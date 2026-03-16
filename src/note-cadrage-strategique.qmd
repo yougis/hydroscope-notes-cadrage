@@ -164,6 +164,8 @@ Le projet est porté par l'OEIL, avec la collaboration des gestionnaires (DAVAR,
 
 Le chef de projet MOA identifié à l'OEIL est Marjolaine David, avec un appui fort de l'AMOA externe (Yapuka - Hugo Roussaffa) pour la tenue des ateliers, la formalisation du cadrage stratégique, les cadrages fonctionnels et la rédaction du cahier des charges fonctionnel.
 
+Afin d'appuyer les sollicitations de l'équipe projet auprès des partenaires lors des ateliers, l'OEIL sollicitera officiellement une lettre de mission auprès du Gouvernement. Cette démarche vise à légitimer l'implication des services techniques territoriaux et provinciaux
+
 ##### Affirmation du portage et de la propriété du projet
 
 L'OEIL est l'unique porteur de projet, bien que le projet soit une évolution d'un outil développé initialement pour la DAVAR en 2021, Hydroscope est désormais une refonte stratégique propre à l'observatoire.
@@ -271,7 +273,10 @@ L'automatisation répond au défi de la réactivité des gestionnaires, en cherc
 
 #### Pilotage technique et aide à la décision, un diagnostic partagé
 
-Le pilotage technique vise à instaurer un **diagnostic partagé** entre le Gouvernement, les Provinces et les Communes, tout en rendant la donnée exploitable par des utilisateurs non-spécialistes en SIG. Les livrables incluent le développement de **trois interfaces profilées** (Expert, Partenaire, Grand Public) dont l'ergonomie et les fonctionnalités sont adaptées aux missions spécifiques de chaque public. L'objectif fonctionnel est de permettre une navigation **multi-échelles fluide** entre le captage et le bassin versant, complétée par la **production de rapports** de synthèse automatisés au format PDF. 
+Le pilotage technique vise à instaurer un **diagnostic partagé** entre le Gouvernement, les Provinces et les Communes, tout en rendant la donnée exploitable par des utilisateurs non-spécialistes en SIG. Les livrables incluent le développement de **trois interfaces profilées** (Expert, Partenaire, Grand Public) dont l'ergonomie et les fonctionnalités sont adaptées aux missions spécifiques de chaque public. L'objectif fonctionnel est de permettre une navigation multi-échelles entre le captage et le bassin versant, complétée par la **production de rapports** de synthèse automatisés au format PDF. 
+
+
+@todo [priority=high,section=formulation] : "multi-échelles entre le captage et le bassin versant" doit être re-formulé. 
 
 
 **Défi d'accessibilité :**
@@ -295,11 +300,22 @@ La pérennité opérationnelle du projet repose sur **l'indépendance technologi
 
 # Définition du cadre opérationnel du projet
 
-## Périmètre du projet : limites techniques et fonctionnelles de l'outil
+## Périmètre du projet
+
+Le projet s'articule autour de quatre domaines prioritaires :
+
+  - Caractériser les territoires (facteurs biogéographiques et pressions).
+  - Assurer une veille environnementale et alerter (détection automatique des changements).
+  - Partager des diagnostics entre acteurs (interfaces adaptées par profil).
+  - Synthétiser l’information (rapports automatisés et fiches)
+
 
 ### Ce qui est inclus
 
-Le projet Hydroscope intègre une **navigation multi-échelles** permettant de circuler de manière fluide entre les territoires, les bassins versants (BVAEP), les périmètres de protection (PPE) et les points de captage. Les fonctionnalités incluent la production de **tableaux de bord experts** pour le pilotage technique et la génération automatisée de **rapports de synthèse au format PDF**. Les données traitées couvrent les indicateurs de pression (incendies, érosion, urbanisation), la population desservie via l'intégration des statistiques de l'ISEE, ainsi que des informations biophysiques clés.
+Le projet Hydroscope intègre une navigation permettant de circuler de manière fluide entre les territoires, les bassins versants (BVAEP), les périmètres de protection (PPE) et les points de captage. Les fonctionnalités incluent la production de **tableaux de bord experts** pour le pilotage technique et la génération automatisée de **rapports de synthèse au format PDF**. Les données traitées couvrent les indicateurs de pression (incendies, érosion, urbanisation), la population desservie via l'intégration des statistiques de l'ISEE, ainsi que des informations biophysiques clés.
+
+Le Bassin AEP est l'unité principale de gestion (plutôt que le PPE seul), car tous les captages n'ont pas de périmètre protégé.
+La pondération multi-critère (méthode par "jauge") est jugé essentiel par la DAVAR et l'OEIL.
 
 @todo [priority=high,section=cadre] : apporter des précisions sur ce qui est inclus
 
@@ -341,7 +357,7 @@ Des référentiels non hydrologiques produit en Nouvelle-Calédonie seront explo
 - Météo;
 - Incendies;
 - Sécheresse végétale;
-- ...
+- Plans Locaux d'Urbanisme (PUD);
   
 @todo [priority=high,section=sources] : préciser les référentiels de données qui pourront être utilisés
 
@@ -384,7 +400,15 @@ Le financement est structuré par le co-financement entre l’**OFB (65 %)** et 
 
 ## Planning macro
 
-Le projet est découpé en deux étapes majeures : une **Phase A de cadrage fonctionnel** d'une durée de 3 mois, suivie d'une **Phase B de réalisation technique**. Les points de validation clés incluent la livraison du **Cahier des Charges Fonctionnel (CCF)** et l'arbitrage final **GO / NO-GO** pour lancer les développements.
+Le calendrier est soumis à deux échéances contractuelles majeures :
+
+  - 29 décembre 2026 : Date limite cible pour la livraison des outils.
+  - 31 mars 2028 : Clôture définitive de la convention avec l'OFB
+
+@todo[priority=high,section=planning] : verifier les dates des fins de convention
+
+
+Le projet est découpé en deux étapes majeures : une première phase de **cadrage fonctionnel** (Phase A) d'une durée de 3 mois, suivie d'une phase de **réalisation technique** (Phase B) . Les points de validation clés incluent la livraison des fiches indicateurs et du **Cahier des Charges Fonctionnel (CCF)**.
 
 ### Mois 1 : Gouvernance et cadrage stratégique (mi-Mars à mi-Avril 2026)
 
@@ -405,7 +429,7 @@ Jalons de livrables :
 
 Période pour transformer les besoins en spécifications fonctionnelles précises.
 
-Semaines 1 à 4 : Réalisation des ateliers de cadrage (4 à 6 sessions) avec les gestionnaires (DAVAR, DASS, Provinces) pour définir les indicateurs et fonctionnalités.
+Semaines 1 à 4 : Réalisation des ateliers de cadrage (6 à 8 sessions) avec les gestionnaires (DAVAR, DASS, Provinces) pour définir les indicateurs et fonctionnalités.
 
 Fin-Avril : Deuxième réunion du COPRO.
 
@@ -452,11 +476,14 @@ Mi-Juin : COPIL de clôture de la Phase A : Présentation finale des livrables e
 
 ### Risques organisationnels
 
-Les principaux défis résident dans la stabilisation du **modèle de données métier** et le choix définitif de l'unité principale de gestion, le consensus actuel penchant pour le **Bassin AEP** plutôt que le seul PPE.
+
+Risque de frustration des partenaires : L'impossibilité d'intégrer tous les besoins exprimés lors des ateliers peut générer une déception. Une communication claire sur le périmètre stratégique sera faite en amont de chaque atelier.
 
 ### Risques techniques
 
 L'enjeu technique majeur concerne l'hétérogénéité des référentiels sources et la **complexité de l'architecture** (historisation, indexation H3 et calcul d'indicateurs multicritères pondérés).
+
+La stabilisation du **modèle de données métier** et le choix définitif de l'unité principale de gestion, le consensus actuel penchant pour le **Bassin AEP** plutôt que le seul PPE. ces données doivent être solides car le modèle de données métier est un socle structurant pour la réalisation technique et les choix d'architecture.
 
 ### Risques financiers
 
@@ -466,7 +493,11 @@ Il existe un risque lié à la difficulté de mobiliser des financements complé
 
 ## Gouvernance du projet
 
-L'**OEIL** assure le sponsoring exécutif et le portage métier du projet. La mission d'**AMOA** est confiée au consultant indépendant Hugo Roussaffa de la société **Yapuka**, garant de la cohérence fonctionnelle et de l'alignement sur les objectifs stratégiques. Le pilotage opérationnel est structuré autour de trois instances : le **COPIL** (stratégie), le **COTECH** (technique) et le **COPRO** (suivi régulier).
+L'**OEIL** assure la maitrise d'ouvrage du projet. La mission d'**AMOA** est confiée au consultant indépendant Hugo Roussaffa de la société **Yapuka**, garant de la cohérence fonctionnelle et de l'alignement sur les objectifs stratégiques. Le pilotage opérationnel est structuré autour de deux instances : le comité de pilotage **COPIL** et le comité de projet **COPRO** . Une équipe projet dédiée, pilotée par Marjolaine David (CP OEIL) avec l'appui de l'AMOA, est chargée de la coordination quotidienne, la réalisation d'action de gestion de projet, la mise en oeuvre de la récolte des besoins et de la production des livrables.
+
+  - COPIL (Stratégique) : Composé de l'OEIL, de l'OFB et du Chef de service de l’eau de la DAVAR (ou son représentant). Son rôle est l'arbitrage des besoins synthétisés.
+  - COPRO (Opérationnel) : Intègre les chefs de projet techniques de l'OEIL et le comité OS1 (DAVAR, DASS, DIMENC, 3 provinces, communes). Il garantit l'alignement des besoins recensés avec le périmètre du projet.
+  - Équipe projet : Pilotée par Marjolaine David (CP OEIL) avec l'appui de l'AMOA (Yapuka).
 
 ---
 
