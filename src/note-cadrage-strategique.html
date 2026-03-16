@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.6.40" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+<meta name="author" content="Hugo Roussaffa" />
+
+<title>Projet HydroScope</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+<!-- htmldependencies:E3FAD763 -->
+<script  src="note-cadrage-strategique_files/libs/quarto-diagram/mermaid.min.js"></script>
+<script  src="note-cadrage-strategique_files/libs/quarto-diagram/mermaid-init.js"></script>
+<link  href="note-cadrage-strategique_files/libs/quarto-diagram/mermaid.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <div id="quarto-toc-target"></div>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Projet HydroScope</h1>
+<p class="subtitle lead">Note de cadrage stratégique</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Auteur·rice</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Hugo Roussaffa <a href="mailto:hugoroussaffa@gmail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Yapuka SARL
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Date de publication</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">7 mars 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table des matières</h2>
+   
+  <ul>
+  <li><a href="#cadre-stratégique-et-justification-du-projet" id="toc-cadre-stratégique-et-justification-du-projet"><span class="header-section-number">1</span> Cadre stratégique et justification du projet</a>
+  <ul>
+  <li><a href="#résumé-exécutif" id="toc-résumé-exécutif"><span class="header-section-number">1.1</span> Résumé exécutif</a>
+  <ul>
+  <li><a href="#synthèse-du-projet" id="toc-synthèse-du-projet"><span class="header-section-number">1.1.1</span> Synthèse du projet</a></li>
+  <li><a href="#finalités-stratégiques" id="toc-finalités-stratégiques"><span class="header-section-number">1.1.2</span> Finalités stratégiques</a></li>
+  <li><a href="#décision-attendue" id="toc-décision-attendue"><span class="header-section-number">1.1.3</span> Décision attendue</a></li>
+  </ul></li>
+  <li><a href="#contexte-et-enjeux" id="toc-contexte-et-enjeux"><span class="header-section-number">1.2</span> Contexte et enjeux</a>
+  <ul>
+  <li><a href="#contexte-interne" id="toc-contexte-interne"><span class="header-section-number">1.2.1</span> Contexte interne</a></li>
+  <li><a href="#contexte-externe" id="toc-contexte-externe"><span class="header-section-number">1.2.2</span> Contexte externe</a></li>
+  <li><a href="#enjeux-et-objectifs" id="toc-enjeux-et-objectifs"><span class="header-section-number">1.2.3</span> Enjeux et objectifs</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#définition-du-cadre-opérationnel-du-projet" id="toc-définition-du-cadre-opérationnel-du-projet"><span class="header-section-number">2</span> Définition du cadre opérationnel du projet</a>
+  <ul>
+  <li><a href="#périmètre-du-projet-limites-techniques-et-fonctionnelles-de-loutil" id="toc-périmètre-du-projet-limites-techniques-et-fonctionnelles-de-loutil"><span class="header-section-number">2.1</span> Périmètre du projet : limites techniques et fonctionnelles de l’outil</a>
+  <ul>
+  <li><a href="#ce-qui-est-inclus" id="toc-ce-qui-est-inclus"><span class="header-section-number">2.1.1</span> Ce qui est inclus</a></li>
+  <li><a href="#ce-qui-est-considéré-comme-hors-périmètre" id="toc-ce-qui-est-considéré-comme-hors-périmètre"><span class="header-section-number">2.1.2</span> Ce qui est considéré comme hors périmètre</a></li>
+  </ul></li>
+  <li><a href="#vision-cible" id="toc-vision-cible"><span class="header-section-number">2.2</span> Vision cible</a>
+  <ul>
+  <li><a href="#situation-actuelle-as-is" id="toc-situation-actuelle-as-is"><span class="header-section-number">2.2.1</span> Situation actuelle (AS-IS)</a></li>
+  <li><a href="#situation-cible-to-be" id="toc-situation-cible-to-be"><span class="header-section-number">2.2.2</span> Situation cible (TO-BE)</a></li>
+  </ul></li>
+  <li><a href="#hypothèses-et-contraintes" id="toc-hypothèses-et-contraintes"><span class="header-section-number">2.3</span> Hypothèses et contraintes</a>
+  <ul>
+  <li><a href="#hypothèses" id="toc-hypothèses"><span class="header-section-number">2.3.1</span> Hypothèses</a></li>
+  <li><a href="#contraintes" id="toc-contraintes"><span class="header-section-number">2.3.2</span> Contraintes</a></li>
+  </ul></li>
+  <li><a href="#estimation-budgétaire-macro" id="toc-estimation-budgétaire-macro"><span class="header-section-number">2.4</span> Estimation budgétaire macro</a></li>
+  <li><a href="#planning-macro" id="toc-planning-macro"><span class="header-section-number">2.5</span> Planning macro</a></li>
+  </ul></li>
+  <li><a href="#sécurisation-gouvernance-et-pilotage" id="toc-sécurisation-gouvernance-et-pilotage"><span class="header-section-number">3</span> Sécurisation, gouvernance et pilotage</a>
+  <ul>
+  <li><a href="#analyse-des-risques-majeurs" id="toc-analyse-des-risques-majeurs"><span class="header-section-number">3.1</span> Analyse des risques majeurs</a>
+  <ul>
+  <li><a href="#risques-organisationnels" id="toc-risques-organisationnels"><span class="header-section-number">3.1.1</span> Risques organisationnels</a></li>
+  <li><a href="#risques-techniques" id="toc-risques-techniques"><span class="header-section-number">3.1.2</span> Risques techniques</a></li>
+  <li><a href="#risques-financiers" id="toc-risques-financiers"><span class="header-section-number">3.1.3</span> Risques financiers</a></li>
+  </ul></li>
+  <li><a href="#gouvernance-du-projet" id="toc-gouvernance-du-projet"><span class="header-section-number">3.2</span> Gouvernance du projet</a></li>
+  <li><a href="#indicateurs-de-pilotage" id="toc-indicateurs-de-pilotage"><span class="header-section-number">3.3</span> Indicateurs de pilotage</a></li>
+  <li><a href="#prochaines-étapes" id="toc-prochaines-étapes"><span class="header-section-number">3.4</span> Prochaines étapes</a></li>
+  </ul></li>
+  </ul>
+</nav>
+<div class="callout callout-style-default callout-important callout-titled" title="Note de version">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note de version
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Version initiale du document - document en cours de rédaction</strong></p>
+</div>
+</div>
+<p><strong>Introduction</strong></p>
+<p>Le projet Hydroscope est né de la volonté de l’OEIL de dépasser les limites fonctionnelles et techniques du tableau de bord « PressionPPE » pour répondre aux enjeux croissants de préservation de la ressource en eau en Nouvelle-Calédonie. Cette ambition, centrée sur la nécessité d’un diagnostic territorial partagé et d’un socle technique plus robuste, a permis de mobiliser des financements stratégiques majeurs auprès de l’OFB (65 %) et du fonds PEP (35 %). La présente note de cadrage entend formaliser les orientations de la Phase A dédiée à la conception fonctionnelle fine des besoins métiers.</p>
+<p>Le projet à pour ambition de s’appuyer sur une architecture technique Open Source capable de transformer la donnée brute en information stratégique, en garantissant l’historisation des indicateurs et l’automatisation de la veille des pressions environnementales (incendies, érosion, artificialisation, pollution) sur la ressource en eau potable du territoire.</p>
+<p>En formalisant cette trajectoire, l’OEIL sécurise la continuité intellectuelle du projet et assure que les futurs outils — qu’il s’agisse de tableaux de bord experts, d’interfaces simplifiées pour les partenaires ou de fiches pédagogiques — réussiront à devenir des leviers d’aide à la décision pour une protection durable des bassins versants producteurs d’eau potable. Cette démarche permet de transformer l’élan initial et les financements obtenus en une réalisation de projet maîtrisée et créatrice de valeur pour le territoire et ses acteurs.</p>
+<p>La note de cadrage stratégique sert ainsi à formaliser la vision, les objectifs, la gouvernance et les principes structurants du projet Hydroscope afin de constituer un document de référence garantissant, tout au long de sa mise en œuvre, l’alignement des décisions avec les objectifs stratégiques de l’Observatoire de l’environnement en Nouvelle-calédonie (OEIL).</p>
+<hr />
+<section id="cadre-stratégique-et-justification-du-projet" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Cadre stratégique et justification du projet</h1>
+<section id="résumé-exécutif" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Résumé exécutif</h2>
+<section id="synthèse-du-projet" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1"><span class="header-section-number">1.1.1</span> Synthèse du projet</h3>
+<p>Le projet Hydroscope vise à la mise en place d’un Système d’Information Environnemental (SIE) moderne destiné au suivi de la ressource en eau potable sur l’ensemble du terrtoire de la Nouvelle-Calédonie, succédant au tableau de bord <em>PressionPPE</em> (2021). Hydroscope vise à automatiser la collecte et l’analyse des données environnementales, à historiser les indicateurs clés et à fournir des interfaces adaptées aux besoins des gestionnaires, partenaires institutionnels et du grand public.</p>
+</section>
+<section id="finalités-stratégiques" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2"><span class="header-section-number">1.1.2</span> Finalités stratégiques</h3>
+<p>Transformer un inventaire de données et d’indicateur en un véritable outil d’analyse et d’aide à la décision destiné au suivi et à la préservation de la ressource en eau potable. Les indicateurs développés permettront de suivre les pressions environnementales (incendies, érosion, artificialisation, pollution) sur les écosystèmes liés à la ressource en eau potable, notamment : * des bassins versants producteurs d’eau potable (BVAEP), * des périmètres de protection des eaux (PPE), * des points de captage.</p>
+<p>Une autre finalité importante et d’assurer la continuité et la modernisation du système d’information environnemental de l’OEIL en adoptant une architecture technique libre, robuste, évolutive et maintenable.</p>
+</section>
+<section id="décision-attendue" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3"><span class="header-section-number">1.1.3</span> Décision attendue</h3>
+<p>La validation du cadrage des orientations stratégiques (neutralité technologique, unité de gestion, gouvernance…) constituera le socle de référence pour les futures notes de cadrage fonctionnelles, des ateliers et par finalité garantira la cohérence du Cahier des Charges final permettant d’engager la mise en œuvre opérationnelle (<strong>Phase B</strong>).</p>
+<hr />
+</section>
+</section>
+<section id="contexte-et-enjeux" class="level2" data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Contexte et enjeux</h2>
+<section id="contexte-interne" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1"><span class="header-section-number">1.2.1</span> Contexte interne</h3>
+<section id="organisation" class="level4" data-number="1.2.1.1">
+<h4 data-number="1.2.1.1"><span class="header-section-number">1.2.1.1</span> Organisation</h4>
+<p>Le projet est porté par l’OEIL, avec la collaboration des gestionnaires (DAVAR, DASS, Provinces, Communes ).</p>
+<p>{TODO indiquer les autres parties prenantes}</p>
+<p>Le chef de projet MOA identifié à l’OEIL est Marjolaine David, avec un appui de l’AMOA externe (Yapuka - Hugo ROussaffa) pour la tenue des ateliers, la formalisation du cadrage fonctionnel, et la rédaction du Cahier des Charges fonctionnel.</p>
+</section>
+<section id="système-dinformation-existant" class="level4" data-number="1.2.1.2">
+<h4 data-number="1.2.1.2"><span class="header-section-number">1.2.1.2</span> Système d’information existant</h4>
+<p>Le projet Hydroscope succède au tableau de bord <em>PressionPPE</em> développé en 2021, qui a permis d’établir un premier inventaire des données et indicateurs liés à la ressource en eau potable. Cependant, ce système présente plusieurs limites fonctionnelles et techniques :</p>
+<ul>
+<li>Forte dépendance à l’environnement ArcGIS (ArcGIS Server, SQL Server, ArcGIS Pro).</li>
+<li>Absence d’historisation des indicateurs.</li>
+<li>Processus de mise à jour manuel et peu flexible.</li>
+<li>Difficulté d’accès, ergonomie compliquée et manque d’interfaces adaptées aux différents profils d’utilisateurs (gestionnaires, partenaires, grand public).</li>
+</ul>
+<p>Une application ArcGIS Pro a été développée en Province Nord pour le suivi de la ressource en eau potable, mais elle se limite à ce territoire et ne répond donc pas aux besoins d’un Système d’Information Environnemental global pour l’ensemble de la Nouvelle-Calédonie. Cette application à néanmoins l’avantage de permettre des calcule d’indicateurs multicritères pondérés, une fonctionnalité qui devra être prise en compte dans la conception de la future plateforme Hydroscope. D’autres limites techniques du système actuel incluent :</p>
+<ul>
+<li>Absence d’automatisation de la collecte et de l’analyse des données.</li>
+<li>Difficulté d’intégration de nouvelles sources de données ou de nouveaux indicateurs.</li>
+<li>Forte dépendance à l’environnement ArcGIS (ArcGIS Server / image, ArcGIS Pro).</li>
+<li>Pas d’interfaces adaptées aux différents profils d’utilisateurs (gestionnaires, partenaires, grand public).</li>
+<li>Absence d’historisation des indicateurs, limitant la capacité à suivre les tendances et à analyser les évolutions dans le temps.</li>
+<li>Processus de mise à jour manuel et peu flexible, nécessitant des manipulations SQL et SIG, ce qui rend la maintenance et l’évolution du système complexes.</li>
+</ul>
+</section>
+</section>
+<section id="contexte-externe" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2"><span class="header-section-number">1.2.2</span> Contexte externe</h3>
+<section id="réglementation" class="level4" data-number="1.2.2.1">
+<h4 data-number="1.2.2.1"><span class="header-section-number">1.2.2.1</span> Réglementation</h4>
+<p>La réglementation de la ressource en eau en Nouvelle-Calédonie repose principalement sur deux textes fondamentaux qui imposent des obligations strictes aux collectivités :</p>
+<ul>
+<li>La délibération n° 105 du 9 août 1968 : C’est le texte cadre relatif à la protection de la ressource. Son article 14 impose obligatoirement la délimitation de PPE autour de tous les captages destinés à l’alimentation en eau potable (AEP) des collectivités humaines.</li>
+<li>La délibération n° 238 du 18 novembre 1997 : Ce texte délègue la gestion de la ressource (notamment la délivrance des autorisations de captage) aux provinces Nord et Sud, bien que la mise en œuvre opérationnelle des PPE reste complexe.</li>
+</ul>
+<p>L’objectif des PPE est de préserver la qualité de la ressource en réglementant ou en interdisant les activités polluantes autour des points de prélèvement, évitant ainsi des frais de traitement onéreux pour les communes et les usagers.</p>
+<p>La mise en place d’un PPE est un processus collaboratif impliquant plusieurs échelons :</p>
+<ul>
+<li>La Nouvelle-Calédonie (DAVAR) : Elle mène les études techniques de délimitation, définit les prescriptions et adopte l’arrêté final de délimitation.</li>
+<li>L’État : Il intervient pour mener l’enquête publique et signer l’arrêté de Déclaration d’Utilité Publique (DUP).</li>
+<li>Les Provinces : Elles gérées autrefois, par délégation de compétences, les autorisations de prélèvements et encadrent les activités à risque via la réglementation sur les Installations Classées pour l’Environnement (ICPE). Cette compétence a été rétrocédée à la Nouvelle-Calédonie au 1er janvier 2022 mais les provinces restent des acteurs clés dans la gestion de la ressource et la mise en œuvre des PPE.</li>
+<li>Les Communes : Elles sont responsables de la distribution de l’eau potable et de la demande initiale de mise en place des PPE.</li>
+</ul>
+</section>
+<section id="partenariats" class="level4" data-number="1.2.2.2">
+<h4 data-number="1.2.2.2"><span class="header-section-number">1.2.2.2</span> Partenariats</h4>
+<p>Une multiplicité de référentiels hydrographiques existe. L’un maintenu par la DAVAR, BRGM, DASS nécessitant une interconnexion.</p>
+<ul>
+<li><p>BD-Lisa (BRGM) : Référentiel hydrographique à l’échelle du territoire, utilisé pour la modélisation des masses d’eau Base de Données des Limites des Systèmes Aquifères.</p></li>
+<li><p>BD-Hydrographie (DITTT) : Réseau hydrographique de la Grande Terre. Donnée composée du réseau hydrographique principal, secondaire et surfacique sur la Grande Terre de la Nouvelle-Calédonie. Des informations concernant le nom des cours d’eau principaux et leur longueur sont également disponibles. Cette donnée est issue de la BDCARTO (1/50.000) de la Direction des Infrastructures, de la Topographie et des Transports Terrestres (DITTT).</p></li>
+<li><p>Cartographie des Périmètres de Protection des Eaux</p></li>
+<li><p>Positionnement des captages destinés à l’Alimentation en Eau Potable</p></li>
+<li><p>Positionnement des captages privés autorisés</p></li>
+<li><p>Emplacements et métadonnées des stations de suivi du débit des cours d’eau et pluviométrique de la DAVAR</p></li>
+<li><p>Cartographie résultant d’études sur les débits des cours d’eau ou sur la pluviométrie</p></li>
+<li><p>Cartographie des Hydro-Eco Régions</p></li>
+<li><p>Carnet ou base de données de suivi des captages par la DASS inscrivant les opération de sécurité sanitaire des réseaux d’eau potable. Ces carnet/Base de données font partit du Plan de Sécurité Sanitaire des Eaux (PSSE).</p></li>
+</ul>
+</section>
+</section>
+<section id="enjeux-et-objectifs" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3"><span class="header-section-number">1.2.3</span> Enjeux et objectifs</h3>
+<section id="le-fonds-pep-levier-stratégique-et-financier" class="level4" data-number="1.2.3.1">
+<h4 data-number="1.2.3.1"><span class="header-section-number">1.2.3.1</span> Le Fonds PEP : Levier stratégique et financier</h4>
+<p>Le fonds PEP constitue un levier financier et stratégique majeur en assurant 35 % du financement du projet, en complément des 65 % apportés par l’Office Français de la Biodiversité. L’un des enjeux critiques réside dans la conformité contractuelle et le respect des jalons, car la production du premier rapport détaillant les critères et fiches indicateurs conditionne le versement de 30 % du budget global. L’objectif opérationnel final est de transformer l’outil existant « PressionPPE » vers un système capable de quantifier plus précisément l’intégrité de la ressource en eau potable pour l’ensemble du territoire. Cette sécurisation financière permet de garantir la viabilité de l’ingénierie déployée par l’OEIL sur du plus long terme.</p>
+</section>
+<section id="connaissance-et-diagnostic-territorial" class="level4" data-number="1.2.3.2">
+<h4 data-number="1.2.3.2"><span class="header-section-number">1.2.3.2</span> Connaissance et diagnostic territorial</h4>
+<p>Sur le plan de la connaissance territoriale, l’enjeu est de passer d’un simple inventaire passif à un véritable outil de pilotage proactif permettant d’identifier les bassins les plus vulnérables pour mieux orienter les budgets de gestion. Pour y parvenir, le projet vise la caractérisation biogéographique fine des Bassins Versants producteurs d’Eau Potable (BVAEP), des périmètres de protection (PPE) et des points de captage. Cet objectif s’appuie sur la mise en œuvre d’une <strong>analyse multicritère</strong> utilisant des seuils de vigilance définis collectivement et l’intégration des données de l’ISEE pour évaluer précisément la population desservie. Ce diagnostic partagé doit permettre à tous les échelons institutionnels de disposer d’un <strong>constat commun</strong> sur l’état de la ressource.</p>
+</section>
+<section id="automatisation-et-système-dalerte" class="level4" data-number="1.2.3.3">
+<h4 data-number="1.2.3.3"><span class="header-section-number">1.2.3.3</span> Automatisation et système d’alerte</h4>
+<p>L’automatisation répond au défi de la réactivité des gestionnaires, en cherchant à réduire le délai entre un événement environnemental et son signalement pour limiter l’impact sur la ressource. L’enjeu est également de garantir la <strong>fiabilité de l’information</strong> en s’affranchissant de manipulations manuelles répétitives et chronophages. L’objectif technique est d’intégrer des algorithmes de <strong>détection automatique des changements</strong>(incendies, défrichements, nouvelles installations classées) déclenchés dès l’intégration de nouvelles données de référence. Le système doit assurer une <strong>veille environnementale</strong> constante en automatisant la récupération de flux de données exogènes réguliers.</p>
+</section>
+<section id="pilotage-technique-et-aide-à-la-décision" class="level4" data-number="1.2.3.4">
+<h4 data-number="1.2.3.4"><span class="header-section-number">1.2.3.4</span> Pilotage technique et aide à la décision</h4>
+<p>Le pilotage technique vise à instaurer un <strong>diagnostic partagé</strong> entre le Gouvernement, les Provinces et les Communes, tout en rendant la donnée exploitable par des utilisateurs non-spécialistes en SIG. Les livrables incluent le développement de <strong>trois interfaces profilées</strong> (Expert, Partenaire, Grand Public) dont l’ergonomie et les fonctionnalités sont adaptées aux missions spécifiques de chaque public. L’objectif fonctionnel est de permettre une navigation <strong>multi-échelles fluide</strong> entre le captage et le bassin versant, complétée par la <strong>production de rapports</strong> de synthèse automatisés au format PDF.</p>
+</section>
+<section id="continuité-et-pérennité-opérationnelle" class="level4" data-number="1.2.3.5">
+<h4 data-number="1.2.3.5"><span class="header-section-number">1.2.3.5</span> Continuité et pérennité opérationnelle</h4>
+<p>La pérennité opérationnelle du projet repose sur <strong>l’indépendance technologique</strong> vis-à-vis des logiciels propriétaires et le maintien de la <strong>continuité intellectuelle</strong> avec les travaux réalisés depuis 2021. L’enjeu est de s’affranchir de la dette technique et des coûts de licence pour garantir la durabilité du système à moindre coût. Pour cela, les objectifs de réalisation imposent une migration vers un <strong>socle Open Source</strong> robuste combinant PostgreSQL/PostGIS, Python et DBT. Enfin, la mise en place d’une <strong>historisation systématique</strong> des indicateurs et des données sources est un prérequis majeur pour permettre des analyses temporelles et suivre l’évolution de la ressource sur le temps long.</p>
+</section>
+<section id="indicateurs-de-succès-du-projet" class="level4" data-number="1.2.3.6">
+<h4 data-number="1.2.3.6"><span class="header-section-number">1.2.3.6</span> Indicateurs de succès du projet</h4>
+<p>La <strong>réussite de l’automatisation</strong> sera évaluée par la capacité opérationnelle du système à intégrer des algorithmes de détection automatique des changements, permettant de signaler l’apparition de nouvelles pressions telles que les incendies ou les défrichages. Un critère de performance majeur résidera dans la qualité des données produites, mesurée par leur complétude, leur précision et leur fraîcheur, garantissant ainsi une information fiable pour les gestionnaires. Enfin, la robustesse technique se traduira par une haute disponibilité de la plateforme, soutenue par une architecture Open Source évolutive et une orchestration automatisée des traitements qui limite les interventions manuelles. Concernant la réussite des usages, le projet visera un <strong>taux d’adoption</strong> conséquent des trois interfaces cibles, validant ainsi l’adéquation des outils avec les besoins spécifiques des profils Experts, Partenaires et Grand Public. L’utilité réelle du système sera évalué par des <strong>questionnaires de satisfaction</strong> auprès des utilisateurs, visant à mesurer si l’outil facilite effectivement le diagnostic partagé et les missions de service public. La capacité des services techniques à s’approprier les fonctionnalités, notamment la navigation multi-échelles et la génération de rapports automatisés, constituera le socle de l’évaluation de la performance fonctionnelle d’Hydroscope.</p>
+<hr />
+</section>
+</section>
+</section>
+</section>
+<section id="définition-du-cadre-opérationnel-du-projet" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Définition du cadre opérationnel du projet</h1>
+<section id="périmètre-du-projet-limites-techniques-et-fonctionnelles-de-loutil" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Périmètre du projet : limites techniques et fonctionnelles de l’outil</h2>
+<section id="ce-qui-est-inclus" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1"><span class="header-section-number">2.1.1</span> Ce qui est inclus</h3>
+<p>Le projet Hydroscope intègre une <strong>navigation multi-échelles</strong> permettant de circuler de manière fluide entre les territoires, les bassins versants (BVAEP), les périmètres de protection (PPE) et les points de captage. Les fonctionnalités incluent la production de <strong>tableaux de bord experts</strong> pour le pilotage technique et la génération automatisée de <strong>rapports de synthèse au format PDF</strong>. Les données traitées couvrent les indicateurs de pression (incendies, érosion, urbanisation), la population desservie via l’intégration des statistiques de l’ISEE, ainsi que des informations biophysiques clés.</p>
+</section>
+<section id="ce-qui-est-considéré-comme-hors-périmètre" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2"><span class="header-section-number">2.1.2</span> Ce qui est considéré comme hors périmètre</h3>
+<p>Le système ne prévoit pas l’accès aux <strong>données brutes</strong> comme les mesures physico-chimiques par exemples, ou la pluviométrie (valeurs précises), mais se limite à conserver l’historique de présence, les dates des prélèvements effectués ou des indicateurs moyens. Par ailleurs, les actions de <strong>vulgarisation pédagogique approfondie</strong> ne sont pas traitées ici, car elles sont déportées vers le projet partenaire nommé <strong>SOURCE</strong>.</p>
+<hr />
+</section>
+</section>
+<section id="vision-cible" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Vision cible</h2>
+<section id="situation-actuelle-as-is" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1"><span class="header-section-number">2.2.1</span> Situation actuelle (AS-IS)</h3>
+<p>L’outil actuel est de nature rigide, impliquant de nombreuses manipulations manuelles SQL ou SIG pour la mise à jour des données. Il repose entre autre sur une architecture dépendante de <strong>logiciels propriétaires</strong> (ArcGIS Online, SQL Serveur) et lors des actualisations des données procède par ajout de nouvvelles lignes horodatés dans les tables.</p>
+</section>
+<section id="situation-cible-to-be" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2"><span class="header-section-number">2.2.2</span> Situation cible (TO-BE)</h3>
+<p>La vision cible repose sur une <strong>chaîne de traitement (ETL) automatisée</strong> et une orchestration moderne utilisant Python et DBT pour garantir la fiabilité des indicateurs et la documentation de leur généalogie. L’architecture technique privilégie l’<strong>indexation spatiale</strong> sur une grille <em>Discrete Global Grid System</em> (DGGS) H3 et/ou raster et l’historisation systématique des données pour suivre l’évolution de la ressource. L’expérience utilisateur sera aussi spécialisé car <strong>trois interfaces dédiées</strong> seront construites sur la même base de données, chaque interface adaptée aux besoins spécifiques des profils Experts, Partenaires et Grand Public.</p>
+<hr />
+</section>
+</section>
+<section id="hypothèses-et-contraintes" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Hypothèses et contraintes</h2>
+<section id="hypothèses" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1"><span class="header-section-number">2.3.1</span> Hypothèses</h3>
+<p>La réussite du projet repose en grande partie sur la <strong>disponibilité et la fiabilité des données</strong> fournies par les partenaires institutionnels (Gouvernement, Provinces, Communes, DASS, ISEE). Il est également hypothéqué que les acteurs institutionnels s’engagent activement dans la validation des indicateurs et la définition des seuils de vigilance, garantissant ainsi l’appropriation du diagnostic territorial partagé. Enfin, le projet suppose une <strong>stabilité des financements</strong> et un respect rigoureux des jalons contractuels avec le fonds PEP pour assurer la continuité de l’ingénierie déployée par l’OEIL.</p>
+</section>
+<section id="contraintes" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2"><span class="header-section-number">2.3.2</span> Contraintes</h3>
+<p>Sur le plan technique, le projet inclus l’usage de <strong>solutions Open Source</strong> pour garantir l’indépendance technologique de l’OEIL. Le calendrier est contraint par les jalons financiers du <strong>fonds PEP</strong> (livraison des fiches indicateurs) et le respect des conventions <strong>OFB</strong> courant jusqu’à la fin de l’année 2028.</p>
+<hr />
+</section>
+</section>
+<section id="estimation-budgétaire-macro" class="level2" data-number="2.4">
+<h2 data-number="2.4"><span class="header-section-number">2.4</span> Estimation budgétaire macro</h2>
+<p>Le financement est structuré par le co-financement entre l’<strong>OFB (65 %)</strong> et le <strong>fonds PEP (35 %)</strong>. Sur la base des premières études, la charge de développement des interfaces de consultation est pour le moment estimée entre <strong>7 et 9 M XPF</strong>, montant pouvant être optimisé selon les possibilités de mutualisation technique et l’analyse plus fine des besoins au cours de la phase A. Les coûts de maintenance et d’hébergement sont estimés à environ <strong>1 M XPF par an</strong> après la mise en production, avec une attention particulière portée à la maîtrise des coûts liés à l’infrastructure cloud et à l’optimisation des traitements automatisés.</p>
+<hr />
+</section>
+<section id="planning-macro" class="level2" data-number="2.5">
+<h2 data-number="2.5"><span class="header-section-number">2.5</span> Planning macro</h2>
+<p>Le projet est découpé en deux étapes majeures : une <strong>Phase A de cadrage fonctionnel</strong> d’une durée de 3 mois, suivie d’une <strong>Phase B de réalisation technique</strong>. Les points de validation clés incluent la livraison du <strong>Cahier des Charges Fonctionnel (CCF)</strong> et l’arbitrage final <strong>GO / NO-GO</strong> pour lancer les développements.</p>
+<p>Mois 1 : Gouvernance et cadrage stratégique (mi-Mars à mi-Avril 2026)</p>
+<p>Mois 2 : Cadrage métier et ateliers (mi-Avril à mi-Mai 2026)</p>
+<p>Mois 3 : Rédaction du Cahier des charges fonctionnel et validation (mi-Mai à mi-Juin 2026)</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p><figure class=''></p>
+<div>
+<pre class="mermaid mermaid-js">
+gantt
+    title Planning Macro - Phase A Hydroscope (2026)
+    dateFormat  YYYY-MM-DD
+    axisFormat  %m-%d
+    
+    section Volet 1 : Pilotage
+    Kick-off projet             :milestone, m1, 2026-03-13, 0d
+    Suivi COPRO (mensuel)       :active, cp1, 2026-03-13, 90d
+    COPIL stratégique           :milestone, cp2, 2026-04-10, 0d
+    
+    section Volet 2 : Cadrage Métier
+    Note de cadrage stratégique :a1, 2026-03-16, 15d
+    Ateliers gestionnaires (4-6):a2, 2026-04-13, 25d
+    Jalon PEP : fiches indicateurs :milestone, pep, 2026-05-15, 0d
+    
+    section Volet 3 : Conception
+    Revue critique PressionPPE  :b1, 2026-04-01, 10d
+    Rédaction du CDC fonctionnel:b2, 2026-05-18, 30d
+    Maquettes &amp; wireframes      :b3, 2026-05-25, 20d
+    
+    section Volet 4 : Transfert
+    COPIL de validation finale  :milestone, go, 2026-06-15, 0d
+    Transfert &amp; rapport AMOA    :c1, 2026-06-16, 7d
+    Jalon décision GO / NO-GO   :milestone, decision, 2026-06-22, 0d
+
+</pre>
+</div>
+<p></figure></p>
+</div>
+</div>
+</div>
+<hr />
+</section>
+</section>
+<section id="sécurisation-gouvernance-et-pilotage" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Sécurisation, gouvernance et pilotage</h1>
+<section id="analyse-des-risques-majeurs" class="level2" data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span> Analyse des risques majeurs</h2>
+<section id="risques-organisationnels" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1"><span class="header-section-number">3.1.1</span> Risques organisationnels</h3>
+<p>Les principaux défis résident dans la stabilisation du <strong>modèle de données métier</strong> et le choix définitif de l’unité principale de gestion, le consensus actuel penchant pour le <strong>Bassin AEP</strong> plutôt que le seul PPE.</p>
+</section>
+<section id="risques-techniques" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2"><span class="header-section-number">3.1.2</span> Risques techniques</h3>
+<p>L’enjeu technique majeur concerne l’hétérogénéité des référentiels sources et la <strong>complexité de l’architecture</strong> (historisation, indexation H3 et calcul d’indicateurs multicritères pondérés).</p>
+</section>
+<section id="risques-financiers" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3"><span class="header-section-number">3.1.3</span> Risques financiers</h3>
+<p>Il existe un risque lié à la difficulté de mobiliser des financements complémentaires ou d’amender les conventions actuelles en cas de dépassement budgétaire imprévu.</p>
+<hr />
+</section>
+</section>
+<section id="gouvernance-du-projet" class="level2" data-number="3.2">
+<h2 data-number="3.2"><span class="header-section-number">3.2</span> Gouvernance du projet</h2>
+<p>L’<strong>OEIL</strong> assure le sponsoring exécutif et le portage métier du projet. La mission d’<strong>AMOA</strong> est confiée au consultant indépendant Hugo Roussaffa de la société <strong>Yapuka</strong>, garant de la cohérence fonctionnelle et de l’alignement sur les objectifs stratégiques. Le pilotage opérationnel est structuré autour de trois instances : le <strong>COPIL</strong> (stratégie), le <strong>COTECH</strong> (technique) et le <strong>COPRO</strong> (suivi régulier).</p>
+<hr />
+</section>
+<section id="indicateurs-de-pilotage" class="level2" data-number="3.3">
+<h2 data-number="3.3"><span class="header-section-number">3.3</span> Indicateurs de pilotage</h2>
+<p>Le suivi de la valeur métier du projet s’appuiera sur le <strong>nombre d’indicateurs priorisés et validés scientifiquement</strong> par les experts. La traçabilité des arbitrages sera assurée par un <strong>journal des décisions</strong> tenu à jour par l’AMOA tout au long de la phase de cadrage.</p>
+<hr />
+</section>
+<section id="prochaines-étapes" class="level2" data-number="3.4">
+<h2 data-number="3.4"><span class="header-section-number">3.4</span> Prochaines étapes</h2>
+<p>Le lancement opérationnel passera par la validation de cette note de cadrage et une <strong>revue critique des indicateurs actuels</strong> de PressionPPE. Des <strong>ateliers thématiques</strong> avec les gestionnaires permettront de finaliser les fiches indicateurs (jalon PEP) et de définir les besoins métiers détaillés, servant de base à la rédaction du <strong>Cahier des Charges Fonctionnel</strong> final.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id = "quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+</body>
+
+</html>

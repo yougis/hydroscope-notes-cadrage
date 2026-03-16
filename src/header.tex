@@ -1,0 +1,24 @@
+\newcommand{\chapterpage}[1]{
+  \newpage
+  \vspace*{\fill}
+  \begin{center}
+  {\Huge\bfseries #1}
+  \end{center}
+  \vspace*{\fill}
+  \newpage
+}
+
+\usepackage{colortbl}
+
+
+% Alternance de couleurs (commence à la ligne 2 pour éviter l'en-tête)
+\rowcolors{1}{white}{lightgray!50}
+
+\usepackage[table]{xcolor}
+\definecolor{lightgray}{HTML}{F0F0F0}
+
+% Force la coloration à toujours commencer APRES l’en-tête (ligne 2)
+\AtBeginEnvironment{tabular}{
+  \rowcolors{2}{lightgray}{white}
+}
+
