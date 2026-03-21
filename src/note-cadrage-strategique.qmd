@@ -15,9 +15,9 @@ date-format: long
 number-sections: true
 
 logo: "ressources/OEIL_logo.png" #logo de l'oeil
-image_font_1: "ressources/feux1.jpg" #image de fond numéro 1
-image_font_2: "ressources/feux2.png" #image 2 supérieure
-logo_partenaire: "ressources/OFB.jpg" #logo partenaire
+image_font_1: "ressources/MJunckerOEIL.jpg" #image de fond numéro 1
+image_font_2:  "ressources/eau-monitoring.png"  #image 2 supérieure
+logo_partenaire: "ressources/logo_yapuka.png" #logo partenaire
 filters:
   - filters/todo.lua
 lang: fr
@@ -84,7 +84,7 @@ Historique des versions du document :
 | Version | Date | Auteur | Description des modifications |
 | -------|-------|------- |--------------------------------|
 | Version 0.1 |2026-03-08| Hugo Roussaffa |Rédaction initiale de la note de cadrage stratégique|
-| Version 0.2 |2026-03-10| Hugo Roussaffa |Intégration des commentaires de Fabien ALBOUY (OEIL) sur la gouvernance, le périmètre contractuel et la communication diplomatique du projet|
+| Version 0.2 |2026-03-10| Hugo Roussaffa |Intégration des commentaires de Fabien ALBOUY (OEIL) sur la gouvernance, le périmètre contractuel et la formulation|
 
 
 ::: {#todo-list}
@@ -158,28 +158,25 @@ Une application ArcGIS Pro a été développée en Province Nord pour le suivi d
 
 #### Organisation interne et partenaires
 
-Le projet est porté par l'OEIL, avec la collaboration des gestionnaires (DAVAR, DASS, Provinces, Communes), d'instances coutumières, d'associations (Conseil de l'eau de La Foa, Farino et Saraméa, Endemia ...) et d'opérateurs de gestion de l'eau (Calédonienne des eaux...). 
+Le projet est porté par l'OEIL, avec le souhait de collaborer avec de nombreux partenaires, tels que :
 
-@todo [priority=high,section=organisation] : préciser les autres partenaires institutionnels et associatifs impliqués dans le projet.
+Les institutions suivantes : DAVAR, DASS, DIMENC, Provinces, Communes, Syndicats de gestion de l’eau (AQUA Nord, SIVOM VKP, CDE), bureaux d’études (SEREG, GEOS4D, GeoImpact, Bioéco, CAPSE) et associations (WWF, comité de population locale).
+
+Cette liste de partenaires sera priorisée par l’équipe projet puis validée en COPRO.
 
 Le chef de projet MOA identifié à l'OEIL est Marjolaine David, avec un appui fort de l'AMOA externe (Yapuka - Hugo Roussaffa) pour la tenue des ateliers, la formalisation du cadrage stratégique, les cadrages fonctionnels et la rédaction du cahier des charges fonctionnel.
 
-Afin d'appuyer les sollicitations de l'équipe projet auprès des partenaires lors des ateliers, l'OEIL sollicitera officiellement une lettre de mission auprès du Gouvernement. Cette démarche vise à légitimer l'implication des services techniques territoriaux et provinciaux
-
-##### Affirmation du portage et de la propriété du projet
-
-L'OEIL est l'unique porteur de projet, bien que le projet soit une évolution d'un outil développé initialement pour la DAVAR en 2021, Hydroscope est désormais une refonte stratégique propre à l'observatoire.
+Afin d'appuyer les sollicitations de l'équipe projet auprès des partenaires lors des ateliers, l'OEIL sollicitera officiellement une lettre de mission auprès du Gouvernement. Cette démarche vise à légitimer l'implication des services techniques territoriaux.
 
 ##### Priorisation hiérarchique des besoins
 
-- **L'OEIL est au centre** : Le Cahier des Charges doit refleter que les besoins de l'OEIL sont au centre du projet;
-- **Consultation et décision** : Les besoins des gestionnaires (DAVAR, DASS, Provinces etc.) sont recueillis à titre consultatif. Ils ne sont intégrés que dans la mesure où ils s'alignent à la vision de l'OEIL, ses missions de service public et le temps long;
+Les besoins des gestionnaires (DAVAR, DASS, Provinces etc.) sont recueillis à titre consultatif. Ils ne sont intégrés que dans la mesure où ils s'alignent à la vision de l'OEIL, ses missions de service public et le temps long.
 
 ##### Gouvernance et arbitrage final
 
-La structure de pilotage doit permettre de donner un pouvoir décisionnel à l'OEIL :
+La structure de pilotage donne un pouvoir décisionnel à l'OEIL :
 
-- **Arbitrage** : l'OEIL s'attache à développé une coordination entre les acteurs. Toutefois, l'analyse critique des attentes ou besoin et l'arbitrage final des points clés reviendrons à l'OEIL. les choix en fonction de sa vision stratégique et ses missions.
+- **Arbitrage** : l'OEIL s'attache à développé une coordination entre les acteurs. Toutefois, l'analyse critique des attentes ou besoin et l'arbitrage final des points clés reviennent à l'OEIL. Les choix seront discutés collegialement en toute transparance en fonction de sa vision stratégique et ses missions.
 
 - **Coordination** : Le consultant AMOA coordonne la planification et les arbitrages selon la vision de l'OEIL et du chef de projet, en veillant à ce que les besoins des partenaires soient exprimés dans la mesure où ils s'alignent avec les objectifs de l'OEIL.
 
