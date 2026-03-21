@@ -1,0 +1,223 @@
+
+
+
+# Contexte et enjeux
+
+## Contexte externe : un patrimoine vital sous pression
+
+### État de la menace
+
+Le projet répond à une urgence environnementale caractérisée par :
+
+- **Incendies** : En 2019, **17 % des feux de brousse** ont touché des PPE (7 000 hectares);
+- **Érosion** : La couverture végétale est dégradée dans **90 % des PPE** de Nouvelle-Calédonie;
+- **Changement climatique** : Une baisse de **20 % des précipitations** est projetée d'ici 2100;
+- **Humain** : La protection de la ressource en eau représente un enjeux vitale pour **271 407 habitants** et **90 800 ménages** .
+
+@todo [priority=medium,section=sources] : apporter des chiffres clés sur les menaces liées à la pollution, l'artificialisation des sols, les espèces envahissantes à partir du Dashboard PressionPPE
+
+
+### Un cadre réglementaire et institutionnel nouveau
+
+L'adoption de la loi du pays n° 2025-9 du 15 juillet 2025 relative au domaine public de l'eau (DPE) et à la protection de la ressource marque une étape majeure dans la modernisation du cadre juridique calédonien.
+
+L'objectif des PPE est de préserver la qualité de la ressource en réglementant ou en interdisant les activités polluantes autour des points de prélèvement, évitant ainsi des frais de traitement onéreux pour les communes et les usagers.
+
+Le rôle de la Nouvelle-Calédonie ne se limite plus seulement aux études techniques, il s'étend désormais à la décision finale de protection :
+
+#### Adoption de l'arrêté 
+
+C'est désormais le gouvernement de la Nouvelle-Calédonie qui instaure par arrêté les périmètres de protection (immédiate, rapprochée et éventuellement éloignée).
+  - Instruction centralisée : Le service de l'eau de la DAVAR est confirmé comme l'instructeur unique pour les demandes d'autorisation de prélèvement et les dossiers de PPE.
+  - Gestion des urgences : Le gouvernement peut désormais autoriser des prélèvements provisoires sans PPE en cas de circonstances climatiques exceptionnelles ou de pollution accidentelle, à condition qu'il n'y ait pas de danger pour la santé.
+
+#### L'État
+
+Alors qu'auparavant l'État signait l'arrêté de Déclaration d'Utilité Publique (DUP), la nouvelle loi du pays transfère le pouvoir de décision au gouvernement local :
+
+  - Procédure locale : Les modalités de l'enquête publique ne dépendent plus des procédures de l'État mais sont désormais fixées par une délibération du Congrès (n° 522 du 20 novembre 2025).
+  - Information : L'État (via le Haut-commissaire) reste informé par la transmission des arrêtés et peut être sollicité pour la liste d'aptitude des commissaires enquêteurs, mais le pilotage de la procédure est calédonien.
+
+#### Les Provinces 
+
+Depuis la rétrocession de la compétence "eau" en 2022, leur rôle a évolué vers le conseil et la concertation :
+
+  - Avis obligatoire : Les provinces sont désormais systématiquement saisies pour avis lors de l'instruction des dossiers de PPE ou d'autorisations de prélèvements importantes.
+  - Délégation possible : La loi prévoit que le gouvernement peut déléguer la gestion du domaine public de l'eau (incluant l'entretien ou la délivrance des autorisations) aux provinces via une convention.
+  - Initiative locale : Elles peuvent demander au gouvernement la création de Conseils Locaux de l'Eau (CLE) pour une gestion concertée par bassin versant.
+
+#### Les Communes
+
+Leurs responsabilités en matière de distribution d'eau potable demeurent, mais leur implication dans la procédure de PPE est précisée :
+
+  - Consultation systématique : Comme les provinces, les communes doivent donner leur avis sur les projets d'installations ou de PPE situés sur leur territoire.
+  - Support de l'enquête publique : Les mairies sont les lieux privilégiés pour l'affichage des avis de consultation et la mise à disposition des dossiers papier.
+  - Initiative des CLE : Elles peuvent également être à l'origine de la création d'un Conseil Local de l'Eau pour mieux gérer les conflits d'usage locaux.
+
+#### Nouveaux échelons et délais imposés
+
+La loi introduit de nouveaux éléments qui n'existaient pas dans le cadre précédent :
+
+  - L'instauration d'un PPE sur terres coutumières est désormais strictement conditionnée à l'accord des autorités coutumières, matérialisé par un acte coutumier.
+  - **Obligation de régularisation** pour les captages existants qui n'auraient pas encore de PPE, les gestionnaires disposent d'un délai d'un an (à compter du 15 juillet 2025) pour fournir le dossier nécessaire à leur détermination.
+  - Participation du public simplifiée pour les PPE concernant ++moins de 12 propriétaires++ (et sans impact économique majeur), une simple consultation publique de 15 jours remplace la lourde procédure d'enquête publique.
+
+
+## Contexte interne 
+### De PressionPPE à Hydroscope
+
+Le projet Hydroscope succède au tableau de bord **PressionPPE** (2021) qui a permis un premier inventaire des données liées à l’eau potable. Toutefois, ce système a atteint des limites opérationnelles, à savoir:
+
+- **Dépendance technique et coûts** : Une forte rigidité liée aux solutions propriétaires (ArcGIS) et aux processus manuels SQL/SIG.
+- **Vision temporelle limitée** : l'historisaion les indicateurs non actualisé ne permet pas de suivre les tendances et l'évolution des menaces dans le temps ni d'identifier de changements entre 2 dates.
+- **Déficit d'usage** : le tableau de bord a été développé spécifiquement pour des specialistes et l'ergonomie complexe qui l'accompagne ne convient pas aux profils des décideurs et du grand public.
+
+D'autre part, une application ArcGIS Pro a été développée en Province Nord pour le suivi de la ressource en eau potable, qui se limite à ce territoire et ne répond donc pas aux besoins d’un Système d’Information Environnemental global pour l’ensemble de la Nouvelle-Calédonie. Cette application à néanmoins l'avantage de permettre des calcule d'indicateurs multicritères pondérés, une fonctionnalité qui devra être prise en compte dans la conception de la future plateforme Hydroscope. D'autres limites techniques du système actuel incluent :
+
+- Absence d’automatisation de la collecte et de l’analyse des données;
+- Difficulté d’intégration de nouvelles sources de données ou de nouveaux indicateurs;
+- Forte dépendance à l’environnement ArcGIS (ArcGIS Server / image, ArcGIS Pro);
+- Pas d'interfaces adaptées aux différents profils d’utilisateurs (gestionnaires, partenaires, grand public);
+- Absence d’historisation des indicateurs, limitant la capacité à suivre les tendances et à analyser les évolutions dans le temps;
+- Processus de mise à jour manuel et peu flexible, nécessitant des manipulations SQL et SIG, ce qui rend la maintenance et l’évolution du système complexes.
+
+
+### Organisation interne et partenaires
+
+Le projet est porté par l'OEIL, avec le souhait de collaborer avec de nombreux partenaires, tels que :
+
+**Les institutions** DAVAR, DASS, DIMENC, Provinces, Communes, **Syndicats de gestion de l’eau** (AQUA Nord, SIVOM VKP, CDE), **bureaux d’études** (SEREG, GEOS4D, GeoImpact, Bioéco, CAPSE) et **associations** (WWF, comité de population locale).
+
+Cette liste de partenaires sera priorisée par l’équipe projet puis validée en COPRO.
+
+Le chef de projet MOA identifié à l'OEIL est Marjolaine David, avec un appui fort de l'AMOA externe (Yapuka - Hugo Roussaffa) pour la tenue des ateliers, la formalisation du cadrage stratégique, les cadrages fonctionnels et la rédaction du cahier des charges fonctionnel.
+
+Afin d'appuyer les sollicitations de l'équipe projet auprès des partenaires lors des ateliers, l'OEIL sollicitera officiellement une lettre de mission auprès du Gouvernement. Cette démarche vise à légitimer l'implication des services techniques territoriaux.
+
+#### Priorisation hiérarchique des besoins
+
+Les besoins des gestionnaires (DAVAR, DASS, Provinces etc.) sont recueillis à titre consultatif. Ils ne sont intégrés que dans la mesure où ils s'alignent à la vision de l'OEIL, ses missions de service public et le temps long.
+
+#### Gouvernance et arbitrage final
+
+La structure de pilotage donne un pouvoir décisionnel à l'OEIL :
+
+- **Arbitrage** : l'OEIL s'attache à développé une coordination entre les acteurs. Toutefois, l'analyse critique des attentes ou besoin et l'arbitrage final des points clés reviennent à l'OEIL. Les choix seront discutés collegialement en toute transparance en fonction de sa vision stratégique et ses missions.
+
+- **Coordination** : Le consultant AMOA coordonne la planification et les arbitrages selon la vision de l'OEIL et du chef de projet, en veillant à ce que les besoins des partenaires soient exprimés dans la mesure où ils s'alignent avec les objectifs de l'OEIL.
+
+- **Journal des décisions** : Ce document, tenu par l'AMOA, sert de synthèse pour présenter l'alignement continu sur les objectifs de l'OEIL et limite les aller-retour sur des points arbitrés sauf pour des cas réévalué en COPIL par exemple.
+
+
+
+### Défis stratégiques et réponses du projet
+
+### Le Fonds PEP : un levier stratégique et financier
+
+Le fonds PEP constitue un levier financier et stratégique majeur en assurant 35 % du financement du projet, en complément des 65 % apportés par l'Office Français de la Biodiversité. L'un des enjeux critiques réside dans la conformité contractuelle et le respect des jalons, car la production du premier rapport détaillant les critères et fiches indicateurs conditionne le versement de 30 % du budget global. L'objectif opérationnel final  est de transformer l'outil existant **PressionPPE** vers un système capable de quantifier plus précisément l'intégrité de la ressource en eau potable pour l'ensemble du territoire. Cette sécurisation financière permet de garantir la viabilité de l'ingénierie déployée par l'OEIL sur du plus long terme.
+
+**Défi financier :**
+
+- **Enjeu** : Garantir la viabilité du projet via le co-financement **OFB (65 %)** et **PEP (35 %)**;
+- **Réponse** : Livraison prioritaire du **rapport de critères et fiches indicateurs**, conditionnant le premier versement de **30 % du budget**.
+
+
+### Connaissance et diagnostic territorial
+
+Sur le plan de la connaissance territoriale, l'enjeu est de passer d'un simple inventaire passif à un véritable outil de pilotage proactif permettant d'identifier les bassins les plus vulnérables pour mieux orienter les budgets de gestion. Pour y parvenir, le projet vise la caractérisation biogéographique fine des Bassins Versants producteurs d’Eau Potable (BVAEP), des périmètres de protection (PPE) et des points de captage. Cet objectif s'appuie sur la mise en œuvre d'une **analyse multicritère** utilisant des seuils de vigilance définis collectivement et l'intégration des données de l'ISEE pour évaluer la population desservie. Ce diagnostic partagé doit permettre à tous les échelons institutionnels de disposer d'un **constat commun** sur l'état de la ressource.
+
+**Défi décisionnel :**
+
+- **Enjeu** : Passer d'un constat passif à une **priorisation proactive** des choix d'investissement, aux actions de terrain;
+- **Réponse** : Mise en place d'une **analyse multicritère** (seuils de vigilance et pondérations) intégrant les données biogéographiques et la population desservie (ISEE).
+
+#### Automatisation et système d'alerte
+
+L'automatisation répond au défi de la réactivité des gestionnaires, en cherchant à réduire le délai entre un événement environnemental et son signalement pour limiter l'impact sur la ressource. L'enjeu est également de garantir la **fiabilité de l'information** en s'affranchissant de manipulations manuelles répétitives et chronophages. L'objectif technique est d'intégrer des algorithmes de **détection automatique des changements**(incendies, défrichements, nouvelles installations classées) déclenchés dès l'intégration de nouvelles données de référence. Le système doit assurer une **veille environnementale** constante en automatisant la récupération de flux de données exogènes réguliers.
+
+
+**Défi de réactivité :**
+
+- **Enjeu** : Réduire le délai de signalement des pressions (incendies, défrichages, pollution) pour protéger les captages et informer les populations;
+- **Réponse** : Déploiement d'une **chaîne ETL automatisée** incluant des algorithmes de **détection automatique de changements** (méthodes Hash MD5 ou Geodiff).
+
+
+### Pilotage technique et aide à la décision, un diagnostic partagé
+
+Le pilotage technique vise à instaurer un **diagnostic partagé** entre le Gouvernement, les Provinces et les Communes, tout en rendant la donnée exploitable par des utilisateurs non-spécialistes en SIG. Les livrables incluent le développement de **trois interfaces profilées** (Expert, Partenaire, Grand Public) dont l'ergonomie et les fonctionnalités sont adaptées aux missions spécifiques de chaque public. L'objectif fonctionnel est de permettre une navigation multi-échelles entre le captage et le bassin versant, complétée par la **production de rapports** de synthèse automatisés au format PDF. 
+
+
+@todo [priority=high,section=formulation] : "multi-échelles entre le captage et le bassin versant" doit être re-formulé. 
+
+
+**Défi d'accessibilité :**
+
+- **Enjeu** : Permettre à tous les acteurs (mairies, provinces, gouvernement, État, aires coutumières, associations) de partager un constat commun;
+- **Réponse** : Développement de **trois interfaces profilées** (Expert, Partenaire, Grand public) et automatisation des **rapports de synthèse PDF**.
+
+
+### Continuité et pérennité opérationnelle
+
+Le projet repose sur une **indépendance technologique** vis-à-vis des logiciels propriétaires et le maintien de la **continuité intellectuelle** avec les travaux réalisés depuis 2021. L'enjeu est de s'affranchir de la dette technique et des coûts de licence et de garantir la durabilité du système à moindre coût (financiers et en effort de maintenance). Pour cela, la phase de réalisation aura comme pre-requis l'utilisation d'une **chaîne de traitement (ETL/ELT) automatisée** et une orchestration moderne utilisant des technologies Open Source comme PostgreSQL/PostGIS, Python et DBT. Enfin, la mise en place d'une **historisation systématique** des indicateurs et des données sources, catalogués et documentés, est un prérequis majeur pour permettre des analyses temporelles et suivre l'évolution de la ressource sur le temps long.
+
+**Défi de pérennité :**
+
+- **Enjeu** : Piloter autant que possible les maintenances et éviter des dettes techniques et assurer le suivi et la veille des données;
+- **Réponse** : Migration vers un socle **Open Source** (PostgreSQL/PostGIS, Python, DBT) garantissant l'**historisation systématique** des données.
+
+
+@todo [priority=high,section=enjeux] : la modélisation métiers et un modèle décisionnel permettant de répondre à plusieurs enjeux (diagnostic partagé, priorisation proactive, veille environnementale) doit être formulé. 
+
+
+----
+
+Méthodologie détaillée pour les ateliers du projet Hydroscope, structurée pour répondre aux besoins stratégiques et fonctionnels identifiés.
+
+### Déroulement des ateliers de co-construction avec les partenaires
+
+**Déroulé type d'une session (2h30) :**
+- **Cadrage (15 min) :** Présentation du projet, du périmètre (ce qui est inclus/exclu) pour éviter les frustrations.
+- **Besoins métiers & indicateurs (1h) :** Identification des données critiques et de leur valeur métier.
+- **Interfaces & usages (45 min) :** Navigation, filtres et ergonomie selon le profil.
+- **Seuils & alertes (30 min) :** Définition collective des seuils de vigilance.
+
+
+### Profils utilisateurs et fonctionnalités attendues
+
+Le projet repose sur **trois interfaces distinctes** adaptées aux niveaux de maîtrise technique.
+
+| Profil | Besoins Spécifiques | Fonctionnalités Clés |
+| :--- | :--- | :--- |
+| **Gestionnaires / Experts** (DAVAR, DASS, OEIL) | Vision exhaustive, pilotage technique et surveillance des pressions. | Navigation hiérarchique ($BVAEP \leftrightarrow Captages \leftrightarrow PPE$), **analyse multicritère (système de jauge)**, requêtes spatiales avancées et consultation des historiques. |
+| **Partenaires** (Communes, Provinces) | Diagnostic opérationnel sans compétences SIG/SQL pour orienter la gestion locale. | Tableaux de bord simplifiés, **vue comparative entre bassins**, rapports PDF automatisés et notifications en cas de changement notable. |
+| **Grand Public** (Citoyens, Associations) | Sensibilisation et compréhension des enjeux de l'eau potable. | Infographies claires, **fiches vulgarisées**, cartographie allégée et narration pédagogique (storytelling). |
+
+### Indicateurs prioritaires et valeur métier
+Les indicateurs sont conçus pour quantifier l'**intégrité de la ressource** et prioriser les actions.
+
+- **Pressions environnementales :** Incendies (surfaces brûlées depuis 2012), érosion (linéaires touchés par classe de pente) et défrichages.
+- **Pressions humaines :** Urbanisation (nombre d'habitations), **population desservie** (données ISEE), installations classées (ICPE) et volumes de prélèvement autorisés.
+- **Facteurs biogéographiques :** Relief, géologie (sols ultramafiques vs volcanosédimentaires) et pluviométrie.  
+- **Valeur métier :** Passer d'un inventaire passif à une **priorisation proactive** des investissements basés sur la vulnérabilité réelle des bassins.
+
+### Seuils de vigilance et système d'alerte
+
+L'innovation d'Hydroscope réside dans sa capacité de **veille environnementale automatisée**.
+
+- **Détection automatique :** Utilisation d'algorithmes (Hash MD5 ou Geodiff) pour repérer les changements dès l'intégration de nouvelles données de référence.
+- **Alertes :** Les seuils déclenchant un signalement (visuel ou notification) doivent être définis collectivement en atelier pour chaque enjeu (ex: % de surface brûlée sur un PPE).
+
+
+### Contraintes Opérationnelles et Réglementaires
+
+- **Cadre légal :** Le projet doit servir de support à la **Loi du pays de juillet 2025**, notamment pour la régularisation des PPE sous un an.
+- **Confidentialité :** L'accès aux **données brutes physico-chimiques** n'est pas prévu ; l'outil n'indiquera que la date et la présence des mesures (via ATYA/HYDROBIO).
+- **Unité de gestion :** Le **Bassin Versant AEP (BVAEP)** est privilégié comme socle de travail car il est univoque pour tous les ouvrages
+
+
+### Modalités d'accès et contraintes d'usage
+
+- **Accès aux données :** Publication via des **services web (API)**, exports en formats courants (CSV, PDF, GeoJSON, XLS) et interfaces web responsives (mobiles/tablettes).
+- **Fréquence de mise à jour :** Automatisée via une chaîne **ETL (Python/DBT)** pour les données exogènes comme les incendies ou l'occupation du sol.
+- **Performance et accessibilité :** L'outil doit être fluide, inclure une documentation contextuelle (métadonnées) et proposer des sessions de **transfert de compétences** pour garantir l'autonomie des utilisateurs.
+- **Pérennité :** Choix exclusif de solutions **Open Source** (PostgreSQL/PostGIS) pour éviter la dépendance aux licences propriétaires.

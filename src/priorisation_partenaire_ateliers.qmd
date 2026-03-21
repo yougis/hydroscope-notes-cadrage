@@ -1,0 +1,176 @@
+---
+title: "Note méthodologique des ateliers"
+subtitle: Projet HydroScope
+author: 
+  name: "Hugo Roussaffa"
+  email: hugoroussaffa@gmail.com
+  Tel: +687 97.83.24
+  affiliation: 
+    name: Yapuka SARL
+    address: "BP 38, 98836 Dumbéa Mairie, Nouvelle-Calédonie"
+    Ridet : 1 568 070.001
+date: today
+date-format: long
+number-sections: true
+
+lang: fr
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
+    theme: cosmo
+    code-fold: true
+    embed-resources: true
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+    toc-depth: 3
+  eisvogel-pdf:
+    titlepage: true
+    titlepage-logo: logo_yapuka.png
+    toc: true
+    toc-title: "Sommaire"
+    number-sections: true
+    include-in-header: header.tex
+    callout-icon: false
+    callout-appearance: simple
+  docx:
+    toc: true
+    toc-depth: 3
+
+copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version document 0.1"
+---
+
+
+
+Les ateliers métiers du projet Hydroscope, prévus durant la Phase A (mi-avril à mi-mai 2026), constituent une étape pivot pour passer de la vision stratégique aux spécifications techniques. Ils visent à recueillir les besoins des partenaires tout en garantissant que l'outil reste aligné sur les objectifs du projet porté par l'OEIL.
+
+# Définition des ateliers métiers
+
+## Objectifs des ateliers
+
+Le premier objectif est de **recueillir et centraliser les besoins fonctionnels** d'une majorité d'acteurs sur le territoire pour construire une vision partagé de la ressource.
+
+Les ateliers permettront de définir :
+
+- Les indicateurs prioritaires et leur valeur métier;
+- Les profils utilisateurs et leurs besoins spécifiques (gestionnaires, partenaires, grand public);
+- Les fonctionnalités attendues pour chaque profil (navigation, visualisation cartographique, tableaux de bord, filtres, exports, ergonomie,niveau de complexité attendu);
+- Les contraintes opérationnelles et réglementaires;
+- Les seuils de vigilance et d’alerte des indicateurs;
+- Les besoins de partage et de collaboration entre acteurs;
+- les modalités d’accès aux données (API, exports, interfaces);
+- les contraintes d’usage (fréquence de mise à jour, fréauence d’utilisation de l’outil, performance, besoin d’autonomie ous d’accompagnement, accessibilité).
+
+## Ateliers spécifiques avec la DAVAR
+
+Deux sessions de travail dédiées à la DAVAR sont indispensables pour sécuriser le socle du projet :
+
+- **REX sur l'outil Pression PPE (2021) :** 
+
+
+Cet atelier consiste en une **revue critique des indicateurs actuels** afin d'identifier ceux n'ayant plus d'intérêt et de tirer les leçons des limites du système précédent (dépendance technique, absence d'historisation). Il s'agit d'évaluer les forces et faiblesses du tableau de bord existant pour orienter les nouvelles fonctionnalités d'Hydroscope.
+
+- **Création des fiches indicateurs Hydroscope :** 
+
+Ce travail de co-construction vise à définir précisément les **métriques, les types de périmètres de calcul et les critères de pondération** des enjeux et des pressions. Ce livrable est stratégique car il constitue le jalon permettant le **versement de 30 % du budget** par le fonds PEP.
+
+## Déroulement et méthodologie des ateliers
+
+Afin de privilégier des échanges de fond et d'éviter la dispersion, le déroulement suit un cadre méthodologique strict :
+
+- **Format bilatéral :** 
+
+Pour plus d'efficacité, les sessions seront menées avec une seule structure à la fois (6 à 10 ateliers au total), évitant la lourdeur des réunions multi-acteurs.
+
+- **Phase préliminaire de cadrage :**
+
+Chaque atelier débute par une communication claire sur le **périmètre stratégique du projet** afin d'éviter toute frustration ultérieure si certains besoins spécifiques ne peuvent être intégrés.
+
+- **Animation et synthèse :**
+
+Les ateliers sont animés par l'assistance à maîtrise d'ouvrage (AMOA), qui est chargée de la rédaction des comptes rendus. Ces derniers sont ensuite **validés par l'OEIL** pour assurer la cohérence avec les objectifs globaux.
+
+- **Arbitrage final :** 
+
+L'équipe projet synthétise ensuite l'ensemble des besoins recueillis pour préparer les arbitrages finaux du **COPIL**, garantissant que les choix retenus respectent l'enveloppe financière et la faisabilité technique.
+
+Pour légitimer ces sollicitations, l'OEIL sollicitera une **lettre de mission officielle** auprès du Gouvernement, facilitant ainsi la mobilisation des services techniques partenaires.
+
+
+
+# Note de priorisation des partenaires
+
+## Stratégie de sélection et critères de choix
+
+Pour garantir que l’outil Hydroscope réponde aux besoins réels du terrain sans disperser les ressources du projet, trois critères de sélection ont été retenus :
+
+- **Mission critique :** Priorité aux acteurs dont la mission légale est directement liée à la protection de la ressource (Loi du pays de 2025).
+- **Représentativité territoriale :** Sélection d'acteurs couvrant la diversité géographique de la Nouvelle-Calédonie (Nord/Sud, Côte Est/Ouest, zones urbaines/rurales).
+- **Diversité des profils :** Équilibre entre experts techniques (données SIG) et décideurs (priorisation des investissements).
+
+## Liste priorisée des partenaires (cible : 8 ateliers)
+
+###  Le pôle institutionnel (indispensables - 3 ateliers)
+
+*Ces acteurs garantissent la cohérence de la donnée sur l'ensemble du Pays.*
+
+- **DAVAR (Service de l'Eau) :** En tant qu'instructeur unique des dossiers de PPE et fournisseur des référentiels "Bassin AEP", leur participation est le socle du projet.
+- **DASS (Santé Publique) :** Responsable de la qualité sanitaire. Leur besoin est centré sur le suivi de la potabilité (base ATYA) et la protection des captages.
+- **DIMENC (Mines & Industrie) :** Essentielle pour intégrer les indicateurs de pressions minières et industrielles (ICPE), enjeux majeurs pour l'intégrité de la ressource.
+
+### Le pôle territorial & gestion locale (représentativité - 3 ateliers)
+
+*L'objectif est de couvrir les spécificités géographiques sans multiplier les réunions.*
+
+-**Les Provinces (via le groupe OS1) :** Pour optimiser le temps, un atelier unique avec le **groupe OS1** permet de toucher les trois provinces. Cela garantit une vision macro sur tout le territoire.
+-**Communes de la Côte Est et Sud (ex: Thio / Mont-Dore) :** **Mont-Dore** représente les enjeux de pression urbaine et de forte population, tandis que **Thio** illustre les problématiques de pressions minières et de communes rurales.
+-**SIVOM VKP (Zone Nord/Ouest) :** Ce syndicat est le relais idéal pour le Nord. Il permet de traiter les enjeux d'un territoire en plein développement agricole et industriel avec une structure de gestion mutualisée.
+
+### Le pôle opérationnel & usages (validation technique - 2 ateliers)
+
+- **La Calédonienne des Eaux (CDE) :** 
+
+Opérateur privé majeur. Son expertise est requise pour valider les indicateurs de population desservie et de volumes réels de distribution.
+
+- **WWF / Comités de population locale :** 
+
+Ces acteurs sont prioritaires pour tester la **représentativité sociale**. Ils valideront l'ergonomie de l'interface "Grand Public" pour s'assurer que les enjeux sont compris par les citoyens.
+
+
+## Acteurs écartés et alternatives de consultation
+
+Pour maintenir la qualité des échanges, certains acteurs ont été volontairement mis en retrait pour la phase d'ateliers bilatéraux :
+
+- **L’Association des Maires :** Jugée trop "filtrante" et politique pour un recueil de besoins techniques.
+- **Les Bureaux d'études (GEOS4D, GeoImpact, CAPSE / BIOECO) :** Bien que techniquement compétents, ils seront consultés uniquement via le **COPRO** ou lors des phases de test pour ne pas saturer le calendrier.
+
+## Synthèse didactique des profils d'ateliers
+
+Voici une proposition de tableau de synthèse des ateliers pour le projet Hydroscope, intégrant les priorités territoriales, les objectifs spécifiques de la DAVAR et la méthodologie de déroulement validée.
+
+## Méthodologie et déroulement des ateliers
+
+- **Format :** Entretiens **bilatéraux** (une structure à la fois) pour garantir des échanges approfondis et éviter la lourdeur des réunions multi-acteurs.
+- **Quantité :** Limité à **6 à 10 ateliers** au total pour éviter la dispersion des besoins.
+- **Animation :** Pilotage par l'AMOA (Yapuka) avec validation systématique des comptes rendus par l'OEIL.
+- **Processus :** Chaque séance débute par une **phase préliminaire de cadrage** pour rappeler le périmètre du projet et limiter les risques de frustration future.
+
+## Tableau de synthèse des ateliers
+
+| Priorité / Acteur | Type d'atelier | Objectifs spécifiques | Interface cible |
+| :--- | :--- | :--- | :--- |
+| **1. DAVAR (SDE)** | **Spécifique (REX)** | Effectuer la revue critique de **Pression PPE** : identifier les indicateurs sans intérêt, analyser les forces/faiblesses de l'outil actuel. | **Expert** |
+| **1. DAVAR (SDE)** | **Spécifique (Technique)** | Co-construire les **fiches indicateurs Hydroscope** (métriques, périmètres, pondérations). *Livrable critique pour le jalon PEP 30%*. | **Expert** |
+| **1. DASS / DIMENC** | Institutionnel | Identifier les besoins en suivi de potabilité (ATYA) et intégrer les pressions industrielles/minières (ICPE). | **Expert** |
+| **2. Provinces (via OS1)** | Territorial | Recueillir les besoins de gestion à l'échelle provinciale et assurer la **représentativité territoriale** via le groupe de travail existant. | **Partenaire** |
+| **2. Communes & SIVOM** (ex: Mont-Dore, Thio, VKP) | Territorial / Gestion | Définir les besoins opérationnels locaux (diagnostic par commune) et évaluer l'ergonomie adapté pour les non-spécialistes. | **Partenaire** |
+| **3. CDE / Bureaux d'études** (ex: SEREG) | Opérationnel | Valider la faisabilité des indicateurs de distribution (volumes, population desservie) et le réalisme des périmètres (PPE). | **Expert / Partenaire** |
+| **4. WWF / Comités locaux** | Usage & Public | Définir les formats de **vulgarisation** (fiches, application mobile) et valider l'intelligibilité des messages pour les usagers. | **Grand Public** |
+
+## Validation et consolidation
+
+À l'issue de ces échanges, l'équipe projet réalise une **synthèse des besoins**. Le **COPRO** vérifie ensuite la cohérence de ces demandes avec le périmètre stratégique, tandis que le **COPIL** assure l'arbitrage final des fonctionnalités qui seront intégrées dans le Cahier des Charges Fonctionnel (CCF).

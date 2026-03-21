@@ -1,0 +1,172 @@
+
+# Définition du cadre opérationnel du projet
+
+## Périmètre du projet
+
+Le projet s'articule autour de quatre domaines prioritaires :
+
+  - Caractériser les territoires (facteurs biogéographiques et pressions).
+  - Assurer une veille environnementale et alerter (détection automatique des changements).
+  - Partager des diagnostics entre acteurs (interfaces adaptées par profil).
+  - Synthétiser l’information (rapports automatisés et fiches)
+
+
+### Ce qui est inclus
+
+Le projet Hydroscope intègre une navigation permettant de circuler de manière fluide entre les territoires, les bassins versants (BVAEP), les périmètres de protection (PPE) et les points de captage. Les fonctionnalités incluent la production de **tableaux de bord experts** pour le pilotage technique et la génération automatisée de **rapports de synthèse au format PDF**. Les données traitées couvrent les indicateurs de pression (incendies, érosion, urbanisation), la population desservie via l'intégration des statistiques de l'ISEE, ainsi que des informations biophysiques clés.
+
+Le Bassin AEP est l'unité principale de gestion (plutôt que le PPE seul), car tous les captages n'ont pas de périmètre protégé.
+La pondération multi-critère (méthode par "jauge") est jugé essentiel par la DAVAR et l'OEIL.
+
+@todo [priority=high,section=cadre] : apporter des précisions sur ce qui est inclus
+
+
+### Ce qui est considéré comme hors périmètre
+
+Le système ne prévoit pas l'accès aux **données brutes** comme les mesures physico-chimiques par exemples, ou la pluviométrie (valeurs précises), mais se limite à conserver l'historique de présence, les dates des prélèvements effectués ou des indicateurs moyens. Par ailleurs, les actions de **vulgarisation pédagogique approfondie** ne sont pas traitées ici, car elles sont déportées vers le projet partenaire nommé **SOURCE**.
+
+@todo [priority=high,section=cadre] : apporter des précisions sur ce qui n'est pas inclus
+
+
+
+---
+
+## Hypothèses et contraintes
+
+### Disponibilité et la fiabilité des données
+
+La réussite du projet repose en grande partie sur l'accès aux données fournies par les partenaires institutionnels (Gouvernement, Provinces, Communes, DASS, ISEE...). 
+
+Le projet doit assurer l'interopérabilité entre les référentiels de la DAVAR, de la DITTT (BD-Hydrographie) et du BRGM (BD-Lisa) etc. 
+
+Voici une liste des référentiels hydrologiques produits par des acteurs en Nouvelle-Calédonie : 
+
+- BD-Lisa (BRGM) : Référentiel hydrographique à l’échelle du territoire, utilisé pour la modélisation des masses d'eau Base de Données des Limites des Systèmes Aquifères. 
+- BD-Hydrographie (DITTT) :  Réseau hydrographique de la Grande Terre. Donnée composée du réseau hydrographique principal, secondaire et surfacique sur la Grande Terre de la Nouvelle-Calédonie. Des informations concernant le nom des cours d'eau principaux et leur longueur sont également disponibles. Cette donnée est issue de la BDCARTO (1/50.000) de la Direction des Infrastructures, de la Topographie et des Transports Terrestres (DITTT).
+- Cartographie des Périmètres de Protection des Eaux;
+- Positionnement des captages destinés à l’Alimentation en Eau Potable;
+- Positionnement des captages privés autorisés;
+- Emplacements et métadonnées des stations de suivi du débit des cours d’eau et pluviométrique de la DAVAR;
+- Cartographie résultant d’études sur les débits des cours d’eau ou sur la pluviométrie;
+- Cartographie des Hydro-Eco Régions;
+- Carnet ou base de données de suivi des captages par la DASS inscrivant les opération de sécurité sanitaire des réseaux d'eau potable. Ces carnets/Base de données font partit du Plan de Sécurité Sanitaire des Eaux (PSSE).
+
+
+Des référentiels non hydrologiques produit en Nouvelle-Calédonie seront exploités : 
+
+- MNT;
+- Météo;
+- Incendies;
+- Sécheresse végétale;
+- Plans Locaux d'Urbanisme (PUD);
+  
+@todo [priority=high,section=sources] : préciser les référentiels de données qui pourront être utilisés
+
+
+
+D'autres référentiels hydrologiques et non hydrologiques produit en dehors de la Nouvelle-Calédonie pourront être exploités :
+
+- Dynamic world;
+- TMF;
+- SWOT
+- ...
+  
+@todo [priority=high,section=sources] : préciser les référentiels de données qui pourront être utilisés
+
+Il est également hypothéqué que les partenanires et acteurs institutionnels s'engagent activement dans la validation des indicateurs et la définition des seuils de vigilance, garantissant ainsi l'appropriation du diagnostic territorial partagé.
+
+
+### Stabilité des financements
+
+Enfin, le projet suppose une **stabilité des financements** et un respect rigoureux des jalons contractuels avec le fonds PEP pour assurer la continuité de l'ingénierie déployée par l'OEIL.
+
+@todo [priority=high,section=Hypothèses] : préciser les hypothèses liées à la mobilisation des financements complémentaires, à l'amendement des conventions en cas de dépassement budgétaire imprévu.
+
+### Ressources humaines
+
+@todo [priority=high,section=Hypothèses] Exprimer la possibilité de mobiliser des ressources internes à l'OEIL, que ce soit au pole environnement qu'au pole SI pour assurer la continuité du projet.
+
+
+### Autres contraintes
+
+Sur le plan technique, le projet inclus l'usage de **solutions Open Source** pour garantir l'indépendance technologique de l'OEIL. Le calendrier est contraint par les jalons financiers du **fonds PEP** (livraison des fiches indicateurs) et le respect des conventions **OFB** courant jusqu'à la fin de l'année 2028.
+
+---
+
+## Estimation budgétaire macro
+
+Le financement est structuré par le co-financement entre l’**OFB (65 %)** et le **fonds PEP (35 %)**. Sur la base des premières études, la charge de développement des interfaces de consultation est pour le moment estimée entre **7 et 9 M XPF**, montant pouvant être optimisé selon les possibilités de mutualisation technique et l'analyse plus fine des besoins au cours de la phase A. Les coûts de maintenance et d'hébergement sont estimés à environ **1 M XPF par an** après la mise en production, avec une attention particulière portée à la maîtrise des coûts liés à l'infrastructure cloud et à l'optimisation des traitements automatisés.
+
+---
+
+## Planning macro
+
+Le calendrier est soumis à deux échéances contractuelles majeures :
+
+  - 29 décembre 2026 : Date limite cible pour la livraison des outils.
+  - 31 mars 2028 : Clôture définitive de la convention avec l'OFB
+
+@todo[priority=high,section=planning] : verifier les dates des fins de convention
+
+
+Le projet est découpé en deux étapes majeures : une première phase de **cadrage fonctionnel** (Phase A) d'une durée de 3 mois, suivie d'une phase de **réalisation technique** (Phase B) . Les points de validation clés incluent la livraison des fiches indicateurs et du **Cahier des Charges Fonctionnel (CCF)**.
+
+### Mois 1 : Gouvernance et cadrage stratégique (mi-Mars à mi-Avril 2026)
+
+Ce mois est dédié à la mise en place du cadre de travail et à la définition des principes fondamentaux du projet.
+
+13 Mars 2026 : Réunion de lancement (Kick-off) avec l'OEIL et les financeurs (OFB et DAVAR/PEP).
+
+Semaines 1 à 3 : Entretiens stratégiques et fonctionnel (2 à 3 sessions) avec l'équipe de l'OEIL pour stabiliser la vision.
+
+Semaine 4 : Première réunion du COPRO (suivi opérationnel et planning).
+
+Jalons de livrables :
+
+  - Note de cadrage stratégique;
+  - Notes de cadrage fonctionnel pour les trois domaines : gestionnaires, grand public et besoins internes OEIL.
+
+### Mois 2 : Cadrage métier et ateliers (mi-Avril à mi-Mai 2026)
+
+Période pour transformer les besoins en spécifications fonctionnelles précises.
+
+Semaines 1 à 4 : Réalisation des ateliers de cadrage (6 à 8 sessions) avec les gestionnaires (DAVAR, DASS, Provinces) pour définir les indicateurs et fonctionnalités.
+
+Fin-Avril : Deuxième réunion du COPRO.
+
+Mi-Mai : Réunion du COTECH (validation technique des options d'historisation et d'indexation H3).
+
+Jalons de livrables (mi-projet) :
+
+- Revue critique des fiches indicateurs et du modèle PressionPPE (usages et limites);
+- Fiches indicateurs Hydroscope : Ce livrable est crucial car il constitue le jalon de paiement PEP (30 % du budget).
+
+### Mois 3 : Rédaction du cahier des charges fonctionnel et validation (mi-Mai à mi-Juin 2026)
+
+Finalisation de la documentation pour préparer la phase de réalisation technique (Phase B).
+
+Semaines 1 et 2 : Rédaction détaillée des spécifications fonctionnelles, schémas, processus et maquettes fonctionnelles (wireframes).
+
+fin-Mai : Troisième réunion du COPRO.
+Début Juin : Relecture et mise en forme finale du cahier des charges fonctionnel.
+
+Jalons de livrables (fin de projet) :
+
+- Cahier des charges fonctionnel Hydroscope (50-60 pages);
+- Journal des décisions et arbitrages finalisé;
+- Rapport de consolidation finale de la mission AMOA;
+
+Mi-Juin : COPIL de clôture de la Phase A : Présentation finale des livrables et arbitrage pour lancer la réalisation technique (Phase B ).
+
+::: {.landscape}
+
+![](ressources/planning.png)
+
+@todo[priority=medium,section=planning] : planning à reprendre sur Planner et à intégrer dans le document quand j'y aurai accès
+
+:::
+
+@todo[priority=high,section=planning] : Définir et planifier les grands jalons de la Phase B.
+
+
+---

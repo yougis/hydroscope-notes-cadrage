@@ -1,0 +1,45 @@
+
+# Gouvernance, pilotage et sécurisation du projet
+
+## Gouvernance du projet
+
+L'**OEIL** assure la maitrise d'ouvrage du projet. La mission d'**AMOA** est confiée au consultant indépendant Hugo Roussaffa de la société **Yapuka**, garant de la cohérence fonctionnelle et de l'alignement sur les objectifs stratégiques. Le pilotage opérationnel est structuré autour de deux instances : le comité de pilotage **COPIL** et le comité de projet **COPRO** . Une équipe projet dédiée, pilotée par Marjolaine David (CP OEIL) avec l'appui de l'AMOA, est chargée de la coordination quotidienne, la réalisation d'action de gestion de projet, la mise en oeuvre de la récolte des besoins et de la production des livrables.
+
+  - COPIL (Stratégique) : Composé de l'OEIL, de l'OFB et du Chef de service de l’eau de la DAVAR (ou son représentant). Son rôle est l'arbitrage des besoins synthétisés.
+  - COPRO (Opérationnel) : Intègre les chefs de projet techniques de l'OEIL et le comité OS1 (DAVAR, DASS, DIMENC, 3 provinces, communes). Il garantit l'alignement des besoins recensés avec le périmètre du projet.
+  - Équipe projet : Pilotée par Marjolaine David (CP OEIL) avec l'appui de l'AMOA (Yapuka).
+
+## Méthodologie de concertation et de validation
+
+### Ateliers métiers
+Recueil des besoins via 6 à 10 entretiens bilatéraux prioritaires.
+
+### Validation des livrables : Processus distinct entre notes stratégiques (OEIL) et fonctionnelles (COPRO).
+
+## Analyse des risques majeurs
+
+### Risques organisationnels
+
+
+Risque de frustration des partenaires : L'impossibilité d'intégrer tous les besoins exprimés lors des ateliers peut générer une déception. Une communication claire sur le périmètre stratégique sera faite en amont de chaque atelier.
+
+### Risques techniques
+
+L'enjeu technique majeur concerne l'hétérogénéité des référentiels sources et la **complexité de l'architecture** (historisation, indexation H3 et calcul d'indicateurs multicritères pondérés).
+
+La stabilisation du **modèle de données métier** et le choix définitif de l'unité principale de gestion, le consensus actuel penchant pour le **Bassin AEP** plutôt que le seul PPE. ces données doivent être solides car le modèle de données métier est un socle structurant pour la réalisation technique et les choix d'architecture.
+
+### Risques financiers
+
+Il existe un risque lié à la difficulté de mobiliser des financements complémentaires ou d'amender les conventions actuelles en cas de dépassement budgétaire imprévu.
+
+
+## Indicateurs de pilotage
+
+Le suivi de la valeur métier du projet s'appuiera sur le **nombre d'indicateurs priorisés et validés scientifiquement** par les experts. La traçabilité des arbitrages sera assurée par un **journal des décisions** tenu à jour par l'AMOA tout au long de la phase de cadrage.
+
+
+## Prochaines étapes
+
+Le lancement opérationnel passera par la validation de cette note de cadrage et une **revue critique des indicateurs actuels** de PressionPPE. 
+Plannification des **ateliers thématiques** avec les gestionnaires pour la période (Avril-Mai). Ces ateliers permettront vue de finaliser les fiches indicateurs (jalon PEP) et de définir les besoins métiers détaillés, qui serviront de base à la rédaction du **Cahier des Charges Fonctionnel** final.

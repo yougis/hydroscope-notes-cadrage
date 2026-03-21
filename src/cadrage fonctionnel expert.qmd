@@ -1,0 +1,13 @@
+1. Le principe de l'Analyse Multicritère (AMC)
+L'approche multicritère permet de croiser différentes familles de données pour obtenir un état global de fonctionnalité et d'intégrité d'un bassin versant ou d'un captage,. Elle ne se contente pas de lister les problèmes, mais combine :
+
+    Les facteurs biogéographiques : Relief, géologie, pluviométrie, couverture végétale,.
+    Les pressions environnementales : Incendies, érosion, urbanisation, défrichages, installations classées (ICPE),.
+    Les enjeux humains et techniques : Population desservie, volumes de prélèvement autorisés, infrastructures,,.
+
+2. Le fonctionnement du système de « jauge »
+Inspiré d'un outil déjà utilisé en Province Nord, ce système repose sur la pondération thématique,. Plutôt que de traiter toutes les données sur un pied d'égalité, on attribue un « poids » (une importance relative) à chaque critère ou famille d'indicateurs,.
+
+    La pondération : Par exemple, on peut décider que le critère « population desservie » pèse plus lourd dans le calcul final qu'un indicateur d'érosion pour prioriser les investissements là où l'impact humain est le plus fort,.
+    Les seuils de vigilance : La méthodologie prévoit de définir collectivement des seuils qui, une fois franchis, font basculer l'indicateur dans une zone d'alerte (le visuel de la « jauge »),.
+    L'agrégation : Les données sont converties (souvent en format raster ou via une grille H3) et agrégées pour produire un score final univoque par unité de gestion
