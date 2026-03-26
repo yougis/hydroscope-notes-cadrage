@@ -76,35 +76,30 @@ D'autres référentiels hydrologiques et non hydrologiques produit en dehors de 
 Il est également hypothéqué que les partenanires et acteurs institutionnels s'engagent activement dans la validation des indicateurs et la définition des seuils de vigilance, garantissant ainsi l'appropriation du diagnostic territorial partagé.
 
 
-### Stabilité des financements
-
-Enfin, le projet suppose une **stabilité des financements** et un respect rigoureux des jalons contractuels avec le fonds PEP pour assurer la continuité de l'ingénierie déployée par l'OEIL.
-
-@todo [priority=high,section=Hypothèses] : préciser les hypothèses liées à la mobilisation des financements complémentaires, à l'amendement des conventions en cas de dépassement budgétaire imprévu.
-
 ### Ressources humaines
 
-@todo [priority=high,section=Hypothèses] Exprimer la possibilité de mobiliser des ressources internes à l'OEIL, que ce soit au pole environnement qu'au pole SI pour assurer la continuité du projet.
+Les ressources internes de l'OEIL, que ce soit au pole environnement qu'au pole SI pourront assurer la continuité du projet. Cependant, il est sera nécessaire de prévoir des ressources externes pour la réalisation technique (Phase B) et la maintenance post-livraison, notamment pour l'hébergement cloud ainsi que les traitements automatisés.
 
 
 ### Autres contraintes
 
-Sur le plan technique, le projet inclus l'usage de **solutions Open Source** pour garantir l'indépendance technologique de l'OEIL. Le calendrier est contraint par les jalons financiers du **fonds PEP** (livraison des fiches indicateurs) et le respect des conventions **OFB** courant jusqu'à la fin de l'année 2028.
+Sur le plan technique, le projet inclus l'usage de **solutions Open Source** pour garantir l'indépendance technologique de l'OEIL. 
+Le calendrier est contraint par les jalons financiers du **fonds PEP** (livraison des fiches indicateurs) et le respect des conventions **OFB** courant jusqu'à la fin de l'année 2028.
 
----
+
 
 ## Estimation budgétaire macro
 
 Le financement est structuré par le co-financement entre l’**OFB (65 %)** et le **fonds PEP (35 %)**. Sur la base des premières études, la charge de développement des interfaces de consultation est pour le moment estimée entre **7 et 9 M XPF**, montant pouvant être optimisé selon les possibilités de mutualisation technique et l'analyse plus fine des besoins au cours de la phase A. Les coûts de maintenance et d'hébergement sont estimés à environ **1 M XPF par an** après la mise en production, avec une attention particulière portée à la maîtrise des coûts liés à l'infrastructure cloud et à l'optimisation des traitements automatisés.
 
----
+
 
 ## Planning macro
 
 Le calendrier est soumis à deux échéances contractuelles majeures :
 
-  - 29 décembre 2026 : Date limite cible pour la livraison des outils.
-  - 31 mars 2028 : Clôture définitive de la convention avec l'OFB
+- 29 décembre 2026 : Date limite cible pour la livraison des outils.
+- 31 mars 2028 : Clôture définitive de la convention avec l'OFB
 
 @todo[priority=high,section=planning] : verifier les dates des fins de convention
 

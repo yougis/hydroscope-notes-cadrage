@@ -14,7 +14,6 @@ Le projet répond à une urgence environnementale caractérisée par :
 - **Changement climatique** : Une baisse de **20 % des précipitations** est projetée d'ici 2100;
 - **Humain** : La protection de la ressource en eau représente un enjeux vitale pour **271 407 habitants** et **90 800 ménages** .
 
-@todo [priority=medium,section=sources] : apporter des chiffres clés sur les menaces liées à la pollution, l'artificialisation des sols, les espèces envahissantes à partir du Dashboard PressionPPE
 
 
 ### Un cadre réglementaire et institutionnel nouveau
@@ -28,8 +27,8 @@ Le rôle de la Nouvelle-Calédonie ne se limite plus seulement aux études techn
 #### Adoption de l'arrêté 
 
 C'est désormais le gouvernement de la Nouvelle-Calédonie qui instaure par arrêté les périmètres de protection (immédiate, rapprochée et éventuellement éloignée).
-  - Instruction centralisée : Le service de l'eau de la DAVAR est confirmé comme l'instructeur unique pour les demandes d'autorisation de prélèvement et les dossiers de PPE.
-  - Gestion des urgences : Le gouvernement peut désormais autoriser des prélèvements provisoires sans PPE en cas de circonstances climatiques exceptionnelles ou de pollution accidentelle, à condition qu'il n'y ait pas de danger pour la santé.
+- Instruction centralisée : Le service de l'eau de la DAVAR est confirmé comme l'instructeur unique pour les demandes d'autorisation de prélèvement et les dossiers de PPE.
+- Gestion des urgences : Le gouvernement peut désormais autoriser des prélèvements provisoires sans PPE en cas de circonstances climatiques exceptionnelles ou de pollution accidentelle, à condition qu'il n'y ait pas de danger pour la santé.
 
 #### L'État
 
