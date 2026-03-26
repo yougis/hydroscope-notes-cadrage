@@ -1,13 +1,65 @@
-1. Le principe de l'Analyse Multicritère (AMC)
-L'approche multicritère permet de croiser différentes familles de données pour obtenir un état global de fonctionnalité et d'intégrité d'un bassin versant ou d'un captage,. Elle ne se contente pas de lister les problèmes, mais combine :
+Le détail des interfaces (menus, boutons, ergonomie).
+La liste exhaustive des indicateurs et leurs modes de calcul précis.
+Les modalités techniques d'exports et de formats de fichiers.
+Les seuils de vigilance précis qui seront définis lors des ateliers
 
-    Les facteurs biogéographiques : Relief, géologie, pluviométrie, couverture végétale,.
-    Les pressions environnementales : Incendies, érosion, urbanisation, défrichages, installations classées (ICPE),.
-    Les enjeux humains et techniques : Population desservie, volumes de prélèvement autorisés, infrastructures,,.
 
-2. Le fonctionnement du système de « jauge »
-Inspiré d'un outil déjà utilisé en Province Nord, ce système repose sur la pondération thématique,. Plutôt que de traiter toutes les données sur un pied d'égalité, on attribue un « poids » (une importance relative) à chaque critère ou famille d'indicateurs,.
 
-    La pondération : Par exemple, on peut décider que le critère « population desservie » pèse plus lourd dans le calcul final qu'un indicateur d'érosion pour prioriser les investissements là où l'impact humain est le plus fort,.
-    Les seuils de vigilance : La méthodologie prévoit de définir collectivement des seuils qui, une fois franchis, font basculer l'indicateur dans une zone d'alerte (le visuel de la « jauge »),.
+## Le principe de l'analyse multicritère 
+L'approche multicritère permet de croiser différentes familles de données pour obtenir un état global de fonctionnalité et d'intégrité d'un bassin versant ou d'un captage. Elle ne se contente pas de lister les problèmes, mais les combine :
+
+- L'état biogéographique : Relief, géologie, pluviométrie, couverture végétale ....
+- Les pressions environnementales et humaines : Incendies, érosion, urbanisation, défrichages, installations classées (ICPE),
+- Les enjeux humains et techniques : Population desservie, volumes de prélèvement autorisés, infrastructures,,.
+
+Pour définir les spécifications fonctionnel finales du système d'analyse multicritère d'**Hydroscope**, la question de la pondération devra être abordée aux cours des ateliers sous plusieurs angles complémentaires. L'objectif est de permetre un classement automatisé des **Bassins Versants Producteurs d’Eau Potable (BVAEP)** des PPE ou des captages selon une priorité d'intervention.
+
+Voici plusieurs approches pour structurer la réflexion sur la pondération lors des ateliers :
+
+### L’approche par "familles d’indicateurs"
+
+Au lieu de pondérer chaque variable individuellement (ce qui peut devenir complexe et instable), les sources suggèrent de regrouper les données par grandes thématiques.
+- **La méthode :** On attribue un poids global à trois grandes familles : **pressions environnementales** (incendies, érosion), **pressions humaines** (urbanisation, ICPE) et **enjeux** (population desservie, volumes).
+- **Question pour les spécifications :** « Quel poids relatif (en %) accordez-vous à la préservation de l'état naturel du bassin (intégrité) par rapport à l'importance socio-économique de l'ouvrage (enjeu humain) ? ».
+
+### Le modèle « risque x vulnérabilité » ou "jauge" (matrice de décision)
+Inspiré de l'analyse multicritère déjà expérimentée par la Province Nord, ce modèle croise l'intensité d'une menace avec la sensibilité du captage.
+Plutôt que de traiter toutes les données sur un pied d'égalité, on attribue un « poids » (une importance relative) à chaque critère ou famille d'indicateurs,.
+
+La pondération : Par exemple, on peut décider que le critère « population desservie » pèse plus lourd dans le calcul final qu'un indicateur d'érosion pour prioriser les investissements là où l'impact humain est le plus fort,
+
+Les seuils de vigilance : La méthodologie prévoit de définir collectivement des seuils qui, une fois franchis, font basculer l'indicateur dans une zone d'alerte (le visuel de la "jauge"),
     L'agrégation : Les données sont converties (souvent en format raster ou via une grille H3) et agrégées pour produire un score final univoque par unité de gestion
+
+
+- **La méthode :** Un score de **pression cumulée** (somme pondérée des menaces) est multiplié par un **coefficient d'enjeu** (lié à la population desservie).
+- **Exemple concret :** Un incendie sur un bassin alimentant 10 000 personnes aura une priorité mécanique plus élevée qu'un incendie identique sur un bassin alimentant 100 personnes.
+- **Question pour les spécifications :** « Existe-t-il un seuil de population en dessous duquel une pression forte ne déclenche pas une priorité d'action immédiate ? ».
+
+### La pondération « dynamique » vs « fixe »
+L'outil peut proposer deux niveaux de réglage pour s'adapter aux différents profils d'utilisateurs.
+- **La méthode :** 
+    - Une pondération **"référence"** (socle scientifique validé par la DAVAR et l'OEIL) pour le diagnostic partagé.
+    - Une pondération **"scénario"** (curseurs ajustables par l'expert dans l'interface) pour simuler des stratégies alternatives.
+- **Question pour les spécifications :** « Quels sont les indicateurs "piliers" dont le poids ne devrait jamais être modifié par l'utilisateur pour garantir la cohérence du diagnostic territorial ? ».
+
+### L’approche par "seuils critiques" (pondération non-linéaire)
+Certaines pressions sont si graves qu'elles peuvent rendre les autres critères secondaires. Cette approche est lié au domaine fonctionnel d'alerte de l'outil.
+
+- **La méthode :** Si un indicateur franchit un **seuil de vigilance critique** (ex: présence d'une ICPE dangereuse ou 50 % du PPE brûlé), le bassin remonte automatiquement en tête de liste, quel que soit le nombre d'habitants desservis.
+- **Question pour les spécifications :** « Quelles sont les "lignes rouges" qui doivent produire une alerte? ».
+
+### La pondération par l'historique (analyse diachronique)
+Hydroscope vise à corriger l'absence d'historisation de l'outil précédent.
+- **La méthode :** On donne plus de poids aux pressions dont la **cinétique est rapide** ou récurrente.
+- **Exemple :** Un bassin où la déforestation a augmenté de 10 % en 2 ans sera priorisé par rapport à un bassin stable, même si ce dernier est globalement plus dégradé.
+- **Question pour les spécifications :** « Quel poids accordez-vous à la *vitesse d'évolution* d'une pression par rapport à son *état actuel* ? ».
+
+
+
+
+
+**Impact stratégique :** La stabilisation de ces règles de calcul est une étape critique car elle alimentera les **fiches indicateurs**, livrable majeur conditionnant le versement de **30 % du budget** par le fonds PEP.
+
+
+
