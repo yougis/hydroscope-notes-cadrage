@@ -79,7 +79,9 @@ resume: "Succédant au tableau de bord PressionPPE (2021), dont il capitalise le
 
 ::::  {.callout-important title="Note de version"} 
 
-La note de cadrage stratégique (version du 8 mars 2026) prend en compte plusieurs commentaires de Fabien ALBOUY (OEIL), datés du 10 mars 2026, qui visent à rectifier le tir sur la gouvernance, le périmètre contractuel et la communication sur le projet.
+
+La version 0.3 est soumise à une seconde lecture à l'OEIL. Les modifications principales concernent la réorganisation du plan, l'intégration d'éléments issus du COPIL de démarage du 13 Mars 2026 et la reformulation de certains passages pour plus de clarté.
+
 
 Historique des versions du document :
 
@@ -87,6 +89,7 @@ Historique des versions du document :
 | -------|-------|------- |--------------------------------|
 | Version 0.1 |2026-03-08| Hugo Roussaffa |Rédaction initiale de la note de cadrage stratégique|
 | Version 0.2 |2026-03-10| Hugo Roussaffa |Intégration des commentaires de Fabien ALBOUY (OEIL) sur la gouvernance, le périmètre contractuel et la formulation|
+| Version 0.3 |2026-03-24| Hugo Roussaffa |Modification de l'organisation du plan, intégration d'éléments suite au COPIL de démarage (13 Mars) |
 
 
 ::: {#todo-list}
