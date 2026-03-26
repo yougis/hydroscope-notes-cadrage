@@ -48,7 +48,7 @@ copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version docume
 
 Les ateliers métiers du projet Hydroscope, prévus durant la Phase A (mi-avril à mi-mai 2026), constituent une étape pivot pour passer de la vision stratégique aux spécifications techniques. Ils visent à recueillir les besoins des partenaires tout en garantissant que l'outil reste aligné sur les objectifs du projet porté par l'OEIL.
 
-# Définition des ateliers métiers
+
 
 ## Objectifs des ateliers
 
@@ -65,6 +65,17 @@ Les ateliers permettront de définir :
 - les modalités d’accès aux données (API, exports, interfaces);
 - les contraintes d’usage (fréquence de mise à jour, fréauence d’utilisation de l’outil, performance, besoin d’autonomie ous d’accompagnement, accessibilité).
 
+
+
+
+### Déroulement des ateliers de co-construction avec les partenaires
+
+**Déroulé type d'une session (2h30) :**
+- **Cadrage (15 min) :** Présentation du projet, du périmètre (ce qui est inclus/exclu) pour éviter les frustrations.
+- **Besoins métiers & indicateurs (1h) :** Identification des données critiques et de leur valeur métier.
+- **Interfaces & usages (45 min) :** Navigation, filtres et ergonomie selon le profil.
+- **Seuils & alertes (30 min) :** Définition collective des seuils de vigilance.
+
 ## Ateliers spécifiques avec la DAVAR
 
 Deux sessions de travail dédiées à la DAVAR sont indispensables pour sécuriser le socle du projet :
@@ -74,9 +85,21 @@ Deux sessions de travail dédiées à la DAVAR sont indispensables pour sécuris
 
 Cet atelier consiste en une **revue critique des indicateurs actuels** afin d'identifier ceux n'ayant plus d'intérêt et de tirer les leçons des limites du système précédent (dépendance technique, absence d'historisation). Il s'agit d'évaluer les forces et faiblesses du tableau de bord existant pour orienter les nouvelles fonctionnalités d'Hydroscope.
 
+Cette réunion d'échange sera le moment de présenter un retour d'experiemce sur le tableau de bord après 5 ans de mise en service.
+Une part importante des echanges sera de laisser l'utilisateur exprimer naturelement ses critiques (positives/negatives) sur l'outils.
+
+Toutefois certaines questions clés devront être aborder si cela n'a pas été fait spontanément : 
+- Quels indicateurs sont obsolètes ou peu pertinents? 
+- Quelles données sont sous-utilisées? 
+- Quelles fonctionnalités manquent pour une prise de décision efficace ?
+- Quelles erreurs sont dans cet outil que le futur outil ne devrait pas commettre ?
+
+
 - **Création des fiches indicateurs Hydroscope :** 
 
 Ce travail de co-construction vise à définir précisément les **métriques, les types de périmètres de calcul et les critères de pondération** des enjeux et des pressions. Ce livrable est stratégique car il constitue le jalon permettant le **versement de 30 % du budget** par le fonds PEP.
+
+
 
 ## Déroulement et méthodologie des ateliers
 
@@ -99,7 +122,6 @@ Les ateliers sont animés par l'assistance à maîtrise d'ouvrage (AMOA), qui es
 L'équipe projet synthétise ensuite l'ensemble des besoins recueillis pour préparer les arbitrages finaux du **COPIL**, garantissant que les choix retenus respectent l'enveloppe financière et la faisabilité technique.
 
 Pour légitimer ces sollicitations, l'OEIL sollicitera une **lettre de mission officielle** auprès du Gouvernement, facilitant ainsi la mobilisation des services techniques partenaires.
-
 
 
 # Note de priorisation des partenaires
@@ -126,9 +148,11 @@ Pour garantir que l’outil Hydroscope réponde aux besoins réels du terrain sa
 
 *L'objectif est de couvrir les spécificités géographiques sans multiplier les réunions.*
 
--**Les Provinces (via le groupe OS1) :** Pour optimiser le temps, un atelier unique avec le **groupe OS1** permet de toucher les trois provinces. Cela garantit une vision macro sur tout le territoire.
--**Communes de la Côte Est et Sud (ex: Thio / Mont-Dore) :** **Mont-Dore** représente les enjeux de pression urbaine et de forte population, tandis que **Thio** illustre les problématiques de pressions minières et de communes rurales.
--**SIVOM VKP (Zone Nord/Ouest) :** Ce syndicat est le relais idéal pour le Nord. Il permet de traiter les enjeux d'un territoire en plein développement agricole et industriel avec une structure de gestion mutualisée.
+- **Les Provinces (via le groupe OS1) :** Pour optimiser le temps, un atelier unique avec le **groupe OS1** permet de toucher les trois provinces. Cela garantit une vision macro sur tout le territoire.
+
+- **Communes de la Côte Est et Sud (ex: Thio / Mont-Dore) :** **Mont-Dore** représente les enjeux de pression urbaine et de forte population, tandis que **Thio** illustre les problématiques de pressions minières et de communes rurales.
+
+- **SIVOM VKP (Zone Nord/Ouest) :** Ce syndicat est le relais idéal pour le Nord. Il permet de traiter les enjeux d'un territoire en plein développement agricole et industriel avec une structure de gestion mutualisée.
 
 ### Le pôle opérationnel & usages (validation technique - 2 ateliers)
 
@@ -138,7 +162,7 @@ Opérateur privé majeur. Son expertise est requise pour valider les indicateurs
 
 - **WWF / Comités de population locale :** 
 
-Ces acteurs sont prioritaires pour tester la **représentativité sociale**. Ils valideront l'ergonomie de l'interface "Grand Public" pour s'assurer que les enjeux sont compris par les citoyens.
+Ces acteurs sont prioritaires pour tester la **représentativité sociale**. Ils présenterons les besoins pour une interface "Grand Public" pour s'assurer que les enjeux soient compris par les citoyens.
 
 
 ## Acteurs écartés et alternatives de consultation
@@ -148,16 +172,9 @@ Pour maintenir la qualité des échanges, certains acteurs ont été volontairem
 - **L’Association des Maires :** Jugée trop "filtrante" et politique pour un recueil de besoins techniques.
 - **Les Bureaux d'études (GEOS4D, GeoImpact, CAPSE / BIOECO) :** Bien que techniquement compétents, ils seront consultés uniquement via le **COPRO** ou lors des phases de test pour ne pas saturer le calendrier.
 
-## Synthèse didactique des profils d'ateliers
+## Synthèse des profils d'ateliers
 
 Voici une proposition de tableau de synthèse des ateliers pour le projet Hydroscope, intégrant les priorités territoriales, les objectifs spécifiques de la DAVAR et la méthodologie de déroulement validée.
-
-## Méthodologie et déroulement des ateliers
-
-- **Format :** Entretiens **bilatéraux** (une structure à la fois) pour garantir des échanges approfondis et éviter la lourdeur des réunions multi-acteurs.
-- **Quantité :** Limité à **6 à 10 ateliers** au total pour éviter la dispersion des besoins.
-- **Animation :** Pilotage par l'AMOA (Yapuka) avec validation systématique des comptes rendus par l'OEIL.
-- **Processus :** Chaque séance débute par une **phase préliminaire de cadrage** pour rappeler le périmètre du projet et limiter les risques de frustration future.
 
 ## Tableau de synthèse des ateliers
 
@@ -174,3 +191,63 @@ Voici une proposition de tableau de synthèse des ateliers pour le projet Hydros
 ## Validation et consolidation
 
 À l'issue de ces échanges, l'équipe projet réalise une **synthèse des besoins**. Le **COPRO** vérifie ensuite la cohérence de ces demandes avec le périmètre stratégique, tandis que le **COPIL** assure l'arbitrage final des fonctionnalités qui seront intégrées dans le Cahier des Charges Fonctionnel (CCF).
+
+
+# Liste de questions à aborder
+
+## Indicateurs prioritaires et valeur métier
+
+- Parmi les pressions identifiées (incendies, érosion, urbanisation, ICPE), quelles sont les trois qui impactent le plus vos décisions de gestion au quotidien ?
+- Comment pondérez-vous l'importance d'un enjeu (ex: population desservie) par rapport à une pression (ex: surface brûlée) pour définir une priorité d'action ?
+- Quelle est la profondeur historique nécessaire (ex: incendies depuis 2012) pour que vos analyses de tendances soient statistiquement valables ?
+- Quels nouveaux indicateurs thématiques (ex: proximité de la voirie, espèces envahissantes) apporteraient une réelle plus-value par rapport à l'ancien outil ?
+
+## Profils utilisateurs et besoins spécifiques
+
+-  Quel est l'objectif principal de votre service en utilisant l'outil : pilotage technique, diagnostic opérationnel ou sensibilisation ?
+-  Quel est le niveau d'expertise technique (SIG, SQL) des agents qui manipuleront l'outil au quotidien ?
+- Quelles décisions concrètes espérez-vous prendre grâce aux informations délivrées par votre interface spécifique ?
+
+## Fonctionnalités attendues par profil
+Navigation multi-échelles, tableaux de bord et ergonomie.
+
+- La navigation hiérarchique (BVAEP↔Captages↔PPE) répond-elle à votre logique d'investigation sur le terrain ?
+- Pour votre profil, privilégiez-vous une vue cartographique interactive ou un tableau de bord riche en graphiques et indicateurs chiffrés ?
+- Quels types de filtres sont indispensables pour vos recherches (par commune, par statut réglementaire, par niveau de risque) ?
+- Quels éléments critiques doivent impérativement figurer dans les rapports PDF automatisés pour qu'ils soient utilisables en réunion ou conseil municipal ?
+
+## Contraintes opérationnelles et réglementaires
+Conformité à la Loi du pays de 2025 et confidentialité.
+
+-   Comment l'outil peut-il vous aider à respecter le délai réglementaire d'un an pour la régularisation des dossiers de PPE ?
+-   Existe-t-il des contraintes de confidentialité spécifiques sur vos données (au-delà de l'exclusion déjà actée des valeurs brutes de mesures physico-chimiques) ?
+-  Quels référentiels réglementaires (PUD, schémas directeurs) doivent être consultables en superposition pour valider vos diagnostics ?
+
+## Seuils de vigilance et système d'alerte
+Détection automatique des changements environnementaux.
+
+-  À partir de quel seuil précis une pression devient-elle une "alerte" pour votre service (ex: % de surface défrichée sur un bassin) ?
+-  Par quel canal souhaitez-vous être informé d'un changement majeur : notification visuelle dans l'outil, email automatisé ou bandeau contextuel ?
+- La détection doit-elle se faire au niveau du captage précis ou à l'échelle globale du bassin versant ?
+
+## Partage et collaboration entre acteurs
+Favoriser un diagnostic partagé et une vision commune.
+
+-  Quelles informations détenues par d'autres partenaires vous manquent aujourd'hui pour finaliser vos dossiers de protection ?
+- Serait-il utile de pouvoir enregistrer et partager un "contexte d'analyse" (zoom et filtres spécifiques) sous forme de lien hypertexte avec un collègue ?
+- Avez-vous besoin de fonctionnalités collaboratives (commentaires, notes sur un bassin versant) partagées entre institutions ?
+
+## Modalités d'accès aux données
+API, formats d'exports et interopérabilité.
+
+-  Avez-vous besoin d'intégrer les indicateurs produits par Hydroscope directement dans vos propres outils métiers ou SIG internes via API ?
+-  Quels formats d'exports sont les plus critiques pour vos analyses secondaires (CSV, Excel, GeoJSON, PDF) ?
+- L'accès direct aux bases de données spatiales (PostGIS) est-il requis pour vos experts ou l'interface web suffit-elle ?
+
+## Contraintes d'usage et performance
+Fréquence de mise à jour, autonomie et accessibilité.
+
+-  Quel délai maximal de rafraîchissement des données est acceptable pour votre veille environnementale (temps réel, hebdomadaire, mensuel) ?
+-  L'outil sera-t-il utilisé principalement au bureau avec une connexion stable ou sur le terrain (tablette/mobile) en zone de réseau limité ?
+- Quel niveau d'autonomie visez-vous pour l'administration des données et quel volume de formation initiale estimez-vous nécessaire ?
+- Quelles sont vos exigences en matière de performance de navigation (temps de chargement des cartes et des indicateurs complexes) ?
