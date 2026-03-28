@@ -3,7 +3,7 @@
 
 # Contexte et enjeux
 
-## Contexte externe : un patrimoine vital sous pression
+## Contexte externe 
 
 ### État de la menace
 
@@ -11,6 +11,7 @@ Le projet répond à une urgence environnementale caractérisée par :
 
 - **Incendies** : En 2019, **17 % des feux de brousse** ont touché des PPE (7 000 hectares);
 - **Érosion** : La couverture végétale est dégradée dans **90 % des PPE** de Nouvelle-Calédonie;
+- L'activité minière constitue une pression majeure qui fragilise la stabilité des sols et la qualité physico-chimique des eaux en amont des prises d'eau.
 - **Changement climatique** : Une baisse de **20 % des précipitations** est projetée d'ici 2100;
 - **Humain** : La protection de la ressource en eau représente un enjeux vitale pour **271 407 habitants** et **90 800 ménages** .
 
@@ -18,11 +19,11 @@ Le projet répond à une urgence environnementale caractérisée par :
 
 ### Un cadre réglementaire et institutionnel nouveau
 
-L'adoption de la loi du pays n° 2025-9 du 15 juillet 2025 relative au domaine public de l'eau (DPE) et à la protection de la ressource marque une étape majeure dans la modernisation du cadre juridique calédonien.
+L'adoption de la loi du pays n° 2025-9 du 15 juillet 2025 relative au domaine public de l'eau (DPE) et à la protection de la ressource modernise le cadre juridique calédonien sur la ressource en eau.
 
 L'objectif des PPE est de préserver la qualité de la ressource en réglementant ou en interdisant les activités polluantes autour des points de prélèvement, évitant ainsi des frais de traitement onéreux pour les communes et les usagers.
 
-Le rôle de la Nouvelle-Calédonie ne se limite plus seulement aux études techniques, il s'étend désormais à la décision finale de protection :
+Le rôle du gouvernement de la Nouvelle-Calédonie ne se limite plus seulement aux études techniques, il s'étend désormais à la décision finale de protection.
 
 #### Adoption de l'arrêté 
 
@@ -34,32 +35,32 @@ C'est désormais le gouvernement de la Nouvelle-Calédonie qui instaure par arr�
 
 Alors qu'auparavant l'État signait l'arrêté de Déclaration d'Utilité Publique (DUP), la nouvelle loi du pays transfère le pouvoir de décision au gouvernement local :
 
-  - Procédure locale : Les modalités de l'enquête publique ne dépendent plus des procédures de l'État mais sont désormais fixées par une délibération du Congrès (n° 522 du 20 novembre 2025).
-  - Information : L'État (via le Haut-commissaire) reste informé par la transmission des arrêtés et peut être sollicité pour la liste d'aptitude des commissaires enquêteurs, mais le pilotage de la procédure est calédonien.
+- Procédure locale : Les modalités de l'enquête publique ne dépendent plus des procédures de l'État mais sont désormais fixées par une délibération du Congrès (n° 522 du 20 novembre 2025).
+- Information : L'État (via le Haut-commissaire) reste informé par la transmission des arrêtés et peut être sollicité pour la liste d'aptitude des commissaires enquêteurs, mais le pilotage de la procédure est calédonien.
 
 #### Les Provinces 
 
 Depuis la rétrocession de la compétence "eau" en 2022, leur rôle a évolué vers le conseil et la concertation :
 
-  - Avis obligatoire : Les provinces sont désormais systématiquement saisies pour avis lors de l'instruction des dossiers de PPE ou d'autorisations de prélèvements importantes.
-  - Délégation possible : La loi prévoit que le gouvernement peut déléguer la gestion du domaine public de l'eau (incluant l'entretien ou la délivrance des autorisations) aux provinces via une convention.
-  - Initiative locale : Elles peuvent demander au gouvernement la création de Conseils Locaux de l'Eau (CLE) pour une gestion concertée par bassin versant.
+- Avis obligatoire : Les provinces sont désormais systématiquement saisies pour avis lors de l'instruction des dossiers de PPE ou d'autorisations de prélèvements importantes.
+- Délégation possible : La loi prévoit que le gouvernement peut déléguer la gestion du domaine public de l'eau (incluant l'entretien ou la délivrance des autorisations) aux provinces via une convention.
+- Initiative locale : Elles peuvent demander au gouvernement la création de Conseils Locaux de l'Eau (CLE) pour une gestion concertée par bassin versant.
 
 #### Les Communes
 
 Leurs responsabilités en matière de distribution d'eau potable demeurent, mais leur implication dans la procédure de PPE est précisée :
 
-  - Consultation systématique : Comme les provinces, les communes doivent donner leur avis sur les projets d'installations ou de PPE situés sur leur territoire.
-  - Support de l'enquête publique : Les mairies sont les lieux privilégiés pour l'affichage des avis de consultation et la mise à disposition des dossiers papier.
-  - Initiative des CLE : Elles peuvent également être à l'origine de la création d'un Conseil Local de l'Eau pour mieux gérer les conflits d'usage locaux.
+- Consultation systématique : Comme les provinces, les communes doivent donner leur avis sur les projets d'installations ou de PPE situés sur leur territoire.
+- Support de l'enquête publique : Les mairies sont les lieux privilégiés pour l'affichage des avis de consultation et la mise à disposition des dossiers papier.
+- Initiative des CLE : Elles peuvent également être à l'origine de la création d'un Conseil Local de l'Eau pour mieux gérer les conflits d'usage locaux.
 
 #### Nouveaux échelons et délais imposés
 
 La loi introduit de nouveaux éléments qui n'existaient pas dans le cadre précédent :
 
-  - L'instauration d'un PPE sur terres coutumières est désormais strictement conditionnée à l'accord des autorités coutumières, matérialisé par un acte coutumier.
-  - **Obligation de régularisation** pour les captages existants qui n'auraient pas encore de PPE, les gestionnaires disposent d'un délai d'un an (à compter du 15 juillet 2025) pour fournir le dossier nécessaire à leur détermination.
-  - Participation du public simplifiée pour les PPE concernant ++moins de 12 propriétaires++ (et sans impact économique majeur), une simple consultation publique de 15 jours remplace la lourde procédure d'enquête publique.
+- L'instauration d'un PPE sur terres coutumières est désormais strictement conditionnée à l'accord des autorités coutumières, matérialisé par un acte coutumier.
+- **Obligation de régularisation** pour les captages existants qui n'auraient pas encore de PPE, les gestionnaires disposent d'un délai d'un an (à compter du 15 juillet 2025) pour fournir le dossier nécessaire à leur détermination.
+- Participation du public simplifiée pour les PPE concernant ++moins de 12 propriétaires++ (et sans impact économique majeur), une simple consultation publique de 15 jours remplace la lourde procédure d'enquête publique.
 
 
 ## Contexte interne 
@@ -71,12 +72,14 @@ Le projet Hydroscope succède au tableau de bord **PressionPPE** (2021) qui a pe
 - **Vision temporelle limitée** : l'historisaion les indicateurs non actualisé ne permet pas de suivre les tendances et l'évolution des menaces dans le temps ni d'identifier de changements entre 2 dates.
 - **Déficit d'usage** : le tableau de bord a été développé spécifiquement pour des specialistes et l'ergonomie complexe qui l'accompagne ne convient pas aux profils des décideurs et du grand public.
 
-D'autre part, une application ArcGIS Pro a été développée en Province Nord pour le suivi de la ressource en eau potable, qui se limite à ce territoire et ne répond donc pas aux besoins d’un Système d’Information Environnemental global pour l’ensemble de la Nouvelle-Calédonie. Cette application à néanmoins l'avantage de permettre des calcule d'indicateurs multicritères pondérés, une fonctionnalité qui devra être prise en compte dans la conception de la future plateforme Hydroscope. D'autres limites techniques du système actuel incluent :
+D'autre part, une application ArcGIS Pro a été développée en Province Nord pour le suivi de la ressource en eau potable, qui se limite à ce territoire et ne répond donc pas aux besoins d’un Système d’Information Environnemental global pour l’ensemble de la Nouvelle-Calédonie. Cette application a néanmoins l'avantage de permettre des calculs d'indicateurs multicritères pondérés, une fonctionnalité qui devra être prise en compte dans la conception de la future plateforme Hydroscope. 
+
+Il s’agit d’un application uniquement pour les des agents aguerris au SIG et qui ne permet pas de partage d’information, ainsi que :
 
 - Absence d’automatisation de la collecte et de l’analyse des données;
 - Difficulté d’intégration de nouvelles sources de données ou de nouveaux indicateurs;
-- Forte dépendance à l’environnement ArcGIS (ArcGIS Server / image, ArcGIS Pro);
-- Pas d'interfaces adaptées aux différents profils d’utilisateurs (gestionnaires, partenaires, grand public);
+- Dépendance à l’environnement ArcGIS (ArcGIS Server / image, ArcGIS Pro);
+- Pas d'interfaces adaptées à différents profils d’utilisateurs (gestionnaires, partenaires, grand public);
 - Absence d’historisation des indicateurs, limitant la capacité à suivre les tendances et à analyser les évolutions dans le temps;
 - Processus de mise à jour manuel et peu flexible, nécessitant des manipulations SQL et SIG, ce qui rend la maintenance et l’évolution du système complexes.
 
@@ -111,14 +114,14 @@ La structure de pilotage donne un pouvoir décisionnel à l'OEIL :
 
 ### Défis stratégiques et réponses du projet
 
-### Le Fonds PEP : un levier stratégique et financier
+### Le Fonds PEP et OFB
 
-Le fonds PEP constitue un levier financier et stratégique majeur en assurant 35 % du financement du projet, en complément des 65 % apportés par l'Office Français de la Biodiversité. L'un des enjeux critiques réside dans la conformité contractuelle et le respect des jalons, car la production du premier rapport détaillant les critères et fiches indicateurs conditionne le versement de 30 % du budget global. L'objectif opérationnel final  est de transformer l'outil existant **PressionPPE** vers un système capable de quantifier plus précisément l'intégrité de la ressource en eau potable pour l'ensemble du territoire. Cette sécurisation financière permet de garantir la viabilité de l'ingénierie déployée par l'OEIL sur du plus long terme.
+Le fonds PEP constitue une part de 35 % du financement du projet, en complément des 65 % apportés par l'Office Français de la Biodiversité. L'un des enjeux critiques réside dans la conformité contractuelle et le respect des jalons, car la production du premier rapport détaillant les critères et fiches indicateurs conditionne le versement de 30 % du fonds PEP.
 
 **Défi financier :**
 
 - **Enjeu** : Garantir la viabilité du projet via le co-financement **OFB (65 %)** et **PEP (35 %)**;
-- **Réponse** : Livraison prioritaire du **rapport de critères et fiches indicateurs**, conditionnant le premier versement de **30 % du budget**.
+- **Réponse** : Livraison prioritaire du **rapport de critères et fiches indicateurs**, conditionnant le premier versement de **30 % du budget** du fonds PEP.
 
 
 ### Connaissance et diagnostic territorial
@@ -168,17 +171,9 @@ Le projet repose sur une **indépendance technologique** vis-à-vis des logiciel
 @todo [priority=high,section=enjeux] : la modélisation métiers et un modèle décisionnel permettant de répondre à plusieurs enjeux (diagnostic partagé, priorisation proactive, veille environnementale) doit être formulé. 
 
 
-----
+## Les ateliers 
 
-Méthodologie détaillée pour les ateliers du projet Hydroscope, structurée pour répondre aux besoins stratégiques et fonctionnels identifiés.
-
-### Déroulement des ateliers de co-construction avec les partenaires
-
-**Déroulé type d'une session (2h30) :**
-- **Cadrage (15 min) :** Présentation du projet, du périmètre (ce qui est inclus/exclu) pour éviter les frustrations.
-- **Besoins métiers & indicateurs (1h) :** Identification des données critiques et de leur valeur métier.
-- **Interfaces & usages (45 min) :** Navigation, filtres et ergonomie selon le profil.
-- **Seuils & alertes (30 min) :** Définition collective des seuils de vigilance.
+{{< include ./priorisation_partenaire_ateliers.qmd >}}
 
 
 ### Profils utilisateurs et fonctionnalités attendues

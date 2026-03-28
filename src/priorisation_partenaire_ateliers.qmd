@@ -58,7 +58,7 @@ Les ateliers permettront de définir :
 
 - Les indicateurs prioritaires et leur valeur métier;
 - Les profils utilisateurs et leurs besoins spécifiques (gestionnaires, partenaires, grand public);
-- Les fonctionnalités attendues pour chaque profil (navigation, visualisation cartographique, tableaux de bord, filtres, exports, ergonomie,niveau de complexité attendu);
+- Les fonctionnalités attendues pour chaque profil (navigation, visualisation cartographique, tableaux de bord, filtres, exports, ergonomie, niveau de complexité attendu);
 - Les contraintes opérationnelles et réglementaires;
 - Les seuils de vigilance et d’alerte des indicateurs;
 - Les besoins de partage et de collaboration entre acteurs;
@@ -70,35 +70,40 @@ Les ateliers permettront de définir :
 
 ### Déroulement des ateliers de co-construction avec les partenaires
 
-**Déroulé type d'une session (2h30) :**
-- **Cadrage (15 min) :** Présentation du projet, du périmètre (ce qui est inclus/exclu) pour éviter les frustrations.
-- **Besoins métiers & indicateurs (1h) :** Identification des données critiques et de leur valeur métier.
-- **Interfaces & usages (45 min) :** Navigation, filtres et ergonomie selon le profil.
-- **Seuils & alertes (30 min) :** Définition collective des seuils de vigilance.
+Prévoir une réunion d'information préalable pour présenter le projet, son périmètre et les objectifs des ateliers afin d'une part de cadrer les attentes et d'éviter les frustrations et deuxièmenet de mutualiser ce temps d'information. Cette réunion doit inclure le plus de partenaires ciblés possible pour maximiser la diffusion de l'information et la mobilisation des acteurs. Cette première réunion d'information peut être organisée en visioconférence sur une durée de moins d'une heure. Ce moment offre aussi l'opportunité de présenter aux participants la méthodologie de déroulement des ateliers et de valider un calendrier. Nous pourrons ensuite communiquer du materiel aux participants en amont de leurs ateliers, comme la liste des questions qui serviront de base aux échanges, la liste des indicateurs actuels, des brouillons de maquettes d'interface etc.
+
+
+**Déroulé type d'un atelier (2h30) :**
+- **Démarage (5 min)**
+- **Cadrage (15 min) :** Rappel rapide du périmètre projet et spécifiquement de l'un des 3 outils profil traité et des objectifs de l'atelier.
+- **Besoins métiers & indicateurs (30 min) :** Identification des spécificités métiers du profil du partenaire, des données critiques et de leur valeur métier.
+- **Seuils & alertes (30 min) :** Définition des seuils de vigilance.
+- **Pause (10 min)**
+- **Interfaces & usages (45 min) :** Navigation, filtres et ergonomie. Partage de l'information et collaboration entre acteurs. Modalités d'accès aux données.
+- **Conclusion (5 min)**
 
 ## Ateliers spécifiques avec la DAVAR
 
-Deux sessions de travail dédiées à la DAVAR sont indispensables pour sécuriser le socle du projet :
+Deux sessions de travail dédiées à la DAVAR sont prévues pour sécuriser le socle du projet :
 
-- **REX sur l'outil Pression PPE (2021) :** 
-
+- **REX sur l'outil Pression PPE (1h) :** 
 
 Cet atelier consiste en une **revue critique des indicateurs actuels** afin d'identifier ceux n'ayant plus d'intérêt et de tirer les leçons des limites du système précédent (dépendance technique, absence d'historisation). Il s'agit d'évaluer les forces et faiblesses du tableau de bord existant pour orienter les nouvelles fonctionnalités d'Hydroscope.
 
 Cette réunion d'échange sera le moment de présenter un retour d'experiemce sur le tableau de bord après 5 ans de mise en service.
-Une part importante des echanges sera de laisser l'utilisateur exprimer naturelement ses critiques (positives/negatives) sur l'outils.
+Une part importante des échanges vise à laisser l'utilisateur exprimer librement ses retours — qu'ils soient positifs ou négatifs — sur l'outil.
 
 Toutefois certaines questions clés devront être aborder si cela n'a pas été fait spontanément : 
-- Quels indicateurs sont obsolètes ou peu pertinents? 
-- Quelles données sont sous-utilisées? 
+
+- Quels indicateurs sont obsolètes ou peu pertinents ? 
+- Quelles données sont sous-utilisées ? 
 - Quelles fonctionnalités manquent pour une prise de décision efficace ?
 - Quelles erreurs sont dans cet outil que le futur outil ne devrait pas commettre ?
 
 
 - **Création des fiches indicateurs Hydroscope :** 
 
-Ce travail de co-construction vise à définir précisément les **métriques, les types de périmètres de calcul et les critères de pondération** des enjeux et des pressions. Ce livrable est stratégique car il constitue le jalon permettant le **versement de 30 % du budget** par le fonds PEP.
-
+Ce travail vise à définir précisément les **métriques, les types de périmètres de calcul et les critères de pondération** des enjeux et des pressions.
 
 
 ## Déroulement et méthodologie des ateliers
@@ -204,8 +209,8 @@ Voici une proposition de tableau de synthèse des ateliers pour le projet Hydros
 
 ## Profils utilisateurs et besoins spécifiques
 
--  Quel est l'objectif principal de votre service en utilisant l'outil : pilotage technique, diagnostic opérationnel ou sensibilisation ?
--  Quel est le niveau d'expertise technique (SIG, SQL) des agents qui manipuleront l'outil au quotidien ?
+- Quel est l'objectif principal de votre service en utilisant l'outil : pilotage technique, diagnostic opérationnel ou sensibilisation ?
+- Quel est le niveau d'expertise technique (SIG, SQL) des agents qui manipuleront l'outil au quotidien ?
 - Quelles décisions concrètes espérez-vous prendre grâce aux informations délivrées par votre interface spécifique ?
 
 ## Fonctionnalités attendues par profil
@@ -219,21 +224,21 @@ Navigation multi-échelles, tableaux de bord et ergonomie.
 ## Contraintes opérationnelles et réglementaires
 Conformité à la Loi du pays de 2025 et confidentialité.
 
--   Comment l'outil peut-il vous aider à respecter le délai réglementaire d'un an pour la régularisation des dossiers de PPE ?
--   Existe-t-il des contraintes de confidentialité spécifiques sur vos données (au-delà de l'exclusion déjà actée des valeurs brutes de mesures physico-chimiques) ?
--  Quels référentiels réglementaires (PUD, schémas directeurs) doivent être consultables en superposition pour valider vos diagnostics ?
+- Comment l'outil peut-il vous aider à respecter le délai réglementaire d'un an pour la régularisation des dossiers de PPE ?
+- Existe-t-il des contraintes de confidentialité spécifiques sur vos données (au-delà de l'exclusion déjà actée des valeurs brutes de mesures physico-chimiques) ?
+- Quels référentiels réglementaires (PUD, schémas directeurs) doivent être consultables en superposition pour valider vos diagnostics ?
 
 ## Seuils de vigilance et système d'alerte
 Détection automatique des changements environnementaux.
 
--  À partir de quel seuil précis une pression devient-elle une "alerte" pour votre service (ex: % de surface défrichée sur un bassin) ?
--  Par quel canal souhaitez-vous être informé d'un changement majeur : notification visuelle dans l'outil, email automatisé ou bandeau contextuel ?
+- À partir de quel seuil précis une pression devient-elle une "alerte" pour votre service (ex: % de surface défrichée sur un bassin) ?
+- Par quel canal souhaitez-vous être informé d'un changement majeur : notification visuelle dans l'outil, email automatisé ou bandeau contextuel ?
 - La détection doit-elle se faire au niveau du captage précis ou à l'échelle globale du bassin versant ?
 
 ## Partage et collaboration entre acteurs
 Favoriser un diagnostic partagé et une vision commune.
 
--  Quelles informations détenues par d'autres partenaires vous manquent aujourd'hui pour finaliser vos dossiers de protection ?
+- Quelles informations détenues par d'autres partenaires vous manquent aujourd'hui pour finaliser vos dossiers de protection ?
 - Serait-il utile de pouvoir enregistrer et partager un "contexte d'analyse" (zoom et filtres spécifiques) sous forme de lien hypertexte avec un collègue ?
 - Avez-vous besoin de fonctionnalités collaboratives (commentaires, notes sur un bassin versant) partagées entre institutions ?
 
