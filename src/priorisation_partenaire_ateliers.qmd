@@ -65,7 +65,43 @@ Les ateliers permettront de définir :
 - les modalités d’accès aux données (API, exports, interfaces);
 - les contraintes d’usage (fréquence de mise à jour, fréauence d’utilisation de l’outil, performance, besoin d’autonomie ous d’accompagnement, accessibilité).
 
+---------
 
+
+
+### Profils utilisateurs et fonctionnalités attendues
+
+Le projet repose sur **trois interfaces distinctes** adaptées aux niveaux de maîtrise technique.
+
+| Profil | Besoins Spécifiques | Fonctionnalités Clés |
+| :--- | :--- | :--- |
+| **Gestionnaires / Experts** (DAVAR, DASS, OEIL) | Vision exhaustive, pilotage technique et surveillance des pressions. | Navigation hiérarchique (BVAEP  <> Captages <> PP), **analyse multicritère**, requêtes spatiales avancées et consultation des historiques. |
+| **Partenaires** (Communes, Provinces) | Diagnostic opérationnel sans compétences SIG/SQL pour orienter la gestion locale. | Tableaux de bord simplifiés, **vue comparative entre bassins**, rapports PDF automatisés et notifications en cas de changement notable. |
+| **Grand Public** (Citoyens, Associations, journaliste) | Sensibilisation et compréhension des enjeux de l'eau potable. | Infographies claires, **fiches vulgarisées**, cartographie allégée et narration pédagogique (storytelling). |
+
+### Indicateurs prioritaires et valeur métier
+Les indicateurs sont conçus pour quantifier l'**intégrité de la ressource** et prioriser les actions.
+
+- **Pressions environnementales :** Incendies (surfaces brûlées depuis 2012), érosion (linéaires touchés par classe de pente) et défrichages.
+- **Pressions humaines :** Urbanisation (nombre d'habitations), **population desservie** (données ISEE), installations classées (ICPE) et volumes de prélèvement autorisés.
+- **Facteurs biogéographiques :** Relief, géologie (sols ultramafiques vs volcanosédimentaires) et pluviométrie.  
+- **Valeur métier :** Passer d'un inventaire passif à une **priorisation proactive** des investissements basés sur la vulnérabilité réelle des bassins.
+
+### Seuils de vigilance et système d'alerte
+
+L'innovation d'Hydroscope réside dans sa capacité de **veille environnementale automatisée**.
+
+- **Détection automatique :** Utilisation d'algorithmes (Hash MD5 ou Geodiff) pour repérer les changements dès l'intégration de nouvelles données de référence.
+- **Alertes :** Les seuils déclenchant un signalement (visuel ou notification) doivent être définis collectivement en atelier pour chaque enjeu (ex: % de surface brûlée sur un PPE).
+
+
+
+
+
+
+
+
+------
 
 
 ### Déroulement des ateliers de co-construction avec les partenaires
@@ -81,42 +117,6 @@ Prévoir une réunion d'information préalable pour présenter le projet, son p�
 - **Pause (10 min)**
 - **Interfaces & usages (45 min) :** Navigation, filtres et ergonomie. Partage de l'information et collaboration entre acteurs. Modalités d'accès aux données.
 - **Conclusion (5 min)**
-
-## Ateliers spécifiques avec la DAVAR
-
-Deux sessions de travail dédiées à la DAVAR sont prévues pour sécuriser le socle du projet :
-
-- **REX sur l'outil Pression PPE (1h) :** 
-
-Cet atelier consiste en une **revue critique des indicateurs actuels** afin d'identifier ceux n'ayant plus d'intérêt et de tirer les leçons des limites du système précédent (dépendance technique, absence d'historisation). Il s'agit d'évaluer les forces et faiblesses du tableau de bord existant pour orienter les nouvelles fonctionnalités d'Hydroscope.
-
-Cette réunion d'échange sera le moment de présenter un retour d'experiemce sur le tableau de bord après 5 ans de mise en service.
-Une part importante des échanges vise à laisser l'utilisateur exprimer librement ses retours — qu'ils soient positifs ou négatifs — sur l'outil.
-
-Toutefois certaines questions clés devront être aborder si cela n'a pas été fait spontanément : 
-
-- Quels indicateurs sont obsolètes ou peu pertinents ? 
-- Quelles données sont sous-utilisées ? 
-- Quelles fonctionnalités manquent pour une prise de décision efficace ?
-- Quelles erreurs sont dans cet outil que le futur outil ne devrait pas commettre ?
-
-
-- **Création des fiches indicateurs Hydroscope :** 
-
-Ce travail vise à définir précisément les **métriques, les types de périmètres de calcul et les critères de pondération** des enjeux et des pressions.
-
-
-## Déroulement et méthodologie des ateliers
-
-Afin de privilégier des échanges de fond et d'éviter la dispersion, le déroulement suit un cadre méthodologique strict :
-
-- **Format bilatéral :** 
-
-Pour plus d'efficacité, les sessions seront menées avec une seule structure à la fois (6 à 10 ateliers au total), évitant la lourdeur des réunions multi-acteurs.
-
-- **Phase préliminaire de cadrage :**
-
-Chaque atelier débute par une communication claire sur le **périmètre stratégique du projet** afin d'éviter toute frustration ultérieure si certains besoins spécifiques ne peuvent être intégrés.
 
 - **Animation et synthèse :**
 
@@ -148,6 +148,31 @@ Pour garantir que l’outil Hydroscope réponde aux besoins réels du terrain sa
 - **DAVAR (Service de l'Eau) :** En tant qu'instructeur unique des dossiers de PPE et fournisseur des référentiels "Bassin AEP", leur participation est le socle du projet.
 - **DASS (Santé Publique) :** Responsable de la qualité sanitaire. Leur besoin est centré sur le suivi de la potabilité (base ATYA) et la protection des captages.
 - **DIMENC (Mines & Industrie) :** Essentielle pour intégrer les indicateurs de pressions minières et industrielles (ICPE), enjeux majeurs pour l'intégrité de la ressource.
+
+
+#### Ateliers spécifiques supplémentaire avec la DAVAR
+
+Deux sessions de travail dédiées à la DAVAR sont prévues pour sécuriser le socle du projet.
+
+- **REX sur l'outil Pression PPE (1h) :** 
+
+Cet atelier consiste en une **revue critique des indicateurs actuels** afin d'identifier ceux n'ayant plus d'intérêt et de tirer les leçons des limites du système précédent (dépendance technique, absence d'historisation). Il s'agit d'évaluer les forces et faiblesses du tableau de bord existant pour orienter les nouvelles fonctionnalités d'Hydroscope.
+
+Cette réunion d'échange sera le moment de présenter un retour d'experiemce sur le tableau de bord après 5 ans de mise en service.
+Une part importante des échanges vise à laisser l'utilisateur exprimer librement ses retours — qu'ils soient positifs ou négatifs — sur l'outil.
+
+Toutefois certaines questions clés devront être aborder si cela n'a pas été fait spontanément : 
+
+- Quels indicateurs sont obsolètes ou peu pertinents ? 
+- Quelles données sont sous-utilisées ? 
+- Quelles fonctionnalités manquent pour une prise de décision efficace ?
+- Quelles erreurs sont dans cet outil que le futur outil ne devrait pas commettre ?
+
+
+- **Création des fiches indicateurs Hydroscope (1h30) :** 
+
+Ce travail vise à définir précisément les **métriques, les types de périmètres de calcul et les critères de pondération** des enjeux et des pressions.
+
 
 ### Le pôle territorial & gestion locale (représentativité - 3 ateliers)
 
@@ -231,28 +256,28 @@ Conformité à la Loi du pays de 2025 et confidentialité.
 ## Seuils de vigilance et système d'alerte
 Détection automatique des changements environnementaux.
 
-- À partir de quel seuil précis une pression devient-elle une "alerte" pour votre service (ex: % de surface défrichée sur un bassin) ?
+- À partir de quel seuil précis un changement devient-elle une "alerte" pour votre service (ex: % de surface défrichée sur un bassin) ?
 - Par quel canal souhaitez-vous être informé d'un changement majeur : notification visuelle dans l'outil, email automatisé ou bandeau contextuel ?
-- La détection doit-elle se faire au niveau du captage précis ou à l'échelle globale du bassin versant ?
+
 
 ## Partage et collaboration entre acteurs
 Favoriser un diagnostic partagé et une vision commune.
 
-- Quelles informations détenues par d'autres partenaires vous manquent aujourd'hui pour finaliser vos dossiers de protection ?
+- Quelles informations détenues par d'autres partenaires vous manquent aujourd'hui et pour quelle raison ?
 - Serait-il utile de pouvoir enregistrer et partager un "contexte d'analyse" (zoom et filtres spécifiques) sous forme de lien hypertexte avec un collègue ?
 - Avez-vous besoin de fonctionnalités collaboratives (commentaires, notes sur un bassin versant) partagées entre institutions ?
 
 ## Modalités d'accès aux données
 API, formats d'exports et interopérabilité.
 
--  Avez-vous besoin d'intégrer les indicateurs produits par Hydroscope directement dans vos propres outils métiers ou SIG internes via API ?
--  Quels formats d'exports sont les plus critiques pour vos analyses secondaires (CSV, Excel, GeoJSON, PDF) ?
+- Avez-vous besoin d'intégrer les indicateurs produits par Hydroscope directement dans vos propres outils métiers ou SIG internes via API ?
+- Quels formats d'exports sont les plus critiques pour vos analyses secondaires (CSV, Excel, GeoJSON, PDF, geopackage, ...) ?
 - L'accès direct aux bases de données spatiales (PostGIS) est-il requis pour vos experts ou l'interface web suffit-elle ?
 
 ## Contraintes d'usage et performance
 Fréquence de mise à jour, autonomie et accessibilité.
 
--  Quel délai maximal de rafraîchissement des données est acceptable pour votre veille environnementale (temps réel, hebdomadaire, mensuel) ?
--  L'outil sera-t-il utilisé principalement au bureau avec une connexion stable ou sur le terrain (tablette/mobile) en zone de réseau limité ?
+- Quel délai maximal de rafraîchissement des données est acceptable pour votre veille environnementale (temps réel, hebdomadaire, mensuel) ?
+- L'outil sera-t-il utilisé principalement au bureau avec une connexion stable ou sur le terrain (tablette/mobile) en zone de réseau limité ?
 - Quel niveau d'autonomie visez-vous pour l'administration des données et quel volume de formation initiale estimez-vous nécessaire ?
 - Quelles sont vos exigences en matière de performance de navigation (temps de chargement des cartes et des indicateurs complexes) ?

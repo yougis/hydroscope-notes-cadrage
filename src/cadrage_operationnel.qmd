@@ -11,20 +11,73 @@ Le projet s'articule autour de quatre domaines  :
   - Synthétiser l’information (rapports automatisés et fiches)
 
 
-### Ce qui est considéré comme inclus dans le perimetre
 
-Le projet Hydroscope propose un périmètre fonctionnel centré sur la caractérisation fine et le suivi de l'intégrité de la ressource. Il intègre une navigation hiérarchique permettant de circuler de manière fluide entre les Bassins Versants Producteurs d’Eau Potable (BVAEP), les Périmètres de Protection des Eaux (PPE) et les points de captage. Le Bassin AEP est retenu comme l'unité principale de gestion, car il constitue un socle de travail univoque pour tous les ouvrages, contrairement au PPE dont tous les captages ne sont pas encore dotés. Les fonctionnalités incluent la production de tableaux de bord experts pour le pilotage technique, ainsi que le développement d'interfaces adaptées pour les partenaires et le grand public. L'outil permettra également la génération automatisée de rapports de synthèse au format PDF à différentes échelles territoriales (commune, province, pays). Les indicateurs traités couvrent les pressions majeures telles que les incendies (surfaces brûlées depuis 2012), l'érosion et l'urbanisation, tout en intégrant l'enjeu humain via les statistiques de population de l'ISEE. Enfin, le projet repose sur un modèle de pondération multi-critère (méthode par « jauge ») et sur la mise en œuvre de processus de détection automatique de changements.
-Hydroscope intègre une chaîne ETL automatisée. La divergence réside dans la mise en œuvre systématique de processus de détection automatique de changements pour signaler l'apparition de nouvelles pressions dès l'intégration des données sources, une fonctionnalité absente ou limitée dans les projets de comparaison.
+@todo [priority=high,section=formulation] : Renomer les 4 grands domaines principaux. 
+Connaissance et caractérisation du territoire
+Diagnostic et analyse multicritère
+Veille et détection automatique des changements
+Partage et diffusion des diagnostics
 
-### Ce qui est considéré comme hors périmètre
+### Logique de délimitation du périmètre vis à vis des besoins remontés
 
-Le système ne prévoit pas l'accès aux **données brutes** comme les valeurs précises des mesures physico-chimiques ou de la pluviométrie, ces dernières étant jugées trop instables ou complexes à obtenir pour une actualisation systématique. L'outil se limite à conserver l'historique de présence, les dates des prélèvements effectués (en exploitant notamment les bases **ATYA** et **HYDROBIO**) ou la production d'indicateurs moyens et agrégés. 
+Pour apporter de la transparance au processus de verification et d'intégration des fonctionnalités dans le périmètre d'Hydroscope, nous définisons 3 critères. Par exemple, une fonctionnalité ou une donnée est incluse si elle répond à toutes les conditions suivantes :
 
-De même, bien que les données des **Plans Locaux d'Urbanisme (PUD)** soient utilisées pour générer des indicateurs de pression, la consultation directe des documents opposables d'urbanisme n'est pas prévue dans l'interface. Par ailleurs, les actions de **vulgarisation pédagogique approfondie** et de communication narrative ne sont pas traitées ici, car elles sont déportées vers le projet partenaire nommé **SOURCE**, avec lequel une coordination étroite est prévue pour garantir la cohérence des messages diffusés. 
+- **Elle produit une information utile à la décision sur la ressource en eau potable** :
 
-Enfin, il est précisé que certaines fonctionnalités ou indicateurs, bien que théoriquement inclus dans le périmètre global, pourraient ne pas être développés dès la première version des interfaces pour des raisons de priorité stratégique, de coût ou de qualité insuffisante des données sources au moment du lancement.
+L'outil n'a pas vocation à centraliser toute l'information disponible sur le territoire — uniquement celle qui permet de caractériser une pression, d'évaluer une vulnérabilité ou d'orienter une action de protection sur la ressource en eau potable.
+
+- **Elle est techniquement soutenable dans le temps**:
+
+Les données intégrées doivent pouvoir être actualisées de manière récurente et maîtrisée. Une donnée pertinente mais trop instable, trop dépendante d'un tiers ou trop coûteuse à maintenir est exclue pour ne pas fragiliser la fiabilité de l'ensemble du système.
+
+- **Elle relève du périmètre de responsabilité de l'OEIL**:
+
+Hydroscope ne se substitue pas aux systèmes existants gérés par d'autres acteurs. Lorsqu'une information est déjà produite et gérée par un partenaire dans un système dédié, l'outil peut s'y connecter ou en restituer une synthèse — mais il ne reprend pas la responsabilité de sa production ni de sa mise à jour.
 
 
+### Ce qui est exclu du périmètre — cadre et justifications
+
+Afin d'évaluer des cas plus précisement, les critères exclusifs suivant seront aussi évalués.
+
+- **Les données internes propres à chaque partenaire**:
+
+Hydroscope est un outil de diagnostic territorial partagé, construit sur des référentiels communs et validés collectivement. Il n'a pas vocation à intégrer des bases de données locales, des tableurs ou des systèmes internes propres à chaque structure. Une telle intégration créerait une dépendance à des sources non maîtrisées, non standardisées et non pérennes, compromettant la fiabilité de l'ensemble du système. Si une donnée produite par un partenaire présente une valeur territoriale réelle, la voie appropriée est sa formalisation en référentiel partagé — ce qui relève d'un processus distinct, piloté par les acteurs concernés.
+
+- **Les fonctionnalités de gestion et de saisie**:
+
+Hydroscope est un outil de lecture et d'analyse statistique — pas un système de gestion documentaire, de suivi de dossiers ou de workflow administratif. Intégrer des fonctionnalités de saisie, de validation ou de suivi de procédures dépasserait le périmètre fonctionnel du projet et alourdirait considérablement la complexité technique et les coûts de maintenance. Ces besoins, légitimes en eux-mêmes, relèvent d'autres outils métiers existants ou à développer séparément.
+
+- **Les données sensibles et confidentielles**:
+
+L'accès aux données brutes physico-chimiques, de météorologie ou de rescencement, aux valeurs précises de mesures ou à toute information soumise à des restrictions de confidentialité est exclu du périmètre. Cet arbitrage protège à la fois les partenaires producteurs de ces données et l'OEIL, en maintenant des périmètres de responsabilité clairs. Hydroscope restitue des indicateurs agrégés et des informations de présence — jamais les données sources sensibles elles-mêmes.
+
+- **La vulgarisation pédagogique et la communication grand public approfondie**:
+
+La sensibilisation citoyenne, la narration pédagogique et la communication narrative sont prises en charge par le projet partenaire SOURCE, avec lequel Hydroscope est coordonné. Développer ces fonctionnalités dans Hydroscope créerait une redondance coûteuse et un risque d'incohérence dans les messages diffusés. L'interface Grand Public d'Hydroscope fournit une information accessible et cartographiée — elle ne se substitue pas à une démarche de communication structurée.
+
+
+- **Fonctionnalités à fort impact budgétaire ou de maintenance**:
+
+Au-delà des exclusions thématiques, certaines demandes peuvent sembler compatibles avec les objectifs du projet mais engendrer des coûts de développement ou de maintenance disproportionnés par rapport à la valeur produite. Ces demandes sont également écartées du périmètre, indépendamment de leur pertinence fonctionnelle.
+
+Trois situations typiques sont identifiées :
+
+- **Le développement sur-mesure pour un usage isolé**:
+
+Une fonctionnalité utile à un seul partenaire, dans un contexte spécifique, ne justifie pas un développement dédié. Le coût de conception, de test et de maintenance d'une fonctionnalité marginale est sans commune mesure avec sa valeur pour l'ensemble du système. Hydroscope est conçu pour répondre à des besoins partagés — pas pour agréger des cas particuliers.
+
+- **Les connecteurs et intégrations techniques non standardisés**:
+
+Connecter Hydroscope à un système tiers mal documenté, propriétaire ou instable crée une dette technique immédiate. Chaque mise à jour du système tiers peut casser l'intégration et mobiliser des ressources de maintenance non provisionnées. Seules les intégrations reposant sur des protocoles ouverts et stables sont envisageables.
+
+- **Les fonctionnalités temps réel ou à haute fréquence de mise à jour**:
+
+L'automatisation des flux de données est prévue dans le projet, mais elle est calibrée sur des cycles cohérents avec la nature des pressions suivies — hebdomadaires ou mensuels selon les cas. Des demandes de mise à jour en temps réel ou quasi temps réel impliquent une infrastructure et des coûts d'exploitation sans rapport avec les besoins opérationnels identifiés dans le projet.
+
+
+### Ce que ce cadre implique pour les demandes d'évolution
+
+Toute demande d'intégration d'une nouvelle fonctionnalité ou donnée sera évaluée selon ces critères, de son impact budgétaire et de maintenance. Une demande qui n'y répond pas n'est pas rejetée définitivement — elle est documentée et pourra être réexaminée si les conditions changent. Les arbitrages finaux relèvent de l'OEIL.
 
 
 ## Hypothèses et contraintes
@@ -33,7 +86,7 @@ Enfin, il est précisé que certaines fonctionnalités ou indicateurs, bien que 
 
 La réussite du projet repose en grande partie sur l'accès aux données fournies par les partenaires institutionnels et privés (Gouvernement, Provinces, Communes, DASS, ISEE, CDE). 
 
-Le projet doit assurer l'interopérabilité entre les référentiels de la DAVAR, de la DITTT (BD-Hydrographie, BDTOPO), de l'ISEE (statistiques de population), des reseaux de distribution d'eau potable (SERAIL, communes, CDE).
+Le projet doit assurer l'interopérabilité entre les référentiels des partenaires, la DAVAR, de la DITTT (BD-Hydrographie, BDTOPO), de l'ISEE (statistiques de population), des reseaux de distribution d'eau potable (SERAIL, communes, CDE) etc.
 
 Voici une liste des référentiels hydrologiques produits par des acteurs en Nouvelle-Calédonie : 
 
@@ -43,10 +96,9 @@ Voici une liste des référentiels hydrologiques produits par des acteurs en Nou
 - Positionnement des captages destinés à l’Alimentation en Eau Potable de la DAVAR;
 - Cartographie des Hydro-Eco Régions;
 
-Des référentiels non hydrologiques produit en Nouvelle-Calédonie pourront être exploités : 
+Des référentiels non hydrologiques produits en Nouvelle-Calédonie pourront être exploités : 
 
-
-- pluviometrie (Météo);
+- Pluviometrie (Météo France NC);
 - Statistiques de population (ISEE);
 - Incendies (OEIL);
 - Sécheresse végétale (OEIL);
@@ -60,7 +112,7 @@ D'autres référentiels hydrologiques et non hydrologiques produit en dehors de 
 
 - Dynamic world;
 - TMF;
-- SWOT: il s'agit d'un satellite d'observation de la Terre qui fournit des données sur les changements de la surface terrestre, y compris les variations des plans d'eau, ce qui peut être pertinent pour le suivi de la ressource en eau potable.
+- SWOT;
 
 
 La liste des ressources utiles au projet est à compléter et à valider lors des ateliers de cadrage fonctionnel.
@@ -69,11 +121,5 @@ Les partenaires et acteurs institutionnels doivent s’engager activement dans l
 
 ### Ressources humaines
 
-Les ressources internes de l'OEIL, que ce soit au pole environnement qu'au pole SI pourront assurer la continuité du projet. Cependant, il est sera nécessaire de prévoir des ressources externes pour la réalisation technique (Phase B) et probablement pour la maintenance post-livraison, notamment pour l'hébergement cloud ainsi que les traitements automatisés.
-
-
-### Autres contraintes
-
-Sur le plan technique, le projet inclus l'usage de **solutions Open Source** pour garantir l'indépendance technologique de l'OEIL. 
-Le calendrier est contraint par les jalons financiers du **fonds PEP** (livraison des fiches indicateurs) et le respect des conventions **OFB** courant jusqu'à la fin de l'année 2028.
+Les ressources internes de l'OEIL, que ce soit au pole environnement qu'au pole SI peuvent assurer la production du projet. Cependant, il est sera nécessaire de prévoir des ressources externes pour la réalisation technique (Phase B) et probablement pour la maintenance post-livraison, notamment pour l'hébergement cloud ainsi que l'automatisation des traitements.
 

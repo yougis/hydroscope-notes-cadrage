@@ -1,3 +1,98 @@
+
+
+#### Caractériser le territoire et ses ressources en eau potable
+
+Sur le plan de la connaissance territoriale, l'enjeu est d'identifier les zones oú la ressource en eau potable est présente, de connaitre au mieux son contexte géographique et les pressions qui s'y exercent. Pour y parvenir, le projet vise la caractérisation biogéographique fine des Bassins Versants d'Approvisionnement en Eau Potable (BVAEP), des périmètres de protection (PP) et des points de captage autorisés. Chaque espace est décrit par de nombreux indicateurs concernant les différentes pressions environnementales observées.
+La modélisation des données avec une forte relation entre BVAEP <-> PP <-> Captage, aporte un spectre permettrant de créer des passerelles entre chacun et de présenter les informations de façon cohérente (un point de captage est autant sous pression que l'ensemble amont du bassin versant).
+
+
+##### Synthétiser l’information : connaissance et diagnostic territorial
+
+Cet objectif s'appuie sur la mise en œuvre d'une **analyse multicritère** utilisant des seuils de vigilance définis collectivement, de l'intégration des données de l'ISEE et des reseau d'aduction en eau potable pour évaluer la population desservie. Ce diagnostic partagé doit permettre à tous les échelons institutionnels de disposer d'un **constat commun** sur l'état de la ressource.
+
+
+##### Partager des diagnostics entre acteurs
+
+Le pilotage technique vise à instaurer un **diagnostic partagé** entre les différents acteurs de l'eau potable du territoire de Nouvelle-Calédonie (Gouvernement, Provinces, Communes, Aires coutumières et citoyens)  tout en rendant la donnée exploitable par des utilisateurs non-spécialistes en SIG. Les livrables incluent le développement de **trois interfaces profilées** (Expert, Partenaire, Grand Public) dont l'ergonomie et les fonctionnalités sont adaptées aux missions spécifiques de chaque public. L'objectif fonctionnel est de permettre une navigation multi-échelles entre le captage et le bassin versant, complétée par la **production de rapports** de synthèse automatisés au format PDF. 
+
+
+@todo [priority=high,section=formulation] : "multi-échelles entre le captage et le bassin versant" doit être re-formulé. 
+
+
+
+**Défi décisionnel :**
+
+- **Enjeu** : Prioriser les zones de forte vulnérabilité pour des choix d'investissement et à des actions de terrain;
+- **Réponse** : Mise en place d'**analyse multicritère** (seuils de vigilance et pondérations) intégrant les informations biogéographiques, les pressions environnementales et une estimation du nombre de foyer desservie par les reseaux d'eau potable et les données de rescencement.
+
+
+
+#### Assurer une veille environnementale et alerter
+
+
+automatisation et système d'alerte
+
+L'automatisation répond au défi de la réactivité des gestionnaires, en cherchant à réduire le délai entre un événement environnemental et son signalement pour limiter l'impact sur la ressource. L'enjeu est également de garantir la **fiabilité de l'information** en s'affranchissant de manipulations manuelles répétitives et chronophages. L'objectif technique est d'intégrer des algorithmes de **détection automatique des changements**(incendies, défrichements, nouvelles installations classées) déclenchés dès l'intégration de nouvelles données de référence. Le système doit assurer une **veille environnementale** constante en automatisant la récupération de flux de données exogènes réguliers.
+
+
+**Défi de réactivité :**
+
+- **Enjeu** : Réduire le délai de signalement des pressions (incendies, défrichages, pollution) pour protéger les captages et informer les populations;
+- **Réponse** : Déploiement d'une **chaîne ETL automatisée** incluant des algorithmes de **détection automatique de changements** (méthodes Hash MD5 ou Geodiff).
+
+
+
+
+**Défi d'accessibilité :**
+
+- **Enjeu** : Permettre à tous les acteurs (mairies, provinces, gouvernement, État, aires coutumières, associations) de partager un constat commun;
+- **Réponse** : Développement de **trois interfaces profilées** (Expert, Partenaire, Grand public) et automatisation des **rapports de synthèse PDF**.
+
+
+### Continuité et pérennité opérationnelle
+
+Le projet repose sur une **indépendance technologique** vis-à-vis des logiciels propriétaires et le maintien de la **continuité intellectuelle** avec les travaux réalisés depuis 2021. L'enjeu est de s'affranchir de la dette technique et des coûts de licence et de garantir la durabilité du système à moindre coût (financiers et en effort de maintenance). Pour cela, la phase de réalisation aura comme pre-requis l'utilisation d'une **chaîne de traitement (ETL/ELT) automatisée** et une orchestration moderne utilisant des technologies Open Source comme PostgreSQL/PostGIS, Python et DBT. Enfin, la mise en place d'une **historisation systématique** des indicateurs et des données sources, catalogués et documentés, est un prérequis majeur pour permettre des analyses temporelles et suivre l'évolution de la ressource sur le temps long.
+
+**Défi de pérennité :**
+
+- **Enjeu** : Piloter autant que possible les maintenances et éviter des dettes techniques et assurer le suivi et la veille des données;
+- **Réponse** : Migration vers un socle **Open Source** (PostgreSQL/PostGIS, Python, DBT) garantissant l'**historisation systématique** des données.
+
+
+@todo [priority=high,section=enjeux] : la modélisation métiers et un modèle décisionnel permettant de répondre à plusieurs enjeux (diagnostic partagé, priorisation proactive, veille environnementale) doit être formulé. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Le détail des interfaces (menus, boutons, ergonomie).
 La liste exhaustive des indicateurs et leurs modes de calcul précis.
 Les modalités techniques d'exports et de formats de fichiers.

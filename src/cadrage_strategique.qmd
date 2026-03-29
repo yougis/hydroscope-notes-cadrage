@@ -114,104 +114,52 @@ La structure de pilotage donne un pouvoir décisionnel à l'OEIL :
 
 ### Défis stratégiques et réponses du projet
 
-### Le Fonds PEP et OFB
 
-Le fonds PEP constitue une part de 35 % du financement du projet, en complément des 65 % apportés par l'Office Français de la Biodiversité. L'un des enjeux critiques réside dans la conformité contractuelle et le respect des jalons, car la production du premier rapport détaillant les critères et fiches indicateurs conditionne le versement de 30 % du fonds PEP.
+#### Viabilité financière et respect des jalons
 
-**Défi financier :**
+Le projet repose sur un co-financement OFB (65 %) et PEP (35 %), dont le premier versement est conditionné à la livraison d'un rapport de critères et fiches indicateurs. Ce jalon constitue une priorité absolue de la phase de démarrage.
 
-- **Enjeu** : Garantir la viabilité du projet via le co-financement **OFB (65 %)** et **PEP (35 %)**;
-- **Réponse** : Livraison prioritaire du **rapport de critères et fiches indicateurs**, conditionnant le premier versement de **30 % du budget** du fonds PEP.
-
-
-### Connaissance et diagnostic territorial
-
-Sur le plan de la connaissance territoriale, l'enjeu est de passer d'un simple inventaire passif à un véritable outil de pilotage proactif permettant d'identifier les bassins les plus vulnérables pour mieux orienter les budgets de gestion. Pour y parvenir, le projet vise la caractérisation biogéographique fine des Bassins Versants producteurs d’Eau Potable (BVAEP), des périmètres de protection (PPE) et des points de captage. Cet objectif s'appuie sur la mise en œuvre d'une **analyse multicritère** utilisant des seuils de vigilance définis collectivement et l'intégration des données de l'ISEE pour évaluer la population desservie. Ce diagnostic partagé doit permettre à tous les échelons institutionnels de disposer d'un **constat commun** sur l'état de la ressource.
-
-**Défi décisionnel :**
-
-- **Enjeu** : Passer d'un constat passif à une **priorisation proactive** des choix d'investissement, aux actions de terrain;
-- **Réponse** : Mise en place d'une **analyse multicritère** (seuils de vigilance et pondérations) intégrant les données biogéographiques et la population desservie (ISEE).
-
-#### Automatisation et système d'alerte
-
-L'automatisation répond au défi de la réactivité des gestionnaires, en cherchant à réduire le délai entre un événement environnemental et son signalement pour limiter l'impact sur la ressource. L'enjeu est également de garantir la **fiabilité de l'information** en s'affranchissant de manipulations manuelles répétitives et chronophages. L'objectif technique est d'intégrer des algorithmes de **détection automatique des changements**(incendies, défrichements, nouvelles installations classées) déclenchés dès l'intégration de nouvelles données de référence. Le système doit assurer une **veille environnementale** constante en automatisant la récupération de flux de données exogènes réguliers.
+- **Enjeu** : Garantir la continuité du projet en respectant les engagements contractuels envers les financeurs.
+- **Réponse** : Livraison prioritaire du rapport de critères et fiches indicateurs, déclenchant le versement de 30 % du fonds PEP.
 
 
-**Défi de réactivité :**
+#### Connaissance et diagnostic territorial partagé
 
-- **Enjeu** : Réduire le délai de signalement des pressions (incendies, défrichages, pollution) pour protéger les captages et informer les populations;
-- **Réponse** : Déploiement d'une **chaîne ETL automatisée** incluant des algorithmes de **détection automatique de changements** (méthodes Hash MD5 ou Geodiff).
+Protéger la ressource en eau potable suppose d'abord de la caractériser précisément : localisation des bassins versants d'approvisionnement (BVAEP), périmètres de protection et points de captage, pressions environnementales associées. Le BVAEP est retenu comme unité de référence pour l'ensemble du projet — il constitue le seul périmètre univoque pour tous les ouvrages et garantit la cohérence des analyses entre acteurs.
 
+La modélisation structure les relations entre ces trois niveaux géographiques — bassin versant, périmètre de protection, captage — permettant d'évaluer les pressions de manière cohérente à chaque échelle et de naviguer entre elles sans rupture d'information.
 
-### Pilotage technique et aide à la décision, un diagnostic partagé
-
-Le pilotage technique vise à instaurer un **diagnostic partagé** entre le Gouvernement, les Provinces et les Communes, tout en rendant la donnée exploitable par des utilisateurs non-spécialistes en SIG. Les livrables incluent le développement de **trois interfaces profilées** (Expert, Partenaire, Grand Public) dont l'ergonomie et les fonctionnalités sont adaptées aux missions spécifiques de chaque public. L'objectif fonctionnel est de permettre une navigation multi-échelles entre le captage et le bassin versant, complétée par la **production de rapports** de synthèse automatisés au format PDF. 
-
-
-@todo [priority=high,section=formulation] : "multi-échelles entre le captage et le bassin versant" doit être re-formulé. 
+- **Enjeu** : Disposer d'un constat commun sur l'état de la ressource, utilisable à tous les échelons institutionnels, pour orienter les décisions d'investissement et les actions de terrain.
+- **Réponse** : Mise en place d'une analyse multicritère et développement de trois interfaces adaptées aux profils des utilisateurs (Expert, Partenaire, Grand public), complétées par des rapports de synthèse automatisés.
 
 
-**Défi d'accessibilité :**
-
-- **Enjeu** : Permettre à tous les acteurs (mairies, provinces, gouvernement, État, aires coutumières, associations) de partager un constat commun;
-- **Réponse** : Développement de **trois interfaces profilées** (Expert, Partenaire, Grand public) et automatisation des **rapports de synthèse PDF**.
+#### Adhésion des utilisateurs et pertinence des indicateurs
 
 
-### Continuité et pérennité opérationnelle
+Un système d'information ne produit de valeur que si ses indicateurs correspondent aux besoins réels de ceux qui les utilisent, et si l'outil est suffisamment accessible pour s'intégrer dans les pratiques de travail. C'est le risque principal du projet : concevoir un système techniquement solide mais déconnecté des usages, ou trop complexe pour être adopté durablement.
 
-Le projet repose sur une **indépendance technologique** vis-à-vis des logiciels propriétaires et le maintien de la **continuité intellectuelle** avec les travaux réalisés depuis 2021. L'enjeu est de s'affranchir de la dette technique et des coûts de licence et de garantir la durabilité du système à moindre coût (financiers et en effort de maintenance). Pour cela, la phase de réalisation aura comme pre-requis l'utilisation d'une **chaîne de traitement (ETL/ELT) automatisée** et une orchestration moderne utilisant des technologies Open Source comme PostgreSQL/PostGIS, Python et DBT. Enfin, la mise en place d'une **historisation systématique** des indicateurs et des données sources, catalogués et documentés, est un prérequis majeur pour permettre des analyses temporelles et suivre l'évolution de la ressource sur le temps long.
+Cette exigence d'accessibilité doit être intégrée dès la conception — dans les choix d'ergonomie, la documentation contextuelle et la capacité de l'outil à rendre les utilisateurs autonomes sans formation lourde.
 
-**Défi de pérennité :**
-
-- **Enjeu** : Piloter autant que possible les maintenances et éviter des dettes techniques et assurer le suivi et la veille des données;
-- **Réponse** : Migration vers un socle **Open Source** (PostgreSQL/PostGIS, Python, DBT) garantissant l'**historisation systématique** des données.
+- **Enjeu** : S'assurer que les indicateurs, la modélisation et les interfaces répondent aux attentes concrètes des gestionnaires, décideurs et experts du territoire, et que l'outil soit approprié par ses utilisateurs dans la durée.
+- **Réponse** : Organisation d'un cycle de 6 à 8 ateliers de co-construction avec les parties prenantes, permettant de valider collectivement les indicateurs, les seuils de vigilance et les choix d'interface avant leur développement.
 
 
-@todo [priority=high,section=enjeux] : la modélisation métiers et un modèle décisionnel permettant de répondre à plusieurs enjeux (diagnostic partagé, priorisation proactive, veille environnementale) doit être formulé. 
+#### Réactivité et veille environnementale
+
+Les pressions sur la ressource — incendies, défrichements, nouvelles installations — peuvent évoluer rapidement. Un changement non intégré et non signalé réduit la capacité des gestionnaires à agir sur les captages qui sont impactés.
+
+- **Enjeu** : Réduire le délai entre un événement environnemental et son signalement, tout en fiabilisant l'information produite.
+- **Réponse** : Déploiement d'une chaîne de traitement automatisée intégrant des algorithmes de détection des changements, assurant une veille continue sans intervention manuelle répétitive.
 
 
-## Les ateliers 
+#### Pérennité et indépendance du système
+
+Le projet s'inscrit dans la continuité de travaux engagés depuis 2021. L'enjeu est de consolider ces acquis dans un système durable, maintenable sans dépendance à des logiciels propriétaires coûteux, et capable de produire des analyses temporelles sur le temps long.
+
+- **Enjeu** : Garantir la durabilité du système à coût maîtrisé, en évitant la dette technique et en assurant la traçabilité des données dans le temps.
+- **Réponse** : Adoption d'un socle open source et mise en place d'une historisation réfléchi des données et indicateurs prioritaires, de cataloguer et de documenter les procedures.
+
+
+## Les ateliers {#sec-ateliers}
 
 {{< include ./priorisation_partenaire_ateliers.qmd >}}
-
-
-### Profils utilisateurs et fonctionnalités attendues
-
-Le projet repose sur **trois interfaces distinctes** adaptées aux niveaux de maîtrise technique.
-
-| Profil | Besoins Spécifiques | Fonctionnalités Clés |
-| :--- | :--- | :--- |
-| **Gestionnaires / Experts** (DAVAR, DASS, OEIL) | Vision exhaustive, pilotage technique et surveillance des pressions. | Navigation hiérarchique ($BVAEP \leftrightarrow Captages \leftrightarrow PPE$), **analyse multicritère (système de jauge)**, requêtes spatiales avancées et consultation des historiques. |
-| **Partenaires** (Communes, Provinces) | Diagnostic opérationnel sans compétences SIG/SQL pour orienter la gestion locale. | Tableaux de bord simplifiés, **vue comparative entre bassins**, rapports PDF automatisés et notifications en cas de changement notable. |
-| **Grand Public** (Citoyens, Associations) | Sensibilisation et compréhension des enjeux de l'eau potable. | Infographies claires, **fiches vulgarisées**, cartographie allégée et narration pédagogique (storytelling). |
-
-### Indicateurs prioritaires et valeur métier
-Les indicateurs sont conçus pour quantifier l'**intégrité de la ressource** et prioriser les actions.
-
-- **Pressions environnementales :** Incendies (surfaces brûlées depuis 2012), érosion (linéaires touchés par classe de pente) et défrichages.
-- **Pressions humaines :** Urbanisation (nombre d'habitations), **population desservie** (données ISEE), installations classées (ICPE) et volumes de prélèvement autorisés.
-- **Facteurs biogéographiques :** Relief, géologie (sols ultramafiques vs volcanosédimentaires) et pluviométrie.  
-- **Valeur métier :** Passer d'un inventaire passif à une **priorisation proactive** des investissements basés sur la vulnérabilité réelle des bassins.
-
-### Seuils de vigilance et système d'alerte
-
-L'innovation d'Hydroscope réside dans sa capacité de **veille environnementale automatisée**.
-
-- **Détection automatique :** Utilisation d'algorithmes (Hash MD5 ou Geodiff) pour repérer les changements dès l'intégration de nouvelles données de référence.
-- **Alertes :** Les seuils déclenchant un signalement (visuel ou notification) doivent être définis collectivement en atelier pour chaque enjeu (ex: % de surface brûlée sur un PPE).
-
-
-### Contraintes Opérationnelles et Réglementaires
-
-- **Cadre légal :** Le projet doit servir de support à la **Loi du pays de juillet 2025**, notamment pour la régularisation des PPE sous un an.
-- **Confidentialité :** L'accès aux **données brutes physico-chimiques** n'est pas prévu ; l'outil n'indiquera que la date et la présence des mesures (via ATYA/HYDROBIO).
-- **Unité de gestion :** Le **Bassin Versant AEP (BVAEP)** est privilégié comme socle de travail car il est univoque pour tous les ouvrages
-
-
-### Modalités d'accès et contraintes d'usage
-
-- **Accès aux données :** Publication via des **services web (API)**, exports en formats courants (CSV, PDF, GeoJSON, XLS) et interfaces web responsives (mobiles/tablettes).
-- **Fréquence de mise à jour :** Automatisée via une chaîne **ETL (Python/DBT)** pour les données exogènes comme les incendies ou l'occupation du sol.
-- **Performance et accessibilité :** L'outil doit être fluide, inclure une documentation contextuelle (métadonnées) et proposer des sessions de **transfert de compétences** pour garantir l'autonomie des utilisateurs.
-- **Pérennité :** Choix exclusif de solutions **Open Source** (PostgreSQL/PostGIS) pour éviter la dépendance aux licences propriétaires.
