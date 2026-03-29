@@ -12,11 +12,11 @@ Le projet s'articule autour de quatre domaines  :
 
 
 
-@todo [priority=high,section=formulation] : Renomer les 4 grands domaines principaux. 
-Connaissance et caractérisation du territoire
-Diagnostic et analyse multicritère
-Veille et détection automatique des changements
-Partage et diffusion des diagnostics
+@todo [priority=medium,section=formulation] : Rennomer les 4 grands domaines principaux. 
+Connaissance et caractérisation du territoire; 
+Diagnostic et analyse multicritère; 
+Veille et détection automatique des changements; 
+Partage et diffusion des diagnostics;
 
 ### Logique de délimitation du périmètre vis à vis des besoins remontés
 

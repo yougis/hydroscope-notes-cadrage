@@ -79,7 +79,7 @@ Il s’agit d’un application uniquement pour les des agents aguerris au SIG et
 - Absence d’automatisation de la collecte et de l’analyse des données;
 - Difficulté d’intégration de nouvelles sources de données ou de nouveaux indicateurs;
 - Dépendance à l’environnement ArcGIS (ArcGIS Server / image, ArcGIS Pro);
-- Pas d'interfaces adaptées à différents profils d’utilisateurs (gestionnaires, partenaires, grand public);
+- Pas d'interfaces adaptées à différents profils d’utilisateurs (experts/gestionnaires, partenaires, grand public);
 - Absence d’historisation des indicateurs, limitant la capacité à suivre les tendances et à analyser les évolutions dans le temps;
 - Processus de mise à jour manuel et peu flexible, nécessitant des manipulations SQL et SIG, ce qui rend la maintenance et l’évolution du système complexes.
 
@@ -90,26 +90,11 @@ Le projet est porté par l'OEIL, avec le souhait de collaborer avec de nombreux 
 
 **Les institutions** DAVAR, DASS, DIMENC, Provinces, Communes, **Syndicats de gestion de l’eau** (AQUA Nord, SIVOM VKP, CDE), **bureaux d’études** (SEREG, GEOS4D, GeoImpact, Bioéco, CAPSE) et **associations** (WWF, comité de population locale).
 
-Cette liste de partenaires sera priorisée par l’équipe projet puis validée en COPRO.
+Cette liste de partenaires est priorisée par l’équipe projet puis sera validée en COPRO.
 
 Le chef de projet MOA identifié à l'OEIL est Marjolaine David, avec un appui fort de l'AMOA externe (Yapuka - Hugo Roussaffa) pour la tenue des ateliers, la formalisation du cadrage stratégique, les cadrages fonctionnels et la rédaction du cahier des charges fonctionnel.
 
 Afin d'appuyer les sollicitations de l'équipe projet auprès des partenaires lors des ateliers, l'OEIL sollicitera officiellement une lettre de mission auprès du Gouvernement. Cette démarche vise à légitimer l'implication des services techniques territoriaux.
-
-#### Priorisation hiérarchique des besoins
-
-Les besoins des gestionnaires (DAVAR, DASS, Provinces etc.) sont recueillis à titre consultatif. Ils ne sont intégrés que dans la mesure où ils s'alignent à la vision de l'OEIL, ses missions de service public et le temps long.
-
-#### Gouvernance et arbitrage final
-
-La structure de pilotage donne un pouvoir décisionnel à l'OEIL :
-
-- **Arbitrage** : l'OEIL s'attache à développé une coordination entre les acteurs. Toutefois, l'analyse critique des attentes ou besoin et l'arbitrage final des points clés reviennent à l'OEIL. Les choix seront discutés collegialement en toute transparance en fonction de sa vision stratégique et ses missions.
-
-- **Coordination** : Le consultant AMOA coordonne la planification et les arbitrages selon la vision de l'OEIL et du chef de projet, en veillant à ce que les besoins des partenaires soient exprimés dans la mesure où ils s'alignent avec les objectifs de l'OEIL.
-
-- **Journal des décisions** : Ce document, tenu par l'AMOA, sert de synthèse pour présenter l'alignement continu sur les objectifs de l'OEIL et limite les aller-retour sur des points arbitrés sauf pour des cas réévalué en COPIL par exemple.
-
 
 
 ### Défis stratégiques et réponses du projet
@@ -159,7 +144,3 @@ Le projet s'inscrit dans la continuité de travaux engagés depuis 2021. L'enjeu
 - **Enjeu** : Garantir la durabilité du système à coût maîtrisé, en évitant la dette technique et en assurant la traçabilité des données dans le temps.
 - **Réponse** : Adoption d'un socle open source et mise en place d'une historisation réfléchi des données et indicateurs prioritaires, de cataloguer et de documenter les procedures.
 
-
-## Les ateliers {#sec-ateliers}
-
-{{< include ./priorisation_partenaire_ateliers.qmd >}}
