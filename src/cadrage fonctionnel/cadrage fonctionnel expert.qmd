@@ -1,4 +1,17 @@
 
+
+
+
+
+
+
+
+
+
+
+------------
+
+
 ### Profils utilisateurs et fonctionnalités attendues
 
 Le projet repose sur **trois interfaces distinctes** adaptées aux niveaux de maîtrise technique.
