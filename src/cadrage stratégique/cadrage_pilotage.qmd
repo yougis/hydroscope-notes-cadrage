@@ -3,11 +3,11 @@
 
 ## Gouvernance du projet
 
-L'**OEIL** assure la maitrise d'ouvrage du projet. La mission d'**AMOA** est confiée au consultant indépendant Hugo Roussaffa de la société **Yapuka**, garant de la cohérence fonctionnelle et de l'alignement sur les objectifs stratégiques. Le pilotage opérationnel est structuré autour de deux instances : le comité de pilotage **COPIL** et le comité de projet **COPRO** . Une équipe projet dédiée, pilotée par Marjolaine David (CP OEIL) avec l'appui de l'AMOA, est chargée de la coordination quotidienne, la réalisation d'action de gestion de projet, la mise en oeuvre de la récolte des besoins et de la production des livrables.
+L'**OEIL** assure la maitrise d'ouvrage du projet. La mission d'**AMOA** est confiée au consultant indépendant Hugo Roussaffa de la société **Yapuka**, garant de la cohérence fonctionnelle et de l'alignement sur les objectifs stratégiques. Le pilotage opérationnel est structuré autour de deux instances : le comité de pilotage **COPIL** et le comité de projet **COPRO** . Une équipe projet dédiée, pilotée par Marjolaine David (cheffe de projet OEIL) avec l'appui de l'AMOA, est chargée de la coordination quotidienne, la réalisation d'action de gestion de projet, la mise en œuvre de la récolte des besoins et de la production des livrables.
 
 - COPIL (Stratégique) : Composé de l'OEIL, de l'OFB et du Chef de service de l’eau de la DAVAR (ou son représentant). Son rôle est l'arbitrage des besoins synthétisés.
 - COPRO (Opérationnel) : Intègre les chefs de projet techniques de l'OEIL et le comité OS1 (DAVAR, DASS, DIMENC, 3 provinces, communes). Il garantit l'alignement des besoins recensés avec le périmètre du projet.
-- Équipe projet : Pilotée par Marjolaine David (CP OEIL) avec l'appui de l'AMOA (Yapuka).
+- Équipe projet : Pilotée par Marjolaine David (cheffe de projet OEIL) avec l'appui de l'AMOA (Yapuka).
 
 
 ### Validation des livrables : Processus distinct entre notes stratégiques (OEIL) et fonctionnelles (COPRO).
@@ -22,11 +22,11 @@ Risque de frustration des partenaires : L'impossibilité d'intégrer tous les be
 
 L'enjeu technique majeur concerne l'hétérogénéité des référentiels sources et la **complexité de l'architecture** (historisation, indexation H3 et calcul d'indicateurs multicritères pondérés).
 
-La stabilisation du **modèle de données métier** et le choix définitif de l'unité principale de gestion, le consensus actuel penchant pour le **Bassin AEP** plutôt que le seul PPE. ces données doivent être solides car le modèle de données métier est un socle structurant pour la réalisation technique et les choix d'architecture.
+La stabilisation du **modèle de données métier** et le choix définitif de l’unité principale de gestion représentent des étapes critiques du projet. Le consensus actuel penche pour le **Bassin Versant AEP** comme unité de gestion plutôt que le seul PPE. Le modèle de données métier doit être solide car c’est un socle structurant pour la réalisation technique et les choix d’architecture. 
 
 ### Risques financiers
 
-Il existe un risque lié à la difficulté de mobiliser des financements complémentaires ou d'amender les conventions actuelles en cas de dépassement budgétaire imprévu, il faut donc être extremement prudent dans la définition du périmètre fonctionnel.
+Il existe un risque lié à la difficulté de mobiliser des financements complémentaires ou d'amender les conventions actuelles en cas de dépassement budgétaire imprévu, il faut donc être extrêmement prudent dans la définition du périmètre fonctionnel.
 
 
 ## Indicateurs de pilotage
@@ -38,12 +38,12 @@ Le suivi de la valeur métier du projet s'appuiera sur le **nombre d'indicateurs
 
 Le calendrier est soumis à deux échéances contractuelles majeures :
 
-- 30 Décembre 2026 : fin de la convention OEIL/PEP, un avenant doit être réalisé pour étendre la periode d'un an.
+- 30 Décembre 2026 : fin de la convention OEIL/PEP, un avenant doit être réalisé pour étendre la période d'un an.
 - Décembre 2027 : Date limite cible pour la livraison des outils.
 - 31 Mars 2028 : Clôture définitive de la convention avec l'OFB
 
 
-Le projet est découpé en deux étapes majeures : une première phase de **cadrage fonctionnel** (Phase A) d'une durée de 3 mois, suivie d'une phase de **réalisation technique** (Phase B) . Les points de validation clés incluent la livraison des fiches indicateurs et du **Cahier des Charges Fonctionnel (CCF)**.
+Le projet est découpé en deux étapes majeures : une première phase de **cadrage fonctionnel** (Phase A) d'une durée de 3 mois, suivie d'une phase de **réalisation technique** (Phase B) . Les points de validation clés de la phase A incluent la livraison des fiches indicateurs et du **Cahier des Charges Fonctionnel (CCF)**.
 
 
 ### Mois 1 : Gouvernance et cadrage stratégique (mi-Mars à mi-Avril 2026)
@@ -63,7 +63,7 @@ Jalons de livrables :
 
 ### Mois 2 : Cadrage métier et ateliers (mi-Avril à mi-Mai 2026)
 
-Période pour transformer les besoins en spécifications fonctionnelles précises.
+Transformation des besoins en spécifications fonctionnelles précises.
 
 Semaines 1 à 4 : Réalisation des ateliers de cadrage (6 à 8 sessions) avec les gestionnaires  pour définir les indicateurs et fonctionnalités.
 
@@ -80,8 +80,10 @@ Finalisation de la documentation pour préparer la phase de réalisation techniq
 
 Semaines 1 et 2 : Rédaction détaillée des spécifications fonctionnelles, schémas, processus et maquettes fonctionnelles (wireframes).
 
-fin-Mai : Troisième réunion du COPRO.
+Fin-Mai : Troisième réunion du COPRO.
 Début Juin : Relecture et mise en forme finale du cahier des charges fonctionnel.
+
+Mi-Juin : COPIL de clôture de la Phase A ; présentation finale des livrables et arbitrage pour lancer la réalisation technique (Phase B). 
 
 Jalons de livrables (fin de projet) :
 
@@ -89,7 +91,6 @@ Jalons de livrables (fin de projet) :
 - Journal des décisions et arbitrages finalisé;
 - Rapport de consolidation finale de la mission AMOA;
 
-Mi-Juin : COPIL de clôture de la Phase A : Présentation finale des livrables et arbitrage pour lancer la réalisation technique (Phase B ).
 
 ::: {.landscape}
 
@@ -107,7 +108,7 @@ Les ateliers métiers du projet Hydroscope, prévus durant la Phase A (mi-avril 
 
 ## Objectifs des ateliers
 
-Le premier objectif est de **recueillir et centraliser les besoins fonctionnels** d'une majorité d'acteurs sur le territoire pour construire une vision partagé de la ressource.
+Le premier objectif est de **recueillir et centraliser les besoins fonctionnels** d'une majorité d'acteurs sur le territoire pour construire une vision partagée de la ressource.
 
 Les ateliers permettront de définir :
 
@@ -118,7 +119,7 @@ Les ateliers permettront de définir :
 - Les seuils de vigilance et d’alerte des indicateurs;
 - Les besoins de partage et de collaboration entre acteurs;
 - les modalités d’accès aux données (API, exports, interfaces);
-- les contraintes d’usage (fréquence de mise à jour, fréauence d’utilisation de l’outil, performance, besoin d’autonomie ous d’accompagnement, accessibilité).
+- les contraintes d’usage (fréquence de mise à jour, fréquence d’utilisation de l’outil, performance, besoin d’autonomie ou d’accompagnement, accessibilité).
 
 
 
@@ -128,7 +129,7 @@ Les ateliers sont animés par l'assistance à maîtrise d'ouvrage (AMOA), qui es
 
 **Arbitrage final :** 
 
-L'équipe projet synthétise ensuite l'ensemble des besoins recueillis pour préparer les arbitrages finaux du **COPIL**, garantissant que les choix retenus respectent le perimètre du projet.
+L'équipe projet synthétise ensuite l'ensemble des besoins recueillis pour préparer les arbitrages finaux du **COPIL**, garantissant que les choix retenus respectent le périmètre du projet.
 
 Pour légitimer ces sollicitations, l'OEIL devrait demander une **lettre de mission officielle** auprès du Gouvernement, facilitant ainsi la mobilisation des services techniques partenaires.
 
@@ -147,7 +148,7 @@ Pour prioriser les acteurs à consulter lors des ateliers de co‑construction d
 ####  Mission critique
 Ce critère évalue l'implication réglementaire et institutionnelle de l'acteur dans la gestion de l'eau en Nouvelle-Calédonie.
 
-- **Valeur 3 (indispensable) :** L'acteur possède une mission régalienne de protection de la ressource ou est le garant des référentiels de données maîtres indispensables au projet (ex: **DAVAR** pour les BVAEP/PPE).
+- **Valeur 3 (indispensable) :** L'acteur exerce une mission de protection de la ressource ou il est le garant des référentiels de données maîtres indispensables au projet (ex: **DAVAR** pour les BVAEP/PPE).
 - **Valeur 2 (thématique/moyenne) :** L'acteur dispose d'une expertise critique sur un domaine de pression ou un enjeu spécifique, mais ne gère pas l'ensemble du système de la ressource (ex: **DIMENC** pour les mines/ICPE,  **DASS** pour la potabilité).
 - **Valeur 1 (usage/indirect) :** L'acteur n'a pas de mission régalienne directe sur la ressource ou intervient principalement comme utilisateur final ou prestataire de réalisation.
 
@@ -189,7 +190,7 @@ Ce critère assure un équilibre entre ceux qui produisent/analysent la donnée 
 **Conclusion de la priorisation :**
 
 Les ateliers seront concentrés en priorité sur les acteurs ayant eu un score de **5 à 9**
-**Les bureaux d'études (GEOS4D, GeoImpact, CAPSE / BIOECO)**, bien que techniquement compétents, ne seront pas interviewer, mais ils pourront toujours être consultés via le **COPRO** ou lors des phases de test pour ne pas saturer le calendrier.
+**Les bureaux d'études (GEOS4D, GeoImpact, CAPSE / BIOECO)**, bien que techniquement compétents, ne seront pas conviés, mais ils pourront toujours être consultés via le **COPRO** ou lors des phases de test pour ne pas saturer le calendrier.
 
 
 #### Liste priorisée des partenaires (cible : 8 ateliers)
@@ -209,7 +210,7 @@ Deux sessions de travail dédiées à la DAVAR sont prévues pour sécuriser le 
 
 Cet atelier consiste en une **revue critique des indicateurs actuels** afin d'identifier ceux n'ayant plus d'intérêt et de tirer les leçons des limites du système précédent (dépendance technique, absence d'historisation). Il s'agit d'évaluer les forces et faiblesses du tableau de bord existant pour orienter les nouvelles fonctionnalités d'Hydroscope.
 
-Cette réunion d'échange sera le moment de présenter un retour d'experiemce sur le tableau de bord après 5 ans de mise en service.
+Cette réunion d'échange sera le moment de présenter un retour d'expériemce sur le tableau de bord après 5 ans de mise en service.
 Une part importante des échanges vise à laisser l'utilisateur exprimer librement ses retours — qu'ils soient positifs ou négatifs — sur l'outil.
 
 Toutefois certaines questions clés devront être aborder si cela n'a pas été fait spontanément : 
@@ -217,7 +218,7 @@ Toutefois certaines questions clés devront être aborder si cela n'a pas été 
 - Quels indicateurs sont obsolètes ou peu pertinents ? 
 - Quelles données sont sous-utilisées ? 
 - Quelles fonctionnalités manquent pour une prise de décision efficace ?
-- Quelles erreurs sont dans cet outil que le futur outil ne devrait pas commettre ?
+- Quelles sont les erreurs de cet outil à ne pas reproduire ? 
 
 
 - **Création des fiches indicateurs Hydroscope (1h30) :** 
@@ -243,7 +244,7 @@ Opérateur privé majeur. Son expertise est requise pour valider les indicateurs
 
 - **WWF / Comités de population locale :** 
 
-Ces acteurs sont prioritaires pour tester la **représentativité sociale**. Ils présenterons les besoins pour une interface "Grand Public" pour s'assurer que les enjeux soient compris par les citoyens.
+Ces acteurs sont prioritaires pour tester la **représentativité sociale**. Ils présenteront les besoins pour une interface "Grand Public" pour s'assurer que les enjeux soient compris par les citoyens.
 
 #### Synthèse des profils d'ateliers
 
@@ -253,13 +254,13 @@ Voici une proposition de tableau de synthèse des ateliers, intégrant les prior
 Voici le tableau de synthèse des ateliers mis à jour, intégrant le calendrier précautionneux établi pour sécuriser le socle de données et les jalons financiers du projet **Hydroscope** entre fin avril et mi-mai 2026.
 
 | Priorité / Acteur | Type d'atelier | Objectifs spécifiques | Interface cible | Date prévisionnelle approximative|
-| :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :-------- | :--- | :--- |
 | **1. DAVAR (SDE)** | **Spécifique (REX)** | Effectuer la revue critique de **Pression PPE** : identifier les indicateurs sans intérêt, analyser les forces/faiblesses de l'outil actuel. | **Expert** | **21 avril 2026** |
 | **1. DAVAR (SDE)** | **Spécifique (Technique)** | Co-construire les **fiches indicateurs Hydroscope** (métriques, périmètres, pondérations). *Livrable critique pour le jalon PEP 30%*. | **Expert** | **23 avril 2026** |
 | **1. DASS / DIMENC** | Institutionnel | Identifier les besoins en suivi de potabilité (ATYA) et intégrer les pressions industrielles/minières (ICPE). | **Expert** | **24 avril 2026** |
 | **2. Provinces (via OS1)** | Territorial | Recueillir les besoins de gestion à l'échelle provinciale et assurer la **représentativité territoriale** via le groupe de travail existant. | **Partenaire** | **28 avril 2026** |
 | **2. Communes & SIVOM** (ex: Mont-Dore, Thio, VKP) | Territorial / Gestion | Définir les besoins opérationnels locaux (diagnostic par commune) et évaluer l'ergonomie adaptée pour les non-spécialistes. | **Partenaire** | **30 avril au 05 mai 2026** |
-| **3. CDE / Bureaux d'études** (ex: SEREG) | Opérationnel | Valider la faisabilité des indicateurs de distribution (volumes, population desservie) et le réalisme des périmètres (PPE). | **Expert / Partenaire** | **07 mai 2026** |
+| **3. CDE**  | Opérationnel | Valider la faisabilité des indicateurs de distribution (volumes, population desservie) et le réalisme des périmètres (PPE). | **Expert / Partenaire** | **07 mai 2026** |
 | **4. WWF / Comités locaux** | Usage & Public | Définir les formats de **vulgarisation** (fiches, application mobile) et valider l'intelligibilité des messages pour les usagers. | **Grand Public** | **12 mai 2026** |
 
 
@@ -272,5 +273,5 @@ Voici le tableau de synthèse des ateliers mis à jour, intégrant le calendrier
 
 
 
-# Annexe 1 : Note méthodologiaue des ateliers {.appendix}
+# Annexe 1 : Note méthodologique des ateliers {.appendix}
 {{< include ./priorisation_partenaire_ateliers.qmd >}}

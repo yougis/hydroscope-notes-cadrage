@@ -1,11 +1,11 @@
 ## Déroulement des ateliers de co-construction avec les partenaires
 
-Avant de commencer les ateliers il serait judicieux de prévoir une réunion d'information préalable pour présenter le projet, son périmètre et les objectifs des ateliers afin d'une part de cadrer les attentes et d'éviter les frustrations et deuxièment et de mutualiser ce temps d'information. Cette réunion doit inclure le plus de partenaires ciblés possible pour maximiser la diffusion de l'information et la mobilisation des acteurs. Cette première réunion d'information peut être organisée en visioconférence sur une durée de moins d'une heure. Ce moment offre aussi l'opportunité de présenter aux participants la méthodologie de déroulement des ateliers et de valider un calendrier. Nous pourrons ensuite communiquer du materiel aux participants en amont de leurs ateliers, comme la liste des questions qui serviront de base aux échanges, la liste des indicateurs actuels, des brouillons de maquettes d'interface etc.
+Avant de commencer les ateliers il serait judicieux de prévoir une réunion d'information préalable pour présenter le projet, son périmètre et les objectifs des ateliers afin d'une part de cadrer les attentes et d'éviter les frustrations et deuxièmement de mutualiser ce temps d'information. Cette réunion doit inclure le plus de partenaires ciblés possible pour maximiser la diffusion de l'information et la mobilisation des acteurs. Cette première réunion d'information peut être organisée en visioconférence sur une durée de moins d'une heure. Ce moment offre aussi l'opportunité de présenter aux participants la méthodologie de déroulement des ateliers et de valider un calendrier. Nous pourrons ensuite communiquer du matériel aux participants en amont de leurs ateliers, comme la liste des questions qui serviront de base aux échanges, la liste des indicateurs actuels, des brouillons de maquettes d'interface etc.
 
 
 **Déroulé type d'un atelier (2h30) :**
 
-- **Démarage (5 min)**
+- **Démarrage (5 min)**
 - **Cadrage (15 min) :** Rappel rapide du périmètre projet et spécifiquement de l'un des 3 outils profil traité et des objectifs de l'atelier.
 - **Besoins métiers & indicateurs (30 min) :** Identification des spécificités métiers du profil du partenaire, des données critiques et de leur valeur métier.
 - **Seuils & alertes (30 min) :** Définition des seuils de vigilance.

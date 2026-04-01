@@ -7,13 +7,13 @@
 
 ### État de la menace
 
-Le projet répond à une urgence environnementale caractérisée par :
+Le projet répond à une urgence environnementale marquée par des pressions et des enjeux multiples :
 
 - **Incendies** : En 2019, **17 % des feux de brousse** ont touché des PPE (7 000 hectares);
 - **Érosion** : La couverture végétale est dégradée dans **90 % des PPE** de Nouvelle-Calédonie;
 - L'activité minière constitue une pression majeure qui fragilise la stabilité des sols et la qualité physico-chimique des eaux en amont des prises d'eau.
 - **Changement climatique** : Une baisse de **20 % des précipitations** est projetée d'ici 2100;
-- **Humain** : La protection de la ressource en eau représente un enjeux vitale pour **271 407 habitants** et **90 800 ménages** .
+- **Humain** : La protection de la ressource en eau représente un enjeu vital pour **271 407 habitants** et **90 800 ménages** .
 
 
 
@@ -28,7 +28,9 @@ Le rôle du gouvernement de la Nouvelle-Calédonie ne se limite plus seulement a
 #### Adoption de l'arrêté 
 
 C'est désormais le gouvernement de la Nouvelle-Calédonie qui instaure par arrêté les périmètres de protection (immédiate, rapprochée et éventuellement éloignée).
+
 - Instruction centralisée : Le service de l'eau de la DAVAR est confirmé comme l'instructeur unique pour les demandes d'autorisation de prélèvement et les dossiers de PPE.
+
 - Gestion des urgences : Le gouvernement peut désormais autoriser des prélèvements provisoires sans PPE en cas de circonstances climatiques exceptionnelles ou de pollution accidentelle, à condition qu'il n'y ait pas de danger pour la santé.
 
 #### L'État
@@ -60,7 +62,7 @@ La loi introduit de nouveaux éléments qui n'existaient pas dans le cadre préc
 
 - L'instauration d'un PPE sur terres coutumières est désormais strictement conditionnée à l'accord des autorités coutumières, matérialisé par un acte coutumier.
 - **Obligation de régularisation** pour les captages existants qui n'auraient pas encore de PPE, les gestionnaires disposent d'un délai d'un an (à compter du 15 juillet 2025) pour fournir le dossier nécessaire à leur détermination.
-- Participation du public simplifiée pour les PPE concernant ++moins de 12 propriétaires++ (et sans impact économique majeur), une simple consultation publique de 15 jours remplace la lourde procédure d'enquête publique.
+- Participation du public simplifiée pour les PPE concernant **moins de 12 propriétaires** (et sans impact économique majeur), une simple consultation publique de 15 jours remplace la lourde procédure d'enquête publique.
 
 
 ## Contexte interne 
@@ -69,12 +71,12 @@ La loi introduit de nouveaux éléments qui n'existaient pas dans le cadre préc
 Le projet Hydroscope succède au tableau de bord **PressionPPE** (2021) qui a permis un premier inventaire des données liées à l’eau potable. Toutefois, ce système a atteint des limites opérationnelles, à savoir:
 
 - **Dépendance technique et coûts** : Une forte rigidité liée aux solutions propriétaires (ArcGIS) et aux processus manuels SQL/SIG.
-- **Vision temporelle limitée** : l'historisaion les indicateurs non actualisé ne permet pas de suivre les tendances et l'évolution des menaces dans le temps ni d'identifier de changements entre 2 dates.
-- **Déficit d'usage** : le tableau de bord a été développé spécifiquement pour des specialistes et l'ergonomie complexe qui l'accompagne ne convient pas aux profils des décideurs et du grand public.
+- **Vision temporelle limitée** : l’absence d’historisation et des indicateurs non actualisés ne permettent pas de suivre les tendances et l’évolution des menaces dans le temps ni d’identifier de changements entre 2 dates.
+- **Déficit d'usage** : le tableau de bord a été développé spécifiquement pour des spécialistes et l'ergonomie complexe qui l'accompagne ne convient pas aux profils des décideurs et du grand public.
 
-D'autre part, une application ArcGIS Pro a été développée en Province Nord pour le suivi de la ressource en eau potable, qui se limite à ce territoire et ne répond donc pas aux besoins d’un Système d’Information Environnemental global pour l’ensemble de la Nouvelle-Calédonie. Cette application a néanmoins l'avantage de permettre des calculs d'indicateurs multicritères pondérés, une fonctionnalité qui devra être prise en compte dans la conception de la future plateforme Hydroscope. 
+D'autre part, l'application ArcGIS Pro développée en Province Nord pour le suivi de la ressource en eau potable, qui se limite à ce territoire et ne répond donc pas aux besoins d’un Système d’Information Environnemental global pour l’ensemble de la Nouvelle-Calédonie. Cette application présente néanmoins l'avantage de permettre des calculs d'indicateurs multicritères pondérés, une fonctionnalité qui devra être prise en compte dans la conception de la future plateforme Hydroscope. 
 
-Il s’agit d’un application uniquement pour les des agents aguerris au SIG et qui ne permet pas de partage d’information, ainsi que :
+Il s’agit d’une application uniquement pour les des agents aguerris au SIG et qui ne permet pas de partage d’information, ainsi que :
 
 - Absence d’automatisation de la collecte et de l’analyse des données;
 - Difficulté d’intégration de nouvelles sources de données ou de nouveaux indicateurs;
@@ -142,5 +144,4 @@ Les pressions sur la ressource — incendies, défrichements, nouvelles installa
 Le projet s'inscrit dans la continuité de travaux engagés depuis 2021. L'enjeu est de consolider ces acquis dans un système durable, maintenable sans dépendance à des logiciels propriétaires coûteux, et capable de produire des analyses temporelles sur le temps long.
 
 - **Enjeu** : Garantir la durabilité du système à coût maîtrisé, en évitant la dette technique et en assurant la traçabilité des données dans le temps.
-- **Réponse** : Adoption d'un socle open source et mise en place d'une historisation réfléchi des données et indicateurs prioritaires, de cataloguer et de documenter les procedures.
-
+- **Réponse** : Adoption d’un socle open source et mise en place d’une historisation réfléchie des données et indicateurs prioritaires, avec un cataloguage et une documentation systématiques des procédures.

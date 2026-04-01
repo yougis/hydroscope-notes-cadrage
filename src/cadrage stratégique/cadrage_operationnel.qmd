@@ -5,22 +5,14 @@
 
 Le projet s'articule autour de quatre domaines  :
 
-  - Caractériser les territoires (facteurs biogéographiques et pressions).
-  - Assurer une veille environnementale et alerter (détection automatique des changements).
-  - Partager des diagnostics entre acteurs (interfaces adaptées par profil).
-  - Synthétiser l’information (rapports automatisés et fiches)
-
-
-
-@todo [priority=medium,section=formulation] : Rennomer les 4 grands domaines principaux. 
-Connaissance et caractérisation du territoire; 
-Diagnostic et analyse multicritère; 
-Veille et détection automatique des changements; 
-Partage et diffusion des diagnostics;
+- Connaissance et caractérisation du territoire; 
+- Diagnostic et analyse multicritère; 
+- Veille et détection automatique des changements; 
+- Partage et diffusion des diagnostics;
 
 ### Logique de délimitation du périmètre vis à vis des besoins remontés
 
-Pour apporter de la transparance au processus de verification et d'intégration des fonctionnalités dans le périmètre d'Hydroscope, nous définisons 3 critères. Par exemple, une fonctionnalité ou une donnée est incluse si elle répond à toutes les conditions suivantes :
+Pour apporter de la transparence aux processus de vérification et d'intégration des fonctionnalités dans le périmètre d'Hydroscope, nous définissons 3 critères. Par exemple, une fonctionnalité ou une donnée est incluse si elle répond à toutes les conditions suivantes :
 
 - **Elle produit une information utile à la décision sur la ressource en eau potable** :
 
@@ -28,7 +20,7 @@ L'outil n'a pas vocation à centraliser toute l'information disponible sur le te
 
 - **Elle est techniquement soutenable dans le temps**:
 
-Les données intégrées doivent pouvoir être actualisées de manière récurente et maîtrisée. Une donnée pertinente mais trop instable, trop dépendante d'un tiers ou trop coûteuse à maintenir est exclue pour ne pas fragiliser la fiabilité de l'ensemble du système.
+Les données intégrées doivent pouvoir être actualisées de manière récurrente et maîtrisée. Une donnée pertinente mais trop instable, trop dépendante d'un tiers ou trop coûteuse à maintenir est exclue pour ne pas fragiliser la fiabilité de l'ensemble du système.
 
 - **Elle relève du périmètre de responsabilité de l'OEIL**:
 
@@ -37,7 +29,7 @@ Hydroscope ne se substitue pas aux systèmes existants gérés par d'autres acte
 
 ### Ce qui est exclu du périmètre — cadre et justifications
 
-Afin d'évaluer des cas plus précisement, les critères exclusifs suivant seront aussi évalués.
+Afin d'évaluer des cas plus précisément, les critères exclusifs suivant seront aussi évalués.
 
 - **Les données internes propres à chaque partenaire**:
 
@@ -49,7 +41,7 @@ Hydroscope est un outil de lecture et d'analyse statistique — pas un système 
 
 - **Les données sensibles et confidentielles**:
 
-L'accès aux données brutes physico-chimiques, de météorologie ou de rescencement, aux valeurs précises de mesures ou à toute information soumise à des restrictions de confidentialité est exclu du périmètre. Cet arbitrage protège à la fois les partenaires producteurs de ces données et l'OEIL, en maintenant des périmètres de responsabilité clairs. Hydroscope restitue des indicateurs agrégés et des informations de présence — jamais les données sources sensibles elles-mêmes.
+L'accès aux données brutes physico-chimiques, de météorologie ou de recencement, aux valeurs précises de mesures ou à toute information soumise à des restrictions de confidentialité est exclu du périmètre. Cet arbitrage protège à la fois les partenaires producteurs de ces données et l'OEIL, en maintenant des périmètres de responsabilité clairs. Hydroscope restitue des indicateurs agrégés et des informations de présence — jamais les données sources sensibles elles-mêmes.
 
 - **La vulgarisation pédagogique et la communication grand public approfondie**:
 
@@ -86,7 +78,7 @@ Toute demande d'intégration d'une nouvelle fonctionnalité ou donnée sera éva
 
 La réussite du projet repose en grande partie sur l'accès aux données fournies par les partenaires institutionnels et privés (Gouvernement, Provinces, Communes, DASS, ISEE, CDE). 
 
-Le projet doit assurer l'interopérabilité entre les référentiels des partenaires, la DAVAR, de la DITTT (BD-Hydrographie, BDTOPO), de l'ISEE (statistiques de population), des reseaux de distribution d'eau potable (SERAIL, communes, CDE) etc.
+Le projet doit assurer l'interopérabilité entre les référentiels des partenaires, la DAVAR, de la DITTT (BD-Hydrographie, BDTOPO), de l'ISEE (statistiques de population), des réseaux de distribution d'eau potable (SERAIL, communes, CDE) etc.
 
 Voici une liste des référentiels hydrologiques produits par des acteurs en Nouvelle-Calédonie : 
 
@@ -98,14 +90,14 @@ Voici une liste des référentiels hydrologiques produits par des acteurs en Nou
 
 Des référentiels non hydrologiques produits en Nouvelle-Calédonie pourront être exploités : 
 
-- Pluviometrie (Météo France NC);
+- Pluviométrie (Météo France NC);
 - Statistiques de population (ISEE);
 - Incendies (OEIL);
 - Sécheresse végétale (OEIL);
 - Plans Locaux d'Urbanisme (Provinces);
 - Base de données des ICPE (DIMENC, Provinces);
 - Base de données des espèces envahissantes (Endemia);
-- Reseau de distribution d'eau potable (SERAIL, communes, CDE);
+- Réseau de distribution d'eau potable (SERAIL, communes, CDE);
 ainsi que des fonds de plans cartographique et d'imagerie de la DTSI;
 
 D'autres référentiels hydrologiques et non hydrologiques produit en dehors de la Nouvelle-Calédonie pourront être exploités :
@@ -121,5 +113,5 @@ Les partenaires et acteurs institutionnels doivent s’engager activement dans l
 
 ### Ressources humaines
 
-Les ressources internes de l'OEIL, que ce soit au pole environnement qu'au pole SI peuvent assurer la production du projet. Cependant, il est sera nécessaire de prévoir des ressources externes pour la réalisation technique (Phase B) et probablement pour la maintenance post-livraison, notamment pour l'hébergement cloud ainsi que l'automatisation des traitements.
+Les ressources internes de l'OEIL, que ce soit au pôle Environnement qu'au pôle Système d’Information peuvent assurer la production du projet. Cependant, il sera nécessaire de prévoir des ressources externes pour la réalisation technique (Phase B) et probablement pour la maintenance post-livraison, notamment pour l'hébergement cloud ainsi que l'automatisation des traitements.
 
