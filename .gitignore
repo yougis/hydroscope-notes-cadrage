@@ -1,2 +1,3 @@
-src/_extensions/*
+_extensions/*
 .~lock.*
+/.quarto/

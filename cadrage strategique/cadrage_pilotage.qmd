@@ -94,7 +94,7 @@ Jalons de livrables (fin de projet) :
 
 ::: {.landscape}
 
-![](ressources/planning.png)
+![](../ressources/planning.png)
 
 :::
 

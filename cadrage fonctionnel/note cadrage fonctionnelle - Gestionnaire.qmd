@@ -1,73 +1,7 @@
 ---
 title: "Note de cadrage fonctionnelle du projet HydroScope"
 subtitle: "Interface Gestionnaires / Experts"
-author: 
-  name: "Hugo Roussaffa"
-  email: hugoroussaffa@gmail.com
-  Tel: +687 97.83.24
-  Position: "Expert Géomatique – Architecte data - Consultant"
-  affiliation: 
-    name: Yapuka SARL
-    address: "BP 38, 98836 Dumbéa Mairie, Nouvelle-Calédonie"
-    Ridet : 1 568 070.001
-date: today
-date-format: long
-number-sections: true
 
-logo: "ressources/OEIL_logo.png" #logo de l'oeil
-image_font_1: "ressources/MJunckerOEIL.jpg" #image de fond numéro 1
-image_font_2:  "ressources/eau-monitoring.png"  #image 2 supérieure
-logo_partenaire: "ressources/logo_yapuka.png" #logo partenaire
-filters:
-  - filters/todo.lua
-lang: fr
-format:
-  html:
-    toc: true
-    toc-depth: 3
-    toc-location: left
-    number-sections: true
-    theme: cosmo
-    code-fold: true
-    embed-resources: true
-  pdf:
-    pdf-engine: xelatex
-    header-includes:
-      - \usepackage{soul}
-      - \sethlcolor{yellow}
-    toc: true
-    colorlinks: true
-    toc-depth: 3
-    fig-width: 8
-    fig-height: 6
-    fig-pos: 'H'
-    number-sections: true
-    keep_tex: false
-    include-in-header: 
-      - "in-header.tex"
-    fontsize: 11pt
-    mainfont: Calibri
-    template-partials: 
-      - "before-body.tex"
-  eisvogel-pdf:
-    pdf-engine: xelatex
-    header-includes:
-      - \usepackage{soul}
-      - \sethlcolor{yellow}
-    titlepage: true
-    titlepage-logo: logo_yapuka.png
-    toc: true
-    toc-title: "Sommaire"
-    number-sections: true
-    include-in-header: header.tex
-    callout-icon: false
-    callout-appearance: simple
-  docx:
-    reference-doc: custom-reference.docx
-    toc: true
-    toc-depth: 2
-    number-sections: true
-    highlight-style: github
 
 copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version document 0.1"
 
@@ -108,7 +42,7 @@ Le projet s'articule autour de quatre domaines fonctionnels :
 Le projet repose sur **trois interfaces distinctes** adaptées aux niveaux de maîtrise technique.
 
 | Profil | Besoins Spécifiques | Fonctionnalités Clés |
-| :--- | :--- | :--- |
+| :--- | :----- | :--------- |
 | **Gestionnaires / Experts** (DAVAR, DASS, OEIL) | Vision exhaustive, pilotage technique et surveillance des pressions. | Navigation hiérarchique (BVAEP  <> Captages <> PP), **analyse multicritère**, requêtes spatiales et consultation avancées.|
 | **Partenaires** (Communes, Provinces) | Diagnostic opérationnel sans compétences SIG/SQL pour orienter la gestion locale. | Tableaux de bord simplifiés, **vue comparative entre bassins**, accés aux rapports PDF automatisés et notifications en cas de changement notable.|
 | **Grand Public** (Citoyens, Associations, journaliste) | Sensibilisation et compréhension des enjeux de l'eau potable. | Infographies claires, **fiches vulgarisées**, cartographie allégée et narration pédagogique (storytelling). |

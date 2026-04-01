@@ -1,75 +1,9 @@
 ---
 title: "Projet HydroScope"
 subtitle: "Note de cadrage stratégique"
-author: 
-  name: "Hugo Roussaffa"
-  email: hugoroussaffa@gmail.com
-  Tel: +687 97.83.24
-  Position: "Expert Géomatique – Architecte data - Consultant"
-  affiliation: 
-    name: Yapuka SARL
-    address: "BP 38, 98836 Dumbéa Mairie, Nouvelle-Calédonie"
-    Ridet : 1 568 070.001
-date: today
-date-format: long
-number-sections: true
 
-logo: "ressources/OEIL_logo.png" #logo de l'oeil
-image_font_1: "ressources/MJunckerOEIL.jpg" #image de fond numéro 1
-image_font_2:  "ressources/eau-monitoring.png"  #image 2 supérieure
-logo_partenaire: "ressources/logo_yapuka.png" #logo partenaire
-filters:
-  - filters/todo.lua
-lang: fr
-format:
-  html:
-    toc: true
-    toc-depth: 3
-    toc-location: left
-    number-sections: true
-    theme: cosmo
-    code-fold: true
-    embed-resources: true
-  pdf:
-    pdf-engine: xelatex
-    header-includes:
-      - \usepackage{soul}
-      - \sethlcolor{yellow}
-    toc: true
-    colorlinks: true
-    toc-depth: 3
-    fig-width: 8
-    fig-height: 6
-    fig-pos: 'H'
-    number-sections: true
-    keep_tex: false
-    include-in-header: 
-      - "in-header.tex"
-    fontsize: 11pt
-    mainfont: Calibri
-    template-partials: 
-      - "before-body.tex"
-  eisvogel-pdf:
-    pdf-engine: xelatex
-    header-includes:
-      - \usepackage{soul}
-      - \sethlcolor{yellow}
-    titlepage: true
-    titlepage-logo: logo_yapuka.png
-    toc: true
-    toc-title: "Sommaire"
-    number-sections: true
-    include-in-header: header.tex
-    callout-icon: false
-    callout-appearance: simple
-  docx:
-    reference-doc: custom-reference.docx
-    toc: true
-    toc-depth: 2
-    number-sections: true
-    highlight-style: github
 
-copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version document 0.2"
+copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version document 0.5"
 
 resume: "Succédant au tableau de bord PressionPPE (2021), dont il capitalise les acquis techniques et le retour d'expérience, le projet Hydroscope vise la mise en place de plusieurs interfaces numériques destinées au suivi de la ressource en eau potable sur l'ensemble du territoire de la Nouvelle-Calédonie. Le projet Hydroscope se fixe pour objectif de caractériser les Bassin Versant d'Approvisionnement en Eau Potable (BVAEP), incluant les Perimetre de Protection de l'Eau (PPE) et les points de captages via leurs facteurs biogéographiques (relief, géologie, végétation, pluviométrie), les pressions subies (urbanisation, incendies, érosion...) et les réponses qui ont pu être apporté sur ces milieux. Le projet doit aussi permettre le partage de ces connaissances à différentes échelles (pays, province, commune) via des interfaces numériques adaptés à différents publics."
 ---
@@ -80,7 +14,7 @@ resume: "Succédant au tableau de bord PressionPPE (2021), dont il capitalise le
 ::::  {.callout-important title="Note de version"} 
 
 
-La version 0.4 est soumise à une seconde lecture de l'OEIL. Les modifications principales concernent la réorganisation du plan, l'intégration d'éléments issus du COPIL de démarage du 13 Mars 2026 et la reformulation de certains passages pour plus de clarté. Plusieurs parties ont été revu et approfondi pour se concentrer les raisons du projet et non sur le "comment". Une note méthodologique concernant les ateliers a toutefois été ajouté en annexe.
+La version 0.5 est soumise à une validation de l'OEIL.
 
 Historique des versions du document :
 
@@ -90,7 +24,7 @@ Historique des versions du document :
 | Version 0.2 |2026-03-10| Hugo Roussaffa |Intégration des commentaires de Fabien ALBOUY (OEIL) sur la gouvernance, le périmètre contractuel et la formulation|
 | Version 0.3 |2026-03-24| Hugo Roussaffa |Modification de l'organisation du plan, intégration d'éléments suite au COPIL de démarage (13 Mars) |
 | Version 0.4 |2026-03-29| Hugo Roussaffa | Révision profonde sur les parties enjeux et pilotage |
-
+| Version 0.5 |2026-04-02| Marjolaine Davide | Relecture, reformulation et orthographe Marjolaine |
 
 ::: {#todo-list}
 :::
