@@ -2,29 +2,32 @@
 title: "Projet HydroScope"
 subtitle: "Note de cadrage stratégique"
 
+version: "Version 0.6"
+ 
 
-copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version document 0.5"
+copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version document 0.6"
 
 resume: "Succédant au tableau de bord PressionPPE (2021), dont il capitalise les acquis techniques et le retour d'expérience, le projet Hydroscope vise la mise en place de plusieurs interfaces numériques destinées au suivi de la ressource en eau potable sur l'ensemble du territoire de la Nouvelle-Calédonie. Le projet Hydroscope se fixe pour objectif de caractériser les Bassin Versant d'Approvisionnement en Eau Potable (BVAEP), incluant les Perimetre de Protection de l'Eau (PPE) et les points de captages via leurs facteurs biogéographiques (relief, géologie, végétation, pluviométrie), les pressions subies (urbanisation, incendies, érosion...) et les réponses qui ont pu être apporté sur ces milieux. Le projet doit aussi permettre le partage de ces connaissances à différentes échelles (pays, province, commune) via des interfaces numériques adaptés à différents publics."
 ---
 
 
+{{< pagebreak >}}
+
+::::  {.callout-note title="Note de version"} 
 
 
-::::  {.callout-important title="Note de version"} 
-
-
-La version 0.5 est soumise à une validation de l'OEIL.
+La version 0.6 est validé par l'OEIL.
 
 Historique des versions du document :
 
-| Version | Date | Auteur | Description des modifications |
-| -------|-------|------- |--------------------------------|
-| Version 0.1 |2026-03-08| Hugo Roussaffa |Rédaction initiale de la note de cadrage stratégique|
-| Version 0.2 |2026-03-10| Hugo Roussaffa |Intégration des commentaires de Fabien ALBOUY (OEIL) sur la gouvernance, le périmètre contractuel et la formulation|
-| Version 0.3 |2026-03-24| Hugo Roussaffa |Modification de l'organisation du plan, intégration d'éléments suite au COPIL de démarrage (13 Mars) |
-| Version 0.4 |2026-03-29| Hugo Roussaffa | Révision profonde sur les parties enjeux et pilotage |
-| Version 0.5 |2026-04-02| Marjolaine Davide | Relecture, reformulation et orthographe Marjolaine |
+| Version | Date | Auteur(s) | Description des modifications |
+| --|--------|--------- |--------------------------------|
+| 0.1 |2026-03-08| Hugo Roussaffa |Rédaction initiale de la note de cadrage stratégique|
+| 0.2 |2026-03-10| Hugo Roussaffa |Intégration des commentaires de Fabien ALBOUY (OEIL) sur la gouvernance, le périmètre contractuel et la formulation|
+| 0.3 |2026-03-24| Hugo Roussaffa |Modification de l'organisation du plan, intégration d'éléments suite au COPIL de démarrage (13 Mars) |
+| 0.4 |2026-03-29| Hugo Roussaffa | Révision profonde sur les parties enjeux et pilotage |
+| 0.5 |2026-04-02| Marjolaine David | Relecture, reformulation et orthographe Marjolaine |
+| 0.6 |2026-04-07| Fabien Albouy, Hugo Roussaffa| Séparation de la note méthodologique des ateliers. Relecture, ajustement et reformulation. Mise en page finale. La note est considéré comme validée.|
 
 ::: {#todo-list}
 :::
@@ -36,17 +39,29 @@ Historique des versions du document :
 
 Le projet Hydroscope s'inscrit dans la continuité d'un premier outil développé en 2021 pour la DAVAR (PressionPPE). Suite au retour d'expérience de ce premier projet, l'OEIL a déposé un dossier au fonds PEP en 2023, validé avec un co-financement de l'OFB (65 %) et du fonds PEP (35 %). L'objectif est de faire évoluer cet outil pour répondre aux besoins accrus de connaissance et de gestion de la ressource en eau.
 
-La rencontre initiale du 21 juillet 2025 entre l’ŒIL et la DAVAR est suivie du démarrage d'une première phase du projet le 13 Mars 2016 (3 mois) dédiée à l'analyse des besoins métiers et à la définition des indicateurs. Cette phase (Phase A) se conclura par la livraison d'un Cahier des Charges Fonctionnel (CCF), document pivot pour lancer la réalisation technique (Phase B).
+La rencontre initiale du 21 juillet 2025 entre l’ŒIL et la DAVAR est suivie du démarrage d'une première phase du projet le 13 Mars 2026 (3 mois) dédiée à l'analyse des besoins métiers et à la définition des indicateurs. Cette phase (Phase A) se conclura par la livraison d'un Cahier des Charges Fonctionnel (CCF), document pivot pour lancer la réalisation technique (Phase B).
 
 Le projet **Hydroscope** a pour ambition de doter le territoire d'une architecture logicielle et d'une structure de données robuste, capables de transformer les données brutes en informations stratégiques, tout en garantissant l'historisation des indicateurs et l’automatisation de la veille sur les pressions environnementales telles que les incendies, l'érosion, la pollution, le développement des espèces envahissantes ou l'artificialisation des sols.
 
-L'OEIL assure la continuité intellectuelle du projet initiale (PressionPPE en 2021) et s'veillera à ce que les futurs outils — qu'il s'agisse de tableaux de bord experts, d'interfaces simplifiées pour les partenaires ou de fiches pédagogiques — deviennent des leviers d'aide à la décision pour la protection durable des bassins versants producteurs d'eau potable (BVAEP). 
+L'OEIL assure la continuité intellectuelle du projet initiale (PressionPPE en 2021) et s’assurera à ce que les futurs outils — qu'il s'agisse de tableaux de bord experts, d'interfaces simplifiées pour les partenaires ou de fiches pédagogiques — deviennent des leviers d'aide à la décision pour la protection durable des bassins versants producteurs d'eau potable (BVAEP). 
 
 La note de cadrage stratégique sert ainsi à formaliser la vision, les objectifs, la gouvernance et les principes structurants du projet Hydroscope afin de constituer un document de référence garantissant, tout au long de sa mise en œuvre, l'alignement des décisions avec les objectifs stratégiques de l'Observatoire de l'environnement en Nouvelle-Calédonie (OEIL).
 
 
 ---
 
+{{< pagebreak >}}
+
 {{< include ./cadrage_strategique.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
 {{< include ./cadrage_operationnel.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
 {{< include ./cadrage_pilotage.qmd >}}

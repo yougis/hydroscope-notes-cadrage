@@ -78,7 +78,7 @@ Toute demande d'intégration d'une nouvelle fonctionnalité ou donnée sera éva
 
 La réussite du projet repose en grande partie sur l'accès aux données fournies par les partenaires institutionnels et privés (Gouvernement, Provinces, Communes, DASS, ISEE, CDE). 
 
-Le projet doit assurer l'interopérabilité entre les référentiels des partenaires, la DAVAR, de la DITTT (BD-Hydrographie, BDTOPO), de l'ISEE (statistiques de population), des réseaux de distribution d'eau potable (SERAIL, communes, CDE) etc.
+Le projet doit s'assurer de l'interopérabilité entre les référentiels des partenaires, la DAVAR, de la DITTT (BD-Hydrographie, BDTOPO), de l'ISEE (statistiques de population), des réseaux de distribution d'eau potable (SERAIL, communes, CDE) etc. L'interopérabilité ne dépend pas seulement de la technique d'Hydroscope, mais aussi de la coopération des partenaires (DAVAR, DITTT, ISEE, CDE) et de la conformité de leurs propres référentiels. L'équipe projet va vérifier et garantir que les conditions sont réunies pour que les systèmes puissent se connecter en sécurisant les liens avec les partenaires.
 
 Voici une liste des référentiels hydrologiques produits par des acteurs en Nouvelle-Calédonie : 
 
@@ -93,18 +93,15 @@ Des référentiels non hydrologiques produits en Nouvelle-Calédonie pourront ê
 - Pluviométrie (Météo France NC);
 - Statistiques de population (ISEE);
 - Incendies (OEIL);
-- Sécheresse végétale (OEIL);
 - Plans Locaux d'Urbanisme (Provinces);
 - Base de données des ICPE (DIMENC, Provinces);
-- Base de données des espèces envahissantes (Endemia);
 - Réseau de distribution d'eau potable (SERAIL, communes, CDE);
 ainsi que des fonds de plans cartographique et d'imagerie de la DTSI;
 
 D'autres référentiels hydrologiques et non hydrologiques produit en dehors de la Nouvelle-Calédonie pourront être exploités :
 
-- Dynamic world;
-- TMF;
-- SWOT;
+- Dynamic world : artificialisation des sols ; 
+- TMF: évolution du couvert forestier; 
 
 
 La liste des ressources utiles au projet est à compléter et à valider lors des ateliers de cadrage fonctionnel.
@@ -115,3 +112,39 @@ Les partenaires et acteurs institutionnels doivent s’engager activement dans l
 
 Les ressources internes de l'OEIL, que ce soit au pôle Environnement qu'au pôle Système d’Information peuvent assurer la production du projet. Cependant, il sera nécessaire de prévoir des ressources externes pour la réalisation technique (Phase B) et probablement pour la maintenance post-livraison, notamment pour l'hébergement cloud ainsi que l'automatisation des traitements.
 
+
+--- 
+
+
+{{< pagebreak >}}
+
+# Les ateliers de collecte des besoins {#sec-ateliers}
+
+
+Les ateliers métiers du projet Hydroscope, prévus durant la Phase A (mi-avril à mi-mai 2026), constituent une étape pivot pour passer de la vision stratégique aux spécifications techniques. Ils visent à recueillir les besoins des partenaires tout en garantissant que l'outil reste aligné sur les objectifs du projet porté par l'OEIL.
+
+
+## Objectifs des ateliers
+
+Le premier objectif est de **recueillir et centraliser les besoins fonctionnels** d'une majorité d'acteurs sur le territoire pour construire une vision partagée de la ressource.
+
+Les ateliers permettront de définir :
+
+- Les indicateurs prioritaires et leur valeur métier;
+- Les profils utilisateurs et leurs besoins spécifiques (gestionnaires, partenaires, grand public);
+- Les fonctionnalités attendues pour chaque profil (navigation, visualisation cartographique, tableaux de bord, filtres, exports, ergonomie, niveau de complexité attendu);
+- Les contraintes opérationnelles et réglementaires;
+- Les seuils de vigilance et d’alerte des indicateurs;
+- Les besoins de partage et de collaboration entre acteurs;
+- les modalités d’accès aux données (API, exports, interfaces);
+- les contraintes d’usage (fréquence de mise à jour, fréquence d’utilisation de l’outil, performance, besoin d’autonomie ou d’accompagnement, accessibilité).
+
+**Animation et synthèse :**
+
+Les ateliers sont animés par l'assistance à maîtrise d'ouvrage (AMOA), qui est chargée de la rédaction des comptes rendus. Ces derniers sont ensuite **validés par l'OEIL** pour assurer la cohérence avec les objectifs globaux.
+
+**Arbitrage final :** 
+
+L'équipe projet synthétise ensuite l'ensemble des besoins recueillis pour préparer les arbitrages finaux du **COPIL**, garantissant que les choix retenus respectent le périmètre du projet.
+
+Pour légitimer ces sollicitations, l'OEIL pourrait demander une **lettre de mission officielle** auprès du Gouvernement, facilitant ainsi la mobilisation des services techniques partenaires.

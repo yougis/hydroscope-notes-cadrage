@@ -1,6 +1,3 @@
-
-
-
 # Contexte et enjeux
 
 ## Contexte externe 
@@ -74,7 +71,7 @@ Le projet Hydroscope succède au tableau de bord **PressionPPE** (2021) qui a pe
 - **Vision temporelle limitée** : l’absence d’historisation et des indicateurs non actualisés ne permettent pas de suivre les tendances et l’évolution des menaces dans le temps ni d’identifier de changements entre 2 dates.
 - **Déficit d'usage** : le tableau de bord a été développé spécifiquement pour des spécialistes et l'ergonomie complexe qui l'accompagne ne convient pas aux profils des décideurs et du grand public.
 
-D'autre part, l'application ArcGIS Pro développée en Province Nord pour le suivi de la ressource en eau potable, qui se limite à ce territoire et ne répond donc pas aux besoins d’un Système d’Information Environnemental global pour l’ensemble de la Nouvelle-Calédonie. Cette application présente néanmoins l'avantage de permettre des calculs d'indicateurs multicritères pondérés, une fonctionnalité qui devra être prise en compte dans la conception de la future plateforme Hydroscope. 
+Une autre application développée pour la province Nord avec ArcGIS Pro a été mise en place pour mieux gérer la ressource en eau potable. Elle se limite au territoire de la province Nord et uniquement pour le besoin de ses propres services. Elle ne couvre donc pas la nécessité ded’un Système d’Information Environnemental global pour l’ensemble de la Nouvelle-Calédonie. Cette application présente néanmoins l’avantage de permettre des calculs d’indicateurs multicritères pondérés, une fonctionnalité qui devra être prise en compte dans la conception de la future plateforme Hydroscope. 
 
 Il s’agit d’une application uniquement pour les des agents aguerris au SIG et qui ne permet pas de partage d’information, ainsi que :
 
@@ -90,7 +87,8 @@ Il s’agit d’une application uniquement pour les des agents aguerris au SIG e
 
 Le projet est porté par l'OEIL, avec le souhait de collaborer avec de nombreux partenaires, tels que :
 
-**Les institutions** DAVAR, DASS, DIMENC, Provinces, Communes, **Syndicats de gestion de l’eau** (AQUA Nord, SIVOM VKP, CDE), **bureaux d’études** (SEREG, GEOS4D, GeoImpact, Bioéco, CAPSE) et **associations** (WWF, comité de population locale).
+
+**Les institutions** (DAVAR, DASS, DIMENC, Provinces, Communes, **les syndicats** SIVOM VKP, SVIM), **les concessionnaires** de l’eau (AQUA Nord,  CDE), les **bureaux d’études** (SEREG, GEOS4D, GeoImpact, Bioéco, CAPSE) et **les associations** (WWF, comité de population locale).
 
 Cette liste de partenaires est priorisée par l’équipe projet puis sera validée en COPRO.
 
@@ -123,7 +121,7 @@ La modélisation structure les relations entre ces trois niveaux géographiques 
 #### Adhésion des utilisateurs et pertinence des indicateurs
 
 
-Un système d'information ne produit de valeur que si ses indicateurs correspondent aux besoins réels de ceux qui les utilisent, et si l'outil est suffisamment accessible pour s'intégrer dans les pratiques de travail. C'est le risque principal du projet : concevoir un système techniquement solide mais déconnecté des usages, ou trop complexe pour être adopté durablement.
+Un système d'information ne produit de valeur que si ses indicateurs correspondent aux besoins réels de ceux qui les utilisent, et si l'outil est suffisamment accessible pour s'intégrer dans les pratiques de travail. C'est le risque principal du projet: concevoir un système techniquement solide mais déconnecté des usages, ou trop complexe pour être adopté durablement.
 
 Cette exigence d'accessibilité doit être intégrée dès la conception — dans les choix d'ergonomie, la documentation contextuelle et la capacité de l'outil à rendre les utilisateurs autonomes sans formation lourde.
 

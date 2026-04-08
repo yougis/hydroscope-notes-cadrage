@@ -1,0 +1,227 @@
+---
+title: "Projet HydroScope"
+subtitle: "Note métodologique des ateliers"
+
+version: "Version 0.1"
+
+copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version document 0.1"
+
+---
+
+{{< pagebreak >}}
+
+
+La note métodologique des ateliers avec les partenaires a pour objectif de formaliser la stratégie, les critères de sélection et le déroulement des ateliers qui seront organisés dans le cadre du projet Hydroscope. Ces ateliers permettrons d'identifier les besoins métiers, les contraintes techniques et les attentes des différents acteurs, afin qu'ils soient pris en compte pour la phase de specifications fonctionnelles détaillées qui seront formalisées dans le cahier des charges fonctionnel (CCF).
+
+## Priorisation des partenaires pour les ateliers {#sec-priorisation-partenaire}
+
+### Stratégie et méthodologie de priorisation
+
+La réussite du cadrage fonctionnel repose sur une co-construction efficace avec les acteurs du territoire, tout en respectant un calendrier serré de 3 mois. Compte tenu de la multiplicité des parties prenantes, le COPIL a retenu une préférence pour des entretiens/ateliers **bilatéraux**. Dans certains cas des entretiens pourront être réalisé en groupe restreint.
+
+L'objectif est de limiter les consultations à une cible de **6 à 10 ateliers bilatéraux approfondis** (8 ateliers retenus en cible principale). Cette approche permet de stabiliser le modèle de données métier et les indicateurs avant la rédaction du Cahier des Charges Fonctionnel (CCF). La sélection s'appuie sur une grille d'évaluation multicritère pour garantir que les "piliers" du projet (détenteurs de données maîtres et décideurs réglementaires) soient consultés en priorité.
+
+### Définition des critères de sélection
+
+Pour prioriser les acteurs à consulter lors des ateliers de co‑construction du projet Hydroscope, trois critères de sélection ont été retenus. Chaque valeur (de 1 à 3) reflète le degré d'importance de l'acteur par rapport à la réussite stratégique et technique du système.
+
+####  Mission critique
+Ce critère évalue l'implication réglementaire et institutionnelle de l'acteur dans la gestion de l'eau en Nouvelle-Calédonie.
+
+- **Valeur 3 (indispensable) :** L'acteur exerce une mission de protection de la ressource ou il est le garant des référentiels de données maîtres indispensables au projet (ex: **DAVAR** pour les BVAEP/PPE).
+- **Valeur 2 (thématique/moyenne) :** L'acteur dispose d'une expertise critique sur un domaine de pression ou un enjeu spécifique, mais ne gère pas l'ensemble du système de la ressource (ex: **DIMENC** pour les mines/ICPE,  **DASS** pour la potabilité).
+- **Valeur 1 (usage/indirect) :** L'acteur n'a pas de mission régalienne directe sur la ressource ou intervient principalement comme utilisateur final ou prestataire de réalisation.
+
+#### Représentativité territoriale
+Ce critère vise à assurer que l'outil est pertinent pour tous les contextes biogéographiques et administratifs du territoire.
+
+- **Valeur 3 (territoriale/forte) :** L'acteur couvre l'intégralité du territoire ou représente une instance de coordination multi-zones (ex: l'**OEIL** au niveau Pays, ou les **Provinces** via le groupe OS1).
+- **Valeur 2 (ciblée/moyenne) :** L'acteur représente un contexte géographique type et contrasté, essentiel pour valider les modèles (ex: **Thio** pour le rural/minier, **Mont-Dore** pour l'urbain/Sud, ou **SIVOM VKP** pour le développement agricole du Nord).
+- **Valeur 1 (faible) :** L'acteur n'a pas d'ancrage géographique spécifique ou sa mission est déconnectée de la diversité territoriale (ex: bureaux d'études ou acteurs privés isolés).
+
+#### Diversité des profils
+Ce critère assure un équilibre entre ceux qui produisent/analysent la donnée et ceux qui prennent des décisions d'investissement à partir d'elle.
+
+- **Valeur 3 (mixte/forte) :** L'acteur mobilise à la fois des profils de décideurs stratégiques (arbitrage des investissements) et des experts techniques (SIG, SQL, modélisation). C'est le cas des partenaires du **COPIL**.
+- **Valeur 2 (technique ou opérationnel) :** L'acteur apporte principalement une vision métier technique (experts de la donnée) ou une vision de gestionnaire de terrain (diagnostic opérationnel).
+- **Valeur 1 (public/usages) :** L'acteur représente uniquement le profil utilisateur final pour la vulgarisation ou la sensibilisation (ex: **WWF** ou comités locaux pour l'interface "Grand Public").
+
+
+:::: {.landscape}
+
+### Tableau final des scores et priorisation
+
+
+| Partenaire | Mission critique | Représentativité | Diversité Profils | Score Global | Justification & Rôle |
+| :------ | :---: | :---: | :---: | :---: | :---------------------------- |
+| **OEIL** | 3 | 3 | 3 | **9** | Porteur souverain du projet, MOA et arbitre final. |
+| **DAVAR (SDE)** | 3 | 3 | 3 | **9** | Instructeur unique PPE et garant du référentiel BVAEP. |
+| **Provinces (via OS1)** | 3 | 3 | 2 | **8** | Avis obligatoire sur PPE et gestion décentralisée. |
+| **DASS** | 2 | 2 | 2 | **7** | Responsable sanitaire unique via la base potabilité ATYA. |
+| **Communes** | 2 | 3 | 2 | **6** | Gestionnaire local direct ; représente le rural et le minier. |
+| **DIMENC** | 3 | 2 | 2 | **7** | Indispensable pour intégrer les pressions minières et ICPE. |
+| **SIVOM VKP** | 2 | 2 | 2 | **6** | Modèle de gestion mutualisée pour la zone Nord/Ouest. |
+| **CDE / Aquanord** | 2 | 2 | 2 | **6** | Expertise requise pour valider les données d'enjeux (pop. desservie). |
+| **WWF / Comités locaux** | 1 | 3 | 1 | **5** | Garants de l'intelligibilité de l'interface "Grand Public". |
+| **Bureaux d'études** | 1 | 1 | 2 | **4** | Mis en retrait des ateliers bilatéraux ; consultés via le COPRO. |
+
+::::
+
+**Conclusion de la priorisation :**
+
+Les ateliers seront concentrés en priorité sur les acteurs ayant eu un score de **5 à 9**
+**Les bureaux d'études (GEOS4D, GeoImpact, CAPSE / BIOECO)**, bien que techniquement compétents, ne seront pas conviés, mais ils pourront toujours être consultés via le **COPRO** ou lors des phases de test pour ne pas saturer le calendrier.
+
+
+#### Liste priorisée des partenaires (cible : 8 ateliers)
+
+#####  Groupe 1 (3 ateliers)
+
+- **DAVAR (Service de l'Eau) :** En tant qu'instructeur unique des dossiers de PPE et fournisseur des référentiels "Bassin AEP", leur participation est le socle du projet.
+- **DASS (Sanitaire et social) :** Responsable de la qualité sanitaire. Leur besoin est centré sur le suivi de la potabilité (base ATYA) et la protection des captages.
+- **DIMENC (Mines & industries) :** Essentielle pour intégrer les indicateurs de pressions minières et industrielles (ICPE), enjeux majeurs pour l'intégrité de la ressource.
+
+
+###### Ateliers spécifiques supplémentaires avec la DAVAR
+
+Deux sessions de travail dédiées à la DAVAR sont prévues pour sécuriser le socle du projet.
+
+- **REX sur l'outil Pression PPE (1h) :** 
+
+Cet atelier consiste en une **revue critique des indicateurs actuels** afin d'identifier ceux n'ayant plus d'intérêt et de tirer les leçons des limites du système précédent (dépendance technique, absence d'historisation). Il s'agit d'évaluer les forces et faiblesses du tableau de bord existant pour orienter les nouvelles fonctionnalités d'Hydroscope.
+
+Cette réunion d'échange sera le moment de présenter un retour d'expériemce sur le tableau de bord après 5 ans de mise en service.
+Une part importante des échanges vise à laisser l'utilisateur exprimer librement ses retours — qu'ils soient positifs ou négatifs — sur l'outil.
+
+Toutefois certaines questions clés devront être aborder si cela n'a pas été fait spontanément : 
+
+- Quels indicateurs sont obsolètes ou peu pertinents ? 
+- Quelles données sont sous-utilisées ? 
+- Quelles fonctionnalités manquent pour une prise de décision efficace ?
+- Quelles sont les erreurs de cet outil à ne pas reproduire ? 
+
+
+- **Création des fiches indicateurs Hydroscope (1h30) :** 
+
+Ce travail vise à définir précisément les **métriques, les types de périmètres de calcul et les critères de pondération** des enjeux et des pressions.
+
+
+##### Groupe 2 (3 ateliers)
+
+*L'objectif est de couvrir les spécificités géographiques sans multiplier les réunions.*
+
+- **Les Provinces (via le groupe OS1) :** Pour optimiser le temps, un atelier unique avec le **groupe OS1** permet de toucher les trois provinces. Cela garantit une vision macro sur tout le territoire.
+
+- **Communes de la Côte Est et Sud (ex: Thio / Mont-Dore) :** **Mont-Dore** représente les enjeux de pression urbaine et de forte population, tandis que **Thio** illustre les problématiques de pressions minières et de communes rurales.
+
+- **SVM & SIVOM VKP (Zone Nord/Ouest) :** Ce syndicat est le relais idéal pour le Nord. Il permet de traiter les enjeux d'un territoire en plein développement agricole et industriel avec une structure de gestion mutualisée.
+
+##### Groupe 3 (2 ateliers)
+
+- **La Calédonienne des Eaux (CDE) :** 
+
+Opérateur privé majeur. Son expertise est requise pour valider les indicateurs de population desservie et de volumes réels de distribution.
+
+- **WWF / Comités de population locale :** 
+
+Ces acteurs sont prioritaires pour tester la **représentativité sociale**. Ils présenteront les besoins pour une interface "Grand Public" pour s'assurer que les enjeux soient compris par les citoyens.
+
+#### Synthèse des profils d'ateliers
+
+Voici une proposition de tableau de synthèse des ateliers, intégrant les priorités territoriales, les objectifs spécifiques de la DAVAR et la méthodologie de déroulement à valider en COPRO.
+
+#### Tableau de synthèse des ateliers
+Voici le tableau de synthèse des ateliers mis à jour, intégrant le calendrier précautionneux établi pour sécuriser le socle de données et les jalons financiers du projet **Hydroscope** entre fin avril et mi-mai 2026.
+
+| Priorité / Acteur | Type d'atelier | Objectifs spécifiques | Interface cible | Date prévisionnelle approximative|
+| :--- | :--- | :-------- | :--- | :--- |
+| **1. DAVAR (SDE)** | **Spécifique (REX)** | Effectuer la revue critique de **Pression PPE** : identifier les indicateurs sans intérêt, analyser les forces/faiblesses de l'outil actuel. | **Expert** | **21 avril 2026** |
+| **1. DAVAR (SDE)** | **Spécifique (Technique)** | Co-construire les **fiches indicateurs Hydroscope** (métriques, périmètres, pondérations). *Livrable critique pour le jalon PEP 30%*. | **Expert** | **23 avril 2026** |
+| **1. DASS / DIMENC** | Institutionnel | Identifier les besoins en suivi de potabilité (ATYA) et intégrer les pressions industrielles/minières (ICPE). | **Expert** | **24 avril 2026** |
+| **2. Provinces (via OS1)** | Territorial | Recueillir les besoins de gestion à l'échelle provinciale et assurer la **représentativité territoriale** via le groupe de travail existant. | **Partenaire** | **28 avril 2026** |
+| **2. Communes & SIVOM/SVM** (ex: Mont-Dore, Thio, VKP) | Territorial / Gestion | Définir les besoins opérationnels locaux (diagnostic par commune) et évaluer l'ergonomie adaptée pour les non-spécialistes. | **Partenaire** | **30 avril au 05 mai 2026** |
+| **3. CDE**  | Opérationnel | Valider la faisabilité des indicateurs de distribution (volumes, population desservie) et le réalisme des périmètres (PPE). | **Expert / Partenaire** | **07 mai 2026** |
+| **4. WWF / Comités locaux** | Usage & Public | Définir les formats de **vulgarisation** (fiches, application mobile) et valider l'intelligibilité des messages pour les usagers. | **Grand Public** | **12 mai 2026** |
+
+
+
+#### Validation et consolidation
+
+À l'issue de ces échanges, l'équipe projet réalise une **synthèse des besoins**. Le **COPRO** vérifie ensuite la cohérence de ces demandes avec le périmètre stratégique, tandis que le **COPIL** assure l'arbitrage final des fonctionnalités qui seront intégrées dans le Cahier des Charges Fonctionnel (CCF).
+
+
+
+
+## Déroulement des ateliers avec les partenaires
+
+Avant de commencer les ateliers il serait judicieux de prévoir une réunion d'information préalable pour présenter le projet, son périmètre et les objectifs des ateliers afin d'une part de cadrer les attentes et d'éviter les frustrations et deuxièmement de mutualiser ce temps d'information. Cette réunion doit inclure le plus de partenaires ciblés possible pour maximiser la diffusion de l'information et la mobilisation des acteurs. Cette première réunion d'information peut être organisée en visioconférence sur une durée de moins d'une heure. Ce moment offre aussi l'opportunité de présenter aux participants la méthodologie de déroulement des ateliers et de valider un calendrier. Nous pourrons ensuite communiquer du matériel aux participants en amont de leurs ateliers, comme la liste des questions qui serviront de base aux échanges, la liste des indicateurs actuels, des brouillons de maquettes d'interface etc.
+
+
+**Déroulé type d'un atelier (2h30) :**
+
+- **Démarrage (5 min)**
+- **Cadrage (15 min) :** Rappel rapide du périmètre projet et spécifiquement de l'un des 3 outils profil traité et des objectifs de l'atelier.
+- **Besoins métiers & indicateurs (30 min) :** Identification des spécificités métiers du profil du partenaire, des données critiques et de leur valeur métier.
+- **Seuils & alertes (30 min) :** Définition des seuils de vigilance.
+- **Pause (10 min)**
+- **Interfaces & usages (45 min) :** Navigation, filtres et ergonomie. Partage de l'information et collaboration entre acteurs. Modalités d'accès aux données.
+- **Conclusion (5 min)**
+
+## Liste de questions à aborder
+
+### Indicateurs prioritaires et valeur métier
+
+- Parmi les pressions identifiées (incendies, érosion, urbanisation, ICPE), quelles sont les trois qui impactent le plus vos décisions de gestion au quotidien ?
+- Comment pondérez-vous l'importance d'un enjeu (ex: population desservie) par rapport à une pression (ex: surface brûlée) pour définir une priorité d'action ?
+- Quelle est la profondeur historique nécessaire (ex: incendies depuis 2012) pour que vos analyses de tendances soient statistiquement valables ?
+- Quels nouveaux indicateurs thématiques (ex: proximité de la voirie, espèces envahissantes) apporteraient une réelle plus-value par rapport à l'ancien outil ?
+
+### Profils utilisateurs et besoins spécifiques
+
+- Quel est l'objectif principal de votre service en utilisant l'outil : pilotage technique, diagnostic opérationnel ou sensibilisation ?
+- Quel est le niveau d'expertise technique (SIG, SQL) des agents qui manipuleront l'outil au quotidien ?
+- Quelles décisions concrètes espérez-vous prendre grâce aux informations délivrées par votre interface spécifique ?
+
+### Fonctionnalités attendues par profil
+Navigation multi-échelles, tableaux de bord et ergonomie.
+
+- La navigation hiérarchique (BVAEP↔Captages↔PPE) répond-elle à votre logique d'investigation sur le terrain ?
+- Pour votre profil, privilégiez-vous une vue cartographique interactive ou un tableau de bord riche en graphiques et indicateurs chiffrés ?
+- Quels types de filtres sont indispensables pour vos recherches (par commune, par statut réglementaire, par niveau de risque) ?
+- Quels éléments critiques doivent impérativement figurer dans les rapports PDF automatisés pour qu'ils soient utilisables en réunion ou conseil municipal ?
+
+### Contraintes opérationnelles et réglementaires
+Conformité à la Loi du pays de 2025 et confidentialité.
+
+- Comment l'outil peut-il vous aider à respecter le délai réglementaire d'un an pour la régularisation des dossiers de PPE ?
+- Existe-t-il des contraintes de confidentialité spécifiques sur vos données (au-delà de l'exclusion déjà actée des valeurs brutes de mesures physico-chimiques) ?
+- Quels référentiels réglementaires (PUD, schémas directeurs) doivent être consultables en superposition pour valider vos diagnostics ?
+
+### Seuils de vigilance et système d'alerte
+Détection automatique des changements environnementaux.
+
+- À partir de quel seuil précis un changement devient-elle une "alerte" pour votre service (ex: % de surface défrichée sur un bassin) ?
+- Par quel canal souhaitez-vous être informé d'un changement majeur : notification visuelle dans l'outil, email automatisé ou bandeau contextuel ?
+
+
+### Partage et collaboration entre acteurs
+Favoriser un diagnostic partagé et une vision commune.
+
+- Quelles informations détenues par d'autres partenaires vous manquent aujourd'hui et pour quelle raison ?
+- Serait-il utile de pouvoir enregistrer et partager un "contexte d'analyse" (zoom et filtres spécifiques) sous forme de lien hypertexte avec un collègue ?
+- Avez-vous besoin de fonctionnalités collaboratives (commentaires, notes sur un bassin versant) partagées entre institutions ?
+
+### Modalités d'accès aux données
+API, formats d'exports et interopérabilité.
+
+- Avez-vous besoin d'intégrer les indicateurs produits par Hydroscope directement dans vos propres outils métiers ou SIG internes via API ?
+- Quels formats d'exports sont les plus critiques pour vos analyses secondaires (CSV, Excel, GeoJSON, PDF, geopackage, ...) ?
+- L'accès direct aux bases de données spatiales (PostGIS) est-il requis pour vos experts ou l'interface web suffit-elle ?
+
+### Contraintes d'usage et performance
+Fréquence de mise à jour, autonomie et accessibilité.
+
+- Quel délai maximal de rafraîchissement des données est acceptable pour votre veille environnementale (temps réel, hebdomadaire, mensuel) ?
+- L'outil sera-t-il utilisé principalement au bureau avec une connexion stable ou sur le terrain (tablette/mobile) en zone de réseau limité ?
+- Quel niveau d'autonomie visez-vous pour l'administration des données et quel volume de formation initiale estimez-vous nécessaire ?
+- Quelles sont vos exigences en matière de performance de navigation (temps de chargement des cartes et des indicateurs complexes) ?

@@ -2,24 +2,27 @@
 title: "Note de cadrage fonctionnelle du projet HydroScope"
 subtitle: "Interface Gestionnaires / Experts"
 
+version: "Version 0.3"
 
-copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version document 0.1"
+copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version document 0.3"
 
 resume: ""
 ---
 
+{{< pagebreak >}}
+
+::::  {.callout-note title="Note de version"} 
 
 
+Cette version est encore un document de travail présenté aux membres du COPRO pour établir le premier partage de vision du périmètre fonctionnel de l'interface **Gestionnaires / Experts**. Les items `@todo` correspondent à des points à valider ou à enrichir pour des sessions de travail prévues du fin Avril / début Mai 2026.
 
-::::  {.callout-important title="Note de version"} 
-
-
-La version 0.1 est un document de travail déstiné à servir de base de discussion pour les ateliers de cadrage fonctionnel avec les gestionnaires. Son contenu est établi à partir des domaines fonctionnels identifiés et de propositions issu du retour d'experience du consultant AMOA. Les items `@todo` correspondent à des points à valider ou enrichir lors des sessions de travail prévues du fin avril 2026.
 Historique des versions du document :
 
 | Version | Date | Auteur | Description des modifications |
 | -------|-------|------- |--------------------------------|
 | Version 0.1 |2026-04-01| Hugo Roussaffa |Rédaction initiale de la note de cadrage fonctionnelle pour les gestionnaires |
+| Version 0.2 |2026-04-06| Hugo Roussaffa | Adaptations suites aux échanges avec Marjolaine, correction orthographe|
+| Version 0.3 |2026-04-06| Fabien Albouy | Reflexion sur le périmètre fonctionnel. AJustement de l'organisation des parties |
 
 
 
@@ -28,11 +31,27 @@ Historique des versions du document :
 
 ::::
 
+
+{{< pagebreak >}}
+
+Objectifs de la note de cadrage fonctionnelle :
+
+- Définir le périmètre fonctionnel de l'interface **Gestionnaires / Experts** ;
+- Apporter une vision commune et partagée des fonctionnalités de l'interface **Gestionnaires / Experts** à l'ensemble des acteurs impliqués (équipe projet, membres du COPRO, COPIL, partenaires) ;
+- Apporter des propositions de fonctionnalités et d'organisation de l'interface ;
+- Établir la base des discussions pour les ateliers d'étude des besoins et des spécifications détaillés avec les gestionnaires et experts ;
+- Identifier les points à valider ou à enrichir pour orienter les discussions sur l'outil au cours des ateliers de travail prévus du fin Avril / début Mai 2026.
+
+Le document sera validé par les membres du COPRO avant le démarrage des ateliers.
+
+
+
 ## Rappel de contexte et positionnement de l'interface
 
 Le projet HydroScope vise à doter la Nouvelle-Calédonie d'interfaces de données sur la ressource en eau potable. Il succède au tableau de bord PressionPPE (2021), dont les limites — rigidité technique, absence d'analyse historisée, ergonomie inadaptée aux non-spécialistes — ont justifié ce nouveau développement.
 
-Le projet s'articule autour de quatre domaines fonctionnels :
+Le projet s'articule autour de quatre domaines fonctionnels nommés ainsi :
+
 - Connaissance et caractérisation du territoire
 - Diagnostic et analyse multicritère
 - Veille et détection automatique des changements
@@ -41,30 +60,30 @@ Le projet s'articule autour de quatre domaines fonctionnels :
 
 Le projet repose sur **trois interfaces distinctes** adaptées aux niveaux de maîtrise technique.
 
-| Profil | Besoins Spécifiques | Fonctionnalités Clés |
+| Profil | Besoins spécifiques | Fonctionnalités clés |
 | :--- | :----- | :--------- |
 | **Gestionnaires / Experts** (DAVAR, DASS, OEIL) | Vision exhaustive, pilotage technique et surveillance des pressions. | Navigation hiérarchique (BVAEP  <> Captages <> PP), **analyse multicritère**, requêtes spatiales et consultation avancées.|
 | **Partenaires** (Communes, Provinces) | Diagnostic opérationnel sans compétences SIG/SQL pour orienter la gestion locale. | Tableaux de bord simplifiés, **vue comparative entre bassins**, accés aux rapports PDF automatisés et notifications en cas de changement notable.|
-| **Grand Public** (Citoyens, Associations, journaliste) | Sensibilisation et compréhension des enjeux de l'eau potable. | Infographies claires, **fiches vulgarisées**, cartographie allégée et narration pédagogique (storytelling). |
+| **Grand public** (citoyens, associations, journaliste) | Sensibilisation et compréhension des enjeux de l'eau potable. | Infographies claires, **fiches vulgarisées**, cartographie allégée et narration pédagogique. |
 
 
-L'interface **Gestionnaires / Experts** est l'interface qui sera la plus complexe. C'est depuis cette interface que sont consultés les indicateurs dans leur pleine granularité, réalisées les analyses multicritères avancées et produits les rapports destinés aux instances de décision. Les deux autres interfaces (Partenaire et Grand Public) sont des **vues dérivées et simplifiées** de ce que l'interface Expert expose. Le monitoring technique de l'outil (chaînes de traitement, cycles de mise à jour, administration des référentiels) est assuré en dehors de l'interface, via des outils Python ou SQL dédiés à l'équipe SI de l'OEIL.
+L'interface **Gestionnaires / Experts** est l'interface qui sera la plus complexe. C'est depuis cette interface que sont consultés les indicateurs dans leur pleine granularité, réalisées les analyses multicritères avancées et produits les rapports destinés aux instances de décision. Les deux autres interfaces (**Partenaire** et **Grand public**) sont des **vues dérivées et simplifiées** de ce que l'interface **Gestionnaires / Experts** expose. Le monitoring technique de l'outil (chaînes de traitement, cycles de mise à jour, administration des référentiels) est assuré en dehors de l'interface, via des outils Python ou SQL dédiés à l'équipe SI de l'OEIL.
 
 
 ## Profil utilisateur ciblé
 
-**Profil Expert métier** — agents de la DAVAR (Service de l'Eau), de la DASS, de la DIMENC, et chargés d'études de l'OEIL. Ces utilisateurs ont une maîtrise avancée des données environnementales et hydrologiques. Ils savent lire une carte SIG, interpréter des indicateurs multicritères et travailler avec des référentiels spatiaux. Leur usage de l'outil est régulier, orienté diagnostic territorial et production de rapports pour appuyer des études, des décisions réglementaires ou des investissements. Ils n'ont pas nécessairement de compétences SQL ou de développement.
+**Profil expert métier** — agents de la DAVAR (Service de l'Eau), de la DASS, de la DIMENC et chargés d'études de l'OEIL. Ces utilisateurs ont une maîtrise avancée des données environnementales et hydrologiques. Ils savent lire une carte, utiliser un SIG, interpréter des indicateurs multicritères et travailler avec des référentiels spatiaux. Leur usage de l'outil est régulier, orienté diagnostic territorial et production de rapports pour appuyer des études, des décisions réglementaires ou des investissements. Ils n'ont pas nécessairement de compétences SQL ou de développement.
 
-@todo [priority=high, section=profils] : Confirmer avec la DAVAR et la DASS le niveau réel de compétences SIG de leurs agents amenés à utiliser l'outil au quotidien, afin d'affiner la frontière entre profil Expert et profil Partenaire.
+@todo [priority=high, section=profils] : Confirmer avec la DAVAR et la DASS le niveau réel de compétences SIG de leurs agents amenés à utiliser l'outil au quotidien, afin d'affiner la frontière entre profil **Gestionnaire / Expert** et profil **Partenaire**.
 
 
 ## Objectifs et décisions que l'interface doit permettre
 
-Afin de définir précisément les objectifs de l'interface Expert, nous proposons des questions opérationnelles clés auxquelles elle doit permettre de répondre. Ces questions sont issues des besoins imaginés et devrons être ajusté par les gestionnaires lors des ateliers de cadrage et des retours d'expérience sur PressionPPE. 
+Afin de définir précisément les objectifs de l'interface **Gestionnaire / Expert**, nous proposons des questions opérationnelles clés auxquelles elle doit permettre de répondre. Ces questions sont issues des besoins imaginés et serons ajusté par les gestionnaires lors des ateliers de cadrage et des retours d'expérience sur PressionPPE. 
 
 - Quels bassins versants d'approvisionnement en eau potable (BVAEP) sont aujourd'hui sous pression forte, selon quels critères et depuis quand ?
 - Un captage donné a-t-il subi une dégradation notable de son environnement depuis l'année dernière ?
-- Quels PPE ne sont pas encore régularisés au regard du délai d'un an imposé par la loi du pays de juillet 2025 ?
+- Quels périmètres de protection ne sont pas encore régularisés au regard du délai d'un an imposé par la loi du pays de juillet 2025 ?
 - Quelle est la tendance d'évolution de l'indicateur de pression incendie sur les 5 ou 10 dernières années ?
 - Une alerte de changement environnemental détectée automatiquement est-elle fondée ? Quelle est sa gravité ?
 
@@ -72,9 +91,9 @@ Afin de définir précisément les objectifs de l'interface Expert, nous proposo
 
 ### Connaissance et caractérisation du territoire
 
-L'interface **Gestionnaires / Experts** donne accès à certaines **couches de données de référence** mobilisées par le projet, à savoir les BVAEP, les périmètres de protection (immédiate, rapprochée, éloignée), les captages AEP, la BD-Hydrographie de la DITTT, les Hydro-Éco Régions, les données d'incendies et de sécheresse végétale (OEIL), les PLU (Provinces) et la base ICPE (DIMENC).
+L'interface **Gestionnaires / Experts** donne accès à certaines **couches de données de référence** mobilisées par le projet, à savoir les BVAEP, les périmètres de protection (immédiate, rapprochée, éloignée), les captages AEP, la BD-Hydrographie de la DITTT, les Hydro-Éco Régions, les données d'incendies (OEIL), les PLU (Provinces) et la base ICPE (DIMENC).
 
-La navigation dans les données est basée sur le modèle **hiérarchique** et doit permettre de passer entre trois niveaux géographiques : le bassin versant (BVAEP), le périmètre de protection (PPE) et le captage. Le BVAEP est l'unité de référence principale du projet.
+La navigation dans les données est basée sur le modèle **hiérarchique** et doit permettre de passer entre trois niveaux géographiques : le bassin versant (BVAEP), le périmètre de protection (PP) et le captage. Le BVAEP est l'unité de gestion de référence principale du projet.
 
 L'interface doit permettre la superposition de couches cartographiques multiples, avec contrôle de l'opacité, activation/désactivation par thème et légendes.
 
@@ -82,41 +101,108 @@ L'interface doit permettre la superposition de couches cartographiques multiples
 
 @todo [priority=medium, section=données] : Confirmer le statut des référentiels externes (Dynamic World, TMF, SWOT) et leurs conditions d'accès.
 
-@todo [priority=medium, section=données] : Confirmer l'accès et l'intêret de l'usage de référentiels interne de l'OEIL (sécheresse végétale).
-
 
 ### Diagnostic et analyse multicritère
 
-Le système doit permettre le **calcul d'indicateurs multicritères pondérés** à l'échelle du BVAEP, du PPE et du captage ainsi que sur une grille régulière intrinsèque aux bassins versants. Cette fonctionnalité est identifiée comme une priorité héritée de l'application ArcGIS Pro développée en Province Nord, dont elle doit reprendre le principe tout en l'étendant à l'ensemble du territoire.
+#### Le principe de l'analyse multicritère 
 
-Chaque indicateur est défini par une fiche indicateur (à construire lors des ateliers DAVAR) précisant : la métrique de calcul, le périmètre de calcul, le coefficient de pondération, la source de données, la fréquence de mise à jour et le seuil de vigilance associé.
 
-L'interface **Gestionnaires / Experts** doit permettre à l'expert de **modifier les pondérations** des indicateurs pour simuler différents scénarios d'analyse, sans que cela n'affecte les paramètres par défaut du système.
+Le système doit permettre le **calcul d'indicateurs multicritères pondérés** à l'échelle des unités de gestion ^[ce sont les périmètres géographiques tels que les Bassins Versant Alimentation en Eau Potable (BVAEP), les périmètres de protection (PP) et captage AEP, ainsi que les mailles d'une grille régulière H3]. Cette fonctionnalité est identifiée comme une priorité héritée de l'application ArcGIS Pro développée en Province Nord, dont elle doit reprendre le principe tout en l'étendant à l'ensemble du territoire Calédonien.
 
-L'**historisation des indicateurs**, fonctionnalité absente de PressionPPE doit permetre de consulter la valeur d'un indicateur à n'importe quelle date passée depuis la mise en service du système, et comparer deux dates pour identifier une évolution. C'est à dire que la valeur d'un indicateur à une date donnée doit être calculable même si les données sources ont été mises à jour depuis, en se basant sur les données historiques archivées.
+
+L'approche multicritère permet de croiser différentes familles de données pour obtenir un état global de fonctionnalité et d'intégrité d'un bassin versant ou d'un captage. Elle ne se contente pas de lister les problèmes, mais les combine :
+
+- L'état biogéographique : Relief, géologie, pluviométrie, couverture végétale ....
+- Les pressions environnementales et humaines : Incendies, érosion, urbanisation, défrichages, installations classées (ICPE),
+- Les enjeux humains et techniques : Population desservie, volumes de prélèvement autorisés, infrastructures.
+
+Pour définir les spécifications fonctionnelles finales du système d'analyse multicritère d'**Hydroscope**, la question de la pondération pourra être abordée aux cours des ateliers sous plusieurs angles complémentaires. 
+La finalité est de permettre un classement des unités de gestion selon une **priorité d'intervention**.
+
+Voici plusieurs approches pour structurer la réflexion sur la pondération lors des ateliers :
+
+##### L’approche par "familles d’indicateurs"
+
+Au lieu de pondérer chaque variable individuellement (ce qui peut devenir complexe et instable), nous suggèrons de regrouper les données par grandes thématiques.
+
+- **La méthode :** On attribue un poids global à quatre grandes familles : **état biogéographique** (pente, pluviométrie, géologie), **pressions environnementales** (incendies, érosion ...), **pressions humaines** (urbanisation, ICPE ...) et **enjeux** (population desservie, volumes).
+- **Question pour les spécifications :** "Quel poids relatif (en %) accorderiez-vous à la préservation de l'état naturel du bassin (intégrité) par rapport à l'importance socio-économique de l'ouvrage (enjeu humain) ?" 
+
+@todo [priority=high, section=pondération] : la question de la pondération doit être reformulé pour clarifier l'idée.
+
+##### L’approche « risque x vulnérabilité » ou "jauge" (matrice de décision)
+
+Inspiré de l'analyse multicritère déjà expérimentée par la Province Nord, ce modèle croise l'intensité d'une menace avec la sensibilité du captage.
+Plutôt que de traiter toutes les données sur un pied d'égalité, on attribue un « poids » (une importance relative) à chaque critère ou famille d'indicateurs.
+
+**La pondération** : on peut décider par exemple que le critère « population desservie » pèse plus lourd dans le calcul final qu'un indicateur d'érosion pour prioriser les investissements là où l'impact humain est le plus fort,
+
+**Les seuils de vigilance** : la méthodologie prévoit de définir collectivement des seuils qui, une fois franchis, font basculer l'indicateur dans une zone d'alerte (le visuel de la "jauge"),
+
+**L'agrégation** : les données sont converties (au format raster ou via une grille vectorielle H3) et agrégées pour produire un score final univoque par unité de gestion.
+
+
+- **La méthode :** Un score de **pression cumulée** (somme pondérée des menaces) est multiplié par un **coefficient d'enjeu** (lié à la population desservie).
+- **Exemple concret :** Un incendie sur un bassin alimentant 10 000 personnes aura une priorité mécanique plus élevée qu'un incendie identique sur un bassin alimentant 100 personnes.
+- **Question pour les spécifications :** « Existe-t-il un seuil de population en dessous duquel une pression forte ne déclenche pas une priorité d'intervention ? ».
+
+##### Une pondération « dynamique » vs « fixe »
+
+L'outil peut proposer deux niveaux de réglage pour s'adapter aux différents profils d'utilisateurs.
+
+- **La méthode :** 
+  - Une pondération **"référence"** (socle scientifique validé par la DAVAR et/ou l'OEIL) pour le diagnostic partagé.
+  - Une pondération **"scénario"** (curseurs ajustables par l'expert dans l'interface) pour simuler des stratégies alternatives.
+
+- **Question pour les spécifications :** "Quels sont les indicateurs "piliers" dont le poids ne devrait jamais être modifié par l'utilisateur pour garantir la cohérence du diagnostic territorial ?".
+
+##### L’approche par "seuils critiques" (pondération non-linéaire)
+Certaines pressions sont si graves qu'elles peuvent rendre les autres critères secondaires. Cette approche est liée au domaine fonctionnel d'alerte de l'outil.
+
+- **La méthode :** Si un indicateur franchit un **seuil de vigilance critique** (ex: présence d'une ICPE dangereuse ou 50 % du PP brûlé), le bassin remonte automatiquement en tête de liste, quel que soit le nombre d'habitants desservis.
+- **Question pour les spécifications :** « Quelles sont les "lignes rouges" qui doivent produire ? ».
+
+##### La pondération par l'historique (analyse diachronique)
+Hydroscope vise à corriger l'absence d'historisation de l'outil précédent.
+
+- **La méthode :** On donne plus de poids aux pressions dont la **cinétique est rapide** ou récurrente.
+- **Exemple :** Un bassin où la déforestation a augmenté de 10 % en 2 ans sera priorisé par rapport à un bassin stable, même si ce dernier est globalement plus dégradé.
+- **Question pour les spécifications :** « Quel poids accordez-vous à la *vitesse d'évolution* d'une pression par rapport à son *état actuel* ? ».
+
+
+#### Définition des indicateurs et paramètres de calcul 
+
+Chaque indicateur est défini par une **fiche indicateur** (à construire lors des ateliers DAVAR) précisant : la métrique de calcul, le périmètre de calcul, le coefficient de pondération, la source de données, la fréquence de mise à jour et le seuil de vigilance associé.
 
 @todo [priority=high, section=indicateurs] : Définir précisément avec la DAVAR les métriques, périmètres de calcul et pondérations pour chaque indicateur.
-
-@todo [priority=high, section=indicateurs] : Confirmer la profondeur historique minimale requise par type d'indicateur pour que les analyses de tendances soient statistiquement valables.
 
 @todo [priority=high, section=indicateurs] : Identifier avec la DAVAR les indicateurs de PressionPPE obsolètes ou sous-utilisés à ne pas reconduire (atelier REX).
 
 
-La vue de synthèse principale de l'interface **tableau de bord expert** agrège les indicateurs chiffrés clés pour un bassin versant, un PPE ou un captage sélectionné, et doit permettre un diagnostic rapide sans navigation cartographique. Il est filtrable par commune, par statut réglementaire (PPE régularisé / non régularisé) et par niveau de risque. Son contenu exact — indicateurs affichés, ordre, seuils de couleur — est à définir lors des ateliers avec la DAVAR.
+#### Vision historique et analyse de tendance
+
+L'**historisation des indicateurs**, fonctionnalité absente de PressionPPE doit permettre de consulter la valeur d'un indicateur à n'importe quelle date passée depuis la mise en service du système, et comparer deux dates pour identifier une évolution. C'est à dire que la valeur d'un indicateur à une date donnée doit être calculable même si les données sources ont été mises à jour depuis, en se basant sur les données historiques archivées.
+
+
+@todo [priority=high, section=historisation] : l'historisation étant une fonctionnalité lourde, il nous faut identifier avec les partenaires 1 ou 2 indicateurs prioritaires pour lesquels cette fonctionnalité est indispensable, et évaluer la profondeur historique minimale à garantir pour ces indicateurs (ex. 5 ans, 10 ans).
+
+#### Vue de synthèse 
+
+La vue de synthèse principale de l'interface **Gestionnaires / Experts** agrège les indicateurs chiffrés clés pour une unité de gestion sélectionnée, et doit permettre un diagnostic rapide sans navigation cartographique. Il est filtrable par commune, par statut réglementaire (PPE régularisé / non régularisé) et par niveau de risque. Son contenu exact — indicateurs affichés, ordre, seuils de couleur — est à définir lors des ateliers avec la DAVAR.
 
 @todo [priority=high, section=tableau-de-bord] : Définir avec la DAVAR et la DASS les indicateurs prioritaires à afficher dans le tableau de bord, leur ordre et les codes couleur associés aux seuils de vigilance.
 
 
 ### Veille et détection automatique des changements
 
-L'interface **Gestionnaires / Experts** permet la **consultation et de qualification des alertes** générées par la chaîne de traitement automatisée (pilotée en dehors de l'interface via les outils SI de l'OEIL). Cette fonctionnalité est une fonctionnalité d'adminitration qui a été pensé pour permetre une veille active des changements environnementaux détectés automatiquement — défrichement, extension urbaine, incendies, nouvelles installations.
+L'interface **Gestionnaires / Experts** permet la **consultation et de qualification des alertes** générées par la chaîne de traitement automatisée (pilotée en dehors de l'interface via les outils SI de l'OEIL). Cette fonctionnalité est une fonctionnalité d'administration qui a été pensé pour permettre une veille active des changements environnementaux détectés automatiquement — défrichement, extension urbaine, incendies, nouvelles installations.
 
-Cette fonctionnalité pourrait permettre de qualifier les alertes : confirmée, infirmée, ou mise en observation. Cette qualification alimenterait le journal des alertes, consultable dans l'historique du bassin versant concerné et pourrait autorisé le déclenchement de notifications vers les profils Partenaire et Grand Public en cas de changement notable confirmé.
+Le risque de ce type de fonctionnalité est de générer un grand nombre d'alertes, dont une partie pourrait être non pertinente. Il serait probablement utile de prévoir une fonctionnalité de qualification des alertes par les experts, afin de qualifier et de filtrer les alertes non pertinentes et d'identifier les changements réellement significatifs. Cette qualification alimenterait le journal des alertes, consultable dans l'historique du bassin versant concerné et pourrait autoriser le déclenchement de notifications vers les interfaces **Partenaire** et **Grand Public** en cas de changement notable confirmé.
 
-Les cycles de mise à jour sont calibrés sur la nature des pressions suivies, des reférentiels utilisés, des exigences et des limites que le projet est capable de poursuivre. Il est toutefois à peut près certains que toutes les demandes de mise à jour en temps réel sont explicitement hors périmètre.
+Les cycles de mise à jour sont calibrés sur la nature des pressions suivies, des référentiels utilisés, des exigences et des limites que le projet est capable de poursuivre. Il est toutefois à peu près certains que toutes les demandes de mise à jour en temps réel sont explicitement hors périmètre.
 
 
-@todo [priority=high, section=alertes] : Confirmer l'interet de cette fonctionnalité de qualification des alertes avec les gestionnaires, et définir les modalités de qualification (ex. critères pour confirmer ou infirmer une alerte).
+@todo [priority=high, section=alertes] : Confirmer l'intérêt de cette fonctionnalité de qualification des alertes avec les gestionnaires, et définir les modalités de qualification (ex. critères pour confirmer ou infirmer une alerte).
 
 @todo [priority=high, section=alertes] : Définir avec la DAVAR et la DASS les seuils précis à partir desquels un changement déclenche une alerte (ex. pourcentage de surface défrichée sur un BVAEP).
 
@@ -127,7 +213,7 @@ Les cycles de mise à jour sont calibrés sur la nature des pressions suivies, d
 
 L'interface **Gestionnaires / Experts** produit les **rapports de synthèse automatisés** qui alimentent les deux autres interfaces. Elle doit permettre la génération de rapports PDF paramétrables, incluant les indicateurs sélectionnés, les cartographies associées et des éléments de contexte supplémentaires à définir en atelier.
 
-L'export de données pourra se faire dans des formats techniques, ce aui est une fonctionnalité réservée à ce profil : CSV, GeoJSON, GeoPackage.
+L'export de données pourra se faire dans des formats techniques, ce qui est une fonctionnalité réservée à ce profil : CSV, GeoJSON, GeoPackage.
 
 La possibilité de **partager un contexte d'analyse** (zoom, filtres actifs, sélection de couches) sous forme de lien hypertexte avec un collègue est aussi une fonctionnalité à évaluer en atelier.
 
@@ -137,6 +223,8 @@ La possibilité de **partager un contexte d'analyse** (zoom, filtres actifs, sé
 
 
 ## Fonctionnalités attendues — synthèse
+
+Voici le tableau synthétique des fonctionnalités attendues pour l'interface **Gestionnaires / Experts**, avec une priorisation indicative basée sur les besoins exprimés. Cette liste est à enrichir lors des échanges de travail en amont des ateliers de spécifications détaillées.
 
 | Fonctionnalité | Priorité | Commentaire |
 |---|---|---|
@@ -152,11 +240,11 @@ La possibilité de **partager un contexte d'analyse** (zoom, filtres actifs, sé
 
 ## Contraintes spécifiques
 
-**Confidentialité** : L'interface **Gestionnaires / Experts**  donne accès à des **indicateurs agrégés**, jamais aux données sources brutes physico-chimiques, météorologiques ou de recensement. Les valeurs précises de mesures et toute information soumise à des restrictions de confidentialité sont explicitement exclues.
+**Confidentialité** : L'interface **Gestionnaires / Experts** donne accès à des **indicateurs agrégés**, jamais aux données sources brutes physico-chimiques, météorologiques ou de recensement. Les valeurs précises de mesures et toute information soumise à des restrictions de confidentialité sont explicitement exclues.
 
 **Techniques** : L'outil reposera sur un socle open source pour garantir la pérennité et l'indépendance vis-à-vis des logiciels propriétaires. L'interopérabilité avec les systèmes partenaires (ATYA/DASS, BD-Hydrographie/DITTT, SERAIL/CDE) doit s'appuyer sur des protocoles ouverts et stables. Les connecteurs vers des systèmes tiers mal documentés ou propriétaires sont exclus.
 
-**Performance** : Le temps de chargement des cartes et des indicateurs multicritères doit rester acceptable sur une connexion bureau standard. Des fonctions particulière comme des exports lourds pourraient être limités et controlés pour éviter les surcharges du système.
+**Performance** : Le temps de chargement des cartes et des indicateurs multicritères doit rester acceptable sur une connexion bureau standard. Des fonctions particulières comme des exports lourds pourraient être limités et contrôlés pour éviter les surcharges du système.
 
 @todo [priority=medium, section=contraintes] : Définir avec l'équipe SI de l'OEIL les exigences précises de performance (temps de chargement acceptable pour les cartes et calculs complexes).
 
