@@ -79,7 +79,7 @@ L'interface **Gestionnaires / Experts** est l'interface qui sera la plus complex
 
 ## Objectifs et décisions que l'interface doit permettre
 
-Afin de définir précisément les objectifs de l'interface **Gestionnaire / Expert**, nous proposons des questions opérationnelles clés auxquelles elle doit permettre de répondre. Ces questions sont issues des besoins imaginés et serons ajusté par les gestionnaires lors des ateliers de cadrage et des retours d'expérience sur PressionPPE. 
+Afin de définir précisément les objectifs de l'interface **Gestionnaires / Experts**, nous proposons des questions opérationnelles clés auxquelles elle doit permettre de répondre. Ces questions sont issues des besoins imaginés et serons ajusté par les gestionnaires lors des ateliers de cadrage et des retours d'expérience sur PressionPPE. 
 
 - Quels bassins versants d'approvisionnement en eau potable (BVAEP) sont aujourd'hui sous pression forte, selon quels critères et depuis quand ?
 - Un captage donné a-t-il subi une dégradation notable de son environnement depuis l'année dernière ?
@@ -130,7 +130,7 @@ Au lieu de pondérer chaque variable individuellement (ce qui peut devenir compl
 
 @todo [priority=high, section=pondération] : la question de la pondération doit être reformulé pour clarifier l'idée.
 
-##### L’approche « risque x vulnérabilité » ou "jauge" (matrice de décision)
+##### L’approche « enjeux x vulnérabilité » ou "jauge" (matrice de décision)
 
 Inspiré de l'analyse multicritère déjà expérimentée par la Province Nord, ce modèle croise l'intensité d'une menace avec la sensibilité du captage.
 Plutôt que de traiter toutes les données sur un pied d'égalité, on attribue un « poids » (une importance relative) à chaque critère ou famille d'indicateurs.
