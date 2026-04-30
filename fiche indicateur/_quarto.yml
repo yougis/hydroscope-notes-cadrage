@@ -58,7 +58,7 @@ format:
     papersize: a4
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     lang: fr
     geometry: margin=2.5cm
     colorlinks: true

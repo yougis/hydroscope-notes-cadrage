@@ -1,0 +1,50 @@
+---
+title: "Interconnexion"
+subtitle: "Indicateur n⁰5"
+categories: ["AEP", "Enjeu"]
+---
+
+Présence de connexions avec d’autres réseaux d’eau.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `5` |
+| **Famille**         | AEP |
+| **Type d'indicateur**            | Enjeu |
+| **Unité de mesure**           | Oui/Non |
+| **Support spatial du calcul** | UD |
+| **Fréquence de mise à jour**       | Annuelle |
+
+## Objectif
+
+Comparer le niveau de dépendance des captages à une ressource unique afin d’identifier ceux pouvant bénéficier d’un secours.
+
+## Description
+
+
+## Sources de données
+
+DASS (étude zones isolées – à confirmer structuration)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Attribution d’un statut binaire par unité de distribution, sans agrégation complexe.
+
+## Contraintes / limites
+
+Effet ambigu sur la criticité (réduction de vulnérabilité vs propagation des risques), nécessitant un arbitrage méthodologique.
+
+## Modalités de calcul
+
+Attribution d’un statut binaire par unité de distribution, sans agrégation complexe.
+
+## Modalité de calcul
+
+Attribution d’un statut binaire par unité de distribution, sans agrégation complexe.
+

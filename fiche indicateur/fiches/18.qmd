@@ -1,0 +1,50 @@
+---
+title: "Activité minière"
+subtitle: "Indicateur n⁰18"
+categories: ["Pression Anthro", "Pression"]
+---
+
+Surface occupée par les activités minières.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `18` |
+| **Famille**         | Pression Anthro |
+| **Type d'indicateur**            | Pression |
+| **Unité de mesure**           | ha |
+| **Support spatial du calcul** | maille |
+| **Fréquence de mise à jour**       | Annuelle |
+
+## Objectif
+
+Comparer les bassins versants selon l’emprise minière afin d’identifier les pressions fortes sur la ressource.
+
+## Description
+
+
+## Sources de données
+
+Géorep – DIMENC (carrières autorisées)  https://georep.nc (données → carrières autorisées)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Calcul des surfaces d’emprise puis agrégation par bassin versant.
+
+## Contraintes / limites
+
+Accès aux données limité (données sensibles ou non publiques).
+
+## Modalités de calcul
+
+Calcul des surfaces d’emprise puis agrégation par bassin versant.
+
+## Modalité de calcul
+
+Calcul des surfaces d’emprise puis agrégation par bassin versant.
+

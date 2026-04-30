@@ -6,6 +6,7 @@ version: "Version 0.3"
 
 copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. Version document 0.3"
 
+
 resume: ""
 ---
 

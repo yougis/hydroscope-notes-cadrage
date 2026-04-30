@@ -1,0 +1,50 @@
+---
+title: "Incendies cumulés"
+subtitle: "Indicateur n⁰15"
+categories: ["Pression Env", "Pression"]
+---
+
+Surface totale touchée par les incendies.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `15` |
+| **Famille**         | Pression Env |
+| **Type d'indicateur**            | Pression |
+| **Unité de mesure**           | ha |
+| **Support spatial du calcul** | maille |
+| **Fréquence de mise à jour**       | Annuelle |
+
+## Objectif
+
+Comparer les bassins versants selon leur historique d’incendies afin d’identifier les milieux les perturbés.
+
+## Description
+
+
+## Sources de données
+
+OEIL (VIIRS / Sentinel – hors Géorep)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Cumul des surfaces brûlées sur une période donnée et agrégation par bassin versant.
+
+## Contraintes / limites
+
+Résolution des données variable selon les capteurs, pouvant affecter la précision.
+
+## Modalités de calcul
+
+Cumul des surfaces brûlées sur une période donnée et agrégation par bassin versant.
+
+## Modalité de calcul
+
+Cumul des surfaces brûlées sur une période donnée et agrégation par bassin versant.
+

@@ -1,0 +1,31 @@
+attribut;explication;role_dans_le_modele
+id;Identifiant unique de l’indicateur, numéro sans signification métier;Technique
+famille;Grande catégorie (AEP, pression, vulnérabilité…) permettant de regrouper les indicateurs;Structuration
+type;Nature de l’indicateur (enjeu, pression, vulnérabilité) permettant de comprendre son rôle;Structuration
+nom_indicateur;Nom court compréhensible pour identifier rapidement l’indicateur;Restitution
+description;Explication simple décrivant ce que mesure l’indicateur;Documentation
+unite;Unité ou classe de mesure permettant de lire correctement la valeur;Analyse
+objectif;But de l’indicateur dans la prise de décision;Pilotage
+source;Origine de la donnée utilisée;Pilotage
+contraintes;Limites ou incertitudes liées à la donnée;Documentation
+methode;Façon dont la donnée est produite (mesurée, calculée ou modélisée);Transformation
+modalites;Règles de traitement ou d’agrégation des données;Transformation
+unite_calcul;Niveau spatial de calcul (captage, UD, bassin versant…);Analyse
+priorite;Niveau d’importance pour le projet;Pilotage
+ponderable;Indique si l’indicateur est utilisé dans la pondération multicritère;Calcul multicritère
+spatialisation_H3;Indique si l’indicateur est calculé sur une maille fine H3;Technique
+type_source;Format de la donnée (vecteur, raster, table…);Technique
+frequence;Fréquence de mise à jour de la donnée;Dynamique temporelle
+normalisation_methode;Méthode pour ramener les valeurs sur une échelle commune;Calcul multicritère
+sens_indicateur;Indique si une valeur élevée est positive ou négative;Calcul multicritère
+definition_criticite;Lien entre la valeur et le niveau de criticité;Calcul multicritère
+quantitatif_qualitatif;Type de donnée (numérique ou catégorielle);Technique
+discret_continue;Nature des valeurs (continues ou discrètes);Technique
+relatif_absolu;Type de mesure (valeur brute ou ratio);Analyse
+discretisation;Méthode de découpage en classes;Restitution
+representation;Mode d’affichage (carte, couleur, symbole…);Restitution
+seuil_vigilance;Valeur seuil permettant d’identifier une situation critique;Alerte
+historisation;Profondeur temporelle pour analyser les évolutions;Dynamique temporelle
+disponibilite_donnee;Niveau d’accessibilité de la donnée;Pilotage
+synthese_echanges;Résumé des décisions et arbitrages;Pilotage
+

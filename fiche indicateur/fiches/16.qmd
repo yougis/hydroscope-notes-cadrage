@@ -1,0 +1,50 @@
+---
+title: "Occupation sol"
+subtitle: "Indicateur n⁰16"
+categories: ["Pression Env", "Pression"]
+---
+
+Type d’occupation des sols (forêt, urbain, etc.).
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `16` |
+| **Famille**         | Pression Env |
+| **Type d'indicateur**            | Pression |
+| **Unité de mesure**           | % |
+| **Support spatial du calcul** | maille |
+| **Fréquence de mise à jour**       | Annuelle |
+
+## Objectif
+
+Comparer les bassins versants selon leur structure (forêt, urbain, agricole) afin d’identifier les menaces dominantes.
+
+## Description
+
+
+## Sources de données
+
+Géorep – MOS 2014  https://georep.nc (Imagerie et occupation des sols)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Regroupement des classes du MOS en catégories simplifiées puis calcul de proportions.
+
+## Contraintes / limites
+
+Nécessité de simplifier les classes pour assurer la lisibilité et la comparabilité.
+
+## Modalités de calcul
+
+Regroupement des classes du MOS en catégories simplifiées puis calcul de proportions.
+
+## Modalité de calcul
+
+Regroupement des classes du MOS en catégories simplifiées puis calcul de proportions.
+

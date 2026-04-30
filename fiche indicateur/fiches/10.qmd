@@ -1,0 +1,50 @@
+---
+title: "Type ouvrage"
+subtitle: "Indicateur n⁰10"
+categories: ["AEP", "Enjeu"]
+---
+
+Type de captage (captage, forage, tranchée drainante).
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `10` |
+| **Famille**         | AEP |
+| **Type d'indicateur**            | Enjeu |
+| **Unité de mesure**           | Classe (forage / captage / tranchée drainante) |
+| **Support spatial du calcul** | Captage |
+| **Fréquence de mise à jour**       | Fixe |
+
+## Objectif
+
+Comparer les captages selon leur vulnérabilité intrinsèque liée à leur nature.
+
+## Description
+
+
+## Sources de données
+
+DAVAR (base captage)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Attribution directe au captage, sans transformation.
+
+## Contraintes / limites
+
+Nécessité de standardiser les typologies pour assurer une comparaison cohérente.
+
+## Modalités de calcul
+
+Attribution directe au captage, sans transformation.
+
+## Modalité de calcul
+
+Attribution directe au captage, sans transformation.
+

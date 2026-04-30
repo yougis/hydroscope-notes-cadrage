@@ -13,7 +13,9 @@ resume: ""
 
 :::: {.callout-note title="Note de version"}
 
-Cette version est une révision de la note de cadrage fonctionnel v0.3, repositionnée suite au COPRO n°1 et à la réunion du 14 avril 2026. Le périmètre fonctionnel est centré sur l'**interface PRINCIPALE** regroupant gestionnaires/experts et partenaires (communes, provinces, concessionnaires, acteurs locaux initiés), conformément aux orientations prises lors de cette réunion. Les items `@todo` correspondent à des points à valider ou à enrichir lors des ateliers avec de futurs utilisateurs prévus en Mai 2026.
+Cette version est une révision de la note de cadrage fonctionnel v0.3, repositionnée suite au COPRO n°1 et à la réunion du 14 avril 2026. Le périmètre fonctionnel est centré sur l'**interface PRINCIPALE** regroupant tous les partenaires. D'autres services numériques destinés à des publics plus ou moins avertis sur la gestion de la ressource en eau (tableau de bord, accès aux données structurés, fiches synthétiques par BVAEP) feront l'objet d'une notes de cadrage fonctionnelle dédiée.
+
+Les items `@todo` correspondent à des points à finaliser, à valider ou à enrichir lors des réunions avec de futurs utilisateurs identifiés.
 
 Historique des versions du document :
 
@@ -22,7 +24,7 @@ Historique des versions du document :
 | Version 0.1 | 2026-04-01 | Hugo Roussaffa | Rédaction initiale (profil Gestionnaires/Experts) |
 | Version 0.2 | 2026-04-06 | Hugo Roussaffa | Adaptations suite aux échanges avec Marjolaine, correction orthographe |
 | Version 0.3 | 2026-04-06 | Fabien Albouy | Réflexion sur le périmètre fonctionnel. Ajustement de l'organisation des parties |
-| Version 0.4 | 2026-04-18 | Hugo Roussaffa | Repositionnement sur une interfae unique Gestionnaire/exprt/partenaire suite au COPRO n°1 et à la réunion du 14 avril 2026 |
+| Version 0.4 | 2026-04-18 | Hugo Roussaffa | Repositionnement sur une interface unique gestionnaire/expert/partenaire suite au COPRO n°1 et à la réunion du 14 avril 2026 |
 
 ::: {#todo-list}
 :::
@@ -31,18 +33,18 @@ Historique des versions du document :
 
 {{< pagebreak >}}
 
-Objectifs de la note de cadrage fonctionnelle :
+La note de cadrage fonctionnelle va permettre de :
 
-- Définir le périmètre fonctionnel de l'interface **Partenaires** ;
+- Définir le périmètre fonctionnel de l'interface **PRINCIPALE** ;
 - Apporter une vision commune et partagée des fonctionnalités à l'ensemble des acteurs impliqués (équipe projet, membres du COPRO, COPIL, partenaires) ;
 - Apporter des propositions de fonctionnalités et d'organisation de l'interface ;
-- Établir la base des discussions pour les ateliers d'étude des besoins et des spécifications détaillées avec les partenaires ;
-- Identifier les points à valider ou à enrichir pour orienter les discussions lors des ateliers de travail prévus fin Avril / début Mai 2026.
+- Établir la base des discussions pour les réunions d'étude des besoins et des spécifications détaillées avec de futurs utilisateurs identifiés ;
+- Identifier les points à valider ou à enrichir pour orienter les discussions lors des réunions de travail à venir.
 
-Le document sera validé par les membres du COPRO avant le démarrage des ateliers.
+Le document devrait être validé par les membres du COPRO avant le démarrage des réunions avec les partenaires.
 
 
-## Rappel de contexte et évolution du positionnement
+## Rappel de contexte 
 
 Le projet HydroScope vise à doter la Nouvelle-Calédonie d'interfaces de données sur la ressource en eau potable. Il succède au tableau de bord PressionPPE (2021), dont les limites — rigidité technique, absence d'analyse historisée, ergonomie inadaptée aux non-spécialistes — ont justifié ce nouveau développement.
 
@@ -53,45 +55,33 @@ Le projet s'articule autour de quatre domaines fonctionnels nommés ainsi :
 - Veille et détection automatique des changements
 - Partage et diffusion des diagnostics
 
-### Évolution de l'architecture des interfaces
+## Positionnement de l'interface PRINCIPALE vis à vis des autres services numériques inclus dans Hydroscope 
 
-La note initiale (v0.3) envisageait trois interfaces distinctes. Suite à la réunion du 14 avril 2026, l'architecture cible évolue vers un regroupement en **deux interfaces principales**, à valider à l'issue de l'analyse des besoins :
+Suite au COPRO n⁰1 et à la réunion du 14 avril 2026, l'architecture cible évolue vers un regroupement en  une interface **PRINCIPALE** et plusieurs services numériques **SECONDAIRES**. Cette nouvelle approche reste à éprouver et à valider à l'issue de l'analyse des besoins.
 
-| Interface | Profils ciblés | Principe |
-| :--- | :--- | :--- |
-| **Interface principale** (Partenaires / Gestionnaires) | Communes, Provinces, DAVAR, DASS, OEIL, concessionnaires, géomaticiens partenaires | Socle commun avec gestion fine des droits d'accès selon les profils. Analyse multicritère modulable. |
-| **Interface Grand Public** | Citoyens, associations, journalistes, maires et élus non-techniciens | Pages de sensibilisation, fiches vulgarisées, cartographie allégée, génération automatique de fiches par BVAEP. |
+**Interface PRINCIPALE** : il s'agit d'une application destiné à plusieurs profils, avec des droits d'accès aux données et à certaines fonctionnalités variables. La fonctionnalité majeure de cette application est de permettre l'accès à un jeux de d'indicateur important et de pouvoir effectuer des analyses multicritères en totale autonomie.
 
-:::: {.callout-warning title="Point de vigilance issu de la réunion du 14 avril"}
+**Services numériques SECONDAIRES** : Plusieurs services et applications destinés à des publics plus ou moins avertis sur la gestion de la ressource en eau. Il s'agit d'un **tableau de bord**, d'un **accés aux données structurés** et de **fiches synthétiques par BVAEP**.  Les fonctionnalités de ces interfaces seront décrites dans une note de cadrage fonctionnelle dédiée. 
 
-La réduction de trois à deux interfaces doit être validée formellement à l'issue de l'analyse des besoins. La fusion des profils Gestionnaires/Experts et Partenaires dans un socle commun implique une gestion de droits fine pour distinguer les fonctionnalités accessibles à chaque profil (jeux de données, exports techniques, pondérations, etc.).
+Cette architecture cible reprend les grands principes des dispositifs de service numérique de l'OEIL (ex. Vulcain / Vulcain Pro, bilan et fiches communales des incendies), avec une **stratification des interfaces** selon les profils utilisateurs et une **différenciation des fonctionnalités** en fonction des besoins et compétences de chaque profil. L'objectif est de garantir une expérience utilisateur adaptée à chaque public tout en assurant la cohérence et la maintenabilité du système.
 
-::::
+## Profils utilisateurs ciblés dans l'interface PRINCIPALE
 
-@todo [priority=high, section=architecture] : Faire valider formellement la réduction à deux interfaces à l'issue de l'analyse des besoins (Marjolaine DAVID).
+Les utilisateurs techniciens et experts de la DAVAR, de la DASS, de la DIMENC et de leurs partenaires techniques (bureaux d'étude) sont les principaux bénéficiaires de l'interface **PRINCIPALE**. Ils utilisent l'interface pour des diagnostics avancés, des analyses multicritères et les partager, ainsi que d'acceder aux données brutes organisées.
 
 
-## Profil utilisateur ciblé : le Partenaire initié
+Des utilisateurs concernés par des diagnostics des bassins versants du gouvernement, des provinces, des communaux, des syndicats, de conseils, d'associations et autres acteurs locaux impliqués dans la gestion de l'eau potable. Ils utilisent l'interface pour consulter la situation de leur territoire, suivre les alertes de changement et parfois pour appliquer leur vision stratégique à travers des pondérations personnalisées (partagée ou originale).
 
-La présente note cible le profil **Partenaire**, qui recouvre des acteurs très hétérogènes en termes de compétences techniques et de besoins opérationnels. On distingue deux sous-profils au sein de cette interface commune :
-
-| Sous-profil | Exemples d'acteurs | Niveau technique | Besoins principaux |
-| :--- | :--- | :--- | :--- |
-| **Partenaire expert / géomaticien** | OEIL, DAVAR, DASS, DIMENC, géomaticiens provinciaux | Maîtrise SIG, SQL possible | Accès organisé aux bases de données, exports techniques (CSV, GeoJSON, GeoPackage), analyse multicritère avec pondérations modulables |
-| **Partenaire institutionnel initié** | Communes, Provinces, concessionnaires, syndicats des eaux | Pas de compétences SIG/SQL | Tableaux de bord simplifiés, vue comparative entre bassins, fiches synthétiques par BVAEP, rapports PDF, notifications de changements notables |
-
-L'interface doit permettre à ces deux sous-profils d'accéder à leurs fonctionnalités respectives depuis un socle commun, grâce à une gestion de droits différenciée.
-
-@todo [priority=high, section=profils] : Confirmer avec la DAVAR et la DASS le niveau réel de compétences SIG des agents amenés à utiliser l'outil, afin d'affiner la frontière entre les deux sous-profils et calibrer les droits d'accès correspondants.
+@todo [priority=high, section=profils] : Préciser d'avantage les profils utilisateurs ciblés, notamment en identifiant des rôles spécifiques au sein des provinces et des communes (ex. technicien de l'eau, responsable environnement). Pourquoi pas concevoir quelques persona pour nous permettre de mieux cerner les besoins spécifiques de chaque type d'utilisateur et d'adapter les fonctionnalités en conséquence.
 
 
 ## Objectifs et décisions que l'interface doit permettre
 
-Afin de définir précisément les objectifs de l'interface **Partenaires**, nous proposons des questions opérationnelles clés auxquelles elle doit permettre de répondre. Ces questions seront ajustées avec les partenaires lors des ateliers de cadrage.
+Afin de définir précisément les objectifs de l'interface **PRINCIPALE**, nous proposons des questions opérationnelles clés auxquelles elle doit permettre de répondre. Ces questions seront ajustées avec les partenaires lors des ateliers de cadrage.
 
 - Quels BVAEP sont aujourd'hui sous pression forte, selon quels critères et depuis quand ?
 - Comment comparer la situation entre plusieurs bassins versants de ma commune ou province ?
-- Quels périmètres de protection ne sont pas encore régularisés au regard du délai imposé par la loi du pays de juillet 2025 ?
+- Quels périmètres de protection ne sont pas encore régularisés?
 - Une alerte de changement environnemental détectée automatiquement est-elle fondée ? Quelle est sa gravité ?
 - Quels indicateurs puis-je consulter pour orienter une décision de gestion locale (investissement, réglementation) ?
 - Comment accéder aux données brutes organisées pour les exploiter dans mon propre SIG ou outil d'analyse ?
@@ -101,38 +91,46 @@ Afin de définir précisément les objectifs de l'interface **Partenaires**, nou
 
 ### Connaissance et caractérisation du territoire
 
-L'interface **Partenaires** donne accès aux **couches de données de référence** mobilisées par le projet : BVAEP, périmètres de protection (immédiate, rapprochée, éloignée), captages AEP, BD-Hydrographie DITTT, Hydro-Éco Régions, données d'incendies (OEIL), PLU (Provinces) et base ICPE (DIMENC).
+L'interface **PRINCIPALE** donne accès aux **couches de données de référence** mobilisées par le projet : BVAEP, périmètres de protection (immédiate, rapprochée, éloignée), captages AEP, BD-Hydrographie DITTT, Hydro-Éco Régions, données incendies (OEIL), PLU (Provinces, communes) et base ICPE (DIMENC, provinces). Certaines couches sont accessibles à tous les profils, d'autres peuvent être filtrées selon le périmètre géographique ou la sensibilité des données.
 
-La navigation est structurée sur le modèle **hiérarchique** BVAEP ↔ Périmètre de protection ↔ Captage. Le BVAEP est l'unité de gestion de référence principale du projet.
+La navigation dans les données est structurée sur le modèle **hiérarchique** du BVAEP ↔ Périmètre de protection ↔ Captage. Le BVAEP est l'unité de gestion de référence principale du projet, autour de laquelle s'organise la navigation et l'analyse. Les utilisateurs peuvent zoomer sur un BVAEP pour consulter les données associées à ses périmètres de protection et captages, ou au contraire faire une vue d'ensemble pour comparer plusieurs BVAEP. Il est possible qu'un BVAEP puisse être associé à plusieurs captages, et que certains captages soient associés à plusieurs BVAEP (ex. captage situé à la confluence de deux bassins versants). Aussi, certain BVAEP n'ont pas de perimètre de protection réglementaire ou non défini. 
 
-L'interface permet la superposition de couches cartographiques multiples, avec contrôle de l'opacité, activation/désactivation par thème et légendes. La compatibilité OGC et la capacité d'export vers des outils SIG tiers (QGIS, ArcGIS) sont indispensables pour les sous-profils experts.
 
-@todo [priority=high, section=données] : Valider avec la DAVAR la liste exhaustive des couches prioritaires et leur ordre de superposition par défaut.
+@todo [priority=medium, section=données] : Est il possible qu'un captage ne soit pas associé à un BVAEP ? si oui, comment gérer ces cas dans la navigation hiérarchique ? 
 
-@todo [priority=medium, section=données] : Confirmer le statut des référentiels externes (Dynamic World, TMF, SWOT) et leurs conditions d'accès.
+L'interface permet la superposition de couches cartographiques multiples, avec contrôle de l'opacité, activation/désactivation par thème et légendes. 
+
+
+@todo [priority=high, section=données] : Valider avec la DAVAR la liste exhaustive des données prioritaires
+
 
 
 ### Diagnostic et analyse multicritère
 
 #### Principe de l'analyse multicritère
 
-L'analyse multicritère est identifiée comme **l'élément central partagé** entre les sous-profils Gestionnaire/Expert et Partenaire institutionnel. Elle permet de croiser différentes familles de données pour obtenir un état global d'intégrité d'un bassin versant ou d'un captage :
+L'analyse multicritère est identifiée comme **la fonctionnalité centrale partagée** entre les différents profils utilisateurs de l'interface PRINCIPALE. Elle permet de croiser différentes familles de données pour obtenir un état global "d'intégrité" des unités de gestion (BVAEP, périmètres de protection, captages) :
 
-- L'état biogéographique : Relief, géologie, pluviométrie, couverture végétale
-- Les pressions environnementales et humaines : Incendies, érosion, urbanisation, défrichages, ICPE
-- Les enjeux humains et techniques : Population desservie, volumes de prélèvement autorisés, infrastructures
+5 familles d'indicateurs sont mobilisées pour le diagnostic :
+
+Enjeux, pressions anthropiques, pressions environnementales, pressions quantitatives et éventuellement 
+
+- L'état biogéographique : Relief, géologie, pluviométrie, couverture végétale, l'Indice de Développement et de Persistance de Réseaux (IDPR), biseau salé ;
+- Les pressions environnementales : Incendies, érosion, déforestation, inondation ;
+- Les pressions anthropiques : IOTA, ICPE, agriculture, urbanisation, occupation du sol ;
+- Les pressions quantitatives : niveau des nappes, productivité, bilan besoin/ressource ;
+- Les enjeux : 
+  - AEP  : Population desservie, productivité
+  - economiques : volumes de prélèvement autorisés, productivité, aménagements spécifiques, surface aquacole en aval
+  - biologiques : zone protégée, KBA/ZICO, Espèces menacées/micro endémisme
+  - patrimoniaux : site de baignade, site touristique
 
 :::: {.callout-important title="Décision issue de la réunion du 14 avril 2026"}
 
-Contrairement à la version initiale centrée sur une analyse pilotée par la DAVAR, l'interface Partenaires doit permettre à chaque utilisateur de **définir ses propres pondérations** pour prioriser les bassins versants selon sa stratégie locale. La DAVAR ne doit pas imposer une pondération unique aux partenaires.
-
-- L'analyse multicritère modulable est le cœur fonctionnel partagé entre gestionnaires et partenaires.
-- Les utilisateurs partenaires doivent pouvoir définir leurs propres pondérations pour adapter l'analyse à leur stratégie.
-- Une pondération de référence (socle scientifique DAVAR/OEIL) reste disponible comme point de départ.
+Contrairement à la version initiale centrée sur une analyse pilotée par la DAVAR, l'interface PRINCIPALE doit permettre à chaque utilisateur de **définir ses propres pondérations** pour prioriser les bassins versants selon sa stratégie locale. La DAVAR ne souhaite pas imposer une pondération unique aux partenaires.
 
 ::::
 
-Pour définir les spécifications fonctionnelles finales, la question de la pondération sera abordée lors des ateliers sous plusieurs angles complémentaires. La finalité est de permettre un **classement des unités de gestion selon une priorité d'intervention**.
 
 ##### L'approche par « familles d'indicateurs »
 
@@ -193,7 +191,7 @@ L'**historisation des indicateurs** — fonctionnalité absente de PressionPPE �
 
 #### Vue de synthèse et tableau de bord
 
-La vue de synthèse principale de l'interface **Partenaires** agrège les indicateurs chiffrés clés pour une unité de gestion sélectionnée, et doit permettre un diagnostic rapide sans navigation cartographique approfondie. Elle est filtrable par commune, par statut réglementaire (PPE régularisé / non régularisé) et par niveau de risque.
+La vue de synthèse principale de l'interface **PRINCIPALE** agrège les indicateurs chiffrés clés pour une unité de gestion sélectionnée, et doit permettre un diagnostic rapide sans navigation cartographique approfondie. Elle est filtrable par commune, par statut réglementaire (PPE régularisé / non régularisé) et par niveau de risque.
 
 Pour le sous-profil **Partenaire institutionnel**, cette vue doit être simplifiée et directement lisible sans compétences SIG. Une **vue comparative entre bassins versants** est une fonctionnalité clé pour ce profil.
 
@@ -202,7 +200,7 @@ Pour le sous-profil **Partenaire institutionnel**, cette vue doit être simplifi
 
 ### Fiches synthétiques par BVAEP
 
-Une fonctionnalité spécifique au profil **Partenaire institutionnel** est la génération de **fiches synthétiques par BVAEP**, destinées aux maires, communes et acteurs locaux non familiers avec les outils SIG. Ces fiches doivent :
+Une fonctionnalité de génération de **fiches synthétiques par BVAEP**, destinées aux maires, communes et acteurs locaux non familiers avec les outils SIG. Ces fiches doivent :
 
 - Être **générées automatiquement** à partir des données et se mettre à jour lorsque les données évoluent, pour limiter la charge de production.
 - Être accessibles depuis une **page d'entrée simple**, sans nécessiter de navigation complexe dans l'interface.
@@ -222,7 +220,7 @@ Les fiches incendies produites avec QGIS constituent un modèle de référence r
 
 ### Veille et consultation des alertes
 
-L'interface **Partenaires** permet la **consultation des alertes** générées par la chaîne de traitement automatisée (pilotée en dehors de l'interface via les outils SI de l'OEIL). Les partenaires institutionnels reçoivent des notifications en cas de changement notable confirmé sur les BVAEP relevant de leur périmètre.
+L'interface **PRINCIPALE** permet la **consultation des alertes** générées par la chaîne de traitement automatisée (pilotée en dehors de l'interface via les outils SI de l'OEIL). Les partenaires institutionnels reçoivent des notifications en cas de changement notable confirmé sur les BVAEP relevant de leur périmètre.
 
 Le risque de sur-génération d'alertes non pertinentes doit être traité en amont, dans l'interface Gestionnaires (qualification des alertes par les experts DAVAR/OEIL). **Les partenaires ne reçoivent que les alertes qualifiées et confirmées.**
 
@@ -248,14 +246,11 @@ La compatibilité OGC est indispensable pour garantir l'interopérabilité avec 
 
 ### Partage et diffusion des diagnostics
 
-L'interface **Partenaires** permet la génération de **rapports PDF paramétrables**, incluant les indicateurs sélectionnés, les cartographies associées et des éléments de contexte supplémentaires à définir en atelier.
+L'interface **PRINCIPALE** permet la génération de **rapports PDF**, incluant les indicateurs sélectionnés, les cartographies associées et des éléments de contexte supplémentaires à définir suite aux échanges avec les futures utilisateurs.
 
-La possibilité de **partager un contexte d'analyse** (zoom, filtres actifs, sélection de couches) sous forme de lien hypertexte avec un collègue est une fonctionnalité à évaluer en atelier.
+L'outil devra offir la possibilité de **partager un contexte d'analyse** (zoom, filtres actifs, sélection de couches) sous forme de lien hypertexte avec un collègue.
 
 @todo [priority=medium, section=rapports] : Identifier les éléments critiques devant figurer dans les rapports PDF pour qu'ils soient directement utilisables en réunion institutionnelle.
-
-@todo [priority=low, section=fonctionnalités] : Évaluer avec les partenaires l'utilité du partage de contexte d'analyse par lien hypertexte.
-
 
 ## Gestion des droits et accès filtrés
 
@@ -276,7 +271,7 @@ La fusion des profils Gestionnaire/Expert et Partenaire dans un socle commun rep
 
 ## Fonctionnalités attendues — synthèse
 
-Voici le tableau synthétique des fonctionnalités attendues pour l'interface **Partenaires**, avec une priorisation indicative basée sur les besoins exprimés. Cette liste est à enrichir lors des échanges de travail en amont des ateliers de spécifications détaillées.
+Voici le tableau synthétique des fonctionnalités attendues pour l'interface **PRINCIPALE**, avec une priorisation indicative basée sur les besoins exprimés. Cette liste est à enrichir lors des échanges de travail en amont des ateliers de spécifications détaillées.
 
 | Fonctionnalité | Priorité | Profil(s) concerné(s) | Commentaire |
 |---|---|---|---|
@@ -295,7 +290,7 @@ Voici le tableau synthétique des fonctionnalités attendues pour l'interface **
 
 ## Contraintes spécifiques
 
-**Confidentialité** : L'interface **Partenaires** ne donne accès qu'à des **indicateurs agrégés**, jamais aux données sources brutes physico-chimiques, météorologiques ou de recensement. La diffusion auprès du grand public nécessite une réflexion spécifique sur le contenu (ex. potabilité) et la sensibilité des données disponibles.
+**Confidentialité** : L'interface **PRINCIPALE** ne donne accès qu'à des **indicateurs agrégés**, jamais aux données sources brutes physico-chimiques, météorologiques ou de recensement. La diffusion auprès du grand public nécessite une réflexion spécifique sur le contenu (ex. potabilité) et la sensibilité des données disponibles.
 
 @todo [priority=high, section=confidentialité] : Présenter aux partenaires la philosophie d'accès (de la donnée brute à la donnée élaborée) et cadrer ce qui sera accessible au grand public (Marjolaine DAVID).
 

@@ -1,0 +1,50 @@
+---
+title: "BBR"
+subtitle: "Indicateur n⁰27"
+categories: ["Pression quanti", "Pression"]
+---
+
+Bilan Besoin Ressource, Écart entre l’eau disponible et les besoins.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `27` |
+| **Famille**         | Pression quanti |
+| **Type d'indicateur**            | Pression |
+| **Unité de mesure**           | Classe (non impacté / impacté / très impacté / déficitaire / très déficitaire) |
+| **Support spatial du calcul** | BV |
+| **Fréquence de mise à jour**       | Mensuelle |
+
+## Objectif
+
+Comparer les bassins versants selon l’équilibre ressource/besoins afin d’identifier les situations de tension ou de déficit.
+
+## Description
+
+
+## Sources de données
+
+DAVAR (diffusion prévue via Géorep / GeoREP à venir)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Utilisation directe de la classe issue du modèle avec agrégation au bassin versant.
+
+## Contraintes / limites
+
+Donnée issue d’un modèle nécessitant validation et mise à jour régulière.
+
+## Modalités de calcul
+
+Utilisation directe de la classe issue du modèle avec agrégation au bassin versant.
+
+## Modalité de calcul
+
+Utilisation directe de la classe issue du modèle avec agrégation au bassin versant.
+

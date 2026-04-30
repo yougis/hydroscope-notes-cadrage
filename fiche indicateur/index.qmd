@@ -1,0 +1,60 @@
+# Fiches indicateurs HydroScope
+
+**Catalogue des indicateurs de suivi hydrologique**
+
+Version 0.1 — 30/04/2026
+
+Copyright Yapuka SARL — 2026. Tous droits réservés.
+
+
+---
+
+## Sommaire par famille
+
+
+### AEP
+
+- [Capacité de production](fiches/1.qmd)
+- [Longueur réseau](fiches/2.qmd)
+- [Capacité réservoir](fiches/3.qmd)
+- [Traitement](fiches/4.qmd)
+- [Interconnexion](fiches/5.qmd)
+- [Population desservie](fiches/6.qmd)
+- [Capacité secours](fiches/7.qmd)
+- [Statut AODPE](fiches/8.qmd)
+- [Statut PPE](fiches/9.qmd)
+- [Type ouvrage](fiches/10.qmd)
+- [Statut captage](fiches/11.qmd)
+
+### Pression Env
+
+- [Surface érosion](fiches/12.qmd)
+- [Terrain nu](fiches/13.qmd)
+- [Glissement terrain](fiches/14.qmd)
+- [Incendies cumulés](fiches/15.qmd)
+- [Occupation sol](fiches/16.qmd)
+- [EEE](fiches/17.qmd)
+
+### Pression Anthro
+
+- [Activité minière](fiches/18.qmd)
+- [ICPE](fiches/19.qmd)
+- [Pollution accidentelle](fiches/20.qmd)
+- [Urbanisation](fiches/21.qmd)
+- [Habitations](fiches/22.qmd)
+
+### Vulnérabilité
+
+- [IDPR](fiches/23.qmd)
+- [Géologie](fiches/24.qmd)
+
+### Pression quanti
+
+- [AODPE nombre](fiches/25.qmd)
+- [AODPE volume](fiches/26.qmd)
+- [BBR](fiches/27.qmd)
+- [Pluviométrie](fiches/28.qmd)
+
+### Pression quali
+
+- [Qualité eau](fiches/29.qmd)

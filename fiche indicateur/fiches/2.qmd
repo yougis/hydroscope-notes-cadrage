@@ -1,0 +1,50 @@
+---
+title: "Longueur réseau"
+subtitle: "Indicateur n⁰2"
+categories: ["AEP", "Enjeu"]
+---
+
+Longueur totale des canalisations d’eau potable.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `2` |
+| **Famille**         | AEP |
+| **Type d'indicateur**            | Enjeu |
+| **Unité de mesure**           | km |
+| **Support spatial du calcul** | UD |
+| **Fréquence de mise à jour**       | Annuelle |
+
+## Objectif
+
+Comparer l’importance des infrastructures dépendantes de chaque captage afin d’identifier ceux dont la défaillance aurait le plus d’impact.
+
+## Description
+
+
+## Sources de données
+
+DASS (étude zones isolées) + CDE + communes (structuration en cours)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Agrégation par unité de distribution puis association au captage, en évitant les doublons.
+
+## Contraintes / limites
+
+Données issues de bases non relationnelles, nécessitant une structuration et une gestion des doublons entre unités de distribution.
+
+## Modalités de calcul
+
+Agrégation par unité de distribution puis association au captage, en évitant les doublons.
+
+## Modalité de calcul
+
+Agrégation par unité de distribution puis association au captage, en évitant les doublons.
+

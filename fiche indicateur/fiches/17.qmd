@@ -1,0 +1,50 @@
+---
+title: "EEE"
+subtitle: "Indicateur n⁰17"
+categories: ["Pression Env", "Pression"]
+---
+
+Présence d’espèces envahissantes.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `17` |
+| **Famille**         | Pression Env |
+| **Type d'indicateur**            | Pression |
+| **Unité de mesure**           | ? |
+| **Support spatial du calcul** | BV |
+| **Fréquence de mise à jour**       |  |
+
+## Objectif
+
+Comparer les bassins versants selon la présence d’espèces envahissantes afin d’identifier des pressions écologiques potentielles.
+
+## Description
+
+
+## Sources de données
+
+Provinces (à identifier – inventaires locaux non centralisés)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Intégration conditionnée à la disponibilité des données, sans méthode définie à ce stade.
+
+## Contraintes / limites
+
+Absence de base de données consolidée et incertitude sur la disponibilité.
+
+## Modalités de calcul
+
+Intégration conditionnée à la disponibilité des données, sans méthode définie à ce stade.
+
+## Modalité de calcul
+
+Intégration conditionnée à la disponibilité des données, sans méthode définie à ce stade.
+

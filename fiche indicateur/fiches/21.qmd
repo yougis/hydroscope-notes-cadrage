@@ -1,0 +1,50 @@
+---
+title: "Urbanisation"
+subtitle: "Indicateur n⁰21"
+categories: ["Pression Anthro", "Pression"]
+---
+
+Nombre de bâtiments présents.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `21` |
+| **Famille**         | Pression Anthro |
+| **Type d'indicateur**            | Pression |
+| **Unité de mesure**           | Nombre |
+| **Support spatial du calcul** | maille |
+| **Fréquence de mise à jour**       | Annuelle |
+
+## Objectif
+
+Comparer les bassins versants selon leur niveau d’artificialisation afin d’identifier les pressions liées aux activités humaines.
+
+## Description
+
+
+## Sources de données
+
+Géorep – BD TOPO  https://georep.nc (BDTOPO-NC)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Comptage des bâtiments par unité spatiale puis agrégation.
+
+## Contraintes / limites
+
+Dépendance à la qualité et à l’actualisation de la BD TOPO.
+
+## Modalités de calcul
+
+Comptage des bâtiments par unité spatiale puis agrégation.
+
+## Modalité de calcul
+
+Comptage des bâtiments par unité spatiale puis agrégation.
+

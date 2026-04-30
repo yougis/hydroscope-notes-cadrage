@@ -1,0 +1,50 @@
+---
+title: "ICPE"
+subtitle: "Indicateur n⁰19"
+categories: ["Pression Anthro", "Pression"]
+---
+
+Nombre de sites industriels à risque.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `19` |
+| **Famille**         | Pression Anthro |
+| **Type d'indicateur**            | Pression |
+| **Unité de mesure**           | Nombre |
+| **Support spatial du calcul** | maille |
+| **Fréquence de mise à jour**       | Semestrielle |
+
+## Objectif
+
+Comparer les bassins versants selon la densité d’activités à risque afin d’identifier les sources potentielles de pollution.
+
+## Description
+
+
+## Sources de données
+
+DIMENC + Provinces (pas de base consolidée – hors Géorep)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Comptage des installations par unité spatiale avec possibilité de typologie.
+
+## Contraintes / limites
+
+Données dispersées entre plusieurs acteurs, absence de base consolidée et typologie homogène.
+
+## Modalités de calcul
+
+Comptage des installations par unité spatiale avec possibilité de typologie.
+
+## Modalité de calcul
+
+Comptage des installations par unité spatiale avec possibilité de typologie.
+

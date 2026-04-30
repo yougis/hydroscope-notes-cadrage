@@ -1,0 +1,50 @@
+---
+title: "Surface érosion"
+subtitle: "Indicateur n⁰12"
+categories: ["Pression Env", "Pression"]
+---
+
+Surface des zones où le sol est abîmé ou fragile.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `12` |
+| **Famille**         | Pression Env |
+| **Type d'indicateur**            | Pression |
+| **Unité de mesure**           | ha |
+| **Support spatial du calcul** | maille |
+| **Fréquence de mise à jour**       | Annuelle |
+
+## Objectif
+
+Comparer les bassins versants selon leur sensibilité à l’érosion afin d’identifier les ressources exposées à des dégradations du milieu.
+
+## Description
+
+
+## Sources de données
+
+OEIL (données érosion provinciales) + MOS (Géorep)  https://georep.nc (Occupation des sols 2014)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Calcul surfacique par unité spatiale régulière puis agrégation au bassin versant.
+
+## Contraintes / limites
+
+Données non homogènes spatialement, limitant la comparabilité à l’échelle du territoire.
+
+## Modalités de calcul
+
+Calcul surfacique par unité spatiale régulière puis agrégation au bassin versant.
+
+## Modalité de calcul
+
+Calcul surfacique par unité spatiale régulière puis agrégation au bassin versant.
+

@@ -1,0 +1,50 @@
+---
+title: "Glissement terrain"
+subtitle: "Indicateur n⁰14"
+categories: ["Pression Env", "Pression"]
+---
+
+Zones exposées aux glissements de terrain.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `14` |
+| **Famille**         | Pression Env |
+| **Type d'indicateur**            | Pression |
+| **Unité de mesure**           | ha |
+| **Support spatial du calcul** | maille |
+| **Fréquence de mise à jour**       |  |
+
+## Objectif
+
+Comparer les bassins versants selon leur instabilité afin d’identifier les zones à risque pour la ressource.
+
+## Description
+
+
+## Sources de données
+
+Géorep – DIMENC (BDMVT)  https://dimenc.gouv.nc/geologie/evaluer-les-risques-naturels/les-versants-instables-et-mouvements-de-terrain
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Calcul surfacique par unité spatiale régulière puis agrégation au bassin versant.
+
+## Contraintes / limites
+
+Donnée modélisée et interprétée, non directement observée.
+
+## Modalités de calcul
+
+Calcul surfacique par unité spatiale régulière puis agrégation au bassin versant.
+
+## Modalité de calcul
+
+Calcul surfacique par unité spatiale régulière puis agrégation au bassin versant.
+

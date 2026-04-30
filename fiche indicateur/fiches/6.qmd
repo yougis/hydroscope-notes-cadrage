@@ -1,0 +1,50 @@
+---
+title: "Population desservie"
+subtitle: "Indicateur n⁰6"
+categories: ["AEP", "Enjeu"]
+---
+
+Nombre de personnes alimentées par la ressource.
+
+## Identification
+
+| Champ               | Valeur |
+|---------------------|--------|
+| **Identifiant**     | `6` |
+| **Famille**         | AEP |
+| **Type d'indicateur**            | Enjeu |
+| **Unité de mesure**           | Nombre |
+| **Support spatial du calcul** | UD |
+| **Fréquence de mise à jour**       | 4 ans |
+
+## Objectif
+
+Comparer les captages selon le nombre de personnes dépendantes afin d’identifier les ressources les plus stratégiques pour l’alimentation en eau.
+
+## Description
+
+
+## Sources de données
+
+DASS (méthode PPE reprise – étude zones isolées)
+
+## Méthode de calcul
+
+
+
+## Modalités de calcul
+
+Affectation par unité de distribution puis agrégation au captage.
+
+## Contraintes / limites
+
+Données estimées à partir de méthodes indirectes (même méthode que pour le projet pression PPE), avec incertitudes sur la répartition réelle.
+
+## Modalités de calcul
+
+Affectation par unité de distribution puis agrégation au captage.
+
+## Modalité de calcul
+
+Affectation par unité de distribution puis agrégation au captage.
+

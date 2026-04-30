@@ -1,0 +1,30 @@
+nom_indicateur;contraintes;modalites
+Capacité de production;Donnée non systématiquement disponible ou homogène selon les captages, nécessitant une consolidation des sources DAVAR.;Affectation au captage puis propagation aux unités associées (bassin versant, périmètres).
+Longueur réseau;Données issues de bases non relationnelles, nécessitant une structuration et une gestion des doublons entre unités de distribution.;Agrégation par unité de distribution puis association au captage, en évitant les doublons.
+Capacité réservoir;Données non liées entre captage et unité de distribution, nécessitant un travail de modélisation des relations.;Somme des volumes par unité de distribution, puis rattachement au captage.
+Traitement;Hétérogénéité des informations disponibles, nécessitant une standardisation des classes de traitement.;Attribution d’une classe standardisée par unité de distribution, puis association au captage.
+Interconnexion;Effet ambigu sur la criticité (réduction de vulnérabilité vs propagation des risques), nécessitant un arbitrage méthodologique.;Attribution d’un statut binaire par unité de distribution, sans agrégation complexe.
+Population desservie;Données estimées à partir de méthodes indirectes (même méthode que pour le projet pression PPE), avec incertitudes sur la répartition réelle.;Affectation par unité de distribution puis agrégation au captage.
+Capacité secours;Absence de données directes et faible pertinence identifiée pour l’analyse multicritère.;Calcul théorique à partir d’indicateurs existants, sans intégration dans le modèle principal.
+Statut AODPE;Donnée fiable mais nécessitant une mise à jour régulière pour garantir sa validité réglementaire.;Attribution directe au captage, sans transformation.
+Statut PPE;Processus d’instruction long avec état intermédiaire. ;Attribution directe au captage, sans transformation.
+Type ouvrage;Nécessité de standardiser les typologies pour assurer une comparaison cohérente.;Attribution directe au captage, sans transformation.
+Statut captage;Information descriptive pouvant évoluer, sans impact direct sur la criticité.;Attribution directe au captage, sans transformation. Utilisation à titre informatif
+Surface érosion;Données non homogènes spatialement, limitant la comparabilité à l’échelle du territoire.;Calcul surfacique par unité spatiale régulière puis agrégation au bassin versant.
+Terrain nu;Dépendance à une source unique (MOS), nécessitant une validation de la qualité et de la mise à jour.;Calcul surfacique par unité spatiale régulière puis agrégation au bassin versant.
+Glissement terrain;Donnée modélisée et interprétée, non directement observée.;Calcul surfacique par unité spatiale régulière puis agrégation au bassin versant.
+Incendies cumulés;Résolution des données variable selon les capteurs, pouvant affecter la précision.;Cumul des surfaces brûlées sur une période donnée et agrégation par bassin versant.
+Occupation sol;Nécessité de simplifier les classes pour assurer la lisibilité et la comparabilité.;Regroupement des classes du MOS en catégories simplifiées puis calcul de proportions.
+EEE;Absence de base de données consolidée et incertitude sur la disponibilité.;Intégration conditionnée à la disponibilité des données, sans méthode définie à ce stade.
+Activité minière;Accès aux données limité (données sensibles ou non publiques).;Calcul des surfaces d’emprise puis agrégation par bassin versant.
+ICPE;Données dispersées entre plusieurs acteurs, absence de base consolidée et typologie homogène.;Comptage des installations par unité spatiale avec possibilité de typologie.
+Pollution accidentelle;Absence de base de données structurée et historisée.;Comptage des événements sur une période donnée, si données disponibles.
+Urbanisation;Dépendance à la qualité et à l’actualisation de la BD TOPO.;Comptage des bâtiments par unité spatiale puis agrégation.
+Habitations;Croisement de sources nécessaire, avec incertitudes sur la précision spatiale.;Comptage ou estimation des logements par unité spatiale.
+IDPR;Donnée robuste mais reposant sur un modèle, nécessitant une bonne compréhension.;Utilisation directe de l’indice existant avec agrégation spatiale.
+Géologie;Risque de redondance avec d’autres indicateurs et nécessité de simplification.;Regroupement des classes géologiques en catégories simplifiées.
+AODPE nombre;Nécessité de suivi régulier pour intégrer les évolutions des autorisations.;Comptage des prélèvements associés à chaque captage.
+AODPE volume;Dépendance à la qualité des déclarations et à leur mise à jour.;Somme des volumes autorisés associés à chaque captage.
+BBR;Donnée issue d’un modèle nécessitant validation et mise à jour régulière.;Utilisation directe de la classe issue du modèle avec agrégation au bassin versant.
+Pluviométrie;Redondance avec d’autres indicateurs de disponibilité de la ressource.;Calcul de la moyenne spatiale par bassin versant.
+Qualité eau;Disponibilité limitée et complexité d’interprétation des données sanitaires.;Attribution d’une classe par captage selon les données disponibles.
