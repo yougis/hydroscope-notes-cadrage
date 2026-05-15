@@ -13,7 +13,7 @@ resume: ""
 
 :::: {.callout-note title="Note de version"}
 
-Cette version est une révision de la note de cadrage fonctionnel v0.3, repositionnée suite au COPRO n°1 et à la réunion du 14 avril 2026. Le périmètre fonctionnel est centré sur l'**interface PRINCIPALE** regroupant tous les partenaires. D'autres services numériques destinés à des publics plus ou moins avertis sur la gestion de la ressource en eau (tableau de bord, accès aux données structurés, fiches synthétiques par BVAEP) feront l'objet d'une notes de cadrage fonctionnelle dédiée.
+Cette version est une révision de la note de cadrage fonctionnel v0.3, repositionnée suite au COPRO n°1 et à la réunion du 14 avril 2026. Le périmètre fonctionnel est centré sur l'**interface PRINCIPALE** regroupant désormais tous les partenaires. D'autres services numériques ¨**SATELITTES**¨ destinés à des publics plus ou moins avertis sur la gestion de la ressource en eau (tableau de bord, accès à la base de données structurés, fiches synthétiques par BVAEP et/ou captage) fera l'objet d'une seconde note de cadrage fonctionnelle. Cette révision applique aussi des ajustements sur l'unité de gestion principale qui s'oriente désormais sur les captages plutôt que les BVAEP, tout en conservant une navigation hiérarchique entre eux. Une unité de gestion (Unité de Distribution) est aussi intégrés à la définition des fonctionnalité.
 
 Les items `@todo` correspondent à des points à finaliser, à valider ou à enrichir lors des réunions avec de futurs utilisateurs identifiés.
 
@@ -33,15 +33,17 @@ Historique des versions du document :
 
 {{< pagebreak >}}
 
-La note de cadrage fonctionnelle va permettre de :
+# Avant propos
 
-- Définir le périmètre fonctionnel de l'interface **PRINCIPALE** ;
+La note de cadrage fonctionnelle permet de :
+
+- Définir le périmètre fonctionnel de **l'interface PRINCIPALE** ;
 - Apporter une vision commune et partagée des fonctionnalités à l'ensemble des acteurs impliqués (équipe projet, membres du COPRO, COPIL, partenaires) ;
 - Apporter des propositions de fonctionnalités et d'organisation de l'interface ;
 - Établir la base des discussions pour les réunions d'étude des besoins et des spécifications détaillées avec de futurs utilisateurs identifiés ;
 - Identifier les points à valider ou à enrichir pour orienter les discussions lors des réunions de travail à venir.
 
-Le document devrait être validé par les membres du COPRO avant le démarrage des réunions avec les partenaires.
+Le document devra être validé par les membres du COPRO avant le démarrage des réunions bilatérales avec les partenaires.
 
 
 ## Rappel de contexte 
@@ -57,29 +59,34 @@ Le projet s'articule autour de quatre domaines fonctionnels nommés ainsi :
 
 ## Positionnement de l'interface PRINCIPALE vis à vis des autres services numériques inclus dans Hydroscope 
 
-Suite au COPRO n⁰1 et à la réunion du 14 avril 2026, l'architecture cible évolue vers un regroupement en  une interface **PRINCIPALE** et plusieurs services numériques **SECONDAIRES**. Cette nouvelle approche reste à éprouver et à valider à l'issue de l'analyse des besoins.
+Suite au COPRO n⁰1 et à la réunion du 14 avril 2026, l'architecture cible évolue vers un regroupement en une interface **PRINCIPALE** et plusieurs services numériques **SATELITTES**. Cette nouvelle approche reste à éprouver et à valider durant le COPRO n⁰2.
 
-**Interface PRINCIPALE** : il s'agit d'une application destiné à plusieurs profils, avec des droits d'accès aux données et à certaines fonctionnalités variables. La fonctionnalité majeure de cette application est de permettre l'accès à un jeux de d'indicateur important et de pouvoir effectuer des analyses multicritères en totale autonomie.
+@todo [priority=high, section=architecture] : Valider en COPRO la pertinence d'une architecture à deux niveaux (interface principale + services satellites) et ajuster le périmètre fonctionnel de chaque composant en conséquence.
 
-**Services numériques SECONDAIRES** : Plusieurs services et applications destinés à des publics plus ou moins avertis sur la gestion de la ressource en eau. Il s'agit d'un **tableau de bord**, d'un **accés aux données structurés** et de **fiches synthétiques par BVAEP**.  Les fonctionnalités de ces interfaces seront décrites dans une note de cadrage fonctionnelle dédiée. 
+**Interface PRINCIPALE** : il s'agit d'une application destiné à plusieurs profils, avec des droits d'accès variables aux données et aux fonctionnalités. La fonctionnalité majeure de cette application est de permettre l'accès à un jeux de d'indicateur et de pouvoir effectuer des analyses multicritères en totale autonomie.
+
+**Services numériques ¨SATELITTES** : plusieurs services et applications destinés à des publics plus ou moins avertis sur la gestion de la ressource en eau. Il s'agit d'un **tableau de bord**, d'un **accés aux données structurés** et de **fiches synthétiques par BVAEP / captages / communes**.  Les fonctionnalités de ces interfaces seront décrites dans une note de cadrage fonctionnelle dédiée.
 
 Cette architecture cible reprend les grands principes des dispositifs de service numérique de l'OEIL (ex. Vulcain / Vulcain Pro, bilan et fiches communales des incendies), avec une **stratification des interfaces** selon les profils utilisateurs et une **différenciation des fonctionnalités** en fonction des besoins et compétences de chaque profil. L'objectif est de garantir une expérience utilisateur adaptée à chaque public tout en assurant la cohérence et la maintenabilité du système.
 
 ## Profils utilisateurs ciblés dans l'interface PRINCIPALE
 
-Les utilisateurs techniciens et experts de la DAVAR, de la DASS, de la DIMENC et de leurs partenaires techniques (bureaux d'étude) sont les principaux bénéficiaires de l'interface **PRINCIPALE**. Ils utilisent l'interface pour des diagnostics avancés, des analyses multicritères et les partager, ainsi que d'acceder aux données brutes organisées.
+Les utilisateurs techniciens et experts de la DAVAR, de la DASS, de la DIMENC et de leurs partenaires institutionnels techniques et privés (bureaux d'étude) sont les principaux bénéficiaires de l'interface **PRINCIPALE**. Ils utilisent l'interface pour des diagnostics cartographiques, des analyses multicritères sur les indicateurs disponibles dans l'interface et partagent leur analyse avec des partenaires.
 
 
-Des utilisateurs concernés par des diagnostics des bassins versants du gouvernement, des provinces, des communaux, des syndicats, de conseils, d'associations et autres acteurs locaux impliqués dans la gestion de l'eau potable. Ils utilisent l'interface pour consulter la situation de leur territoire, suivre les alertes de changement et parfois pour appliquer leur vision stratégique à travers des pondérations personnalisées (partagée ou originale).
+Les utilisateurs concernés par des diagnostics des bassins versants du gouvernement, des provinces, des communes, des syndicats, des conseils, d'associations et autres acteurs locaux impliqués dans la gestion de l'eau potable. Ils utilisent l'interface pour consulter la situation de leur territoire, suivre les changements et pour avoir une vision stratégique à travers des analyses multicritères cartographiques.
 
 @todo [priority=high, section=profils] : Préciser d'avantage les profils utilisateurs ciblés, notamment en identifiant des rôles spécifiques au sein des provinces et des communes (ex. technicien de l'eau, responsable environnement). Pourquoi pas concevoir quelques persona pour nous permettre de mieux cerner les besoins spécifiques de chaque type d'utilisateur et d'adapter les fonctionnalités en conséquence.
 
 
 ## Objectifs et décisions que l'interface doit permettre
 
-Afin de définir précisément les objectifs de l'interface **PRINCIPALE**, nous proposons des questions opérationnelles clés auxquelles elle doit permettre de répondre. Ces questions seront ajustées avec les partenaires lors des ateliers de cadrage.
+Voici quelques questions opérationnelles auxquelles l'interface PRINCIPALE doit permettre de répondre. Ces questions ne sont pas exhaustives:
 
-- Quels BVAEP sont aujourd'hui sous pression forte, selon quels critères et depuis quand ?
+- En tant que gestionnaire institutionnel : 
+  - Je souhaite pouvoir identifier les captages et des bassins versants associés du territoire qui sont vulnérables afin de prioriser mes actions de gestion et d'investissement.
+  - En applicant des critères de pondération différents, je souhaite pouvoir simuler différentes stratégies de gestion et comparer leurs impacts sur la priorisation des captages et des bassins versants associés.
+  - avoir une vision spatiale des analyses multicritères pour comparer la situation entre plusieurs captages et des bassins versants associés.
 - Comment comparer la situation entre plusieurs bassins versants de ma commune ou province ?
 - Quels périmètres de protection ne sont pas encore régularisés?
 - Une alerte de changement environnemental détectée automatiquement est-elle fondée ? Quelle est sa gravité ?
@@ -109,7 +116,7 @@ L'interface permet la superposition de couches cartographiques multiples, avec c
 
 #### Principe de l'analyse multicritère
 
-L'analyse multicritère est identifiée comme **la fonctionnalité centrale partagée** entre les différents profils utilisateurs de l'interface PRINCIPALE. Elle permet de croiser différentes familles de données pour obtenir un état global "d'intégrité" des unités de gestion (BVAEP, périmètres de protection, captages) :
+L'analyse multicritère est identifiée comme **la fonctionnalité centrale partagée** entre les différents profils utilisateurs de l'interface **PRINCIPALE**. Elle permet de croiser différentes familles de données pour obtenir un état global "d'intégrité" des unités de gestion (BVAEP, périmètres de protection, captages) :
 
 5 familles d'indicateurs sont mobilisées pour le diagnostic :
 

@@ -1,0 +1,30 @@
+
+
+## Objectifs et décisions que l'interface doit aider à prendre
+
+Voici quelques questions opérationnelles auxquelles l'interface PRINCIPALE doit permettre de répondre.
+
+
+- Comparer les captages et les bassins versants associés de mon territoire pour identifier les plus vulnérables et prioriser mes actions de gestion.
+- Identifier les pressions et les enjeux qui pèsent sur un captage ou un bassin versant pour orienter mes actions de gestion.
+- Suivre l'évolution de la situation d'un captage ou d'un bassin versant dans le temps pour évaluer l'efficacité de mes actions de gestion.
+
+
+- En tant que gestionnaire institutionnel : 
+  - Je consulte la carte des captages et des bassins versants de mon territoire.
+  - Je recherche un captage.
+  - J'identifie un captage : 
+    - je peux afficher la synthèse aggrégée des indicateurs associés à ce captage pour comprendre les pressions et les enjeux qui pèsent sur lui.
+    - je peux afficher les tendance d'évolution de certains indicateurs.
+    - Je peux accéder à une fiche synthétique du captage qui me donne une vision d'ensemble de sa situation.
+    - Je peux voir les indicateurs associés au bassin versant pour voir les pressions et les enjeux qui pèsent sur ce captage.
+  - Je souhaite pouvoir identifier les captages et des bassins versants associés du territoire qui sont vulnérables afin de prioriser mes actions de gestion et d'investissement.
+      - En applicant des critères de pondération différents sur les indicateurs ou famille d'indicateurs : 
+        - je souhaite pouvoir simuler différentes stratégies de gestion et comparer leurs impacts sur la "priorisation" des captages et des bassins versants associés.
+        - je souhaite avoir une vision spatiale des analyses multicritères pour comparer la situation entre plusieurs captages et des bassins versants associés.
+        - je souhaite pouvoir partager mes analyses et mes diagnostics avec mes collègues et partenaires pour faciliter la coordination des actions de gestion.
+    
+      - Je peux voir les indicateurs clés de tous les captages de mon territoire, et les comparer entre eux pour identifier les plus vulnérables.
+
+- Quels périmètres de protection ne sont pas encore régularisés?
+- Comment accéder aux données brutes organisées pour les exploiter dans mon propre SIG ou outil d'analyse ?
