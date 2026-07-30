@@ -1,0 +1,68 @@
+Cet EPIC regroupe l’ensemble des fonctionnalités permettant de restituer, explorer et interpréter les données et indicateurs produits par HydroScope. Il constitue l’interface principale entre le système et les utilisateurs, en traduisant des informations complexes en représentations compréhensibles et exploitables.
+
+L’enjeu est de proposer des outils de visualisation adaptés à des profils variés, tout en garantissant une lecture fiable et non ambiguë des données.
+
+#### Description
+
+L’EPIC couvre la conception et la mise en œuvre des interfaces de consultation et d’exploration des données. Il s’appuie sur les indicateurs produits (EPIC 4) et les référentiels (EPIC 3) pour proposer des restitutions à différentes échelles spatiales et temporelles.
+
+Les visualisations doivent permettre à la fois une lecture synthétique des informations (tableaux de bord) et une exploration plus fine (cartographie, graphiques), en fonction des besoins des utilisateurs.
+
+Une attention particulière est portée à l’ergonomie, à la lisibilité et à la cohérence des représentations proposées.
+
+#### Fonctionnalités
+
+- **Cartographie interactive**  
+Visualisation des données et indicateurs sur des supports cartographiques :
+  - affichage des bassins versants, captages et autres objets géographiques  
+  - représentation des indicateurs sous forme de couches thématiques  
+  - navigation (zoom, déplacement) et interaction (sélection, survol)  
+  - superposition de plusieurs couches d’information  
+
+La cartographie constitue un élément central pour appréhender les dynamiques territoriales.
+
+- **Tableaux de bord**  
+Mise à disposition de vues synthétiques permettant de suivre les principaux indicateurs :
+  - sélection d’indicateurs clés  
+  - visualisation agrégée par territoire ou thématique  
+  - accès rapide à l’information essentielle  
+
+Ces tableaux de bord doivent être adaptés aux différents profils utilisateurs.
+
+- **Graphiques temporels**  
+Représentation de l’évolution des indicateurs dans le temps :
+  - séries temporelles  
+  - comparaison de périodes  
+  - identification de tendances et de ruptures  
+
+Ces outils permettent d’analyser les dynamiques et les évolutions.
+
+- **Comparaisons spatiales**  
+Possibilité de comparer plusieurs territoires ou objets :
+  - comparaison entre bassins versants  
+  - comparaison entre captages  
+  - visualisation simultanée de plusieurs entités  
+
+Ces fonctionnalités facilitent la priorisation et l’identification des situations contrastées.
+
+- **Monitoring**
+
+Les fonctionnalités de monitoring dans cet EPIC visent à rendre visibles et compréhensibles les informations de suivi pour les utilisateurs.
+
+Elles comprennent :
+- la mise à disposition de tableaux de bord dédiés au monitoring (technique, qualité des données, indicateurs métier) ;
+- l’affichage d’informations de fraîcheur et de qualité directement dans les visualisations (cartes, graphiques, fiches) ;
+- des outils de suivi temporel permettant d’identifier des tendances ou des anomalies ;
+- des vues synthétiques facilitant l’identification rapide des situations nécessitant une attention particulière.
+
+Ces fonctionnalités doivent rester lisibles et adaptées aux différents profils utilisateurs.
+
+
+
+#### Points de vigilance
+
+- Risque de surcharge visuelle pouvant nuire à la compréhension  
+- Nécessité d’adapter les visualisations aux différents profils d’utilisateurs  
+- Importance de la cohérence entre les représentations (cartes, graphiques, tableaux)  
+- Risque de mauvaise interprétation lié à des choix de représentation (échelles, couleurs, classifications)  
+- Dépendance à la qualité et à la fraîcheur des données affichées

@@ -1,0 +1,66 @@
+EPIC;ID User Story;Libellé User Story;MVP
+EPIC 1 – Gestion des données;US1.1;Importer des données via fichier;TRUE
+EPIC 1 – Gestion des données;US1.3;Planifier des imports simples;TRUE
+EPIC 1 – Gestion des données;US1.4;Normaliser les données;TRUE
+EPIC 1 – Gestion des données;US1.5;Gérer les erreurs d’import;TRUE
+EPIC 1 – Gestion des données;US1.6;Historiser les données;TRUE
+EPIC 1 – Gestion des données;US1.2;Connecter une API externe;FALSE
+EPIC 1 – Gestion des données;US1.7;Rejouer un traitement;FALSE
+EPIC 2 – Qualité des données;US2.1;Détecter des valeurs aberrantes;TRUE
+EPIC 2 – Qualité des données;US2.4;Calculer un taux de complétude;TRUE
+EPIC 2 – Qualité des données;US2.5;Qualifier la fiabilité;TRUE
+EPIC 2 – Qualité des données;US2.6;Associer des métadonnées;TRUE
+EPIC 2 – Qualité des données;US2.2;Vérifier cohérence temporelle;FALSE
+EPIC 2 – Qualité des données;US2.3;Vérifier cohérence spatiale;FALSE
+EPIC 2 – Qualité des données;US2.7;Visualiser la qualité;FALSE
+EPIC 3 – Référentiels;US3.1;Gérer les bassins versants;TRUE
+EPIC 3 – Référentiels;US3.2;Gérer les captages;TRUE
+EPIC 3 – Référentiels;US3.4;Gérer la maille H3;TRUE
+EPIC 3 – Référentiels;US3.5;Définir un indicateur;TRUE
+EPIC 3 – Référentiels;US3.3;Gérer périmètres de protection;FALSE
+EPIC 3 – Référentiels;US3.6;Gérer les profils utilisateurs;FALSE
+EPIC 3 – Référentiels;US3.7;Versionner les référentiels;FALSE
+EPIC 4 – Calcul d’indicateurs;US4.1;Calculer des indicateurs simples;TRUE
+EPIC 4 – Calcul d’indicateurs;US4.2;Agréger à l’échelle BV;TRUE
+EPIC 4 – Calcul d’indicateurs;US4.3;Agrégation temporelle;TRUE
+EPIC 4 – Calcul d’indicateurs;US4.5;Filtrer les données;TRUE
+EPIC 4 – Calcul d’indicateurs;US4.4;Paramétrer un calcul;FALSE
+EPIC 4 – Calcul d’indicateurs;US4.6;Versionner un indicateur;FALSE
+EPIC 4 – Calcul d’indicateurs;US4.7;Recalculer un indicateur;FALSE
+EPIC 5 – Analyse multicritère;US5.1;Construire un indice composite;FALSE
+EPIC 5 – Analyse multicritère;US5.2;Définir des pondérations;FALSE
+EPIC 5 – Analyse multicritère;US5.3;Tester des scénarios;FALSE
+EPIC 5 – Analyse multicritère;US5.4;Comparer scénarios;FALSE
+EPIC 5 – Analyse multicritère;US5.5;Visualiser contributions;FALSE
+EPIC 5 – Analyse multicritère;US5.6;Documenter méthodes;FALSE
+EPIC 6 – Visualisation;US6.1;Visualiser sur carte;TRUE
+EPIC 6 – Visualisation;US6.2;Afficher indicateurs carto;TRUE
+EPIC 6 – Visualisation;US6.3;Navigation (zoom  filtres);TRUE
+EPIC 6 – Visualisation;US6.4;Graphiques temporels;TRUE
+EPIC 6 – Visualisation;US6.7;Fiche territoire;TRUE
+EPIC 6 – Visualisation;US6.5;Comparer territoires;FALSE
+EPIC 6 – Visualisation;US6.6;Tableau de bord avancé;FALSE
+EPIC 7 – Aide à la décision;US7.1;Définir des seuils;TRUE
+EPIC 7 – Aide à la décision;US7.3;Identifier tendances;TRUE
+EPIC 7 – Aide à la décision;US7.4;Fiche synthétique;TRUE
+EPIC 7 – Aide à la décision;US7.2;Détecter dépassement;FALSE
+EPIC 7 – Aide à la décision;US7.5;Prioriser territoires;FALSE
+EPIC 7 – Aide à la décision;US7.6;Aide à interprétation avancée;FALSE
+EPIC 8 – Export;US8.1;Export CSV;TRUE
+EPIC 8 – Export;US8.6;Export vue simple;TRUE
+EPIC 8 – Export;US8.2;Export SIG;FALSE
+EPIC 8 – Export;US8.3;Rapport PDF;FALSE
+EPIC 8 – Export;US8.4;Partage lien;FALSE
+EPIC 8 – Export;US8.5;API;FALSE
+EPIC 9 – Utilisateurs;US9.2;Authentification;TRUE
+EPIC 9 – Utilisateurs;US9.3;Rôles simples;TRUE
+EPIC 9 – Utilisateurs;US9.1;Créer compte;FALSE
+EPIC 9 – Utilisateurs;US9.4;Restreindre accès fin;FALSE
+EPIC 9 – Utilisateurs;US9.5;Adapter interface;FALSE
+EPIC 9 – Utilisateurs;US9.6;Suivre connexions;FALSE
+EPIC 10 – Traçabilité;US10.1;Tracer imports;TRUE
+EPIC 10 – Traçabilité;US10.2;Tracer calculs;TRUE
+EPIC 10 – Traçabilité;US10.3;Journal actions;FALSE
+EPIC 10 – Traçabilité;US10.4;Historique modifications;FALSE
+EPIC 10 – Traçabilité;US10.5;Reconstituer calcul;FALSE
+EPIC 10 – Traçabilité;US10.6;Audit usages;FALSE

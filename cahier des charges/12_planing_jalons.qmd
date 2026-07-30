@@ -1,0 +1,118 @@
+## Planning et jalons
+
+Le planning du projet HydroScope s’inscrit dans une logique itérative et incrémentale, tout en intégrant des contraintes calendaires fortes liées aux financements (OFB / PEP). Il vise à concilier une approche Agile avec des jalons contractuels permettant de sécuriser le pilotage du projet.
+
+La période de développement est prévue du **1er novembre 2026 au 31 mai 2027**, avec une mise à disposition progressive des fonctionnalités.
+
+### Macro-planning
+
+Le projet est structuré en grandes phases :
+
+- **Phase de préparation (octobre 2026)**
+  - finalisation du cadrage fonctionnel et technique ;
+  - consolidation du backlog initial ;
+  - préparation des environnements ;
+  - cadrage des flux de données avec les partenaires.
+- **Phase de développement – itérative (novembre 2026 → avril 2027)**
+  - développement par sprints (2 à 4 semaines) ;
+  - intégration progressive des données ;
+  - validations régulières avec les utilisateurs ;
+  - ajustement du backlog en continu.
+- **Phase de stabilisation et recette (mai 2027)**
+  - tests fonctionnels et méthodologiques ;
+  - correction des anomalies ;
+  - validation des indicateurs ;
+  - préparation à la mise en production.
+- **Mise en production initiale (fin mai 2027)**
+
+### Jalons contractuels
+
+Afin de sécuriser le pilotage du projet, plusieurs jalons contractuels sont définis :
+
+- **J1 – Lancement du projet (01/11/2026)**  
+  Démarrage des développements, validation du backlog initial, des modalités de travail et des engagements de fourniture de données.
+
+- **J2 – Validation du socle technique et des flux de données (mi-décembre 2026)**  
+  Mise en place des mécanismes d’import, structuration des données, premiers référentiels opérationnels.
+
+- **J3 – Livraison du MVP (fin janvier 2027)**  
+  Mise à disposition d’une première version fonctionnelle incluant :
+  - intégration de données structurées ;
+  - calcul d’indicateurs simples ;
+  - visualisation cartographique et temporelle ;
+  - premières fiches territoires.
+- **J4 – Enrichissement fonctionnel (mars 2027)**  
+  Extension des fonctionnalités :
+  - enrichissement des indicateurs ;
+  - amélioration des visualisations ;
+  - premières fonctionnalités d’aide à la décision ;
+  - consolidation des données.
+- **J5 – Recette fonctionnelle et méthodologique (mai 2027)**  
+  Validation par la MOA :
+  - conformité fonctionnelle ;
+  - validation des indicateurs ;
+  - correction des anomalies critiques ;
+  - validation des performances globales.
+- **J6 – Mise en production (31/05/2027)**  
+  Mise à disposition de la version initiale du système.
+
+### Pilotage et suivi
+
+Le suivi du planning repose sur :
+
+- l’avancement des sprints ;
+- le suivi du backlog produit et de ses priorités ;
+- les démonstrations régulières (sprint review) ;
+- les comités de pilotage (COPIL) et comités techniques (COTECH) ;
+- le suivi des anomalies et des corrections.
+
+Des ajustements pourront être réalisés en fonction de l’avancement réel, dans le respect des jalons contractuels.
+
+### Dépendances
+
+Le respect du planning dépend de plusieurs facteurs :
+
+- disponibilité et qualité des données sources ;
+- mobilisation des acteurs pour les validations ;
+- formalisation des engagements de fourniture de données ;
+- validation des choix méthodologiques (indicateurs) ;
+- contraintes techniques liées à l’intégration des données.
+
+Ces dépendances devront être suivies de manière continue.
+
+### Gestion des risques projet
+
+Le projet comporte des risques pouvant impacter les délais, la qualité ou le périmètre. Leur identification et leur suivi sont essentiels pour sécuriser le projet.
+
+#### Principaux risques
+
+- **Disponibilité des données** : retard ou absence de certaines données nécessaires ;
+- **Qualité des données** : données incomplètes ou hétérogènes ;
+- **Dépendance aux partenaires** : variabilité dans les contributions des acteurs ;
+- **Complexité méthodologique** : difficulté à stabiliser les indicateurs ou les méthodes ;
+- **Charge technique** : sous-estimation des volumes ou des performances attendues ;
+- **Dérive du périmètre** : ajout de fonctionnalités non priorisées ;
+- **Adoption utilisateur** : difficulté d’appropriation de l’outil.
+
+#### Suivi des risques
+
+Les risques feront l’objet :
+- d’un suivi régulier en COTECH et COPIL ;
+- d’une mise à jour continue ;
+- de la définition de mesures de mitigation adaptées.
+
+#### Mesures de mitigation (exemples)
+
+- formalisation des engagements de fourniture de données ;
+- priorisation stricte du MVP et du backlog ;
+- validation progressive des indicateurs ;
+- mise en place de contrôles qualité sur les données ;
+- implication régulière des utilisateurs.
+
+### Points de vigilance
+
+- Respect des échéances liées aux financements (OFB / PEP)  
+- Nécessité de stabiliser rapidement un MVP opérationnel  
+- Coordination entre rythme Agile et contraintes contractuelles  
+- Anticipation des phases de recette et de validation méthodologique  
+- Gestion des dépendances liées aux données et aux partenaires  

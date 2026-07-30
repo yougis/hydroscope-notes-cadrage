@@ -4,3 +4,4 @@ _extensions/*
 .vscode/*
 cadrage fonctionnel/note cadrage fonctionnelle - Gestionnaire_files/*
 cadrage strategique/cadrage_strategique_files/*
+**/*.quarto_ipynb

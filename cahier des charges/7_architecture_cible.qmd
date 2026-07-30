@@ -1,0 +1,72 @@
+## Architecture cible (niveau macro)
+
+L’architecture cible d’HydroScope vise à structurer de manière cohérente les différents composants du système afin de répondre aux besoins fonctionnels, aux exigences non fonctionnelles et aux contraintes d’interopérabilité. Elle doit permettre de garantir la robustesse, la scalabilité et la maintenabilité de la solution, tout en facilitant les évolutions futures.
+
+Cette architecture repose sur une séparation claire des responsabilités entre les différentes couches du système : acquisition des données, stockage, traitement, exposition et restitution.
+
+### Principes généraux
+
+L’architecture s’appuie sur les principes suivants :
+
+- **Modularité** : séparation des composants pour faciliter la maintenance et les évolutions ;
+- **Scalabilité** : capacité à gérer l’augmentation des volumes de données et des usages ;
+- **Interopérabilité** : intégration facilitée avec des systèmes externes et respect des standards ;
+- **Traçabilité** : capacité à suivre les flux de données et les traitements ;
+- **Ouverture** : recours privilégié à des technologies open source lorsque cela est pertinent.
+
+### Schéma fonctionnel
+
+L’architecture s’organise autour de plusieurs briques principales :
+
+- **Sources de données**  
+  Données internes et externes (services institutionnels, données environnementales, données satellitaires, bases existantes).
+
+- **Couche d’ingestion**  
+  Mécanismes d’import et de connexion aux sources (API, fichiers, flux automatisés), incluant des processus de validation initiale.
+
+- **Couche de stockage**  
+  Stockage des données brutes et des données structurées :
+  - base de données (relationnelle et/ou spatiale)  
+  - stockage des historiques  
+  - gestion des référentiels  
+
+- **Couche de traitement**  
+  Traitements permettant :
+  - la transformation et la normalisation des données  
+  - le calcul des indicateurs  
+  - l’agrégation spatiale et temporelle  
+  - l’application des règles métier  
+
+- **Couche d’exposition (API)**  
+  Mise à disposition des données et indicateurs via des interfaces programmatiques, permettant leur consommation par l’application et par des systèmes tiers.
+
+- **Couche de restitution (front-end)**  
+  Interfaces utilisateurs :
+  - cartographie interactive  
+  - tableaux de bord  
+  - fiches détaillées  
+  - outils d’exploration et d’analyse  
+
+### Intégration au système d’information existant
+
+HydroScope doit s’intégrer dans l’écosystème existant des partenaires.
+
+Cela implique :
+- la connexion à des sources de données existantes sans duplication inutile ;
+- la capacité à consommer des services externes (API, flux de données) ;
+- la possibilité de diffuser les données produites vers d’autres systèmes ;
+- la compatibilité avec les outils SIG et les standards géographiques.
+
+Cette intégration doit être pensée de manière à limiter les redondances et à favoriser la cohérence des données entre systèmes.
+
+### Choix technologiques (à cadrer)
+
+Les choix technologiques seront précisés lors des phases de conception détaillée. Ils devront répondre aux exigences du projet en matière de performance, de sécurité, d’interopérabilité et de maintenabilité.
+
+Une attention particulière sera portée :
+- à l’utilisation de technologies open source ;
+- à la gestion des données géographiques ;
+- à la capacité à traiter des volumes de données importants ;
+- à la facilité de déploiement et d’exploitation.
+
+Ces choix devront être validés en cohérence avec les contraintes des partenaires et les compétences disponibles.

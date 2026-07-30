@@ -1,0 +1,51 @@
+## Parties prenantes et gouvernance
+
+La mise en œuvre du projet HydroScope repose sur une gouvernance partenariale associant des acteurs institutionnels, techniques et opérationnels intervenant à différentes étapes du cycle de vie de la donnée et de la décision publique.
+
+### Acteurs
+
+L’**OEIL** assure le portage du projet HydroScope. Il coordonne les travaux, centralise les données et garantit la cohérence globale du dispositif, notamment en matière de structuration de l’information et de production d’indicateurs.
+
+Les **services du Gouvernement de la Nouvelle-Calédonie**, en particulier la **DAVAR (service de l’eau)**, interviennent en tant qu’acteurs clés sur les aspects réglementaires, techniques et méthodologiques liés à la gestion des ressources en eau et à la mise en œuvre des périmètres de protection.
+
+Les **Provinces** contribuent à la fois à la production de données environnementales et à leur analyse, dans le cadre de leurs compétences en matière d’environnement et d’aménagement du territoire. Elles jouent également un rôle d’appui auprès des communes.
+
+Les **Communes** sont les gestionnaires opérationnels des captages d’eau potable. Elles constituent des utilisateurs centraux de l’outil, tant pour le suivi de leurs ressources que pour l’aide à la décision dans la gestion quotidienne et stratégique.
+
+Les **partenaires techniques** (producteurs de données, organismes scientifiques, opérateurs) participent à l’alimentation du système, à la qualification des données et à la définition des indicateurs.
+
+Enfin, les **utilisateurs finaux** regroupent différents profils (techniciens, ingénieurs, décideurs, partenaires institutionnels), avec des besoins différenciés en matière d’accès, de lecture et d’exploitation de l’information.
+
+### Rôles et responsabilités
+
+La **Maîtrise d’Ouvrage (MOA)**, assurée par l’OEIL, définit les orientations stratégiques du projet, exprime les besoins fonctionnels et valide les livrables.
+
+L’**Assistance à Maîtrise d’Ouvrage (AMOA)** accompagne la formalisation des besoins, veille à la cohérence méthodologique, en particulier sur les aspects liés aux indicateurs et aux traitements de données, et assure l’interface entre les acteurs métiers et les équipes techniques.
+
+La **Maîtrise d’Œuvre (MOE)** est en charge de la conception technique, du développement et de la mise en œuvre de la solution, en respectant les exigences fonctionnelles et non fonctionnelles définies.
+
+Les **utilisateurs** sont associés tout au long du projet afin de garantir l’adéquation de l’outil aux usages réels. Ils interviennent notamment dans les phases de recueil des besoins, de tests et de validation fonctionnelle.
+
+### Modalités de validation
+
+La gouvernance du projet s’appuie sur plusieurs instances :
+
+- Le **comité de pilotage (COPIL)**, chargé de définir les orientations stratégiques, de valider les grandes étapes du projet et d’arbitrer les décisions structurantes ;
+- Le **comité technique (COTECH)**, qui assure le suivi opérationnel, la validation des choix fonctionnels et méthodologiques ainsi que la coordination entre les acteurs ;
+- Des **ateliers thématiques et utilisateurs**, permettant de recueillir les besoins, de confronter les propositions fonctionnelles aux usages et d’intégrer les retours terrain.
+
+Les validations sont réalisées de manière itérative, en lien avec les cycles de développement, afin de sécuriser progressivement les choix effectués.
+
+### Organisation du projet en mode Agile
+
+Le projet HydroScope est conduit selon une approche itérative et incrémentale inspirée des méthodes Agile, permettant d’adapter en continu le produit aux besoins des utilisateurs et aux contraintes identifiées.
+
+Le développement s’appuie sur un **backlog produit** structuré en fonctionnalités (EPICS) et décliné en éléments plus fins. Ce backlog est priorisé en continu par la MOA, en fonction de la valeur métier, des contraintes techniques et des enjeux du projet.
+
+Le fonctionnement repose sur des cycles courts de développement (**sprints**), intégrant :
+- des phases de planification (sprint planning),
+- des points de suivi réguliers au sein de l’équipe projet,
+- des **revues de sprint** associant les parties prenantes pour présenter les fonctionnalités développées,
+- des **rétrospectives** visant à améliorer en continu l’organisation et les pratiques.
+
+Des démonstrations régulières sont organisées afin de recueillir les retours des utilisateurs et d’ajuster les priorités. Cette organisation vise à sécuriser les développements, à améliorer la qualité du produit et à garantir son adéquation avec les besoins métiers.

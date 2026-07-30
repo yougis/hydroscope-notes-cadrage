@@ -1,0 +1,106 @@
+## Exigences non fonctionnelles
+
+
+
+Les exigences non fonctionnelles définissent les qualités attendues du système HydroScope au-delà des fonctionnalités métiers. Elles visent à garantir la performance, la sécurité, la robustesse et la pérennité de la solution, tout en assurant une expérience utilisateur adaptée aux différents profils.
+
+Ces exigences doivent être prises en compte dès la conception du système afin d’éviter des limitations structurelles ou des coûts de refonte ultérieurs.
+
+### Performance
+
+Le système doit offrir des temps de réponse compatibles avec les usages attendus :
+
+- affichage des cartes et tableaux de bord : **< 3 secondes** dans des conditions nominales ;
+- chargement de fiches territoires : **< 2 secondes** ;
+- génération de graphiques temporels : **< 3 secondes**.
+
+Les traitements de calcul d’indicateurs doivent être réalisés :
+- en temps quasi immédiat pour les indicateurs simples (quelques secondes) ;
+- en différé (pipeline de traitement en arrière plan) pour les traitements lourds, avec des délais maîtrisés et suivi (cf. monitoring).
+
+@todo[priority=high, subject=lien]: faire le lien avec la section  monitoring pour le suivi des traitements en arrière plan
+
+### Volumétrie et charge
+
+Le système devra être dimensionné pour gérer les volumes suivants :
+
+- plusieurs dizaines de bassins versants et 
+- plusieurs centaines de captages et forages ;
+- plusieurs dizaines d’indicateurs calculés à différentes échelles ; 
+- des données spatiales potentiellement volumineuses (maillages, séries temporelles) ;
+
+@todo[priority=high, subject=processing]: indiquer la volumetrie plus précisement sur les traitements.
+
+
+Le système devra permettre :
+
+- la gestion de **10 à 50 utilisateurs simultanés** (ordre de grandeur) ;
+- des mises à jour régulières des données (de quotidienne à annuelle selon les sources) ;
+- une évolution du volume de données dans le temps.
+
+
+Ces exigences seront précisées et validées lors des phases de conception.
+
+### Sécurité
+
+HydroScope doit garantir la protection des données et des accès au système.
+
+Cela inclut :
+
+- la sécurisation des accès (authentification, gestion des droits) ;
+- la protection des données utilisateur et des données sensibles ;
+- la sécurisation des échanges pour certaines données avec les systèmes externes ;
+- Une traçabilité des accès et des actions.
+
+Les mécanismes de sécurité doivent être adaptés aux différents niveaux d’utilisateurs et aux contraintes institutionnelles.
+
+### Interopérabilité
+
+Le système doit pouvoir s’intégrer dans un écosystème existant de données et d’outils:
+
+- le respect des standards en vigueur, notamment pour les données géographiques ;
+- la capacité à consommer et à exposer des données via des API ;
+- la compatibilité avec les formats d’échange usuels (tabulaires, géographiques) ;
+- la possibilité d’interagir avec des systèmes tiers (API sécurisés ou non, webservices OGC et ESRI, serveur FTP).
+- 
+@todo[priority=high, subject=API]: préciser les usage des API externe prévues.
+
+L’interopérabilité est un facteur clé pour faciliter le partage et la réutilisation des données.
+
+### Accessibilité et ergonomie
+
+L’interface utilisateur doit être conçue pour être accessible à des profils variés, allant des experts aux utilisateurs non spécialisés.
+
+- une navigation claire et intuitive ;
+- des interfaces adaptées aux usages (exploration, analyse, restitution) ;
+- une lisibilité des informations (cartes, graphiques, tableaux) ;
+- une prise en compte des bonnes pratiques en matière d’accessibilité numérique.
+
+L’objectif est de faciliter l’appropriation de l’outil et de limiter les risques de mauvaise interprétation.
+
+### Maintenabilité et évolutivité
+
+Le système doit être conçu de manière à faciliter sa maintenance et son évolution dans le temps.
+
+- une architecture modulaire permettant d’ajouter ou de modifier des fonctionnalités (microservices);
+- une documentation technique et fonctionnelle complète fourni qu format numérique, mise à jour à chaque livraison de version;
+- la possibilité de faire évoluer les indicateurs, les référentiels et les sources de données;
+
+Ces éléments doivent permettre d’assurer la pérennité du système et sa capacité à s’adapter aux évolutions futures.
+
+### Disponibilité
+
+Le système devra garantir un niveau de disponibilité compatible avec les usages :
+
+- disponibilité cible : **≥ 95 %** (hors maintenance planifiée) ;
+- plages de maintenance définies et communiquées ;
+- reprise en cas d’incident dans des délais maîtrisés (cf. SLA).
+
+@todo[priority=high, subject=lien]: faire le lien avec SLA
+
+### Points de vigilance
+
+- Cohérence entre volumétrie estimée et choix techniques  
+- Risque de dégradation des performances avec l’augmentation des données  
+- Nécessité d’ajuster les exigences en fonction des usages réels  
+- Arbitrage entre performance, coût et complexité technique  

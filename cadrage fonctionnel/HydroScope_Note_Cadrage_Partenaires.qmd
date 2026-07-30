@@ -129,8 +129,11 @@ Enjeux, pressions anthropiques, pressions environnementales, pressions quantitat
 - Les enjeux : 
   - AEP  : Population desservie, productivité
   - economiques : volumes de prélèvement autorisés, productivité, aménagements spécifiques, surface aquacole en aval
-  - biologiques : zone protégée, KBA/ZICO, Espèces menacées/micro endémisme
+  - biologiques : zone protégée, KBA/ZICO, Espèces menacées/micro endémisme, couverture végétale, l'Indice de Développement et de Persistance de Réseaux (IDPR),
   - patrimoniaux : site de baignade, site touristique
+
+@todo [priority=high, section=données] : reprendre l'organisation des famille selon l'organisation dans les fiches indicateurs.
+
 
 :::: {.callout-important title="Décision issue de la réunion du 14 avril 2026"}
 

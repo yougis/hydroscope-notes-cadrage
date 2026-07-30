@@ -1,0 +1,59 @@
+Cet EPIC regroupe les fonctionnalités liées à la gestion des accès, des profils et des droits au sein d’HydroScope. Il vise à garantir un accès sécurisé et adapté aux données et aux fonctionnalités, en tenant compte de la diversité des utilisateurs et des usages.
+
+Dans un contexte multi-acteurs, impliquant des partenaires institutionnels, techniques et potentiellement le grand public, la gestion des utilisateurs constitue un élément clé pour assurer à la fois la sécurité des données et la pertinence des informations diffusées.
+
+#### Description
+
+L’EPIC couvre l’ensemble des mécanismes d’authentification, d’autorisation et de gestion des profils utilisateurs. Il doit permettre de contrôler l’accès aux données, de différencier les niveaux de visibilité et d’adapter les fonctionnalités disponibles en fonction des besoins et des rôles.
+
+Le système doit également permettre une gestion évolutive des utilisateurs, afin d’intégrer de nouveaux acteurs et d’adapter les droits en fonction des évolutions organisationnelles.
+
+#### Fonctionnalités
+
+- **Authentification**  
+Mise en place de mécanismes permettant d’identifier les utilisateurs :
+  - connexion sécurisée (identifiant / mot de passe)  
+  - possibilité d’intégration avec des systèmes existants (SSO, annuaires)  
+  - gestion des sessions  
+
+Ces mécanismes doivent garantir la sécurité des accès tout en restant simples d’utilisation.
+
+- **Gestion des droits d’accès**  
+Définition et gestion des autorisations :
+  - accès aux données (restreint ou ouvert selon les profils)  
+  - accès aux fonctionnalités (visualisation, export, paramétrage)  
+  - gestion fine des permissions  
+
+Cette gestion doit permettre de protéger les données sensibles tout en facilitant leur diffusion lorsque cela est pertinent.
+
+- **Profils utilisateurs**  
+Définition de profils adaptés aux différents usages :
+  - profils techniques (experts, analystes)  
+  - profils opérationnels (collectivités, gestionnaires)  
+  - profils décisionnels  
+  - éventuellement accès grand public  
+
+Chaque profil doit bénéficier d’une interface et de fonctionnalités adaptées à ses besoins.
+
+
+- **Monitoring**
+
+
+
+Les fonctionnalités de monitoring dans cet EPIC concernent le suivi et l’analyse des usages de la plateforme.
+
+Elles comprennent :
+- le suivi de la fréquentation de l’outil (connexions, sessions) ;
+- l’analyse des usages par type d’utilisateur (fonctionnalités consultées, parcours) ;
+- le suivi des actions réalisées (consultations, exports, modifications) ;
+- la production de statistiques d’usage pour orienter les évolutions du produit.
+
+Ces éléments contribuent à l’amélioration continue de l’outil et à l’adaptation aux besoins réels.
+
+#### Points de vigilance
+
+- Équilibre entre sécurité des données et accessibilité pour les utilisateurs  
+- Complexité potentielle de la gestion des droits si elle n’est pas bien structurée  
+- Nécessité d’aligner les profils avec les usages réels et les organisations existantes  
+- Gestion des évolutions (arrivées/départs d’utilisateurs, changements de rôle)  
+- Cohérence avec les règles de diffusion définies dans l’EPIC Export et diffusion

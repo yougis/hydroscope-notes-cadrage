@@ -1,0 +1,108 @@
+## Organisation du projet en mode Agile
+
+Le projet HydroScope est conduit selon une approche itérative et incrémentale inspirée des méthodes Agile. Cette organisation vise à adapter en continu le produit aux besoins des utilisateurs, à sécuriser les développements et à garantir une livraison progressive de fonctionnalités opérationnelles.
+
+Elle permet également de concilier des exigences de rigueur méthodologique (notamment sur les indicateurs) avec une capacité d’adaptation aux retours terrain.
+
+### Principes d’organisation
+
+L’organisation du projet repose sur les principes suivants :
+
+- **Itération** : développement par cycles courts permettant des ajustements réguliers ;
+- **Incrémentation** : livraison progressive de fonctionnalités utilisables ;
+- **Priorisation par la valeur** : les fonctionnalités sont développées en fonction de leur utilité métier ;
+- **Co-construction** : implication continue des utilisateurs et partenaires ;
+- **Amélioration continue** : adaptation des pratiques au fil du projet.
+
+### Backlog produit
+
+Le projet s’appuie sur un **backlog produit** structuré, qui constitue le référentiel central des besoins.
+
+Ce backlog est organisé :
+
+- en **EPICS**, correspondant aux grandes fonctionnalités du système ;
+- en **User Stories (US)**, décrivant les besoins du point de vue utilisateur.
+
+Le backlog est :
+
+- maintenu et priorisé par la **MOA**, avec l’appui de l’AMOA ;
+- enrichi et ajusté en continu en fonction des retours utilisateurs et des contraintes techniques ;
+- utilisé comme base de planification des développements.
+
+Le backlog a vocation à être intégré et suivi dans les outils de gestion de projet utilisés par l’OEIL, notamment **Azure DevOps**, permettant :
+
+- le suivi de l’avancement ;
+- la traçabilité des développements ;
+- le lien entre besoins fonctionnels et réalisation technique.
+
+### Stratégie MVP (Minimum Viable Product)
+
+Le projet prévoit la réalisation d’un **MVP (Minimum Viable Product)** dès les premières phases de développement.
+
+Le MVP constitue une première version fonctionnelle du système, centrée sur les fonctionnalités à plus forte valeur métier. Il vise à :
+- proposer un socle opérationnel (données, indicateurs, visualisation) ;
+- permettre une première utilisation par les acteurs ;
+- recueillir des retours utilisateurs en conditions réelles.
+
+Le périmètre du MVP est volontairement restreint afin de :
+- limiter les risques techniques et méthodologiques ;
+- valider les choix structurants du projet ;
+- faciliter une montée en charge progressive.
+
+Le détail du périmètre fonctionnel du MVP est détaillé dans une section suivante du présent document.
+
+@todo [priority=high, section=link] : mettre lien section
+
+### Organisation des sprints
+
+Le développement est organisé en cycles courts appelés **sprints**, d’une durée généralement comprise entre 2 et 4 semaines.
+
+Chaque sprint comprend :
+- la sélection d’un ensemble de User Stories issues du backlog priorisé ;
+- leur conception, développement et test ;
+- la production d’un incrément fonctionnel utilisable.
+
+Cette organisation permet :
+- des livraisons régulières ;
+- une réduction des risques ;
+- une meilleure visibilité sur l’avancement.
+
+### Rituels Agile
+
+Le projet s’appuie sur des rituels permettant d’assurer la coordination et le pilotage :
+
+- **Sprint planning** : définition des objectifs et du contenu du sprint ;
+- **Points de suivi réguliers** : coordination de l’équipe projet ;
+- **Sprint review** : présentation des fonctionnalités réalisées aux parties prenantes ;
+- **Rétrospective** : amélioration continue des pratiques.
+
+Ces rituels structurent le fonctionnement de l’équipe et facilitent la communication entre les acteurs.
+
+### Validation et implication des utilisateurs
+
+Les utilisateurs sont associés tout au long du projet afin de garantir l’adéquation de l’outil aux besoins réels.
+
+Cela se traduit par :
+- des démonstrations régulières des fonctionnalités développées ;
+- la collecte de retours utilisateurs à chaque itération ;
+- l’intégration de ces retours dans le backlog.
+
+Cette démarche permet d’ajuster progressivement le produit et de sécuriser les choix fonctionnels.
+
+### Gestion des livraisons
+
+Le projet prévoit des livraisons progressives, structurées autour :
+
+- d’un **MVP**, mis à disposition rapidement ;
+- de versions successives enrichissant les fonctionnalités ;
+- d’une validation régulière par la MOA avant mise en production.
+
+Les livraisons sont synchronisées avec les jalons du projet et les contraintes calendaires définies.
+
+### Points de vigilance
+
+- Maintenir une forte implication de la MOA dans la priorisation du backlog  
+- Assurer la cohérence entre rythme Agile et contraintes calendaires (OFB / PEP)  
+- Garantir la qualité méthodologique des indicateurs malgré les cycles courts  
+- Éviter la dispersion du backlog et les dérives de périmètre  
+- Assurer la traçabilité entre besoins, développements et livraisons  

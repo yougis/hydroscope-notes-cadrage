@@ -1,0 +1,56 @@
+## Gestion du code source et pratiques de développement
+
+Le développement du projet HydroScope s’appuie sur des pratiques de gestion de code visant à garantir la qualité, la traçabilité et la maintenabilité du système.
+
+Le code source sera hébergé au sein de l’infrastructure de l’OEIL, dans un dépôt dédié. Les outils de gestion de projet et de versionnement (notamment Azure DevOps) seront utilisés pour assurer la cohérence entre les développements et les besoins fonctionnels.
+
+#### Gestion des versions
+
+Le code source devra être structuré selon des pratiques de gestion de versions permettant :
+- de tracer les évolutions du code ;
+- de gérer les développements parallèles ;
+- de sécuriser les mises en production.
+
+Une stratégie de gestion de branches (par exemple de type GitFlow ou équivalent) devra être définie et appliquée.
+
+#### Lien avec le backlog
+
+Dans la mesure du possible, chaque évolution du code devra être associée à une User Story ou à un élément du backlog.
+
+Cela implique :
+- la référence explicite des identifiants de User Stories dans les messages de commit ;
+- la traçabilité entre les développements réalisés et les besoins fonctionnels ;
+- une cohérence entre l’avancement technique et le suivi du backlog dans Azure DevOps.
+
+#### Nomenclature des commits
+
+Les messages de commit devront respecter une nomenclature commune afin de garantir leur lisibilité et leur exploitabilité.
+
+À titre indicatif, les commits pourront suivre une structure de type :
+
+`[EPIC/US] Type : description courte`
+
+Exemples :
+- `[US4.1] feat : ajout du calcul d’indicateur de base`
+- `[US6.2] fix : correction affichage carte`
+- `[US1.1] chore : amélioration script import`
+
+Les types de commits peuvent inclure :
+- `feat` (nouvelle fonctionnalité)
+- `fix` (correction)
+- `chore` (maintenance)
+- `refactor` (amélioration du code sans modification fonctionnelle)
+
+#### Revue de code
+
+Des mécanismes de revue de code (pull requests) devront être mis en place afin de :
+- garantir la qualité du code produit ;
+- partager les connaissances au sein de l’équipe ;
+- limiter les risques d’erreur.
+
+#### Points de vigilance
+
+- Maintenir une discipline dans la rédaction des commits  
+- Assurer le lien systématique entre code et backlog  
+- Éviter les commits trop volumineux ou peu explicites  
+- Garantir la cohérence entre branches et cycles de développement  

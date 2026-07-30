@@ -1,0 +1,47 @@
+### EPIC 5 : Analyse multicritère
+
+L’analyse multicritère constitue un axe d’évolution du projet HydroScope visant à proposer des lectures synthétiques des dynamiques territoriales, en combinant plusieurs indicateurs relatifs aux pressions, aux enjeux et aux caractéristiques des bassins versants.
+
+Elle a pour objectif de faciliter l’identification de situations prioritaires et d’apporter un appui à la décision, tout en conservant un lien explicite avec les données et indicateurs sous-jacents.
+
+### Description
+
+Cet EPIC couvre les fonctionnalités permettant de croiser plusieurs indicateurs afin de produire des analyses agrégées ou des représentations synthétiques. Il s’inscrit dans une logique exploratoire et progressive, compte tenu des enjeux méthodologiques associés.
+
+À ce stade, les modalités précises de construction de ces analyses ne sont pas arrêtées. Elles feront l’objet de travaux spécifiques associant les partenaires techniques et les utilisateurs, afin de garantir leur pertinence scientifique et leur compréhension.
+
+L’analyse multicritère devra ainsi être conçue comme un outil d’aide à l’interprétation, et non comme un mécanisme de décision automatisée.
+
+### Fonctionnalités envisagées
+
+À titre indicatif, les fonctionnalités pouvant être couvertes par cet EPIC incluent :
+
+- la combinaison de plusieurs indicateurs au sein de représentations synthétiques ;
+- la possibilité d’explorer différentes configurations (sélection d’indicateurs, regroupements) ;
+- la visualisation des contributions respectives des indicateurs ;
+- la comparaison de territoires selon plusieurs critères.
+
+Ces fonctionnalités seront précisées et priorisées au cours du projet.
+
+### Principes de mise en œuvre
+
+La mise en œuvre de cet EPIC devra respecter plusieurs principes :
+
+- **Transparence** : les méthodes utilisées devront être explicites et compréhensibles ;
+- **Traçabilité** : les résultats devront pouvoir être reliés aux indicateurs sources ;
+- **Réversibilité** : il devra être possible de revenir à une lecture détaillée des indicateurs ;
+- **Prudence méthodologique** : éviter toute simplification excessive ou biaisée.
+
+### Points de vigilance
+
+- Risques liés à l’agrégation de données hétérogènes (échelles, unités, qualité)  
+- Difficulté d’interprétation des résultats par les utilisateurs  
+- Risque d’effet “boîte noire” en cas de manque de transparence  
+- Nécessité de validation scientifique des approches retenues  
+- Risque de surinterprétation ou d’usage inadapté des résultats  
+
+### Positionnement dans le projet
+
+Compte tenu de sa complexité et des enjeux méthodologiques associés, l’analyse multicritère n’est pas intégrée dans le périmètre du MVP. Elle fera l’objet d’un développement ultérieur, après validation des principes méthodologiques et des besoins utilisateurs.
+
+Cet EPIC sera abordé de manière progressive, en lien étroit avec les partenaires techniques, afin de garantir la robustesse et la pertinence des résultats produits.

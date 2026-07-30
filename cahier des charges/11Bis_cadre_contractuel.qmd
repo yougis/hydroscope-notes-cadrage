@@ -1,0 +1,66 @@
+## Cadre contractuel et juridique
+
+Le présent projet s’inscrit dans un cadre contractuel nécessitant la définition de règles claires en matière de propriété, de gestion des données, de maintenance et de réversibilité. Les éléments suivants devront être pris en compte dans la mise en œuvre et l’exploitation de la solution HydroScope.
+
+### Propriété intellectuelle
+
+Les développements réalisés dans le cadre du projet HydroScope feront l’objet d’une clarification des droits de propriété intellectuelle.
+
+Sauf disposition contraire, les éléments suivants sont attendus :
+- les codes sources développés dans le cadre du projet seront accessibles à l’OEIL ;
+- l’OEIL disposera de droits d’usage, de modification et de réutilisation du code ;
+- les éventuels composants tiers ou bibliothèques utilisées devront être clairement identifiés (licences, restrictions).
+
+Une attention particulière sera portée à la compatibilité avec des solutions open source.
+
+### Protection des données (RGPD)
+
+Le traitement des données dans HydroScope devra respecter la réglementation en vigueur en matière de protection des données, notamment le RGPD.
+
+Cela implique :
+- l’identification des données sensibles ou à caractère personnel (le cas échéant) ;
+- la mise en place de mesures de sécurisation adaptées ;
+- la limitation des accès aux données en fonction des profils utilisateurs ;
+- la traçabilité des accès et des traitements.
+
+Une analyse du niveau de sensibilité des données devra être réalisée en amont.
+
+### Réversibilité
+
+Le prestataire devra garantir la réversibilité de la solution en fin de contrat ou en cas de changement de prestataire.
+
+Cela inclut :
+- la restitution des données dans des formats standards et exploitables ;
+- la mise à disposition du code source (selon les modalités définies) ;
+- la documentation technique et fonctionnelle nécessaire à la reprise ;
+- l’assistance à la reprise par un tiers, si nécessaire.
+
+L’objectif est d’éviter toute dépendance technique ou fonctionnelle vis-à-vis d’un prestataire.
+
+### Maintenance et support (SLA / TMA)
+
+Un dispositif de maintenance et de support devra être défini afin de garantir le bon fonctionnement du système dans la durée.
+
+Ce dispositif précisera notamment :
+- les niveaux de service attendus (SLA) ;
+- les délais de prise en charge et de résolution des incidents ;
+- les modalités de maintenance corrective et évolutive (TMA) ;
+- les canaux de support et de communication.
+
+Des niveaux de criticité pourront être définis afin de prioriser les interventions.
+
+Ci dessous un tableau de délais de prise en charge et de résolution approximatif attendu en réponse.
+
+| Criticité | Délai de prise en charge | Délai de résolution |
+|----------|------------------------|---------------------|
+| Bloquant | 4h | 24h |
+| Majeur   | 5 jours | 10 jours |
+| Mineur   | 10 jours | 30 jours |
+
+
+### Points de vigilance
+
+- Clarifier les droits d’usage et de modification du code dès le démarrage du projet  
+- Anticiper les contraintes liées aux données sensibles ou réglementées  
+- Éviter toute dépendance forte à des solutions propriétaires non maîtrisées  
+- Définir des engagements de service réalistes et adaptés aux moyens disponibles  

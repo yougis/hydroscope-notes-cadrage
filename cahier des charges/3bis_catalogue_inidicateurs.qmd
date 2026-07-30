@@ -1,0 +1,19 @@
+## Gestion des indicateurs
+
+Le projet HydroScope repose sur la production d’indicateurs permettant de caractériser les pressions environnementales, les enjeux et les dynamiques territoriales liées aux ressources en eau.
+
+Ces indicateurs ne constituent pas un ensemble figé. Leur définition, leur méthode de calcul et leur périmètre d’application a fait l’objet d’un travail itératif associant les partenaires techniques et les utilisateurs.
+
+À ce titre, les indicateurs sont structurés au sein d’un **référentiel dédié**, permettant :
+
+- d’assurer la cohérence des définitions et des objectifs;
+- de documenter les méthodes de calcul ;
+- de garantir la transparence et la traçabilité des traitements ;
+- de faciliter leur évolution dans le temps.
+
+Le contenu détaillé des indicateurs (définition, sources, méthodes) est maintenu dans un **catalogue** distinct du présent cahier des charges, afin de permettre :
+
+- des ajustements méthodologiques sans remise en cause du cadre global ;
+- une mise à jour progressive en fonction des retours d’usage et des données disponibles.
+
+La version 4 de ce référentiel est fournie en annexe à titre indicatif.

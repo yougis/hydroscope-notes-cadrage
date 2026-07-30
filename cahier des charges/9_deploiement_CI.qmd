@@ -1,0 +1,67 @@
+## Stratégie de déploiement
+
+La stratégie de déploiement d’HydroScope vise à mettre à disposition un outil opérationnel de manière progressive, en sécurisant les usages et en accompagnant l’appropriation par les utilisateurs. Elle s’inscrit dans la continuité de l’approche Agile, avec des mises en production incrémentales et maîtrisées.
+
+L’objectif est de limiter les risques, de valider les choix fonctionnels en conditions réelles et de permettre une montée en charge progressive du système.
+
+### Approche progressive
+
+Le déploiement du projet s’appuie sur la mise en production d’un MVP, permettant une première utilisation en conditions réelles sur un périmètre fonctionnel limité.
+
+Ce MVP sera enrichi progressivement par itérations successives, permettant d’introduire progressivement les fonctionnalités auprès des utilisateurs.et en intégrant les retours des utilisateurs et les évolutions du backlog.
+
+Le déploiement du système est envisagé en plusieurs étapes:
+
+- Mise à disposition d’un **MVP (Minimum Viable Product)** couvrant les fonctionnalités essentielles (intégration de données, premiers indicateurs, visualisation de base) ;
+- Enrichissement progressif des fonctionnalités en fonction des priorités du backlog ;
+- Extension du périmètre fonctionnel et des jeux de données intégrés.
+
+Cette approche permet de tester rapidement les usages et d’ajuster le produit en continu.
+
+### Environnements
+
+Le système devra être déployé sur plusieurs environnements distincts afin de garantir la qualité et la sécurité des mises en production :
+
+- **Environnement de développement** : utilisé par la MOE pour le développement et les tests techniques ;
+- **Environnement de test / recette** : utilisé pour la validation fonctionnelle par la MOA et les utilisateurs ;
+- **Environnement de production** : accessible aux utilisateurs finaux.
+
+La gestion des environnements doit permettre de sécuriser les déploiements et de limiter les risques de régression.
+
+### Modalités de mise en production
+
+Les mises en production seront réalisées de manière régulière, en cohérence avec les cycles de développement.
+
+- Déploiement des nouvelles fonctionnalités à l’issue des phases de validation ;
+- Vérification du bon fonctionnement après mise en production ;
+- Possibilité de retour arrière en cas de problème majeur.
+
+Une attention particulière devra être portée à la continuité de service lors des mises à jour.
+
+### Montée en charge
+
+Le déploiement devra prendre en compte une montée en charge progressive :
+
+- augmentation du nombre d’utilisateurs ;
+- intégration de nouveaux jeux de données ;
+- extension des fonctionnalités.
+
+Le système devra être dimensionné pour accompagner cette montée en charge sans dégradation des performances.
+
+### Accompagnement au déploiement
+
+Le déploiement devra être accompagné afin de faciliter l’appropriation de l’outil :
+
+- information des utilisateurs sur les évolutions ;
+- organisation de phases de test avec les utilisateurs ;
+- prise en compte des retours dans les versions suivantes.
+
+Cet accompagnement est essentiel pour assurer l’adhésion des parties prenantes.
+
+### Points de vigilance
+
+- Coordination entre les cycles Agile et les contraintes de mise en production  
+- Gestion des dépendances entre fonctionnalités  
+- Risque de décalage entre les attentes utilisateurs et les fonctionnalités livrées  
+- Nécessité de maintenir la cohérence des données entre environnements  
+- Anticipation des impacts techniques liés à la montée en charge

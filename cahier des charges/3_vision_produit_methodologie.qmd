@@ -1,0 +1,73 @@
+## Vision produit & principes méthodologiques
+
+Le projet HydroScope vise à proposer un outil structurant permettant d’améliorer la connaissance, le suivi et l’analyse des ressources en eau à l’échelle des bassins versants d’alimentation en eau potable. Il s’inscrit dans une logique d’appui à la décision publique, en mettant à disposition des informations consolidées, fiables et accessibles aux différents acteurs du territoire.
+
+### Vision cible
+
+HydroScope a vocation à devenir un outil de référence partagé entre les acteurs institutionnels et techniques de la gestion de l’eau en Nouvelle-Calédonie. Il doit permettre de croiser des données issues de sources multiples afin de produire une lecture synthétique et opérationnelle des dynamiques à l’œuvre sur les territoires.
+
+L’outil repose sur un équilibre entre plusieurs exigences complémentaires :
+
+- garantir une **rigueur scientifique** dans la production et l’interprétation des indicateurs ;
+- proposer une **accessibilité adaptée à des publics variés**, allant des experts aux décideurs ;
+- offrir des capacités d’**exploration, de comparaison et d’analyse**, facilitant l’identification des enjeux prioritaires et l’orientation des actions.
+
+HydroScope ne constitue pas un outil de décision automatisée, mais un support d’analyse visant à éclairer les choix des gestionnaires.
+
+### Principes méthodologiques
+
+La conception et le développement d’HydroScope reposent sur un ensemble de principes visant à garantir la fiabilité et la compréhension des résultats produits.
+
+- **Traçabilité**  
+Chaque donnée intégrée dans le système doit être associée à sa source, à sa date de production et aux éventuelles transformations qu’elle a subies. Cette traçabilité doit être accessible aux utilisateurs afin de garantir la transparence de l’information.
+
+- **Transparence des calculs**  
+Les méthodes de calcul des indicateurs doivent être explicites, documentées et compréhensibles. Les choix méthodologiques (agrégation, pondération, seuils) doivent pouvoir être consultés et justifiés.
+
+- **Robustesse des indicateurs**  
+Les indicateurs produits doivent reposer sur des bases méthodologiques solides. Une attention particulière est portée à la pertinence des données utilisées, à leur qualité et à la cohérence des traitements appliqués.
+
+- **Interopérabilité**  
+Le système doit s’inscrire dans un écosystème existant en respectant les standards en vigueur, notamment dans le domaine des données géographiques, afin de faciliter les échanges et la réutilisation des données.
+
+- **Lisibilité**  
+Les restitutions proposées doivent permettre une appropriation rapide de l’information, en évitant les représentations complexes ou ambiguës. Une attention particulière est portée à la pédagogie et à l’adaptation des interfaces aux différents profils d’utilisateurs.
+
+### Risques méthodologiques
+
+Compte tenu de la diversité des données mobilisées et des traitements envisagés, plusieurs risques méthodologiques doivent être identifiés et maîtrisés.
+
+- **Agrégation abusive**  
+Le croisement ou la combinaison de données hétérogènes (échelles spatiales, temporelles, unités, niveaux de précision) peut conduire à des résultats peu pertinents, voire trompeurs.
+
+- **Biais d’interprétation**  
+La simplification nécessaire à la production d’indicateurs synthétiques peut induire des erreurs de lecture ou des conclusions hâtives si le contexte d’interprétation n’est pas suffisamment explicité.
+
+- **Qualité des données**  
+La fiabilité des résultats dépend directement de la qualité des données sources, qui peuvent être incomplètes, hétérogènes ou non validées.
+
+- **Effet “boîte noire”**  
+Une complexité excessive des traitements ou un manque de transparence dans les calculs peut entraîner une perte de confiance des utilisateurs.
+
+- **Surinterprétation**  
+Les indicateurs produits doivent être utilisés dans leur domaine de validité et dans le cadre des objectifs que nous leurs avons fixés. Leur interprétation en dehors de ce cadre peut conduire à des décisions inadaptées.
+
+
+## Stratégie MVP (Minimum Viable Product)
+
+Le projet HydroScope repose sur la mise à disposition rapide d’une première version fonctionnelle du système (MVP), permettant de répondre aux besoins prioritaires des utilisateurs tout en limitant les risques.
+
+Le MVP vise à :
+- proposer un socle fonctionnel opérationnel (données, indicateurs, visualisation) ;
+- permettre une première utilisation par les acteurs métiers ;
+- recueillir des retours utilisateurs afin d’ajuster les développements ultérieurs.
+
+Le périmètre du MVP est volontairement restreint aux fonctionnalités à plus forte valeur métier, notamment :
+- l’intégration de données structurées ;
+- le calcul d’indicateurs simples et robustes ;
+- la visualisation cartographique et temporelle ;
+- la consultation de fiches territoires.
+
+Les fonctionnalités plus avancées (analyse multicritère, paramétrage complexe, automatisation avancée) sont prévues dans des phases ultérieures.
+
+Le MVP constitue une étape clé du projet et fera l’objet d’une validation spécifique par la MOA.

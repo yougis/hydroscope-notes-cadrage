@@ -1,0 +1,53 @@
+## Monitoring, supervision et pilotage
+
+Le projet HydroScope intègre des besoins transverses de monitoring visant à garantir le bon fonctionnement du système, la fiabilité des données et la capacité à suivre les dynamiques environnementales dans le temps. Ces fonctions de monitoring ne se limitent pas à la production de tableaux de bord, mais reposent sur des mécanismes de suivi, d’alerte et d’analyse continue.
+
+L’objectif est double : sécuriser techniquement et méthodologiquement le système, tout en fournissant aux acteurs des outils de veille et de pilotage adaptés à leurs besoins.
+
+### Monitoring technique
+
+Le système devra permettre de suivre le bon fonctionnement des traitements et des flux de données.
+
+Cela inclut notamment :
+- le suivi des processus d’import (succès, échecs, volumétrie, durée) ;
+- la surveillance des connexions aux sources de données (API, bases externes) ;
+- le suivi des performances (temps de réponse, temps de calcul) ;
+- la gestion des erreurs et des journaux techniques.
+
+Ces éléments sont principalement destinés aux équipes techniques en charge de l’exploitation et de la maintenance du système.
+
+### Monitoring de la qualité des données
+
+HydroScope devra permettre de suivre en continu la qualité et la fraîcheur des données intégrées.
+
+Cela comprend :
+- la visualisation des dates de mise à jour des données ;
+- le suivi de la complétude des jeux de données ;
+- la détection d’anomalies (valeurs aberrantes, ruptures de séries, incohérences) ;
+- la qualification du niveau de fiabilité des données.
+
+Ces informations devront être accessibles aux utilisateurs afin d’éclairer l’interprétation des indicateurs.
+
+### Monitoring métier et environnemental
+
+Le système devra permettre de suivre les évolutions des indicateurs dans une logique de veille environnementale.
+
+Cela inclut :
+- le suivi temporel des pressions environnementales ;
+- la détection de tendances et de ruptures ;
+- la mise en place de mécanismes d’alerte sur des évolutions significatives ;
+- la priorisation des territoires en fonction de leur niveau de pression.
+
+Ces fonctionnalités participent directement à l’aide à la décision.
+
+### Monitoring des usages
+
+HydroScope devra permettre d’analyser les usages de la plateforme afin d’en améliorer la pertinence et l’adoption.
+
+Cela comprend :
+- le suivi de la fréquentation de l’outil ;
+- l’identification des fonctionnalités les plus utilisées ;
+- l’analyse des usages par profil utilisateur ;
+- le suivi des exports et des consultations.
+
+Ces éléments alimentent la démarche d’amélioration continue du produit.

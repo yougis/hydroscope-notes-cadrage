@@ -1,0 +1,128 @@
+## Contexte et objectifs
+
+La protection des ressources en eau potable constitue un enjeu majeur pour la Nouvelle-Calédonie. Les captages destinés à l'alimentation en eau potable sont exposés à de nombreuses pressions environnementales et anthropiques susceptibles d'altérer durablement la qualité et la disponibilité de la ressource. Les incendies, l'érosion des sols, les activités minières, l'urbanisation ou encore les effets du changement climatique nécessitent une connaissance fine des territoires afin d'orienter les actions de prévention et de protection.
+
+Une grande partie des captages est alimentée par des eaux superficielles, ce qui les rend particulièrement sensibles aux modifications des bassins versants d'alimentation en eau potable. La préservation de ces bassins versants constitue ainsi un levier essentiel pour garantir une ressource en eau de qualité sur le long terme.
+
+### Contexte institutionnel
+
+La gestion de l'eau potable en Nouvelle-Calédonie repose sur une organisation institutionnelle impliquant plusieurs acteurs complémentaires.
+
+Depuis la loi du pays du **15 juillet 2025** relative au domaine public de l'eau, le **Gouvernement de la Nouvelle-Calédonie** est compétent pour instaurer les **Périmètres de Protection des Eaux (PPE)** par arrêté. Le service de l'eau de la **DAVAR** assure l'instruction technique et administrative des dossiers de protection.
+
+Les **Provinces** interviennent principalement dans leurs compétences environnementales et participent à l'instruction des dossiers en formulant un avis obligatoire. Elles assurent également un rôle de conseil et d'accompagnement auprès des collectivités.
+
+Les **Communes** conservent la responsabilité du service public de production et de distribution d'eau potable ainsi que de l'assainissement. Elles sont les principales gestionnaires des captages destinés à l'alimentation des populations.
+
+Sur les **terres coutumières**, la création d'un périmètre de protection est soumise à l'accord des autorités coutumières concernées.
+
+La réglementation impose désormais la régularisation des captages existants ne disposant pas encore de périmètre de protection, renforçant ainsi les besoins en outils d'observation, de suivi et d'aide à la décision.
+
+### Positionnement du projet HydroScope
+
+Le projet **HydroScope** est une initiative portée par l'OEIL, en partenariat avec les services techniques concernés, avec le soutien financier de l'Office Français de la Biodiversité (OFB) et du fonds de la Politique de l'Eau Partagée (PEP).
+
+Il s'inscrit dans la continuité du tableau de bord **PressionPPE**, développé en 2021 avec le Service de l'eau de la DAVAR pour centraliser des informations relatives aux pressions exercées sur les ressources en eau potable. Les retours d'expérience sur cet outil ont mis en évidence plusieurs pistes d'amélioration, notamment concernant l'historisation des données, l'automatisation des traitements, l'adaptation des interfaces aux différents profils d'utilisateurs ainsi que l'ouverture vers des technologies open source.
+
+HydroScope vise ainsi à faire évoluer cet outil en proposant une plateforme permettant de consolider les données disponibles, de produire des indicateurs homogènes, de faciliter leur consultation par les différents acteurs impliqués dans la gestion de la ressource et de simplifier le processus de production et de diffusion des données.
+
+Le projet est actuellement engagé dans une phase de réalisation destinée à développer des services numériques en réponse aux  besoins métiers identifiés lors de la phase d'analyse. Cette phase se concentre sur la définition des indicateurs, la structuration des données et la conception des interfaces utilisateurs adaptées aux différents profils d'acteurs. 
+
+### Objectifs du projet
+
+L'objectif d'HydroScope est de mettre à disposition un système d'information permettant de mieux suivre l'état des bassins versants d'alimentation en eau potable (BVAEP), les unités de gestion (captage/forage) et des périmètres de protection des eaux, afin de faciliter leur analyse et leur suivi dans le temps.
+
+Plus précisément, le projet poursuit 4 objectifs :
+
+- **Connaissance:** 
+Mieux caractériser le territoire (relief, géologie, pluviométrie) et les enjeux (population desservie) en 
+centralisant et structurerantles données utiles à la caractérisation des bassins versants et des points de captages
+
+- **Diagnostic:**
+Appréhender le niveau d'intégrité de la ressource via l'analyse d'une multitude d'indicateurs : 
+  - en produisant des indicateurs homogènes décrivant les enjeux, les pressions environnementales et les caractéristiques des territoires. 
+  - en assurerant l'historisation des données afin de suivre leur évolution dans le temps.
+
+- **Veille:** 
+Détecter automatiquement les changements environnementaux significatifs et faciliter l'identification de ces évolutions significatives grâce à des mécanismes de veille et de mise à jour automatisée.
+
+- **Partage:**
+Diffuser un diagnostic commun entre les parties prenantes pour orienter les investissements publics en mettant à disposition des indicateurs dans un tableau de bord adaptés aux différents profils d'utilisateurs et en facilitant le partage d'une information cohérente entre les différents partenaires.
+
+HydroScope n'a pas vocation à remplacer les outils métiers existants ni à se substituer aux décisions des gestionnaires. Il constitue un outil d'observation, d'analyse et de restitution destiné à fournir une vision consolidée des informations disponibles afin d'appuyer les travaux de suivi et de protection de la ressource en eau potable.
+
+### Objectifs fonctionnels
+
+L'application doit permettre aux gestionnaires de répondre à des questions concrètes pour prioriser leurs interventions :
+
+- Quels sont les bassins versants actuellement sous pression forte et selon quels critères ?
+- Quelle est la tendance d'évolution d'une pression (ex: incendies, glissement de terrain) sur les 5 ou 10 dernières années ?
+- Quels zones doivent être protégés/restaurer en priorité  ?
+- Quel est le niveau de gravité d'un défrichage détectée par satellite ?
+
+L'application devra notamment permettre de :
+
+- consulter les caractéristiques des bassins versants d'alimentation en eau potable ;
+- visualiser les indicateurs produits à différentes échelles territoriales et sur les objets géographiques suivants (captage/forage; bassin versant AEP, maille géographique vectorielle H3 ^[Système de grille hierarchique vectorielle standardisée utilisé pour agréger des données hétérogènes (incendies, érosion, occupation du sol).] );
+- suivre l'évolution temporelle des pressions environnementales ;
+- comparer plusieurs territoires, captages/forages ou bassins versants ;
+- Assurer la traçabilité et la transparence des traitements effectués
+- accéder aux fiches descriptives des indicateurs, des bassins versants AEP, des captages/forages et périmètres de protection ;
+- produire des rapports exportables ;
+- diffuser des niveaux d'information adaptés aux différents profils d'utilisateurs (experts, partenaires institutionnels et grand public).
+
+L'ensemble de ces fonctionnalités devra contribuer à améliorer l'accès aux données existantes et d'appuyer la prise de décision publique et opérationnelle auprès des acteurs de la gestion de l'eau potable en Nouvelle-Calédonie.
+
+### Quantification du périmètre
+
+Le périmètre fonctionnel du projet HydroScope s’appuie sur un ensemble de données territoriales et d’indicateurs dont les volumes doivent être pris en compte pour dimensionner la solution.
+
+À ce stade, les ordres de grandeur sont les suivants :
+
+- **Bassins versants d’alimentation en eau potable (BVAEP)** : ~XX unités  
+- **Captages / forages** : ~500 unités  
+- **Périmètres de protection** : ~250 unités  
+- **Indicateurs** : ~40 indicateurs (en fonction des thématiques retenues)  
+- **Sources de données** : ~30 sources (catalogue georep, google earth engine, base de données OEIL ...)
+
+Ces valeurs sont indicatives et pourront évoluer au cours du projet, notamment en fonction :
+
+- de la disponibilité des données ;
+- des choix méthodologiques ;
+- des besoins exprimés par les utilisateurs.
+
+Elles permettent néanmoins de fournir un premier niveau de cadrage pour le dimensionnement technique et fonctionnel de la solution.
+Les indicateurs et leur sources identifiés jusqu'à présent sont détaillés dans l'annexe ...
+
+@todo [priority=high, section=annexe] : indiquer l'annexe
+
+
+### Sources de données
+
+Le projet HydroScope repose sur l’intégration et la valorisation de données issues de sources multiples, produites par différents acteurs du territoire.
+
+Les principales sources de données mobilisées incluent :
+
+- **Données géographiques de référence** :
+  - bassins versants d’alimentation en eau potable (BVAEP) ;
+  - captages et forages ;
+  - périmètres de protection des eaux ;
+  - limites administratives.
+
+- **Données environnementales** :
+  - incendies ;
+  - érosion des sols ;
+  - occupation du sol ;
+  - données climatiques (pluviométrie, etc.).
+
+- **Données issues de l’observation satellitaire** :
+  - détection de changements d’occupation du sol ;
+  - suivi de phénomènes environnementaux.
+
+- **Données administratives et réglementaires** :
+  - informations liées aux périmètres de protection ;
+  - données issues des services de l’État et des collectivités.
+
+Ces données sont produites et mises à disposition par différents acteurs (communes, provinces, services du Gouvernement, partenaires techniques).
+
+Elles présentent des niveaux hétérogènes de qualité, de structuration et de fréquence de mise à jour, ce qui nécessite des traitements spécifiques dans le cadre du projet HydroScope.

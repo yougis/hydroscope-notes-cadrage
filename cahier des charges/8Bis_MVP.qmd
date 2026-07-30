@@ -1,0 +1,89 @@
+## Priorisation et périmètre du MVP
+
+Dans une logique de développement itératif et de sécurisation des usages, le projet HydroScope prévoit la mise en œuvre d’un **MVP (Minimum Viable Product)** dès les premières phases de réalisation.
+
+Ce MVP constitue une première version opérationnelle du système, centrée sur les fonctionnalités à plus forte valeur métier. Il s’appuie directement sur les EPICS définis précédemment, en sélectionnant un sous-ensemble cohérent et priorisé de fonctionnalités.
+
+L’objectif est de disposer rapidement d’un outil permettant :
+- de structurer et exploiter les données disponibles ;
+- de produire des indicateurs fiables ;
+- de visualiser et interpréter les résultats à l’échelle des territoires.
+
+### Périmètre fonctionnel du MVP par EPIC
+
+Le MVP mobilise les EPICS de la manière suivante :
+
+#### EPIC 1 : Gestion des données
+Le MVP intègre les fonctionnalités essentielles permettant l’acquisition et la structuration des données :
+- import de données via fichiers ;
+- normalisation des données selon un modèle commun ;
+- gestion simple des erreurs d’import ;
+- historisation des données.
+
+Ces éléments constituent le socle du système.
+
+#### EPIC 2 : Qualité et validation des données
+Le MVP inclut des mécanismes de contrôle de base :
+- détection simple d’anomalies (valeurs aberrantes) ;
+- calcul d’indicateurs de complétude ;
+- qualification élémentaire des données ;
+- gestion des métadonnées.
+
+Ces fonctionnalités permettent d’assurer un premier niveau de fiabilité.
+
+#### EPIC 3 : Référentiels
+Le MVP repose sur la mise en place des référentiels structurants :
+- référentiel géographique (bassins versants, captages) ;
+- premiers éléments du référentiel indicateurs.
+
+Ces référentiels sont nécessaires à la cohérence du système.
+
+#### EPIC 4 : Calcul d’indicateurs
+Le MVP se concentre sur des indicateurs simples et robustes :
+- calculs statistiques de base ;
+- agrégations spatiales à l’échelle des bassins versants ;
+- agrégations temporelles simples ;
+- filtrage des données utilisées.
+
+Les mécanismes avancés de paramétrage et de versioning ne sont pas inclus à ce stade.
+
+#### EPIC 5 : Analyse multicritère
+Cet EPIC n’est pas intégré dans le MVP.
+
+Les fonctionnalités associées (indices composites, pondérations, scénarios) sont reportées à des phases ultérieures, en raison des risques méthodologiques et de leur complexité.
+
+#### EPIC 6 : Visualisation et exploration
+Le MVP intègre les fonctionnalités principales de restitution :
+- cartographie interactive des données et indicateurs ;
+- navigation (zoom, filtres) ;
+- graphiques temporels ;
+- accès à des fiches territoires.
+
+Ces éléments permettent une appropriation immédiate de l’outil.
+
+#### EPIC 7 : Aide à la décision
+Le MVP inclut une version simplifiée de cet EPIC :
+- définition de seuils simples ;
+- identification de tendances ;
+- restitution synthétique par territoire.
+
+Les mécanismes avancés de scoring ou d’analyse sont exclus à ce stade.
+
+#### EPIC 8 : Export et diffusion
+Le MVP propose des capacités d’export limitées :
+- export de données en format tabulaire ;
+- export de vues simples.
+
+Les fonctionnalités avancées (API étendues, diffusion automatisée) sont reportées.
+
+#### EPIC 9 : Gestion des utilisateurs
+Le MVP inclut une gestion simplifiée des accès :
+- authentification des utilisateurs ;
+- gestion de profils basiques.
+
+#### EPIC 10 : Traçabilité et audit
+Le MVP intègre un niveau minimal de traçabilité :
+- suivi des imports de données ;
+- traçabilité simple des calculs.
+
+Les mécanismes d’audit avancés sont hors périmètre à ce stade.

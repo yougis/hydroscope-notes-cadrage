@@ -1,0 +1,57 @@
+Cet EPIC vise à garantir la fiabilité, la cohérence et la compréhension des données intégrées dans HydroScope. Il constitue un complément indispensable à la gestion des données, en introduisant des mécanismes de contrôle, de qualification et de documentation permettant de sécuriser les usages analytiques et décisionnels.
+
+Compte tenu de la diversité des sources mobilisées (données environnementales, géographiques, satellitaires, administratives), cet EPIC doit permettre d’expliciter le niveau de confiance associé aux données et d’éviter des interprétations erronées liées à des données incomplètes ou de qualité insuffisante.
+
+#### Description
+
+L’EPIC couvre l’ensemble des processus permettant de contrôler les données lors de leur intégration, de qualifier leur qualité et de rendre visible cette information auprès des utilisateurs.
+
+Il s’inscrit dans une logique de transparence méthodologique, en rendant explicites les limites des données utilisées et en permettant, le cas échéant, d’alerter sur des anomalies ou incohérences détectées.
+
+#### Fonctionnalités
+
+- **Contrôles de cohérence**  
+Mise en place de règles automatiques permettant de détecter des anomalies dans les données :
+  - valeurs aberrantes ou hors plage attendue  
+  - incohérences spatiales (ex : géométries invalides, mauvais rattachement territorial)  
+  - incohérences temporelles (dates manquantes, inversées, discontinuités)  
+Ces contrôles peuvent être bloquants ou informatifs selon les cas.
+
+- **Qualification des données**  
+Attribution d’un niveau de qualité ou de confiance aux données, en fonction de critères définis (source, méthode de production, complétude, fréquence de mise à jour).  
+Cette qualification doit être exploitable dans les traitements ultérieurs (filtrage, pondération, affichage différencié).
+
+- **Gestion des métadonnées**  
+Association systématique de métadonnées aux jeux de données :
+  - source et producteur  
+  - date de production et de mise à jour  
+  - description du contenu  
+  - méthodes de collecte ou de calcul  
+Ces informations doivent être accessibles aux utilisateurs afin de faciliter l’interprétation.
+
+- **Indicateurs de fiabilité**  
+Production d’indicateurs synthétiques permettant d’évaluer la qualité globale d’un jeu de données ou d’un indicateur :
+  - taux de complétude  
+  - fréquence de mise à jour  
+  - niveau de validation  
+Ces indicateurs doivent être visibles dans les interfaces (tableaux de bord, fiches indicateurs).
+
+- **Monitoring**
+
+Dans cet EPIC les besoins en monitoring intègre des mécanismes de suivi continu de la qualité des données afin d’éclairer leur utilisation.
+
+Les fonctionnalités incluent :
+- la production d’indicateurs de qualité (complétude, fraîcheur, cohérence) ;
+- la détection automatisée d’anomalies (valeurs aberrantes, ruptures de séries, incohérences spatiales ou temporelles) ;
+- la visualisation synthétique de l’état des données (tableaux de bord de qualité) ;
+- l’historisation des indicateurs de qualité afin de suivre leur évolution.
+
+Ces éléments permettent de rendre explicite le niveau de confiance associé aux données.
+
+#### Points de vigilance
+
+- Hétérogénéité des standards de qualité selon les sources de données  
+- Risque de surconfiance dans des données insuffisamment qualifiées  
+- Complexité de mise en œuvre des règles de contrôle (équilibre entre automatisation et pertinence métier)  
+- Nécessité de rendre lisible l’information de qualité sans alourdir l’expérience utilisateur  
+- Articulation avec les autres EPICS, notamment le calcul d’indicateurs et l’analyse multicritère, où la qualité des données conditionne directement la validité des résultats

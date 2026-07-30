@@ -1,0 +1,53 @@
+Cet EPIC regroupe les fonctionnalités permettant de diffuser, partager et valoriser les données et analyses produites par HydroScope. Il répond à un enjeu central du projet : faciliter l’accès à une information fiable et homogène pour l’ensemble des parties prenantes, tout en permettant leur réutilisation dans d’autres contextes.
+
+L’objectif est de rendre les données et résultats produits facilement exploitables, que ce soit pour des usages internes (analyse, reporting) ou externes (communication, partage inter-institutionnel).
+
+#### Description
+
+L’EPIC couvre les mécanismes d’export des données et des indicateurs, ainsi que leur mise à disposition via différents supports. Il doit permettre de répondre à des besoins variés, allant de l’extraction brute de données à la production de documents synthétiques.
+
+Les fonctionnalités doivent être adaptées aux différents profils d’utilisateurs, en tenant compte de leurs besoins en termes de format, de niveau de détail et de fréquence d’accès.
+
+#### Fonctionnalités
+
+- **Export de données**  
+Possibilité d’extraire les données et indicateurs sous des formats standards :
+  - formats tabulaires (CSV, Excel)  
+  - formats géographiques (GeoJSON, Shapefile, etc.)  
+  - export filtré selon des critères (territoire, période, indicateur)  
+
+Ces exports doivent permettre une réutilisation directe dans des outils tiers.
+
+- **Export de rapports**  
+Génération de documents synthétiques :
+  - rapports par territoire (bassin versant, captage)  
+  - synthèses thématiques  
+  - intégration de cartes, graphiques et indicateurs  
+
+Ces rapports doivent être adaptés à des usages de communication et d’aide à la décision.
+
+- **Partage de résultats**  
+Mise à disposition de fonctionnalités facilitant le partage :
+  - liens de consultation  
+  - diffusion auprès de partenaires  
+  - partage de vues spécifiques (tableaux de bord, cartes)  
+
+Ces mécanismes doivent permettre de diffuser une information cohérente entre acteurs.
+
+- **API de diffusion**  
+Exposition des données via des interfaces programmatiques :
+  - accès aux indicateurs et données structurées  
+  - possibilité d’intégration dans d’autres systèmes  
+  - gestion des droits d’accès  
+
+Cette ouverture permet d’inscrire HydroScope dans un écosystème plus large.
+
+
+
+#### Points de vigilance
+
+- Maîtrise des droits d’accès et des niveaux de diffusion (données sensibles)  
+- Cohérence entre les données diffusées et les données visualisées dans l’application  
+- Risque de mauvaise interprétation en dehors du contexte fourni par l’outil  
+- Nécessité de documenter les formats et contenus diffusés  
+- Gestion des performances et des volumes de données lors des exports

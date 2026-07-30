@@ -20,6 +20,7 @@ image_font_2:  "ressources/eau-monitoring.png"  #image 2 supérieure
 logo_partenaire: "ressources/logo_yapuka.png" #logo partenaire
 filters:
   - filters/todo.lua
+
 lang: fr
 format:
   html:
@@ -32,9 +33,11 @@ format:
     embed-resources: true
   pdf:
     pdf-engine: xelatex
+    df-print: kable # Formate les dataframes pandas proprement en LaTeX
     header-includes:
       - \usepackage{soul}
       - \sethlcolor{yellow}
+      - \usepackage{pdfpages}
     toc: true
     colorlinks: true
     toc-depth: 3

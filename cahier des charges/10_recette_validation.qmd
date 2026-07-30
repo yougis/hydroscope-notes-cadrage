@@ -1,0 +1,85 @@
+## Recette et validation
+
+La recette et la validation du système HydroScope constituent une étape essentielle pour garantir la conformité de la solution aux besoins exprimés, ainsi que la fiabilité des traitements et des indicateurs produits. Elles s’inscrivent dans une démarche continue, en cohérence avec l’approche Agile du projet.
+
+L’objectif est de vérifier à la fois la qualité fonctionnelle du système, la robustesse technique et la validité méthodologique des résultats.
+
+### Stratégie de tests
+
+La stratégie de tests repose sur plusieurs niveaux complémentaires :
+
+- **Tests techniques** réalisés par la MOE :
+  - tests unitaires (fonctions, composants) ;
+  - tests d’intégration (enchaînement des traitements, flux de données) ;
+  - tests de performance.
+
+- **Tests fonctionnels** :
+  - vérification de la conformité des fonctionnalités aux besoins exprimés ;
+  - validation des interfaces et des parcours utilisateurs.
+
+- **Tests de non-régression** :
+  - vérification que les évolutions n’altèrent pas les fonctionnalités existantes.
+
+Ces tests sont réalisés de manière continue au fil des sprints.
+
+### Recette fonctionnelle
+
+La recette fonctionnelle est pilotée par la MOA, avec l’appui de l’AMOA et la participation des utilisateurs.
+
+Elle vise à :
+- valider la conformité des fonctionnalités livrées ;
+- vérifier l’adéquation de l’outil aux usages métiers ;
+- identifier les écarts ou anomalies.
+
+La recette s’appuie sur des scénarios de test représentatifs des usages réels. Elle est réalisée de manière itérative, à chaque livraison de fonctionnalités.
+
+### Validation scientifique et méthodologique
+
+Compte tenu de la nature du projet, une attention particulière est portée à la validation des indicateurs et des méthodes de calcul.
+
+Cette validation vise à :
+- vérifier la pertinence des indicateurs produits ;
+- contrôler la cohérence des méthodes d’agrégation et de calcul ;
+- s’assurer de la conformité aux principes méthodologiques définis.
+
+Elle implique les experts métiers et les partenaires techniques concernés.
+
+### Critères d’acceptation
+
+Chaque fonctionnalité doit être associée à des critères d’acceptation permettant de valider sa conformité.
+
+Ces critères portent notamment sur :
+- le respect des exigences fonctionnelles ;
+- la qualité des résultats produits ;
+- la conformité des interfaces ;
+- la prise en compte des règles métier.
+
+La validation est prononcée par la MOA sur la base de ces critères.
+
+### Gestion des anomalies
+
+Les anomalies identifiées lors des phases de test et de recette sont :
+- recensées et qualifiées ;
+- priorisées en fonction de leur impact ;
+- corrigées dans les cycles de développement suivants.
+
+Un suivi des anomalies est mis en place afin de garantir leur résolution.
+
+### Validation des versions
+
+Chaque version du système fait l’objet d’une validation avant mise en production.
+
+Cette validation repose sur :
+- la réussite des tests techniques et fonctionnels ;
+- la validation des éléments méthodologiques ;
+- la correction des anomalies critiques.
+
+La décision de mise en production est prise par la MOA.
+
+### Points de vigilance
+
+- Nécessité d’impliquer les utilisateurs dans les phases de recette  
+- Importance de la validation méthodologique des indicateurs  
+- Risque de sous-estimation des efforts de test dans un contexte Agile  
+- Coordination entre corrections d’anomalies et développement de nouvelles fonctionnalités  
+- Maintien d’un référentiel de tests à jour tout au long du projet

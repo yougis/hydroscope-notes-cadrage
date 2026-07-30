@@ -1,0 +1,160 @@
+---
+title: "Projet HydroScope"
+subtitle: "Note de cadrage stratégique"
+
+execute:
+  echo: false
+
+version: "version 1"
+ 
+
+copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. 1"
+
+resume: "Succédant au tableau de bord PressionPPE (2021), dont il capitalise les acquis techniques et le retour d'expérience, le projet Hydroscope vise la mise en place de services numériques destinées au suivi de la ressource en eau potable sur l'ensemble du territoire de la Nouvelle-Calédonie. Le projet Hydroscope se fixe pour objectif de caractériser les Bassin Versant d'Approvisionnement en Eau Potable (BVAEP), incluant les Perimetre de Protection de l'Eau (PPE) et les points de captages via leurs facteurs biogéographiques (relief, géologie, végétation, pluviométrie), les pressions subies (urbanisation, incendies, érosion...) et les réponses qui ont pu être apporté sur ces milieux. Le projet doit aussi permettre le partage de ces connaissances à différentes échelles (pays, province, commune) via des interfaces numériques adaptés à différents publics."
+---
+
+
+{{< pagebreak >}}
+
+:::: {.callout-note title="Note de version"} 
+
+
+Historique des versions du document :
+
+| Version | Date | Auteur(s) | Description des modifications |
+| --|--------|--------- |--------------------------------|
+| 1 || Hugo Roussaffa |Rédaction initiale du cahier des charges|
+
+
+::: {#todo-list}
+:::
+
+::::
+
+**Introduction** 
+
+Le projet Hydroscope s'inscrit dans la continuité d'un premier outil développé en 2021 pour la DAVAR (PressionPPE). Suite au retour d'expérience de ce premier projet, l'OEIL a déposé un dossier au fonds PEP en 2023, validé avec un co-financement de l'OFB (65 %) et du fonds PEP (35 %). L'objectif est de faire évoluer cet outil pour répondre aux besoins accrus de connaissance et de gestion de la ressource en eau.
+
+Le projet **Hydroscope** a pour ambition de doter le territoire d'une architecture logicielle et d'une structure de données robuste, capables de transformer les données brutes en informations stratégiques, tout en garantissant l'historisation des indicateurs et l’automatisation de la veille sur les pressions environnementales telles que les incendies, l'érosion, la pollution, le développement des espèces envahissantes ou l'artificialisation des sols.
+
+L'OEIL assure la continuité intellectuelle du projet initiale (PressionPPE en 2021) et s’assurera à ce que les futurs outils — qu'il s'agisse de tableaux de bord experts, d'interfaces simplifiées pour les partenaires ou de fiches pédagogiques — deviennent des leviers d'aide à la décision pour la protection durable des bassins versants producteurs d'eau potable (BVAEP). 
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./1_contexte_objectif.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./2_partie_prenantes_gouvernance.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./3_vision_produit_methodologie.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./4_monitoring.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./5_perimetre_fonctionnel.qmd >}}
+
+---
+
+
+
+{{< pagebreak >}}
+
+{{< include ./5Ter_product_baclog.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include "./6_Exigences non fonctionnelles.qmd" >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./7_architecture_cible.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./8_methodologie_agile.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./8Bis_MVP.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./8Bis_bonne_pratique_dev.qmd >}}
+
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./9_deploiement_CI.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./10_recette_validation.qmd >}}
+
+---
+
+
+
+
+
+
+{{< pagebreak >}}
+
+{{< include ./11_accompagnement.qmd >}}
+
+---
+
+
+{{< pagebreak >}}
+
+{{< include ./11Bis_cadre_contractuel.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./12_planing_jalons.qmd >}}
+
+---
+
+
+
+# Annexes {#sec-Annexes}
+
+
+## Tableau synthétique des indicateurs
+
+@todo [priority=high, section=annexe-liens-fichiers] : inserer un lien vers le tableau des indicateurs
+
+## Catalogue des indicateurs
+
+@todo [priority=high, section=annexe-liens-fichiers] : inserer un lien vers le catalogue de fiches des indicateurs
