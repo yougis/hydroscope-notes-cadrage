@@ -1,18 +1,20 @@
 ## Monitoring, supervision et pilotage
 
-Le projet HydroScope intègre des besoins transverses de monitoring visant à garantir le bon fonctionnement du système, la fiabilité des données et la capacité à suivre les dynamiques environnementales dans le temps. Ces fonctions de monitoring ne se limitent pas à la production de tableaux de bord, mais reposent sur des mécanismes de suivi, d’alerte et d’analyse continue.
+Des besoins transverses de monitoring sont essentiels pour le bon fonctionnement du système, la fiabilité des données et la capacité à suivre les dynamiques géographiques dans le temps. Ces fonctions de monitoring reposent sur des mécanismes de suivi, d’alerte et d’analyse continue.
 
-L’objectif est double : sécuriser techniquement et méthodologiquement le système, tout en fournissant aux acteurs des outils de veille et de pilotage adaptés à leurs besoins.
+L’objectif est double : sécuriser techniquement et méthodologiquement le système, tout en fournissant aux administrateurs des outils de veille et de pilotage adaptés à leurs besoins.
 
 ### Monitoring technique
 
 Le système devra permettre de suivre le bon fonctionnement des traitements et des flux de données.
 
 Cela inclut notamment :
-- le suivi des processus d’import (succès, échecs, volumétrie, durée) ;
-- la surveillance des connexions aux sources de données (API, bases externes) ;
-- le suivi des performances (temps de réponse, temps de calcul) ;
+
+- le suivi des processus d’import (sources, sortie, succès, échecs, volumétrie, date et durée) ;
+- la surveillance des connexions aux sources de données (catalogues, API, bases interne/externe) ;
+- le suivi des performances (helthcheck, temps de réponse, charge serveur, disponibilité) ;
 - la gestion des erreurs et des journaux techniques.
+- des alertes et notifications en cas de dysfonctionnements ou d’anomalies.
 
 Ces éléments sont principalement destinés aux équipes techniques en charge de l’exploitation et de la maintenance du système.
 
@@ -21,6 +23,7 @@ Ces éléments sont principalement destinés aux équipes techniques en charge d
 HydroScope devra permettre de suivre en continu la qualité et la fraîcheur des données intégrées.
 
 Cela comprend :
+
 - la visualisation des dates de mise à jour des données ;
 - le suivi de la complétude des jeux de données ;
 - la détection d’anomalies (valeurs aberrantes, ruptures de séries, incohérences) ;
@@ -33,21 +36,40 @@ Ces informations devront être accessibles aux utilisateurs afin d’éclairer l
 Le système devra permettre de suivre les évolutions des indicateurs dans une logique de veille environnementale.
 
 Cela inclut :
+
 - le suivi temporel des pressions environnementales ;
 - la détection de tendances et de ruptures ;
 - la mise en place de mécanismes d’alerte sur des évolutions significatives ;
-- la priorisation des territoires en fonction de leur niveau de pression.
+- détéction différentielle brute des données à leur mise à jours.
 
-Ces fonctionnalités participent directement à l’aide à la décision.
+Ces fonctionnalités participent directement au rôle d’aide à la décision du projet. D'autre part, elles permettent de sécuriser la production des indicateurs et d’alerter les utilisateurs sur des évolutions significatives.
 
 ### Monitoring des usages
 
 HydroScope devra permettre d’analyser les usages de la plateforme afin d’en améliorer la pertinence et l’adoption.
 
-Cela comprend :
-- le suivi de la fréquentation de l’outil ;
-- l’identification des fonctionnalités les plus utilisées ;
-- l’analyse des usages par profil utilisateur ;
-- le suivi des exports et des consultations.
+Le prestataire devra proposer des mécanismes permettant de suivre :
 
-Ces éléments alimentent la démarche d’amélioration continue du produit.
+- le suivi de la fréquentation de l’outil ;
+- l’identification des actions les plus utilisées ;
+- l’analyse des usages par profil utilisateur ;
+- le suivi des exports ;
+- Le territoires les plus consultés et les indicateurs les plus utilisés.
+
+Ces éléments alimentent la démarche d’amélioration continue de l'outil.
+
+
+### Historisation et traçabilité des données
+
+
+Pour assurer un monitoring efficace et garantir la traçabilité des indicateurs produits, nous pensons qu'un versionnement des données et des logs de traitements effectués est important.
+
+Chaque jeu de données thématique ou de référence intégré dans HydroScope (ICPE, radier/gué, MOS
+vectorisés, routes, feux Sentinel/VIIRS, etc.) pourra faire l’objet d’un stockage versionné, horodaté, permettant de :
+
+- conserver un état complet des données utilisées à chaque mise à jour ;
+- reconstituer la source exacte d’un indicateur produit à une date donnée et reproduire tout résultat passé (traçabilité environnementale, réglementaire) ;
+- faciliter les audits techniques, relectures et vérifications des traitements ;
+
+L’historisation des données ne peut pas être uniforme, elle devra donc s'adapter aux types de données sources exploitées (données vectorielles, raster, séries temporelles, etc.) et aux besoins des utilisateurs.
+

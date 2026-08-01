@@ -1,66 +1,92 @@
 ## Accompagnement et conduite du changement
 
-La mise en œuvre d’HydroScope implique des évolutions dans les pratiques des acteurs de la gestion de l’eau en Nouvelle-Calédonie. À ce titre, un dispositif d’accompagnement et de conduite du changement est აუცილaire pour favoriser l’appropriation de l’outil, garantir son utilisation effective et assurer la cohérence des usages entre les différentes parties prenantes.
+La mise en œuvre d’HydroScope implique des évolutions dans les pratiques des acteurs de la gestion de l’eau en Nouvelle-Calédonie. À ce titre, un dispositif d’accompagnement et de conduite du changement est nécessaire pour favoriser l’appropriation de l’outil, garantir son utilisation effective et assurer la cohérence des usages entre les différentes parties prenantes.
 
-L’objectif est de faciliter l’adoption du système, de sécuriser son déploiement et de maximiser sa valeur pour les utilisateurs.
+L’objectif est de faciliter l’adoption du système, de sécuriser son déploiement et de permettre une montée en compétence progressive des utilisateurs et des administrateurs.
 
-### Accompagnement des utilisateurs
+### Accompagnement des utilisateurs et des administrateurs
 
-L’accompagnement vise à permettre aux différents profils d’utilisateurs de comprendre et d’utiliser efficacement HydroScope.
+Le dispositif d’accompagnement concerne à la fois :
 
-Il comprend :
-- la présentation des objectifs et des fonctionnalités de l’outil ;
-- l’explication des indicateurs et des principes méthodologiques ;
-- l’accompagnement à la prise en main des interfaces.
+- les **utilisateurs finaux** (techniciens, ingénieurs, décideurs), qui utilisent l’outil pour analyser et interpréter les données ;
+- les **administrateurs** (OEIL notamment), qui assurent l’exploitation, la gestion des données et le paramétrage de la plateforme.
 
-Cet accompagnement doit être adapté aux différents profils (experts, techniciens, décideurs).
+#### Objectifs
+
+L’accompagnement vise à permettre :
+
+- une prise en main rapide de l’outil ;
+- une compréhension des indicateurs et de leurs limites ;
+- une utilisation adaptée aux différents profils ;
+- une autonomie progressive des administrateurs dans la gestion du système.
+
+Pour les administrateurs, cela inclut en particulier :
+
+- la gestion des données (import, mise à jour, contrôle qualité) ;
+- l’administration des référentiels (objets géographiques, indicateurs) ;
+- la supervision des traitements et des calculs ;
+- la gestion des utilisateurs et des droits ;
+- un premier niveau de support aux utilisateurs.
 
 ### Formation
 
-Des actions de formation devront être mises en place afin de garantir une appropriation opérationnelle de l’outil.
+Des actions de formation devront être mises en place, adaptées aux différents profils :
 
-Ces formations pourront prendre plusieurs formes :
-- sessions de formation initiale lors du déploiement ;
-- formations thématiques (indicateurs, visualisation, analyse) ;
-- supports pédagogiques (guides, tutoriels).
+- **Formations utilisateurs** :
+  - prise en main de l’interface ;
+  - lecture et interprétation des indicateurs ;
+  - utilisation des outils de visualisation et d’analyse.
+  
+- **Formations administrateurs** :
+  - gestion des flux de données et des imports ;
+  - administration des référentiels et des indicateurs ;
+  - utilisation des outils de supervision et de monitoring ;
+  - bonnes pratiques d’exploitation de la plateforme.
 
-Les contenus devront être adaptés au niveau de connaissance des utilisateurs.
+Ces formations pourront être réalisées sous forme de sessions dédiées, d’ateliers pratiques et de supports pédagogiques.
 
 ### Documentation
 
-Une documentation complète et accessible devra être produite.
+Une documentation complète devra être produite et maintenue à jour :
 
-Elle comprend :
-- une documentation fonctionnelle (présentation des fonctionnalités) ;
-- une documentation méthodologique (définition des indicateurs, méthodes de calcul) ;
-- une documentation utilisateur (guides de prise en main, cas d’usage).
+- **Documentation utilisateur** :
+  - guides de prise en main ;
+  - description des fonctionnalités ;
+  - cas d’usage.
+  
+- **Documentation administrateur** :
+  - guide d’administration ;
+  - description des processus d’import et de mise à jour ;
+  - documentation des indicateurs et des traitements ;
+  - procédures de gestion des incidents.
 
-Cette documentation constitue un support essentiel pour l’autonomie des utilisateurs.
+Cette documentation constitue un support essentiel pour l’autonomie des utilisateurs et des administrateurs.
 
-### Support et assistance
+### Support et accompagnement dans la durée
 
-Un dispositif de support devra être mis en place pour accompagner les utilisateurs dans la durée.
+Un dispositif de support devra être mis en place pour accompagner les utilisateurs et les administrateurs après le déploiement :
 
-Il comprend :
-- un point de contact pour le support (questions, incidents) ;
-- la gestion des demandes d’évolution ;
-- le suivi des incidents et leur résolution.
+- point de contact pour les questions et incidents ;
+- accompagnement lors des premières phases d’exploitation ;
+- suivi des demandes d’évolution ;
+- support spécifique pour les administrateurs lors de la prise en main.
 
-Ce dispositif doit permettre de maintenir un niveau de service satisfaisant.
+Des actions de **transfert de compétences** devront être prévues afin de limiter la dépendance au prestataire.
 
 ### Communication
 
-Une communication régulière devra être assurée autour du projet et de ses évolutions.
+Une communication régulière devra être assurée tout au long du projet :
 
-Elle vise à :
-- informer les utilisateurs des nouvelles fonctionnalités ;
-- valoriser les usages et les résultats obtenus ;
-- maintenir l’engagement des parties prenantes.
+- information sur les évolutions de l’outil ;
+- valorisation des usages ;
+- partage des bonnes pratiques.
+
+Cette communication contribue à maintenir l’engagement des parties prenantes.
 
 ### Points de vigilance
 
 - Hétérogénéité des profils utilisateurs et des niveaux de compétence  
 - Nécessité d’expliquer les limites méthodologiques des indicateurs  
-- Risque de non-appropriation si l’accompagnement est insuffisant  
+- Risque de dépendance au prestataire en l’absence de transfert de compétences  
 - Importance de maintenir la documentation à jour  
-- Coordination entre évolutions de l’outil et formation des utilisateurs
+- Coordination entre évolutions de l’outil, formation et support  

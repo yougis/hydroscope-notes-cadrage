@@ -6,6 +6,21 @@ EPIC 1 – Gestion des données;US1.5;Gérer les erreurs d’import;TRUE
 EPIC 1 – Gestion des données;US1.6;Historiser les données;TRUE
 EPIC 1 – Gestion des données;US1.2;Connecter une API externe;FALSE
 EPIC 1 – Gestion des données;US1.7;Rejouer un traitement;FALSE
+EPIC 1bis – Catalogage des données;US1bis.1;Enregistrer un jeu de données dans le catalogue;TRUE
+EPIC 1bis – Catalogage des données;US1bis.2;Associer des métadonnées à un jeu de données;TRUE
+EPIC 1bis – Catalogage des données;US1bis.3;Modifier les métadonnées d’un jeu de données;FALSE
+EPIC 1bis – Catalogage des données;US1bis.4;Consulter les informations d’un jeu de données;TRUE
+EPIC 1bis – Catalogage des données;US1bis.5;Rechercher un jeu de données dans le catalogue;FALSE
+EPIC 1bis – Catalogage des données;US1bis.6;Filtrer les jeux de données selon des critères;FALSE
+EPIC 1bis – Catalogage des données;US1bis.7;Visualiser les relations entre indicateur et données sources;TRUE
+EPIC 1bis – Catalogage des données;US1bis.8;Tracer les transformations appliquées à un jeu de données;FALSE
+EPIC 1bis – Catalogage des données;US1bis.9;Identifier une donnée comme source ou dérivée;FALSE
+EPIC 1bis – Catalogage des données;US1bis.10;Alimenter automatiquement le catalogue lors des imports;TRUE
+EPIC 1bis – Catalogage des données;US1bis.11;Relier un jeu de données à un traitement (ex : dbt);FALSE
+EPIC 1bis – Catalogage des données;US1bis.12;Enregistrer un indicateur comme donnée dérivée;TRUE
+EPIC 1bis – Catalogage des données;US1bis.13;Consulter les métadonnées d’un indicateur;FALSE
+EPIC 1bis – Catalogage des données;US1bis.14;Ajouter un nouveau jeu de données sans modifier la structure;FALSE
+EPIC 1bis – Catalogage des données;US1bis.15;Historiser les modifications des métadonnées;FALSE
 EPIC 2 – Qualité des données;US2.1;Détecter des valeurs aberrantes;TRUE
 EPIC 2 – Qualité des données;US2.4;Calculer un taux de complétude;TRUE
 EPIC 2 – Qualité des données;US2.5;Qualifier la fiabilité;TRUE

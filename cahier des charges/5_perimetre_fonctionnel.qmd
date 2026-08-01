@@ -1,10 +1,14 @@
 ## Périmètre fonctionnel – EPICS
 
-Le périmètre fonctionnel d’HydroScope est structuré en grands ensembles cohérents de fonctionnalités (EPICS), permettant d’organiser le développement du produit de manière progressive et itérative. Chaque EPIC fait l’objet d’une description détaillée dans une fiche dédiée, intégrée dynamiquement dans ce document via des inclusions Quarto.
+Le périmètre fonctionnel d’HydroScope est structuré en grands ensembles cohérents de fonctionnalités (EPICS), permettant d’organiser le développement du produit de manière progressive et itérative.
 
-### EPIC 1 : Gestion des données
+### EPIC 1 : Gestion des indicateurs
 
-{{< include epics/epic-1-gestion-donnees.qmd >}}
+{{< include epics/epic-1-gestion-indicateurs.qmd >}}
+
+### EPIC 1 bis : Catalogue de données
+
+{{< include epics/epic-1bis-catalogue.qmd >}}
 
 ### EPIC 2 : Qualité et validation des données
 

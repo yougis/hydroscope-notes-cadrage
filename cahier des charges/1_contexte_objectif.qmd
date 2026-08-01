@@ -79,7 +79,7 @@ Le périmètre fonctionnel du projet HydroScope s’appuie sur un ensemble de do
 
 À ce stade, les ordres de grandeur sont les suivants :
 
-- **Bassins versants d’alimentation en eau potable (BVAEP)** : ~XX unités  
+- **Bassins versants d’alimentation en eau potable (BVAEP)** : ~50 unités  
 - **Captages / forages** : ~500 unités  
 - **Périmètres de protection** : ~250 unités  
 - **Indicateurs** : ~40 indicateurs (en fonction des thématiques retenues)  

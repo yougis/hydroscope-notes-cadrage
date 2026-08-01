@@ -1,10 +1,8 @@
-### EPIC 5 : Analyse multicritère
-
 L’analyse multicritère constitue un axe d’évolution du projet HydroScope visant à proposer des lectures synthétiques des dynamiques territoriales, en combinant plusieurs indicateurs relatifs aux pressions, aux enjeux et aux caractéristiques des bassins versants.
 
 Elle a pour objectif de faciliter l’identification de situations prioritaires et d’apporter un appui à la décision, tout en conservant un lien explicite avec les données et indicateurs sous-jacents.
 
-### Description
+#### Description
 
 Cet EPIC couvre les fonctionnalités permettant de croiser plusieurs indicateurs afin de produire des analyses agrégées ou des représentations synthétiques. Il s’inscrit dans une logique exploratoire et progressive, compte tenu des enjeux méthodologiques associés.
 
@@ -12,7 +10,7 @@ Cet EPIC couvre les fonctionnalités permettant de croiser plusieurs indicateurs
 
 L’analyse multicritère devra ainsi être conçue comme un outil d’aide à l’interprétation, et non comme un mécanisme de décision automatisée.
 
-### Fonctionnalités envisagées
+#### Fonctionnalités envisagées
 
 À titre indicatif, les fonctionnalités pouvant être couvertes par cet EPIC incluent :
 
@@ -23,7 +21,7 @@ L’analyse multicritère devra ainsi être conçue comme un outil d’aide à l
 
 Ces fonctionnalités seront précisées et priorisées au cours du projet.
 
-### Principes de mise en œuvre
+#### Principes de mise en œuvre
 
 La mise en œuvre de cet EPIC devra respecter plusieurs principes :
 
@@ -32,7 +30,7 @@ La mise en œuvre de cet EPIC devra respecter plusieurs principes :
 - **Réversibilité** : il devra être possible de revenir à une lecture détaillée des indicateurs ;
 - **Prudence méthodologique** : éviter toute simplification excessive ou biaisée.
 
-### Points de vigilance
+#### Points de vigilance
 
 - Risques liés à l’agrégation de données hétérogènes (échelles, unités, qualité)  
 - Difficulté d’interprétation des résultats par les utilisateurs  
@@ -40,7 +38,7 @@ La mise en œuvre de cet EPIC devra respecter plusieurs principes :
 - Nécessité de validation scientifique des approches retenues  
 - Risque de surinterprétation ou d’usage inadapté des résultats  
 
-### Positionnement dans le projet
+#### Positionnement dans le projet
 
 Compte tenu de sa complexité et des enjeux méthodologiques associés, l’analyse multicritère n’est pas intégrée dans le périmètre du MVP. Elle fera l’objet d’un développement ultérieur, après validation des principes méthodologiques et des besoins utilisateurs.
 

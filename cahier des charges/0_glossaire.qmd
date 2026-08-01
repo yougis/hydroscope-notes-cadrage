@@ -1,0 +1,61 @@
+## Glossaire
+
+Ce glossaire vise à clarifier les principaux acronymes, termes techniques et notions utilisés dans le cadre du projet HydroScope. Il a pour objectif de faciliter la compréhension du document par l’ensemble des parties prenantes.
+
+### Acronymes et acteurs
+
+- **OEIL** : Observatoire de l’Environnement en Nouvelle-Calédonie  
+- **DAVAR** : Direction des Affaires Vétérinaires, Alimentaires et Rurales  
+- **OFB** : Office Français de la Biodiversité  
+- **PEP** : Politique de l’Eau Partagée  
+- **MOA** : Maîtrise d’Ouvrage (porteur du besoin)  
+- **AMOA** : Assistance à Maîtrise d’Ouvrage (appui à la définition et au suivi du projet)  
+- **MOE** : Maîtrise d’Œuvre (réalisation technique du projet)  
+- **COPIL** : Comité de pilotage  
+- **COTECH** : Comité technique  
+
+### Concepts projet et méthodologie Agile
+
+- **HydroScope** : Système d’information dédié au suivi, à l’analyse et à la valorisation des données relatives aux ressources en eau potable en Nouvelle-Calédonie  
+- **Backlog produit** : Liste priorisée des fonctionnalités à développer  
+- **EPIC** : Ensemble fonctionnel regroupant plusieurs User Stories  
+- **User Story (US)** : Description d’un besoin fonctionnel du point de vue utilisateur  
+- **MVP (Minimum Viable Product)** : Première version fonctionnelle du produit, limitée aux fonctionnalités essentielles  
+- **Sprint** : Cycle court de développement dans une méthode Agile 
+
+### Données et objets métier
+
+- **BVAEP** : Bassin Versant d’Alimentation en Eau Potable  
+- **Captage / forage** : Point de prélèvement d’eau destiné à l’alimentation en eau potable  
+- **Périmètre de Protection des Eaux (PPE)** : Zone réglementaire visant à protéger un captage  
+- **Indicateur** : Variable calculée permettant de caractériser un phénomène (enjeux, pression, état, évolution)  
+- **Référentiel** : Ensemble structuré d’objets ou de définitions partagés (géographiques, indicateurs, utilisateurs)  
+- **Métadonnées** : Données décrivant d’autres données (source, date, méthode, etc.)
+
+### Concepts techniques
+
+- **API (Application Programming Interface)** : Interface permettant à des systèmes d’échanger des données  
+- **SIG (Système d’Information Géographique)** : Outils permettant de manipuler et visualiser des données géographiques  
+- **H3** : Système de grille géographique hiérarchique permettant d’agréger des données spatiales dans des Hexagones dans un système hiérarchique.
+- **CSV (Comma-Separated Values)** : Format de fichier tabulaire simple  
+- **GeoJSON / Shapefile** : Formats de données géographiques  
+- **Base de données** : Système de stockage structuré des données  
+
+### Qualité et analyse des données
+
+- **Agrégation** : Regroupement de données selon une échelle spatiale ou temporelle  
+- **Analyse multicritère** : Méthode permettant de combiner plusieurs indicateurs pour produire une analyse synthétique  
+- **Traçabilité** : Capacité à suivre l’origine et les transformations des données  
+- **Complétude** : Niveau de remplissage d’un jeu de données  
+- **Cohérence** : Absence de contradictions dans les données  
+
+### Exploitation et maintenance
+
+- **SLA (Service Level Agreement)** : Engagement sur les niveaux de service (disponibilité, délais de traitement)  
+- **TMA (Tierce Maintenance Applicative)** : Activités de maintenance corrective et évolutive d’une application  
+- **Réversibilité** : Capacité à transférer le système ou les données vers un autre prestataire  
+- **Monitoring** : Suivi du fonctionnement du système et des données  
+
+### Réglementation
+
+- **RGPD (Règlement Général sur la Protection des Données)** : Cadre réglementaire européen relatif à la protection des données personnelles  

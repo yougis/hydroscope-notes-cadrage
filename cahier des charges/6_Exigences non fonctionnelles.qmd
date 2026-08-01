@@ -18,7 +18,7 @@ Les traitements de calcul d’indicateurs doivent être réalisés :
 - en temps quasi immédiat pour les indicateurs simples (quelques secondes) ;
 - en différé (pipeline de traitement en arrière plan) pour les traitements lourds, avec des délais maîtrisés et suivi (cf. monitoring).
 
-@todo[priority=high, subject=lien]: faire le lien avec la section  monitoring pour le suivi des traitements en arrière plan
+@todo[priority=high, section=lien]: faire le lien avec la section  monitoring pour le suivi des traitements en arrière plan
 
 ### Volumétrie et charge
 
@@ -29,7 +29,7 @@ Le système devra être dimensionné pour gérer les volumes suivants :
 - plusieurs dizaines d’indicateurs calculés à différentes échelles ; 
 - des données spatiales potentiellement volumineuses (maillages, séries temporelles) ;
 
-@todo[priority=high, subject=processing]: indiquer la volumetrie plus précisement sur les traitements.
+@todo[priority=high, section=processing]: indiquer la volumetrie plus précisement sur les traitements.
 
 
 Le système devra permettre :
@@ -63,7 +63,7 @@ Le système doit pouvoir s’intégrer dans un écosystème existant de données
 - la compatibilité avec les formats d’échange usuels (tabulaires, géographiques) ;
 - la possibilité d’interagir avec des systèmes tiers (API sécurisés ou non, webservices OGC et ESRI, serveur FTP).
 - 
-@todo[priority=high, subject=API]: préciser les usage des API externe prévues.
+@todo[priority=high, section=API]: préciser les usage des API externe prévues.
 
 L’interopérabilité est un facteur clé pour faciliter le partage et la réutilisation des données.
 
@@ -92,11 +92,11 @@ Ces éléments doivent permettre d’assurer la pérennité du système et sa ca
 
 Le système devra garantir un niveau de disponibilité compatible avec les usages :
 
-- disponibilité cible : **≥ 95 %** (hors maintenance planifiée) ;
+- disponibilité cible : **≥ 98 %** (soit 7 jours hors maintenance planifiée) ;
 - plages de maintenance définies et communiquées ;
 - reprise en cas d’incident dans des délais maîtrisés (cf. SLA).
 
-@todo[priority=high, subject=lien]: faire le lien avec SLA
+@todo[priority=high, section=lien]: faire le lien avec SLA
 
 ### Points de vigilance
 

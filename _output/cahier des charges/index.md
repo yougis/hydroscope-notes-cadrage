@@ -11,8 +11,10 @@ authors:
   Position: Expert Géomatique -- Architecte data - Consultant
   Tel: +687 97.83.24
 copyright:
-  statement: Copyright Yapuka SARL - 2026. Tous droits réservés. 1
-date: 30 juillet 2026
+  tag: "!expr"
+  value: paste("Copyright Yapuka SARL - 2026. Tous droits réservés.",
+    version)
+date: 1 août 2026
 date-format: long
 engines:
 - path: /opt/quarto/share/extension-subtrees/julia-engine/\_extensions/julia-engine/julia-engine.js
@@ -53,9 +55,17 @@ version: version 1
 >   --------- ------ ---------------- ------------------------------------------
 >   1                Hugo Roussaffa   Rédaction initiale du cahier des charges
 >
-> Points en attente (4)
+> Points en attente (7)
 >
 > [high (annexe)](#annexe-indiquer-l-annexe) : indiquer l'annexe
+>
+> [high (lien)](#lien-faire-le-lien-avec-la-section-monitoring-pour-le-suivi-des-traitements-en-arri-re-plan)
+> : faire le lien avec la section monitoring pour le suivi des traitements en arrière plan
+>
+> [high (processing)](#processing-indiquer-la-volumetrie-plus-pr-cisement-sur-les-traitements-)
+> : indiquer la volumetrie plus précisement sur les traitements.
+>
+> [high (lien)](#lien-faire-le-lien-avec-sla) : faire le lien avec SLA
 >
 > [high (link)](#link-mettre-lien-section) : mettre lien section
 >
@@ -252,7 +262,7 @@ pris en compte pour dimensionner la solution.
 
 À ce stade, les ordres de grandeur sont les suivants :
 
-- **Bassins versants d'alimentation en eau potable (BVAEP)** : \~XX
+- **Bassins versants d'alimentation en eau potable (BVAEP)** : \~50
   unités\
 - **Captages / forages** : \~500 unités\
 - **Périmètres de protection** : \~250 unités\
@@ -946,8 +956,6 @@ dans le temps.
 
 ### EPIC 5 : Analyse multicritère (vigilance forte) {#epic-5-analyse-multicritère-vigilance-forte number="0.6.5"}
 
-### EPIC 5 : Analyse multicritère {#epic-5-analyse-multicritère number="0.6.6"}
-
 L'analyse multicritère constitue un axe d'évolution du projet HydroScope
 visant à proposer des lectures synthétiques des dynamiques
 territoriales, en combinant plusieurs indicateurs relatifs aux
@@ -957,7 +965,7 @@ Elle a pour objectif de faciliter l'identification de situations
 prioritaires et d'apporter un appui à la décision, tout en conservant un
 lien explicite avec les données et indicateurs sous-jacents.
 
-### Description {#description-3 number="0.6.7"}
+#### Description {#description-3 number="0.6.5.1"}
 
 Cet EPIC couvre les fonctionnalités permettant de croiser plusieurs
 indicateurs afin de produire des analyses agrégées ou des
@@ -972,7 +980,7 @@ pertinence scientifique et leur compréhension.
 L'analyse multicritère devra ainsi être conçue comme un outil d'aide à
 l'interprétation, et non comme un mécanisme de décision automatisée.
 
-### Fonctionnalités envisagées {#fonctionnalités-envisagées number="0.6.8"}
+#### Fonctionnalités envisagées {#fonctionnalités-envisagées number="0.6.5.2"}
 
 À titre indicatif, les fonctionnalités pouvant être couvertes par cet
 EPIC incluent :
@@ -986,7 +994,7 @@ EPIC incluent :
 
 Ces fonctionnalités seront précisées et priorisées au cours du projet.
 
-### Principes de mise en œuvre {#principes-de-mise-en-œuvre number="0.6.9"}
+#### Principes de mise en œuvre {#principes-de-mise-en-œuvre number="0.6.5.3"}
 
 La mise en œuvre de cet EPIC devra respecter plusieurs principes :
 
@@ -999,7 +1007,7 @@ La mise en œuvre de cet EPIC devra respecter plusieurs principes :
 - **Prudence méthodologique** : éviter toute simplification excessive ou
   biaisée.
 
-### Points de vigilance {#points-de-vigilance-3 number="0.6.10"}
+#### Points de vigilance {#points-de-vigilance-3 number="0.6.5.4"}
 
 - Risques liés à l'agrégation de données hétérogènes (échelles, unités,
   qualité)\
@@ -1008,7 +1016,7 @@ La mise en œuvre de cet EPIC devra respecter plusieurs principes :
 - Nécessité de validation scientifique des approches retenues\
 - Risque de surinterprétation ou d'usage inadapté des résultats
 
-### Positionnement dans le projet {#positionnement-dans-le-projet number="0.6.11"}
+#### Positionnement dans le projet {#positionnement-dans-le-projet number="0.6.5.5"}
 
 Compte tenu de sa complexité et des enjeux méthodologiques associés,
 l'analyse multicritère n'est pas intégrée dans le périmètre du MVP. Elle
@@ -1019,7 +1027,7 @@ Cet EPIC sera abordé de manière progressive, en lien étroit avec les
 partenaires techniques, afin de garantir la robustesse et la pertinence
 des résultats produits.
 
-### EPIC 6 : Visualisation et exploration {#epic-6-visualisation-et-exploration number="0.6.12"}
+### EPIC 6 : Visualisation et exploration {#epic-6-visualisation-et-exploration number="0.6.6"}
 
 Cet EPIC regroupe l'ensemble des fonctionnalités permettant de
 restituer, explorer et interpréter les données et indicateurs produits
@@ -1031,7 +1039,7 @@ L'enjeu est de proposer des outils de visualisation adaptés à des
 profils variés, tout en garantissant une lecture fiable et non ambiguë
 des données.
 
-#### Description {#description-4 number="0.6.12.1"}
+#### Description {#description-4 number="0.6.6.1"}
 
 L'EPIC couvre la conception et la mise en œuvre des interfaces de
 consultation et d'exploration des données. Il s'appuie sur les
@@ -1045,7 +1053,7 @@ des informations (tableaux de bord) et une exploration plus fine
 Une attention particulière est portée à l'ergonomie, à la lisibilité et
 à la cohérence des représentations proposées.
 
-#### Fonctionnalités {#fonctionnalités-3 number="0.6.12.2"}
+#### Fonctionnalités {#fonctionnalités-3 number="0.6.6.2"}
 
 - **Cartographie interactive**\
   Visualisation des données et indicateurs sur des supports
@@ -1102,7 +1110,7 @@ nécessitant une attention particulière.
 Ces fonctionnalités doivent rester lisibles et adaptées aux différents
 profils utilisateurs.
 
-#### Points de vigilance {#points-de-vigilance-4 number="0.6.12.3"}
+#### Points de vigilance {#points-de-vigilance-4 number="0.6.6.3"}
 
 - Risque de surcharge visuelle pouvant nuire à la compréhension\
 - Nécessité d'adapter les visualisations aux différents profils
@@ -1113,7 +1121,7 @@ profils utilisateurs.
   (échelles, couleurs, classifications)\
 - Dépendance à la qualité et à la fraîcheur des données affichées
 
-### EPIC 7 : Aide à la décision {#epic-7-aide-à-la-décision number="0.6.13"}
+### EPIC 7 : Aide à la décision {#epic-7-aide-à-la-décision number="0.6.7"}
 
 Cet EPIC vise à traduire les données et indicateurs produits par
 HydroScope en éléments directement mobilisables pour l'action. Il ne
@@ -1126,7 +1134,7 @@ les situations à risque ou prioritaires, et d'accompagner
 l'interprétation des résultats dans une logique d'appui à la décision
 publique.
 
-#### Description {#description-5 number="0.6.13.1"}
+#### Description {#description-5 number="0.6.7.1"}
 
 L'EPIC couvre l'ensemble des mécanismes permettant de passer d'une
 information analytique (indicateurs, visualisations) à une information
@@ -1139,7 +1147,7 @@ territoires ou les captages nécessitant une attention particulière, tout
 en conservant un accès au détail des données pour justifier les
 analyses.
 
-#### Fonctionnalités {#fonctionnalités-4 number="0.6.13.2"}
+#### Fonctionnalités {#fonctionnalités-4 number="0.6.7.2"}
 
 - **Seuils et alertes**\
   Définition de seuils sur certains indicateurs afin de signaler des
@@ -1194,7 +1202,7 @@ contextualisées (territoire, indicateur, période) ; - la mise en
 Ces mécanismes doivent être paramétrables et interprétables afin
 d'éviter des alertes inadaptées.
 
-#### Points de vigilance {#points-de-vigilance-5 number="0.6.13.3"}
+#### Points de vigilance {#points-de-vigilance-5 number="0.6.7.3"}
 
 - Risque de simplification excessive pouvant masquer la complexité des
   phénomènes\
@@ -1206,7 +1214,7 @@ d'éviter des alertes inadaptées.
 - Risque de surinterprétation ou de mauvaise utilisation des indicateurs
   dans des contextes non adaptés
 
-### EPIC 8 : Export et diffusion {#epic-8-export-et-diffusion number="0.6.14"}
+### EPIC 8 : Export et diffusion {#epic-8-export-et-diffusion number="0.6.8"}
 
 Cet EPIC regroupe les fonctionnalités permettant de diffuser, partager
 et valoriser les données et analyses produites par HydroScope. Il répond
@@ -1218,7 +1226,7 @@ L'objectif est de rendre les données et résultats produits facilement
 exploitables, que ce soit pour des usages internes (analyse, reporting)
 ou externes (communication, partage inter-institutionnel).
 
-#### Description {#description-6 number="0.6.14.1"}
+#### Description {#description-6 number="0.6.8.1"}
 
 L'EPIC couvre les mécanismes d'export des données et des indicateurs,
 ainsi que leur mise à disposition via différents supports. Il doit
@@ -1229,7 +1237,7 @@ Les fonctionnalités doivent être adaptées aux différents profils
 d'utilisateurs, en tenant compte de leurs besoins en termes de format,
 de niveau de détail et de fréquence d'accès.
 
-#### Fonctionnalités {#fonctionnalités-5 number="0.6.14.2"}
+#### Fonctionnalités {#fonctionnalités-5 number="0.6.8.2"}
 
 - **Export de données**\
   Possibilité d'extraire les données et indicateurs sous des formats
@@ -1268,7 +1276,7 @@ entre acteurs.
 Cette ouverture permet d'inscrire HydroScope dans un écosystème plus
 large.
 
-#### Points de vigilance {#points-de-vigilance-6 number="0.6.14.3"}
+#### Points de vigilance {#points-de-vigilance-6 number="0.6.8.3"}
 
 - Maîtrise des droits d'accès et des niveaux de diffusion (données
   sensibles)\
@@ -1279,7 +1287,7 @@ large.
 - Nécessité de documenter les formats et contenus diffusés\
 - Gestion des performances et des volumes de données lors des exports
 
-### EPIC 9 : Gestion des utilisateurs {#epic-9-gestion-des-utilisateurs number="0.6.15"}
+### EPIC 9 : Gestion des utilisateurs {#epic-9-gestion-des-utilisateurs number="0.6.9"}
 
 Cet EPIC regroupe les fonctionnalités liées à la gestion des accès, des
 profils et des droits au sein d'HydroScope. Il vise à garantir un accès
@@ -1291,7 +1299,7 @@ institutionnels, techniques et potentiellement le grand public, la
 gestion des utilisateurs constitue un élément clé pour assurer à la fois
 la sécurité des données et la pertinence des informations diffusées.
 
-#### Description {#description-7 number="0.6.15.1"}
+#### Description {#description-7 number="0.6.9.1"}
 
 L'EPIC couvre l'ensemble des mécanismes d'authentification,
 d'autorisation et de gestion des profils utilisateurs. Il doit permettre
@@ -1303,7 +1311,7 @@ Le système doit également permettre une gestion évolutive des
 utilisateurs, afin d'intégrer de nouveaux acteurs et d'adapter les
 droits en fonction des évolutions organisationnelles.
 
-#### Fonctionnalités {#fonctionnalités-6 number="0.6.15.2"}
+#### Fonctionnalités {#fonctionnalités-6 number="0.6.9.2"}
 
 - **Authentification**\
   Mise en place de mécanismes permettant d'identifier les utilisateurs :
@@ -1348,7 +1356,7 @@ statistiques d'usage pour orienter les évolutions du produit.
 Ces éléments contribuent à l'amélioration continue de l'outil et à
 l'adaptation aux besoins réels.
 
-#### Points de vigilance {#points-de-vigilance-7 number="0.6.15.3"}
+#### Points de vigilance {#points-de-vigilance-7 number="0.6.9.3"}
 
 - Équilibre entre sécurité des données et accessibilité pour les
   utilisateurs\
@@ -1361,7 +1369,7 @@ l'adaptation aux besoins réels.
 - Cohérence avec les règles de diffusion définies dans l'EPIC Export et
   diffusion
 
-### EPIC 10 : Traçabilité et audit {#epic-10-traçabilité-et-audit number="0.6.16"}
+### EPIC 10 : Traçabilité et audit {#epic-10-traçabilité-et-audit number="0.6.10"}
 
 Cet EPIC vise à garantir la transparence, la reproductibilité et la
 fiabilité des traitements réalisés au sein d'HydroScope. Il constitue un
@@ -1373,7 +1381,7 @@ Dans un contexte où les indicateurs produits peuvent influencer des
 décisions publiques, la capacité à tracer les opérations et à auditer
 les résultats est essentielle.
 
-#### Description {#description-8 number="0.6.16.1"}
+#### Description {#description-8 number="0.6.10.1"}
 
 L'EPIC couvre l'ensemble des mécanismes permettant de suivre
 l'historique des données, des traitements et des actions utilisateurs.
@@ -1384,7 +1392,7 @@ ayant conduit à un résultat donné.
 Il doit également permettre d'identifier les modifications apportées au
 système (données, paramètres, indicateurs) et d'en analyser les impacts.
 
-#### Fonctionnalités {#fonctionnalités-7 number="0.6.16.2"}
+#### Fonctionnalités {#fonctionnalités-7 number="0.6.10.2"}
 
 - **Historique des modifications**\
   Enregistrement des évolutions apportées aux données et aux
@@ -1431,7 +1439,7 @@ permettant d'analyser les événements et de reconstituer les processus.
 Ces éléments sont essentiels pour garantir la reproductibilité des
 analyses et la confiance dans le système.
 
-#### Points de vigilance {#points-de-vigilance-8 number="0.6.16.3"}
+#### Points de vigilance {#points-de-vigilance-8 number="0.6.10.3"}
 
 - Volume important de données générées par les logs et historiques\
 - Nécessité de rendre la traçabilité exploitable et compréhensible pour
@@ -1716,7 +1724,7 @@ temps quasi immédiat pour les indicateurs simples (quelques secondes)
 ; - en différé (pipeline de traitement en arrière plan) pour les
 traitements lourds, avec des délais maîtrisés et suivi (cf. monitoring).
 
-@todo [priority=high, subject=lien]: faire le lien avec la section
+@todo [priority=high, section=lien]: faire le lien avec la section
 monitoring pour le suivi des traitements en arrière plan
 
 ### Volumétrie et charge {#volumétrie-et-charge number="0.9.2"}
@@ -1729,7 +1737,7 @@ Le système devra être dimensionné pour gérer les volumes suivants :
 - des données spatiales potentiellement volumineuses (maillages, séries
   temporelles) ;
 
-@todo [priority=high, subject=processing]: indiquer la volumetrie plus
+@todo [priority=high, section=processing]: indiquer la volumetrie plus
 précisement sur les traitements.
 
 Le système devra permettre :
@@ -1771,7 +1779,7 @@ données et d'outils:
   géographiques) ;
 - la possibilité d'interagir avec des systèmes tiers (API sécurisés ou
   non, webservices OGC et ESRI, serveur FTP).
-- @todo [priority=high, subject=API]: préciser les usage des API externe
+- @todo [priority=high, section=API]: préciser les usage des API externe
   prévues.
 
 L'interopérabilité est un facteur clé pour faciliter le partage et la
@@ -1812,11 +1820,12 @@ capacité à s'adapter aux évolutions futures.
 Le système devra garantir un niveau de disponibilité compatible avec les
 usages :
 
-- disponibilité cible : **≥ 95 %** (hors maintenance planifiée) ;
+- disponibilité cible : **≥ 98 %** (soit 7 jours hors maintenance
+  planifiée) ;
 - plages de maintenance définies et communiquées ;
 - reprise en cas d'incident dans des délais maîtrisés (cf. SLA).
 
-@todo [priority=high, subject=lien]: faire le lien avec SLA
+@todo [priority=high, section=lien]: faire le lien avec SLA
 
 ### Points de vigilance {#points-de-vigilance-9 number="0.9.8"}
 
@@ -2120,7 +2129,7 @@ utilisées.
 Les mécanismes avancés de paramétrage et de versioning ne sont pas
 inclus à ce stade.
 
-#### EPIC 5 : Analyse multicritère {#epic-5-analyse-multicritère-1 number="0.12.1.5"}
+#### EPIC 5 : Analyse multicritère {#epic-5-analyse-multicritère number="0.12.1.5"}
 
 Cet EPIC n'est pas intégré dans le MVP.
 
@@ -2438,79 +2447,110 @@ La décision de mise en production est prise par la MOA.
 
 La mise en œuvre d'HydroScope implique des évolutions dans les pratiques
 des acteurs de la gestion de l'eau en Nouvelle-Calédonie. À ce titre, un
-dispositif d'accompagnement et de conduite du changement est აუცილaire
+dispositif d'accompagnement et de conduite du changement est nécessaire
 pour favoriser l'appropriation de l'outil, garantir son utilisation
 effective et assurer la cohérence des usages entre les différentes
 parties prenantes.
 
 L'objectif est de faciliter l'adoption du système, de sécuriser son
-déploiement et de maximiser sa valeur pour les utilisateurs.
+déploiement et de permettre une montée en compétence progressive des
+utilisateurs et des administrateurs.
 
-### Accompagnement des utilisateurs {#accompagnement-des-utilisateurs number="0.16.1"}
+### Accompagnement des utilisateurs et des administrateurs {#accompagnement-des-utilisateurs-et-des-administrateurs number="0.16.1"}
 
-L'accompagnement vise à permettre aux différents profils d'utilisateurs
-de comprendre et d'utiliser efficacement HydroScope.
+Le dispositif d'accompagnement concerne à la fois :
 
-Il comprend : - la présentation des objectifs et des fonctionnalités de
-l'outil ; - l'explication des indicateurs et des principes
-méthodologiques ; - l'accompagnement à la prise en main des interfaces.
+- les **utilisateurs finaux** (techniciens, ingénieurs, décideurs), qui
+  utilisent l'outil pour analyser et interpréter les données ;
+- les **administrateurs** (OEIL notamment), qui assurent l'exploitation,
+  la gestion des données et le paramétrage de la plateforme.
 
-Cet accompagnement doit être adapté aux différents profils (experts,
-techniciens, décideurs).
+#### Objectifs {#objectifs number="0.16.1.1"}
+
+L'accompagnement vise à permettre :
+
+- une prise en main rapide de l'outil ;
+- une compréhension des indicateurs et de leurs limites ;
+- une utilisation adaptée aux différents profils ;
+- une autonomie progressive des administrateurs dans la gestion du
+  système.
+
+Pour les administrateurs, cela inclut en particulier :
+
+- la gestion des données (import, mise à jour, contrôle qualité) ;
+- l'administration des référentiels (objets géographiques, indicateurs)
+  ;
+- la supervision des traitements et des calculs ;
+- la gestion des utilisateurs et des droits ;
+- un premier niveau de support aux utilisateurs.
 
 ### Formation {#formation number="0.16.2"}
 
-Des actions de formation devront être mises en place afin de garantir
-une appropriation opérationnelle de l'outil.
+Des actions de formation devront être mises en place, adaptées aux
+différents profils :
 
-Ces formations pourront prendre plusieurs formes : - sessions de
-formation initiale lors du déploiement ; - formations thématiques
-(indicateurs, visualisation, analyse) ; - supports pédagogiques (guides,
-tutoriels).
+- **Formations utilisateurs** :
+  - prise en main de l'interface ;
+  - lecture et interprétation des indicateurs ;
+  - utilisation des outils de visualisation et d'analyse.
+- **Formations administrateurs** :
+  - gestion des flux de données et des imports ;
+  - administration des référentiels et des indicateurs ;
+  - utilisation des outils de supervision et de monitoring ;
+  - bonnes pratiques d'exploitation de la plateforme.
 
-Les contenus devront être adaptés au niveau de connaissance des
-utilisateurs.
+Ces formations pourront être réalisées sous forme de sessions dédiées,
+d'ateliers pratiques et de supports pédagogiques.
 
 ### Documentation {#documentation number="0.16.3"}
 
-Une documentation complète et accessible devra être produite.
+Une documentation complète devra être produite et maintenue à jour :
 
-Elle comprend : - une documentation fonctionnelle (présentation des
-fonctionnalités) ; - une documentation méthodologique (définition des
-indicateurs, méthodes de calcul) ; - une documentation utilisateur
-(guides de prise en main, cas d'usage).
+- **Documentation utilisateur** :
+  - guides de prise en main ;
+  - description des fonctionnalités ;
+  - cas d'usage.
+- **Documentation administrateur** :
+  - guide d'administration ;
+  - description des processus d'import et de mise à jour ;
+  - documentation des indicateurs et des traitements ;
+  - procédures de gestion des incidents.
 
 Cette documentation constitue un support essentiel pour l'autonomie des
-utilisateurs.
+utilisateurs et des administrateurs.
 
-### Support et assistance {#support-et-assistance number="0.16.4"}
+### Support et accompagnement dans la durée {#support-et-accompagnement-dans-la-durée number="0.16.4"}
 
 Un dispositif de support devra être mis en place pour accompagner les
-utilisateurs dans la durée.
+utilisateurs et les administrateurs après le déploiement :
 
-Il comprend : - un point de contact pour le support (questions,
-incidents) ; - la gestion des demandes d'évolution ; - le suivi des
-incidents et leur résolution.
+- point de contact pour les questions et incidents ;
+- accompagnement lors des premières phases d'exploitation ;
+- suivi des demandes d'évolution ;
+- support spécifique pour les administrateurs lors de la prise en main.
 
-Ce dispositif doit permettre de maintenir un niveau de service
-satisfaisant.
+Des actions de **transfert de compétences** devront être prévues afin de
+limiter la dépendance au prestataire.
 
 ### Communication {#communication number="0.16.5"}
 
-Une communication régulière devra être assurée autour du projet et de
-ses évolutions.
+Une communication régulière devra être assurée tout au long du projet :
 
-Elle vise à : - informer les utilisateurs des nouvelles fonctionnalités
-; - valoriser les usages et les résultats obtenus ; - maintenir
-l'engagement des parties prenantes.
+- information sur les évolutions de l'outil ;
+- valorisation des usages ;
+- partage des bonnes pratiques.
+
+Cette communication contribue à maintenir l'engagement des parties
+prenantes.
 
 ### Points de vigilance {#points-de-vigilance-14 number="0.16.6"}
 
 - Hétérogénéité des profils utilisateurs et des niveaux de compétence\
 - Nécessité d'expliquer les limites méthodologiques des indicateurs\
-- Risque de non-appropriation si l'accompagnement est insuffisant\
+- Risque de dépendance au prestataire en l'absence de transfert de
+  compétences\
 - Importance de maintenir la documentation à jour\
-- Coordination entre évolutions de l'outil et formation des utilisateurs
+- Coordination entre évolutions de l'outil, formation et support
 
 ------------------------------------------------------------------------
 
@@ -2757,6 +2797,46 @@ vers le tableau des indicateurs
 
 @todo [priority=high, section=annexe-liens-fichiers] : inserer un lien
 vers le catalogue de fiches des indicateurs
+
+## Cadre de chiffrage (DQE) {#cadre-de-chiffrage-dqe number="1.3"}
+
+## Détail Quantitatif Estimatif (DQE) {#détail-quantitatif-estimatif-dqe number="1.4"}
+
+:::: {.cell execution_count="2"}
+::: {.cell-output .cell-output-display execution_count="2"}
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+         EPIC                            ID_US   User_Story                         MVP    Complexité   Charge (JH)   Coût   Commentaires
+  ------ ------------------------------- ------- ---------------------------------- ------ ------------ ------------- ------ --------------
+  0      EPIC 1 -- Gestion des données   US1.1   Importer des données via fichier   Oui    Élevée                            
+  5      EPIC 1 -- Gestion des données   US1.2   Connecter une API externe          Non    Élevée                            
+  1      EPIC 1 -- Gestion des données   US1.3   Planifier des imports simples      Oui    Élevée                            
+  2      EPIC 1 -- Gestion des données   US1.4   Normaliser les données             Oui    Élevée                            
+  3      EPIC 1 -- Gestion des données   US1.5   Gérer les erreurs d'import         Oui    Élevée                            
+  \...   \...                            \...    \...                               \...   \...         \...          \...   \...
+  53     EPIC 9 -- Utilisateurs          US9.2   Authentification                   Oui    Faible                            
+  54     EPIC 9 -- Utilisateurs          US9.3   Rôles simples                      Oui    Faible                            
+  56     EPIC 9 -- Utilisateurs          US9.4   Restreindre accès fin              Non    Faible                            
+  57     EPIC 9 -- Utilisateurs          US9.5   Adapter interface                  Non    Faible                            
+  58     EPIC 9 -- Utilisateurs          US9.6   Suivre connexions                  Non    Faible                            
+
+<p>65 rows × 8 columns</p>
+</div>
+:::
+::::
 
 [^1]: Système de grille hierarchique vectorielle standardisée utilisé
     pour agréger des données hétérogènes (incendies, érosion, occupation

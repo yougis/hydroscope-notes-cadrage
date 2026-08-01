@@ -1,0 +1,55 @@
+
+## Détail Quantitatif Estimatif (DQE)
+
+```{python}
+import pandas as pd
+
+df = pd.read_csv("backlog.csv", sep=";")
+df.columns = df.columns.str.strip()
+
+# Renommage
+df = df.rename(columns={
+    "ID User Story": "ID_US",
+    "Libellé User Story": "User_Story"
+})
+
+# Fallback si rename foire
+if "ID_US" not in df.columns:
+    df["ID_US"] = df.iloc[:, 1]
+
+if "User_Story" not in df.columns:
+    df["User_Story"] = df.iloc[:, 2]
+
+# MVP
+df["MVP"] = df["MVP"].astype(str).str.upper().map({
+    "TRUE": "Oui",
+    "FALSE": "Non"
+})
+
+# Complexité
+complexity_map = {
+    "EPIC 1 – Gestion des données": "Élevée",
+    "EPIC 2 – Qualité des données": "Moyenne",
+    "EPIC 3 – Référentiels": "Moyenne",
+    "EPIC 4 – Calcul d’indicateurs": "Élevée",
+    "EPIC 5 – Analyse multicritère": "Très élevée",
+    "EPIC 6 – Visualisation": "Élevée",
+    "EPIC 7 – Aide à la décision": "Moyenne",
+    "EPIC 8 – Export": "Faible",
+    "EPIC 9 – Utilisateurs": "Faible",
+    "EPIC 10 – Traçabilité": "Moyenne"
+}
+
+df["Complexité"] = df["EPIC"].map(complexity_map)
+
+# Colonnes DQE
+df["Charge (JH)"] = ""
+df["Coût"] = ""
+df["Commentaires"] = ""
+
+# Tri
+df = df.sort_values(by=["EPIC", "ID_US"])
+
+# Affichage
+df
+```

@@ -1,4 +1,4 @@
-Cet EPIC vise à garantir la fiabilité, la cohérence et la compréhension des données intégrées dans HydroScope. Il constitue un complément indispensable à la gestion des données, en introduisant des mécanismes de contrôle, de qualification et de documentation permettant de sécuriser les usages analytiques et décisionnels.
+Cet EPIC vise à garantir la fiabilité, la cohérence et la compréhension des données intégrées dans HydroScope. Il constitue un complément indispensable à la gestion des données, en introduisant des mécanismes de catalogage, de contrôle, de qualification et de documentation permettant de sécuriser les usages analytiques et décisionnels.
 
 Compte tenu de la diversité des sources mobilisées (données environnementales, géographiques, satellitaires, administratives), cet EPIC doit permettre d’expliciter le niveau de confiance associé aux données et d’éviter des interprétations erronées liées à des données incomplètes ou de qualité insuffisante.
 
@@ -21,13 +21,8 @@ Ces contrôles peuvent être bloquants ou informatifs selon les cas.
 Attribution d’un niveau de qualité ou de confiance aux données, en fonction de critères définis (source, méthode de production, complétude, fréquence de mise à jour).  
 Cette qualification doit être exploitable dans les traitements ultérieurs (filtrage, pondération, affichage différencié).
 
-- **Gestion des métadonnées**  
-Association systématique de métadonnées aux jeux de données :
-  - source et producteur  
-  - date de production et de mise à jour  
-  - description du contenu  
-  - méthodes de collecte ou de calcul  
-Ces informations doivent être accessibles aux utilisateurs afin de faciliter l’interprétation.
+
+
 
 - **Indicateurs de fiabilité**  
 Production d’indicateurs synthétiques permettant d’évaluer la qualité globale d’un jeu de données ou d’un indicateur :

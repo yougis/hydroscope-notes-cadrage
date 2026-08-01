@@ -1,0 +1,50 @@
+L’intégration et l’exploitation de données issues de sources multiples, hétérogènes et évolutives rend la mise en place d’un dispositif de catalogage constitue un élément central du système.
+
+Le catalogue de données vise à référencer l’ensemble des jeux de données manipulés dans la plateforme, qu’il s’agisse de données sources ou de données dérivées (dont les indicateurs).
+
+### Description
+
+Le catalogage des données ne se limite pas à une fonction documentaire. Il constitue un composant opérationnel du système permettant de structurer, qualifier et rendre intelligibles les données utilisées dans HydroScope.
+
+Chaque jeu de données intégré doit être identifié, décrit et relié aux traitements auxquels il participe. Cela permet de donner de la lisibilité au système, tant pour les administrateurs que pour les utilisateurs.
+
+Le catalogue joue ainsi un rôle central dans la compréhension des données, leur réutilisation et la traçabilité des analyses produites.
+
+### Fonctionnalités
+
+Le système devra permettre de référencer les jeux de données à travers un catalogue structuré, en associant à chaque dataset un ensemble d’informations descriptives (source, description, emprise spatiale, fréquence de mise à jour, qualité, etc.).
+
+Il devra également permettre d’établir des liens explicites entre les données sources, les traitements appliqués et les données produites, notamment les indicateurs. Cette traçabilité constitue un élément clé du fonctionnement du système.
+
+Le catalogue devra être accessible, au moins partiellement, afin de permettre aux utilisateurs de comprendre l’origine des données et d’en évaluer la pertinence.
+
+Enfin, le système devra évidement permettre l’intégration progressive de nouvelles sources de données, sans remise en cause de la structure existante.
+
+### Principes de mise en œuvre
+
+La mise en œuvre du catalogue devra s’appuyer sur une structuration cohérente des métadonnées, permettant de décrire les jeux de données de manière homogène.
+
+Dans la mesure du possible, des standards existants pourront être mobilisés, notamment dans le domaine des données géographiques, afin de garantir l’interopérabilité et la pérennité du système.
+
+Le catalogue devra être alimenté autant que possible de manière automatisée, en lien avec les processus d’intégration des données, afin de limiter les tâches manuelles et les risques d’écart entre documentation et données réellement exploitées.
+
+
+### Objectifs
+
+Le catalogage des données vise à améliorer la lisibilité du système en rendant explicites les sources disponibles et leurs caractéristiques. Il doit permettre de faciliter la réutilisation des données entre les différents traitements et indicateurs, tout en garantissant la traçabilité des informations mobilisées dans les analyses.
+
+Il contribue également à documenter les conditions d’usage des données — notamment leur qualité, leur fréquence de mise à jour et leur précision — et à accompagner l’intégration progressive de nouvelles sources, en assurant leur suivi dans le temps.
+
+Dans un contexte multi-acteurs, le catalogue constitue également un support de dialogue entre producteurs et utilisateurs de données.
+
+De manière transverse, cet EPIC doit intégrer des fonctionnalité de monitoring en matière de traçabilité (origine des données, date d’intégration, transformations appliquées) et de résilience (gestion des erreurs, contrôle des imports, capacité à rejouer des traitements).
+
+### implémentation technique
+
+Chaque jeu de données intégré dans HydroScope doit être associé à un ensemble de métadonnées structurées, permettant d’en décrire l’origine, le contenu et les conditions d’usage. Ces informations couvrent notamment l’identification de la source et du producteur, la description du contenu, l’emprise spatiale, les dates de production et de mise à jour, ainsi que les modalités de collecte ou de calcul.
+
+Des éléments relatifs à la qualité des données, à leur fréquence de mise à jour — lorsqu’elle peut être estimée — ainsi qu’à leur format et leur structure doivent également être renseignés afin de garantir une bonne compréhension des données manipulées.
+
+Ces métadonnées ne constituent pas uniquement une documentation. Elles doivent être intégrées au fonctionnement du système et alimentées en lien avec les processus d’intégration et de transformation des données, notamment via les outils de pipeline (ex : dbt). Elles participent ainsi à la traçabilité des traitements et à la cohérence globale du système.
+
+Une partie de ces informations pourra être rendue accessible aux utilisateurs afin de faciliter l’interprétation des indicateurs. Le catalogue a vocation à évoluer progressivement, en lien avec l’intégration de nouvelles sources de données et l’évolution des usages.

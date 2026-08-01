@@ -1,19 +1,46 @@
-## Gestion des indicateurs
 
-Le projet HydroScope repose sur la production d’indicateurs permettant de caractériser les pressions environnementales, les enjeux et les dynamiques territoriales liées aux ressources en eau.
+L’intégration et l’exploitation de données issues de sources multiples, hétérogènes et évolutives rendent nécessaire la mise en place d’un dispositif de catalogage structuré. Celui-ci constitue un élément central du système HydroScope.
 
-Ces indicateurs ne constituent pas un ensemble figé. Leur définition, leur méthode de calcul et leur périmètre d’application a fait l’objet d’un travail itératif associant les partenaires techniques et les utilisateurs.
+Le catalogue de données vise à référencer l’ensemble des jeux de données manipulés dans la plateforme, qu’il s’agisse de données sources ou de données dérivées, dont les indicateurs.
 
-À ce titre, les indicateurs sont structurés au sein d’un **référentiel dédié**, permettant :
+### Description
 
-- d’assurer la cohérence des définitions et des objectifs;
-- de documenter les méthodes de calcul ;
-- de garantir la transparence et la traçabilité des traitements ;
-- de faciliter leur évolution dans le temps.
+Le catalogage des données constitue un composant opérationnel du système. Il permet d’organiser, qualifier et rendre intelligibles les données utilisées dans HydroScope.
 
-Le contenu détaillé des indicateurs (définition, sources, méthodes) est maintenu dans un **catalogue** distinct du présent cahier des charges, afin de permettre :
+Chaque jeu de données intégré doit être identifié, décrit et relié aux traitements auxquels il participe. Cette structuration permet d’assurer la lisibilité du système, tant pour les administrateurs que pour les utilisateurs, et de garantir la traçabilité des analyses produites.
 
-- des ajustements méthodologiques sans remise en cause du cadre global ;
-- une mise à jour progressive en fonction des retours d’usage et des données disponibles.
+### Fonctionnalités
 
-La version 4 de ce référentiel est fournie en annexe à titre indicatif.
+Le système devra permettre de référencer les jeux de données au sein d’un catalogue structuré, en associant à chaque dataset un ensemble de métadonnées descriptives.
+
+Il devra également permettre de tracer les relations entre données sources, transformations et données produites, notamment les indicateurs. Cette capacité est essentielle pour comprendre l’origine des résultats et en assurer la reproductibilité.
+
+Le catalogue devra être consultable afin de permettre aux utilisateurs d’accéder aux informations nécessaires à l’interprétation des données. Le niveau de détail et d’accès pourra être adapté selon les profils.
+
+Le système devra enfin permettre l’intégration progressive de nouvelles sources de données, sans remise en cause de la structure existante.
+
+### Principes de mise en œuvre
+
+Le catalogue devra reposer sur une structuration homogène des métadonnées, afin de garantir la cohérence des descriptions et leur exploitabilité.
+
+Lorsque cela est pertinent, des standards existants pourront être mobilisés, notamment dans le domaine des données géographiques, afin de faciliter l’interopérabilité.
+
+Le catalogue devra être alimenté autant que possible de manière automatisée, en lien avec les processus d’intégration et de transformation des données. Cette automatisation est essentielle pour garantir la cohérence entre les données réellement exploitées et leur description.
+
+### Implémentation technique
+
+Chaque jeu de données intégré dans HydroScope devra être associé à un ensemble de métadonnées structurées décrivant son origine, son contenu et ses conditions d’usage.
+
+Ces métadonnées devront couvrir les informations nécessaires à la compréhension et à l’exploitation des données, notamment leur source, leur description, leur emprise spatiale, leurs dates de production et de mise à jour, ainsi que les modalités de collecte ou de transformation.
+
+Elles devront être intégrées au fonctionnement du système et alimentées en lien avec les pipelines de données, notamment via des outils de transformation tels que dbt. Elles participent ainsi à la traçabilité des traitements et à la cohérence globale du système.
+
+Les indicateurs calculés seront intégrés au catalogue comme des données dérivées, avec un lien explicite vers les données sources et les traitements associés.
+
+Une partie des métadonnées pourra être exposée aux utilisateurs afin de faciliter l’interprétation des résultats.
+
+### Points de vigilance
+
+- Risque de dissociation entre catalogue et données réellement exploitées  
+- Nécessité d’automatiser la production et la mise à jour des métadonnées  
+- Importance de maintenir la cohérence entre données, traitements et indicateurs  

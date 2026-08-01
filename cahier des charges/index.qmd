@@ -8,7 +8,7 @@ execute:
 version: "version 1"
  
 
-copyright: "Copyright Yapuka SARL - 2026. Tous droits réservés. 1"
+copyright: !expr paste("Copyright Yapuka SARL - 2026. Tous droits réservés.", version)
 
 resume: "Succédant au tableau de bord PressionPPE (2021), dont il capitalise les acquis techniques et le retour d'expérience, le projet Hydroscope vise la mise en place de services numériques destinées au suivi de la ressource en eau potable sur l'ensemble du territoire de la Nouvelle-Calédonie. Le projet Hydroscope se fixe pour objectif de caractériser les Bassin Versant d'Approvisionnement en Eau Potable (BVAEP), incluant les Perimetre de Protection de l'Eau (PPE) et les points de captages via leurs facteurs biogéographiques (relief, géologie, végétation, pluviométrie), les pressions subies (urbanisation, incendies, érosion...) et les réponses qui ont pu être apporté sur ces milieux. Le projet doit aussi permettre le partage de ces connaissances à différentes échelles (pays, province, commune) via des interfaces numériques adaptés à différents publics."
 ---
@@ -56,6 +56,12 @@ L'OEIL assure la continuité intellectuelle du projet initiale (PressionPPE en 2
 {{< pagebreak >}}
 
 {{< include ./3_vision_produit_methodologie.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./3bis_catalogue_inidicateurs.qmd >}}
 
 ---
 
@@ -158,3 +164,9 @@ L'OEIL assure la continuité intellectuelle du projet initiale (PressionPPE en 2
 ## Catalogue des indicateurs
 
 @todo [priority=high, section=annexe-liens-fichiers] : inserer un lien vers le catalogue de fiches des indicateurs
+
+
+## Cadre de chiffrage (DQE)
+
+
+{{< include ./annexes/Cadre_chiffrage.qmd >}}

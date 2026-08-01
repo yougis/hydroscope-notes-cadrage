@@ -53,21 +53,26 @@ Une complexité excessive des traitements ou un manque de transparence dans les 
 Les indicateurs produits doivent être utilisés dans leur domaine de validité et dans le cadre des objectifs que nous leurs avons fixés. Leur interprétation en dehors de ce cadre peut conduire à des décisions inadaptées.
 
 
-## Stratégie MVP (Minimum Viable Product)
+L'offre proposée par le prestataire doit intégrer ces principes méthodologiques et proposer des solutions permettant de limiter les risques identifiés, tout en garantissant la pertinence et la fiabilité des résultats produits. 
+Nous estimons que la mise en œuvre d’un **MVP (Minimum Viable Product)** constituera un moyen efficace pour valider les choix méthodologiques et techniaues avant de déployer des fonctionnalités plus avancées.
 
-Le projet HydroScope repose sur la mise à disposition rapide d’une première version fonctionnelle du système (MVP), permettant de répondre aux besoins prioritaires des utilisateurs tout en limitant les risques.
+### Mise en oeuvre d'un MVP (Minimum Viable Product)
 
-Le MVP vise à :
+La mise à disposition rapide d’une première version fonctionnelle du système (MVP), permetra de répondre aux besoins prioritaires des utilisateurs tout en limitant les risques identifiés.
+
+Le MVP permettra de :
+
 - proposer un socle fonctionnel opérationnel (données, indicateurs, visualisation) ;
-- permettre une première utilisation par les acteurs métiers ;
-- recueillir des retours utilisateurs afin d’ajuster les développements ultérieurs.
+- permettre une première utilisation par des beta testeurs;
+- recueillir des retours afin d’ajuster les développements ultérieurs.
 
-Le périmètre du MVP est volontairement restreint aux fonctionnalités à plus forte valeur métier, notamment :
+Le périmètre du MVP est volontairement restreint aux fonctionnalités à plus forte valeur métier, comme :
+
 - l’intégration de données structurées ;
 - le calcul d’indicateurs simples et robustes ;
 - la visualisation cartographique et temporelle ;
-- la consultation de fiches territoires.
+- la consultation de fiches de synthèses sur certains territoires.
 
-Les fonctionnalités plus avancées (analyse multicritère, paramétrage complexe, automatisation avancée) sont prévues dans des phases ultérieures.
+Les fonctionnalités plus avancées (analyse multicritère, paramétrage complexe, automatisation avancée) et un jeu d'indicateur complet sont prévues dans des phases ultérieures.
 
-Le MVP constitue une étape clé du projet et fera l’objet d’une validation spécifique par la MOA.
+Le MVP constitue un jalon important du projet et fera l’objet d’une validation spécifique par la MOA.
