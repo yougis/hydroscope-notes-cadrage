@@ -1,58 +1,21 @@
-Cet EPIC vise à garantir la transparence, la reproductibilité et la fiabilité des traitements réalisés au sein d’HydroScope. Il constitue un élément central pour instaurer un climat de confiance dans l’outil, en permettant de comprendre l’origine des données, les transformations appliquées et les actions réalisées par les utilisateurs.
+### EPIC 10 : Traçabilité et audit
 
-Dans un contexte où les indicateurs produits peuvent influencer des décisions publiques, la capacité à tracer les opérations et à auditer les résultats est essentielle.
+#### Objectifs
 
-#### Description
+Cet EPIC vise à garantir la transparence, la reproductibilité et la fiabilité des traitements réalisés au sein d’HydroScope.
 
-L’EPIC couvre l’ensemble des mécanismes permettant de suivre l’historique des données, des traitements et des actions utilisateurs. Il s’appuie sur les principes de traçabilité définis dans la vision produit et doit permettre de reconstituer, à tout moment, le cheminement ayant conduit à un résultat donné.
+Il doit permettre de comprendre l’origine des données, les transformations appliquées et les actions réalisées dans le système, afin d’instaurer un climat de confiance dans l’outil.
 
-Il doit également permettre d’identifier les modifications apportées au système (données, paramètres, indicateurs) et d’en analyser les impacts.
+Dans un contexte où les indicateurs peuvent contribuer à orienter des décisions publiques, la capacité à tracer les traitements et à justifier les résultats constitue un enjeu central.
 
-#### Fonctionnalités
+#### Mise en œuvre et fonctionnalités
 
-- **Historique des modifications**  
-Enregistrement des évolutions apportées aux données et aux référentiels :
-  - modifications de données  
-  - mises à jour de référentiels  
-  - changements de paramètres  
+Le système devra permettre de suivre et de reconstituer l’ensemble du cycle de vie des données, depuis leur intégration jusqu’à leur exploitation. 
 
-Cet historique doit permettre de visualiser les évolutions dans le temps et, si nécessaire, de revenir à un état antérieur.
+Il devra assurer un suivi des évolutions apportées aux données, aux référentiels et aux paramètres, afin de permettre une lecture dans le temps des modifications et, si nécessaire, une restitution d’un état antérieur.
 
-- **Traçabilité des calculs**  
-Capacité à documenter les traitements appliqués pour produire un indicateur :
-  - données sources utilisées  
-  - règles de calcul appliquées  
-  - version de l’indicateur  
-  - paramètres utilisés  
+La traçabilité des calculs devra permettre de relier chaque indicateur aux données sources mobilisées, aux transformations appliquées et aux paramètres utilisés. L’objectif est de pouvoir reproduire un résultat et d’en comprendre les conditions de production.
 
-Cette traçabilité doit permettre de reproduire un calcul et d’en comprendre les résultats.
+Le système devra également enregistrer les actions réalisées par les administrateurs et les utilisateurs, notamment les opérations d’import, de modification et d’export. Ces informations doivent permettre de suivre l’utilisation de la plateforme et de répondre à des besoins d’audit ou de sécurité.
 
-- **Journal des actions**  
-Enregistrement des actions réalisées par les utilisateurs :
-  - connexions  
-  - imports de données  
-  - modifications de paramètres  
-  - exports réalisés  
-
-Ce journal permet de suivre l’utilisation du système et de répondre à des besoins d’audit ou de sécurité.
-
-- **Monitoring**
-
-Cet EPIC assure la consolidation des informations de suivi dans une logique d’audit et de transparence.
-
-Les fonctionnalités incluent :
-- la centralisation des journaux d’événements techniques et fonctionnels ;
-- la traçabilité complète des traitements (données sources, calculs, paramètres) ;
-- l’historique des actions utilisateurs ;
-- la mise à disposition d’outils d’audit permettant d’analyser les événements et de reconstituer les processus.
-
-Ces éléments sont essentiels pour garantir la reproductibilité des analyses et la confiance dans le système.
-
-
-#### Points de vigilance
-
-- Volume important de données générées par les logs et historiques  
-- Nécessité de rendre la traçabilité exploitable et compréhensible pour les utilisateurs  
-- Équilibre entre niveau de détail et lisibilité des informations  
-- Gestion des droits d’accès aux informations de traçabilité (données potentiellement sensibles)  
-- Cohérence avec les mécanismes de versioning (indicateurs, données, référentiels)
+Enfin, les informations de traçabilité devront être structurées et accessibles de manière à permettre l’analyse des événements et la reconstitution des processus, sans se limiter à une accumulation de journaux techniques.

@@ -21,16 +21,11 @@ L’historisation doit permettre de répondre à des besoins variés : reconstit
 
 
 - **Monitoring**
-
 Les fonctionnalités de monitoring au sein de cet EPIC visent à assurer la maîtrise des flux de données et la fiabilité des processus d’intégration.
-
 Elles comprennent :
-- le suivi des imports de données (statut des traitements, succès/échec, volumétrie, durée d’exécution) ;
-- la journalisation des opérations d’ingestion (date, source, type de traitement, résultat) ;
-- la capacité à rejouer des traitements en cas d’erreur ou de correction de données ;
-- la mise en place d’indicateurs de performance des pipelines (temps de traitement, fréquence des mises à jour).
-
+    - le suivi des imports de données (statut des traitements, succès/échec, volumétrie, durée d’exécution) ;
+    - la journalisation des opérations d’ingestion (date, source, type de traitement, résultat) ;
+    - la capacité à rejouer des traitements en cas d’erreur ou de correction de données ;
+    - la mise en place d’indicateurs de performance des pipelines (temps de traitement, fréquence des mises à jour).
 Ces éléments permettent d’identifier rapidement les dysfonctionnements et de garantir la continuité des flux de données.
-
-
 Compte tenu de son rôle structurant, cet EPIC constitue une priorité dans le développement du projet et conditionne la qualité globale du système HydroScope, c'est notament pour cela qu'il fait partie du MVP du projet.

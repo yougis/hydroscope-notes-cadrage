@@ -30,9 +30,9 @@ Le périmètre fonctionnel d’HydroScope est structuré en grands ensembles coh
 
 {{< include epics/epic-6-visualisation.qmd >}}
 
-### EPIC 7 : Aide à la décision
+### EPIC 7 : Fiches et rapports automatisés
 
-{{< include epics/epic-7-aide-decision.qmd >}}
+{{< include epics/epic-7-fiche-rapport.qmd >}}
 
 ### EPIC 8 : Export et diffusion
 

@@ -82,11 +82,3 @@ Une communication régulière devra être assurée tout au long du projet :
 - partage des bonnes pratiques.
 
 Cette communication contribue à maintenir l’engagement des parties prenantes.
-
-### Points de vigilance
-
-- Hétérogénéité des profils utilisateurs et des niveaux de compétence  
-- Nécessité d’expliquer les limites méthodologiques des indicateurs  
-- Risque de dépendance au prestataire en l’absence de transfert de compétences  
-- Importance de maintenir la documentation à jour  
-- Coordination entre évolutions de l’outil, formation et support  

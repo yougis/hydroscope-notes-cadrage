@@ -1,53 +1,61 @@
-Cet EPIC regroupe les fonctionnalités permettant de diffuser, partager et valoriser les données et analyses produites par HydroScope. Il répond à un enjeu central du projet : faciliter l’accès à une information fiable et homogène pour l’ensemble des parties prenantes, tout en permettant leur réutilisation dans d’autres contextes.
-
-L’objectif est de rendre les données et résultats produits facilement exploitables, que ce soit pour des usages internes (analyse, reporting) ou externes (communication, partage inter-institutionnel).
 
 #### Description
 
-L’EPIC couvre les mécanismes d’export des données et des indicateurs, ainsi que leur mise à disposition via différents supports. Il doit permettre de répondre à des besoins variés, allant de l’extraction brute de données à la production de documents synthétiques.
+Cet EPIC regroupe les fonctionnalités permettant de diffuser, partager et valoriser les données et analyses produites par HydroScope. Il répond à un des grands objectifs du projet à savoir faciliter l’accès à une information fiable et homogène pour l’ensemble des parties prenantes, tout en permettant leur réutilisation dans d’autres contextes.
 
-Les fonctionnalités doivent être adaptées aux différents profils d’utilisateurs, en tenant compte de leurs besoins en termes de format, de niveau de détail et de fréquence d’accès.
+L’objectif est de rendre les données et résultats produits facilement exploitables, que ce soit pour des usages internes (analyse, reporting) ou externes (communication, partage inter-institutionnel).
+
 
 #### Fonctionnalités
 
-- **Export de données**  
+- **Export de données**
 Possibilité d’extraire les données et indicateurs sous des formats standards :
-  - formats tabulaires (CSV, Excel)  
-  - formats géographiques (GeoJSON, Shapefile, etc.)  
-  - export filtré selon des critères (territoire, période, indicateur)  
+  - formats tabulaires (CSV, Excel)
+  - formats géographiques (GeoJSON, Shapefile, Geopackage etc.)
+  - export filtré selon des critères (territoire, période, indicateurs)
+Ces exports doivent permettre une réutilisation dans des outils tiers comme des SIG bureautique.
 
-Ces exports doivent permettre une réutilisation directe dans des outils tiers.
+- **Export de rapports**
+Le système devra permettre le téléchargement de ces fiches sous des formats adaptés (PDF ou équivalent), depuis l'interface, afin de faciliter leur diffusion et leur utilisation par les différents acteurs.
+D'un point de vue technique, le système ne devra pas nécesserement générer ces fiches sur demande, mais  elles devront être maintenues à jour suite à l'intégration de mises à jour des données.
 
-- **Export de rapports**  
-Génération de documents synthétiques :
-  - rapports par territoire (bassin versant, captage)  
-  - synthèses thématiques  
-  - intégration de cartes, graphiques et indicateurs  
+ **Partage de résultats**
 
-Ces rapports doivent être adaptés à des usages de communication et d’aide à la décision.
+Le système devra permettre le partage de vues de l’application sous forme de liens, afin de faciliter la diffusion d’analyses entre les différents acteurs.
 
-- **Partage de résultats**  
-Mise à disposition de fonctionnalités facilitant le partage :
-  - liens de consultation  
-  - diffusion auprès de partenaires  
-  - partage de vues spécifiques (tableaux de bord, cartes)  
+Ces liens devront permettre de restituer un **contexte de consultation**, incluant notamment :
+- le territoire sélectionné ;
+- les indicateurs affichés ;
+- les filtres appliqués (temporels, thématiques, géographiques) ;
+- le type de visualisation (carte, graphique, tableau de bord).
 
-Ces mécanismes doivent permettre de diffuser une information cohérente entre acteurs.
+L’utilisateur destinataire devra pouvoir accéder à cette vue de manière directe, sans avoir à reconstruire manuellement le contexte d’analyse.
 
-- **API de diffusion**  
-Exposition des données via des interfaces programmatiques :
-  - accès aux indicateurs et données structurées  
-  - possibilité d’intégration dans d’autres systèmes  
-  - gestion des droits d’accès  
+L’accès à ces contenus devra toutefois respecter les règles de gestion des droits. Un utilisateur ne devra pouvoir consulter que les données auxquelles il est autorisé, même lorsqu’il accède via un lien partagé.
 
-Cette ouverture permet d’inscrire HydroScope dans un écosystème plus large.
+Le système devra permettre de gérer différents niveaux de partage, par exemple :
+- partage interne entre utilisateurs authentifiés ;
+- diffusion élargie à des partenaires disposant d’un accès ;
+- éventuellement partage public limité à certaines données.
 
+Les mécanismes de partage devront garantir la cohérence des informations diffusées et éviter toute ambiguïté liée à des différences de configuration ou de filtres.
 
+Une attention particulière devra être portée à la pérennité des liens (gestion des versions, évolution des données) ainsi qu’à la lisibilité des informations partagées.
 
-#### Points de vigilance
+- **API de diffusion**
 
-- Maîtrise des droits d’accès et des niveaux de diffusion (données sensibles)  
-- Cohérence entre les données diffusées et les données visualisées dans l’application  
-- Risque de mauvaise interprétation en dehors du contexte fourni par l’outil  
-- Nécessité de documenter les formats et contenus diffusés  
-- Gestion des performances et des volumes de données lors des exports
+Le système devra exposer les données via des interfaces programmatiques (API) afin de permettre leur réutilisation dans des systèmes tiers et d’assurer l’interopérabilité de la plateforme.
+
+L’API devra permettre d’accéder aux données structurées du système, notamment :
+- les données sources intégrées ;
+- les indicateurs calculés ;
+- les référentiels géographiques et thématiques.
+
+Les données devront être accessibles selon différents critères de requête, incluant notamment le territoire, la période temporelle, le type d’indicateur ou de donnée.
+
+L’API devra permettre de restituer des données cohérentes avec celles affichées dans l’application, en tenant compte des traitements et des agrégations réalisés.
+
+L’accès à l’API devra être sécurisé et respecter les droits des utilisateurs. Les données exposées devront être filtrées en fonction des habilitations, afin de garantir la confidentialité des informations sensibles.
+@todo[priority=high section=lien]: lien avec epic 9
+
+L’API devra être documentée afin de faciliter son utilisation par des systèmes tiers. Cette documentation devra préciser les formats d’échange, les paramètres de requête et les modalités d’authentification.

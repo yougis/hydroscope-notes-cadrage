@@ -12,7 +12,7 @@ Ce MVP sera enrichi progressivement par itérations successives, permettant d’
 
 Le déploiement du système est envisagé en plusieurs étapes:
 
-- Mise à disposition d’un **MVP (Minimum Viable Product)** couvrant les fonctionnalités essentielles (intégration de données, premiers indicateurs, visualisation de base) ;
+- Mise à disposition du **MVP (Minimum Viable Product)** couvrant les fonctionnalités essentielles (intégration de données, premiers indicateurs, visualisation de base) ;
 - Enrichissement progressif des fonctionnalités en fonction des priorités du backlog ;
 - Extension du périmètre fonctionnel et des jeux de données intégrés.
 
@@ -23,7 +23,7 @@ Cette approche permet de tester rapidement les usages et d’ajuster le produit 
 Le système devra être déployé sur plusieurs environnements distincts afin de garantir la qualité et la sécurité des mises en production :
 
 - **Environnement de développement** : utilisé par la MOE pour le développement et les tests techniques ;
-- **Environnement de test / recette** : utilisé pour la validation fonctionnelle par la MOA et les utilisateurs ;
+- **Environnement de test / recette / qualification** : utilisé pour la validation fonctionnelle par la MOA et les utilisateurs ;
 - **Environnement de production** : accessible aux utilisateurs finaux.
 
 La gestion des environnements doit permettre de sécuriser les déploiements et de limiter les risques de régression.
@@ -58,10 +58,3 @@ Le déploiement devra être accompagné afin de faciliter l’appropriation de l
 
 Cet accompagnement est essentiel pour assurer l’adhésion des parties prenantes.
 
-### Points de vigilance
-
-- Coordination entre les cycles Agile et les contraintes de mise en production  
-- Gestion des dépendances entre fonctionnalités  
-- Risque de décalage entre les attentes utilisateurs et les fonctionnalités livrées  
-- Nécessité de maintenir la cohérence des données entre environnements  
-- Anticipation des impacts techniques liés à la montée en charge

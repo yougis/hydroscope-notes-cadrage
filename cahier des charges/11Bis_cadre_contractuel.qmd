@@ -58,9 +58,3 @@ Ci dessous un tableau de délais de prise en charge et de résolution approximat
 | Mineur   | 10 jours | 30 jours |
 
 
-### Points de vigilance
-
-- Clarifier les droits d’usage et de modification du code dès le démarrage du projet  
-- Anticiper les contraintes liées aux données sensibles ou réglementées  
-- Éviter toute dépendance forte à des solutions propriétaires non maîtrisées  
-- Définir des engagements de service réalistes et adaptés aux moyens disponibles  

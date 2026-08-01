@@ -1,7 +1,5 @@
 ## Exigences non fonctionnelles
 
-
-
 Les exigences non fonctionnelles définissent les qualités attendues du système HydroScope au-delà des fonctionnalités métiers. Elles visent à garantir la performance, la sécurité, la robustesse et la pérennité de la solution, tout en assurant une expérience utilisateur adaptée aux différents profils.
 
 Ces exigences doivent être prises en compte dès la conception du système afin d’éviter des limitations structurelles ou des coûts de refonte ultérieurs.
@@ -11,12 +9,13 @@ Ces exigences doivent être prises en compte dès la conception du système afin
 Le système doit offrir des temps de réponse compatibles avec les usages attendus :
 
 - affichage des cartes et tableaux de bord : **< 3 secondes** dans des conditions nominales ;
-- chargement de fiches territoires : **< 2 secondes** ;
+- chargement de fiches territoires : **< 3 secondes** ;
 - génération de graphiques temporels : **< 3 secondes**.
+Au delà des indicateur de chargement doivent etre affichés pour informer l'utilisateur du temps de traitement restant.
 
-Les traitements de calcul d’indicateurs doivent être réalisés :
+Pour les traitements liés aux calcul d’indicateurs :
 - en temps quasi immédiat pour les indicateurs simples (quelques secondes) ;
-- en différé (pipeline de traitement en arrière plan) pour les traitements lourds, avec des délais maîtrisés et suivi (cf. monitoring).
+- en différé (pipeline de traitement en arrière plan) pour les traitements lourds, avec des délais maîtrisés et suivi.
 
 @todo[priority=high, section=lien]: faire le lien avec la section  monitoring pour le suivi des traitements en arrière plan
 
@@ -24,9 +23,9 @@ Les traitements de calcul d’indicateurs doivent être réalisés :
 
 Le système devra être dimensionné pour gérer les volumes suivants :
 
-- plusieurs dizaines de bassins versants et 
+- plusieurs dizaines de bassins versants
 - plusieurs centaines de captages et forages ;
-- plusieurs dizaines d’indicateurs calculés à différentes échelles ; 
+- plusieurs dizaines d’indicateurs calculés à différentes échelles ;
 - des données spatiales potentiellement volumineuses (maillages, séries temporelles) ;
 
 @todo[priority=high, section=processing]: indiquer la volumetrie plus précisement sur les traitements.
@@ -36,9 +35,7 @@ Le système devra permettre :
 
 - la gestion de **10 à 50 utilisateurs simultanés** (ordre de grandeur) ;
 - des mises à jour régulières des données (de quotidienne à annuelle selon les sources) ;
-- une évolution du volume de données dans le temps.
-
-
+- une évolution continue du volume de données dans le temps (env. +15% ).
 Ces exigences seront précisées et validées lors des phases de conception.
 
 ### Sécurité
@@ -50,7 +47,9 @@ Cela inclut :
 - la sécurisation des accès (authentification, gestion des droits) ;
 - la protection des données utilisateur et des données sensibles ;
 - la sécurisation des échanges pour certaines données avec les systèmes externes ;
-- Une traçabilité des accès et des actions.
+- Une traçabilité des accès et des actions ;
+- la conformité avec les réglementations en vigueur (RGPD, directives institutionnelles) ;
+- la mise en place de mécanismes de sauvegarde et de restauration des données (Barman).
 
 Les mécanismes de sécurité doivent être adaptés aux différents niveaux d’utilisateurs et aux contraintes institutionnelles.
 
@@ -62,7 +61,7 @@ Le système doit pouvoir s’intégrer dans un écosystème existant de données
 - la capacité à consommer et à exposer des données via des API ;
 - la compatibilité avec les formats d’échange usuels (tabulaires, géographiques) ;
 - la possibilité d’interagir avec des systèmes tiers (API sécurisés ou non, webservices OGC et ESRI, serveur FTP).
-- 
+
 @todo[priority=high, section=API]: préciser les usage des API externe prévues.
 
 L’interopérabilité est un facteur clé pour faciliter le partage et la réutilisation des données.
@@ -73,7 +72,7 @@ L’interface utilisateur doit être conçue pour être accessible à des profil
 
 - une navigation claire et intuitive ;
 - des interfaces adaptées aux usages (exploration, analyse, restitution) ;
-- une lisibilité des informations (cartes, graphiques, tableaux) ;
+- une lisibilité des informations (cartes, graphiques, tableaux) avec respect des règle de l'art en datavizualisation ;
 - une prise en compte des bonnes pratiques en matière d’accessibilité numérique.
 
 L’objectif est de faciliter l’appropriation de l’outil et de limiter les risques de mauvaise interprétation.
@@ -84,7 +83,9 @@ Le système doit être conçu de manière à faciliter sa maintenance et son év
 
 - une architecture modulaire permettant d’ajouter ou de modifier des fonctionnalités (microservices);
 - une documentation technique et fonctionnelle complète fourni qu format numérique, mise à jour à chaque livraison de version;
-- la possibilité de faire évoluer les indicateurs, les référentiels et les sources de données;
+- la possibilité de faire évoluer les indicateurs, les référentiels et les sources de données ;
+- l'utilisation de framework et de bibliothèques standards pour faciliter la maintenance et l’intégration de nouvelles fonctionnalités ;
+- l'identification précises de briques technique et librairie et leur modalité de mise à jour ;
 
 Ces éléments doivent permettre d’assurer la pérennité du système et sa capacité à s’adapter aux évolutions futures.
 
@@ -97,10 +98,3 @@ Le système devra garantir un niveau de disponibilité compatible avec les usage
 - reprise en cas d’incident dans des délais maîtrisés (cf. SLA).
 
 @todo[priority=high, section=lien]: faire le lien avec SLA
-
-### Points de vigilance
-
-- Cohérence entre volumétrie estimée et choix techniques  
-- Risque de dégradation des performances avec l’augmentation des données  
-- Nécessité d’ajuster les exigences en fonction des usages réels  
-- Arbitrage entre performance, coût et complexité technique  

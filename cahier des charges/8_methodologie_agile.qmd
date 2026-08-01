@@ -98,11 +98,3 @@ Le projet prévoit des livraisons progressives, structurées autour :
 - d’une validation régulière par la MOA avant mise en production.
 
 Les livraisons sont synchronisées avec les jalons du projet et les contraintes calendaires définies.
-
-### Points de vigilance
-
-- Maintenir une forte implication de la MOA dans la priorisation du backlog  
-- Assurer la cohérence entre rythme Agile et contraintes calendaires (OFB / PEP)  
-- Garantir la qualité méthodologique des indicateurs malgré les cycles courts  
-- Éviter la dispersion du backlog et les dérives de périmètre  
-- Assurer la traçabilité entre besoins, développements et livraisons  

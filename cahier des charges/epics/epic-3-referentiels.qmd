@@ -1,4 +1,4 @@
-Cet EPIC regroupe l’ensemble des éléments structurants nécessaires au bon fonctionnement d’HydroScope. Les référentiels constituent le socle commun sur lequel reposent les données, les traitements et les restitutions. Ils permettent d’assurer la cohérence globale du système, en garantissant une compréhension partagée des objets manipulés et des règles associées.
+Cet EPIC regroupe des éléments nécessaires au modèle de données de l'application HydroScope. Les référentiels constituent le socle sur lequel reposent les données, les traitements et les restitutions. Ils permettent d’assurer la cohérence globale du système, en garantissant une compréhension partagée des objets manipulés et des règles associées.
 
 Dans un contexte multi-acteurs et multi-sources, la mise en place de référentiels fiables et partagés est essentielle pour éviter les ambiguïtés, faciliter les croisements de données et sécuriser les analyses.
 
@@ -12,12 +12,11 @@ Ces référentiels doivent être centralisés, versionnés et documentés. Ils d
 
 - **Référentiel géographique**  
 Gestion des objets spatiaux utilisés dans le système :
-  - bassins versants d’alimentation en eau potable (BVAEP)  
-  - captages et forages  
-  - périmètres de protection  
-  - limites administratives (communes, provinces)  
-  - maillages d’analyse (ex : grille H3)  
-
+  - bassins versants d’alimentation en eau potable (BVAEP)
+  - captages et forages
+  - périmètres de protection
+  - limites administratives (communes, provinces)
+  - maillages d’analyse (ex : grille H3)
 Ce référentiel doit permettre d’assurer la cohérence spatiale des données, de gérer les relations entre objets (inclusion, intersection) et de prendre en compte les évolutions des périmètres dans le temps.
 
 - **Référentiel des indicateurs**  
@@ -32,16 +31,7 @@ Ce référentiel constitue un élément central de la transparence méthodologiq
 
 - **Référentiel des utilisateurs et des rôles**  
 Définition des profils utilisateurs et des droits associés :
-  - types de profils (expert, technicien, décideur, grand public)  
-  - niveaux d’accès aux données et aux fonctionnalités  
-  - gestion des rôles et des habilitations  
-
+  - types de profils (expert, technicien, décideur, autres)
+  - niveaux d’accès aux données et aux fonctionnalités
+  - gestion des rôles et des habilitations
 Ce référentiel permet d’adapter l’outil aux différents usages et de contrôler l’accès aux informations sensibles.
-
-#### Points de vigilance
-
-- Cohérence entre les différents référentiels (ex : correspondance entre objets géographiques et indicateurs)  
-- Gestion des évolutions dans le temps (modification de périmètres, évolution des nomenclatures)  
-- Nécessité de documenter précisément les référentiels pour éviter les ambiguïtés d’usage  
-- Risque de multiplication des référentiels non maîtrisés si la gouvernance n’est pas clairement définie  
-- Importance de l’alignement avec les standards existants (notamment géographiques) pour garantir l’interopérabilité

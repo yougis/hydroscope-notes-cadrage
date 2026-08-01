@@ -138,7 +138,8 @@ Voici plusieurs approches pour structurer la réflexion sur la pondération lors
 
 Au lieu de pondérer chaque variable individuellement (ce qui peut devenir complexe et instable), nous suggèrons de regrouper les données par grandes thématiques.
 - **La méthode :** On attribue un poids global à quatre grandes familles : **état biogéographique** (pente, pluviometrie, géologie), **pressions environnementales** (incendies, érosion ...), **pressions humaines** (urbanisation, ICPE ...) et **enjeux** (population desservie, volumes).
-- **Question pour les spécifications :** "Quel poids relatif (en %) accorderiez-vous à la préservation de l'état naturel du bassin (intégrité) par rapport à l'importance socio-économique de l'ouvrage (enjeu humain) ?" @todo [priority=high, section=pondération] : la question de la pondération doit être reformulé pour clarifier l'idée.
+- **Question pour les spécifications :** "Quel poids relatif (en %) accorderiez-vous à la préservation de l'état naturel du bassin (intégrité) par rapport à l'importance socio-économique de l'ouvrage (enjeu humain) ?" 
+@todo [priority=high, section=pondération] : la question de la pondération doit être reformulé pour clarifier l'idée.
 
 ### L’approche « risque x vulnérabilité » ou "jauge" (matrice de décision)
 

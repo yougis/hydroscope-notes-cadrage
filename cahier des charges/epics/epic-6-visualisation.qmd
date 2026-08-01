@@ -1,52 +1,51 @@
-Cet EPIC regroupe l’ensemble des fonctionnalités permettant de restituer, explorer et interpréter les données et indicateurs produits par HydroScope. Il constitue l’interface principale entre le système et les utilisateurs, en traduisant des informations complexes en représentations compréhensibles et exploitables.
 
-L’enjeu est de proposer des outils de visualisation adaptés à des profils variés, tout en garantissant une lecture fiable et non ambiguë des données.
 
 #### Description
 
-L’EPIC couvre la conception et la mise en œuvre des interfaces de consultation et d’exploration des données. Il s’appuie sur les indicateurs produits (EPIC 4) et les référentiels (EPIC 3) pour proposer des restitutions à différentes échelles spatiales et temporelles.
+L’EPIC couvre la conception et la mise en œuvre des interfaces de consultation et d’exploration des données. Il s’appuie sur les indicateurs produits (EPIC 4) et les référentiels (EPIC 3) pour proposer des restitutions graphiques et cartographiques à différentes échelles spatiales et temporelles.
 
-Les visualisations doivent permettre à la fois une lecture synthétique des informations (tableaux de bord) et une exploration plus fine (cartographie, graphiques), en fonction des besoins des utilisateurs.
+Les data visualisations doivent permettre à la fois une lecture synthétique des informations (tableaux de bord) et une exploration plus fine (cartographie, graphiques), en fonction des besoins des utilisateurs.
 
 Une attention particulière est portée à l’ergonomie, à la lisibilité et à la cohérence des représentations proposées.
 
 #### Fonctionnalités
 
-- **Cartographie interactive**  
-Visualisation des données et indicateurs sur des supports cartographiques :
-  - affichage des bassins versants, captages et autres objets géographiques  
-  - représentation des indicateurs sous forme de couches thématiques  
-  - navigation (zoom, déplacement) et interaction (sélection, survol)  
-  - superposition de plusieurs couches d’information  
-
-La cartographie constitue un élément central pour appréhender les dynamiques territoriales.
+- **Cartographie interactive**
+  - affichage des bassins versants, captages et autres objets géographiques
+  - représentation des indicateurs sous forme de couches thématiques
+  - navigation (zoom, déplacement) et interaction (sélection, survol)
+  - superposition de plusieurs couches d’information
 
 - **Tableaux de bord**  
-Mise à disposition de vues synthétiques permettant de suivre les principaux indicateurs :
-  - sélection d’indicateurs clés  
-  - visualisation agrégée par territoire ou thématique  
-  - accès rapide à l’information essentielle  
-
+  - sélection d’indicateur 
+  - visualisation agrégée par territoire ou thématique
+  - accès rapide à l’information essentielle
 Ces tableaux de bord doivent être adaptés aux différents profils utilisateurs.
 
 - **Graphiques temporels**  
-Représentation de l’évolution des indicateurs dans le temps :
   - séries temporelles  
   - comparaison de périodes  
   - identification de tendances et de ruptures  
-
 Ces outils permettent d’analyser les dynamiques et les évolutions.
 
 - **Comparaisons spatiales**  
 Possibilité de comparer plusieurs territoires ou objets :
-  - comparaison entre bassins versants  
-  - comparaison entre captages  
-  - visualisation simultanée de plusieurs entités  
+  - comparaison entre bassins versants
+  - comparaison entre captages
+  - visualisation simultanée de plusieurs entités
+Les interfaces devront intégrer des mécanismes de sélection et de filtrage permettant d’explorer les données de manière dynamique.
 
-Ces fonctionnalités facilitent la priorisation et l’identification des situations contrastées.
+- **Sélecteurs et filtres**
+Ces dispositifs doivent permettre de filtrer les données selon différentes dimensions, notamment :
+  - le territoire (bassin versant, captage, zone géographique) ;
+  - la période temporelle ;
+  - certains attributs ou caractéristiques des referentiels (type, status, propriété etc. ).
+
+Les sélecteurs doivent être cohérents entre les différentes vues (cartes, graphiques, tableaux) afin de garantir une expérience utilisateur homogène. Une modification de filtre doit se répercuter de manière cohérente sur l’ensemble des visualisations.
+
+Une attention particulière devra être portée à la lisibilité et à l’ergonomie de ces filtres, afin d’éviter une complexité excessive pour les utilisateurs non experts, tout en permettant des usages avancés pour les profils techniques.
 
 - **Monitoring**
-
 Les fonctionnalités de monitoring dans cet EPIC visent à rendre visibles et compréhensibles les informations de suivi pour les utilisateurs.
 
 Elles comprennent :
@@ -55,7 +54,7 @@ Elles comprennent :
 - des outils de suivi temporel permettant d’identifier des tendances ou des anomalies ;
 - des vues synthétiques facilitant l’identification rapide des situations nécessitant une attention particulière.
 
-Ces fonctionnalités doivent rester lisibles et adaptées aux différents profils utilisateurs.
+Ces fonctionnalités doivent rester lisibles et adaptées aux profils d'administrateur de la plateforme.
 
 
 

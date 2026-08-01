@@ -57,6 +57,13 @@ L'OEIL assure la continuité intellectuelle du projet initiale (PressionPPE en 2
 
 {{< include ./3_vision_produit_methodologie.qmd >}}
 
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./8_methodologie_agile.qmd >}}
+
 ---
 
 {{< pagebreak >}}
@@ -95,19 +102,9 @@ L'OEIL assure la continuité intellectuelle du projet initiale (PressionPPE en 2
 
 {{< include ./7_architecture_cible.qmd >}}
 
----
-
-{{< pagebreak >}}
-
-{{< include ./8_methodologie_agile.qmd >}}
 
 ---
 
-{{< pagebreak >}}
-
-{{< include ./8Bis_MVP.qmd >}}
-
----
 
 {{< pagebreak >}}
 

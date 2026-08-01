@@ -1,31 +1,9 @@
 
-## Liste des User Stories (US) identifiées dans les EPICS
-
-## Backlog produit et gestion des User Stories
+## Backlog et gestion des User Stories
 
 Le tableau ci-dessus présente une première structuration du backlog produit d’HydroScope, organisée en EPICS et en User Stories (US). Il constitue une traduction opérationnelle des besoins fonctionnels identifiés dans le cadre du projet.
 
-Chaque **EPIC** correspond à un grand ensemble fonctionnel (ex : gestion des données, visualisation, aide à la décision), lui-même décliné en **User Stories**, qui décrivent des fonctionnalités attendues du point de vue utilisateur.
-
-La colonne associée au **MVP (Minimum Viable Product)** permet d’identifier les fonctionnalités prioritaires à développer en première phase, afin de disposer rapidement d’un outil opérationnel répondant aux besoins essentiels.
-
-
-```{python}
-#| label: tbl-backlog-latex
-#| tbl-cap: "Product Backlog (base évolutive)"
-#| output: asis
-
-import pandas as pd
-
-df = pd.read_csv("backlog.csv", sep=";")
-df = df.sort_values(by=["EPIC", "ID User Story"])
-
-df["MVP"] = df["MVP"].map({True: "✅", False: "❌"})
-
-# Option A: via tabulate (recommandé)
-print(df.to_markdown(index=False))
-```
-
+Chaque **EPIC** correspondant à un grand ensemble fonctionnel est lui-même décliné en **User Stories**, qui décrivent des fonctionnalités attendues du point de vue utilisateur et qui constituent une liste de travail appelée backlog.
 
 
 ### Rôle du backlog
@@ -39,16 +17,44 @@ Ce backlog constitue un outil de pilotage des developpement du projet. Il permet
 
 Il ne s’agit pas d’un document figé, mais d’un référentiel de base qui est évolutif.
 
+```{python}
+#| label: tbl-backlog-latex
+#| tbl-cap: "Product Backlog (base évolutive)"
+#| output: asis
+
+import pandas as pd
+
+df = pd.read_csv("backlog.csv", sep=";")
+df = df.sort_values(by=["EPIC", "ID User Story"])
+
+df["MVP"] = df["MVP"].map({True: "O", False: "X"})
+
+# Option A: via tabulate (recommandé)
+print(df.to_markdown(index=False))
+```
+
+
+
 ### Évolution du backlog
 
-Dans une démarche Agile, le backlog est amené à évoluer tout au long du projet :
+DLe backlog produit est amené à évoluer tout au long du projet afin de s’adapter aux besoins et aux retours des utilisateurs. Cette évolutivité constitue un principe de fonctionnement du projet.
 
-- de nouvelles User Stories pourront être ajoutées à mesure que les besoins se précisent ;
-- certaines User Stories pourront être reformulées ou découpées ;
-- les priorités pourront être ajustées en fonction des retours utilisateurs, des contraintes techniques ou des arbitrages projet ;
-- des fonctionnalités initialement prévues hors MVP pourront être intégrées plus tôt, ou inversement.
+Toutefois, cette évolution doit être encadrée afin de garantir la maîtrise du périmètre, des délais et des coûts.
 
-Cette capacité d’adaptation est essentielle pour garantir la pertinence du produit final.
+Le backlog initial constitue la base contractuelle du projet, notamment pour le périmètre du MVP. Les fonctionnalités associées à ce périmètre devront être réalisées dans le cadre du marché.
+
+Les évolutions du backlog (ajout, modification ou suppression de fonctionnalités) devront faire l’objet :
+- d’une analyse d’impact (fonctionnelle et technique) ;
+- d’une estimation de charge ;
+- d’une validation par la MOA.
+
+Ces évolutions pourront être :
+- intégrées dans le périmètre existant si elles restent compatibles avec les engagements contractuels ;
+- ou traitées comme des évolutions hors périmètre, dans le cadre d’un dispositif de maintenance ou de prestations complémentaires.
+
+Le prestataire devra proposer une organisation permettant de gérer ces évolutions de manière transparente, notamment via l’outil de gestion de projet (ex : Azure DevOps).
+
+Une attention particulière devra être portée à la maîtrise du périmètre du MVP, qui constitue une étape clé du projet.
 
 ### Intégration dans les outils de gestion de projet
 

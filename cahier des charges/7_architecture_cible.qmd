@@ -26,9 +26,9 @@ L’architecture s’organise autour de plusieurs briques principales :
 
 - **Couche de stockage**  
   Stockage des données brutes et des données structurées :
-  - base de données (relationnelle et/ou spatiale)  
-  - stockage des historiques  
-  - gestion des référentiels  
+  - base de données (relationnelle et/ou spatiale)
+  - stockage des historiques
+  - gestion des référentiels
 
 - **Couche de traitement**  
   Traitements permettant :

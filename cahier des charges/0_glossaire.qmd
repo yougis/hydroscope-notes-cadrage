@@ -40,6 +40,7 @@ Ce glossaire vise à clarifier les principaux acronymes, termes techniques et no
 - **CSV (Comma-Separated Values)** : Format de fichier tabulaire simple  
 - **GeoJSON / Shapefile** : Formats de données géographiques  
 - **Base de données** : Système de stockage structuré des données  
+- **DBT** : Outil/framework de transformation et de documentation des lineages de données dans un pipeline de traitement SQL.
 
 ### Qualité et analyse des données
 
