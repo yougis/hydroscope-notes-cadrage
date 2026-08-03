@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "read-ai": {
+      "type": "remote",
+      "url": "https://api.read.ai/mcp",
+      "oauth": {}
+    },
+    "figma": {
+      "type": "remote",
+      "url": "https://figma-console-mcp.southleft.com/sse",
+      "oauth": {}
+    },
+    "composio": {
+      "type": "remote",
+      "url": "https://connect.composio.dev/mcp",
+      "enabled": true,
+      "headers": {
+        "x-consumer-api-key": "ck_mGfa8-dtWAGeE8QIjq_C"
+      }
+    },
+    "apify": {
+      "type": "remote",
+      "url": "https://mcp.apify.com/?tools=jungle_synthesizer/12go-asia-multimodal-scraper",
+      "enabled": true,
+      "headers": {
+        "x-consumer-api-key": "apify_api_BrnnBUf5DzYZf2MdG28FV93ZOdr8cV2fwzZ6"
+      }
+    }
+  }
+} 

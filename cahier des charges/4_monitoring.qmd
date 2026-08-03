@@ -61,8 +61,9 @@ Ces éléments alimentent la démarche d’amélioration continue de l'outil.
 
 ### Historisation et traçabilité des données
 
+@todo [priority=medium] : la solution de versionnement (GeoDiff + snapshots Prefect) est proposée — à valider avec l'OEIL.
 
-Pour assurer un monitoring efficace et garantir la traçabilité des indicateurs produits, nous pensons qu'un versionnement des données et des logs de traitements effectués est important.
+Pour assurer la traçabilité des indicateurs, le système s'appuie sur deux mécanismes complémentaires : GeoDiff pour le versionnement des données cartographiques, et des sauvegardes complètes orchestrées par le pipeline Prefect pour les autres types de données. Chaque indicateur produit est ainsi relié à la version exacte des données ayant servi à son calcul.
 
 Chaque jeu de données thématique ou de référence intégré dans HydroScope (ICPE, radier/gué, MOS
 vectorisés, routes, feux Sentinel/VIIRS, etc.) pourra faire l’objet d’un stockage versionné, horodaté, permettant de :

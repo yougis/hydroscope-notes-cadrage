@@ -59,14 +59,37 @@ Cela implique :
 
 Cette intégration doit être pensée de manière à limiter les redondances et à favoriser la cohérence des données entre systèmes.
 
-### Choix technologiques (à cadrer)
+### Choix technologiques
 
-Les choix technologiques seront précisés lors des phases de conception détaillée. Ils devront répondre aux exigences du projet en matière de performance, de sécurité, d’interopérabilité et de maintenabilité.
+Les choix technologiques ci‑dessous sont proposés pour répondre aux exigences du projet en matière de performance, de sécurité, d'interopérabilité et de maintenabilité. Ils s'appuient sur des technologies open source et des standards en vigueur dans le domaine des données géographiques.
 
-Une attention particulière sera portée :
-- à l’utilisation de technologies open source ;
-- à la gestion des données géographiques ;
-- à la capacité à traiter des volumes de données importants ;
-- à la facilité de déploiement et d’exploitation.
+#### Stack applicative
 
-Ces choix devront être validés en cohérence avec les contraintes des partenaires et les compétences disponibles.
+- **Frontend** : application web monopage (SPA) développée en **Vue.js** , **React** , selon les compétences disponibles au sein de l'équipe OEIL. L'interface est conçue pour être responsive, accessible et adaptable aux différents profils d'utilisateurs (experts, partenaires institutionnels, grand public).
+- **Cartographie** : utilisation de **MapLibre GL JS** , **OpenLayers**pour la restitution cartographique interactive. Le système supporte le tuilage vectoriel et raster (architecture tuilage) afin d'assurer des performances optimales quel que soit le volume de données affiché.
+- **API backend** : exposition des données et des indicateurs via des endpoints RESTful, conformes aux standards OGC (WMS, WFS) et compatibles avec les systèmes ESRI. L'API sert de couche d'abstraction entre le front-end et la couche de traitement.
+- **Géotraitements** : les traitements géographiques spécifiques (validation topologique, contrôle qualité géométrique, agrégation spatiale sur la grille H3) sont réalisés côté serveur via des pipelines dédiés.
+
+#### Données et stockage
+
+- **Base de données** : **PostgreSQL** avec l'extension **PostGIS** pour le stockage des données relationnelles et spatiales. Ce choix garantit la compatibilité avec les standards géographiques et la capacité à gérer des volumes de données importants.
+- **Historisation** : mécanisme de versionnement des données via **GeoDiff** (ou équivalent), permettant de conserver un état complet des données à chaque mise à jour et de reconstituer la source exacte d'un indicateur produit à une date donnée.
+- **Référentiels** : gestion centralisée des référentiels (objets géographiques, indicateurs, sources de données) avec possibilité d'évolution progressive.
+- **Catalogage** : les jeux de données et les indicateurs sont référencés dans un catalogue structuré, exposé via des standards **STAC** (SpatioTemporal Asset Catalog) et/ou **CKAN**, assurant la traçabilité et la découverte des données.
+
+#### Intégration et pipelines de données
+
+- **ETL / Transformation** : les pipelines d'intégration et de transformation des données sont construits avec **dbt** (data build tool), assurant la traçabilité des traitements, la reproductibilité des résultats et la cohérence entre les données sources et les indicateurs produits.
+- **Modèle de données** : le modèle conceptuel de données (MCD) repose sur les entités principales du projet : **PPE** (Périmètres de Protection de l'Eau), **BV** (Bassins Versants) et **captages/forages**, avec des tables de référence et de fait clairement identifiées.
+- **Guidelines d'intégration** : un document de référence (guidelines d'intégration) est produit pour formaliser les modalités de connexion aux sources de données, les formats d'échange attendus et les règles de qualité applicables.
+
+#### Infrastructure et déploiement
+
+- **Hébergement** : le système est déployé sur une infrastructure dédiée, conforme aux exigences de sécurité et de souveraineté des données institutionnelles. L'hébergement est à la charge de l'OEIL ou de son prestataire infrastructure.
+- **Environnements** : trois environnements distincts sont mis en place — développement, test/recette/qualification, production — afin de sécuriser les mises en production et limiter les risques de régression.
+- **CI/CD** : un pipeline d'intégration et de déploiement continus est configuré pour automatiser les tests, la validation et la mise en production des livrables.
+- **Sécurité et accès** : mécanismes d'authentification et de gestion des droits (RBAC) sont mis en place. La protection des données utilisateur et sensibles est assurée conformément au RGPD et aux directives institutionnelles.
+- **Sauvegarde et restauration** : des mécanismes de sauvegarde régulière (Barman ou équivalent) et de restauration sont configurés avec des délais de récupération définis.
+- **Monitoring** : un dispositif de supervision couvre le bon fonctionnement des traitements, la surveillance des connexions aux sources de données, les performances (healthcheck, temps de réponse, disponibilité) et la gestion des alertes en cas d'anomalie.
+
+Ces choix devront être validés en cohérence avec les contraintes des partenaires, les compétences disponibles au sein de l'équipe OEIL et les exigences contractuelles du projet.

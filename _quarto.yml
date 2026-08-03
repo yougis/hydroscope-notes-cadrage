@@ -28,9 +28,9 @@ format:
     toc-depth: 3
     toc-location: left
     number-sections: true
-    theme: cosmo
     code-fold: true
     embed-resources: true
+    theme: lumen
   pdf:
     pdf-engine: xelatex
     df-print: kable # Formate les dataframes pandas proprement en LaTeX

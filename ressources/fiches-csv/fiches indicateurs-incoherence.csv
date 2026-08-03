@@ -1,0 +1,33 @@
+id_relation;ids_indicateurs;type_vigilance;description;;
+R1;501, 1;Redondance;La Pluviométrie est jugée redondante avec la Capacité de production, car une baisse de pluie se traduit déjà par une baisse de débit mesurée au captage [1, 2].;;
+R2;401, 400;Redondance;La Géologie présente un risque élevé de redondance avec l'IDPR, ce dernier étant calculé à partir de données hydrologiques et géologiques [3, 4].;;
+R3;301, 202;Redondance;L'Activité minière (identifiée via le MOS) peut faire doublon avec l'indicateur Terrain nu, sur-représentant ainsi la pression physique sur le sol [5].;;
+R4;304, 302;Redondance;Les Habitations (données ISEE) sont un complément du bâti (Urbanisation) ; elles peuvent être fusionnées pour simplifier l'analyse de la pression anthropique [6].;
+R5;203;Incohérence;Le Glissement de terrain est classé en Pression mais fait débat pour un déplacement vers la famille Vulnérabilité (aléa lié à la nature du terrain) [7].;;
+R6;5;Incohérence;Le sens de l'Interconnexion n'est pas tranché : elle peut être vue comme un secours (positif) ou comme un vecteur de propagation de pollution (négatif) [8].;;
+R7;105, 106, 202;Redondance;Utilisation concurrente de plusieurs sources (MOS, TMF, Dynamic World) pour le couvert végétal et le sol nu ; risque de doublons techniques [9].;
+R8;2, 3, 6;Incohérence;Risque de doublons ou de sur-comptage si plusieurs captages sont rattachés à une même Unité de Distribution (UD) pour le réseau, les réservoirs ou la population [10, 11].;;
+R9;201, 202;Redondance;"Risque de données non homogènes si l'on croise la ""Surface érosion"" de l'OEIL avec le ""Terrain nu"" issu du MOS "; le MOS est privilégié pour sa robustesse [12, 13].;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
+id_relation;indicateurs_concernes;sous_groupes_concernes;type_vigilance;description;
+R1;Pluviométrie, Capacité de production;Apports naturels, Robustesse et résilience technique;Redondance;La pluie est jugée redondante avec la capacité de production, car une baisse de précipitations impacte déjà directement le débit mesuré au captage [1, 2].;
+R2;Géologie, IDPR;Sensibilité naturelle;Redondance;La géologie présente un risque de doublon avec l'IDPR, car ce dernier est calculé à partir de données géologiques et hydrologiques [3, 4].;
+R3;Activité minière, Terrain nu;Activités à risque, Fragilité des sols et transferts (chronique);Redondance;"L'emprise minière est souvent détectée via la classe ""terrain nu"" du MOS "; compter les deux surestime la pression physique [5, 6].
+R4;Habitations, Urbanisation;Niveau d'artificialisation et densité;Redondance;Le nombre de logements (ISEE) et le bâti (DITTT) mesurent la même pression humaine et pourraient être fusionnés [7, 8].;
+R5;Glissement terrain;Perturbations majeures du milieu (Aléa), Sensibilité naturelle;Incohérence;L'aléa glissement est classé en Pression mais relève aussi de la vulnérabilité intrinsèque liée à la nature instable du terrain [9, 10].;
+R6;Interconnexion;Robustesse et résilience technique;Incohérence;L'interconnexion a un sens de criticité ambigu : elle est un secours (positif) mais peut propager une pollution (négatif) [11, 12].;
+R7;Occupation sol (couvert végétal), Occupation sol (couvert forestier), Terrain nu;État écologique et rôle protecteur, Fragilité des sols et transferts (chronique);Redondance;Risque de doublons techniques entre les sources MOS, TMF et Dynamic World pour caractériser l'état de la végétation [13-15].;
+R8;Longueur réseau, Capacité réservoir, Population desservie;Poids stratégique de la desserte, Robustesse et résilience technique;Redondance;Risque de sur-comptage des enjeux si plusieurs captages sont rattachés à une même Unité de Distribution (UD) [16-18].;
+R9;Surface érosion, Terrain nu;Fragilité des sols et transferts (chronique);Redondance;Risque de données non homogènes entre les formes érosives locales et le terrain nu global (MOS) ; le MOS est privilégié [6, 19].
+R10;Zones protégées provinciales;Valeur patrimoniale et réglementaire;Vigilance;Hétérogénéité des données entre les provinces (Sud, Nord, Îles) nécessitant une standardisation des périmètres [20, 21].;

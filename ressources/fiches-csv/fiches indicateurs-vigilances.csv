@@ -1,0 +1,11 @@
+id_relation;ids_indicateurs;type_vigilance;description
+R1;501, 1;Redondance;La Pluviométrie est jugée redondante avec la Capacité de production, car une baisse de pluie se traduit déjà par une baisse de débit mesurée au captage.
+R2;401, 400;Redondance;La Géologie présente un risque élevé de redondance avec la vulnérabilité intrinsèque des eaux souterraines , ce dernier étant calculé à partir de données hydrologiques et géologiques.
+R3;301, 202;Redondance;L'Activité minière (identifiée via le MOS) peut faire doublon avec l'indicateur Terrain nu, sur-représentant ainsi la pression physique sur le sol.
+R4;304, 302;Redondance;Les Habitations (données ISEE) sont un complément du bâti (Urbanisation)   elles peuvent être fusionnées pour simplifier l'analyse de la pression anthropique.
+R5;203;Incohérence;Le Glissement de terrain est classé en Pression mais fait débat pour un déplacement vers la famille Vulnérabilité (aléa lié à la nature du terrain).
+R6;5;Incohérence;Le sens de l'Interconnexion n'est pas tranché : elle peut être vue comme un secours (positif) ou comme un vecteur de propagation de pollution (négatif).
+R7;105, 106, 202;Redondance;Utilisation concurrente de plusieurs sources (MOS, TMF, Dynamic World) pour le couvert végétal et le sol nu ,  risque de doublons techniques.
+R8;2, 3, 6;Incohérence;Risque de doublons ou de sur-comptage si plusieurs captages sont rattachés à une même Unité de Distribution (UD) pour le réseau, les réservoirs ou la population.
+R9;201, 202;Redondance;"Risque de données non homogènes si l'on croise la ""Surface érosion"" de l'OEIL avec le ""Terrain nu"" issu du MOS ,  le MOS est privilégié pour sa robustesse"
+R10;1, 500, 503;Redondance;Le BBR intègre le volume de prélèvement autorisé et le débits caractéristiques d’étiage médian (DCE2).

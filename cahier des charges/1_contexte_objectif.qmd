@@ -99,30 +99,50 @@ Les indicateurs et leur sources identifiés jusqu'à présent sont détaillés d
 
 ### Sources de données
 
-Le projet HydroScope repose sur l’intégration et la valorisation de données issues de sources multiples, produites par différents acteurs du territoire.
+Le projet HydroScope repose sur l'intégration et la valorisation de données issues de sources multiples, produites par différents acteurs du territoire.
 
-Les principales sources de données mobilisées incluent :
+::: {.landscape}
 
-- **Données géographiques de référence** :
-  - bassins versants d’alimentation en eau potable (BVAEP) ;
-  - captages et forages ;
-  - périmètres de protection des eaux ;
-  - limites administratives.
+Les principales sources de données mobilisées sont les suivantes :
 
-- **Données environnementales** :
-  - incendies ;
-  - érosion des sols ;
-  - occupation du sol ;
-  - données climatiques (pluviométrie, etc.).
+```{python}
+#| label: tbl-sources
+#| tbl-cap: "Sources de données et modalités d'accès"
+#| output: asis
 
-- **Données issues de l’observation satellitaire** :
-  - détection de changements d’occupation du sol ;
-  - suivi de phénomènes environnementaux.
+import pandas as pd
 
-- **Données administratives et réglementaires** :
-  - informations liées aux périmètres de protection ;
-  - données issues des services de l’État et des collectivités.
+df = pd.read_csv("../ressources/fiches-csv/fiches indicateurs-sources.csv", sep=";")
+
+def modalite_acc(row):
+    url = str(row.get("url", ""))
+    if "georep" in url or "geoportail" in url:
+        return "GEOREP (plateforme web)"
+    if "earth-engine" in url.lower() or "developers.google" in url:
+        return "GEE API"
+    if "province-sud.nc" in url:
+        return "PSUD Open Data"
+    if "cadastre.gouv.nc" in url:
+        return "cadastre.gouv.nc"
+    if "pas d'accès api" in url.lower():
+        return "Contact direct"
+    if "convention" in url.lower():
+        return "Convention requise"
+    if "à identifier" in url.lower() or url == "":
+        return "À confirmer"
+    return url
+
+df["Accès"] = df.apply(modalite_acc, axis=1)
+df_affiche = df[["nom_ressource", "origine", "distributeur", "Accès", "statut_disponibilite"]].sort_values(by=["origine", "nom_ressource"])
+df_affiche.columns = ["Source", "Fournisseur", "Distributeur", "Modalité d'accès", "Statut"]
+
+print(df_affiche.to_markdown(index=False))
+```
+
+::: 
 
 Ces données sont produites et mises à disposition par différents acteurs (communes, provinces, services du Gouvernement, partenaires techniques).
 
 Elles présentent des niveaux hétérogènes de qualité, de structuration et de fréquence de mise à jour, ce qui nécessite des traitements spécifiques dans le cadre du projet HydroScope.
+
+@todo [priority=medium] : remplacer les tableaux statiques des sources et indicateurs par des blocs Python Quarto lisant les CSV existants

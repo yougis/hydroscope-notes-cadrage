@@ -39,6 +39,22 @@ Les indicateurs calculés seront intégrés au catalogue comme des données dér
 
 Une partie des métadonnées pourra être exposée aux utilisateurs afin de faciliter l’interprétation des résultats.
 
+### Cataologue des indicateurs
+
+
+```{python}
+#| label: tbl-indicateurs
+#| tbl-cap: "Catalogue des indicateurs"
+#| output: asis
+
+import pandas as pd
+
+df = pd.read_csv("../ressources/fiches-csv/fiches indicateurs-indicateurs.csv", sep=";")
+df = df.sort_values(by=["nom_indicateur"])
+print(df[["id_indicateur", "nom_indicateur", "unite", "actif"]].to_markdown(index=False))
+```
+
+
 ### Points de vigilance
 
 - Risque de dissociation entre catalogue et données réellement exploitées  

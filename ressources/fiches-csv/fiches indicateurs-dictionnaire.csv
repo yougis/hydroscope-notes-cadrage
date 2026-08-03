@@ -1,0 +1,48 @@
+table;attribut;libelle_affiche;description;rôle;glossaire;affichage;valeur
+indicateurs;fiche_indicateur;Fiche n⁰;Numéro de la fiche indicateur;Documentation;non;;
+indicateurs;id_indicateur;Identifiant de l’indicateur;Identifiant unique de l’indicateur dans le cadre du projet Hydroscope;identification;oui;tableau;"1–99 → Enjeux AEP
+100–199 → Enjeux Environnementaux
+200–299 → Pressions Environnementales
+300–399 → Pressions Anthropiques
+400–499 → Vulnérabilité
+500–599 → Pressions Quantitatives 
+600–699 → Pressions Qualitatives
+"
+indicateurs;Nom_theme;Thématique;Grande catégorie de regroupement métier facilitant la navigation et l'organisation du catalogue (ex: Enjeux AEP, Pressions Anthropiques).;identification;oui;tableau;"Enjeux AEP / Enjeux Environnementaux / Pressions Environnementales / Pressions Anthropiques / Vulnérabilité / Pressions Quantitatives / Pressions Qualitatives
+"
+indicateurs;famille_indicateur;Famille;Nature fondamentale de l'indicateur définissant son rôle dans le calcul du risque : Enjeu (valeur à protéger), Pression (menace active) ou Vulnérabilité (sensibilité intrinsèque).;identification;oui;tableau;"Enjeu / Pression / Vulnérabilité
+"
+indicateurs;nom_indicateur;Nom de l’indicateur;Nom court compréhensible pour identifier rapidement l’indicateur;identification;oui;titre;
+indicateurs;description_indicateur;Description;Explication vulgarisée décrivant ce que l'indicateur mesure concrètement et comment il est perçu.;Documentation;non;introduction;
+indicateurs;priorite;Priorité;L’indicateur est il considéré comme essentiel au projet;Pilotage;oui;section;Oui / non
+indicateurs;unite;Unité;Unité de mesure physique (m3, km, ha) ou libellé de la classe qualitative (Oui/Non, A1/A2/A3) permettant de lire la valeur.;Analyse;oui;tableau;
+indicateurs;objectif;Objectif;But précis de l'indicateur dans le processus de décision (ex: identifier les ressources les plus limitées en période sèche).;Pilotage;oui;section;
+indicateurs;modalites;Modalités de traitement;Règles techniques et algorithmes utilisés pour transformer, agréger ou propager la donnée entre les différents supports spatiaux.;Transformation;oui;section;
+indicateurs;support_spatial;Support spatial;Entité géographique de référence à laquelle la donnée est rattachée (Captage, Unité de Distribution, Bassin Versant ou Maille).;Analyse;oui;tableau;UD (Unité de Distribution) / Captage / Périmètre de protection / BV (Bassin versant) / maille (découpage cartographique régulier de type H3)
+indicateurs;Ponderation;Pondération multicritère;Indique si l'indicateur est activement utilisé pour l’analyse multicritère.;Calcul multicritère;oui;tableau;
+indicateurs;spatialisation_H3;Spatialisation H3;Indique si la donnée est projetée sur une maille hexagonale fine (H3) pour permettre des analyses géographiques croisées.;Technique;oui;tableau;
+indicateurs;normalisation_methode;Méthode de normalisation;Processus mathématique ou métier (quantiles, seuils, binaire) utilisé pour ramener des données hétérogènes sur une échelle de criticité commune.;Calcul multicritère;oui;section;
+indicateurs;sens_indicateur;Sens de l’indicateur;"Orientation statistique ou logique de la donnée. 
+- Pour une donnée quantitative :  indique si une valeur élevée est bénéfique (Positif, ex: capacité de production) ou préjudiciable (Négatif, ex: surface incendiée).
+- Pour une donnée qualitative : indique si l'état ou la classe de l'indicateur est perçu comme favorable (Positif, ex: présence d'un traitement ou d'un secours) ou défavorable (Négatif, ex: absence de protection réglementaire) pour la gestion du captage";Calcul multicritère;oui;section;Positif / Négatif / Neutre
+indicateurs;definition_criticite;Définition de la criticité;Traduction opérationnelle de la valeur : explique le lien de cause à effet entre la donnée et le niveau de risque ou d'enjeu pour le territoire.;Calcul multicritère;oui;section;
+indicateurs;quantitatif_qualitatif;Nature des données;Distingue les données Quantitatives (chiffrées) des données Qualitatives (textuelles ou catégories).;Technique;oui;visualisation;Quantitatif / Qualitatif
+indicateurs;discret_continu;Discret ou continu;Nature mathématique des valeurs : Discret (nombres entiers, catégories) ou Continu (échelles de mesure fluides).;Technique;oui;visualisation;Continue / Discrète
+indicateurs;relatif_absolu;Relatif ou absolu;Type de mesure : Absolu pour une valeur brute (ex: volume) ou Relatif pour un ratio ou un pourcentage (ex: densité).;Technique;oui;visualisation;Absolu / Relatif
+indicateurs;implantation;implantation;Mode de représentation géométrique sur la carte : Ponctuelle (position précise) ou Zonale (surface).;Technique;oui;visualisation;Ponctuelle / zonale
+indicateurs;representation_cartographique;Représentation cartographique;Style visuel de restitution (ex: carte choroplèthe, cercles proportionnels, couleur ou symbole).;Restitution;oui;visualisation;carte choroplèthe, cercle proportionnel, couleur, symbole
+indicateurs;synthese_echanges-1;Synthèse échanges Stéphane du 24 avril 2026;Résumé des décisions et arbitrages;Pilotage;non;;
+indicateurs;synthese_echanges-2;Synthèse échanges de la réunion de présentation avec la DASS DIMENC et DAVAR le 21 Mai 2026;Résumé des décisions et arbitrages;Pilotage;non;;
+sources;id_ressource;Identifiant de la ressource;Identifiant unique de la ressource dans le cadre du projet Hydroscope;identification;oui;tableau;"1–99 → Données AEP métiers
+Au delà de 100 → Toutes les autres sources de données"
+sources;nom_ressource;Nom de la ressource;Nom de la ressource;identification;non;tableau;
+sources;description_ressource;Description;Description de la ressource;Dynamique temporelle;non;section;
+sources;origine;Origine;Organisme ou service producteur initial de la donnée brute (ex: DAVAR, DASS, Météo France).;Documentation;oui;tableau;
+sources;distributeur;Distributeur;Entité ou plateforme assurant la mise à disposition technique de la donnée (ex: GéoRep).;Documentation;oui;tableau;
+sources;url;URL;Lien direct vers la ressource en ligne ou sa fiche de métadonnées détaillée.;Documentation;oui;tableau;
+sources;statut_disponibilite;Disponibilité;Statut d'accès à la source : Disponible (public), Interne (administration) ou À vérifier (sous convention).;Pilotage;oui;section;Disponible / Interne / A vérifier
+sources;couverture_spatiale;Couverture spatiale;Désigne l'étendue géographique ou l'emprise territoriale sur laquelle la donnée source est disponible et valide. Cet attribut permet à l'utilisateur de savoir si l'indicateur est calculé sur l'ensemble de la Nouvelle-Calédonie, sur une province spécifique (ex: Province Sud) ou uniquement sur un périmètre restreint;Pilotage;oui;section;Nouvelle-Calédonie / provinces / communes … 
+sources;actualisation;Période d actualisation;Fréquence de mise à jour de la donnée par le producteur (ex: quotidienne, annuelle, jamais).;Dynamique temporelle;oui;tableau;"inconnu / jamais / x jours / x années
+"
+sources;type_source;Type de source;Format technique du fichier de données (Vecteur, Raster, Table).;Technique;oui;tableau;vecteur, raster, table, rapport, infographie
+sources;contraintes_ressource;Point de vigilance;Identification des limites techniques, incertitudes de mesure ou biais d'interprétation liés à la source.;Pilotage;oui;section;
