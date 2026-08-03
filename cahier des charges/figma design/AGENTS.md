@@ -11,11 +11,17 @@ A Vite development server is **already running** on `$PORT` (default 8443). You 
 
 ## Project Structure
 
-This is the canonical project structure. Start with task-relevant files below. Only follow imports or inspect other files when required, when a documented path is missing, or when the repository contradicts this guide.
+The source lives under `src/`, organised **feature-first** with co-location. Navigate by feature, not by file type. Use the `@/` alias (mapped in `tsconfig.json`) to import from `src/`. Prefer barrel `index.ts` exports where folders group several modules.
 
-- `src/main.tsx` - React entrypoint; imports `src/index.css` and mounts `src/App.tsx` into the `#root` element
-- `src/App.tsx` - Primary application component and the usual starting point for UI work
-- `src/index.css` - Global CSS entrypoint and Tailwind CSS v4 import
+- `src/main.tsx` - React entrypoint; imports `src/styles/index.css` and mounts `src/app/App.tsx` into the `#root` element
+- `src/app/App.tsx` - Application shell: routing `ind:…`/`carte`/stub/portail, layout (Header, Sidebar, Footer), and session wiring. Usual starting point for top-level structure.
+- `src/app/hooks/useSession.ts` - session state (selected captages, session indicators) + handlers
+- `src/config/views.ts` - navigation model (`VIEWS`, `GROUPS`, `VIEW_ICONS`, `buildIndicatorGroup`)
+- `src/types/domain.ts` - shared domain types (`View`, `Capteur`, `Indicateur`, `IAMode`)
+- `src/data/hydroscope.ts` - mock/session data (`CAPTAGES`, `CAPTAGE_POINTS`, `CATALOGUE`, `catalogueById`)
+- `src/components/` - reusable UI (`ui/`), `charts/`, and `layout/` (Header, Sidebar, Footer)
+- `src/features/` - feature slices: `carte/`, `indicateurs/`, `portail/`, `stubs/`
+- `src/styles/` - CSS entrypoints (`index.css` wiring `fonts.css`, `tailwind.css`, `theme.css`)
 - `index.html` - Vite HTML shell containing the `#root` element and loading `src/main.tsx`
 - `package.json` - Project dependencies and the Vite build, development, preview, and formatting scripts
 - `vite.config.ts` - Vite configuration with React, Tailwind CSS v4, and Figma Make plugins plus the `@` alias for `src`
@@ -30,12 +36,10 @@ This is the canonical project structure. Start with task-relevant files below. O
 
 ## Styling
 
-This project uses **Tailwind CSS v4** through the `@tailwindcss/vite` plugin configured in `vite.config.ts`. `src/index.css` imports Tailwind with `@import 'tailwindcss';`. Use Tailwind utility classes directly in JSX and put global CSS or Tailwind v4 theme customization in `src/index.css`. This scaffold does not need a Tailwind config file or PostCSS config.
-
-`src/main.tsx` imports `src/index.css`, so global font wiring belongs in `src/index.css`. Keep CSS `@import` statements first, then add any `@font-face` rules and font-family defaults there.
+This project uses **Tailwind CSS v4** through the `@tailwindcss/vite` plugin configured in `vite.config.ts`. `src/styles/tailwind.css` imports Tailwind with `@import 'tailwindcss' source(none);` and `@source '../**/*.{js,ts,jsx,tsx}'`. Use Tailwind utility classes directly in JSX. Global CSS, theme customization and font wiring belong in `src/styles/` (`index.css` aggregates `fonts.css`, `tailwind.css`, `theme.css`). This scaffold does not need a Tailwind config file or PostCSS config.
 
 ## Code quality
 
 - Use double quotes for strings containing apostrophes (`"We're here to help"`), or escape them in single-quoted strings. An unescaped apostrophe in a single-quoted string breaks the build.
 - Ensure JSX tags are closed and braces are balanced.
-- Export components as default exports.
+- Export components as **named** exports (barrel `index.ts` re-exports them). Prefer typed `interface` Props and custom hooks (`use`-prefixed) for logic over heavy `.tsx` files.
