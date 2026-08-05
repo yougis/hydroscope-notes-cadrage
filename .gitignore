@@ -13,3 +13,4 @@ _extensions/*
 */.cache/
 */dist/
 **/pnpm-lock.yaml
+opencode,json
