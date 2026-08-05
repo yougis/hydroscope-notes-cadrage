@@ -1,0 +1,100 @@
+EPIC;ID User Story;Libellé User Story;MVP;JH bas;JH haut;Option AMC;Commentaires
+EPIC 1 – Gestion des données;US1.1;Importer des données via fichier;TRUE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1 – Gestion des données;US1.3;Planifier des imports simples;TRUE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1 – Gestion des données;US1.4;Normaliser les données;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1 – Gestion des données;US1.5;Gérer les erreurs d'import;TRUE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1 – Gestion des données;US1.6;Historiser les données;TRUE;2;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1 – Gestion des données;US1.2;Connecter une API externe;FALSE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1 – Gestion des données;US1.7;Rejouer un traitement;FALSE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.1;Enregistrer un jeu de données dans le catalogue;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.2;Associer des métadonnées à un jeu de données;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.3;Modifier les métadonnées d'un jeu de données;FALSE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.4;Consulter les informations d'un jeu de données;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.5;Rechercher un jeu de données dans le catalogue;FALSE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.6;Filtrer les jeux de données selon des critères;FALSE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.7;Visualiser les relations entre indicateur et données sources;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.8;Tracer les transformations appliquées à un jeu de données;FALSE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.9;Identifier une donnée comme source ou dérivée;FALSE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.10;Alimenter automatiquement le catalogue lors des imports;TRUE;2;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.11;Relier un jeu de données à un traitement (ex : dbt);FALSE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.12;Enregistrer un indicateur comme donnée dérivée;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.13;Consulter les métadonnées d'un indicateur;FALSE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.14;Ajouter un nouveau jeu de données sans modifier la structure;FALSE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 1bis – Catalogage des données;US1bis.15;Historiser les modifications des métadonnées;FALSE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 2 – Qualité des données;US2.1;Détecter des valeurs aberrantes;TRUE;1;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 2 – Qualité des données;US2.4;Calculer un taux de complétude;TRUE;1;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 2 – Qualité des données;US2.5;Qualifier la fiabilité;TRUE;1;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 2 – Qualité des données;US2.6;Associer des métadonnées;TRUE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 2 – Qualité des données;US2.2;Vérifier cohérence temporelle;FALSE;1;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 2 – Qualité des données;US2.3;Vérifier cohérence spatiale;FALSE;1;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 2 – Qualité des données;US2.7;Visualiser la qualité;FALSE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 3 – Référentiels;US3.1;Gérer les bassins versants;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 3 – Référentiels;US3.2;Gérer les captages;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 3 – Référentiels;US3.4;Gérer la maille H3;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 3 – Référentiels;US3.5;Définir un indicateur;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 3 – Référentiels;US3.3;Gérer périmètres de protection;FALSE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 3 – Référentiels;US3.6;Gérer les profils utilisateurs;FALSE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 3 – Référentiels;US3.7;Versionner les référentiels;FALSE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 4 – Calcul d'indicateurs;US4.1;Calculer des indicateurs simples;TRUE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 4 – Calcul d'indicateurs;US4.2;Agréger à l'échelle BV;TRUE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 4 – Calcul d'indicateurs;US4.3;Agrégation temporelle;TRUE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 4 – Calcul d'indicateurs;US4.5;Filtrer les données;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 4 – Calcul d'indicateurs;US4.4;Paramétrer un calcul;FALSE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 4 – Calcul d'indicateurs;US4.6;Versionner un indicateur;FALSE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 4 – Calcul d'indicateurs;US4.7;Recalculer un indicateur;FALSE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 5 – Analyse multicritère;US5.1;Construire un indice composite;FALSE;8;13;OUI;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 5 – Analyse multicritère;US5.2;Définir des pondérations;FALSE;8;13;OUI;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 5 – Analyse multicritère;US5.3;Tester des scénarios;FALSE;8;13;OUI;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 5 – Analyse multicritère;US5.4;Comparer scénarios;FALSE;8;13;OUI;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 5 – Analyse multicritère;US5.5;Visualiser contributions;FALSE;8;13;OUI;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 5 – Analyse multicritère;US5.6;Documenter méthodes;FALSE;5;10;OUI;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.1;Visualiser sur carte;TRUE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.2;Afficher indicateurs carto;TRUE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.3;Navigation (zoom filtres);TRUE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.4;Graphiques temporels;TRUE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.7;Fiche territoire;TRUE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.5;Comparer territoires;FALSE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.6;Tableau de bord avancé;FALSE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.8;Basculer l'échelle d'analyse Captages ↔ Bassins versants;TRUE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.9;Afficher le compteur d'unités sélectionnées;TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.10;Rechercher avec suggestions (commune, province, captage, presets);TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.11;Cumuler plusieurs facettes de recherche (sélection multiple);TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.12;Afficher les facettes actives en puces décochables (SOLR/CKAN);TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.13;Appliquer un preset « Top 10 » (plus/moins exposés, plus/moins proches) et pouvoir le retirer;TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.14;Décocher une facette pour retirer filtre ou sélection;TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.15;Sélectionner / désélectionner / retirer une unité individuellement;TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.16;Conserver indépendamment les sélections Captages et Bassins versants;TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.17;Trier la liste (distance / nom);TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.18;Calculer les communes intersectant un BV (≥ 20 %) pour la facette Commune;TRUE;2;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.19;Mettre en évidence le croisement captages ↔ BV sur la carte;TRUE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.20;Choisir le fond de carte (Carto / Satellite / Terrain) via un sélecteur posé sur la carte;TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.21;Afficher / masquer chaque couche (BV, captages, périmètres, zones à risque) depuis une section « Couches » du volet gauche;TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.22;Rechercher un indicateur dans un dropdown groupé Famille → Thème → Groupe;TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.23;Consulter la fiche métadonnées depuis la vignette de l'indicateur (pas depuis les graphiques);TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.24;Basculer chaque graphique entre les vues Répartition / Temporel / Changements / Carte, vue temporelle désactivée si données non historisées;TRUE;4;6;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.25;Voir toute la liste des indicateurs (38) regroupée Famille → Thème → Groupe;TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 6 – Visualisation;US6.26;Présélectionner les indicateurs du volet droit par famille (tabs), thèmes (pills) et groupe (dropdown);TRUE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 7 – Aide à la décision;US7.1;Définir des seuils;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 7 – Aide à la décision;US7.3;Identifier tendances;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 7 – Aide à la décision;US7.4;Fiche synthétique;TRUE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 7 – Aide à la décision;US7.2;Détecter dépassement;FALSE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 7 – Aide à la décision;US7.5;Prioriser territoires;FALSE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 7 – Aide à la décision;US7.6;Aide à interprétation avancée;FALSE;3;5;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 8 – Export;US8.1;Export CSV;TRUE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 8 – Export;US8.6;Export vue simple;TRUE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 8 – Export;US8.2;Export SIG;FALSE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 8 – Export;US8.3;Rapport PDF;FALSE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 8 – Export;US8.4;Partage lien;FALSE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 8 – Export;US8.5;API;FALSE;2;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 9 – Utilisateurs;US9.2;Authentification;TRUE;2;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 9 – Utilisateurs;US9.3;Rôles simples;TRUE;2;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 9 – Utilisateurs;US9.1;Créer compte;FALSE;2;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 9 – Utilisateurs;US9.4;Restreindre accès fin;FALSE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 9 – Utilisateurs;US9.5;Adapter interface;FALSE;2;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 9 – Utilisateurs;US9.6;Suivre connexions;FALSE;1;2;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 10 – Traçabilité;US10.1;Tracer imports;TRUE;1;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 10 – Traçabilité;US10.2;Tracer calculs;TRUE;1;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 10 – Traçabilité;US10.3;Journal actions;FALSE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 10 – Traçabilité;US10.4;Historique modifications;FALSE;3;4;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 10 – Traçabilité;US10.5;Reconstituer calcul;FALSE;1;3;;Estimation AMOA indicative — non publiée, calibrage global
+EPIC 10 – Traçabilité;US10.6;Audit usages;FALSE;1;3;;Estimation AMOA indicative — non publiée, calibrage global

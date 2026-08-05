@@ -118,7 +118,9 @@ const EPIC_LABELS = {
 
 // ---------- Données issues de cahier des charges/backlog.csv ----------
 // Structures consolidées du graphe. La source de vérité est backlog.csv,
-// lue via fetch() au démarrage puis dérivée en US_DATA / US / US_FINALITE / DEP.
+// servie via GitHub raw (HTTPS + CORS *) puis dérivée en US_DATA / US / US_FINALITE / DEP.
+const BACKLOG_URL = 'https://raw.githubusercontent.com/yougis/hydroscope-notes-cadrage/refs/heads/main/cahier%20des%20charges/backlog.csv';
+
 let US_DATA = {};        // id -> { epic, nom, libelle, mvp, ihm, module, depend[], typ, role, phrase }
 let US = {};             // id -> [epic, libelle]
 let US_FINALITE = {};    // id -> type fonctionnel
@@ -156,8 +158,8 @@ function parseEpic(cell) {
 
 // Charge et consolide les données depuis backlog.csv
 async function loadUsData() {
-  const res = await fetch('../backlog.csv');
-  if (!res.ok) throw new Error('Impossible de charger ../backlog.csv (HTTP ' + res.status + ')');
+  const res = await fetch(BACKLOG_URL);
+  if (!res.ok) throw new Error('Impossible de charger le backlog (HTTP ' + res.status + ')');
   const rows = parseCSV(await res.text());
   const header = rows[0].map(h => h.trim());
   const col = name => header.indexOf(name);

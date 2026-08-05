@@ -143,16 +143,13 @@ flowchart LR
 - **Sauvegarde et restauration** : des mécanismes de sauvegarde régulière (Barman ou équivalent) et de restauration sont configurés avec des délais de récupération évalué en cours de projet (un test de recuperation de la base complète sera effectué avant la mise en production). 
 - **Monitoring** : un dispositif de supervision couvre le bon fonctionnement des traitements, la surveillance des connexions aux sources de données, les performances (healthcheck, temps de réponse, disponibilité) et la gestion des alertes en cas d'anomalie.
 
-{
 ::: {.callout-caution}
-
 
 Ces choix devront être validés en cohérence avec les contraintes des partenaires, les compétences disponibles au sein de l'équipe OEIL et les exigences contractuelles du projet.
 
 @todo[] : valider architecture cible avec l'équipe OEIL, en particulier sur les aspects technologiques et d'intégration.
 
 :::
-}
 
 ### Schéma de synthèse
 
