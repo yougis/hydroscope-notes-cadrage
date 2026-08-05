@@ -1,0 +1,51 @@
+---
+title: "CU-DECISION-01 — Tableau de bord synthétique et fiche territoire"
+profile: "Décideur métier"
+uc: "CU-DECISION-01"
+us: "US6.6, US6.7"
+epic: "EPIC 6 — Visualisation ; EPIC 7 — Aide à la décision"
+mvp: true
+amc: false
+---
+
+# Consulter un tableau de bord synthétique et une fiche territoire
+
+**Phrase agile :** En tant que décideur métier, je veux consulter un tableau de bord
+synthétique et une fiche territoire afin de disposer d'une vue d'ensemble de la qualité
+de l'eau sur mon territoire.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-DECISION-01` (US6.6, US6.7) — `profils_utilisateurs.md` (Profil 4).
+- `help/04-tableau-de-bord.md` ; EPIC 6 ; `src/features/portail/DashboardPage.tsx`.
+- Navigation : Sidebar « Exploration > Tableau de bord ».
+
+## 2. Fonctionnalités couvertes
+
+- Vue d'ensemble par territoire : chiffres clés (valeur actuelle, tendance 10 ans,
+  rang territorial, fraîcheur).
+- Carte du territoire + légende + alertes actives.
+- Graphiques d'évolution annuelle et de comparaison de périodes.
+- Bascule vers **interface publique** (mêmes données, nav restreinte).
+
+## 3. Parcours IHM
+
+1. Connexion → Sidebar « Exploration > Tableau de bord ».
+2. Recherche d'entrée (commune, cours d'eau, captage).
+3. Sélection d'un territoire → chargement des chiffres clés + carte.
+4. Survol carte → infobulle valeur ; consultation des alertes.
+5. (Option) bouton « Interface publique → » / « Espace experts → ».
+
+## 4. Rendu visuel obtenu
+
+- Cartes de KPIs (`card-elevated`, Level 1 drop) : valeur, tendance, rang, fraîcheur.
+- Carte `MapCanvas` (SVG/OpenLayers) : basemaps Carto/Satellite/Terrain ; couches
+  BV/captages/PPE/risque ; tooltip survol.
+- Graphiques `LineChart` (évolution) / `BarChart` (comparaison de périodes).
+- Palette sémantique : `blue-600` interactif, vert/rouge/ambre pour états/alertes.
+- Captures : _(à insérer depuis le prototype — DashboardPage.tsx / help/04)_.
+
+## 5. Points de vigilance
+
+- Même jeu de données entre interface experte et publique (help/04).
+- Vue synthétique **descriptive** (le classement relève de l'AMC, document isolé).

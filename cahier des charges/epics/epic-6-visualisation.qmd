@@ -45,6 +45,10 @@ Les sélecteurs doivent être cohérents entre les différentes vues (cartes, gr
 
 Une attention particulière devra être portée à la lisibilité et à l’ergonomie de ces filtres, afin d’éviter une complexité excessive pour les utilisateurs non experts, tout en permettant des usages avancés pour les profils techniques.
 
+- **Fiches territoriales (US6.7)**  
+Le système doit permettre de consulter une fiche territoire fournissant une synthèse d’un bassin versant, à l’échelle de la commune ou de l’unité de gestion (captage, bassin versant). Les fiches doivent offrir une structuration homogène des informations : description du périmètre, unités de gestion associées le cas échéant, indicateurs disponibles, éléments de comparaison descriptive et visualisations associées (cartes, graphiques temporels).  
+Les contenus doivent être directement issus des données et indicateurs produits, sans transformation interprétative : aucune fonctionnalité de classement, de scoring ou de priorisation ne doit être introduite dans ce cadre, ces rôles relevant de l’EPIC 7 (aide à la décision) et de l’option analyse multicritère (EPIC 5).
+
 - **Monitoring**
 Les fonctionnalités de monitoring dans cet EPIC visent à rendre visibles et compréhensibles les informations de suivi pour les utilisateurs.
 

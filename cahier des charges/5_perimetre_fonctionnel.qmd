@@ -1,16 +1,16 @@
 ## Périmètre fonctionnel – EPICS
 
-Le périmètre fonctionnel d’HydroScope est structuré en grands ensembles cohérents de fonctionnalités (EPICS), permettant d’organiser le développement du produit de manière progressive et itérative.
+Le périmètre fonctionnel d’HydroScope est structuré en grands ensembles cohérents de fonctionnalités (EPICS), permettant d’organiser le développement du produit de manière progressive et itérative. Les intitulés des EPICS sont identiques à ceux du product backlog (chapitre 5Ter).
 
-### EPIC 1 : Gestion des indicateurs
+### EPIC 1 : Gestion des données
 
-{{< include epics/epic-1-gestion-indicateurs.qmd >}}
+{{< include epics/epic-1-gestion-donnees.qmd >}}
 
-### EPIC 1 bis : Catalogue de données
+### EPIC 1 bis : Catalogage des données
 
 {{< include epics/epic-1bis-catalogue.qmd >}}
 
-### EPIC 2 : Qualité et validation des données
+### EPIC 2 : Qualité des données
 
 {{< include epics/epic-2-qualite-donnees.qmd >}}
 
@@ -22,26 +22,26 @@ Le périmètre fonctionnel d’HydroScope est structuré en grands ensembles coh
 
 {{< include epics/epic-4-calcul-indicateurs.qmd >}}
 
-### EPIC 5 : Analyse multicritère (vigilance forte)
+### EPIC 5 : Analyse multicritère (option)
 
 {{< include epics/epic-5-analyse-multicritere.qmd >}}
 
-### EPIC 6 : Visualisation et exploration
+### EPIC 6 : Visualisation
 
 {{< include epics/epic-6-visualisation.qmd >}}
 
-### EPIC 7 : Fiches et rapports automatisés
+### EPIC 7 : Aide à la décision
 
-{{< include epics/epic-7-fiche-rapport.qmd >}}
+{{< include epics/epic-7-aide-decision.qmd >}}
 
-### EPIC 8 : Export et diffusion
+### EPIC 8 : Export
 
 {{< include epics/epic-8-export-diffusion.qmd >}}
 
-### EPIC 9 : Gestion des utilisateurs
+### EPIC 9 : Utilisateurs
 
 {{< include epics/epic-9-gestion-utilisateurs.qmd >}}
 
-### EPIC 10 : Traçabilité et audit
+### EPIC 10 : Traçabilité
 
 {{< include epics/epic-10-tracabilite-audit.qmd >}}

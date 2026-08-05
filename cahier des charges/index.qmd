@@ -24,6 +24,7 @@ Historique des versions du document :
 | Version | Date | Auteur(s) | Description des modifications |
 | --|--------|--------- |--------------------------------|
 | 1 || Hugo Roussaffa |Rédaction initiale du cahier des charges|
+| 2 | 05/08/2026 | Hugo Roussaffa | Finalisation du backlog et des profils utilisateurs, ajout du cadre de chiffrage, compléments des exigences — version soumise à la relecture de la MOA |
 
 
 ::: {#todo-list}
@@ -149,23 +150,41 @@ L'OEIL assure la continuité intellectuelle du projet initial (PressionPPE en 20
 
 ---
 
+{{< pagebreak >}}
 
+{{< include ./0_glossaire.qmd >}}
+
+---
 
 # Annexes {#sec-Annexes}
 
-
 ## Tableau synthétique des indicateurs
 
-@todo [priority=high, section=annexe-liens-fichiers] : inserer un lien vers le tableau des indicateurs
+Le tableau de référence des indicateurs est fourni avec le présent cahier des charges :
+
+- [liste_indicateurs_v4.xlsx](./annexes/liste_indicateurs_v4.xlsx) — version de référence contractuelle (38 indicateurs, version 4) ;
+- [liste_indicateurs_v3.2.csv](../ressources/liste_indicateurs_v3.2.csv) — version de travail CSV, identique dans son contenu (38 indicateurs).
 
 ## Catalogue des indicateurs
 
-@todo [priority=high, section=annexe-liens-fichiers] : inserer un lien vers le catalogue de fiches des indicateurs
+Le catalogue de fiches détaillées des indicateurs est fourni avec le présent cahier des charges :
 
+- [Fiches_indicateurs_HydroScope-v4.pdf](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées (définition, objectifs, méthode, sources, vigilances) ;
+- le répertoire des données structurées associées ([../ressources/fiches-csv](../ressources/fiches-csv/)) alimente dynamiquement les tableaux du chapitre 3bis.
+
+## Critères d'acceptation
+
+Les critères d'acceptation du périmètre MVP sont détaillés sous forme Gherkin (Étant donné / Quand / Alors) afin de constituer une base de recette contractuelle. Le périmètre lot 2 (évolutions) et l'option analyse multicritère font l'objet de critères synthétiques par EPIC, affinés en cours de projet.
+
+{{< include ./annexes/Criteres_acceptation_donnees.qmd >}}
+
+{{< include ./annexes/Criteres_acceptation_visualisation.qmd >}}
+
+{{< include ./annexes/Criteres_acceptation_lot2.qmd >}}
 
 ## Cadre de chiffrage (DQE)
 
-@todo [priority=medium, section=annexe] : le cadre de chiffrage sera mis à jour une fois les choix techniques validés avec l'OEIL.
+Le cadre de chiffrage (annexe ci-dessous) constitue la grille commune de chiffrage et de comparaison des offres. Les candidats sont invités à le compléter ligne à ligne, pour le périmètre de base, puis pour les options (analyse multicritère, TMA).
 
 
 {{< include ./annexes/Cadre_chiffrage.qmd >}}

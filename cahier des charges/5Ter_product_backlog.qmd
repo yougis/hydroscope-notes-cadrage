@@ -37,7 +37,7 @@ print(df.to_markdown(index=False))
 
 ### Évolution du backlog
 
-DLe backlog produit est amené à évoluer tout au long du projet afin de s’adapter aux besoins et aux retours des utilisateurs. Cette évolutivité constitue un principe de fonctionnement du projet.
+Le backlog produit est amené à évoluer tout au long du projet afin de s’adapter aux besoins et aux retours des utilisateurs. Cette évolutivité constitue un principe de fonctionnement du projet.
 
 Toutefois, cette évolution doit être encadrée afin de garantir la maîtrise du périmètre, des délais et des coûts.
 

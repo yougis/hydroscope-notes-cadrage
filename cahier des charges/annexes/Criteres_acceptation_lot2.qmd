@@ -1,0 +1,100 @@
+## Critères d'acceptation — Lot 2 (évolutions) et options
+
+Le périmètre du **Lot 2** regroupe les User Stories du product backlog non retenues dans le MVP (`MVP=FALSE` dans backlog.csv). Pour le chiffrage contractuel, ces User Stories sont couvertes par des **critères d'acceptation synthétiques au niveau de l'EPIC**, présentés ci-après ; ils seront détaillés et affinés au fil du projet, avant le développement de chaque fonctionnalité (principe « juste-à-temps » de la méthode Agile). Un critère est accepté lorsque la fonctionnalité se comporte conformément aux règles décrites, sur des jeux de données de référence représentatifs de la Nouvelle-Calédonie.
+
+### EPIC 1 — Gestion des données (US1.2, US1.7)
+
+Les évolutions non-MVP de la gestion des données couvrent la **connexion d'API externes** (US1.2) et le **rejeu de traitements** (US1.7) :
+- La connexion d'une API externe permet de configurer une source (endpoint, paramètres, authentification, fréquence) et d'en importer les données sans fichier ; les échecs de connexion sont journalisés et l'import reste traçable comme un import « fichier ».
+- Le rejeu d'un traitement permet de recalculer un jeu de données après correction des données sources, sans perte de l'exécution historique : chaque rejeu est horodaté, attribué à son auteur et documenté (jeu de données, version des données d'entrée, paramètres).
+- Les résultats du rejeu sont comparables à l'exécution initiale (différences explicites), et les dépendances aval (indicateurs, catalogue) sont mises à jour ou signalées.
+
+### EPIC 1bis — Catalogage des données (US1bis.3, US1bis.5, US1bis.6, US1bis.8, US1bis.9, US1bis.11, US1bis.13, US1bis.14, US1bis.15)
+
+Les évolutions du catalogue portent sur sa **maintenance et son enrichissement** :
+- Les métadonnées d'un jeu de données sont modifiables (US1bis.3) avec traçabilité des évolutions (US1bis.15 : qui, quand, quoi), sans casser les liens avec les indicateurs existants.
+- La recherche (US1bis.5) et le filtrage multicritères (US1bis.6) permettent de retrouver un jeu de données rapidement (texte, source, type, période) et de restreindre la liste du catalogue.
+- La traçabilité des transformations (US1bis.8) et le lien jeu de données ↔ traitement (US1bis.11) rendent la chaîne de production reproductible : lignage visible, dbt ou équivalent, versions identifiées.
+- L'identification source/dérivée (US1bis.9) et la consultation des métadonnées d'indicateur (US1bis.13) distinguent clairement données sources et données produites dans le catalogue.
+- L'ajout d'un nouveau jeu de données sans modification de la structure (US1bis.14) s'effectue par simple référencement (le schéma d'ingestion n'est pas réécrit).
+
+### EPIC 2 — Qualité des données (US2.2, US2.3, US2.7)
+
+Les évolutions non-MVP de la qualité couvrent la **cohérence temporelle et spatiale** et la **visualisation de la qualité** :
+- La vérification de cohérence temporelle (US2.2) détecte les incohérences de dates (ordre, plage, fréquences, anomalies de calendrier) et les signale sans bloquer l'import.
+- La vérification de cohérence spatiale (US2.3) détecte les incohérences géographiques (position hors périmètre attendu, unité non référencée, géométrie invalide) sur la base des référentiels.
+- La visualisation de la qualité (US2.7) restitue les résultats de contrôles (taux de complétude, fiabilité, anomalies) au niveau de chaque jeu de données, permettant à l'administrateur d'identifier les données fiables en un coup d'œil.
+- Chaque contrôle est tracé (règle, date d'exécution, résultat) et réutilisable sur de nouveaux imports.
+
+### EPIC 3 — Référentiels (US3.3, US3.6, US3.7)
+
+Les évolutions des référentiels couvrent les **périmètres de protection**, les **profils utilisateurs** et le **versionnement** :
+- La gestion des périmètres de protection (US3.3) permet de créer, modifier et désactiver des PPE (périmètres rapproché/éloigné) et de les représenter sur la carte en lien avec les captages.
+- La gestion des profils utilisateurs et des droits (US3.6) permet de définir les rôles et leurs permissions (consultation, édition, administration) et de les appliquer aux comptes ; les changements de droits prennent effet sans délai sur les nouveaux accès.
+- Le versionnement des référentiels (US3.7) conserve l'historique des évolutions (bassins versants, captages, indicateurs) et permet de restituer un état antérieur sans casser les jeux de données et calculs référencés.
+- Toute modification de référentiel est tracée (auteur, date, raison) et répercutée de façon cohérente dans le catalogue et les calculs.
+
+### EPIC 4 — Calcul d'indicateurs (US4.4, US4.6, US4.7)
+
+Les évolutions non-MVP du calcul couvrent le **paramétrage**, le **versionnement** et le **recalcul** des indicateurs :
+- Le paramétrage d'un calcul (US4.4) permet d'ajuster les règles de production (agrégations, filtres, arrondis, périodes) d'un indicateur ; les paramètres sont validés avant application et leur modification est journalisée.
+- Le versionnement d'un indicateur (US4.6) conserve la définition et les paramètres de chaque version, les résultats étant rattachés à la version qui les a produits.
+- Le recalcul d'un indicateur (US4.7) actualise les valeurs après correction des données ou des paramètres, sans écraser les résultats antérieurs (nouvelle version), et propage les mises à jour aux vues, aux fiches et aux exports.
+- Chaque exécution de calcul reste rejouable et tracée (données d'entrée, paramètres, version), en cohérence avec l'EPIC 10.
+
+### EPIC 6 — Visualisation (US6.5, US6.6)
+
+Les évolutions non-MVP de la visualisation couvrent la **comparaison de territoires** et le **tableau de bord avancé** :
+- La comparaison de territoires (US6.5) permet de mettre côte à côte plusieurs bassins versants ou captages (indicateurs, graphiques) afin de faciliter l'arbitrage des investissements ; les échelles et périodes comparées sont cohérentes entre les vues.
+- Le tableau de bord avancé (US6.6) offre une vue agrégée et configurable de l'information (indicateurs, qualité, fraîcheur) adaptée aux décideurs, sans perte de lien vers le détail.
+
+*(Le calcul des communes intersectant un bassin versant, US6.18, relève du périmètre MVP : voir les critères d'acceptation EPIC 6 à 10.)*
+
+- Les évolutions restent conformes aux conventions de cohérence des vues définies pour le MVP.
+
+### EPIC 7 — Aide à la décision (US7.2, US7.5, US7.6)
+
+Les évolutions non-MVP de l'aide à la décision couvrent la **détection de dépassement**, la **priorisation des territoires** et l'**aide à l'interprétation avancée** :
+- La détection de dépassement (US7.2) signale les valeurs franchissant les seuils définis (US7.1) et les périodes de tension sur la ressource, avec restitution des circonstances (période, unité, indicateur).
+- La priorisation des territoires (US7.5) classe les bassins versants selon leur score de criticité issu de l'analyse multicritère (EPIC 5) ; le classement est traçable jusqu'aux scores intermédiaires et aux pondérations.
+- L'aide à l'interprétation avancée (US7.6) établit une hiérarchie d'actions justifiée, explicite les facteurs déterminants de chaque situation et documente les limites méthodologiques de l'analyse.
+- Les résultats sont présentés comme aide à l'interprétation, sans décision automatique, et toute hiérarchie reste justifiable et rejouable.
+
+### EPIC 8 — Export (US8.2, US8.3, US8.4, US8.5)
+
+Les évolutions non-MVP de l'export couvrent le **SIG**, les **rapports PDF**, le **partage par lien** et l'**API** :
+- L'export SIG (US8.2) fournit les données géographiques dans des formats standards (GeoJSON, Shapefile, Geopackage), avec projection documentée, attributs alignés sur la vue exportée et respect des droits.
+- Le rapport PDF (US8.3) restitue les fiches territoire (US6.7) sous forme exploitable (carte, indicateurs, périodes) pour une présentation formelle ; le rapport est tenu à jour des dernières données.
+- Le partage par lien (US8.4) restitue un contexte de consultation complet (territoire, indicateurs, filtres, type de vue) et respecte les droits : le destinataire ne voit que les données auxquelles il est habilité ; la pérennité des liens est gérée (versions).
+- L'API (US8.5) expose données sources, indicateurs et référentiels avec filtres (territoire, période, type), résultats cohérents avec l'application, authentification et documentation des formats et paramètres.
+
+### EPIC 9 — Utilisateurs (US9.1, US9.4, US9.5, US9.6)
+
+Les évolutions non-MVP de la gestion des utilisateurs couvrent la **création de comptes**, la **restriction fine des accès**, l'**adaptation de l'interface** et le **suivi des connexions** :
+- La création de comptes (US9.1) permet à l'administrateur plateforme de créer, modifier, réinitialiser et désactiver des comptes, chacun rattaché à un rôle existant (US9.3).
+- La restriction fine des accès (US9.4) limite la consultation aux données et fonctionnalités autorisées, y compris via les liens partagés et l'API (droits par jeu de données ou périmètre).
+- L'adaptation de l'interface (US9.5) présente à chaque profil les fonctionnalités pertinentes (navigation, menus, actions) selon ses droits, sans afficher les éléments non autorisés.
+- Le suivi des connexions (US9.6) enregistre les accès (utilisateur, date/heure, statut) et permet d'analyser l'usage de la plateforme, dans le respect du RGPD.
+
+### EPIC 10 — Traçabilité (US10.3, US10.4, US10.5, US10.6)
+
+Les évolutions non-MVP de la traçabilité couvrent le **journal des actions**, l'**historique des modifications**, la **reconstitution des calculs** et l'**audit des usages** :
+- Le journal des actions (US10.3) trace les opérations effectuées sur la plateforme (imports, modifications, exports, connexions) avec auteur, date et type d'action ; il est consultable et filtrable.
+- L'historique des modifications (US10.4) restitue les changements apportés aux données et référentiels dans le temps, permettant de suivre les évolutions et d'en comprendre le contexte.
+- La reconstitution d'un calcul (US10.5) reproduit un résultat passé à partir du journal des calculs (données d'entrée, paramètres, versions), sans dépendre de l'état courant des données.
+- L'audit des usages (US10.6) analyse les accès et actions pour contrôler les accès et justifier les opérations ; les données d'audit sont conservées selon des règles de rétention documentées.
+- Les journaux sont structurés (événements normalisés, recherche, export) et n'accumulent pas de journaux techniques bruts.
+
+---
+
+### EPIC 5 — Analyse multicritère (OPTION — US5.1 à US5.6, non-MVP, chiffrée séparément)
+
+L'analyse multicritère est traitée en **OPTION** : l'intégralité de ses 6 User Stories (construction d'indice composite, pondérations, scénarios, comparaison, visualisation des contributions, documentation des méthodes) est exclue du MVP et fera l'objet d'un chiffrage distinct, après validation des principes méthodologiques. Critères d'acceptation synthétiques :
+- **Scoring conservateur « déclassant »** : pour un territoire, la classe de priorité retenue est celle de l'indicateur le plus pénalisant (règle du « pire cas »), les critères dégradés ne pouvant pas être compensés par des critères favorables.
+- **Pondérations encadrées** : les poids des indicateurs sont définis par l'expert métier dans une plage contrainte (bornes validées), le total étant normalisé ; toute pondération hors cadre est refusée avec un message explicite.
+- **Seuil de complétude** : un territoire n'est inclus dans le classement que si ses données couvrent au moins ~80 % des indicateurs requis ; en deçà, le territoire est exclu ou marqué « non classable », sans résultat partial.
+- **Scores intermédiaires exportables** : les scores par indicateur, les pondérations et le score composite sont exportables (CSV) pour contrôle et réutilisation externe.
+- **Comparaison de scénarios** : plusieurs jeux de pondérations sont testables et comparables (classements côte à côte, écarts), permettant d'identifier la configuration la plus représentative du terrain.
+- **Visualisation des contributions** : la part de chaque indicateur dans le score de criticité est visualisable, pour comprendre les facteurs de risque dominants.
+- **Documentation des méthodes** : les méthodes de calcul (formules, normalisation, déclassement, seuils) sont documentées et consultables, garantissant la transparence de l'aide à la décision.
+- La réversibilité est garantie : depuis toute lecture synthétique, le détail des indicateurs sources reste accessible.

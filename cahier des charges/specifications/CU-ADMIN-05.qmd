@@ -1,0 +1,47 @@
+---
+title: "CU-ADMIN-05 — Lancer un audit d'usage pour adapter la plateforme"
+profile: "Administrateur plateforme"
+uc: "CU-ADMIN-05"
+us: "US10.6"
+epic: "EPIC 10 — Traçabilité ; §4 — Monitoring des usages"
+mvp: false
+amc: false
+---
+
+# Lancer un audit d'usage pour adapter la plateforme
+
+**Phrase agile :** En tant qu'administrateur plateforme, je veux lancer un audit
+d'usage afin d'identifier les fonctionnalités les plus utilisées et adapter la
+plateforme aux besoins réels.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-ADMIN-05` (US10.6) — `profils_utilisateurs.md` (Profil 1).
+- §4 — Monitoring des usages (fréquentation, actions, profils, exports, territoires/indicateurs).
+- EPIC 10 — Traçabilité et audit.
+
+## 2. Fonctionnalités couvertes
+
+- Suivi de la fréquentation et des actions les plus utilisées.
+- Analyse des usages par **profil utilisateur**.
+- Suivi des exports, des territoires et indicateurs les plus consultés.
+- Restitution synthétique pour le pilotage de l'amélioration continue.
+
+## 3. Parcours IHM
+
+1. Sidebar « Suivi > Supervision » (monitoring).
+2. Vue « Usages » → indicateurs d'activité (sessions, actions).
+3. Filtrage par profil / période.
+4. Lecture des classements (top territoires, top indicateurs).
+
+## 4. Rendu visuel obtenu
+
+- Cartes de compteurs (KPIs) sur `card-elevated` (Level 1 drop).
+- Graphiques de tendance `LineChart`, répartition `BarChart` (`src/components/charts/`).
+- Table de détail (territoires/indicateurs les plus consultés).
+- Captures : _(à insérer depuis le prototype — vue Supervision)_.
+
+## 5. Points de vigilance
+
+- Anonymisation / conformité RGPD des données d'usage.
+- Ne pas confondre « usage » et « pertinence » : l'audit alimente le recueil de retours, pas une décision automatique.

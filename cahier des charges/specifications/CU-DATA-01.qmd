@@ -1,0 +1,49 @@
+---
+title: "CU-DATA-01 — Importer un jeu de données et le normaliser"
+profile: "Administrateur expert data"
+uc: "CU-DATA-01"
+us: "US1.1, US1.4"
+epic: "EPIC 1 — Gestion des données ; EPIC 1 bis — Catalogage des données"
+mvp: true
+amc: false
+---
+
+# Importer un nouveau jeu de données et le normaliser
+
+**Phrase agile :** En tant qu'administrateur expert data, je veux importer un nouveau
+jeu de données et le normaliser afin que la plateforme dispose de données fiables et homogènes.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-DATA-01` (US1.1, US1.4) — `profils_utilisateurs.md` (Profil 2).
+- EPIC 1 / EPIC 1 bis (catalogue de données) ; §4 Historisation (GeoDiff + Prefect).
+- Navigation : Sidebar « Données > Ajout de données » (`UX-header-sidebar.md` §2.2).
+
+## 2. Fonctionnalités couvertes
+
+- Import de jeux de données structurés (formats standards : CSV, Excel, formats géo).
+- Normalisation : harmonisation des champs, unités, projection spatiale.
+- Enregistrement au **catalogue** avec métadonnées (source, date, version, transformations).
+- Historisation (version horodatée) pour traçabilité.
+
+## 3. Parcours IHM
+
+1. Sidebar « Données > Ajout de données ».
+2. Sélection du fichier (glisser-déposer / parcourir).
+3. Configuration du mapping des colonnes → normalisation.
+4. Aperçu et contrôle de qualité (pré-import).
+5. Validation → intégration + enregistrement au catalogue.
+
+## 4. Rendu visuel obtenu
+
+- Zone de dépôt (drag & drop) sur `card-content`.
+- Assistant pas-à-pas (étapes) avec indicateur de progression.
+- Table d'aperçu (`ex-data-table-cell`), champs mappés via `Select`.
+- Statut de fin (succès/échec) avec badge couleur.
+- Captures : _(à insérer depuis le prototype — vue Ajout de données / Import)_.
+
+## 5. Points de vigilance
+
+- Traçabilité des transformations (reproduire un résultat passé).
+- Contrôle de qualité avant intégration (lien CU-DATA-02).
+- La normalisation est au cœur de la robustesse des indicateurs (§3.2 CDC).

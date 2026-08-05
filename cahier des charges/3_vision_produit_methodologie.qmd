@@ -54,11 +54,11 @@ Les indicateurs produits doivent être utilisés dans leur domaine de validité 
 
 
 L'offre proposée par le prestataire doit intégrer ces principes méthodologiques et proposer des solutions permettant de limiter les risques identifiés, tout en garantissant la pertinence et la fiabilité des résultats produits. 
-Nous estimons que la mise en œuvre d’un **MVP (Minimum Viable Product)** constituera un moyen efficace pour valider les choix méthodologiques et techniaues avant de déployer des fonctionnalités plus avancées.
+Nous estimons que la mise en œuvre d’un **MVP (Minimum Viable Product)** constituera un moyen efficace pour valider les choix méthodologiques et techniques avant de déployer des fonctionnalités plus avancées.
 
 ### Mise en oeuvre d'un MVP (Minimum Viable Product)
 
-La mise à disposition rapide d’une première version fonctionnelle du système (MVP), permetra de répondre aux besoins prioritaires des utilisateurs tout en limitant les risques identifiés.
+La mise à disposition rapide d’une première version fonctionnelle du système (MVP), permettra de répondre aux besoins prioritaires des utilisateurs tout en limitant les risques identifiés.
 
 Le MVP permettra de :
 

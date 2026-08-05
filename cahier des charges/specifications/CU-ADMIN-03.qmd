@@ -1,0 +1,47 @@
+---
+title: "CU-ADMIN-03 — Restreindre l'accès aux données sensibles selon le profil"
+profile: "Administrateur plateforme"
+uc: "CU-ADMIN-03"
+us: "US9.4"
+epic: "EPIC 9 — Utilisateurs"
+mvp: true
+amc: false
+---
+
+# Restreindre l'accès aux données sensibles selon le profil
+
+**Phrase agile :** En tant qu'administrateur plateforme, je veux restreindre l'accès
+aux données sensibles selon le profil afin de protéger les informations réglementées.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-ADMIN-03` (US9.4) — `profils_utilisateurs.md` (Profil 1).
+- EPIC 9 ; §6 Sécurité ; §11Bis Protection des données (RGPD).
+- RBAC appliqué côté **API** et côté **front** (spec UX §4.4).
+
+## 2. Fonctionnalités couvertes
+
+- Marquage de jeux de données / indicateurs « sensibles » ou « publics ».
+- Règle d'accès : seuls les profils autorisés consultent les données restreintes.
+- Réapplication des droits pour **liens partagés** (EPIC 8) et **API de diffusion** :
+  dégradation vers le périmètre public si l'authentification échoue.
+
+## 3. Parcours IHM
+
+1. Sidebar « Administration > Données sensibles ».
+2. Sélectionner une donnée/indicateur et définir la restriction (profil(s) autorisé(s)).
+3. Enregistrer → l'API et l'interface filtrent selon les habilitations.
+4. Test : connexion avec un profil non autorisé → la donnée est masquée.
+
+## 4. Rendu visuel obtenu
+
+- Panneau de gestion par accordéon/table de jeux de données avec badge de niveau
+  d'accès (« Public » / « Restreint »).
+- Bandeau/infobulle « Données protégées » en `amber` sur les éléments restreints.
+- En cas d'accès refusé sur lien partagé : formulaire de connexion (spec UX §3.9).
+- Captures : _(à insérer depuis le prototype)_.
+
+## 5. Points de vigilance
+
+- La restriction s'applique **à tous les canaux** (IHM, liens, API).
+- Ne jamais exposer de données réglementées en clair dans les métadonnées publiques.

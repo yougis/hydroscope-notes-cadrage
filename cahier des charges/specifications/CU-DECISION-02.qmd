@@ -1,0 +1,48 @@
+---
+title: "CU-DECISION-02 — Comparer deux bassins versants"
+profile: "Décideur métier"
+uc: "CU-DECISION-02"
+us: "US6.5, US7.5"
+epic: "EPIC 6 — Visualisation (comparaisons spatiales)"
+mvp: true
+amc: false
+---
+
+# Comparer deux bassins versants pour prioriser des investissements
+
+**Phrase agile :** En tant que décideur métier, je veux comparer deux bassins versants
+afin d'arbitrer les investissements en fonction des besoins identifiés.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-DECISION-02` (US6.5, US7.5) — `profils_utilisateurs.md` (Profil 4).
+- `help/06-comparer-territoires.md` ; EPIC 6.
+- Navigation : Sidebar « Exploration > Comparer les territoires ».
+
+## 2. Fonctionnalités couvertes
+
+- Comparaison côte à côte de plusieurs territoires/unités (captages, BV, communes).
+- **Cohérence des filtres** entre vues comparées (toute modification se répercute).
+- Visualisation simultanée pour lire les différences.
+- Tri selon un indicateur (du plus au moins exposé).
+
+## 3. Parcours IHM
+
+1. Sidebar « Exploration > Comparer les territoires ».
+2. Choisir les territoires/unités à comparer.
+3. Lecture côte à côte (graphiques + carte).
+4. Tri selon un indicateur pour identifier les extrêmes.
+5. Recouper avec les fiches métadonnées (fraîcheur/qualité).
+
+## 4. Rendu visuel obtenu
+
+- Comparaison en colonnes/panneaux côte à côte (`react-resizable-panels` dispo).
+- « Visualisation simultanée » de plusieurs entités.
+- Tri : bouton de tri du sélecteur (spec UX §3.3).
+- Captures : _(à insérer depuis le prototype — vue Comparer les territoires)_.
+
+## 5. Points de vigilance
+
+- Comparer des unités de **même nature** (help/06).
+- La comparaison est **descriptive** ; la hiérarchisation/criticitté relève de l'AMC
+  (document isolé).

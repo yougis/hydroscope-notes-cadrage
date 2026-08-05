@@ -1,0 +1,48 @@
+---
+title: "CU-DATA-03 — Gérer un bassin versant et ses captages"
+profile: "Administrateur expert data"
+uc: "CU-DATA-03"
+us: "US3.1, US3.2"
+epic: "EPIC 3 — Référentiels"
+mvp: true
+amc: false
+---
+
+# Gérer un bassin versant et ses captages dans le référentiel
+
+**Phrase agile :** En tant qu'administrateur expert data, je veux gérer un bassin
+versant et ses captages dans le référentiel afin de maintenir la cohérence spatiale du système.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-DATA-03` (US3.1, US3.2) — `profils_utilisateurs.md` (Profil 2).
+- EPIC 3 — Référentiels (géographique : BVAEP, captages/forages, PPE, communes, H3).
+- `UX-header-sidebar.md` §2.2 (groupe « Administration > Référentiels »).
+
+## 2. Fonctionnalités couvertes
+
+- Création/édition d'un bassin versant (géométrie, attributs, province).
+- Gestion des captages/forages rattachés (type, statut, commune, distance).
+- Gestion des périmètres de protection (PPE) et liens avec les communes.
+- Maintien de la cohérence spatiale (croisement captages ↔ BVAEP).
+
+## 3. Parcours IHM
+
+1. Sidebar « Administration > Référentiels ».
+2. Sélection « Bassins versants » / « Captages ».
+3. Créer/éditer une entité → formulaire + saisie cartographique.
+4. Rattachement des captages au BV.
+5. Validation → mise à jour de la carte et des listes.
+
+## 4. Rendu visuel obtenu
+
+- Formulaire sur `card-content` ; champs `text-input` (fond `canvas-soft`).
+- Sélecteur cartographique (dessin/édition de géométrie) sur la carte.
+- Table de listage des entités du référentiel.
+- Captures : _(à insérer depuis le prototype — vue Référentiels)_.
+
+## 5. Points de vigilance
+
+- Le référentiel sert de base à tous les indicateurs : toute modification doit
+  rester tracée (EPIC 10).
+- Cohérence entre l'échelle captage (point) et l'échelle BV (polygone).

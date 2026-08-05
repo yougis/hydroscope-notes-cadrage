@@ -16,10 +16,10 @@ Possibilité d’extraire les données et indicateurs sous des formats standards
 Ces exports doivent permettre une réutilisation dans des outils tiers comme des SIG bureautique.
 
 - **Export de rapports**
-Le système devra permettre le téléchargement de ces fiches sous des formats adaptés (PDF ou équivalent), depuis l'interface, afin de faciliter leur diffusion et leur utilisation par les différents acteurs.
-D'un point de vue technique, le système ne devra pas nécesserement générer ces fiches sur demande, mais  elles devront être maintenues à jour suite à l'intégration de mises à jour des données.
+Le système devra permettre le téléchargement des fiches territoriales produites par l'EPIC 6 (US6.7) sous des formats adaptés (PDF ou équivalent), depuis l'interface, afin de faciliter leur diffusion et leur utilisation par les différents acteurs (US8.3).
+D'un point de vue technique, le système ne devra pas nécessairement générer ces fiches sur demande, mais elles devront être maintenues à jour suite à l'intégration de mises à jour des données.
 
- **Partage de résultats**
+- **Partage de résultats**
 
 Le système devra permettre le partage de vues de l’application sous forme de liens, afin de faciliter la diffusion d’analyses entre les différents acteurs.
 
@@ -55,7 +55,6 @@ Les données devront être accessibles selon différents critères de requête, 
 
 L’API devra permettre de restituer des données cohérentes avec celles affichées dans l’application, en tenant compte des traitements et des agrégations réalisés.
 
-L’accès à l’API devra être sécurisé et respecter les droits des utilisateurs. Les données exposées devront être filtrées en fonction des habilitations, afin de garantir la confidentialité des informations sensibles.
-@todo[priority=high section=lien]: lien avec epic 9
+L’accès à l’API devra être sécurisé et respecter les droits des utilisateurs. Les données exposées devront être filtrées en fonction des habilitations, afin de garantir la confidentialité des informations sensibles. Les modalités d’habilitations applicables à l’API s’appuient sur le modèle de rôles et de droits défini dans l’EPIC 9 (gestion des utilisateurs).
 
 L’API devra être documentée afin de faciliter son utilisation par des systèmes tiers. Cette documentation devra préciser les formats d’échange, les paramètres de requête et les modalités d’authentification.

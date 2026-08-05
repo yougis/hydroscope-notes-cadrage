@@ -39,7 +39,7 @@ Les indicateurs calculés seront intégrés au catalogue comme des données dér
 
 Une partie des métadonnées pourra être exposée aux utilisateurs afin de faciliter l’interprétation des résultats.
 
-### Cataologue des indicateurs
+### Catalogue des indicateurs
 
 
 ```{python}

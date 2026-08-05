@@ -60,7 +60,23 @@ Le graphe navigable (`annexes/graphe_dependances.html`) permet de basculer le co
 
 ---
 
-## 2. EPIC 3 — Référentiels (socle géographique)
+## 2. EPIC 2 — Qualité des données
+
+Aucune US de l'EPIC 2 ne déclare de parent dans le backlog : les contrôles de qualité s'appliquent aux données intégrées indépendamment de leur origine (EPIC 1). Ils forment en revanche une **chaîne interne de qualification**, et alimentent fonctionnellement l'aide à la décision (EPIC 7) et l'analyse multicritère (EPIC 5).
+
+### Chaîne interne de qualification
+| Parent | Enfant(s) | Justification |
+|---|---|---|
+| `US2.1` Détecter valeurs aberrantes / `US2.2` Cohérence temporelle / `US2.3` Cohérence spatiale | `US2.6` Associer métadonnées de qualité | Les contrôles effectués sont consignés dans les métadonnées de qualité. |
+| `US2.6` Métadonnées de qualité | `US2.7` Visualiser la qualité | La visualisation de la qualité synthétise les contrôles documentés. |
+
+### Liens fonctionnels (non portés dans la colonne `Dépend de`)
+- `US2.4` Taux de complétude → seuil de comparabilité de l'analyse multicritère (≈ 80 %, décision R9) : un score de criticité (EPIC 5 / `US7.5`) ne s'applique que si la complétude des données est suffisante.
+- `US2.5` Qualifier la fiabilité → entrée des analyses d'aide à la décision (EPIC 7) : la confiance accordée à un indicateur conditionne son usage pour l'arbitrage.
+
+---
+
+## 3. EPIC 3 — Référentiels (socle géographique)
 
 | Parent | Enfant(s) | Justification |
 |---|---|---|
@@ -70,7 +86,7 @@ Le graphe navigable (`annexes/graphe_dependances.html`) permet de basculer le co
 
 ---
 
-## 3. EPIC 4 — Calcul d'indicateurs
+## 4. EPIC 4 — Calcul d'indicateurs
 
 | Parent | Enfant(s) | Justification |
 |---|---|---|
@@ -80,7 +96,7 @@ Le graphe navigable (`annexes/graphe_dependances.html`) permet de basculer le co
 
 ---
 
-## 4. EPIC 5 — Analyse multicritère (chaîne)
+## 5. EPIC 5 — Analyse multicritère (chaîne)
 
 | Parent | Enfant(s) | Justification |
 |---|---|---|
@@ -91,7 +107,21 @@ Le graphe navigable (`annexes/graphe_dependances.html`) permet de basculer le co
 
 ---
 
-## 5. EPIC 7 — Aide à la décision
+## 6. EPIC 6 — Visualisation
+
+L'EPIC 6 est le plus dense du backlog (26 US). Ses dépendances externes sont portées par les EPIC 3 et 4 (référentiels → affichage cartographique, historisation → vue temporelle) ; le tableau ci-dessous complète la lecture intra-EPIC et les liens croisés.
+
+| Parent | Enfant(s) | Justification |
+|---|---|---|
+| `US6.18` Communes intersectant un BV | `US6.10` Facette « Commune » de la recherche | Le calcul d'intersection (≥ 20 %) alimente la facette commune du sélecteur. |
+| `US6.10` / `US6.11` Recherche et sélection multiple | `US6.12` / `US6.14` Facettes actives en puces | L'affichage des facettes actives en puces décochables suppose que la recherche et la sélection multiple existent. |
+| `US6.7` Fiche territoire | `US6.4` Graphiques temporels / `US8.3` Rapport PDF | La fiche territoire est la base du rapport PDF et alimente les graphiques temporels (voir EPIC 7). |
+| `US3.1` / `US3.2` Référentiels | `US6.8` / `US6.18` / `US6.19` | Bascule d'échelle, facette commune et croisement captages↔BV reposent sur les référentiels (voir EPIC 3). |
+| `US6.24` Bascule des vues graphiques | `US4.3` Agrégation temporelle | La vue temporelle est désactivée si les données ne sont pas historisées (voir EPIC 4). |
+
+---
+
+## 7. EPIC 7 — Aide à la décision
 
 | Parent | Enfant(s) | Justification |
 |---|---|---|
@@ -100,7 +130,7 @@ Le graphe navigable (`annexes/graphe_dependances.html`) permet de basculer le co
 
 ---
 
-## 6. EPIC 8 — Export & diffusion
+## 8. EPIC 8 — Export & diffusion
 
 | Parent | Enfant(s) | Justification |
 |---|---|---|
@@ -109,7 +139,7 @@ Le graphe navigable (`annexes/graphe_dependances.html`) permet de basculer le co
 
 ---
 
-## 7. EPIC 9 — Gestion des utilisateurs
+## 9. EPIC 9 — Gestion des utilisateurs
 
 | Parent | Enfant(s) | Justification |
 |---|---|---|
@@ -118,7 +148,7 @@ Le graphe navigable (`annexes/graphe_dependances.html`) permet de basculer le co
 
 ---
 
-## 8. EPIC 10 — Traçabilité
+## 10. EPIC 10 — Traçabilité
 
 | Parent | Enfant(s) | Justification |
 |---|---|---|
@@ -133,7 +163,10 @@ US1.1 → US1.4 / US1.5 / US1.6 → (US4.3, US10.4, US10.5)
       → US1bis.10 → US1bis.1 → US1bis.2 → US1bis.3
       → US1bis.8 → US1bis.11
 
-US3.1 / US3.2 → US6.8 / US6.18 / US6.19
+US2.1 / US2.2 / US2.3 → US2.6 → US2.7
+US2.4 (complétude ≈ 80 %) / US2.5 (fiabilité) → EPIC 5 / EPIC 7
+
+US3.1 / US3.2 → US6.8 / US6.18 / US6.19 → US6.10
 US3.5 → US4.1 → US4.2 / US4.3 / US4.7 / US10.2 → US10.5
 
 US5.1 → US5.2 → US5.3 → US5.4 → US5.5

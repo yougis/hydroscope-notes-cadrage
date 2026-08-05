@@ -20,7 +20,11 @@ export function Header({ avance, onToggleAvance, period, onSetPeriod, onOpenHelp
   return (
     <header className="flex h-14 shrink-0 items-center gap-3 border-b border-neutral-200 bg-white px-4">
       <div className="flex items-center gap-2.5">
-        <div className="flex h-8 w-8 items-center justify-center rounded bg-blue-600 text-sm font-bold text-white">H</div>
+        <div className="flex h-8 w-8 items-center justify-center rounded bg-blue-600 text-white">
+          <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="currentColor" aria-hidden="true">
+            <path d="M12 2c.62 3.7 5.5 7.2 5.5 11.3a5.5 5.5 0 0 1-11 0C6.5 9.2 11.38 5.7 12 2z" />
+          </svg>
+        </div>
         <div className="leading-tight">
           <div className="text-sm font-bold">HydroScope</div>
           <div className="text-[10px] text-neutral-400">Nouvelle-Calédonie · Eau potable</div>

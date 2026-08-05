@@ -13,4 +13,7 @@ _extensions/*
 */.cache/
 */dist/
 **/pnpm-lock.yaml
-opencode,json
+opencode.json
+
+# Documents de travail AMOA (non publiés dans le CDC)
+/ressources/travail_amoa/
