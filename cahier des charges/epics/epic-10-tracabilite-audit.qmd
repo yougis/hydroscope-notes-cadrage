@@ -1,5 +1,3 @@
-### EPIC 10 : Traçabilité et audit
-
 #### Objectifs
 
 Cet EPIC vise à garantir la transparence, la reproductibilité et la fiabilité des traitements réalisés au sein d’HydroScope.

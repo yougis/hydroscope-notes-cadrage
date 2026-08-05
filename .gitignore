@@ -1,8 +1,15 @@
 _extensions/*
 .~lock.*
-/.quarto/
 /.continue/
 .vscode/*
-cadrage fonctionnel/note cadrage fonctionnelle - Gestionnaire_files/*
-cadrage strategique/cadrage_strategique_files/*
 **/*.quarto_ipynb
+/cahier des charges/pnpm-lock.yaml
+**/.pnpm-store/
+**/pnpm-lock.yaml
+/.quarto/
+*/.figma/
+*/node_modules/
+*/.pnpm/
+*/.cache/
+*/dist/
+**/pnpm-lock.yaml

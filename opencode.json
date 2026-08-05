@@ -25,7 +25,15 @@
       "enabled": true,
       "headers": {
         "x-consumer-api-key": "apify_api_BrnnBUf5DzYZf2MdG28FV93ZOdr8cV2fwzZ6"
-      }
+      },
+    "joplin": {
+      "type": "local",
+      "enabled": true,
+      "command": "/home/yogis/.conda/envs/crewai/bin/python",
+      "args": [
+        "/home/yogis/AI/mcp/joplin-mcp/src/mcp/joplin_mcp.py"
+      ]
+    }
     }
   }
 } 

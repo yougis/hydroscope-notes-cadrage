@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>HydroScope — Graphe des dépendances US</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; color: #222; }
+  header { padding: 12px 18px; background: #0d3b66; color: #fff; }
+  header h1 { margin: 0; font-size: 20px; }
+  header p { margin: 4px 0 0; font-size: 13px; opacity: .85; }
+  #controls { padding: 10px 18px; background: #f4f6f8; border-bottom: 1px solid #ddd; }
+  #controls label { margin-right: 14px; font-size: 13px; cursor: pointer; display: inline-block; white-space: nowrap; }
+  #controls .chip { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 4px; vertical-align: middle; }
+  button { padding: 6px 12px; margin-left: 10px; cursor: pointer; border: 1px solid #0d3b66; background: #0d3b66; color: #fff; border-radius: 4px; font-size: 13px; }
+  button:hover { background: #1565a8; }
+  #legend { font-size: 13px; padding: 8px 18px; background: #fff; border-bottom: 1px solid #eee; }
+  #legend b { margin-right: 8px; }
+  .legend-item { display: inline-block; margin-right: 12px; }
+  #graph { width: 100%; height: calc(100vh - 165px); }
+  #count { font-size: 13px; color: #555; margin-left: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>HydroScope — Graphe des dépendances User Stories</h1>
+  <p>Arcs orientés = relation <b>parent → enfant</b>. Zoom, pan et glisser-déposer des nœuds pour naviguer. Cliquez sur un nœud pour le détail.</p>
+</header>
+
+<div id="controls">
+  <button onclick="resetView()">Réinitialiser la vue</button>
+  <button onclick="applyPhysics()">Layout automatique</button>
+  <button onclick="applyHierarchy()">Layout hiérarchique</button>
+  <span id="count"></span>
+</div>
+
+<div id="legend"></div>
+<div id="graph"></div>
+
+<script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<script>
+// ---------- Données des US ----------
+// nœud: {id, label, epic, title}
+const EPICS = {
+  "EPIC 1": "#d32f2f", "EPIC 1bis": "#f57c00", "EPIC 2": "#fbc02d",
+  "EPIC 3": "#43a047", "EPIC 4": "#2e7d32", "EPIC 5": "#00897b",
+  "EPIC 6": "#1976d2", "EPIC 7": "#5e35b1", "EPIC 8": "#8e24aa",
+  "EPIC 9": "#6d4c41", "EPIC 10": "#546e7a"
+};
+
+const US = {
+  "US1.1":["EPIC 1","Importer des données via fichier"],"US1.3":["EPIC 1","Planifier des imports simples"],
+  "US1.4":["EPIC 1","Normaliser les données"],"US1.5":["EPIC 1","Gérer les erreurs d'import"],
+  "US1.6":["EPIC 1","Historiser les données"],"US1.2":["EPIC 1","Connecter une API externe"],
+  "US1.7":["EPIC 1","Rejouer un traitement"],
+  "US1bis.1":["EPIC 1bis","Enregistrer un jeu de données dans le catalogue"],
+  "US1bis.2":["EPIC 1bis","Associer des métadonnées"],"US1bis.3":["EPIC 1bis","Modifier les métadonnées"],
+  "US1bis.4":["EPIC 1bis","Consulter les informations d'un jeu de données"],
+  "US1bis.5":["EPIC 1bis","Rechercher un jeu de données"],"US1bis.6":["EPIC 1bis","Filtrer les jeux de données"],
+  "US1bis.7":["EPIC 1bis","Visualiser les relations indicateur ↔ sources"],
+  "US1bis.8":["EPIC 1bis","Tracer les transformations"],"US1bis.9":["EPIC 1bis","Identifier source ou dérivée"],
+  "US1bis.10":["EPIC 1bis","Alimenter auto le catalogue"],"US1bis.11":["EPIC 1bis","Relier à un traitement (dbt)"],
+  "US1bis.12":["EPIC 1bis","Indicateur comme donnée dérivée"],"US1bis.13":["EPIC 1bis","Consulter métadonnées indicateur"],
+  "US1bis.14":["EPIC 1bis","Ajouter un jeu de données sans modifier la structure"],
+  "US1bis.15":["EPIC 1bis","Historiser les modifications des métadonnées"],
+  "US2.1":["EPIC 2","Détecter des valeurs aberrantes"],"US2.4":["EPIC 2","Calculer un taux de complétude"],
+  "US2.5":["EPIC 2","Qualifier la fiabilité"],"US2.6":["EPIC 2","Associer des métadonnées de qualité"],
+  "US2.2":["EPIC 2","Vérifier cohérence temporelle"],"US2.3":["EPIC 2","Vérifier cohérence spatiale"],
+  "US2.7":["EPIC 2","Visualiser la qualité"],
+  "US3.1":["EPIC 3","Gérer les bassins versants"],"US3.2":["EPIC 3","Gérer les captages"],
+  "US3.4":["EPIC 3","Gérer la maille H3"],"US3.5":["EPIC 3","Définir un indicateur"],
+  "US3.3":["EPIC 3","Gérer périmètres de protection"],"US3.6":["EPIC 3","Gérer les profils utilisateurs"],
+  "US3.7":["EPIC 3","Versionner les référentiels"],
+  "US4.1":["EPIC 4","Calculer des indicateurs simples"],"US4.2":["EPIC 4","Agréger à l'échelle BV"],
+  "US4.3":["EPIC 4","Agrégation temporelle"],"US4.5":["EPIC 4","Filtrer les données"],
+  "US4.4":["EPIC 4","Paramétrer un calcul"],"US4.6":["EPIC 4","Versionner un indicateur"],
+  "US4.7":["EPIC 4","Recalculer un indicateur"],
+  "US5.1":["EPIC 5","Construire un indice composite"],"US5.2":["EPIC 5","Définir des pondérations"],
+  "US5.3":["EPIC 5","Tester des scénarios"],"US5.4":["EPIC 5","Comparer scénarios"],
+  "US5.5":["EPIC 5","Visualiser contributions"],"US5.6":["EPIC 5","Documenter méthodes"],
+  "US6.1":["EPIC 6","Visualiser sur carte"],"US6.2":["EPIC 6","Afficher indicateurs carto"],
+  "US6.3":["EPIC 6","Navigation (zoom filtres)"],"US6.4":["EPIC 6","Graphiques temporels"],
+  "US6.7":["EPIC 6","Fiche territoire"],"US6.5":["EPIC 6","Comparer territoires"],
+  "US6.6":["EPIC 6","Tableau de bord avancé"],"US6.8":["EPIC 6","Basculer échelle Captages↔BV"],
+  "US6.9":["EPIC 6","Compteur d'unités sélectionnées"],"US6.10":["EPIC 6","Recherche avec suggestions"],
+  "US6.11":["EPIC 6","Cumuler facettes de recherche"],"US6.12":["EPIC 6","Facettes actives en puces"],
+  "US6.13":["EPIC 6","Preset Top 10"],"US6.14":["EPIC 6","Décocher une facette"],
+  "US6.15":["EPIC 6","Sélection individuelle d'unité"],"US6.16":["EPIC 6","Conserver sélections Captages/BV"],
+  "US6.17":["EPIC 6","Trier la liste (distance/nom)"],"US6.18":["EPIC 6","Communes intersectant un BV"],
+  "US6.19":["EPIC 6","Croisement captages ↔ BV"],"US6.20":["EPIC 6","Choisir le fond de carte"],
+  "US6.21":["EPIC 6","Afficher/masquer les couches"],"US6.22":["EPIC 6","Rechercher un indicateur"],
+  "US6.23":["EPIC 6","Fiche métadonnées de l'indicateur"],"US6.24":["EPIC 6","Basculer entre vues graphiques"],
+  "US6.25":["EPIC 6","Voir toute la liste des indicateurs"],"US6.26":["EPIC 6","Présélectionner par famille"],
+  "US7.1":["EPIC 7","Définir des seuils"],"US7.3":["EPIC 7","Identifier tendances"],
+  "US7.4":["EPIC 7","Fiche synthétique"],"US7.2":["EPIC 7","Détecter dépassement"],
+  "US7.5":["EPIC 7","Prioriser territoires"],"US7.6":["EPIC 7","Aide à interprétation avancée"],
+  "US8.1":["EPIC 8","Export CSV"],"US8.6":["EPIC 8","Export vue simple"],"US8.2":["EPIC 8","Export SIG"],
+  "US8.3":["EPIC 8","Rapport PDF"],"US8.4":["EPIC 8","Partage lien"],"US8.5":["EPIC 8","API"],
+  "US9.2":["EPIC 9","Authentification"],"US9.3":["EPIC 9","Rôles simples"],"US9.1":["EPIC 9","Créer compte"],
+  "US9.4":["EPIC 9","Restreindre accès fin"],"US9.5":["EPIC 9","Adapter interface"],
+  "US9.6":["EPIC 9","Suivre connexions"],
+  "US10.1":["EPIC 10","Tracer imports"],"US10.2":["EPIC 10","Tracer calculs"],
+  "US10.3":["EPIC 10","Journal actions"],"US10.4":["EPIC 10","Historique modifications"],
+  "US10.5":["EPIC 10","Reconstituer calcul"],"US10.6":["EPIC 10","Audit usages"]
+};
+
+// ---------- Dépendances (parent → enfant) ----------
+const DEP = [
+  ["US1.1","US1.3"],["US1.1","US1.4"],["US1.1","US1.5"],["US1.1","US1.6"],["US1.1","US1bis.10"],
+  ["US1.2","US1bis.1"],["US1bis.1","US1bis.2"],["US1bis.2","US1bis.3"],
+  ["US1bis.8","US1bis.11"],["US1bis.10","US1bis.1"],["US1bis.12","US4.1"],
+  ["US1.6","US4.3"],["US1.6","US10.4"],["US1.6","US10.5"],
+  ["US3.1","US6.8"],["US3.1","US6.18"],["US3.1","US6.19"],["US3.1","US4.2"],
+  ["US3.2","US6.8"],["US3.2","US6.18"],["US3.2","US6.19"],
+  ["US3.5","US4.1"],["US3.5","US6.2"],["US3.5","US1bis.12"],
+  ["US4.1","US4.2"],["US4.1","US4.3"],["US4.1","US4.7"],["US4.1","US10.2"],["US4.1","US5.1"],
+  ["US4.7","US4.1"],
+  ["US5.1","US5.2"],["US5.1","US5.3"],["US5.1","US5.4"],["US5.1","US5.5"],["US5.1","US7.5"],
+  ["US5.2","US5.3"],["US5.2","US7.5"],["US5.3","US5.4"],["US5.3","US5.5"],["US5.4","US5.5"],
+  ["US6.24","US4.3"],["US6.7","US8.3"],["US6.7","US6.4"],
+  ["US7.1","US7.2"],["US7.1","US7.6"],
+  ["US8.4","US9.4"],["US8.5","US9.4"],
+  ["US9.2","US9.3"],["US9.2","US9.1"],["US9.2","US9.5"],["US9.2","US9.6"],["US9.3","US9.4"],["US9.3","US9.5"],
+  ["US10.2","US10.5"]
+];
+
+// ---------- Construction ----------
+function main() {
+  // Légende
+  const legend = document.getElementById('legend');
+  legend.innerHTML = '<b>EPICs :</b>';
+  for (const [epic, color] of Object.entries(EPICS)) {
+    legend.innerHTML += `<span class="legend-item"><span class="chip" style="background:${color}"></span>${epic}</span>`;
+  }
+
+  const nodes = [];
+  for (const [id, [epic, label]] of Object.entries(US)) {
+    nodes.push({ id: id, label: label, title: epic + ' — ' + label, color: EPICS[epic], font: { color: '#fff' } });
+  }
+
+  const edges = DEP.map(([from, to]) => ({
+    from: from, to: to, arrows: 'to', color: { color: '#7a7a7a' }, smooth: { type: 'dynamic' }
+  }));
+
+  const container = document.getElementById('graph');
+
+  const physicsUrlOptions = { physics: true };
+  const stablePhysicsOptions = {
+    nodes: { shape: 'box', shadow: { enabled: true }, borderWidth: 1, margin: { top: 6, right: 8, bottom: 6, left: 8 } },
+    edges: { width: 1.5, selectionWidth: 2 },
+    physics: { stabilization: true, barnesHut: { gravitationalConstant: -3500 } }
+  };
+  const hierarchicalOptions = {
+    nodes: { shape: 'box', shadow: { enabled: true }, borderWidth: 1, margin: { top: 6, right: 8, bottom: 6, left: 8 } },
+    edges: { width: 1.5 },
+    layout: { hierarchical: { direction: 'UD', sortMethod: 'directed', nodeSpacing: 110, levelSeparation: 90, treeSpacing: 140 } },
+    physics: false,
+    interaction: { hover: true, tooltipDelay: 200 }
+  };
+
+  let network = new vis.Network(container, { nodes, edges }, stablePhysicsOptions);
+
+  document.getElementById('count').textContent = `${nodes.length} US · ${edges.length} dépendances`;
+
+  window.resetView = () => network.fit({ animation: true });
+  window.applyPhysics = () => network.setOptions(stablePhysicsOptions);
+  window.applyHierarchy = () => network.setOptions(hierarchicalOptions);
+}
+
+window.addEventListener('DOMContentLoaded', main);
+</script>
+</body>
+</html>
