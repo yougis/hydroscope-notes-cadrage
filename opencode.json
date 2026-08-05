@@ -24,7 +24,7 @@
       "url": "https://mcp.apify.com/?tools=jungle_synthesizer/12go-asia-multimodal-scraper",
       "enabled": true,
       "headers": {
-        "x-consumer-api-key": "apify_api_BrnnBUf5DzYZf2MdG28FV93ZOdr8cV2fwzZ6"
+        "x-consumer-api-key": ""
       }
     },
     "joplin": {
@@ -49,7 +49,7 @@
       ],
       "enabled": true,
       "environment": {
-        "OPENLAYER_API_KEY": "sk-ol-h4Eg6AxzDGAwfKlz1DPIOAVLHR1HhPZT"
+        "OPENLAYER_API_KEY": "sk-ol-"
       }
     }
   }
