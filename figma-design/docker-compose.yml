@@ -1,0 +1,16 @@
+name: hydroscope
+
+services:
+  pnpm-dev:
+    image: node:22
+    container_name: pnpm-dev
+    working_dir: /app
+    command: >
+      sh -c "corepack enable && corepack prepare pnpm@10.34.3 --activate &&
+      pnpm install --frozen-lockfile 2>&1 &&
+      exec pnpm dev --port 5173 --strictPort --host 0.0.0.0"
+    ports:
+      - "5173:5173"
+    volumes:
+      - "/home/yogis/SynologyDrive/Projects/hydroscope/documents projet/Notes de cadrage/figma-design:/app"
+    restart: unless-stopped

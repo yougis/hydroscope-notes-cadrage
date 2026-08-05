@@ -18,20 +18,21 @@ export const UNITES_GESTIONES: UniteGestionDef[] = [
 
 export const CAPTAGES: CaptageDef[] = UNITES_GESTIONES
 
-export const CAPTAGE_POINTS: Array<{ key: string; x: number; y: number }> = [
-  { key: 'C-001', x: 120, y: 185 },
-  { key: 'C-002', x: 175, y: 160 },
-  { key: 'C-003', x: 210, y: 195 },
-  { key: 'C-004', x: 285, y: 175 },
-  { key: 'C-005', x: 350, y: 185 },
-  { key: 'C-006', x: 395, y: 170 },
-  { key: 'C-007', x: 430, y: 190 },
-  { key: 'C-008', x: 465, y: 195 },
-  { key: 'C-009', x: 500, y: 185 },
-  { key: 'C-010', x: 520, y: 205 },
-  { key: 'C-011', x: 155, y: 140 },
-  { key: 'C-012', x: 260, y: 140 },
-]
+/** Coordonnées WGS84 réelles (lon, lat) des unités de gestion (communes). */
+export const CAPTAGE_COORDS: Record<string, [number, number]> = {
+  'C-001': [164.2619, -20.5621], // Koumac
+  'C-002': [164.7, -20.9667], // Voh
+  'C-003': [164.9, -21.13], // Pouembout
+  'C-004': [164.8658, -21.0595], // Koné
+  'C-005': [165.3293, -20.9496], // Poindimié
+  'C-006': [165.6167, -21.2833], // Houaïlou
+  'C-007': [165.95, -21.5333], // Canala
+  'C-008': [166.05122, -21.86226], // Boulouparis
+  'C-009': [165.83, -21.71], // La Foa
+  'C-010': [165.85, -21.64], // Sarraméa
+  'C-011': [165.15, -21.35], // Poya
+  'C-012': [165.83, -21.4], // Kouaoua
+}
 
 type Row = [code: string, label: string, unit: string, family: 'ENJEUX' | 'MENACES', theme: string, group: string, datatype: 'stock' | 'qualite' | 'mixte', sourceLabel: string, timeSeries: boolean, desc: string]
 
@@ -129,8 +130,31 @@ export const captagesOfBvaep = (bvId: string) => BVAEPS.find((b) => b.id === bvI
 
 export const communesIntersectingBvaep = (bvId: string) => [...new Set(captagesOfBvaep(bvId).map((c) => c.commune))].sort()
 
-export const BVAEP_POLYGONS: Record<string, string> = {
-  'BV-01': '100,180 130,155 175,150 210,160 260,170 285,170 290,190 285,195 250,205 210,205 130,205',
-  'BV-02': '155,135 230,145 260,135 350,135 395,160 430,185 395,205 360,205 250,205 210,205 210,160 175,155 155,155',
-  'BV-03': '430,185 430,190 465,190 500,180 520,200 510,210 465,210',
+/** Anneaux WGS84 (lon, lat) simplifiés des bassins versants régionaux. */
+export const BVAEP_OUTLINES: Record<string, [number, number][]> = {
+  'BV-01': [
+    [164.2, -20.2],
+    [165.3, -20.2],
+    [165.4, -20.7],
+    [164.9, -21.1],
+    [164.4, -21.2],
+    [163.7, -20.8],
+  ],
+  'BV-02': [
+    [164.8, -21.2],
+    [165.6, -21.1],
+    [166.2, -21.3],
+    [166.3, -21.7],
+    [165.6, -21.9],
+    [165.0, -21.7],
+    [164.7, -21.4],
+  ],
+  'BV-03': [
+    [165.4, -21.8],
+    [166.2, -21.7],
+    [166.9, -21.9],
+    [167.0, -22.4],
+    [166.0, -22.4],
+    [165.4, -22.2],
+  ],
 }

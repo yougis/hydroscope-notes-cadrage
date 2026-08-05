@@ -6,6 +6,12 @@
       "sourceType": "github",
       "skillPath": "skills/frontend-design/SKILL.md",
       "computedHash": "4eabc66183767153e404b39d1b839b1c37f2d82d86f0a0d7e880a579d8d62336"
+    },
+    "react-debugging": {
+      "source": "serkan-ozal/browser-devtools-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-debugging/SKILL.md",
+      "computedHash": "98d61d24d5c8361c514b3bc3027413dd33319330779437280b1550d82bbe9e90"
     }
   }
 }

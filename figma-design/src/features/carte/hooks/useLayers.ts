@@ -11,8 +11,6 @@ export interface LayerDef {
 export const LAYER_DEFS: LayerDef[] = [
   { key: 'bv', label: 'Bassins versants', on: true },
   { key: 'capt', label: 'Unités de gestion', on: true },
-  { key: 'ppe', label: 'Périmètres', on: true },
-  { key: 'risque', label: 'Zones à risque', on: false },
   { key: 'source', label: 'Couche source', on: false },
 ]
 

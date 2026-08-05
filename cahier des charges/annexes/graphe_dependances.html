@@ -3,7 +3,17 @@
 <head>
 <meta charset="utf-8">
 <title>HydroScope — Graphe des dépendances US</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
+  /* Police pour les icônes de rôle dans le graphe (Font Awesome Solid exposé sous un nom de famille
+     au poids que vis-network utilise pour dessiner node.icon, afin que les glyphes se résolvent). */
+  @font-face {
+    font-family: 'HydroIcons';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2') format('woff2');
+  }
   body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; color: #222; }
   header { padding: 12px 18px; background: #0d3b66; color: #fff; }
   header h1 { margin: 0; font-size: 20px; }
@@ -16,8 +26,31 @@
   #legend { font-size: 13px; padding: 8px 18px; background: #fff; border-bottom: 1px solid #eee; }
   #legend b { margin-right: 8px; }
   .legend-item { display: inline-block; margin-right: 12px; }
-  #graph { width: 100%; height: calc(100vh - 165px); }
+  #groupnav { padding: 8px 18px; background: #eef1f4; border-bottom: 1px solid #ddd; font-size: 13px; }
+  #groupnav .gn-btn { display: inline-block; margin: 2px 4px; padding: 4px 10px; border-radius: 12px; cursor: pointer; border: 1px solid #ccc; background: #fff; font-size: 12px; }
+  #groupnav .gn-btn:hover { border-color: #0d3b66; }
+  #groupnav .gn-btn.active { color: #fff; border-color: #0d3b66; }
+  #groupnav .gn-btn.active { border: 2px solid #0d3b66; box-shadow: inset 0 0 0 2px #fff; }
+  #graph { width: 100%; height: calc(100vh - 230px); }
   #count { font-size: 13px; color: #555; margin-left: 12px; }
+  #facets { padding: 8px 18px; background: #f7f9fb; border-bottom: 1px solid #ddd; font-size: 13px; }
+  #facets .facet-group { margin-right: 24px; display: inline-block; }
+  .facet-pill { display: inline-block; margin: 2px 4px; padding: 3px 10px; border-radius: 12px; cursor: pointer; border: 1px solid #ccc; background: #fff; font-size: 12px; user-select: none; }
+  .facet-pill.on { background: #0d3b66; color: #fff; border-color: #0d3b66; }
+  .facet-clear { margin-left: 6px; color: #c0392b; cursor: pointer; font-weight: bold; }
+  #detail { position: fixed; top: 0; right: 0; bottom: 0; width: 340px; min-width: 260px; max-width: 70vw;
+    background: #fff; box-shadow: -3px 0 12px rgba(0,0,0,.18); z-index: 1000; overflow-y: auto;
+    display: flex; flex-direction: column; border-left: 1px solid #ddd; }
+  #detail.closed { display: none; }
+  #detail #d-resizer { width: 6px; cursor: col-resize; background: #e0e0e0; flex-shrink: 0; }
+  #detail #d-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #0d3b66; color: #fff; }
+  #detail #d-title { font-weight: bold; font-size: 15px; }
+  #detail #d-close { cursor: pointer; font-size: 20px; line-height: 1; padding: 0 6px; }
+  #detail #d-body { padding: 14px; flex: 1; overflow-y: auto; font-size: 13px; }
+  #detail .prop { margin-bottom: 10px; }
+  #detail .prop .k { font-weight: bold; color: #0d3b66; margin-bottom: 2px; }
+  #detail .prop .v { color: #333; }
+  #detail .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; color: #fff; }
 </style>
 </head>
 <body>
@@ -30,11 +63,33 @@
   <button onclick="resetView()">Réinitialiser la vue</button>
   <button onclick="applyPhysics()">Layout automatique</button>
   <button onclick="applyHierarchy()">Layout hiérarchique</button>
+  <button id="btnFilter" onclick="toggleLinked()">Afficher US liées uniquement</button>
+  <span id="colorby"><b>Colorier par :</b>
+    <label><input type="radio" name="coloring" value="epic" checked onchange="setColoring(this.value)"> EPIC</label>
+    <label><input type="radio" name="coloring" value="finalite" onchange="setColoring(this.value)"> Type fonctionnel</label>
+  </span>
   <span id="count"></span>
+</div>
+
+<div id="groupnav"></div>
+
+<div id="facets">
+  <span class="facet-group"><b>ROLE :</b> <span id="facet-role"></span></span>
+  <span class="facet-group"><b>IHM :</b> <span id="facet-ihm"></span></span>
+  <span class="facet-group"><b>MVP :</b> <span id="facet-mvp"></span></span>
 </div>
 
 <div id="legend"></div>
 <div id="graph"></div>
+
+<div id="detail" class="closed">
+  <div id="d-resizer" title="Redimensionner"></div>
+  <div id="d-header">
+    <span id="d-title">Détail de l'US</span>
+    <span id="d-close" onclick="closeDetail()" title="Fermer">✕</span>
+  </div>
+  <div id="d-body"></div>
+</div>
 
 <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
 <script>
@@ -45,6 +100,122 @@ const EPICS = {
   "EPIC 3": "#43a047", "EPIC 4": "#2e7d32", "EPIC 5": "#00897b",
   "EPIC 6": "#1976d2", "EPIC 7": "#5e35b1", "EPIC 8": "#8e24aa",
   "EPIC 9": "#6d4c41", "EPIC 10": "#546e7a"
+};
+
+const EPIC_LABELS = {
+  "EPIC 1": "Gestion des données",
+  "EPIC 1bis": "Catalogage des données",
+  "EPIC 2": "Qualité des données",
+  "EPIC 3": "Référentiels",
+  "EPIC 4": "Calcul d'indicateurs",
+  "EPIC 5": "Analyse multicritère",
+  "EPIC 6": "Visualisation",
+  "EPIC 7": "Aide à la décision",
+  "EPIC 8": "Export & diffusion",
+  "EPIC 9": "Gestion des utilisateurs",
+  "EPIC 10": "Traçabilité & audit"
+};
+
+const US_DATA = {
+  'US1.1': { epic:'EPIC 1', nom:'US1.1', libelle:'Importer des données via fichier', mvp:'TRUE', ihm:'OUI', module:'Gestion des données & catalogue', depend:[], typ:'Acquisition', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux importer des données via fichier afin que la plateforme dispose de données fiables et homogènes.' },
+  'US1.3': { epic:'EPIC 1', nom:'US1.3', libelle:'Planifier des imports simples', mvp:'TRUE', ihm:'NON', module:'Gestion des données & catalogue', depend:["US1.1"], typ:'Acquisition', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux planifier des imports simples afin que les données soient actualisées automatiquement.' },
+  'US1.4': { epic:'EPIC 1', nom:'US1.4', libelle:'Normaliser les données', mvp:'TRUE', ihm:'NON', module:'Gestion des données & catalogue', depend:["US1.1"], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux normaliser les données afin qu\'elles soient homogènes et comparables.' },
+  'US1.5': { epic:'EPIC 1', nom:'US1.5', libelle:'Gérer les erreurs d\'import', mvp:'TRUE', ihm:'OUI', module:'Gestion des données & catalogue', depend:["US1.1"], typ:'Acquisition', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux gérer les erreurs d\'import afin de corriger les données rejetées efficacement.' },
+  'US1.6': { epic:'EPIC 1', nom:'US1.6', libelle:'Historiser les données', mvp:'TRUE', ihm:'NON', module:'Gestion des données & catalogue', depend:["US1.1"], typ:'Gouvernance', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux historiser les données afin de reconstituer leur évolution dans le temps.' },
+  'US1.2': { epic:'EPIC 1', nom:'US1.2', libelle:'Connecter une API externe', mvp:'FALSE', ihm:'OUI', module:'Gestion des données & catalogue', depend:[], typ:'Acquisition', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux connecter une API externe afin d\'alimenter la plateforme sans fichier.' },
+  'US1.7': { epic:'EPIC 1', nom:'US1.7', libelle:'Rejouer un traitement', mvp:'FALSE', ihm:'NON', module:'Gestion des données & catalogue', depend:[], typ:'Acquisition', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux rejouer un traitement afin de recalculer un jeu de données après correction.' },
+  'US1bis.1': { epic:'EPIC 1bis', nom:'US1bis.1', libelle:'Enregistrer un jeu de données dans le catalogue', mvp:'TRUE', ihm:'OUI', module:'Gestion des données & catalogue', depend:["US1.2"], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux enregistrer un jeu de données dans le catalogue afin qu\'il soit référencé et trouvable.' },
+  'US1bis.2': { epic:'EPIC 1bis', nom:'US1bis.2', libelle:'Associer des métadonnées à un jeu de données', mvp:'TRUE', ihm:'OUI', module:'Gestion des données & catalogue', depend:["US1bis.1"], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux associer des métadonnées à un jeu de données afin d\'en documenter l\'origine et la structure.' },
+  'US1bis.3': { epic:'EPIC 1bis', nom:'US1bis.3', libelle:'Modifier les métadonnées d\'un jeu de données', mvp:'FALSE', ihm:'OUI', module:'Gestion des données & catalogue', depend:["US1bis.2"], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux modifier les métadonnées afin de maintenir le catalogue à jour.' },
+  'US1bis.4': { epic:'EPIC 1bis', nom:'US1bis.4', libelle:'Consulter les informations d\'un jeu de données', mvp:'TRUE', ihm:'OUI', module:'Gestion des données & catalogue', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux consulter les informations d\'un jeu de données afin d\'en connaître le contenu et la source.' },
+  'US1bis.5': { epic:'EPIC 1bis', nom:'US1bis.5', libelle:'Rechercher un jeu de données dans le catalogue', mvp:'FALSE', ihm:'OUI', module:'Gestion des données & catalogue', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux rechercher un jeu de données afin de le retrouver rapidement dans le catalogue.' },
+  'US1bis.6': { epic:'EPIC 1bis', nom:'US1bis.6', libelle:'Filtrer les jeux de données selon des critères', mvp:'FALSE', ihm:'OUI', module:'Gestion des données & catalogue', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux filtrer les jeux de données selon des critères afin de restreindre la liste du catalogue.' },
+  'US1bis.7': { epic:'EPIC 1bis', nom:'US1bis.7', libelle:'Visualiser les relations entre indicateur et données sources', mvp:'TRUE', ihm:'OUI', module:'Gestion des données & catalogue', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux visualiser les relations entre un indicateur et ses données sources afin d\'en comprendre la provenance.' },
+  'US1bis.8': { epic:'EPIC 1bis', nom:'US1bis.8', libelle:'Tracer les transformations appliquées à un jeu de données', mvp:'FALSE', ihm:'NON', module:'Gestion des données & catalogue', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux tracer les transformations appliquées à un jeu de données afin d\'en garantir la reproductibilité.' },
+  'US1bis.9': { epic:'EPIC 1bis', nom:'US1bis.9', libelle:'Identifier une donnée comme source ou dérivée', mvp:'FALSE', ihm:'NON', module:'Gestion des données & catalogue', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux identifier une donnée comme source ou dérivée afin de clarifier sa place dans la chaîne.' },
+  'US1bis.10': { epic:'EPIC 1bis', nom:'US1bis.10', libelle:'Alimenter automatiquement le catalogue lors des imports', mvp:'TRUE', ihm:'NON', module:'Gestion des données & catalogue', depend:["US1.1", "US1bis.1"], typ:'Acquisition', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux alimenter automatiquement le catalogue lors des imports afin d\'éviter les saisies manuelles.' },
+  'US1bis.11': { epic:'EPIC 1bis', nom:'US1bis.11', libelle:'Relier un jeu de données à un traitement (ex : dbt)', mvp:'FALSE', ihm:'NON', module:'Gestion des données & catalogue', depend:["US1bis.8"], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux relier un jeu de données à un traitement afin d\'en retracer l\'élaboration.' },
+  'US1bis.12': { epic:'EPIC 1bis', nom:'US1bis.12', libelle:'Enregistrer un indicateur comme donnée dérivée', mvp:'TRUE', ihm:'OUI', module:'Gestion des données & catalogue', depend:["US3.5"], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux enregistrer un indicateur comme donnée dérivée afin qu\'il soit identifié comme tel dans le catalogue.' },
+  'US1bis.13': { epic:'EPIC 1bis', nom:'US1bis.13', libelle:'Consulter les métadonnées d\'un indicateur', mvp:'FALSE', ihm:'OUI', module:'Gestion des données & catalogue', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux consulter les métadonnées d\'un indicateur afin d\'en vérifier la définition et la méthode.' },
+  'US1bis.14': { epic:'EPIC 1bis', nom:'US1bis.14', libelle:'Ajouter un nouveau jeu de données sans modifier la structure', mvp:'FALSE', ihm:'NON', module:'Gestion des données & catalogue', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux ajouter un nouveau jeu de données sans modifier la structure afin d\'étendre le catalogue à moindre coût.' },
+  'US1bis.15': { epic:'EPIC 1bis', nom:'US1bis.15', libelle:'Historiser les modifications des métadonnées', mvp:'FALSE', ihm:'NON', module:'Gestion des données & catalogue', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux historiser les modifications des métadonnées afin de tracer les évolutions du catalogue.' },
+  'US2.1': { epic:'EPIC 2', nom:'US2.1', libelle:'Détecter des valeurs aberrantes', mvp:'TRUE', ihm:'NON', module:'Suivi qualité & traçabilité', depend:[], typ:'Qualification', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux détecter des valeurs aberrantes afin d\'identifier les données à corriger.' },
+  'US2.4': { epic:'EPIC 2', nom:'US2.4', libelle:'Calculer un taux de complétude', mvp:'TRUE', ihm:'NON', module:'Suivi qualité & traçabilité', depend:[], typ:'Qualification', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux calculer un taux de complétude afin de mesurer la couverture des données.' },
+  'US2.5': { epic:'EPIC 2', nom:'US2.5', libelle:'Qualifier la fiabilité', mvp:'TRUE', ihm:'NON', module:'Suivi qualité & traçabilité', depend:[], typ:'Qualification', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux qualifier la fiabilité afin d\'évaluer la confiance à accorder aux données.' },
+  'US2.6': { epic:'EPIC 2', nom:'US2.6', libelle:'Associer des métadonnées', mvp:'TRUE', ihm:'OUI', module:'Suivi qualité & traçabilité', depend:[], typ:'Qualification', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux associer des métadonnées de qualité afin de documenter les contrôles effectués.' },
+  'US2.2': { epic:'EPIC 2', nom:'US2.2', libelle:'Vérifier cohérence temporelle', mvp:'FALSE', ihm:'NON', module:'Suivi qualité & traçabilité', depend:[], typ:'Qualification', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux vérifier la cohérence temporelle afin de détecter les incohérences de dates.' },
+  'US2.3': { epic:'EPIC 2', nom:'US2.3', libelle:'Vérifier cohérence spatiale', mvp:'FALSE', ihm:'NON', module:'Suivi qualité & traçabilité', depend:[], typ:'Qualification', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux vérifier la cohérence spatiale afin de détecter les incohérences géographiques.' },
+  'US2.7': { epic:'EPIC 2', nom:'US2.7', libelle:'Visualiser la qualité', mvp:'FALSE', ihm:'OUI', module:'Suivi qualité & traçabilité', depend:[], typ:'Qualification', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux visualiser la qualité afin de repérer les jeux de données fiables.' },
+  'US3.1': { epic:'EPIC 3', nom:'US3.1', libelle:'Gérer les bassins versants', mvp:'TRUE', ihm:'OUI', module:'Administration & profils', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux gérer les bassins versants afin de maintenir le référentiel à jour.' },
+  'US3.2': { epic:'EPIC 3', nom:'US3.2', libelle:'Gérer les captages', mvp:'TRUE', ihm:'OUI', module:'Administration & profils', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux gérer les captages afin de maintenir le référentiel à jour.' },
+  'US3.4': { epic:'EPIC 3', nom:'US3.4', libelle:'Gérer la maille H3', mvp:'TRUE', ihm:'OUI', module:'Administration & profils', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux gérer la maille H3 afin de garantir la cohérence des agrégations.' },
+  'US3.5': { epic:'EPIC 3', nom:'US3.5', libelle:'Définir un indicateur', mvp:'TRUE', ihm:'OUI', module:'Administration & profils', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux définir un indicateur afin de le rendre calculable et affichable.' },
+  'US3.3': { epic:'EPIC 3', nom:'US3.3', libelle:'Gérer périmètres de protection', mvp:'FALSE', ihm:'OUI', module:'Administration & profils', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux gérer les périmètres de protection afin de les représenter sur la carte.' },
+  'US3.6': { epic:'EPIC 3', nom:'US3.6', libelle:'Gérer les profils utilisateurs', mvp:'FALSE', ihm:'OUI', module:'Administration & profils', depend:[], typ:'Gouvernance', role:'Administrateur plateforme', phrase:'' },
+  'US3.7': { epic:'EPIC 3', nom:'US3.7', libelle:'Versionner les référentiels', mvp:'FALSE', ihm:'NON', module:'Administration & profils', depend:[], typ:'Structuration', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux versionner les référentiels afin de conserver l\'historique de leurs évolutions.' },
+  'US4.1': { epic:'EPIC 4', nom:'US4.1', libelle:'Calculer des indicateurs simples', mvp:'TRUE', ihm:'NON', module:'Gestion des données & catalogue', depend:["US3.5", "US4.7", "US1bis.12"], typ:'Exploitation', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux calculer des indicateurs simples afin de produire des valeurs fiables.' },
+  'US4.2': { epic:'EPIC 4', nom:'US4.2', libelle:'Agréger à l\'échelle BV', mvp:'TRUE', ihm:'NON', module:'Gestion des données & catalogue', depend:["US3.1", "US4.1"], typ:'Exploitation', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux agréger à l\'échelle du bassin versant afin de disposer de valeurs synthétiques.' },
+  'US4.3': { epic:'EPIC 4', nom:'US4.3', libelle:'Agrégation temporelle', mvp:'TRUE', ihm:'NON', module:'Gestion des données & catalogue', depend:["US1.6", "US4.1", "US6.24"], typ:'Exploitation', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux agréger les données dans le temps afin de produire des séries comparables.' },
+  'US4.5': { epic:'EPIC 4', nom:'US4.5', libelle:'Filtrer les données', mvp:'TRUE', ihm:'OUI', module:'Gestion des données & catalogue', depend:[], typ:'Exploitation', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux filtrer les données afin de restreindre le calcul aux valeurs pertinentes.' },
+  'US4.4': { epic:'EPIC 4', nom:'US4.4', libelle:'Paramétrer un calcul', mvp:'FALSE', ihm:'NON', module:'Gestion des données & catalogue', depend:[], typ:'Exploitation', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux paramétrer un calcul afin d\'ajuster les règles de production de l\'indicateur.' },
+  'US4.6': { epic:'EPIC 4', nom:'US4.6', libelle:'Versionner un indicateur', mvp:'FALSE', ihm:'NON', module:'Gestion des données & catalogue', depend:[], typ:'Exploitation', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux versionner un indicateur afin de conserver la traçabilité de ses évolutions.' },
+  'US4.7': { epic:'EPIC 4', nom:'US4.7', libelle:'Recalculer un indicateur', mvp:'FALSE', ihm:'NON', module:'Gestion des données & catalogue', depend:["US4.1"], typ:'Exploitation', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux recalculer un indicateur afin de mettre à jour les valeurs après correction.' },
+  'US5.1': { epic:'EPIC 5', nom:'US5.1', libelle:'Construire un indice composite', mvp:'FALSE', ihm:'OUI', module:'Suivi & veille', depend:["US4.1"], typ:'Exploitation', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux construire un indice composite afin de fournir une base transparente pour l\'aide à la décision.' },
+  'US5.2': { epic:'EPIC 5', nom:'US5.2', libelle:'Définir des pondérations', mvp:'FALSE', ihm:'OUI', module:'Suivi & veille', depend:["US5.1"], typ:'Exploitation', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux définir les pondérations de l\'analyse multicritère afin d\'évaluer le risque réel de dégradation de la ressource.' },
+  'US5.3': { epic:'EPIC 5', nom:'US5.3', libelle:'Tester des scénarios', mvp:'FALSE', ihm:'OUI', module:'Suivi & veille', depend:["US5.1", "US5.2"], typ:'Exploitation', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux tester des scénarios de pondération afin d\'analyser l\'impact des différents facteurs sur le classement de criticité.' },
+  'US5.4': { epic:'EPIC 5', nom:'US5.4', libelle:'Comparer scénarios', mvp:'FALSE', ihm:'OUI', module:'Suivi & veille', depend:["US5.1", "US5.3"], typ:'Exploitation', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux comparer les scénarios de l\'analyse multicritère afin d\'identifier la pondération la plus représentative du terrain.' },
+  'US5.5': { epic:'EPIC 5', nom:'US5.5', libelle:'Visualiser contributions', mvp:'FALSE', ihm:'OUI', module:'Suivi & veille', depend:["US5.1", "US5.3", "US5.4"], typ:'Exploitation', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux visualiser la contribution de chaque indicateur au score de criticité afin de comprendre les facteurs de risque dominants.' },
+  'US5.6': { epic:'EPIC 5', nom:'US5.6', libelle:'Documenter méthodes', mvp:'FALSE', ihm:'NON', module:'Suivi & veille', depend:[], typ:'Exploitation', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux documenter les méthodes de calcul afin d\'assurer la transparence de l\'aide à la décision.' },
+  'US6.1': { epic:'EPIC 6', nom:'US6.1', libelle:'Visualiser sur carte', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Cartographie', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux visualiser les données sur carte afin de situer les territoires concernés.' },
+  'US6.2': { epic:'EPIC 6', nom:'US6.2', libelle:'Afficher indicateurs carto', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Cartographie', depend:["US3.5"], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux afficher les indicateurs sur la carte afin d\'en lire la répartition géographique.' },
+  'US6.3': { epic:'EPIC 6', nom:'US6.3', libelle:'Navigation (zoom filtres)', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Cartographie', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux naviguer sur la carte afin d\'explorer librement le territoire.' },
+  'US6.4': { epic:'EPIC 6', nom:'US6.4', libelle:'Graphiques temporels', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Visualisation & dataviz', depend:["US6.7"], typ:'Restitution – Diffusion', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux consulter l\'évolution temporelle des indicateurs afin d\'identifier les dynamiques impactant la ressource.' },
+  'US6.7': { epic:'EPIC 6', nom:'US6.7', libelle:'Fiche territoire', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Fiches & synthèse territoriale', depend:[], typ:'Restitution – Diffusion', role:'Décideur métier', phrase:'En tant que décideur métier, je veux consulter une fiche territoire afin d\'avoir une synthèse d\'un bassin versant.' },
+  'US6.5': { epic:'EPIC 6', nom:'US6.5', libelle:'Comparer territoires', mvp:'FALSE', ihm:'OUI', module:'Cartographie & exploration > Visualisation & dataviz', depend:[], typ:'Restitution – Diffusion', role:'Décideur métier', phrase:'En tant que décideur métier, je veux comparer des territoires afin d\'arbitrer les investissements.' },
+  'US6.6': { epic:'EPIC 6', nom:'US6.6', libelle:'Tableau de bord avancé', mvp:'FALSE', ihm:'OUI', module:'Cartographie & exploration > Visualisation & dataviz', depend:[], typ:'Restitution – Diffusion', role:'Décideur métier', phrase:'En tant que décideur métier, je veux disposer d\'un tableau de bord avancé afin d\'avoir une vue agrégée de l\'information.' },
+  'US6.8': { epic:'EPIC 6', nom:'US6.8', libelle:'Basculer l\'échelle d\'analyse Captages ↔ Bassins versants', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Cartographie', depend:["US3.1", "US3.2"], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux basculer l\'échelle d\'analyse entre captages et bassins versants afin de changer de niveau de lecture.' },
+  'US6.9': { epic:'EPIC 6', nom:'US6.9', libelle:'Afficher le compteur d\'unités sélectionnées', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Outils d\'exploration', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux afficher le compteur d\'unités sélectionnées afin de connaître le périmètre courant.' },
+  'US6.10': { epic:'EPIC 6', nom:'US6.10', libelle:'Rechercher avec suggestions (commune, province, captage, presets)', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Sélecteur de captages / BV', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux rechercher avec des suggestions afin de trouver rapidement un captage ou une commune.' },
+  'US6.11': { epic:'EPIC 6', nom:'US6.11', libelle:'Cumuler plusieurs facettes de recherche (sélection multiple)', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Sélecteur de captages / BV', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux cumuler plusieurs facettes de recherche afin d\'affiner ma sélection.' },
+  'US6.12': { epic:'EPIC 6', nom:'US6.12', libelle:'Afficher les facettes actives en puces décochables (SOLR/CKAN)', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Outils d\'exploration', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux voir les facettes actives en puces afin de savoir quels filtres sont appliqués.' },
+  'US6.13': { epic:'EPIC 6', nom:'US6.13', libelle:'Appliquer un preset « Top 10 » (plus/moins exposés, plus/moins proches) et pouvoir le retirer', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Sélecteur de captages / BV', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux appliquer un preset afin d\'afficher rapidement les territoires les plus concernés.' },
+  'US6.14': { epic:'EPIC 6', nom:'US6.14', libelle:'Décocher une facette pour retirer filtre ou sélection', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Outils d\'exploration', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux décocher une facette afin de retirer un filtre en un clic.' },
+  'US6.15': { epic:'EPIC 6', nom:'US6.15', libelle:'Sélectionner / désélectionner / retirer une unité individuellement', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Sélecteur de captages / BV', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux sélectionner ou retirer une unité individuellement afin de personnaliser ma sélection.' },
+  'US6.16': { epic:'EPIC 6', nom:'US6.16', libelle:'Conserver indépendamment les sélections Captages et Bassins versants', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Sélecteur de captages / BV', depend:[], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux conserver indépendamment les sélections captages et bassins versants afin de ne pas les mélanger.' },
+  'US6.17': { epic:'EPIC 6', nom:'US6.17', libelle:'Trier la liste (distance / nom)', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Sélecteur de captages / BV', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux trier la liste par distance ou par nom afin d\'organiser ma lecture.' },
+  'US6.18': { epic:'EPIC 6', nom:'US6.18', libelle:'Calculer les communes intersectant un BV (≥ 20 %) pour la facette Commune', mvp:'TRUE', ihm:'NON', module:'Cartographie & exploration > Sélecteur de captages / BV', depend:["US3.1", "US3.2"], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux calculer les communes intersectant un bassin versant afin d\'alimenter la facette Commune.' },
+  'US6.19': { epic:'EPIC 6', nom:'US6.19', libelle:'Mettre en évidence le croisement captages ↔ BV sur la carte', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Cartographie', depend:["US3.1", "US3.2"], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux mettre en évidence le croisement captages et bassins versants afin de comprendre leurs liens.' },
+  'US6.20': { epic:'EPIC 6', nom:'US6.20', libelle:'Choisir le fond de carte (Carto / Satellite / Terrain) via un sélecteur posé sur la carte', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Cartographie', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux choisir le fond de carte afin d\'adapter ma lecture au contexte.' },
+  'US6.21': { epic:'EPIC 6', nom:'US6.21', libelle:'Afficher / masquer chaque couche (BV, captages, périmètres, zones à risque) depuis une section « Couches » du volet gauche', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Cartographie', depend:[], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux afficher ou masquer chaque couche afin de personnaliser ce qui est visible.' },
+  'US6.22': { epic:'EPIC 6', nom:'US6.22', libelle:'Rechercher un indicateur dans un dropdown groupé Famille → Thème → Groupe', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Catalogue d\'indicateurs', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux rechercher un indicateur par famille, thème et groupe afin de le retrouver rapidement.' },
+  'US6.23': { epic:'EPIC 6', nom:'US6.23', libelle:'Consulter la fiche métadonnées depuis la vignette de l\'indicateur (pas depuis les graphiques)', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Catalogue d\'indicateurs', depend:[], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux consulter la fiche métadonnées d\'un indicateur afin d\'en vérifier la définition.' },
+  'US6.24': { epic:'EPIC 6', nom:'US6.24', libelle:'Basculer chaque graphique entre les vues Répartition / Temporel / Changements / Carte, vue temporelle désactivée si données non historisées', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Visualisation & dataviz', depend:[], typ:'Restitution – Diffusion', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux basculer entre les vues graphiques afin d\'analyser la répartition spatiale et l\'évolution temporelle.' },
+  'US6.25': { epic:'EPIC 6', nom:'US6.25', libelle:'Voir toute la liste des indicateurs (38) regroupée Famille → Thème → Groupe', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Catalogue d\'indicateurs', depend:[], typ:'Restitution – Diffusion', role:'Intéressé public', phrase:'En tant qu\'intéressé public, je veux voir toute la liste des indicateurs afin de connaître ce qui est disponible.' },
+  'US6.26': { epic:'EPIC 6', nom:'US6.26', libelle:'Présélectionner les indicateurs du volet droit par famille (tabs), thèmes (pills) et groupe (dropdown)', mvp:'TRUE', ihm:'OUI', module:'Cartographie & exploration > Catalogue d\'indicateurs', depend:[], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux présélectionner les indicateurs par famille afin d\'orienter l\'usage du volet droit.' },
+  'US7.1': { epic:'EPIC 7', nom:'US7.1', libelle:'Définir des seuils', mvp:'TRUE', ihm:'OUI', module:'Suivi & veille', depend:[], typ:'Exploitation', role:'Décideur métier', phrase:'En tant que décideur métier, je veux définir des seuils d\'alerte afin de qualifier les valeurs des indicateurs et être averti des situations critiques.' },
+  'US7.3': { epic:'EPIC 7', nom:'US7.3', libelle:'Identifier tendances', mvp:'TRUE', ihm:'OUI', module:'Suivi & veille', depend:[], typ:'Exploitation', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux identifier des tendances sur les indicateurs afin de détecter les évolutions préoccupantes de la ressource.' },
+  'US7.4': { epic:'EPIC 7', nom:'US7.4', libelle:'Fiche synthétique', mvp:'TRUE', ihm:'OUI', module:'Suivi & veille', depend:[], typ:'Exploitation', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux consulter la fiche synthétique d\'un bassin versant afin d\'identifier rapidement les facteurs de vulnérabilité dominants.' },
+  'US7.2': { epic:'EPIC 7', nom:'US7.2', libelle:'Détecter dépassement', mvp:'FALSE', ihm:'OUI', module:'Suivi & veille', depend:["US7.1"], typ:'Exploitation', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux détecter les dépassements de seuil afin d\'anticiper les périodes de tension sur la ressource.' },
+  'US7.5': { epic:'EPIC 7', nom:'US7.5', libelle:'Prioriser territoires', mvp:'FALSE', ihm:'OUI', module:'Suivi & veille', depend:["US5.1", "US5.2"], typ:'Exploitation', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux prioriser les territoires selon leur score de criticité afin de concentrer les actions sur les zones les plus sensibles.' },
+  'US7.6': { epic:'EPIC 7', nom:'US7.6', libelle:'Aide à interprétation avancée', mvp:'FALSE', ihm:'OUI', module:'Suivi & veille', depend:[], typ:'Exploitation', role:'Expert métier eau potable', phrase:'En tant qu\'expert métier eau potable, je veux utiliser l\'aide à l\'interprétation avancée afin d\'établir une hiérarchie d\'actions justifiée.' },
+  'US8.1': { epic:'EPIC 8', nom:'US8.1', libelle:'Export CSV', mvp:'TRUE', ihm:'OUI', module:'Export & diffusion', depend:[], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux exporter les données en CSV afin de les réutiliser dans d\'autres traitements.' },
+  'US8.6': { epic:'EPIC 8', nom:'US8.6', libelle:'Export vue simple', mvp:'TRUE', ihm:'OUI', module:'Export & diffusion', depend:[], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux exporter une vue simple afin de partager un état des données.' },
+  'US8.2': { epic:'EPIC 8', nom:'US8.2', libelle:'Export SIG', mvp:'FALSE', ihm:'OUI', module:'Export & diffusion', depend:[], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux exporter au format SIG afin de réutiliser les données dans un logiciel cartographique.' },
+  'US8.3': { epic:'EPIC 8', nom:'US8.3', libelle:'Rapport PDF', mvp:'FALSE', ihm:'OUI', module:'Export & diffusion', depend:["US6.7"], typ:'Restitution – Diffusion', role:'Décideur métier', phrase:'En tant que décideur métier, je veux générer un rapport PDF afin de présenter les résultats au conseil municipal et formaliser la prise de décision.' },
+  'US8.4': { epic:'EPIC 8', nom:'US8.4', libelle:'Partage lien', mvp:'FALSE', ihm:'OUI', module:'Export & diffusion', depend:[], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux partager un lien afin de transmettre une vue des données à un collaborateur.' },
+  'US8.5': { epic:'EPIC 8', nom:'US8.5', libelle:'API', mvp:'FALSE', ihm:'NON', module:'Export & diffusion', depend:[], typ:'Restitution – Diffusion', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux accéder aux données via une API afin de les réutiliser dans d\'autres systèmes.' },
+  'US9.2': { epic:'EPIC 9', nom:'US9.2', libelle:'Authentification', mvp:'TRUE', ihm:'OUI', module:'Administration & profils', depend:[], typ:'Gouvernance', role:'Administrateur plateforme', phrase:'' },
+  'US9.3': { epic:'EPIC 9', nom:'US9.3', libelle:'Rôles simples', mvp:'TRUE', ihm:'OUI', module:'Administration & profils', depend:["US9.2"], typ:'Gouvernance', role:'Administrateur plateforme', phrase:'' },
+  'US9.1': { epic:'EPIC 9', nom:'US9.1', libelle:'Créer compte', mvp:'FALSE', ihm:'OUI', module:'Administration & profils', depend:["US9.2"], typ:'Gouvernance', role:'Administrateur plateforme', phrase:'' },
+  'US9.4': { epic:'EPIC 9', nom:'US9.4', libelle:'Restreindre accès fin', mvp:'FALSE', ihm:'NON', module:'Administration & profils', depend:["US9.3", "US8.4", "US8.5"], typ:'Gouvernance', role:'Administrateur plateforme', phrase:'' },
+  'US9.5': { epic:'EPIC 9', nom:'US9.5', libelle:'Adapter interface', mvp:'FALSE', ihm:'OUI', module:'Administration & profils', depend:["US9.2", "US9.3"], typ:'Gouvernance', role:'Administrateur plateforme', phrase:'' },
+  'US9.6': { epic:'EPIC 9', nom:'US9.6', libelle:'Suivre connexions', mvp:'FALSE', ihm:'NON', module:'Administration & profils', depend:["US9.2"], typ:'Gouvernance', role:'Administrateur plateforme', phrase:'' },
+  'US10.1': { epic:'EPIC 10', nom:'US10.1', libelle:'Tracer imports', mvp:'TRUE', ihm:'NON', module:'Suivi qualité & traçabilité', depend:[], typ:'Gouvernance', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux tracer les imports afin de savoir quelles données ont été chargées.' },
+  'US10.2': { epic:'EPIC 10', nom:'US10.2', libelle:'Tracer calculs', mvp:'TRUE', ihm:'NON', module:'Suivi qualité & traçabilité', depend:["US4.1"], typ:'Gouvernance', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux tracer les calculs afin de reconstituer leur exécution.' },
+  'US10.3': { epic:'EPIC 10', nom:'US10.3', libelle:'Journal actions', mvp:'FALSE', ihm:'OUI', module:'Suivi qualité & traçabilité', depend:[], typ:'Gouvernance', role:'Administrateur plateforme', phrase:'' },
+  'US10.4': { epic:'EPIC 10', nom:'US10.4', libelle:'Historique modifications', mvp:'FALSE', ihm:'OUI', module:'Suivi qualité & traçabilité', depend:["US1.6"], typ:'Gouvernance', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux consulter l\'historique des modifications afin de suivre les changements.' },
+  'US10.5': { epic:'EPIC 10', nom:'US10.5', libelle:'Reconstituer calcul', mvp:'FALSE', ihm:'NON', module:'Suivi qualité & traçabilité', depend:["US1.6", "US10.2"], typ:'Gouvernance', role:'Administrateur expert data', phrase:'En tant qu\'administrateur expert data, je veux reconstituer un calcul afin de vérifier un résultat passé.' },
+  'US10.6': { epic:'EPIC 10', nom:'US10.6', libelle:'Audit usages', mvp:'FALSE', ihm:'NON', module:'Suivi qualité & traçabilité', depend:[], typ:'Gouvernance', role:'Administrateur plateforme', phrase:'' },
 };
 
 const US = {
@@ -123,50 +294,319 @@ const DEP = [
   ["US10.2","US10.5"]
 ];
 
+// ---------- Propriétés de coloriage (finalité fonctionnelle) ----------
+// Échelle séquentielle ordonnée de valeur (clair → foncé), suivant le cycle de vie de la donnée :
+// Acquisition → Structuration → Qualification → Exploitation → Restitution/Diffusion → Gouvernance
+const FINALITES = {
+  "Acquisition": { color: "#fdf3d8", bord: "#d9b95c", groupe: "Pilier 1 – Connaissance" },
+  "Structuration": { color: "#fce7b3", bord: "#d8a63e", groupe: "Pilier 1 – Connaissance" },
+  "Qualification": { color: "#f9d489", bord: "#cc8a26", groupe: "Pilier 1 – Connaissance" },
+  "Exploitation": { color: "#f0a74f", bord: "#b26a17", groupe: "Pilier 2 (+3) – Diagnostic & Veille" },
+  "Restitution – Diffusion": { color: "#dd6b33", bord: "#a13f12", groupe: "Pilier 4 – Partage" },
+  "Gouvernance": { color: "#9c2d1e", bord: "#5e150c", groupe: "Transverse – Socle" }
+};
+
+// finalité par US (id -> finalité)
+const US_FINALITE = {
+  "US1.1":"Acquisition","US1.3":"Acquisition","US1.4":"Structuration","US1.5":"Acquisition","US1.6":"Gouvernance","US1.2":"Acquisition","US1.7":"Acquisition",
+  "US1bis.1":"Structuration","US1bis.2":"Structuration","US1bis.3":"Structuration","US1bis.4":"Structuration","US1bis.5":"Structuration","US1bis.6":"Structuration","US1bis.7":"Structuration","US1bis.8":"Structuration","US1bis.9":"Structuration","US1bis.10":"Acquisition","US1bis.11":"Structuration","US1bis.12":"Structuration","US1bis.13":"Structuration","US1bis.14":"Structuration","US1bis.15":"Structuration",
+  "US2.1":"Qualification","US2.4":"Qualification","US2.5":"Qualification","US2.6":"Qualification","US2.2":"Qualification","US2.3":"Qualification","US2.7":"Qualification",
+  "US3.1":"Structuration","US3.2":"Structuration","US3.4":"Structuration","US3.5":"Structuration","US3.3":"Structuration","US3.6":"Gouvernance","US3.7":"Structuration",
+  "US4.1":"Exploitation","US4.2":"Exploitation","US4.3":"Exploitation","US4.5":"Exploitation","US4.4":"Exploitation","US4.6":"Exploitation","US4.7":"Exploitation",
+  "US5.1":"Exploitation","US5.2":"Exploitation","US5.3":"Exploitation","US5.4":"Exploitation","US5.5":"Exploitation","US5.6":"Exploitation",
+  "US6.1":"Restitution – Diffusion","US6.2":"Restitution – Diffusion","US6.3":"Restitution – Diffusion","US6.4":"Restitution – Diffusion","US6.7":"Restitution – Diffusion","US6.5":"Restitution – Diffusion","US6.6":"Restitution – Diffusion","US6.8":"Restitution – Diffusion","US6.9":"Restitution – Diffusion","US6.10":"Restitution – Diffusion","US6.11":"Restitution – Diffusion","US6.12":"Restitution – Diffusion","US6.13":"Restitution – Diffusion","US6.14":"Restitution – Diffusion","US6.15":"Restitution – Diffusion","US6.16":"Restitution – Diffusion","US6.17":"Restitution – Diffusion","US6.18":"Restitution – Diffusion","US6.19":"Restitution – Diffusion","US6.20":"Restitution – Diffusion","US6.21":"Restitution – Diffusion","US6.22":"Restitution – Diffusion","US6.23":"Restitution – Diffusion","US6.24":"Restitution – Diffusion","US6.25":"Restitution – Diffusion","US6.26":"Restitution – Diffusion",
+  "US7.1":"Exploitation","US7.3":"Exploitation","US7.4":"Exploitation","US7.2":"Exploitation","US7.5":"Exploitation","US7.6":"Exploitation",
+  "US8.1":"Restitution – Diffusion","US8.6":"Restitution – Diffusion","US8.2":"Restitution – Diffusion","US8.3":"Restitution – Diffusion","US8.4":"Restitution – Diffusion","US8.5":"Restitution – Diffusion",
+  "US9.2":"Gouvernance","US9.3":"Gouvernance","US9.1":"Gouvernance","US9.4":"Gouvernance","US9.5":"Gouvernance","US9.6":"Gouvernance",
+  "US10.1":"Gouvernance","US10.2":"Gouvernance","US10.3":"Gouvernance","US10.4":"Gouvernance","US10.5":"Gouvernance","US10.6":"Gouvernance"
+};
+
 // ---------- Construction ----------
-function main() {
-  // Légende
+let currentColoring = 'epic';
+
+function renderLegend(mode) {
+  // Légende retirée (les groupes sont visibles via la barre de navigation).
   const legend = document.getElementById('legend');
-  legend.innerHTML = '<b>EPICs :</b>';
-  for (const [epic, color] of Object.entries(EPICS)) {
-    legend.innerHTML += `<span class="legend-item"><span class="chip" style="background:${color}"></span>${epic}</span>`;
-  }
+  legend.innerHTML = '';
+}
 
-  const nodes = [];
-  for (const [id, [epic, label]] of Object.entries(US)) {
-    nodes.push({ id: id, label: label, title: epic + ' — ' + label, color: EPICS[epic], font: { color: '#fff' } });
+function nodeAppearance(id) {
+  const [epic, label] = US[id];
+  const roleIcon = ROLE_ICONS[US_DATA[id].role];
+  const stdFont = "'Segoe UI', -apple-system, Arial, sans-serif";
+  if (currentColoring === 'epic') {
+    return { id: id, label: label, sublabel: id,
+             color: EPICS[epic], borderWidth: 1, borderWidthSelected: 2,
+             title: epic + ' (' + EPIC_LABELS[epic] + ') — ' + id + ' — ' + label,
+             icon: { face: 'HydroIcons', code: roleIcon.code, color: '#fff' },
+             font: { color: '#fff', size: 13, face: stdFont, bold: true },
+             sublabelFont: { color: '#fff', size: 10, face: 'monospace' } };
   }
+  const fin = FINALITES[US_FINALITE[id]];
+  const darkRgb = fin.bord; // texte sombre sur fond clair
+  return { id: id, label: label, sublabel: id, color: fin.color, borderWidth: 2, borderWidthSelected: 3,
+           title: US_FINALITE[id] + ' — ' + id + ' — ' + label,
+           icon: { face: 'HydroIcons', code: roleIcon.code, color: '#123' },
+           font: { color: '#123', size: 13, face: stdFont, bold: true },
+           sublabelFont: { color: '#123', size: 10, face: 'monospace' } };
+}
 
-  const edges = DEP.map(([from, to]) => ({
+function setColoring(mode) {
+  currentColoring = mode;
+  renderLegend(mode);
+  renderGroupNav();
+  allNodes = buildNodes();
+  if (activeGroup) {
+    // ré-appliquer le filtre au nouveau découpage
+    applyFilter();
+  } else {
+    window.network.body.data.nodes.update(allNodes);
+  }
+}
+
+// ---------- Navigation & filtrage par groupe ----------
+// Sélection courante : {mode:'epic'|'finalite', valeur} | null = tout
+let activeGroup = null;
+let linkedOnly = false;
+
+// ---------- Facettes (ROLE, IHM, MVP) ----------
+let facets = { role: new Set(), ihm: new Set(), mvp: new Set() };
+
+const FACET_DEFS = {
+  role: { container: 'facet-role', values: ['Administrateur expert data','Administrateur plateforme','Décideur métier','Expert métier eau potable','Intéressé public'] },
+  ihm: { container: 'facet-ihm', values: ['OUI','NON'] },
+  mvp: { container: 'facet-mvp', values: ['TRUE','FALSE'] }
+};
+
+const ROLE_ICONS = {
+  'Administrateur expert data': { cls: 'fa-wrench',     code: '\uf0ad' },
+  'Administrateur plateforme':  { cls: 'fa-gear',       code: '\uf013' },
+  'Décideur métier':            { cls: 'fa-chart-line', code: '\uf201' },
+  'Expert métier eau potable':  { cls: 'fa-droplet',    code: '\uf043' },
+  'Intéressé public':           { cls: 'fa-users',      code: '\uf0c0' }
+};
+
+function renderFacets() {
+  for (const [key, def] of Object.entries(FACET_DEFS)) {
+    const el = document.getElementById(def.container);
+    let html = def.values.map(v => {
+      const on = facets[key].has(v) ? ' on' : '';
+      const icon = key === 'role' ? `<i class="fa-solid ${ROLE_ICONS[v].cls}"></i> ` : '';
+      return `<span class="facet-pill${on}" onclick="toggleFacet('${key}','${v}')">${icon}${v}</span>`;
+    }).join('');
+    if (facets[key].size) html += `<span class="facet-clear" onclick="clearFacet('${key}')">✕ effacer</span>`;
+    el.innerHTML = html;
+  }
+}
+
+function toggleFacet(key, value) {
+  if (facets[key].has(value)) facets[key].delete(value);
+  else facets[key].add(value);
+  renderFacets();
+  applyFilter();
+}
+
+function clearFacet(key) {
+  facets[key].clear();
+  renderFacets();
+  applyFilter();
+}
+
+function facetMatches(id) {
+  const d = US_DATA[id];
+  if (facets.role.size && !facets.role.has(d.role)) return false;
+  if (facets.ihm.size && !facets.ihm.has(d.ihm)) return false;
+  if (facets.mvp.size && !facets.mvp.has(d.mvp)) return false;
+  return true;
+}
+
+// ---------- Volet Détail (clic sur une US) ----------
+let detailOpen = false;
+
+function openDetail(id) {
+  const d = US_DATA[id];
+  const panel = document.getElementById('detail');
+  panel.classList.remove('closed');
+  detailOpen = true;
+  document.getElementById('d-title').textContent = d.nom + ' — ' + d.libelle;
+  const depLabels = (d.depend && d.depend.length)
+    ? d.depend.map(p => `<span class="facet-pill" onclick="openDetail('${p}')">${p}</span>`).join(' ')
+    : '<em>aucun</em>';
+  document.getElementById('d-body').innerHTML = `
+    <div class="prop"><div class="k">EPIC</div><div class="v">${d.epic} · ${EPIC_LABELS[d.epic]}</div></div>
+    <div class="prop"><div class="k">Type fonctionnel</div><div class="v">${d.typ}</div></div>
+    <div class="prop"><div class="k">Module</div><div class="v">${d.module}</div></div>
+    <div class="prop"><div class="k">ROLE (profil utilisateur)</div><div class="v"><i class="fa-solid ${ROLE_ICONS[d.role].cls}"></i> ${d.role}</div></div>
+    <div class="prop"><div class="k">IHM</div><div class="v">${d.ihm}</div></div>
+    <div class="prop"><div class="k">MVP</div><div class="v">${d.mvp}</div></div>
+    <div class="prop"><div class="k">Dépend de (parents)</div><div class="v">${depLabels}</div></div>
+    <div class="prop"><div class="k">Phrase méthode agile</div><div class="v">${d.phrase || '<em>—</em>'}</div></div>`;
+}
+
+function closeDetail() {
+  document.getElementById('detail').classList.add('closed');
+  detailOpen = false;
+  if (window.network) window.network.unselectAll();
+}
+
+function initDetail() {
+  // resizer : agrandir / rétrécir la largeur
+  const panel = document.getElementById('detail');
+  const resizer = document.getElementById('d-resizer');
+  resizer.addEventListener('mousedown', e => {
+    e.preventDefault();
+    const startX = e.clientX;
+    const startW = panel.offsetWidth;
+    const move = ev => {
+      const w = startW - (ev.clientX - startX);
+      panel.style.width = Math.min(Math.max(w, 260), Math.round(window.innerWidth * 0.7)) + 'px';
+    };
+    const up = () => {
+      document.removeEventListener('mousemove', move);
+      document.removeEventListener('mouseup', up);
+    };
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', up);
+  });
+}
+
+
+function linkedIds() {
+  const s = new Set();
+  DEP.forEach(([from, to]) => { s.add(from); s.add(to); });
+  return s;
+}
+
+function renderGroupNav() {
+  const nav = document.getElementById('groupnav');
+  const cats = currentColoring === 'epic' ? Object.keys(EPICS) : Object.keys(FINALITES);
+  const chip = c => currentColoring === 'epic' ? EPICS[c] : FINALITES[c].color;
+
+  let items = [`<span class="gn-btn" onclick="setGroup()">Tout</span>`];
+  cats.forEach(c => {
+    const disp = currentColoring === 'epic'
+      ? c + ' · ' + EPIC_LABELS[c]
+      : c;
+    items.push(`<span class="gn-btn" data-val="${c.replace(/['"]/g,'')}" onclick="setGroup('${currentColoring}','${c.replace(/['"]/g,'')}')">${disp}</span>`);
+  });
+  nav.innerHTML = items.join(' ');
+
+  nav.querySelectorAll('.gn-btn').forEach(bt => {
+    const val = bt.dataset.val;
+    if (!val) { return; }
+    const col = chip(val);
+    bt.style.background = col;
+    bt.style.borderColor = col;
+    bt.style.color = '#fff';
+    if (activeGroup && activeGroup.valeur === val) bt.classList.add('active');
+  });
+}
+
+// Jeu complet de nœuds et de liens (source de référence)
+let allNodes = [];
+let allEdges = [];
+
+function buildNodes() {
+  return Object.keys(US).map(nodeAppearance);
+}
+
+function computeShownIds() {
+  let shown = new Set(Object.keys(US));
+  if (activeGroup) {
+    const keep = id => {
+      const grp = currentColoring === 'epic' ? US[id][0] : US_FINALITE[id];
+      return grp === activeGroup.valeur;
+    };
+    shown = new Set(Object.keys(US).filter(keep));
+  }
+  if (linkedOnly) {
+    const linked = linkedIds();
+    shown = new Set([...shown].filter(id => linked.has(id)));
+  }
+  // Facettes : combinaison ET entre facettes actives
+  if (facets.role.size || facets.ihm.size || facets.mvp.size) {
+    shown = new Set([...shown].filter(id => facetMatches(id)));
+  }
+  return shown;
+}
+
+function applyFilter() {
+  const shown = computeShownIds();
+  // Ne garder que les nœuds filtrés
+  const nodes = allNodes.filter(n => shown.has(n.id));
+  // Ne garder que les liens dont les deux extrémités sont visibles
+  const edges = allEdges.filter(e => shown.has(e.from) && shown.has(e.to));
+  // Remplacement de la source de données du graphe
+  window.network.setData({ nodes: nodes, edges: edges });
+  document.querySelector('#btnFilter').textContent = linkedOnly ? 'Tout afficher' : 'Afficher US liées uniquement';
+  // Vue initialisée sur le jeu filtré
+  window.network.fit({ animation: true });
+}
+
+function setGroup(mode, valeur) {
+  if (!mode) { activeGroup = null; }
+  else { activeGroup = { mode: mode, valeur: valeur }; }
+  renderGroupNav();
+  // régénère les nœuds selon le coloriage courant puis filtre
+  allNodes = buildNodes();
+  applyFilter();
+}
+
+function toggleLinked() {
+  linkedOnly = !linkedOnly;
+  applyFilter();
+}
+
+function main() {
+  renderLegend('epic');
+  renderGroupNav();
+  renderFacets();
+  initDetail();
+
+  allNodes = buildNodes();
+  allEdges = DEP.map(([from, to]) => ({
     from: from, to: to, arrows: 'to', color: { color: '#7a7a7a' }, smooth: { type: 'dynamic' }
   }));
 
   const container = document.getElementById('graph');
 
-  const physicsUrlOptions = { physics: true };
   const stablePhysicsOptions = {
-    nodes: { shape: 'box', shadow: { enabled: true }, borderWidth: 1, margin: { top: 6, right: 8, bottom: 6, left: 8 } },
+    nodes: { shape: 'square', shadow: { enabled: true }, size: 46, margin: { top: 14, right: 18, bottom: 14, left: 18 } },
     edges: { width: 1.5, selectionWidth: 2 },
     physics: { stabilization: true, barnesHut: { gravitationalConstant: -3500 } }
   };
   const hierarchicalOptions = {
-    nodes: { shape: 'box', shadow: { enabled: true }, borderWidth: 1, margin: { top: 6, right: 8, bottom: 6, left: 8 } },
+    nodes: { shape: 'square', shadow: { enabled: true }, size: 46, margin: { top: 14, right: 18, bottom: 14, left: 18 } },
     edges: { width: 1.5 },
     layout: { hierarchical: { direction: 'UD', sortMethod: 'directed', nodeSpacing: 110, levelSeparation: 90, treeSpacing: 140 } },
     physics: false,
     interaction: { hover: true, tooltipDelay: 200 }
   };
 
-  let network = new vis.Network(container, { nodes, edges }, stablePhysicsOptions);
+  let network = new vis.Network(container, { nodes: allNodes, edges: allEdges }, stablePhysicsOptions);
+  window.network = network;
 
-  document.getElementById('count').textContent = `${nodes.length} US · ${edges.length} dépendances`;
+  network.on('selectNode', params => {
+    if (params.nodes && params.nodes.length) openDetail(params.nodes[0]);
+  });
+  network.on('deselectNode', () => {}); // conservé : fermeture via ✕
 
-  window.resetView = () => network.fit({ animation: true });
+  document.getElementById('count').textContent = `${allNodes.length} US · ${allEdges.length} dépendances`;
+
+  window.resetView = () => { activeGroup = null; linkedOnly = false; facets = { role: new Set(), ihm: new Set(), mvp: new Set() }; renderFacets(); allNodes = buildNodes(); renderGroupNav(); network.setOptions(stablePhysicsOptions); network.setData({ nodes: allNodes, edges: allEdges }); network.fit({ animation: true }); };
   window.applyPhysics = () => network.setOptions(stablePhysicsOptions);
   window.applyHierarchy = () => network.setOptions(hierarchicalOptions);
+  window.openDetail = openDetail;
+  window.closeDetail = closeDetail;
 }
 
-window.addEventListener('DOMContentLoaded', main);
+window.addEventListener('DOMContentLoaded', () => {
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(main);
+  } else {
+    main();
+  }
+});
 </script>
 </body>
 </html>

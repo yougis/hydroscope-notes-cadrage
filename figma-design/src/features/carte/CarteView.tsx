@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BVAEPS, CAPTAGE_POINTS } from '@/data/hydroscope'
+import { BVAEPS } from '@/data/hydroscope'
 import { MapCanvas } from './MapCanvas'
 import { useLayers, type BasemapId } from './hooks/useLayers'
 import { CaptageSelector } from './components/CaptageSelector'
@@ -52,7 +52,7 @@ export function CarteView({
   const isGestion = unitMode === 'gestion'
   const h3Mode = showCarte
   const selectedKeys = isGestion
-    ? CAPTAGE_POINTS.filter((p) => selectedUnites.has(p.key)).map((p) => p.key)
+    ? [...selectedUnites]
     : BVAEPS.filter((b) => selectedBvaeps.has(b.id)).flatMap((b) => b.captageRefs)
 
   return (

@@ -51,6 +51,7 @@
 
 
 **Objectifs** :
+
 1. Conduire l'analyse multicritère pour évaluer des scénarios
 2. Consulter les indicateurs de menace sur l'eau potable d'un territoire
 3. Suivre les tendances et détecter les situations critiques
@@ -71,15 +72,8 @@
 
 **Description** — Élu, directeur de service ou président d'association disposant d'un pouvoir de décision métier. Utilise HydroScope pour piloter les orientations stratégiques et opérationnelles en matière de gestion de l'eau potable.
 
-**Exemples concrets** :
-- Commune de référence : Païta (98818), commune rurale du Grand Nouméa avec captages et zones de protection à gérer
-- Captage exemple : Captage de la source de Païta (captage d'alimentation en eau potable du secteur ouest, soumis à un périmètre de protection de 1ère catégorie)
-- Indicateur exemple : Indicateur de couverture du périmètre de protection (% de surface du BV effectivement protégée par un arrêté préfectoral de PPE)
-- Source de données : Arrêtés préfectoraux de PPE (textes réglementaires), données cadastrales des communes (limites communales pour l'intersection BV), référentiel H3 de la DAVAR
-- Format de fichier : PDF (rapports d'audit et rapports pour le conseil municipal), CSV (export de données chiffrées pour tableaux de bord départementaux)
-- Technologie : MapLibre (consultation cartographique en lecture seule), PostGIS (requêtes spatiales pour la génération de rapports PDF)
-
 **Objectifs** :
+
 1. Disposer d'une vue synthétique de la qualité de l'eau sur son territoire
 2. Comparer des territoires pour arbitrer des investissements
 3. Suivre les tendances et détecter les situations critiques
@@ -100,15 +94,9 @@
 
 **Description** — Citoyen, habitant ou journaliste souhaitant consulter la qualité de l'eau sur son territoire. Accès anonyme, interface simplifiée et filtrable, lecture seule stricte (aucun export, aucun partage).
 
-**Exemples concrets** :
-- Commune de référence : Koné (98811), chef-lieu de la Province Nord, commune côtière avec captages et BV d'alimentation en eau potable
-- Captage exemple : Captage de la rivière Koné (captage d'alimentation du centre-ville de Koné, soumis à un périmètre de protection)
-- Indicateur exemple : Résultat de contrôle microbiologique (E. coli, coliformes thermotolérants) affiché sous forme de valeur chiffrée sur survol de la carte
-- Source de données : Données publiques de la DAVAR et des Provinces (résultats de prélèvements rendus publics), référentiel géographique des BV et captages
-- Format de fichier : Aucun export disponible (lecture seule stricte) — les données sont consultées uniquement via l'interface web
-- Technologie : MapLibre (carte interactive en lecture seule), OGC WMS (couches cartographiques publiques), H3 (indexation spatiale pour le filtrage par commune)
 
 **Objectifs** :
+
 1. Vérifier la qualité de l'eau potable sur son lieu de résidence
 2. Explorer la carte des captages et bassins versants de sa commune
 3. Comprendre les indicateurs de qualité grâce à des données chiffrées

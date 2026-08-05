@@ -1,0 +1,807 @@
+%%
+% Copyright (c) 2017 - 2024, Pascal Wagler;
+% Copyright (c) 2014 - 2024, John MacFarlane
+%
+% All rights reserved.
+%
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+%
+% - Redistributions of source code must retain the above copyright
+% notice, this list of conditions and the following disclaimer.
+%
+% - Redistributions in binary form must reproduce the above copyright
+% notice, this list of conditions and the following disclaimer in the
+% documentation and/or other materials provided with the distribution.
+%
+% - Neither the name of John MacFarlane nor the names of other
+% contributors may be used to endorse or promote products derived
+% from this software without specific prior written permission.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+% FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+% COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+% INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+% BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+% CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+% LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+% ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+% POSSIBILITY OF SUCH DAMAGE.
+%%
+
+%%
+% This is the Eisvogel pandoc LaTeX template.
+%
+% For usage information and examples visit the official GitHub page:
+% https://github.com/Wandmalfarbe/pandoc-latex-template
+%%
+
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
+%
+\documentclass[
+  paper=a4,
+  oneside  ,captions=tableheading
+]{scrartcl}
+\usepackage{amsmath,amssymb}
+% Use setspace anyway because we change the default line spacing.
+% The spacing is changed early to affect the titlepage and the TOC.
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\definecolor{default-linkcolor}{HTML}{A50000}
+\definecolor{default-filecolor}{HTML}{A50000}
+\definecolor{default-citecolor}{HTML}{4077C0}
+\definecolor{default-urlcolor}{HTML}{4077C0}
+\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,]{geometry}
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+% add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
+\usepackage{footnotebackref}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+% Make use of float-package and set default placement for figures to H.
+% The option H means 'PUT IT HERE' (as  opposed to the standard h option which means 'You may put it here if you like').
+\usepackage{float}
+\floatplacement{figure}{H}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{french}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\newcommand{\chapterpage}[1]{
+  \newpage
+  \vspace*{\fill}
+  \begin{center}
+  {\Huge\bfseries #1}
+  \end{center}
+  \vspace*{\fill}
+  \newpage
+}
+
+\usepackage{colortbl}
+
+
+% Alternance de couleurs (commence à la ligne 2 pour éviter l'en-tête)
+\rowcolors{1}{white}{lightgray!50}
+
+\usepackage[table]{xcolor}
+\definecolor{lightgray}{HTML}{F0F0F0}
+
+% Force la coloration à toujours commencer APRES l’en-tête (ligne 2)
+\AtBeginEnvironment{tabular}{
+  \rowcolors{2}{lightgray}{white}
+}
+
+\usepackage{soul}
+\sethlcolor{yellow}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table des matières}
+\else
+  \newcommand\contentsname{Table des matières}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Liste des Figures}
+\else
+  \newcommand\listfigurename{Liste des Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Liste des Tables}
+\else
+  \newcommand\listtablename{Liste des Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{Liste des Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdfauthor={Hugo Roussaffa},
+  pdflang={fr},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={default-filecolor},
+  citecolor={default-citecolor},
+  urlcolor={default-urlcolor},
+  breaklinks=true,
+  pdfcreator={LaTeX via pandoc with the Eisvogel template}}
+\author{Hugo Roussaffa}
+\date{5 août 2026}
+
+
+
+%%
+%% added
+%%
+
+
+%
+% for the background color of the title page
+%
+\usepackage{pagecolor}
+\usepackage{afterpage}
+\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering]{geometry}
+
+%
+% break urls
+%
+\PassOptionsToPackage{hyphens}{url}
+
+%
+% When using babel or polyglossia with biblatex, loading csquotes is recommended
+% to ensure that quoted texts are typeset according to the rules of your main language.
+%
+\usepackage{csquotes}
+
+%
+% captions
+%
+\definecolor{caption-color}{HTML}{777777}
+\usepackage[font={stretch=1.2}, textfont={color=caption-color}, position=top, skip=4mm, labelfont=bf, singlelinecheck=false, justification=raggedright]{caption}
+\setcapindent{0em}
+
+%
+% blockquote
+%
+\definecolor{blockquote-border}{RGB}{221,221,221}
+\definecolor{blockquote-text}{RGB}{119,119,119}
+\usepackage{mdframed}
+\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+
+%
+% Source Sans Pro as the default font family
+% Source Code Pro for monospace text
+%
+% 'default' option sets the default
+% font family to Source Sans Pro, not \sfdefault.
+%
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+  \else % if not pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+
+  % XeLaTeX specific adjustments for straight quotes: https://tex.stackexchange.com/a/354887
+  % This issue is already fixed (see https://github.com/silkeh/latex-sourcecodepro/pull/5) but the
+  % fix is still unreleased.
+  % TODO: Remove this workaround when the new version of sourcecodepro is released on CTAN.
+  \ifxetex
+    \makeatletter
+    \defaultfontfeatures[\ttfamily]
+      { Numbers   = \sourcecodepro@figurestyle,
+        Scale     = \SourceCodePro@scale,
+        Extension = .otf }
+    \setmonofont
+      [ UprightFont    = *-\sourcecodepro@regstyle,
+        ItalicFont     = *-\sourcecodepro@regstyle It,
+        BoldFont       = *-\sourcecodepro@boldstyle,
+        BoldItalicFont = *-\sourcecodepro@boldstyle It ]
+      {SourceCodePro}
+    \makeatother
+  \fi
+  \fi
+
+%
+% heading color
+%
+\definecolor{heading-color}{RGB}{40,40,40}
+\addtokomafont{section}{\color{heading-color}}
+% When using the classes report, scrreprt, book,
+% scrbook or memoir, uncomment the following line.
+%\addtokomafont{chapter}{\color{heading-color}}
+
+%
+% variables for title, author and date
+%
+\usepackage{titling}
+\title{}
+\author{Hugo Roussaffa}
+\date{5 août 2026}
+
+%
+% tables
+%
+
+\definecolor{table-row-color}{HTML}{F5F5F5}
+\definecolor{table-rule-color}{HTML}{999999}
+
+%\arrayrulecolor{black!40}
+\arrayrulecolor{table-rule-color}     % color of \toprule, \midrule, \bottomrule
+\setlength\heavyrulewidth{0.3ex}      % thickness of \toprule, \bottomrule
+\renewcommand{\arraystretch}{1.3}     % spacing (padding)
+
+
+%
+% remove paragraph indentation
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+%
+%
+% Listings
+%
+%
+
+
+%
+% header and footer
+%
+\usepackage[headsepline,footsepline]{scrlayer-scrpage}
+
+\newpairofpagestyles{eisvogel-header-footer}{
+  \clearpairofpagestyles
+  \ihead*{}
+  \chead*{}
+  \ohead*{5 août 2026}
+  \ifoot*{Hugo Roussaffa}
+  \cfoot*{}
+  \ofoot*{\thepage}
+  \addtokomafont{pageheadfoot}{\upshape}
+}
+\pagestyle{eisvogel-header-footer}
+
+
+
+%%
+%% end added
+%%
+
+\begin{document}
+
+%%
+%% begin titlepage
+%%
+\begin{titlepage}
+\newgeometry{left=6cm}
+\newcommand{\colorRule}[3][black]{\textcolor[HTML]{#1}{\rule{#2}{#3}}}
+\begin{flushleft}
+\noindent
+\\[-1em]
+\color[HTML]{5F5F5F}
+\makebox[0pt][l]{\colorRule[435488]{1.3\textwidth}{4pt}}
+\par
+\noindent
+
+{
+  \setstretch{1.4}
+  \vfill
+  \noindent {\huge \textbf{\textsf{}}}
+    \vskip 2em
+  \noindent {\Large \textsf{Hugo Roussaffa}}
+  \vfill
+}
+
+\noindent
+\includegraphics[width=35mm, left]{../logo\_yapuka.png}
+
+\textsf{5 août 2026}
+\end{flushleft}
+\end{titlepage}
+\restoregeometry
+\pagenumbering{arabic}
+
+%%
+%% end titlepage
+%%
+
+
+
+\renewcommand*\contentsname{Sommaire}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+\newpage
+}
+\section{Profils utilisateurs
+HydroScope}\label{profils-utilisateurs-hydroscope}
+
+\subsection{Profil 1 : Administrateur
+plateforme}\label{profil-1-administrateur-plateforme}
+
+\textbf{Description} --- Agent technique (OEIL) responsable de
+l'exploitation, de la sécurité et de la maintenance de la plateforme
+HydroScope. Gère les comptes utilisateurs, les droits d'accès, les
+paramètres système et l'audit des usages.
+
+\textbf{Objectifs} :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Sécuriser les accès et garantir la conformité RGPD
+\item
+  Maintenir la disponibilité et les performances du système
+\item
+  Paramétrer les profils utilisateurs et les droits d'accès
+\item
+  Assurer la traçabilité complète des opérations
+\item
+  Suivre les usages pour adapter la plateforme aux besoins
+\end{enumerate}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\#
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cas d'usage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+US
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Phrase agile
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+CU-ADMIN-01 & Créer un compte utilisateur et lui attribuer un profil &
+US9.1 & En tant qu'administrateur plateforme, je veux créer un compte
+utilisateur et lui attribuer un profil afin que chaque acteur puisse
+accéder à la plateforme avec les droits appropriés. \\
+CU-ADMIN-02 & Configurer les rôles et les droits d'accès par profil &
+US9.3 & En tant qu'administrateur plateforme, je veux configurer les
+rôles et les droits d'accès par profil afin de garantir que chaque
+utilisateur ne dispose que des fonctionnalités nécessaires à son
+rôle. \\
+CU-ADMIN-03 & Restreindre l'accès à certaines données sensibles selon le
+profil & US9.4 & En tant qu'administrateur plateforme, je veux
+restreindre l'accès aux données sensibles selon le profil afin de
+protéger les informations réglementées. \\
+CU-ADMIN-04 & Consulter le journal des actions et détecter des anomalies
+& US10.3 & En tant qu'administrateur plateforme, je veux consulter le
+journal des actions afin de détecter des comportements anormaux et
+assurer la sécurité du système. \\
+CU-ADMIN-05 & Lancer un audit d'usage pour adapter la plateforme aux
+besoins & US10.6 & En tant qu'administrateur plateforme, je veux lancer
+un audit d'usage afin d'identifier les fonctionnalités les plus
+utilisées et adapter la plateforme aux besoins réels. \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Profil 2 : Administrateur expert
+data}\label{profil-2-administrateur-expert-data}
+
+\textbf{Description} --- Administrateur des données responsable de
+l'alimentation, de la qualité, du catalogue, des calculs d'indicateurs
+et de la construction de l'aide à la décision. Gère les référentiels
+géographiques et méthodologiques.
+
+\textbf{Objectifs} :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Alimenter la plateforme avec des données fiables et normalisées
+\item
+  Qualifier la qualité des données et détecter les anomalies
+\item
+  Construire et maintenir les référentiels géographiques et
+  méthodologiques
+\item
+  Produire les indicateurs et les rendre accessibles aux autres profils
+\item
+  Construire l'aide à la décision (AMC, seuils, pondérations) et gérer
+  les exports
+\end{enumerate}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\#
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cas d'usage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+US
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Phrase agile
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+CU-DATA-01 & Importer un nouveau jeu de données et le normaliser &
+US1.1, US1.4 & En tant qu'administrateur expert data, je veux importer
+un nouveau jeu de données et le normaliser afin que la plateforme
+dispose de données fiables et homogènes. \\
+CU-DATA-02 & Détecter des valeurs aberrantes et qualifier la fiabilité &
+US2.1, US2.5 & En tant qu'administrateur expert data, je veux détecter
+des valeurs aberrantes et qualifier la fiabilité afin de garantir la
+confiance à accorder aux données produites. \\
+CU-DATA-03 & Gérer un bassin versant et ses captages dans le référentiel
+& US3.1, US3.2 & En tant qu'administrateur expert data, je veux gérer un
+bassin versant et ses captages dans le référentiel afin de maintenir la
+cohérence spatiale du système. \\
+CU-DATA-04 & Calculer un indicateur et versionner sa méthode & US4.1,
+US4.6 & En tant qu'administrateur expert data, je veux calculer un
+indicateur et versionner sa méthode afin de garantir la traçabilité et
+la reproductibilité des résultats. \\
+CU-DATA-05 & Construire un indice composite et documenter les méthodes &
+US5.1, US5.6 & En tant qu'administrateur expert data, je veux construire
+un indice composite et documenter les méthodes afin de fournir une base
+transparente pour l'aide à la décision. \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Profil 3 : Expert métier eau
+potable}\label{profil-3-expert-muxe9tier-eau-potable}
+
+\textbf{Description} --- Ingénieur/e spécialisé(e) en eau potable qui
+consulte les indicateurs et approfondit l'analyse (AMC, scénarios,
+comparaisons). N'effectue pas de gestion de données en back-end mais
+exploite les résultats pour son expertise métier.
+
+\textbf{Objectifs} : 1. Conduire l'analyse multicritère pour évaluer des
+scénarios 2. Consulter les indicateurs de menace sur l'eau potable d'un
+territoire 3. Suivre les tendances et détecter les situations critiques
+4. Produire des synthèses pour alimenter la décision 5. Alterner entre
+les vues graphiques pour une analyse multi-échelle
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\#
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cas d'usage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+US
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Question concrète
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Phrase agile
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+CU-EXPERT-01 & Conduire l'analyse multicritère (pondérations, scénarios,
+comparaisons, contributions) & US5.2, US5.3, US5.4, US5.5 & Sachant que
+le BVAEP de la Dumbéa a un statut PPE absent, une surface agricole de 15
+\%, 3 ICPE en amont et une géologie ruisselante, quel poids attribuer à
+chaque indicateur pour que le classement de criticité reflète le risque
+réel de dégradation ? & En tant qu'expert métier eau potable, je veux
+conduire l'analyse multicritère et paramétrer les pondérations afin de
+créer un score de criticité adapté au contexte de chaque territoire. \\
+CU-EXPERT-02 & Consulter les graphiques temporels et alterner les vues &
+US6.4, US6.24 & Entre 2021 et 2025, comment a évolué la surface cumulée
+d'incendies sur le BVAEP de la Dumbéa, et cette hausse est-elle corrélée
+aux surfaces d'érosion identifiées la même année ? & En tant qu'expert
+métier eau potable, je veux consulter l'évolution temporelle des
+indicateurs et basculer les vues graphiques (changement, répartition,
+carte H3) afin d'identifier les dynamiques croisées impactant la
+ressource. \\
+CU-EXPERT-03 & Identifier des tendances et détecter des dépassements &
+US7.3, US7.2 & Le BBR du captage de la Dumbéa est-il passé sous le seuil
+de déficit en période d'étiage sur les deux dernières années, indiquant
+une tension quantitative sur la ressource ? & En tant qu'expert métier
+eau potable, je veux identifier les tendances des indicateurs et être
+alerté par les dépassements de seuil que j'ai définis, afin d'anticiper
+les périodes de tension sur la ressource. \\
+CU-EXPERT-04 & Consulter la fiche synthétique du BVAEP prioritaire &
+US7.4, US7.5 & Quels indicateurs contribuent le plus au score de
+criticité final du BVAEP de la Dumbéa : est-ce le statut PPE, la densité
+d'ICPE, la surface d'incendies cumulés, ou la géologie ? & En tant
+qu'expert métier eau potable, je veux consulter la fiche synthétique
+d'un territoire prioritaire afin d'identifier rapidement les facteurs de
+vulnérabilité dominants avant de recommander une action. \\
+CU-EXPERT-05 & Utiliser l'aide à l'interprétation avancée pour prioriser
+& US7.6 & Parmi les 5 captages prioritaires du Grand Nouméa, lequel
+cumule le plus de facteurs de risque aggravants : absence de PPE + BBR
+déficitaire + forte densité d'ICPE + superficie brûlée récurrente ? & En
+tant qu'expert métier eau potable, je veux prioriser les territoires
+avec l'aide à l'interprétation avancée afin d'établir une hiérarchie
+d'actions justifiée partagée avec les décideurs. \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Profil 4 : Décideur
+métier}\label{profil-4-duxe9cideur-muxe9tier}
+
+\textbf{Description} --- Élu, directeur de service ou président
+d'association disposant d'un pouvoir de décision métier. Utilise
+HydroScope pour piloter les orientations stratégiques et opérationnelles
+en matière de gestion de l'eau potable.
+
+\textbf{Exemples concrets} : - Commune de référence : Païta (98818),
+commune rurale du Grand Nouméa avec captages et zones de protection à
+gérer - Captage exemple : Captage de la source de Païta (captage
+d'alimentation en eau potable du secteur ouest, soumis à un périmètre de
+protection de 1ère catégorie) - Indicateur exemple : Indicateur de
+couverture du périmètre de protection (\% de surface du BV effectivement
+protégée par un arrêté préfectoral de PPE) - Source de données : Arrêtés
+préfectoraux de PPE (textes réglementaires), données cadastrales des
+communes (limites communales pour l'intersection BV), référentiel H3 de
+la DAVAR - Format de fichier : PDF (rapports d'audit et rapports pour le
+conseil municipal), CSV (export de données chiffrées pour tableaux de
+bord départementaux) - Technologie : MapLibre (consultation
+cartographique en lecture seule), PostGIS (requêtes spatiales pour la
+génération de rapports PDF)
+
+\textbf{Objectifs} : 1. Disposer d'une vue synthétique de la qualité de
+l'eau sur son territoire 2. Comparer des territoires pour arbitrer des
+investissements 3. Suivre les tendances et détecter les situations
+critiques 4. Produire des rapports formalisés pour les instances
+décisionnelles 5. Consulter l'aide à la décision pour éclairer ses choix
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\#
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cas d'usage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+US
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Phrase agile
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+CU-DECISION-01 & Consulter un tableau de bord synthétique et une fiche
+territoire & US6.6, US6.7 & En tant que décideur métier, je veux
+consulter un tableau de bord synthétique et une fiche territoire afin de
+disposer d'une vue d'ensemble de la qualité de l'eau sur mon
+territoire. \\
+CU-DECISION-02 & Comparer deux bassins versants pour prioriser des
+investissements & US6.5, US7.5 & En tant que décideur métier, je veux
+comparer deux bassins versants afin d'arbitrer les investissements en
+fonction des besoins identifiés. \\
+CU-DECISION-03 & Identifier une tendance critique et détecter un
+dépassement de seuil & US7.3, US7.2 & En tant que décideur métier, je
+veux identifier une tendance critique et détecter un dépassement de
+seuil afin de réagir rapidement face à une situation urgente. \\
+CU-DECISION-04 & Générer un rapport PDF pour un conseil municipal &
+US8.3 & En tant que décideur métier, je veux générer un rapport PDF afin
+de présenter les résultats au conseil municipal et formaliser la prise
+de décision. \\
+CU-DECISION-05 & Consulter l'aide à l'interprétation avancée pour
+éclairer une décision & US7.6 & En tant que décideur métier, je veux
+consulter l'aide à l'interprétation avancée afin de comprendre les
+causes sous-jacentes des anomalies détectées. \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Profil 5 : Intéressé
+public}\label{profil-5-intuxe9ressuxe9-public}
+
+\textbf{Description} --- Citoyen, habitant ou journaliste souhaitant
+consulter la qualité de l'eau sur son territoire. Accès anonyme,
+interface simplifiée et filtrable, lecture seule stricte (aucun export,
+aucun partage).
+
+\textbf{Exemples concrets} : - Commune de référence : Koné (98811),
+chef-lieu de la Province Nord, commune côtière avec captages et BV
+d'alimentation en eau potable - Captage exemple : Captage de la rivière
+Koné (captage d'alimentation du centre-ville de Koné, soumis à un
+périmètre de protection) - Indicateur exemple : Résultat de contrôle
+microbiologique (E. coli, coliformes thermotolérants) affiché sous forme
+de valeur chiffrée sur survol de la carte - Source de données : Données
+publiques de la DAVAR et des Provinces (résultats de prélèvements rendus
+publics), référentiel géographique des BV et captages - Format de
+fichier : Aucun export disponible (lecture seule stricte) --- les
+données sont consultées uniquement via l'interface web - Technologie :
+MapLibre (carte interactive en lecture seule), OGC WMS (couches
+cartographiques publiques), H3 (indexation spatiale pour le filtrage par
+commune)
+
+\textbf{Objectifs} : 1. Vérifier la qualité de l'eau potable sur son
+lieu de résidence 2. Explorer la carte des captages et bassins versants
+de sa commune 3. Comprendre les indicateurs de qualité grâce à des
+données chiffrées 4. Accéder aux périmètres de protection et aux zones à
+risque 5. S'informer sur l'état de la ressource en eau sans outil
+technique
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\#
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cas d'usage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+US
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Phrase agile
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+CU-PUBLIC-01 & Vérifier la qualité de l'eau près de chez soi via la
+carte & US6.1, US6.2, US6.20 & En tant qu'intéressé public, je veux
+vérifier la qualité de l'eau près de chez moi via la carte afin de
+connaître l'état de la ressource en eau dans mon quartier. \\
+CU-PUBLIC-02 & Rechercher ma commune ou mon captage et consulter les
+indicateurs & US6.10, US6.22 & En tant qu'intéressé public, je veux
+rechercher ma commune ou mon captage et consulter les indicateurs afin
+de trouver rapidement l'information pertinente. \\
+CU-PUBLIC-03 & Consulter les couches thématiques et zoomer sur un
+territoire & US6.3, US6.21 & En tant qu'intéressé public, je veux
+consulter les couches thématiques et zoomer sur un territoire afin
+d'explorer visuellement les zones de ma commune. \\
+CU-PUBLIC-04 & Appliquer un preset pour voir les territoires les plus
+exposés & US6.13 & En tant qu'intéressé public, je veux appliquer un
+preset afin de visualiser rapidement les territoires les plus concernés
+par les problèmes de qualité de l'eau. \\
+CU-PUBLIC-05 & Trier la liste des indicateurs par distance pour trouver
+les plus proches & US6.17, US6.25 & En tant qu'intéressé public, je veux
+trier la liste des indicateurs par distance afin de trouver les données
+les plus proches de mon lieu de résidence. \\
+\end{longtable}
+}
+
+\end{document}

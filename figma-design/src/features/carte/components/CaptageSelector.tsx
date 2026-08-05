@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Eye, EyeOff, Layers } from 'lucide-react'
 import { Icon } from '@/components/ui/Icon'
 import { BVAEPS, CAPTAGES, communes, communesIntersectingBvaep, provinces, captagesOfBvaep, catalogueById } from '@/data/hydroscope'
-import { valueForBvaep, valueForCaptage } from '@/data/values'
+import { valueForBvaep, valueForUnite } from '@/data/values'
 import type { BvaepDef, CaptageDef, UnitMode } from '@/types/domain'
 import { PanelSection } from './PanelSection'
 import type { LayerDef } from '../hooks/useLayers'
@@ -105,7 +105,7 @@ export function CaptageSelector({
     if (isGestion) {
       const prev = [...selectedUnites]
       const scored = visibleCaptages.map((c: CaptageDef) => {
-        const base = kind === 'plus-proches' || kind === 'plus-eloignes' ? c.dist : valueForCaptage(indId, c.id)
+        const base = kind === 'plus-proches' || kind === 'plus-eloignes' ? c.dist : valueForUnite(indId, c.id)
         return { id: c.id, value: base }
       })
       const asc = kind === 'moins-exposes' || kind === 'plus-proches'
@@ -144,7 +144,7 @@ export function CaptageSelector({
           </button>
           <button
             onClick={() => onSetMode('bvaep')}
-            className={`rounded px-2 py-0.5 text-[11px] font-medium transition ${!isCaptage ? 'bg-white text-blue-700 shadow-sm' : 'text-neutral-500'}`}
+            className={`rounded px-2 py-0.5 text-[11px] font-medium transition ${!isGestion ? 'bg-white text-blue-700 shadow-sm' : 'text-neutral-500'}`}
           >
             Bassins versants
           </button>
@@ -269,7 +269,7 @@ export function CaptageSelector({
             }}
             className="flex-1 rounded-md border border-blue-400 bg-blue-50 px-2 py-1 text-[11px] font-medium text-blue-700"
           >
-            <option value="">Top 10 ▾</option>
+            <option value="">Top 10 indicateur ▾</option>
             {PRESET_LABELS.map((p) => (
               <option key={p.kind} value={p.kind}>
                 {p.label}
@@ -287,7 +287,7 @@ export function CaptageSelector({
             <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500">Unités de gestion</span>
             {selectedUnites.size > 0 && (
               <button onClick={onClearUnites} className="text-[10px] font-medium text-neutral-400 hover:text-red-500">
-                Vider
+                Tout désélectionner
               </button>
             )}
           </div>
@@ -320,7 +320,7 @@ export function CaptageSelector({
             <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500">Bassins versants</span>
             {selectedBvaeps.size > 0 && (
               <button onClick={onClearBvaeps} className="text-[10px] font-medium text-neutral-400 hover:text-red-500">
-                Vider
+                Tout désélectionner
               </button>
             )}
           </div>

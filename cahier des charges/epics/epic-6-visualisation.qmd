@@ -17,9 +17,9 @@ Une attention particulière est portée à l’ergonomie, à la lisibilité et �
   - superposition de plusieurs couches d’information
 
 - **Tableaux de bord**  
-  - sélection d’indicateur 
   - visualisation agrégée par territoire ou thématique
-  - accès rapide à l’information essentielle
+  - affichage de statistiques via des graphiques et des cartes
+  - accès rapide à l’information essentielle des indicateurs disponibles.
 Ces tableaux de bord doivent être adaptés aux différents profils utilisateurs.
 
 - **Graphiques temporels**  

@@ -7,6 +7,40 @@ La colonne `Dépend de (Parent)` du fichier `backlog.csv` reprend ces relations 
 
 ---
 
+## 0. Typologie fonctionnelle (dimension orthogonale aux EPIC)
+
+Chaque US est classée selon une **finalité fonctionnelle** (`Type fonctionnel` dans `backlog.csv`), rattachée aux **4 piliers** du projet (vision AMOA). Les EPIC restent le conteneur thématique stable ; la finalité est une vue transversale.
+
+| Finalité fonctionnelle | Pilier(s) projet | Explication |
+|---|---|---|
+| **Acquisition** | Pilier 1 – Connaissance & Caractérisation | Centralisation des données et des captages |
+| **Structuration** | Pilier 1 – Connaissance & Caractérisation | Mise en ordre du référentiel et du catalogue |
+| **Qualification** | Pilier 1 – Connaissance & Caractérisation (fondement) | Fiabilisation de la donnée avant diagnostic |
+| **Exploitation** | Pilier 2 – Diagnostic & Analyse multicritère (+ Pilier 3) | Calculs, analyse, aide à la décision |
+| **Restitution – Diffusion** | Pilier 4 – Partage & Diffusion | Visualisation, fiches, exports, API |
+| **Gouvernance** | Transverse (socle) | Comptes, droits, traçabilité, audit |
+
+> **Note sur le Pilier 3 (Veille & Détection) :** il n'est pas une finalité séparée ici. Les US de veille/détection (ex : `US7.1` seuils, `US7.2` dépassement) sont rattachées à **Exploitation**, en cohérence avec la classification B retenue.
+
+### Répartition par EPIC
+| EPIC | Finalité dominante | US en dérogation |
+|---|---|---|
+| EPIC 1 – Gestion des données | **Acquisition** | `US1.4` → Structuration ; `US1.6` → Gouvernance |
+| EPIC 1bis – Catalogage | **Structuration** | `US1bis.10` → Acquisition |
+| EPIC 2 – Qualité | **Qualification** | — |
+| EPIC 3 – Référentiels | **Structuration** (socle) | `US3.6` (profils utilisateurs) → Gouvernance |
+| EPIC 4 – Calcul indicateurs | **Exploitation** | — |
+| EPIC 5 – Analyse multicritère | **Exploitation** | — |
+| EPIC 6 – Visualisation | **Restitution – Diffusion** | — |
+| EPIC 7 – Aide à la décision | **Exploitation** | — |
+| EPIC 8 – Export | **Restitution – Diffusion** | — |
+| EPIC 9 – Utilisateurs | **Gouvernance** | — |
+| EPIC 10 – Traçabilité | **Gouvernance** | — |
+
+Le graphe navigable (`annexes/graphe_dependances.html`) permet de basculer le coloriage des nœuds entre **EPIC** et **Type fonctionnel**.
+
+---
+
 ## 1. EPIC 1 & 1bis — Gestion & catalogage des données
 
 ### Import des données

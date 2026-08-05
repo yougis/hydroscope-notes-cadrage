@@ -4,7 +4,7 @@ import { catalogueById } from '@/data/hydroscope'
 import { Icon } from '@/components/ui/Icon'
 
 export const VIEWS: ViewDef[] = [
-  { id: 'carte', label: 'Carte des territoires', group: 'Exploration', expertOnly: false, desc: 'Zone de travail : sélecteur d\'unités de gestion à gauche, carte et couches au centre, catalogue d’indicateurs à droite. Les indicateurs ajoutés ouvrent une page dédiée dans la sidebar.', epic: 'EPIC 6', mvp: true },
+  { id: 'carte', label: 'Carte des territoires', group: 'Exploration', expertOnly: false, desc: 'Zone de travail : sélecteur d\'unités de gestion à gauche, carte et couches au centre, catalogue d\'indicateurs à droite. Les indicateurs ajoutés ouvrent une page dédiée dans la sidebar.', epic: 'EPIC 6', mvp: true },
   { id: 'tableau', label: 'Tableau de bord', group: 'Exploration', expertOnly: false, desc: 'Vue d’ensemble par territoire : chiffres clés, évolution dans le temps, comparaison de périodes, tendances et alertes.', epic: 'EPIC 6', mvp: true },
   { id: 'fiches', label: 'Fiches des territoires', group: 'Exploration', expertOnly: false, desc: 'Fiches structurées par unité (commune, bassin versant, point de captage, périmètre de protection) et fiches indicateurs, avec rapports exportables.', epic: 'EPIC 7', mvp: true },
   { id: 'comparaison', label: 'Comparer les territoires', group: 'Exploration', expertOnly: true, desc: 'Comparaison de plusieurs territoires ou unités, visualisation simultanée et filtres cohérents entre les vues.', epic: 'EPIC 6', mvp: false },

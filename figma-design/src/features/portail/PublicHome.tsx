@@ -42,8 +42,8 @@ export function PublicHome({ mapKey }: PublicHomeProps) {
         <div className="relative h-72 overflow-hidden rounded-lg border border-neutral-200 bg-white">
           <MapCanvas key={mapKey ?? 'public'} showGrid={false} />
           <div className="absolute bottom-3 left-3 rounded-md border border-neutral-200 bg-white p-2 text-[11px] text-neutral-500">
-            <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-blue-500" /> Point de captage</span>
-            <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full border border-dashed border-neutral-500" /> Périmètre de protection</span>
+            <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-blue-500" /> Unité de gestion</span>
+            <span className="mt-1 flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm border border-neutral-400 bg-neutral-200" /> Bassin versant</span>
           </div>
         </div>
       </section>

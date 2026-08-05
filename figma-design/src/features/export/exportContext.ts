@@ -1,4 +1,4 @@
-import { UNITES_GESTIONES, CAPTAGE_POINTS, BVAEPS, BVAEP_POLYGONS } from '@/data/hydroscope'
+import { UNITES_GESTIONES, CAPTAGE_COORDS, BVAEPS, BVAEP_OUTLINES } from '@/data/hydroscope'
 import { valueForUnite, valueForBvaep } from '@/data/values'
 import { buildSqliteDatabase, gpkgPoint, gpkgPolygon, type GpkgTableDef } from './geopackage'
 import type { IndicatorDef, PeriodRange, UnitMode } from '@/types/domain'
@@ -28,10 +28,12 @@ function stamp() {
   return new Date().toISOString().slice(0, 10)
 }
 
-function ncLonLat(x: number, y: number): [number, number] {
-  const lon = 164.0 + ((x - 120) / 400) * 2.8
-  const lat = -20.4 + ((205 - y) / 85) * -1.5
-  return [lon, lat]
+function bvaepRing(bvId: string): Array<[number, number]> {
+  const ring = (BVAEP_OUTLINES[bvId] ?? []).map((p) => [...p] as [number, number])
+  if (ring.length && (ring[0][0] !== ring[ring.length - 1][0] || ring[0][1] !== ring[ring.length - 1][1])) {
+    ring.push([...ring[0]] as [number, number])
+  }
+  return ring
 }
 
 function selectedUnites(ctx: ExportContext) {
@@ -90,13 +92,7 @@ export function exportContextAsGeoJson(ctx: ExportContext): ExportResult {
   const features: Array<{ type: 'Feature'; geometry: unknown; properties: Record<string, unknown> }> = []
   if (ctx.unitMode === 'bvaep') {
     for (const b of selectedBvaeps(ctx)) {
-      const pts = (BVAEP_POLYGONS[b.id] ?? '')
-        .trim()
-        .split(/\s+/)
-        .map((p) => p.split(',').map(Number))
-        .filter((a) => a.length === 2)
-        .map(([x, y]) => ncLonLat(x, y))
-      const ring = [...pts, pts[0] ?? ncLonLat(0, 0)]
+      const ring = bvaepRing(b.id)
       const properties: Record<string, unknown> = {
         id: b.id,
         nom: b.name,
@@ -108,8 +104,7 @@ export function exportContextAsGeoJson(ctx: ExportContext): ExportResult {
     }
   } else {
     for (const c of selectedUnites(ctx)) {
-      const pt = CAPTAGE_POINTS.find((p) => p.key === c.id)
-      const [lon, lat] = pt ? ncLonLat(pt.x, pt.y) : [164.0, -20.4]
+      const [lon, lat] = CAPTAGE_COORDS[c.id] ?? [164.0, -20.4]
       const properties: Record<string, unknown> = {
         id: c.id,
         nom: c.name,
@@ -149,13 +144,7 @@ export function exportContextAsGeoPackage(ctx: ExportContext): ExportResult {
       ['nb_captages', 'INTEGER'],
     ]
     for (const b of selectedBvaeps(ctx)) {
-      const pts = (BVAEP_POLYGONS[b.id] ?? '')
-        .trim()
-        .split(/\s+/)
-        .map((p) => p.split(',').map(Number))
-        .filter((a) => a.length === 2)
-        .map(([x, y]) => ncLonLat(x, y))
-      const ring = [...pts, pts[0] ?? ncLonLat(0, 0)]
+      const ring = bvaepRing(b.id)
       features.push({
         rowid: features.length + 1,
         values: [
@@ -178,8 +167,7 @@ export function exportContextAsGeoPackage(ctx: ExportContext): ExportResult {
       ['bassin_versant', 'TEXT'],
     ]
     for (const c of selectedUnites(ctx)) {
-      const pt = CAPTAGE_POINTS.find((p) => p.key === c.id)
-      const [lon, lat] = pt ? ncLonLat(pt.x, pt.y) : [164.0, -20.4]
+      const [lon, lat] = CAPTAGE_COORDS[c.id] ?? [164.0, -20.4]
       features.push({
         rowid: features.length + 1,
         values: [

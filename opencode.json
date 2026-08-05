@@ -25,7 +25,8 @@
       "enabled": true,
       "headers": {
         "x-consumer-api-key": "apify_api_BrnnBUf5DzYZf2MdG28FV93ZOdr8cV2fwzZ6"
-      },
+      }
+    },
     "joplin": {
       "type": "local",
       "enabled": true,
@@ -33,7 +34,23 @@
       "args": [
         "/home/yogis/AI/mcp/joplin-mcp/src/mcp/joplin_mcp.py"
       ]
-    }
+    },
+    "openlayer": {
+      "type": "local",
+      "command": [
+        "/usr/bin/env",
+        "conda",
+        "run",
+        "--no-capture-output",
+        "-n",
+        "crewai",
+        "uvx",
+        "openlayer-mcp"
+      ],
+      "enabled": true,
+      "environment": {
+        "OPENLAYER_API_KEY": "sk-ol-h4Eg6AxzDGAwfKlz1DPIOAVLHR1HhPZT"
+      }
     }
   }
-} 
+}
