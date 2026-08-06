@@ -1,0 +1,53 @@
+---
+title: "CU-EXPERT-04 — Consulter la fiche synthétique descriptive du territoire"
+profile: "Expert métier eau potable"
+uc: "CU-EXPERT-04"
+us: "US7.4, US7.5"
+epic: "EPIC 7 — Aide à la décision"
+mvp: true
+amc: false
+---
+
+# Consulter la fiche synthétique descriptive d'un territoire
+
+**Phrase agile :** En tant qu'expert métier eau potable, je veux consulter la fiche
+synthétique d'un territoire afin d'identifier rapidement les informations disponibles
+avant de recommander une action.
+
+> **Note de frontière AMC.** La fiche ici est **purement descriptive** : elle présente
+> les unités de gestion et les indicateurs, sans classement ni hiérarchisation.
+> Les éléments liés au **score de criticité / contributions** (us7.4/US7.6) sont traités
+> dans le document AMC isolé `AMC_rendu_score.qmd`.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-EXPERT-04` (US7.4, US7.5) — `profils_utilisateurs.qmd` (Profil 3).
+- EPIC 7 — Fiches et rapports (descriptif, sans scoring ; EPIC 7 interdit classement/scoring).
+- Navigation : Sidebar « Exploration > Fiches des territoires ».
+
+## 2. Fonctionnalités couvertes
+
+- Fiche à l'échelle d'une **unité de gestion** (captage/BV) ou d'une **commune**.
+- Présentation homogène : périmètre, unités de gestion associées, indicateurs.
+- Visualisations associées (carte, graphiques temporels) et comparaison descriptive.
+- Contenus issus des données/indicateurs, **sans transformation interprétative**.
+
+## 3. Parcours IHM
+
+1. Sidebar « Exploration > Fiches des territoires ».
+2. Choisir un territoire (recherche / sélection).
+3. Lecture de la fiche structurée (unités + indicateurs + visualisations).
+4. Bascule descriptif vs (optionnel) rendu AMC (voir document AMC isolé).
+
+## 4. Rendu visuel obtenu
+
+- Fiche structurée en sections (périmètre, unités, indicateurs).
+- Blocs graphiques : carte miniature + graphiques temporels.
+- Métadonnées/fraîcheur affichées (liens vers la fiche indicateur).
+- Captures : _(à insérer depuis le prototype — vue Fiches des territoires)_.
+
+## 5. Points de vigilance
+
+- **Aucun classement/scoring** dans la fiche (exigence EPIC 7).
+- Le score de criticité et les contributions relèvent de l'AMC (document isolé).
+- Maintenir les fiches à jour après les mises à jour de données (régénération).

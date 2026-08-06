@@ -15,8 +15,9 @@ Ce backlog constitue un outil de pilotage des developpement du projet. Il permet
 - suivre l’avancement des fonctionnalités au fil des itérations ;
 - faciliter les échanges entre la MOA, l’AMOA (si existante) et la MOE.
 
-Il ne s’agit pas d’un document figé, mais d’un référentiel de base qui est évolutif.
+Il ne s’agit pas d’un document figé, mais d’un référentiel de base qui est évolutif. 
 
+:::{landscape}
 ```{python}
 #| label: tbl-backlog-latex
 #| tbl-cap: "Product Backlog (base évolutive)"
@@ -32,7 +33,7 @@ df["MVP"] = df["MVP"].map({True: "O", False: "X"})
 # Option A: via tabulate (recommandé)
 print(df.to_markdown(index=False))
 ```
-
+:::
 
 
 ### Évolution du backlog
@@ -41,18 +42,20 @@ Le backlog produit est amené à évoluer tout au long du projet afin de s’ada
 
 Toutefois, cette évolution doit être encadrée afin de garantir la maîtrise du périmètre, des délais et des coûts.
 
-Le backlog initial constitue la base contractuelle du projet, notamment pour le périmètre du MVP. Les fonctionnalités associées à ce périmètre devront être réalisées dans le cadre du marché.
+Le backlog initial constitue la base contractuelle du projet, notamment pour le périmètre du MVP. Les fonctionnalités associées à ce périmètre devront être réalisées dans le cadre de la préstation.
 
 Les évolutions du backlog (ajout, modification ou suppression de fonctionnalités) devront faire l’objet :
+
 - d’une analyse d’impact (fonctionnelle et technique) ;
 - d’une estimation de charge ;
 - d’une validation par la MOA.
 
 Ces évolutions pourront être :
+
 - intégrées dans le périmètre existant si elles restent compatibles avec les engagements contractuels ;
 - ou traitées comme des évolutions hors périmètre, dans le cadre d’un dispositif de maintenance ou de prestations complémentaires.
 
-Le prestataire devra proposer une organisation permettant de gérer ces évolutions de manière transparente, notamment via l’outil de gestion de projet (ex : Azure DevOps).
+Le prestataire devra proposer une organisation permettant de gérer ces évolutions de manière transparente, notamment via l’outil de gestion de projet (Azure DevOps).
 
 Une attention particulière devra être portée à la maîtrise du périmètre du MVP, qui constitue une étape clé du projet.
 
@@ -65,7 +68,7 @@ Dans ce cadre :
 - les EPICS et User Stories seront créés et structurés dans un projet dédié ;
 - ils seront enrichis avec des critères d’acceptation, des estimations de charge et des dépendances ;
 - ils seront planifiés et suivis au sein des sprints de développement ;
-- leur avancement sera tracé de manière continue
+- leur avancement sera tracé de manière continue ;
 - le code source sera hebergé dans l'infrastructure de l'OEIL et les commits seront liés aux US dans la mesure du possible.
 
 Le tableau présent dans le présent cahier des charges constitue ainsi une base de travail initiale, destinée à être opérationnalisée et détaillée dans l’outil de gestion de projet au cours de la phase de réalisation.

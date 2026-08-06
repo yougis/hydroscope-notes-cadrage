@@ -1,9 +1,22 @@
 export interface UnitBarDatum {
+  id?: string
   label: string
   value: number
 }
 
-export function UnitBarChart({ data, unit = '', className = '' }: { data: UnitBarDatum[]; unit?: string; className?: string }) {
+export function UnitBarChart({
+  data,
+  unit = '',
+  className = '',
+  hoveredId,
+  onHovered,
+}: {
+  data: UnitBarDatum[]
+  unit?: string
+  className?: string
+  hoveredId?: string | null
+  onHovered?: (id: string | null) => void
+}) {
   if (data.length === 0) return null
   const max = Math.max(...data.map((d) => d.value), 1)
   return (
@@ -15,14 +28,32 @@ export function UnitBarChart({ data, unit = '', className = '' }: { data: UnitBa
         ))}
         {data.map((d, i) => {
           const h = Math.max(4, (d.value / max) * 60)
+          const isHover = d.id != null && d.id === hoveredId
           return (
-            <rect key={i} x={i * 40 + 8} y={84 - h} width={24} height={h} rx="3" fill="#93c5fd" />
+            <rect
+              key={i}
+              x={i * 40 + 8}
+              y={84 - h}
+              width={24}
+              height={h}
+              rx="3"
+              fill={isHover ? '#2563eb' : '#93c5fd'}
+              onMouseEnter={() => d.id && onHovered?.(d.id)}
+              onMouseLeave={() => d.id && onHovered?.(null)}
+              style={{ cursor: d.id ? 'pointer' : 'default' }}
+            />
           )
         })}
       </svg>
       <div className="flex justify-between gap-1 overflow-hidden text-[9px] text-neutral-400">
         {data.map((d, i) => (
-          <span key={i} className="truncate" title={`${d.label} : ${d.value} ${unit}`}>
+          <span
+            key={i}
+            className={`truncate ${d.id === hoveredId ? 'font-semibold text-blue-700' : ''}`}
+            title={`${d.label} : ${d.value} ${unit}`}
+            onMouseEnter={() => d.id && onHovered?.(d.id)}
+            onMouseLeave={() => d.id && onHovered?.(null)}
+          >
             {d.label}
           </span>
         ))}

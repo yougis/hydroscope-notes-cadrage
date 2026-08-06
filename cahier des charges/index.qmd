@@ -155,17 +155,16 @@ L'OEIL assure la continuité intellectuelle du projet initial (PressionPPE en 20
 
 ## Tableau synthétique des indicateurs
 
-Le tableau de référence des indicateurs est fourni avec le présent cahier des charges :
+Le tableau de référence des indicateurs est le **fichier maître** `fiches indicateurs.xlsx` (source unique des indicateurs, dossier de travail `fiche indicateur/`), joint à l'offre :
 
-- [liste_indicateurs_v4.xlsx](./annexes/liste_indicateurs_v4.xlsx) — version de référence contractuelle (38 indicateurs, version 4) ;
-- [liste_indicateurs_v3.2.csv](../ressources/liste_indicateurs_v3.2.csv) — version de travail CSV, identique dans son contenu (38 indicateurs).
+- `fiches indicateurs.xlsx` — référentiel contractuel des indicateurs (38 indicateurs, regroupement V1 : 2 familles, 4 thèmes, 10 groupes), résolu par la variable d'environnement `HYDRO_INDICATEURS_XLSX` (défaut : dossier `fiche indicateur/`).
 
 ## Catalogue des indicateurs
 
 Le catalogue de fiches détaillées des indicateurs est fourni avec le présent cahier des charges :
 
 - [Fiches_indicateurs_HydroScope-v4.pdf](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées (définition, objectifs, méthode, sources, vigilances) ;
-- le répertoire des données structurées associées ([../ressources/fiches-csv](../ressources/fiches-csv/)) alimente dynamiquement les tableaux du chapitre 5 – Présentation des indicateurs.
+- le fichier maître `fiches indicateurs.xlsx` (source unique) alimente dynamiquement les tableaux des chapitres 1 et 5 – Présentation des indicateurs.
 
 ## Critères d'acceptation
 

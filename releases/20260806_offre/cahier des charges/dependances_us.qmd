@@ -1,0 +1,261 @@
+---
+title: "Dépendances entre User Stories"
+format: html
+date: "2026-08-06"
+---
+
+Ce document recense les relations de dépendance **(parent → enfant)** entre les User Stories du backlog. Tous les tableaux de ce document sont générés depuis `backlog.csv` : les relations parent/enfant sont dérivées de la colonne `Dépend de (Parent)`, et **seules les dépendances déclarées dans cette colonne** figurent dans les tableaux.
+
+> Une US peut être **à la fois enfant et parent** (ex : `US4.1` est enfant de `US3.5`, `US4.7` et `US1bis.12`, et parent de `US4.2`, `US4.3`, `US4.7`, `US5.1` et `US10.2`). Ces influences croisées sont représentées dans le graphe navigable (`annexes/graphe_dependances.html`).
+
+---
+
+## Typologie des dépendances
+
+Chaque US est classée selon une **finalité fonctionnelle** (`Type fonctionnel` dans `backlog.csv`), rattachée aux **4 piliers** du projet (vision AMOA). Les EPIC restent le conteneur thématique stable ; la finalité est une vue transversale.
+
+```{python}
+#| label: tbl-typologie
+#| tbl-cap: "Typologie des dépendances (finalité fonctionnelle × pilier)"
+#| output: asis
+
+import pandas as pd
+
+df = pd.read_csv("backlog.csv", sep=";")
+df["Dépend de (Parent)"] = df["Dépend de (Parent)"].fillna("").astype(str)
+
+# Explications extraites de la version précédente du document (tableau « Typologie »)
+EXPLICATIONS = {
+    "Acquisition": "Centralisation des données et des captages",
+    "Structuration": "Mise en ordre du référentiel et du catalogue",
+    "Qualification": "Fiabilisation de la donnée avant diagnostic",
+    "Exploitation": "Calculs, analyse, aide à la décision",
+    "Restitution – Diffusion": "Visualisation, fiches, exports, API",
+    "Gouvernance": "Comptes, droits, traçabilité, audit",
+}
+
+# Justifications extraites des tableaux parent/enfant de la version précédente du document
+JUSTIFICATIONS = {
+    "US1.1": "Maillon racine : la planification, la normalisation, la gestion d'erreurs, l'historisation et l'alimentation du catalogue supposent qu'un import existe.",
+    "US1.2": "Un flux API doit pouvoir être catalogué.",
+    "US1.6": "La lecture temporelle et la reconstitution d'état supposent l'existence d'un historique.",
+    "US1bis.1": "L'enregistrement conditionne l'enrichissement métadonnées.",
+    "US1bis.2": "On ne modifie que ce qui a été documenté.",
+    "US1bis.8": "Relier un jeu de données à un traitement s'appuie sur la traçabilité des transformations.",
+    "US1bis.12": "L'indicateur dérivé est produit par un calcul préalable.",
+    "US2.1": "Les contrôles effectués sont consignés dans les métadonnées de qualité.",
+    "US2.2": "Les contrôles effectués sont consignés dans les métadonnées de qualité.",
+    "US2.3": "Les contrôles effectués sont consignés dans les métadonnées de qualité.",
+    "US2.6": "La visualisation de la qualité synthétise les contrôles documentés.",
+    "US3.1": "Le BV est l'objet structurant de l'agrégation et de l'affichage cartographique.",
+    "US3.2": "Le captage est nécessaire au croisement et au sélecteur.",
+    "US3.5": "Un indicateur doit être défini (méthode, unité) avant d'être calculé et affiché.",
+    "US4.1": "Le calcul simple est la base de toutes les agrégations, du recalcul, de la traçabilité et de l'AMC.",
+    "US4.7": "Recalculer ré-exécute un calcul existant.",
+    "US5.1": "L'indice est le préalable à toute pondération et priorisation.",
+    "US5.2": "On teste et priorise à partir d'une pondération définie.",
+    "US5.3": "La comparaison et la visualisation des contributions s'appuient sur des scénarios testés.",
+    "US5.4": "La visualisation des contributions clôt la chaîne d'analyse.",
+    "US6.7": "La fiche territoire est la base du rapport PDF et alimente les graphiques temporels (voir EPIC 7).",
+    "US6.10": "L'affichage des facettes actives en puces décochables suppose que la recherche et la sélection multiple existent.",
+    "US6.11": "L'affichage des facettes actives en puces décochables suppose que la recherche et la sélection multiple existent.",
+    "US6.18": "Le calcul d'intersection (≥ 20 %) alimente la facette commune du sélecteur.",
+    "US6.24": "La vue temporelle est désactivée si les données ne sont pas historisées (voir EPIC 4).",
+    "US7.1": "On ne peut détecter un dépassement qu'à partir de seuils définis.",
+    "US8.4": "Le partage doit respecter les droits d'accès (voir EPIC 9).",
+    "US8.5": "L'API doit filtrer les données selon les habilitations.",
+    "US9.2": "L'authentification est le préalable à la gestion des rôles, comptes et sessions.",
+    "US9.3": "Les rôles permettent de granuler les droits et d'adapter l'interface.",
+    "US10.2": "Reconstituer un résultat supposé qu'il ait été tracé à l'exécution.",
+}
+
+def parents_de(us):
+    return [p.strip() for segment in us["Dépend de (Parent)"].split(";") for p in segment.split(",") if p.strip()]
+
+def ligne_us(us_id):
+    return df.loc[df["ID User Story"] == us_id]
+
+def libelle_us(us_id):
+    ligne = ligne_us(us_id)
+    return ligne.iloc[0]["Libellé User Story"] if len(ligne) else us_id
+
+def epic_us(us_id):
+    ligne = ligne_us(us_id)
+    return ligne.iloc[0]["EPIC"] if len(ligne) else None
+
+def cle_id(us_id):
+    import re
+    m = re.fullmatch(r"(\D+)(\d+)", us_id)
+    return (m.group(1), int(m.group(2))) if m else (us_id, 0)
+
+def tableau_dependances(epics):
+    enfants = {}
+    for _, us in df.iterrows():
+        for parent in parents_de(us):
+            if epic_us(parent) in epics:
+                enfants.setdefault(parent, set()).add(us["ID User Story"])
+    lignes = []
+    for parent, epic in sorted(((p, epic_us(p)) for p in enfants), key=lambda t: (t[1], cle_id(t[0]))):
+        enfants_tries = sorted(enfants[parent], key=cle_id)
+        lignes.append({
+            "Parent": f"{parent} — {libelle_us(parent)}",
+            "Enfant(s)": " ; ".join(f"{e} — {libelle_us(e)}" for e in enfants_tries),
+            "Justification": JUSTIFICATIONS.get(parent, "—"),
+        })
+    return pd.DataFrame(lignes)
+
+pilier = df.groupby("Type fonctionnel")["Pilier(s)"].first()
+effectif = df.groupby("Type fonctionnel")["ID User Story"].count()
+typologie = pd.DataFrame({
+    "Finalité fonctionnelle": list(EXPLICATIONS),
+    "Pilier(s) projet": [pilier[t] for t in EXPLICATIONS],
+    "Explication": list(EXPLICATIONS.values()),
+    "Nombre d'US": [effectif[t] for t in EXPLICATIONS],
+})
+print(typologie.to_markdown(index=False))
+```
+
+> **Note sur le Pilier 3 (Veille & Détection) :** il n'est pas une finalité séparée ici. Les US de veille/détection (ex : `US7.1` seuils, `US7.2` dépassement) sont rattachées à **Exploitation**, en cohérence avec la classification B retenue.
+
+### Répartition par EPIC
+
+```{python}
+#| label: tbl-repartition
+#| tbl-cap: "Répartition des US par EPIC et finalité dominante"
+#| output: asis
+
+def finalite_dominante(series):
+    comptes = {t: list(series).count(t) for t in dict.fromkeys(series)}
+    return max(comptes, key=comptes.get)
+
+lignes = []
+for epic, grp in df.groupby("EPIC", sort=True):
+    dominante = finalite_dominante(grp["Type fonctionnel"])
+    derogations = grp[grp["Type fonctionnel"] != dominante]
+    if len(derogations):
+        texte = " ; ".join(
+            f"{u} — {l}" for u, l in zip(derogations["ID User Story"], derogations["Libellé User Story"])
+        )
+    else:
+        texte = "—"
+    lignes.append({"EPIC": epic, "Finalité dominante": dominante, "US en dérogation": texte})
+
+repartition = pd.DataFrame(lignes)
+print(repartition.to_markdown(index=False))
+```
+
+Le graphe navigable (`annexes/graphe_dependances.html`) permet de basculer le coloriage des nœuds entre **EPIC** et **Type fonctionnel**.
+
+---
+
+## EPIC 1 & 1bis — Gestion & catalogage des données
+
+Le tableau ci-dessous recense les arêtes dont le parent appartient à l'EPIC 1 (Gestion des données) ou à l'EPIC 1bis (Catalogage des données).
+
+```{python}
+#| label: tbl-epic-1-1bis
+#| tbl-cap: "EPIC 1 & 1bis — arêtes parent/enfant"
+#| output: asis
+
+print(tableau_dependances({"EPIC 1 – Gestion des données", "EPIC 1bis – Catalogage des données"}).to_markdown(index=False))
+```
+
+---
+
+## EPIC 3 — Référentiels (socle géographique)
+
+```{python}
+#| label: tbl-epic-3
+#| tbl-cap: "EPIC 3 — arêtes parent/enfant"
+#| output: asis
+
+print(tableau_dependances({"EPIC 3 – Référentiels"}).to_markdown(index=False))
+```
+
+---
+
+## EPIC 4 — Calcul d'indicateurs
+
+Noter la **boucle de recalcul** `US4.1` ↔ `US4.7` : `US4.7` (Recalculer un indicateur) dépend de `US4.1` (Calculer des indicateurs simples), qui dépend en retour de `US4.7` — recalculer ré-exécute un calcul existant, qui peut lui-même déclencher un recalcul.
+
+```{python}
+#| label: tbl-epic-4
+#| tbl-cap: "EPIC 4 — arêtes parent/enfant"
+#| output: asis
+
+print(tableau_dependances({"EPIC 4 – Calcul d'indicateurs"}).to_markdown(index=False))
+```
+
+---
+
+## EPIC 5 — Analyse multicritère (chaîne)
+
+```{python}
+#| label: tbl-epic-5
+#| tbl-cap: "EPIC 5 — arêtes parent/enfant"
+#| output: asis
+
+print(tableau_dependances({"EPIC 5 – Analyse multicritère"}).to_markdown(index=False))
+```
+
+---
+
+## EPIC 6 — Visualisation
+
+L'EPIC 6 est le plus dense du backlog (26 US). Ses dépendances externes sont portées par les EPIC 3 et 4 (référentiels → affichage cartographique, historisation → vue temporelle) ; le tableau ci-dessous recense les arêtes dont le parent appartient à l'EPIC 6.
+
+```{python}
+#| label: tbl-epic-6
+#| tbl-cap: "EPIC 6 — arêtes parent/enfant"
+#| output: asis
+
+print(tableau_dependances({"EPIC 6 – Visualisation"}).to_markdown(index=False))
+```
+
+---
+
+## EPIC 7 — Aide à la décision
+
+```{python}
+#| label: tbl-epic-7
+#| tbl-cap: "EPIC 7 — arêtes parent/enfant"
+#| output: asis
+
+print(tableau_dependances({"EPIC 7 – Aide à la décision"}).to_markdown(index=False))
+```
+
+---
+
+## EPIC 8 — Export & diffusion
+
+```{python}
+#| label: tbl-epic-8
+#| tbl-cap: "EPIC 8 — arêtes parent/enfant"
+#| output: asis
+
+print(tableau_dependances({"EPIC 8 – Export"}).to_markdown(index=False))
+```
+
+---
+
+## EPIC 9 — Gestion des utilisateurs
+
+```{python}
+#| label: tbl-epic-9
+#| tbl-cap: "EPIC 9 — arêtes parent/enfant"
+#| output: asis
+
+print(tableau_dependances({"EPIC 9 – Utilisateurs"}).to_markdown(index=False))
+```
+
+---
+
+## EPIC 10 — Traçabilité
+
+```{python}
+#| label: tbl-epic-10
+#| tbl-cap: "EPIC 10 — arêtes parent/enfant"
+#| output: asis
+
+print(tableau_dependances({"EPIC 10 – Traçabilité"}).to_markdown(index=False))
+```

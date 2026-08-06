@@ -1,0 +1,46 @@
+---
+title: "CU-DATA-04 — Calculer un indicateur et versionner sa méthode"
+profile: "Administrateur expert data"
+uc: "CU-DATA-04"
+us: "US4.1, US4.6"
+epic: "EPIC 4 — Calcul d'indicateurs"
+mvp: true
+amc: false
+---
+
+# Calculer un indicateur et versionner sa méthode
+
+**Phrase agile :** En tant qu'administrateur expert data, je veux calculer un indicateur
+et versionner sa méthode afin de garantir la traçabilité et la reproductibilité des résultats.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-DATA-04` (US4.1, US4.6) — `profils_utilisateurs.qmd` (Profil 2).
+- EPIC 4 — Calcul d'indicateurs (calculs simples, agrégations, paramétrage, versioning).
+
+## 2. Fonctionnalités couvertes
+
+- Définition du calcul : variables, règles d'agrégation, filtres (qualité/type, période, source).
+- Calculs simples (moyenne, médiane, somme) et agrégations spatiales/temporelles.
+- **Versioning** de la méthode : conservation des versions, reproductibilité, traçabilité.
+- Documentation du paramétrage (transparence).
+
+## 3. Parcours IHM
+
+1. Sidebar « Données > Indicateurs ».
+2. Créer/modifier un indicateur → définition de la formule (paramétrage).
+3. Lancement du calcul (traitement).
+4. Consultation du résultat + enregistrement de la version de la méthode.
+5. Historique des versions consultable.
+
+## 4. Rendu visuel obtenu
+
+- Éditeur de méthode (liste de paramètres `Select`, champs numériques).
+- Rendu du résultat : vignette + graphiques (lien vers onglets dataviz).
+- Badge de version (`v1`, `v2`…) sur la fiche indicateur.
+- Captures : _(à insérer depuis le prototype — vue Indicateurs)_.
+
+## 5. Points de vigilance
+
+- Transparence des calculs (§3.2) : la méthode doit être explicite et justifiable.
+- Versioning indispensable à la comparabilité temporelle (EPIC 4).

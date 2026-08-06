@@ -138,7 +138,6 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
       feature.set('name', cActive?.name ?? id)
       feature.set('commune', cActive?.commune ?? '—')
       feature.set('province', cActive?.province ?? '—')
-      feature.set('dist', cActive?.dist ?? 0)
       feature.set(
         'value',
         ind ? `${valueForUnite(ind.id, id).toLocaleString('fr-FR')} ${ind.unit}` : null

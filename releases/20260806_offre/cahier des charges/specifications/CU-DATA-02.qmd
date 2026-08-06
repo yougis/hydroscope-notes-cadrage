@@ -1,0 +1,47 @@
+---
+title: "CU-DATA-02 — Détecter des anomalies et qualifier la fiabilité"
+profile: "Administrateur expert data"
+uc: "CU-DATA-02"
+us: "US2.1, US2.5"
+epic: "EPIC 2 — Qualité des données"
+mvp: true
+amc: false
+---
+
+# Détecter des valeurs aberrantes et qualifier la fiabilité
+
+**Phrase agile :** En tant qu'administrateur expert data, je veux détecter des valeurs
+aberrantes et qualifier la fiabilité afin de garantir la confiance à accorder aux données produites.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-DATA-02` (US2.1, US2.5) — `profils_utilisateurs.qmd` (Profil 2).
+- EPIC 2 — Qualité et validation ; §8 — Monitoring de la qualité des données
+  (fraîcheur, complétude, anomalies, fiabilité).
+
+## 2. Fonctionnalités couvertes
+
+- Détection d'anomalies (valeurs aberrantes, ruptures de séries, incohérences).
+- Suivi de la complétude et de la fraîcheur des jeux de données.
+- Qualification du niveau de **fiabilité** de chaque donnée/indicateur.
+- Affichage des indicateurs de qualité dans les visualisations (cartes, graphiques, fiches).
+
+## 3. Parcours IHM
+
+1. Sidebar « Données > Données disponibles » puis un jeu de données.
+2. Vue « Qualité » : indicateurs de complétude, fraîcheur, anomalies.
+3. Signalement/validation des valeurs aberrantes (masquage ou correction).
+4. Affectation du niveau de fiabilité → reporté dans les fiches métadonnées.
+
+## 4. Rendu visuel obtenu
+
+- Indicateurs de qualité en pastilles/badges (vert = bon, ambre = dégradé, rouge = critique).
+- « Fraîcheur » affichée : date de mise à jour (mono) sur les vignettes.
+- Anomalies listées avec compteur ; détail en table.
+- Captures : _(à insérer depuis le prototype — vue Données disponibles / Qualité)_.
+
+## 5. Points de vigilance
+
+- La fiabilité éclaire l'interprétation sans la remplacer (§3.2, §8).
+- Seuil de comparabilité (~80 % de complétude) : ne classer que les données
+  suffisamment décrites (réunion AMC).

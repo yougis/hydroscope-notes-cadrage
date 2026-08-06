@@ -1,0 +1,37 @@
+
+#### Description
+
+Cet EPIC regroupe les fonctionnalités d’aide à la décision : qualifier les valeurs des indicateurs (seuils, tendances), identifier rapidement les facteurs de vulnérabilité dominants d’un bassin versant et, à terme, prioriser les territoires selon leur criticité. Il matérialise l’un des objectifs centraux du projet : transformer la connaissance produite en support d’arbitrage pour les décideurs et les gestionnaires de la ressource.
+
+L’EPIC 7 se distingue de l’EPIC 6 (visualisation descriptive, sans interprétation) et de l’EPIC 5 (analyse multicritère, option chiffrée séparément) : il introduit la **qualification** des valeurs, c’est-à-dire une lecture orientée vers l’action, tout en restant transparente et traçable.
+
+Le périmètre MVP couvre les US7.1 (définir des seuils), US7.3 (identifier des tendances) et US7.4 (fiche synthétique d’un bassin versant). La détection de dépassement (US7.2), la priorisation des territoires (US7.5) et l’aide à l’interprétation avancée (US7.6) relèvent du lot 2, la priorisation étant liée à l’option analyse multicritère (EPIC 5).
+
+#### Fonctionnalités
+
+- **Seuils d’alerte (US7.1)**  
+Le système doit permettre de définir des seuils permettant de qualifier les valeurs des indicateurs (ex. niveaux de vigilance), avec des valeurs par défaut proposées et la possibilité de les adapter. La définition et la modification des seuils doivent être tracées afin de préserver la lisibilité des analyses.
+
+- **Détection de dépassement (US7.2)**  
+Le système doit permettre de détecter les dépassements de seuil afin d’anticiper les périodes de tension sur la ressource. Cette fonctionnalité s’appuie sur les seuils définis (US7.1) et sur l’historisation des données (EPIC 1).
+
+- **Identification des tendances (US7.3)**  
+Le système doit permettre d’identifier les tendances d’évolution des indicateurs (hausse, baisse, rupture) afin de signaler les évolutions préoccupantes de la ressource. Les tendances sont produites à partir des séries historisées et doivent rester interprétables par un utilisateur non statisticien.
+
+- **Fiche synthétique d’un bassin versant (US7.4)**  
+Le système doit permettre de consulter une fiche synthétique par bassin versant, mettant en évidence les facteurs de vulnérabilité dominants, afin d’identifier rapidement les situations nécessitant une attention. Cette fiche est distincte de la fiche territoire descriptive de l’EPIC 6 (US6.7) : elle porte une lecture de criticité, sans classement ni hiérarchisation automatisée dans le périmètre MVP.
+
+- **Priorisation des territoires (US7.5, lot 2)**  
+Le système doit permettre de prioriser les territoires selon leur score de criticité, afin de concentrer les actions sur les zones les plus sensibles. Cette fonctionnalité dépend de l’indice composite de l’EPIC 5 (US5.1) et de ses pondérations (US5.2).
+
+- **Aide à l’interprétation avancée (US7.6, lot 2)**  
+Le système doit fournir une aide à l’interprétation permettant d’établir une hiérarchie d’actions justifiée, en explicitant les facteurs ayant conduit à la situation observée.
+
+#### Points de vigilance
+
+- **Méthode de scoring** : le scoring conservateur « déclassant » (la classe la plus pénalisante détermine le niveau) est privilégié ; il reste à valider avec la MOA et le conseil scientifique avant son intégration (point ouvert MOA).
+- **Complétude des données** : la comparabilité des territoires suppose un seuil de complétude des données d’environ 80 % ; en deçà, les résultats doivent être affichés avec la réserve appropriée.
+- **Pondérations encadrées** : les pondérations éventuelles sont encadrées et validées (atelier OS1, conseil scientifique) ; des garde-fous d’interface doivent prévenir les usages non maîtrisés.
+- **Transparence** : les scores intermédiaires doivent rester exportables et documentés afin de préserver la traçabilité de l’aide à la décision.
+- **Données sensibles** : la diffusion agrégée et le floutage des données sensibles s’appliquent aux restitutions d’aide à la décision comme aux visualisations.
+- **Règle « 50 % »** : le débit prélevable par défaut est fixé à 50 % du débit caractéristique ; sa définition définitive reste à consolider avec la DAVAR (point ouvert MOA).

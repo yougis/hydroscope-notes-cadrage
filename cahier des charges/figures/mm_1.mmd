@@ -1,0 +1,9 @@
+flowchart TB
+    SRC["Sources de données"]
+    ING["Ingestion et import"]
+    STO["Stockage"]
+    TRA["Traitement"]
+    API["Exposition (API)"]
+    UI["Interfaces utilisateurs"]
+
+    SRC --> ING --> STO --> TRA --> API --> UI

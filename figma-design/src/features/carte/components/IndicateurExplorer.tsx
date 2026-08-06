@@ -6,7 +6,7 @@ import { UNITES_GESTIONES, CATALOGUE, BVAEPS, catalogueById, groupsOfFamily, gro
 import { valueForUnite, valueForBvaep } from '@/data/values'
 import { ChartModeSwitcher, type ChartViewMode } from '@/features/indicateurs/ChartModeSwitcher'
 import { PanelSection } from './PanelSection'
-import type { IndicatorDef, IndicatorFamily, UnitMode } from '@/types/domain'
+import type { IndicatorDef, IndicatorFamily, UnitMode, HoverEntity } from '@/types/domain'
 
 export interface IndicateurExplorerProps {
   unitMode: UnitMode
@@ -20,6 +20,8 @@ export interface IndicateurExplorerProps {
   onMode: (m: ChartViewMode) => void
   showCarte: boolean
   onToggleCarte: () => void
+  hoverEntity?: HoverEntity | null
+  onHoverEntity?: (e: HoverEntity | null) => void
 }
 
 function matchIndicator(i: IndicatorDef, q: string) {
@@ -39,6 +41,8 @@ export function IndicateurExplorer({
   onMode,
   showCarte,
   onToggleCarte,
+  hoverEntity = null,
+  onHoverEntity,
 }: IndicateurExplorerProps) {
   const [query, setQuery] = useState('')
   const [famille, setFamille] = useState<IndicatorFamily>('ENJEUX')
@@ -81,11 +85,15 @@ export function IndicateurExplorer({
     if (!ind) return []
     if (unitMode === 'bvaep') {
       const units = BVAEPS.filter((b) => selectedBvaeps.has(b.id))
-      return units.map((b) => ({ label: `BV-${b.id.slice(-2)}`, value: valueForBvaep(ind.id, b.id) }))
+      return units.map((b) => ({ id: b.id, label: `BV-${b.id.slice(-2)}`, value: valueForBvaep(ind.id, b.id) }))
     }
     const units = UNITES_GESTIONES.filter((c) => selectedUnites.has(c.id))
-    return units.map((c) => ({ label: c.name.slice(0, 8), value: valueForUnite(ind.id, c.id) }))
+    return units.map((c) => ({ id: c.id, label: c.name.slice(0, 8), value: valueForUnite(ind.id, c.id) }))
   })()
+
+  const hoveredKind = unitMode === 'bvaep' ? 'bvaep' : 'unite'
+  const hoveredId = hoverEntity && hoverEntity.kind === hoveredKind ? hoverEntity.id : null
+  const emitHover = (id: string | null) => onHoverEntity?.(id ? { kind: hoveredKind, id } : null)
 
   const noUnits = chartData.length === 0
 
@@ -286,9 +294,9 @@ export function IndicateurExplorer({
                 Valeurs par hexagone H3 disponibles au survol de la carte.
               </p>
             ) : mode === 'tableau' ? (
-              <UnitValueTable data={chartData} unit={ind.unit} className="min-h-24 w-full" />
+              <UnitValueTable data={chartData} unit={ind.unit} className="min-h-24 w-full" hoveredId={hoveredId} onHovered={emitHover} />
             ) : mode === 'repartition' ? (
-              <UnitBarChart data={chartData} unit={ind.unit} className="min-h-24 w-full" />
+              <UnitBarChart data={chartData} unit={ind.unit} className="min-h-24 w-full" hoveredId={hoveredId} onHovered={emitHover} />
             ) : (
               <div className="rounded-md border border-dashed border-neutral-300 bg-neutral-50 p-2 text-center text-[10px] text-neutral-400">
                 Vue {mode} — détaillée dans la page indicateur (sidebar).

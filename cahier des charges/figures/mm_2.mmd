@@ -1,0 +1,12 @@
+flowchart TB
+    SRC["Sources de données<br/>internes & externes"]
+    ING["Ingestion et import<br/>API · fichiers · flux automatisés"]
+    STO["Stockage<br/>base spatiale (PostgreSQL + PostGIS)<br/>historisation · référentiels · catalogue"]
+    TRA["Traitement<br/>normalisation · calcul des indicateurs<br/>agrégations spatiales (grille H3)"]
+    API["Exposition<br/>API REST · standards OGC (WMS/WFS) · ESRI"]
+    UI["Interfaces utilisateurs<br/>cartes · tableaux de bord · fiches"]
+    TIERS["Systèmes tiers<br/>outils SIG · portails · applications"]
+
+    SRC --> ING --> STO --> TRA --> API --> UI
+    API --> TIERS
+

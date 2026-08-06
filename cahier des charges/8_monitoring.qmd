@@ -38,11 +38,13 @@ Le système devra permettre de suivre les évolutions des indicateurs dans une l
 Cela inclut :
 
 - le suivi temporel des pressions environnementales ;
+- détéction différentielle brute des données à leur mise à jours.
 - la détection de tendances et de ruptures ;
 - la mise en place de mécanismes d’alerte sur des évolutions significatives ;
-- détéction différentielle brute des données à leur mise à jours.
 
 Ces fonctionnalités participent directement au rôle d’aide à la décision du projet. D'autre part, elles permettent de sécuriser la production des indicateurs et d’alerter les utilisateurs sur des évolutions significatives.
+
+@todo [priority=high] : à préciser avec l'OEIL si c'est optionnel notamment sur les seuils d'alerte et les détéction des tendances et des ruptures.
 
 ### Monitoring des usages
 

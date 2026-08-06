@@ -1,0 +1,48 @@
+---
+title: "CU-ADMIN-04 — Consulter le journal des actions et détecter des anomalies"
+profile: "Administrateur plateforme"
+uc: "CU-ADMIN-04"
+us: "US10.3"
+epic: "EPIC 10 — Traçabilité"
+mvp: true
+amc: false
+---
+
+# Consulter le journal des actions et détecter des anomalies
+
+**Phrase agile :** En tant qu'administrateur plateforme, je veux consulter le journal
+des actions afin de détecter des comportements anormaux et assurer la sécurité du système.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-ADMIN-04` (US10.3) — `profils_utilisateurs.qmd` (Profil 1).
+- EPIC 10 — Traçabilité et audit ; §8 Historisation et traçabilité des données.
+- Navigation : Sidebar « Suivi > Historique & traçabilité » (`UX-header-sidebar.md` §2.2).
+
+## 2. Fonctionnalités couvertes
+
+- Journal horodaté des actions (connexions, imports, calculs, exports, changements de droits).
+- Filtres (utilisateur, date, type d'action, statut).
+- Recherche et export du journal.
+- Signalement des événements anormaux (échecs, tentatives multiples).
+
+## 3. Parcours IHM
+
+1. Sidebar « Suivi > Historique & traçabilité ».
+2. Vue chronologique du journal (table avec pagination).
+3. Application de filtres (période, acteur, action).
+4. Clic sur une ligne → détail de l'événement.
+5. Export CSV du journal filtré (EPIC 8).
+
+## 4. Rendu visuel obtenu
+
+- Table de logs (`ex-data-table-cell`) : horodatage `mono`, statut avec pastille
+  couleur (vert = succès, rouge = échec/anomalie, ambre = avertissement).
+- Filtres en `Select`/`DatePicker` (Radix `day-picker`).
+- Export via menu « Export » (composant `ExportMenu.tsx`).
+- Captures : _(à insérer depuis le prototype — vue Historique & traçabilité)_.
+
+## 5. Points de vigilance
+
+- Journal immuable / non falsifiable (audit EPIC 10).
+- Volumétrie : pagination et rétention configurable.

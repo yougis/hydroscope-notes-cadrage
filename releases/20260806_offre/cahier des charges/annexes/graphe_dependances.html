@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>HydroScope — Graphe des dépendances US</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  /* Police pour les icônes de rôle dans le graphe (Font Awesome Solid exposé sous un nom de famille
+     au poids que vis-network utilise pour dessiner node.icon, afin que les glyphes se résolvent). */
+  @font-face {
+    font-family: 'HydroIcons';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2') format('woff2');
+  }
+  body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; color: #e6e8eb; background: #17191d; }
+  header { padding: 12px 18px; background: #101215; color: #fff; }
+  header h1 { margin: 0; font-size: 20px; }
+  header p { margin: 4px 0 0; font-size: 13px; opacity: .85; }
+  #controls { padding: 10px 18px; background: #1c1f24; border-bottom: 1px solid #2a2e35; }
+  #controls label { margin-right: 14px; font-size: 13px; cursor: pointer; display: inline-block; white-space: nowrap; color: #cfd3d8; }
+  #controls b { color: #e6e6eb; }
+  #controls .chip { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 4px; vertical-align: middle; }
+  button { padding: 6px 12px; margin-left: 10px; cursor: pointer; border: 1px solid #2f6f9f; background: #14324d; color: #fff; border-radius: 4px; font-size: 13px; }
+  button:hover { background: #1d4a70; }
+  #legend { font-size: 13px; padding: 8px 18px; background: #1c1f24; color: #e6e6eb; border-bottom: 1px solid #2a2e35; }
+  #legend b { margin-right: 8px; }
+  .legend-item { display: inline-block; margin-right: 12px; color: #e6e6eb; }
+  #groupnav { padding: 8px 18px; background: #1c1f24; border-bottom: 1px solid #2a2e35; font-size: 13px; }
+  #groupnav .gn-btn { display: inline-block; margin: 2px 4px; padding: 4px 10px; border-radius: 12px; cursor: pointer; border: 1px solid #fff; background: #2a2e35; font-size: 12px; color: #fff; }
+  #groupnav .gn-btn:hover { border-color: #7fc0ff; }
+  #groupnav .gn-btn.active { border: 2px solid #fff; box-shadow: 0 0 0 2px #17191d; }
+  #graph { width: 100%; height: calc(100vh - 230px); background: #14161a; }
+  #count { font-size: 13px; color: #9aa1a8; margin-left: 12px; }
+  #facets { padding: 8px 18px; background: #17191d; border-bottom: 1px solid #2a2e35; font-size: 13px; color: #e6e6eb; }
+  #facets b { color: #e6e6eb; }
+  #facets .facet-group { margin-right: 24px; display: inline-block; }
+  .facet-pill { display: inline-block; margin: 2px 4px; padding: 3px 10px; border-radius: 12px; cursor: pointer; border: 1px solid #4a4f57; background: #2a2e35; color: #e6e8eb; font-size: 12px; user-select: none; }
+  .facet-pill:hover { border-color: #7fc0ff; }
+  .facet-pill.on { background: #2f6f9f; color: #fff; border-color: #7fc0ff; }
+  .facet-clear { margin-left: 6px; color: #ff6b6b; cursor: pointer; font-weight: bold; }
+  #detail { position: fixed; top: 0; right: 0; bottom: 0; width: 340px; min-width: 260px; max-width: 70vw;
+    background: #1c1f24; box-shadow: -3px 0 12px rgba(0,0,0,.5); z-index: 1000; overflow-y: auto;
+    display: flex; flex-direction: column; border-left: 1px solid #2a2e35; color: #e6e8eb; }
+  #detail.closed { display: none; }
+  #detail #d-resizer { width: 6px; cursor: col-resize; background: #2a2e35; flex-shrink: 0; }
+  #detail #d-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #101215; color: #fff; }
+  #detail #d-title { font-weight: bold; font-size: 15px; }
+  #detail #d-close { cursor: pointer; font-size: 20px; line-height: 1; padding: 0 6px; }
+  #detail #d-body { padding: 14px; flex: 1; overflow-y: auto; font-size: 13px; }
+  #detail .prop { margin-bottom: 10px; }
+  #detail .prop .k { font-weight: bold; color: #7fc0ff; margin-bottom: 2px; }
+  #detail .prop .v { color: #e6e8eb; }
+  #detail .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; color: #fff; }
+</style>
+</head>
+<body>
+<header>
+  <h1>HydroScope — Graphe des dépendances User Stories</h1>
+  <p>Arcs orientés = relation <b>parent → enfant</b>. Zoom, pan et glisser-déposer des nœuds pour naviguer. Cliquez sur un nœud pour le détail.</p>
+</header>
+
+<div id="controls">
+  <button onclick="resetView()">Réinitialiser la vue</button>
+  <button id="btnFilter" onclick="toggleLinked()">Afficher US liées uniquement</button>
+  <span id="colorby"><b>Colorier par :</b>
+    <label><input type="radio" name="coloring" value="epic" checked onchange="setColoring(this.value)"> EPIC</label>
+    <label><input type="radio" name="coloring" value="finalite" onchange="setColoring(this.value)"> Type fonctionnel</label>
+  </span>
+  <span id="count"></span>
+</div>
+
+<div id="groupnav"></div>
+
+<div id="facets">
+  <span class="facet-group"><b>ROLE :</b> <span id="facet-role"></span></span>
+  <span class="facet-group"><b>IHM :</b> <span id="facet-ihm"></span></span>
+  <span class="facet-group"><b>MVP :</b> <span id="facet-mvp"></span></span>
+</div>
+
+<div id="legend"></div>
+<div id="graph"></div>
+
+<div id="detail" class="closed">
+  <div id="d-resizer" title="Redimensionner"></div>
+  <div id="d-header">
+    <span id="d-title">Détail de l'US</span>
+    <span id="d-close" onclick="closeDetail()" title="Fermer">✕</span>
+  </div>
+  <div id="d-body"></div>
+</div>
+
+<script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<script>
+// ---------- Données des US ----------
+// nœud: {id, label, epic, title}
+const EPICS = {
+  "EPIC 1": "#d32f2f", "EPIC 1bis": "#f57c00", "EPIC 2": "#fbc02d",
+  "EPIC 3": "#43a047", "EPIC 4": "#2e7d32", "EPIC 5": "#00897b",
+  "EPIC 6": "#1976d2", "EPIC 7": "#5e35b1", "EPIC 8": "#8e24aa",
+  "EPIC 9": "#6d4c41", "EPIC 10": "#546e7a"
+};
+
+const EPIC_LABELS = {
+  "EPIC 1": "Gestion des données",
+  "EPIC 1bis": "Catalogage des données",
+  "EPIC 2": "Qualité des données",
+  "EPIC 3": "Référentiels",
+  "EPIC 4": "Calcul d'indicateurs",
+  "EPIC 5": "Analyse multicritère",
+  "EPIC 6": "Visualisation",
+  "EPIC 7": "Aide à la décision",
+  "EPIC 8": "Export & diffusion",
+  "EPIC 9": "Gestion des utilisateurs",
+  "EPIC 10": "Traçabilité & audit"
+};
+
+// ---------- Données issues de cahier des charges/backlog.csv ----------
+// Structures consolidées du graphe. La source de vérité est backlog.csv,
+// servie via GitHub raw (HTTPS + CORS *) puis dérivée en US_DATA / US / US_FINALITE / DEP.
+const BACKLOG_URL = 'https://raw.githubusercontent.com/yougis/hydroscope-notes-cadrage/refs/heads/main/cahier%20des%20charges/backlog.csv';
+
+let US_DATA = {};        // id -> { epic, nom, libelle, mvp, ihm, module, depend[], typ, role, phrase }
+let US = {};             // id -> [epic, libelle]
+let US_FINALITE = {};    // id -> type fonctionnel
+let DEP = [];            // [parent, child]
+
+// Parsing CSV RFC4180 (séparateur ';', champs quotés, retours à la ligne CRLF/LF)
+function parseCSV(text) {
+  const rows = []; let row = [], field = '', inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i], n = text[i + 1];
+    if (inQ) {
+      if (c === '"' && n === '"') { field += '"'; i++; }
+      else if (c === '"') inQ = false;
+      else field += c;
+    } else if (c === '"') inQ = true;
+    else if (c === ';') { row.push(field); field = ''; }
+    else if (c === '\n' || c === '\r') {
+      if (c === '\r' && n === '\n') i++;
+      row.push(field); field = '';
+      if (row.some(f => f.trim() !== '')) rows.push(row);
+      row = [];
+    } else field += c;
+  }
+  if (field !== '' || row.length) { row.push(field); if (row.some(f => f.trim() !== '')) rows.push(row); }
+  return rows;
+}
+
+// Cellule EPIC "EPIC 1 – Gestion des données" -> { code:'EPIC 1', label:'Gestion des données' }
+function parseEpic(cell) {
+  const t = cell.trim();
+  const m = /^(EPIC\s+[^–-]+?)\s*[–-]\s*(.*)$/.exec(t);
+  if (m) return { code: m[1].trim(), label: m[2].trim() };
+  return { code: t, label: t };
+}
+
+// Charge et consolide les données depuis backlog.csv
+async function loadUsData() {
+  const res = await fetch(BACKLOG_URL);
+  if (!res.ok) throw new Error('Impossible de charger le backlog (HTTP ' + res.status + ')');
+  const rows = parseCSV(await res.text());
+  const header = rows[0].map(h => h.trim());
+  const col = name => header.indexOf(name);
+  const iId = col('ID User Story'), iEpic = col('EPIC'), iLib = col('Libellé User Story'),
+        iMvp = col('MVP'), iFeB = col('Front_or_Back'), iMod = col('Module'),
+        iDep = col('Dépend de (Parent)'), iTyp = col('Type fonctionnel'),
+        iRole = col('Profil utilisateur'), iPhrase = col('Phrase méthode agile');
+
+  US_DATA = {}; US = {}; US_FINALITE = {}; DEP = [];
+  for (let r = 1; r < rows.length; r++) {
+    const get = k => (rows[r][k] || '').trim();
+    const id = get(iId);
+    if (!id) continue;
+    const epic = parseEpic(get(iEpic)).code;
+    const libelle = get(iLib);
+    const depend = get(iDep) ? get(iDep).split(';').map(s => s.trim()).filter(Boolean) : [];
+    US_DATA[id] = {
+      epic: epic, nom: id, libelle: libelle,
+      mvp: get(iMvp),
+      ihm: get(iFeB).toLowerCase().startsWith('front') ? 'OUI' : 'NON',
+      module: get(iMod), depend: depend,
+      typ: get(iTyp), role: get(iRole), phrase: get(iPhrase)
+    };
+    US[id] = [epic, libelle];
+    US_FINALITE[id] = get(iTyp);
+    depend.forEach(p => { if (p) DEP.push([p, id]); });
+  }
+}
+
+const FINALITES = {
+  "Acquisition": { color: "#8a7530", bord: "#5f4f20", groupe: "Pilier 1 – Connaissance" },
+  "Structuration": { color: "#a38a24", bord: "#6e5c14", groupe: "Pilier 1 – Connaissance" },
+  "Qualification": { color: "#c08a1a", bord: "#845c0e", groupe: "Pilier 1 – Connaissance" },
+  "Exploitation": { color: "#c56e16", bord: "#86480b", groupe: "Pilier 2 (+3) – Diagnostic & Veille" },
+  "Restitution – Diffusion": { color: "#b04918", bord: "#742e0e", groupe: "Pilier 4 – Partage" },
+  "Gouvernance": { color: "#9c2d1e", bord: "#5e150c", groupe: "Transverse – Socle" }
+};
+
+// US_FINALITE (id -> type fonctionnel) : dérivée de US_DATA depuis backlog.csv
+
+
+// ---------- Construction ----------
+let currentColoring = 'epic';
+
+function renderLegend(mode) {
+  // Légende retirée (les groupes sont visibles via la barre de navigation).
+  const legend = document.getElementById('legend');
+  legend.innerHTML = '';
+}
+
+// Coupe un libellé long sur 2 lignes équilibrées (retour à la ligne au mot le plus proche du milieu).
+function wrapLabel(text, maxLen) {
+  if (!text) return '';
+  if (text.length <= maxLen) return text;
+  const half = Math.floor(text.length / 2);
+  let split = -1;
+  for (let i = 0; i <= Math.floor(maxLen / 2); i++) {
+    if (text[half - i] === ' ') { split = half - i; break; }
+    if (text[half + i] === ' ') { split = half + i; break; }
+  }
+  if (split < 0) return text;
+  return text.slice(0, split).trim() + '\n' + text.slice(split).trim();
+}
+
+function nodeAppearance(id) {
+  const [epic, label] = US[id];
+  const wrapped = wrapLabel(label, 26);
+  const roleIcon = ROLE_ICONS[US_DATA[id].role];
+  const stdFont = "'Segoe UI', -apple-system, Arial, sans-serif";
+  if (currentColoring === 'epic') {
+    return { id: id, label: wrapped, sublabel: id,
+             color: EPICS[epic], borderWidth: 1, borderWidthSelected: 2,
+             title: epic + ' (' + EPIC_LABELS[epic] + ') — ' + id + ' — ' + label,
+             icon: { face: 'HydroIcons', code: roleIcon.code, color: '#fff' },
+             font: { color: '#fff', size: 13, face: stdFont, bold: true },
+             sublabelFont: { color: '#fff', size: 10, face: 'monospace' } };
+  }
+  const fin = FINALITES[US_FINALITE[id]];
+  return { id: id, label: wrapped, sublabel: id, color: fin.color, borderWidth: 2, borderWidthSelected: 3,
+           title: US_FINALITE[id] + ' — ' + id + ' — ' + label,
+           icon: { face: 'HydroIcons', code: roleIcon.code, color: '#fff' },
+           font: { color: '#fff', size: 13, face: stdFont, bold: true },
+           sublabelFont: { color: '#fff', size: 10, face: 'monospace' } };
+}
+
+function setColoring(mode) {
+  currentColoring = mode;
+  renderLegend(mode);
+  renderGroupNav();
+  allNodes = buildNodes();
+  if (activeGroup) {
+    // ré-appliquer le filtre au nouveau découpage
+    applyFilter();
+  } else {
+    window.network.body.data.nodes.update(allNodes);
+  }
+}
+
+// ---------- Navigation & filtrage par groupe ----------
+// Sélection courante : {mode:'epic'|'finalite', valeur} | null = tout
+let activeGroup = null;
+let linkedOnly = false;
+
+// ---------- Facettes (ROLE, IHM, MVP) ----------
+let facets = { role: new Set(), ihm: new Set(), mvp: new Set() };
+
+const FACET_DEFS = {
+  role: { container: 'facet-role', values: ['Administrateur expert data','Administrateur plateforme','Décideur métier','Expert métier eau potable','Intéressé public'] },
+  ihm: { container: 'facet-ihm', values: ['OUI','NON'] },
+  mvp: { container: 'facet-mvp', values: ['TRUE','FALSE'] }
+};
+
+const ROLE_ICONS = {
+  'Administrateur expert data': { cls: 'fa-wrench',     code: '\uf0ad' },
+  'Administrateur plateforme':  { cls: 'fa-gear',       code: '\uf013' },
+  'Décideur métier':            { cls: 'fa-chart-line', code: '\uf201' },
+  'Expert métier eau potable':  { cls: 'fa-droplet',    code: '\uf043' },
+  'Intéressé public':           { cls: 'fa-users',      code: '\uf0c0' }
+};
+
+function renderFacets() {
+  for (const [key, def] of Object.entries(FACET_DEFS)) {
+    const el = document.getElementById(def.container);
+    let html = def.values.map(v => {
+      const on = facets[key].has(v) ? ' on' : '';
+      const icon = key === 'role' ? `<i class="fa-solid ${ROLE_ICONS[v].cls}"></i> ` : '';
+      return `<span class="facet-pill${on}" onclick="toggleFacet('${key}','${v}')">${icon}${v}</span>`;
+    }).join('');
+    if (facets[key].size) html += `<span class="facet-clear" onclick="clearFacet('${key}')">✕ effacer</span>`;
+    el.innerHTML = html;
+  }
+}
+
+function toggleFacet(key, value) {
+  if (facets[key].has(value)) facets[key].delete(value);
+  else facets[key].add(value);
+  renderFacets();
+  applyFilter();
+}
+
+function clearFacet(key) {
+  facets[key].clear();
+  renderFacets();
+  applyFilter();
+}
+
+function facetMatches(id) {
+  const d = US_DATA[id];
+  if (facets.role.size && !facets.role.has(d.role)) return false;
+  if (facets.ihm.size && !facets.ihm.has(d.ihm)) return false;
+  if (facets.mvp.size && !facets.mvp.has(d.mvp)) return false;
+  return true;
+}
+
+// ---------- Volet Détail (clic sur une US) ----------
+let detailOpen = false;
+
+function openDetail(id) {
+  const d = US_DATA[id];
+  const panel = document.getElementById('detail');
+  panel.classList.remove('closed');
+  detailOpen = true;
+  document.getElementById('d-title').textContent = d.nom + ' — ' + d.libelle;
+  const depLabels = (d.depend && d.depend.length)
+    ? d.depend.map(p => `<span class="facet-pill" onclick="openDetail('${p}')">${p}</span>`).join(' ')
+    : '<em>aucun</em>';
+  document.getElementById('d-body').innerHTML = `
+    <div class="prop"><div class="k">EPIC</div><div class="v">${d.epic} · ${EPIC_LABELS[d.epic]}</div></div>
+    <div class="prop"><div class="k">Type fonctionnel</div><div class="v">${d.typ}</div></div>
+    <div class="prop"><div class="k">Module</div><div class="v">${d.module}</div></div>
+    <div class="prop"><div class="k">ROLE (profil utilisateur)</div><div class="v"><i class="fa-solid ${ROLE_ICONS[d.role].cls}"></i> ${d.role}</div></div>
+    <div class="prop"><div class="k">IHM</div><div class="v">${d.ihm}</div></div>
+    <div class="prop"><div class="k">MVP</div><div class="v">${d.mvp}</div></div>
+    <div class="prop"><div class="k">Dépend de (parents)</div><div class="v">${depLabels}</div></div>
+    <div class="prop"><div class="k">Phrase méthode agile</div><div class="v">${d.phrase || '<em>—</em>'}</div></div>`;
+}
+
+function closeDetail() {
+  document.getElementById('detail').classList.add('closed');
+  detailOpen = false;
+  if (window.network) window.network.unselectAll();
+}
+
+function initDetail() {
+  // resizer : agrandir / rétrécir la largeur
+  const panel = document.getElementById('detail');
+  const resizer = document.getElementById('d-resizer');
+  resizer.addEventListener('mousedown', e => {
+    e.preventDefault();
+    const startX = e.clientX;
+    const startW = panel.offsetWidth;
+    const move = ev => {
+      const w = startW - (ev.clientX - startX);
+      panel.style.width = Math.min(Math.max(w, 260), Math.round(window.innerWidth * 0.7)) + 'px';
+    };
+    const up = () => {
+      document.removeEventListener('mousemove', move);
+      document.removeEventListener('mouseup', up);
+    };
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', up);
+  });
+}
+
+
+function linkedIds() {
+  const s = new Set();
+  DEP.forEach(([from, to]) => { s.add(from); s.add(to); });
+  return s;
+}
+
+function renderGroupNav() {
+  const nav = document.getElementById('groupnav');
+  const cats = currentColoring === 'epic' ? Object.keys(EPICS) : Object.keys(FINALITES);
+  const chip = c => currentColoring === 'epic' ? EPICS[c] : FINALITES[c].color;
+
+  let items = [`<span class="gn-btn" onclick="setGroup()">Tout</span>`];
+  cats.forEach(c => {
+    const disp = currentColoring === 'epic'
+      ? c + ' · ' + EPIC_LABELS[c]
+      : c;
+    items.push(`<span class="gn-btn" data-val="${c.replace(/['"]/g,'')}" onclick="setGroup('${currentColoring}','${c.replace(/['"]/g,'')}')">${disp}</span>`);
+  });
+  nav.innerHTML = items.join(' ');
+
+  nav.querySelectorAll('.gn-btn').forEach(bt => {
+    const val = bt.dataset.val;
+    if (!val) { return; }
+    const col = chip(val);
+    bt.style.background = col;
+    bt.style.borderColor = col;
+    const rgb = parseInt(col.slice(1), 16);
+    const r = (rgb >> 16) & 255, g = (rgb >> 8) & 255, b = rgb & 255;
+    const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+    bt.style.color = lum > 150 ? '#1a1c1f' : '#fff';
+    if (activeGroup && activeGroup.valeur === val) bt.classList.add('active');
+  });
+}
+
+// Jeu complet de nœuds et de liens (source de référence)
+let allNodes = [];
+let allEdges = [];
+
+function buildNodes() {
+  return Object.keys(US).map(nodeAppearance);
+}
+
+function computeShownIds() {
+  let shown = new Set(Object.keys(US));
+  if (activeGroup) {
+    const keep = id => {
+      const grp = currentColoring === 'epic' ? US[id][0] : US_FINALITE[id];
+      return grp === activeGroup.valeur;
+    };
+    shown = new Set(Object.keys(US).filter(keep));
+  }
+  if (linkedOnly) {
+    const linked = linkedIds();
+    shown = new Set([...shown].filter(id => linked.has(id)));
+  }
+  // Facettes : combinaison ET entre facettes actives
+  if (facets.role.size || facets.ihm.size || facets.mvp.size) {
+    shown = new Set([...shown].filter(id => facetMatches(id)));
+  }
+  return shown;
+}
+
+function applyFilter() {
+  const shown = computeShownIds();
+  // Ne garder que les nœuds filtrés
+  const nodes = allNodes.filter(n => shown.has(n.id));
+  // Ne garder que les liens dont les deux extrémités sont visibles
+  const edges = allEdges.filter(e => shown.has(e.from) && shown.has(e.to));
+  // Remplacement de la source de données du graphe
+  window.network.setData({ nodes: nodes, edges: edges });
+  document.querySelector('#btnFilter').textContent = linkedOnly ? 'Tout afficher' : 'Afficher US liées uniquement';
+  // Vue initialisée sur le jeu filtré
+  window.network.fit({ animation: true });
+}
+
+function setGroup(mode, valeur) {
+  if (!mode) { activeGroup = null; }
+  else { activeGroup = { mode: mode, valeur: valeur }; }
+  renderGroupNav();
+  // régénère les nœuds selon le coloriage courant puis filtre
+  allNodes = buildNodes();
+  applyFilter();
+}
+
+function toggleLinked() {
+  linkedOnly = !linkedOnly;
+  applyFilter();
+}
+
+function main() {
+  renderLegend('epic');
+  renderGroupNav();
+  renderFacets();
+  initDetail();
+
+  allNodes = buildNodes();
+  allEdges = DEP.map(([from, to]) => ({
+    from: from, to: to, arrows: 'to', color: { color: '#e6e8eb' }, smooth: { type: 'dynamic' }
+  }));
+
+  const container = document.getElementById('graph');
+
+  const stablePhysicsOptions = {
+    nodes: { shape: 'square', shadow: { enabled: true }, size: 46, margin: { top: 14, right: 18, bottom: 14, left: 18 } },
+    edges: { width: 1.5, selectionWidth: 2 },
+    physics: { stabilization: true, barnesHut: { gravitationalConstant: -3500 } }
+  };
+  const hierarchicalOptions = {
+    nodes: { shape: 'square', shadow: { enabled: true }, size: 46, margin: { top: 14, right: 18, bottom: 14, left: 18 } },
+    edges: { width: 1.5 },
+    layout: { hierarchical: { direction: 'UD', sortMethod: 'directed', nodeSpacing: 110, levelSeparation: 90, treeSpacing: 140 } },
+    physics: false,
+    interaction: { hover: true, tooltipDelay: 200 }
+  };
+
+  let network = new vis.Network(container, { nodes: allNodes, edges: allEdges }, stablePhysicsOptions);
+  window.network = network;
+
+  network.on('selectNode', params => {
+    if (params.nodes && params.nodes.length) openDetail(params.nodes[0]);
+  });
+  network.on('deselectNode', () => {}); // conservé : fermeture via ✕
+
+  document.getElementById('count').textContent = `${allNodes.length} US · ${allEdges.length} dépendances`;
+
+  window.resetView = () => { activeGroup = null; linkedOnly = false; facets = { role: new Set(), ihm: new Set(), mvp: new Set() }; renderFacets(); allNodes = buildNodes(); renderGroupNav(); network.setOptions(stablePhysicsOptions); network.setData({ nodes: allNodes, edges: allEdges }); network.fit({ animation: true }); };
+  window.applyPhysics = () => network.setOptions(stablePhysicsOptions);
+  window.applyHierarchy = () => network.setOptions(hierarchicalOptions);
+  window.openDetail = openDetail;
+  window.closeDetail = closeDetail;
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await loadUsData();
+  } catch (e) {
+    document.getElementById('count').textContent = 'Erreur chargement CSV : ' + e.message;
+    return;
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(main);
+  else main();
+});
+</script>
+</body>
+</html>

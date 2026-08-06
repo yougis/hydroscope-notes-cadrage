@@ -1,0 +1,66 @@
+---
+title: "ADI — Parcours utilisateurs d'aide à l'interprétation et manques comblés"
+profile: "Document support (ADI — Aide à l'interprétation)"
+uc: "ADI_parcours"
+us: "US7.x, US6.x (synthèse)"
+epic: "EPIC 7 — Aide à la décision ; EPIC 6 — Visualisation"
+mvp: true
+amc: false
+---
+
+# Parcours utilisateurs d'aide à l'interprétation
+
+> **⚠️ ADI — Aide à l'interprétation pour la décision.** Document de synthèse qui relie
+> les **cas d'usage d'aide à la décision** aux **surfaces d'interface** qui exposent les
+> indicateurs, formalise les **parcours** (J1…J4) et lève les **manques transverses**
+> identifiés entre les deux. S'appuie sur les fiches `ADI_*` et sur les `CU-*`.
+
+## 1. Objectif
+
+Aligner l'interface d'accès aux indicateurs sur les **besoins d'arbitrage** des décideurs
+et des experts : aller d'une valeur « brute » vers une valeur **qualifiée et
+contextualisée**, sans jamais produire de décision automatique ni de score (AMC isolée).
+
+## 2. Parcours type
+
+### J1 — « Vérifier la qualité d'une ressource » (public)
+Carte → sélection captage/BV → lecture valeur + niveau (légende) → fiche indicateur
+(méthode/source/fraîcheur). *Surfaces* : `CarteView`/`MapCanvas`, fiche enrichie
+(`ADI_fiche_indicateur`).
+
+### J2 — « Expliquer et justifier à un partenaire » (expert)
+Carte → choisir un indicateur (catalogue) → page indicateur → fiche enrichie (spectre +
+justification + tendance). *Surfaces* : `IndicateurExplorer`, `IndicateurPage`,
+`ADI_fiche_indicateur`, `ADI_depassement_tendance`.
+
+### J3 — « Comparer avant d'investir » (décideur)
+Comparer deux territoires (US6.5) → lecture côte à côte qualifiée → tri descriptif →
+fiche synthèse avec facteurs dominants (`ADI_fiche_territoire_synthese`). *Surfaces* :
+vue comparaison, radar (`ADI_caracterisation_radar`).
+
+### J4 — « Détecter une tension et arbitrer » (décideur/expert)
+Tableau de bord → alerte/tendance → fiche synthèse BV → pastilles de dépassement →
+décision (hors outil). *Surfaces* : `DashboardPage`, `ADI_depassement_tendance`,
+`ADI_fiche_territoire_synthese`.
+
+## 3. Manques transverses comblés par les ADI
+
+| # | Manque identifié | Levier ADI / evo. | Fiche de référence |
+|---|---|---|---|
+| 1 | Valeurs **non qualifiées** (classes synthétiques) | Qualification data-driven (seuils de référence) | `ADI_methodologie`, `ADI_vigilance_carte` |
+| 2 | Fiche indicateur **sans interprétation** | Spectre + justification + méthode | `ADI_fiche_indicateur` |
+| 3 | **Contexte fragmenté** (tableau/croisement hors session) | Sessions cohérentes entre vues (EPIC 6) | `ADI_parcours` (gouvernance session) |
+| 4 | **Pas de nav croisée** indicateur ⇄ territoire | Liens entité → fiche / autres indicateurs | `ADI_fiche_territoire_synthese` |
+| 5 | Promesses « seuils/échelle » **non tenues** | Implémentation du bloc interprétation | `ADI_fiche_indicateur` |
+
+## 4. Règles transverses (à respecter partout)
+
+- La **référence reste globale** (jamais recalculée sur la sélection) → comparabilité.
+- Un niveau est **toujours accompagné** de sa justification et de sa méthode (jamais de
+  niveau « muet »).
+- Réserve de complétude (< ~80 %) → « Indéterminé ».
+- **Aucun score/classement** hors documents AMC (EPIC 5, lot 2).
+
+## 5. Liens
+- Fiches de cas d'usage : `CU-DECISION-01..05`, `CU-EXPERT-01..04`, `CU-PUBLIC-*`.
+- AMC isolée : `AMC_methodologie`, `AMC_rendu_score` (hors MVP).

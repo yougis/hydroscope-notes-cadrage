@@ -35,22 +35,6 @@ Le backlog a vocation à être intégré et suivi dans les outils de gestion de 
 - la traçabilité des développements ;
 - le lien entre besoins fonctionnels et réalisation technique.
 
-### Stratégie MVP (Minimum Viable Product)
-
-Le projet prévoit la réalisation d’un **MVP (Minimum Viable Product)** dès les premières phases de développement.
-
-Le MVP constitue une première version fonctionnelle du système, centrée sur les fonctionnalités à plus forte valeur métier. Il vise à :
-- proposer un socle opérationnel (données, indicateurs, visualisation) ;
-- permettre une première utilisation par les acteurs ;
-- recueillir des retours utilisateurs en conditions réelles.
-
-Le périmètre du MVP est volontairement restreint afin de :
-- limiter les risques techniques et méthodologiques ;
-- valider les choix structurants du projet ;
-- faciliter une montée en charge progressive.
-
-Le détail du périmètre fonctionnel du MVP est détaillé au [chapitre 6 – Périmètre fonctionnel (EPICS)](#sec-perimetre) et dans le [chapitre 7 – Product backlog](#sec-backlog).
-
 ### Organisation des sprints
 
 Le développement est organisé en cycles courts appelés **sprints**, d’une durée généralement comprise entre 2 et 4 semaines.
@@ -81,18 +65,10 @@ Ces rituels structurent le fonctionnement de l’équipe et facilitent la commun
 Les utilisateurs sont associés tout au long du projet afin de garantir l’adéquation de l’outil aux besoins réels.
 
 Cela se traduit par :
+
 - des démonstrations régulières des fonctionnalités développées ;
 - la collecte de retours utilisateurs à chaque itération ;
 - l’intégration de ces retours dans le backlog.
 
 Cette démarche permet d’ajuster progressivement le produit et de sécuriser les choix fonctionnels.
 
-### Gestion des livraisons
-
-Le projet prévoit des livraisons progressives, structurées autour :
-
-- d’un **MVP**, mis à disposition rapidement ;
-- de versions successives enrichissant les fonctionnalités ;
-- d’une validation régulière par la MOA avant mise en production.
-
-Les livraisons sont synchronisées avec les jalons du projet et les contraintes calendaires définies.

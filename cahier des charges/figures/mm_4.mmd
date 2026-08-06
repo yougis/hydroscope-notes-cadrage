@@ -1,0 +1,54 @@
+flowchart TB
+    SRC["Sources de données<br/>internes & externes"]
+    ING["Ingestion et import<br/>fichiers · API · flux automatisés"]
+
+    subgraph STO["Stockage des données"]
+        DB[(PostgreSQL + PostGIS)]
+        HIST["Historisation<br/>(GeoDiff + snapshots)"]
+        REF["Référentiels"]
+        CAT["Catalogue (STAC/CKAN)"]
+    end
+
+    subgraph TRA["Cycle de traitement"]
+        DBT["Pipelines dbt<br/>normalisation · règles métier · H3"]
+        RES["Indicateurs calculés<br/>et données enrichies"]
+    end
+
+    subgraph SRV["Services / microservices"]
+        SB["Services métier et géoservices"]
+    end
+
+    API["API<br/>REST · OGC WMS/WFS · ESRI"]
+    EXP["Exports de données<br/>fichiers (CSV · Excel · GeoJSON · Shapefile)"]
+
+    subgraph UI2["Restitution"]
+        FR["Application web<br/>SPA Vue / React"]
+        MAP["Cartographie<br/>MapLibre / OpenLayers"]
+    end
+
+    TIERS["Systèmes tiers<br/>outils SIG · portails"]
+
+    SRC --> ING --> STO
+    STO --> TRA
+    TRA -->|résultats réécrits| DB
+    STO --> SRV
+    SRV --> API
+    API --> UI2
+    API --> TIERS
+    API --> EXP
+
+    ORCH["Orchestration et supervision<br/>Prefect (pipeline) · monitoring<br/>— agit entre les briques —"]
+    ORCH -.-> ING
+    ORCH -.-> STO
+    ORCH -.-> TRA
+    ORCH -.-> SRV
+
+    subgraph INFRA["Infrastructure"]
+        ENV["Infrastructure locale<br/>et cloud (production)"]
+        SEC["Accès selon les profils (RBAC)"]
+        SAV["Sauvegarde et restauration<br/>Barman · base de sauvegarde"]
+        CICD["Automatisation<br/>tests et déploiements"]
+    end
+    INFRA -.-> STO
+    INFRA -.-> SRV
+    INFRA -.-> ORCH

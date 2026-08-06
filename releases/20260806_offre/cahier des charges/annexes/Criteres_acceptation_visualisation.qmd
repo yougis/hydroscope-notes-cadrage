@@ -1,0 +1,236 @@
+## Critères d'acceptation — EPIC 6 à 10 (périmètre MVP)
+
+Ce document fixe, pour chaque User Story MVP du périmètre EPIC 6 à 10, des **critères d'acceptation** contractuels rédigés en Gherkin (Étant donné / Quand / Alors). Ils constituent la base de recette fonctionnelle : un critère est satisfait lorsque le comportement décrit se reproduit de façon déterministe lors des essais, sur les jeux de données de référence et les comptes de test fournis au chiffrage.
+
+Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.csv) — EPIC 6 (24 US), EPIC 7 (3 US), EPIC 8 (2 US), EPIC 9 (2 US), EPIC 10 (2 US), soit 33 US. Les conventions suivantes s'appliquent à l'ensemble :
+
+- **BVAEP** : bassin versant d'alimentation en eau potable ; **PPE** : périmètre de protection des eaux ; **unités** : captages ou BVAEP selon l'échelle active.
+- **Cohérence des vues** : carte, listes, graphiques, compteur et fiches présentent la même sélection et les mêmes filtres à tout instant.
+- **Catalogue d'indicateurs** : navigation par Famille → Thème → Groupe ; un indicateur n'est affichable que s'il est calculé et publié.
+- Un état « sans donnée », « non historisé » ou « filtre inactif » est toujours explicité, jamais silencieux.
+
+---
+
+**EPIC 6 — Visualisation**
+
+### US6.1 — Visualiser sur carte
+- **Étant donné** la plateforme opérationnelle avec des données BVAEP et captages chargées, **quand** je consulte la vue « Carte », **alors** une carte interactive s'affiche (fond Cartographique par défaut) avec les objets du périmètre positionnés.
+- **Étant donné** une carte affichée, **quand** je me déplace (pan) ou je zoome, **alors** l'emprise se met à jour et les objets pertinents apparaissent, sans rechargement de la page.
+- **Étant donné** un objet visible (BVAEP, captage, PPE), **quand** je le survole, **alors** une infobulle présente son nom et son identifiant.
+- **Étant donné** une zone sans donnée dans l'emprise, **quand** la carte est rendue, **alors** le périmètre reste lisible avec un libellé explicite (pas de fond vide ambigu).
+
+### US6.2 — Afficher indicateurs carto
+- **Étant donné** un indicateur sélectionné dans le volet indicateurs, **quand** je l'applique à la carte, **alors** les unités sont colorées selon les classes de valeurs de l'indicateur, avec une légende affichant la plage et les couleurs.
+- **Étant donné** une unité sans valeur pour l'indicateur, **quand** la carte est rendue, **alors** cette unité est affectée à une classe « sans donnée » distincte, hors plage de valeurs.
+- **Étant donné** un indicateur calculé ou recalculé, **quand** je rafraîchis le rendu cartographique, **alors** les couleurs correspondent aux nouvelles valeurs sans référence obsolète.
+- **Étant donné** un changement d'indicateur (via Famille → Thème → Groupe), **quand** je bascule, **alors** la légende et les couleurs correspondent immédiatement au nouvel indicateur en conservant la sélection courante.
+
+### US6.3 — Navigation (zoom filtres)
+- **Étant donné** la carte, **quand** j'utilise les contrôles de zoom et le pan, **alors** l'emprise évolue et les unités affichées sont recalculées de façon synchrone.
+- **Étant donné** une sélection ou des filtres actifs, **quand** je navigue sur la carte, **alors** la sélection et les filtres ne sont ni réinitialisés ni altérés.
+- **Étant donné** une navigation avancée, **quand** j'actionne la réinitialisation de la vue, **alors** l'emprise revient au périmètre par défaut en conservant les filtres utilisateur.
+- **Étant donné** un changement d'échelle, **quand** les unités deviennent trop nombreuses à l'écran, **alors** la carte propose un regroupement lisible (agrégation visuelle) sans perte de données.
+
+### US6.4 — Graphiques temporels
+- **Étant donné** un indicateur à données historisées, **quand** je consulte son graphique temporel, **alors** une série chronologique est tracée avec unité, dates et période affichées.
+- **Étant donné** plusieurs unités sélectionnées (captages et/ou BVAEP), **quand** le graphique temporel est affiché, **alors** chaque série est identifiée et distinguée par une palette de couleurs cohérente avec la carte.
+- **Étant donné** une période sans mesure, **quand** elle appartient à la série, **alors** elle apparaît comme une lacune explicite (valeur indisponible), jamais remplacée par un zéro.
+- **Étant donné** un point de la série, **quand** je le survole, **alors** une infobulle affiche la date et la valeur de l'indicateur.
+
+### US6.7 — Fiche territoire
+- **Étant donné** une fiche territoire (commune, BVAEP ou bassin versant), **quand** je la consulte, **alors** elle présente le périmètre décrit, les unités de gestion associées et les indicateurs disponibles.
+- **Étant donné** une fiche territoire générée, **quand** elle est affichée, **alors** son contenu est strictement issu des données et indicateurs produits, sans ajout interprétatif ni classement/priorisation.
+- **Étant donné** une unité cartographique, **quand** je l'active (clic ou sélection), **alors** je peux ouvrir sa fiche territoire depuis la carte.
+- **Étant donné** une donnée source mise à jour, **quand** la fiche est consultée, **alors** elle reflète la dernière version sans action manuelle.
+
+### US6.8 — Basculer l'échelle d'analyse Captages ↔ Bassins versants
+- **Étant donné** une échelle active (captages ou BVAEP), **quand** je bascule l'échelle, **alors** la carte affiche immédiatement les unités de la nouvelle échelle sur la même emprise.
+- **Étant donné** des sélections distinctes Captages et Bassins versants, **quand** j'alterne les échelles, **alors** chaque sélection est rappelée indépendamment (les types d'unités ne sont pas mélangés).
+- **Étant donné** un indicateur applicable aux deux échelles, **quand** je bascule, **alors** la valeur affichée correspond à l'agrégation de l'échelle active (globale pour un BVAEP, ponctuelle pour un captage).
+- **Étant donné** le compteur d'unités, **quand** je bascule d'échelle, **alors** il reflète immédiatement le nombre d'unités sélectionnées à la nouvelle échelle.
+
+### US6.9 — Afficher le compteur d'unités sélectionnées
+- **Étant donné** une sélection en cours, **quand** la vue est chargée, **alors** un compteur affiche le nombre d'unités sélectionnées, au format « X captages · Y bassins versants ».
+- **Étant donné** une action d'ajout ou de retrait de sélection, **quand** elle est validée, **alors** le compteur se met à jour en temps réel.
+- **Étant donné** une sélection vide, **quand** la vue est affichée, **alors** le compteur est à 0 avec un message invitant à sélectionner (aucune ambiguïté entre « rien » et « tout »).
+- **Étant donné** la carte, les listes et le compteur, **quand** une sélection est modifiée, **alors** ils restent cohérents entre eux.
+
+### US6.10 — Rechercher avec suggestions (commune, province, captage, presets)
+- **Étant donné** la zone de recherche, **quand** je saisis au moins deux caractères, **alors** des suggestions s'affichent pour : communes, provinces, captages, BVAEP et presets « Top 10 ».
+- **Étant donné** un nom saisi, **quand** la recherche ignore la casse et les accents, **alors** les résultats attendus sont retrouvés.
+- **Étant donné** le choix d'une suggestion commune ou province, **quand** je valide, **alors** la carte se centre sur l'entité et la sélection est restreinte à son périmètre (filtre géographique).
+- **Étant donné** une recherche sans résultat, **quand** elle est exécutée, **alors** un message « Aucun résultat » est affiché, sans rechargement ni erreur.
+
+### US6.11 — Cumuler plusieurs facettes de recherche (sélection multiple)
+- **Étant donné** plusieurs facettes (commune, province, type d'unité, indicateur), **quand** je les cumule, **alors** la sélection résultante est la combinaison des critères définie (intersection des filtres).
+- **Étant donné** un filtre et une sélection manuelle combinés, **quand** la vue est rendue, **alors** la carte, les listes et le compteur reflètent exactement la même combinaison.
+- **Étant donné** des facettes cumulées méthodologiquement incompatibles, **quand** je tente de les cumuler, **alors** le système présente un état « filtre incompatible » explicite, sans ambiguïté.
+- **Étant donné** l'état courant des facettes, **quand** je quitte puis reviens sur la vue, **alors** l'état est restauré ou clairement signalé comme non conservé.
+
+### US6.12 — Afficher les facettes actives en puces décochables (SOLR/CKAN)
+- **Étant donné** au moins un filtre actif, **quand** la vue s'affiche, **alors** une puce (chip) portant le libellé du filtre est visible.
+- **Étant donné** plusieurs filtres cumulés (SOLR/CKAN), **quand** ils sont tous appliqués, **alors** une puce par filtre est affichée, sans doublon ni filtre invisible.
+- **Étant donné** une puce active, **quand** je clique sur sa croix de désélection, **alors** le filtre est retiré et toutes les vues (carte, liste, graphiques) se mettent à jour.
+- **Étant donné** l'ensemble des puces, **quand** je les retire une à une, **alors** la sélection initiale est progressivement restituée jusqu'au retour à l'état de départ.
+
+### US6.13 — Appliquer un preset « Top 10 » (plus/moins exposés, plus/moins proches) et pouvoir le retirer
+- **Étant donné** la zone des presets, **quand** je choisis « Top 10 les plus exposés » (et les variantes : moins exposés, plus/moins proches), **alors** la sélection et la liste affichent les dix unités calculées selon la règle du preset.
+- **Étant donné** un preset appliqué, **quand** la carte et les listes sont rendues, **alors** les dix unités sont identifiées dans les vues et cohérentes entre elles.
+- **Étant donné** une sélection utilisateur préalable, **quand** j'applique un preset, **alors** l'application du preset est explicite (remplacement ou superposition selon la règle définie), jamais silencieuse.
+- **Étant donné** un preset actif, **quand** je le retire, **alors** la sélection antérieure est restituée telle qu'elle était avant l'application.
+- **Étant donné** une unité non classable par la règle du preset, **quand** elle n'est pas retenue, **alors** elle n'est pas exclue silencieusement et reste consultable.
+
+### US6.14 — Décocher une facette pour retirer filtre ou sélection
+- **Étant donné** une facette cochée dans le sélecteur, **quand** je la décoche, **alors** le filtre ou la sélection correspondant(e) est retiré(e) et toutes les vues se mettent à jour.
+- **Étant donné** une facette décochée, **quand** je la décoche à nouveau, **alors** rien ne change (comportement idempotent, sans erreur).
+- **Étant donné** un filtre retiré par décochage, **quand** je le ré-applique, **alors** le résultat correspond au résultat initial (pas de dérive de l'état).
+
+### US6.15 — Sélectionner / désélectionner / retirer une unité individuellement
+- **Étant donné** une liste de captages ou de BVAEP, **quand** je clique une unité, **alors** elle est sélectionnée ; au second clic, elle est désélectionnée.
+- **Étant donné** une unité sélectionnée, **quand** je la retire via sa puce ou son bouton dédié, **alors** elle est retirée de la sélection et les autres unités restent intactes.
+- **Étant donné** une sélection en cours, **quand** j'ajoute une unité individuelle, **alors** le compteur et la carte intègrent l'unité sans réinitialiser le reste.
+- **Étant donné** une unité retirée, **quand** un graphique est affiché, **alors** l'unité n'apparaît plus dans les séries renvoyées.
+
+### US6.16 — Conserver indépendamment les sélections Captages et Bassins versants
+- **Étant donné** des sélections distinctes de captages et de BVAEP, **quand** je passe d'une échelle à l'autre, **alors** chaque sélection est mémorisée séparément (jamais substituée par l'autre type d'unité).
+- **Étant donné** une sélection de captages, **quand** j'ajoute une sélection de BVAEP, **alors** les deux coexistent et restent affichées distinctement dans les composants dédiés.
+- **Étant donné** la bascule d'échelle, **quand** je reviens aux captages, **alors** la sélection de captages d'origine est restituée à l'identique.
+
+### US6.17 — Trier la liste (distance / nom)
+- **Étant donné** une liste d'unités, **quand** je choisis « Tri par nom », **alors** la liste est triée par ordre alphabétique (avec sens ascendant/descendant), sans modifier la sélection.
+- **Étant donné** une liste, **quand** je choisis « Tri par distance », **alors** la liste ordonne les unités des plus proches aux plus éloignées par rapport à la référence définie (position de recherche ou point central courant).
+- **Étant donné** un tri en cours, **quand** je change de mode, **alors** l'autre mode s'applique immédiatement.
+- **Étant donné** un tri appliqué, **quand** j'ajoute ou je retire des unités, **alors** l'ordre est recalculé en conservant le mode choisi.
+
+### US6.18 — Calculer les communes intersectant un BV (≥ 20 %) pour la facette Commune (IHM NON)
+- **Étant donné** un bassin versant et le référentiel communal, **quand** le calcul d'intersection est exécuté, **alors** sont identifiées les communes dont la surface intersectée avec le bassin versant atteint au moins 20 % de la surface du bassin.
+- **Étant donné** une commune dont le taux d'intersection est inférieur au seuil de 20 %, **quand** le calcul est exécuté, **alors** elle n'est pas retenue pour la facette « Commune ».
+- **Étant donné** un bassin versant mis à jour (US3.1), **quand** le calcul est relancé, **alors** la liste des communes de la facette reflète les relations à jour du référentiel.
+- **Étant donné** la facette « Commune » de la recherche (US6.10), **quand** elle est alimentée par ce calcul, **alors** elle ne présente que les communes validées par la règle (≥ 20 %), cohérentes avec la sélection courante des bassins versants.
+- **Étant donné** un calcul exécuté, **quand** le seuil ou le référentiel ont été modifiés, **alors** le recalcul est rejouable et trace les paramètres utilisés (seuil, version du référentiel), sans saisie manuelle.
+
+### US6.19 — Mettre en évidence le croisement captages ↔ BV sur la carte
+- **Étant donné** des captages appartenant à des BVAEP, **quand** je demande la mise en évidence du croisement, **alors** les liens captage → bassin versant sont explicites et lisibles sur la carte.
+- **Étant donné** la mise en évidence active, **quand** je survole un captage, **alors** le ou les bassins versants associés se mettent en avant (et inversement).
+- **Étant donné** le croisement affiché, **quand** un captage est hors bassin, **alors** il est distinguable et signalé comme « hors bassin » (pas de lien forcé).
+- **Étant donné** un référentiel mis à jour (US3.1 / US3.2), **quand** la carte est rafraîchie, **alors** le croisement restitué utilise les relations à jour.
+
+### US6.20 — Choisir le fond de carte (Carto / Satellite / Terrain) via un sélecteur posé sur la carte
+- **Étant donné** la carte, **quand** j'ouvre le sélecteur de fond posé sur la carte, **alors** les trois choix « Cartographie », « Satellite », « Terrain » sont proposés.
+- **Étant donné** le choix d'un fond, **quand** je le valide, **alors** la carte bascule immédiatement sur ce fond en conservant couches, indicateur et emprise courants.
+- **Étant donné** un fond sans couverture (ex. satellite hors zone), **quand** il est sélectionné, **alors** un fond de substitution est affiché sans erreur visible.
+- **Étant donné** le choix du fond, **quand** ma préférence est mémorisée, **alors** elle est ré-appliquée lors des prochaines sessions.
+
+### US6.21 — Afficher / masquer chaque couche (BV, captages, périmètres, zones à risque) depuis la section « Couches »
+- **Étant donné** le volet gauche avec la section « Couches », **quand** la vue est ouverte, **alors** chaque couche est listée (BVAEP, captages, PPE – périmètres de protection, zones à risque) avec son état de visibilité.
+- **Étant donné** un basculement de couche, **quand** je l'affiche, **alors** elle apparaît immédiatement ; quand je la masque, elle disparaît sans impact sur les autres couches.
+- **Étant donné** un indicateur porté par la couche BVAEP, **quand** la couche est masquée, **alors** le rendu de l'indicateur est mis en évidence (message proposant sa réactivation) au lieu d'un affichage silencieusement vide.
+- **Étant donné** plusieurs couches actives, **quand** elles se superposent, **alors** l'ordre de rendu est stable et la lisibilité est conservée.
+
+### US6.22 — Rechercher un indicateur dans un dropdown groupé Famille → Thème → Groupe
+- **Étant donné** le menu déroulant des indicateurs, **quand** je le déploie, **alors** la liste est hiérarchisée Famille → Thème → Groupe.
+- **Étant donné** la hiérarchie, **quand** je navigue niveau par niveau, **alors** la recherche restreint la liste aux choix descendants du niveau actif.
+- **Étant donné** un texte saisi, **quand** il correspond à des indicateurs, **alors** la liste filtrée les présente avec leur libellé, sans ambiguïté.
+- **Étant donné** l'indicateur choisi, **quand** je le valide, **alors** le catalogue indicateurs et la carte se mettent à jour.
+
+### US6.23 — Consulter la fiche métadonnées depuis la vignette de l'indicateur (pas depuis les graphiques)
+- **Étant donné** la vignette d'un indicateur, **quand** je la sélectionne pour les métadonnées, **alors** la fiche métadonnées s'ouvre.
+- **Étant donné** la fiche métadonnées affichée, **alors** elle contient la définition, l'unité, la période, les sources et le lignage des données mobilisées (catalogue).
+- **Étant donné** la règle d'accès, **quand** je tente d'ouvrir les métadonnées depuis un graphique, **alors** l'entrée n'est pas activée (accès uniquement depuis la vignette).
+- **Étant donné** une fiche métadonnées d'indicateur, **quand** elle est consultée, **alors** elle est cohérente avec le catalogue de référence même si l'indicateur n'est pas encore calculé.
+
+### US6.24 — Basculer chaque graphique entre les vues Répartition / Temporel / Changements / Carte, vue temporelle désactivée si données non historisées
+- **Étant donné** un graphique d'indicateur, **quand** il est consulté, **alors** les bascules « Répartition », « Temporel », « Changements » et « Carte » sont disponibles.
+- **Étant donné** un indicateur sans historique, **quand** la vue « Temporel » serait demandée, **alors** elle est désactivée (grisée) avec le commentaire « données non historisées ».
+- **Étant donné** une vue active, **quand** je bascule entre les vues, **alors** l'indicateur, la sélection et la période courants sont transmis à la nouvelle vue.
+- **Étant donné** la vue « Changements » demandée, **quand** les données sont insuffisantes, **alors** un état « données insuffisantes » est affiché au lieu d'un faux résultat.
+- **Étant donné** un indicateur, **quand** la vue « Carte » (maille H3) est affichée, **alors** elle est cohérente avec la carte principale (classes et palettes identiques).
+
+### US6.25 — Voir toute la liste des indicateurs (38) regroupée Famille → Thème → Groupe
+- **Étant donné** le catalogue d'indicateurs complet, **quand** je l'ouvre, **alors** la liste complète (38 indicateurs) s'affiche, regroupée par Famille → Thème → Groupe avec compteurs.
+- **Étant donné** un regroupement, **quand** une famille/thème est sans indicateur visible, **alors** elle est affichée vide ou masquée selon une règle cohérente, jamais tronquée arbitrairement.
+- **Étant donné** le catalogue des indicateurs, **quand** je recherche par libellé, **alors** le résultat reste hiérarchisé et identifiable.
+- **Étant donné** les droits du profil, **quand** un indicateur n'est pas autorisé, **alors** il est absent de la liste pour ce profil, sans message d'erreur.
+
+### US6.26 — Présélectionner les indicateurs du volet droit par famille (tabs), thèmes (pills) et groupe (dropdown)
+- **Étant donné** le volet droit des indicateurs, **quand** il est affiché, **alors** les onglets (tabs) par famille, les pastilles (pills) par thème et le menu déroulant par groupe sont disponibles.
+- **Étant donné** une famille sélectionnée, **quand** des pastilles (pills) sont choisies, **alors** la liste des groupes d'indicateurs est pré-sélectionnée en conséquence.
+- **Étant donné** une pré-sélection appliquée, **quand** le volet droit est rendu, **alors** l'indicateur proposé est en cohérence avec les thèmes et le groupe sélectionnés.
+- **Étant donné** une navigation entre familles, **quand** je change de tab, **alors** la pré-sélection de la nouvelle famille s'applique sans confusion avec la précédente.
+
+---
+
+**EPIC 7 — Aide à la décision**
+
+### US7.1 — Définir des seuils
+- **Étant donné** un indicateur, **quand** je définis un ou plusieurs seuils (niveaux d'alerte), **alors** les seuils sont enregistrés et associés à l'indicateur pour la période courante.
+- **Étant donné** des seuils déjà définis, **quand** je les modifie, **alors** la mise à jour est immédiate, répercutée partout où l'indicateur est utilisé, et l'historique des changements est conservé.
+- **Étant donné** une valeur croisant un seuil, **quand** elle franchit le niveau d'alerte, **alors** la situation est qualifiée « critique / alerte » et signalée dans la restitution (badge, classe de couleur).
+- **Étant donné** un indicateur sans seuil renseigné, **quand** il est affiché, **alors** la vue est rendue normalement, sans signal d'alerte artificiel.
+- **Étant donné** un profil habilité, **quand** un seuil est modifié, **alors** la modification est tracée (utilisateur, date) et inaccessible aux profils lecteurs.
+
+### US7.3 — Identifier tendances
+- **Étant donné** un indicateur historisé, **quand** l'analyse est déclenchée, **alors** une tendance (orientation : hausse, baisse, stable) est affichée avec sa période de référence.
+- **Étant donné** la tendance calculée, **quand** je la consulte, **alors** l'intensité (delta ou seuil de variation) présentée est fondée sur une règle explicite et reproductible.
+- **Étant donné** une tendance détectée, **quand** je survole l'élément, **alors** les valeurs montrant l'évolution de la période sont détaillées.
+- **Étant donné** une série trop courte pour une tendance significative, **quand** elle est demandée, **alors** l'état « historique insuffisant » est affiché au lieu d'un résultat indicatif.
+
+### US7.4 — Fiche synthétique
+- **Étant donné** un bassin versant, **quand** je consulte sa fiche synthétique, **alors** elle présente les facteurs de vulnérabilité dominants issus de l'analyse des indicateurs (seuils, tendances, fraîcheur des données).
+- **Étant donné** un facteur mis en avant, **quand** la fiche est consultée, **alors** son origine est traçable (indicateur → valeur → seuil/tendance) et aucune interprétation non fondée n'est introduite.
+- **Étant donné** la fiche synthétique d'un bassin, **quand** j'y accède depuis la carte ou le sélecteur, **alors** la navigation est directe et la fiche cohérente avec la sélection courante.
+- **Étant donné** des données insuffisantes pour la synthèse, **quand** la fiche est générée, **alors** un état « données insuffisantes pour une synthèse » est affiché à la place d'une hiérarchie vide.
+
+---
+
+**EPIC 8 — Export**
+
+### US8.1 — Export CSV
+- **Étant donné** une sélection courante (captages / BVAEP, indicateurs, facettes), **quand** je lance l'export CSV, **alors** un fichier CSV est téléchargé couvrant l'ensemble du périmètre sélectionné (filtres inclus).
+- **Étant donné** le fichier téléchargé, **quand** je l'ouvre dans un tableur, **alors** il est encodé UTF-8 (BOM), avec séparateur cohérent, ligne d'entête et ligne par unité/valeur.
+- **Étant donné** les colonnes de l'export, **quand** le fichier est produit, **alors** elles sont nommées et documentées (identifiant, nom, échelle, période, valeur, unité) et cohérentes avec la vue affichée.
+- **Étant donné** une valeur absente, **quand** le fichier est rempli, **alors** la cellule est vide avec un code « NA » documenté (jamais un zéro à la place d'une donnée inconnue).
+- **Étant donné** un volume important, **quand** l'export est demandé, **alors** le résultat est complet (pagination interne, sans perte silencieuse) et la préparation est signalée si nécessaire.
+
+### US8.6 — Export vue simple
+- **Étant donné** une « vue simple » en consultation, **quand** j'en demande l'export, **alors** je reçois un fichier consolidé et simple de la vue courante : sélection, indicateurs, période et facettes appliquées.
+- **Étant donné** l'export de vue simple, **quand** il est produit, **alors** son contenu correspond à la vue affichée à l'écran au moment de l'export (ni plus, ni moins).
+- **Étant donné** la vue simple, **quand** l'export est déclenché, **alors** une seule action suffit, sans paramétrage avancé (adapté aux utilisateurs non techniques).
+- **Étant donné** l'export de vue simple, **quand** le fichier est ouvert, **alors** les métadonnées d'en-tête (nom de la vue, date d'export, source « HydroScope ») précisent le périmètre diffusé.
+
+---
+
+**EPIC 9 — Utilisateurs**
+
+### US9.2 — Authentification
+- **Étant donné** des identifiants valides, **quand** je me connecte, **alors** l'authentification réussit et je suis redirigé vers la vue de mon profil, sans mot de passe affiché ni stocké en clair.
+- **Étant donné** des identifiants invalides, **quand** je tente une connexion, **alors** un message d'échec générique est affiché et l'incident (échec) est tracé côté logs.
+- **Étant donné** une session authentifiée, **quand** celle-ci expire (inactivité définie), **alors** l'utilisateur est déconnecté proprement et redirigé vers le formulaire de connexion.
+- **Étant donné** une fonctionnalité protégée, **quand** un utilisateur non authentifié tente d'y accéder, **alors** une redirection vers l'authentification est effectuée avant de servir la ressource.
+- **Étant donné** la conformité RGPD (cookies / stockage local), **quand** une session est ouverte, **alors** aucun mot de passe ni donnée personnelle sensible n'est stocké côté navigateur.
+
+### US9.3 — Rôles simples
+- **Étant donné** les rôles définis par la plateforme (administrateur plateforme, administrateur expert data, expert métier eau potable, décideur, intéressé public), **quand** un compte est créé ou modifié, **alors** un rôle simple lui est attribué parmi cette liste normative.
+- **Étant donné** un utilisateur connecté, **quand** il utilise la plateforme, **alors** seules les fonctionnalités autorisées par son rôle sont visibles et actives.
+- **Étant donné** un utilisateur sans droit, **quand** il tente d'accéder à une fonctionnalité ou URL directe, **alors** l'accès est bloqué (aucun contournement par autorisation via adresse directe).
+- **Étant donné** le changement de rôle d'un compte, **quand** il est enregistré, **alors** les nouveaux droits sont appliqués à la connexion suivante, sans privilège résiduel sur la session antérieure.
+
+---
+
+**EPIC 10 — Traçabilité**
+
+### US10.1 — Tracer imports
+- **Étant donné** un import (fichier ou source externe) réalisé, **quand** il se termine, **alors** une entrée de journal est créée : type d'import, source, périmètre, nombre de lignes, statut (réussi / partiel / échoué) et horaire (dates/heures).
+- **Étant donné** un import partiel ou échoué, **quand** l'entrée est consultée, **alors** les détails des erreurs (lignes rejetées, motif) sont accessibles pour la correction.
+- **Étant donné** le journal des imports, **quand** je le consulte, **alors** la recherche par période, source et statut est possible, et le contenu est immuable (aucune suppression).
+- **Étant donné** un import suivi, **quand** il est enregistré, **alors** l'événement est visible dans le journal dans un délai conforme aux engagements contractuels, indépendamment du statut ultérieur des données.
+
+### US10.2 — Tracer calculs
+- **Étant donné** un calcul (indicateur simple, agrégation bassin versant, agrégation temporelle) exécuté, **quand** il est journalisé, **alors** le journal enregistre : identifiant de l'exécution, version de l'indicateur, données d'entrée, paramètres, date et statut.
+- **Étant donné** un recalcul, **quand** il est déclenché, **alors** une nouvelle entrée de journal est créée (l'entrée précédente n'est pas écrasée), permettant la reconstitution.
+- **Étant donné** le journal des calculs, **quand** je le consulte, **alors** il permet de relier chaque résultat à la définition d'indicateur et aux paramètres utilisés.
+- **Étant donné** l'échec d'un calcul, **quand** il est journalisé, **alors** le motif est explicité, accessible à l'administrateur pour permettre la correction.
+
+---
+
+*Périmètre MVP — Ce document référence le catalogue des indicateurs (38 indicateurs) et les référentiels (BVAEP, captages, PPE) fournis en données de référence pour la recette en Nouvelle-Calédonie. La liste des US couvertes correspond aux flags `MVP=TRUE` du fichier backlog.csv : 33 US au total pour les EPIC 6 à 10, dont 24 pour l'EPIC 6.*

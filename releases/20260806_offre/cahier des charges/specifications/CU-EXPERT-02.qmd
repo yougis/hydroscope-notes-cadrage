@@ -1,0 +1,50 @@
+---
+title: "CU-EXPERT-02 — Consulter les graphiques temporels et alterner les vues"
+profile: "Expert métier eau potable"
+uc: "CU-EXPERT-02"
+us: "US6.4, US6.24"
+epic: "EPIC 6 — Visualisation"
+mvp: true
+amc: false
+---
+
+# Consulter les graphiques temporels et alterner les vues
+
+**Phrase agile :** En tant qu'expert métier eau potable, je veux consulter l'évolution
+temporelle des indicateurs et basculer les vues graphiques (changement, répartition, carte H3)
+afin d'identifier les dynamiques croisées impactant la ressource.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-EXPERT-02` (US6.4, US6.24) — `profils_utilisateurs.qmd` (Profil 3).
+- EPIC 6 — Graphiques temporels, comparaisons, choroplèthe H3.
+- Spec UX §3.4 (dataviz par onglets) et §3.5 (vues temporelles, changements, H3) ;
+  composant `ChartModeSwitcher` (`src/features/indicateurs/`).
+
+## 2. Fonctionnalités couvertes
+
+- Série temporelle de l'indicateur pour les captages compatibles (données historisées).
+- Vue « changements » : variations entre une date de début et de fin.
+- Vue « répartition » : comparaison inter-unités (barres par unité).
+- Carte choroplèthe H3 / carte thématique source.
+- Cohérence multi-vues sur la session (mêmes capteurs et filtres).
+
+## 3. Parcours IHM
+
+1. Ouvrir un indicateur → onglet dataviz (volet droit).
+2. Basculer via les icônes `ChartModeSwitcher` sous le graphique.
+3. Sélectionner les unités à comparer (sélecteur).
+4. Alterner entre les modes (répartition / temporel / changements / H3).
+
+## 4. Rendu visuel obtenu
+
+- Graphiques `LineChart` / `BarChart` / `UnitBarChart` (`src/components/charts/`).
+- Mode temporel grisé si l'indicateur n'a pas de série historisée (spec UX §3.5).
+- Carte H3 : hexagones colorés (`QUALITE_COLORS` 0-3), tooltip survol avec valeur.
+- Captures : _(à insérer depuis le prototype — page Indicateur / IndicateurPage.tsx)_.
+
+## 5. Points de vigilance
+
+- Cohérence des filtres entre les vues (EPIC 6).
+- Ne pas surcharger visuellement (limiter les modes/couches simultanées).
+- La H3 avancée peut être post-MVP (enrichissement).

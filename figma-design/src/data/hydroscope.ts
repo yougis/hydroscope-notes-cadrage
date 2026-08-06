@@ -2,18 +2,18 @@ import type { BvaepDef, CaptageDef, UniteGestionDef, IndicatorDef } from '@/type
 import { detailOf } from './indicatorDetails'
 
 export const UNITES_GESTIONES: UniteGestionDef[] = [
-  { id: 'C-001', name: 'Koumac — Rivière Blanche', commune: 'Koumac', province: 'Province Nord', bvaep: 'Nord', kind: 'captage_superficiel', dist: 4.2 },
-  { id: 'C-002', name: 'Voh — Forage F2', commune: 'Voh', province: 'Province Nord', bvaep: 'Nord', kind: 'forage', dist: 11.8 },
-  { id: 'C-003', name: 'Pouembont — Tranchee du Col', commune: 'Pouembout', province: 'Province Nord', bvaep: 'Nord', kind: 'tranchee_drainante', dist: 3.1 },
-  { id: 'C-004', name: 'Koné — Forage Nord', commune: 'Koné', province: 'Province Nord', bvaep: 'Nord', kind: 'forage', dist: 7.6 },
-  { id: 'C-005', name: 'Poindimié — Ancien captage', commune: 'Poindimié', province: 'Province Nord', bvaep: 'Nord', kind: 'captage_superficiel', dist: 9.4 },
-  { id: 'C-006', name: 'Houaïlou — Forage F1', commune: 'Houaïlou', province: 'Province Nord', bvaep: 'Centre', kind: 'forage', dist: 2.8 },
-  { id: 'C-007', name: 'Canala — Tranchée de la Ouinnée', commune: 'Canala', province: 'Province Nord', bvaep: 'Centre', kind: 'tranchee_drainante', dist: 15.2 },
-  { id: 'C-008', name: 'Boulouparis — Capture de la Néra', commune: 'Boulouparis', province: 'Province Sud', bvaep: 'Sud', kind: 'captage_superficiel', dist: 5.3 },
-  { id: 'C-009', name: 'La Foa — Forage du Pont', commune: 'La Foa', province: 'Province Sud', bvaep: 'Sud', kind: 'forage', dist: 8.9 },
-  { id: 'C-010', name: 'Sarraméa — Tranchée du Creek', commune: 'Sarraméa', province: 'Province Sud', bvaep: 'Sud', kind: 'tranchee_drainante', dist: 12.7 },
-  { id: 'C-011', name: 'Poya — Rivière de Poya', commune: 'Poya', province: 'Province Nord', bvaep: 'Centre', kind: 'captage_superficiel', dist: 6.1 },
-  { id: 'C-012', name: 'Kouaoua — Forage de la Mine', commune: 'Kouaoua', province: 'Province Nord', bvaep: 'Centre', kind: 'forage', dist: 4.7 },
+  { id: 'C-001', name: 'Koumac — Rivière Blanche', commune: 'Koumac', province: 'Province Nord', bvaep: 'Nord', kind: 'captage_superficiel' },
+  { id: 'C-002', name: 'Voh — Forage F2', commune: 'Voh', province: 'Province Nord', bvaep: 'Nord', kind: 'forage' },
+  { id: 'C-003', name: 'Pouembont — Tranchee du Col', commune: 'Pouembout', province: 'Province Nord', bvaep: 'Nord', kind: 'tranchee_drainante' },
+  { id: 'C-004', name: 'Koné — Forage Nord', commune: 'Koné', province: 'Province Nord', bvaep: 'Nord', kind: 'forage' },
+  { id: 'C-005', name: 'Poindimié — Ancien captage', commune: 'Poindimié', province: 'Province Nord', bvaep: 'Nord', kind: 'captage_superficiel' },
+  { id: 'C-006', name: 'Houaïlou — Forage F1', commune: 'Houaïlou', province: 'Province Nord', bvaep: 'Centre', kind: 'forage' },
+  { id: 'C-007', name: 'Canala — Tranchée de la Ouinnée', commune: 'Canala', province: 'Province Nord', bvaep: 'Centre', kind: 'tranchee_drainante' },
+  { id: 'C-008', name: 'Boulouparis — Capture de la Néra', commune: 'Boulouparis', province: 'Province Sud', bvaep: 'Sud', kind: 'captage_superficiel' },
+  { id: 'C-009', name: 'La Foa — Forage du Pont', commune: 'La Foa', province: 'Province Sud', bvaep: 'Sud', kind: 'forage' },
+  { id: 'C-010', name: 'Sarraméa — Tranchée du Creek', commune: 'Sarraméa', province: 'Province Sud', bvaep: 'Sud', kind: 'tranchee_drainante' },
+  { id: 'C-011', name: 'Poya — Rivière de Poya', commune: 'Poya', province: 'Province Nord', bvaep: 'Centre', kind: 'captage_superficiel' },
+  { id: 'C-012', name: 'Kouaoua — Forage de la Mine', commune: 'Kouaoua', province: 'Province Nord', bvaep: 'Centre', kind: 'forage' },
 ]
 
 export const CAPTAGES: CaptageDef[] = UNITES_GESTIONES

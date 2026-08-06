@@ -1,59 +1,62 @@
-## Planning et jalons
+## Planning et jalons {#sec-planning-jalons}
 
 Le planning du projet HydroScope s’inscrit dans une logique itérative et incrémentale, tout en intégrant des contraintes calendaires fortes liées aux financements (OFB / PEP). Il vise à concilier une approche Agile avec des jalons contractuels permettant de sécuriser le pilotage du projet.
 
-La période de développement est prévue du **1er novembre 2026 au 31 mai 2027**, avec une mise à disposition progressive des fonctionnalités.
+La période de développement est prévue du **1er décembre 2026 au 30 juin 2027**, avec une mise à disposition progressive des fonctionnalités.
 
 ### Macro-planning
 
 Le projet est structuré en grandes phases :
 
-- **Phase de préparation (octobre 2026)**
+- **Phase de préparation (décembre 2026)**
   - finalisation du cadrage fonctionnel et technique ;
   - consolidation du backlog initial ;
   - préparation des environnements ;
   - cadrage des flux de données avec les partenaires.
-- **Phase de développement – itérative (novembre 2026 → avril 2027)**
+- **Phase de développement – itérative (janvier 2026 → mai 2027)**
   - développement par sprints (2 à 4 semaines) ;
   - intégration progressive des données ;
   - validations régulières avec les utilisateurs ;
   - ajustement du backlog en continu.
-- **Phase de stabilisation et recette (mai 2027)**
+- **Phase de stabilisation et recette (juin 2027)**
   - tests fonctionnels et méthodologiques ;
   - correction des anomalies ;
   - validation des indicateurs ;
   - préparation à la mise en production.
-- **Mise en production initiale (fin mai 2027)**
+- **Mise en production initiale (juillet 2027)**
 
 ### Jalons contractuels
 
 Afin de sécuriser le pilotage du projet, plusieurs jalons contractuels sont définis :
 
-- **J1 – Lancement du projet (01/11/2026)**  
+- **J1 – Lancement du projet (01/12/2026)**
   Démarrage des développements, validation du backlog initial, des modalités de travail et des engagements de fourniture de données.
 
-- **J2 – Validation du socle technique et des flux de données (mi-décembre 2026)**  
+- **J2 – Validation du socle technique et des flux de données (fin-décembre 2026)**
   Mise en place des mécanismes d’import, structuration des données, premiers référentiels opérationnels.
 
-- **J3 – Livraison du MVP (fin janvier 2027)**  
+- **J3 – Livraison du MVP (fin janvier 2027)**
   Mise à disposition d’une première version fonctionnelle incluant :
   - intégration de données structurées ;
   - calcul d’indicateurs simples ;
   - visualisation cartographique et temporelle ;
   - premières fiches territoires.
-- **J4 – Enrichissement fonctionnel (mars 2027)**  
+
+- **J4 – Enrichissement fonctionnel (mars 2027)**
   Extension des fonctionnalités :
   - enrichissement des indicateurs ;
   - amélioration des visualisations ;
   - premières fonctionnalités d’aide à la décision ;
   - consolidation des données.
-- **J5 – Recette fonctionnelle et méthodologique (mai 2027)**  
+
+- **J5 – Recette fonctionnelle et méthodologique (mai 2027)**
   Validation par la MOA :
   - conformité fonctionnelle ;
   - validation des indicateurs ;
   - correction des anomalies critiques ;
   - validation des performances globales.
-- **J6 – Mise en production (31/05/2027)**  
+
+- **J6 – Mise en production (31/06/2027)**  
   Mise à disposition de la version initiale du système.
 
 ### Pilotage et suivi
@@ -94,6 +97,8 @@ Le projet comporte des risques pouvant impacter les délais, la qualité ou le p
 - **Dérive du périmètre** : ajout de fonctionnalités non priorisées ;
 - **Adoption utilisateur** : difficulté d’appropriation de l’outil.
 
+L'ensemble de ces risques doivent être pris en compte par le prestataire et sa propostition doit permettre des les limiter.
+
 #### Suivi des risques
 
 Les risques feront l’objet :
@@ -115,4 +120,4 @@ Les risques feront l’objet :
 - Nécessité de stabiliser rapidement un MVP opérationnel  
 - Coordination entre rythme Agile et contraintes contractuelles  
 - Anticipation des phases de recette et de validation méthodologique  
-- Gestion des dépendances liées aux données et aux partenaires  
+- Gestion des dépendances liées aux données et aux partenaires

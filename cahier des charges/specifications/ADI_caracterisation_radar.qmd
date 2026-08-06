@@ -1,0 +1,54 @@
+---
+title: "ADI — Radar de caractérisation d'un territoire (Enjeux ⇄ Menaces)"
+profile: "Document support (ADI — Aide à l'interprétation)"
+uc: "ADI_caracterisation_radar"
+us: "US6.1, US6.7"
+epic: "EPIC 6 — Visualisation"
+mvp: true
+amc: false
+---
+
+# Radar de caractérisation d'un territoire (Enjeux ⇄ Menaces)
+
+> **⚠️ ADI — Aide à l'interprétation pour la décision.** Complète la fiche territoire par
+> un **radar descriptif** superposant, par thème, la position qualifiée des familles
+> ENJEUX et MENACES. Il donne la **posture** d'un territoire de façon lisible, sans
+> pondération, **sans score** et **sans hiérarchisation** (AMC isolée).
+
+## 1. Contexte & référence
+
+- Familles `ENJEUX` / `MENACES`, thèmes, groupes (catalogue, `src/data/hydroscope.ts`).
+- `ADI_methodologie_seuils.qmd` (niveaux de vigilance) ; EPIC 6 § dataviz.
+- Fiche territoire US6.7 (`CU-DECISION-01`) ; complément du schéma « facteurs
+  dominants » (`ADI_fiche_territoire_synthese`).
+
+## 2. Fonctionnalités couvertes
+
+- Radar multi-axes par territoire (unité de gestion, bassin versant ou commune).
+- Axes = thèmes du territoire ; chaque axe porte la **position qualifiée** du thème
+  (valeurs ramenées à la référence globale).
+- Superposition **Enjeux vs Menaces** pour lire la posture d'un même territoire.
+- Lecture **seule** : pas de comparaison automatique inter-territoires (comparaison via
+  les vues dédiées, `CU-DECISION-02`).
+
+## 3. Parcours IHM
+
+1. Ouvrir la fiche territoire (`CU-DECISION-01` / Sidebar « Fiches des territoires »)
+   OU la page indicateur d'un territoire.
+2. Choisir le territoire.
+3. Lecture du radar Enjeux/Menaces + badges de niveau par thème.
+4. Clic sur un axe → détail des indicateurs du thème + fiche indicateur enrichie
+   (`ADI_fiche_indicateur`).
+
+## 4. Rendu visuel attendu
+
+- Radar `RadarChart` à 4–6 axes (thèmes), polygones Enjeux et Menaces superposés.
+- Badges de niveau sur les axes (libellés `QUALITE_LABELS`).
+- Captures : _(à insérer depuis le prototype — radar Enjeux/Menaces)_.
+
+## 5. Points de vigilance
+
+- **Purement descriptif** : pas de pondération ni de score agrégé (EPIC 7 ≠ EPIC 5/AMC).
+- Les thèmes/indicateurs du radar sont ceux **disponibles** sur le territoire
+  (complétude respectée).
+- Cohérence couleur/échelle avec la carte et la fiche indicateur.

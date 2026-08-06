@@ -1,0 +1,4 @@
+flowchart LR
+    SRC["Sources de données"] --> ETL["Pipelines d'intégration (dbt)"]
+    ETL --> MOD["Modèle de données<br/>captages · bassins versants · PPE"]
+    MOD --> IND["Indicateurs"]

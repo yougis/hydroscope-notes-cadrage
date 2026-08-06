@@ -1,0 +1,54 @@
+---
+title: "ADI — Pastilles de dépassement et identification des tendances"
+profile: "Document support (ADI — Aide à l'interprétation)"
+uc: "ADI_depassement_tendance"
+us: "US7.3, US7.2, US6.4"
+epic: "EPIC 7 — Aide à la décision ; EPIC 6 — Graphiques temporels"
+mvp: true
+amc: false
+---
+
+# Pastilles de dépassement et identification des tendances
+
+> **⚠️ ADI — Aide à l'interprétation pour la décision.** Sur les séries temporelles et la
+> carte, signale les **franchissements de seuil** et les **tendances** (hausse / baisse /
+> rupture) de façon **descriptive**. L'identification des tendances (US7.3) est au
+> périmètre MVP de l'EPIC 7 ; la détection de dépassement (US7.2) relève du lot 2. Aucun
+> tri ni décision automatique.
+
+## 1. Contexte & référence
+
+- Graphiques temporels US6.4 (`LineChart`) ; séries historisées (EPIC 1) ; modes
+  « Vue temporelle » / « Changements » (US6.24).
+- `ADI_methodologie_seuils.qmd` (seuils) ; EPIC 7 § US7.2/US7.3 ; EPIC 6 § monitoring.
+- Carte : pastilles sur entités (US6.5).
+
+## 2. Fonctionnalités couvertes
+
+- **Seuil en pointillés** sur la courbe temporelle (borne de référence).
+- **Pastille de dépassement** : marqueur `≠` quand la valeur franchit le seuil, coloré
+  (Dégradé/Critique).
+- **Tendance** : flèche `▲ / ▼ / —` + libellé (« en hausse », « en baisse », « rupture »),
+  calculée sur une fenêtre glissante et lisible par un non-statisticien.
+- **Date de début** de la période de tension affichée.
+
+## 3. Parcours IHM
+
+1. Page indicateur → mode « Vue temporelle » ou « Changements ».
+2. Lecture du seuil en pointillés + pastilles `≠` sur la série.
+3. Lecture des flèches de tendance par période.
+4. Clic sur une pastille → détail + lien fiche indicateur.
+
+## 4. Rendu visuel attendu
+
+- Ligne de seuil en pointillés sur le `LineChart` ; marqueurs `≠` colorés.
+- Pastilles de tendance/dépassement sur la carte (entités, H3).
+- Icônes de tendance (▲/▼/—) sur les chiffres clés et fiches.
+- Captures : _(à insérer depuis le prototype — séries temporelles + pastilles)_.
+
+## 5. Points de vigilance
+
+- **Réserve de complétude** : jamais de pastille d'alerte sans donnée fiable (complétude
+  < ~80 % → Indéterminé).
+- La tendance reste **indicative** ; l'arbitrage revient à l'acteur.
+- Cohérence avec la fiche indicateur (seuils versionnés, référence documentée).

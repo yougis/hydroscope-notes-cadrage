@@ -1,0 +1,51 @@
+---
+title: "CU-ADMIN-02 — Configurer les rôles et les droits d'accès par profil"
+profile: "Administrateur plateforme"
+uc: "CU-ADMIN-02"
+us: "US9.3"
+epic: "EPIC 9 — Utilisateurs"
+mvp: true
+amc: false
+---
+
+# Configurer les rôles et les droits d'accès par profil
+
+**Phrase agile :** En tant qu'administrateur plateforme, je veux configurer les rôles
+et les droits d'accès par profil afin que chaque utilisateur ne dispose que des
+fonctionnalités nécessaires à son rôle.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-ADMIN-02` (US9.3) — `profils_utilisateurs.qmd` (Profil 1).
+- EPIC 9 — Gestion des utilisateurs ; RBAC (§ spec UX §4.4 ; §3.6).
+- `UX-header-sidebar.md` §2.2 (groupe « Administration »).
+
+## 2. Fonctionnalités couvertes
+
+- Édition de la matrice des profils (rôles).
+- Affectation des droits par profil : accès aux données/indicateurs, aux
+  fonctionnalités (visualisation, export, paramétrage) et aux modules (ex. **AMC**, post-MVP).
+- Persistance et audit des modifications (versionnage / journal).
+
+## 3. Parcours IHM
+
+1. Connexion admin → Sidebar « Administration > Référentiels » .
+2. Onglet « Profils / droits ».
+3. Sélection d'un profil → tableau des fonctionnalités avec cases à cocher.
+4. Enregistrement → application immédiate aux utilisateurs rattachés.
+5. (Facultatif) journal des changements consultable via « Historique & traçabilité ».
+
+## 4. Rendu visuel obtenu
+
+- Matrice de droits rendue sous forme de **table** (`ex-data-table-cell` : en-tête en
+  petite capitale, corps en `body-sm`) — `DESIGN.md` §Examples.
+- Cases : `Checkbox` Radix ; active state : `blue-600` (interactif).
+- Enregistrement via `button-primary` (pilule noire `{rounded.pill}` 999 px,
+  `DESIGN.md` §Components) ou `blue-600` selon système du prototype.
+- Captures : _(à insérer depuis le prototype — vue Référentiels/Profils)_.
+
+## 5. Points de vigilance
+
+- Séparer la configuration des droits de l'attribution des comptes (CU-ADMIN-01).
+- Les droits du module AMC restent conditionnés (post-MVP).
+- Auditer les changements de droits (EPIC 10).

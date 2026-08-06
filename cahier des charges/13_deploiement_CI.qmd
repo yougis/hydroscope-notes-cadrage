@@ -12,9 +12,12 @@ Ce MVP sera enrichi progressivement par itérations successives, permettant d’
 
 Le déploiement du système est envisagé en plusieurs étapes:
 
-- Mise à disposition du **MVP (Minimum Viable Product)** couvrant les fonctionnalités essentielles (intégration de données, premiers indicateurs, visualisation de base) ;
+- Mise à disposition du **MVP (Minimum Viable Product)** ;
 - Enrichissement progressif des fonctionnalités en fonction des priorités du backlog ;
-- Extension du périmètre fonctionnel et des jeux de données intégrés.
+- De test unitaires et de tests d’intégration ;
+- Extension du périmètre fonctionnel et des jeux de données intégrés;
+- D’une validation régulière par la MOA avant mise en production.
+
 
 Cette approche permet de tester rapidement les usages et d’ajuster le produit en continu.
 

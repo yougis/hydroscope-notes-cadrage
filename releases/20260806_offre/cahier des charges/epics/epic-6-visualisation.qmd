@@ -1,0 +1,71 @@
+
+
+#### Description
+
+L’EPIC couvre la conception et la mise en œuvre des interfaces de consultation et d’exploration des données. Il s’appuie sur les indicateurs produits (EPIC 4) et les référentiels (EPIC 3) pour proposer des restitutions graphiques et cartographiques à différentes échelles spatiales et temporelles.
+
+Les data visualisations doivent permettre à la fois une lecture synthétique des informations (tableaux de bord) et une exploration plus fine (cartographie, graphiques), en fonction des besoins des utilisateurs.
+
+Une attention particulière est portée à l’ergonomie, à la lisibilité et à la cohérence des représentations proposées.
+
+#### Fonctionnalités
+
+- **Cartographie interactive**
+  - affichage des bassins versants, captages et autres objets géographiques
+  - représentation des indicateurs sous forme de couches thématiques
+  - navigation (zoom, déplacement) et interaction (sélection, survol)
+  - superposition de plusieurs couches d’information
+
+- **Tableaux de bord**  
+  - visualisation agrégée par territoire ou thématique
+  - affichage de statistiques via des graphiques et des cartes
+  - accès rapide à l’information essentielle des indicateurs disponibles.
+Ces tableaux de bord doivent être adaptés aux différents profils utilisateurs.
+
+- **Graphiques temporels**  
+  - séries temporelles  
+  - comparaison de périodes  
+  - identification de tendances et de ruptures  
+Ces outils permettent d’analyser les dynamiques et les évolutions.
+
+- **Comparaisons spatiales**  
+Possibilité de comparer plusieurs territoires ou objets :
+  - comparaison entre bassins versants
+  - comparaison entre captages
+  - visualisation simultanée de plusieurs entités
+Les interfaces devront intégrer des mécanismes de sélection et de filtrage permettant d’explorer les données de manière dynamique.
+
+- **Sélecteurs et filtres**
+Ces dispositifs doivent permettre de filtrer les données selon différentes dimensions, notamment :
+  - le territoire (bassin versant, captage, zone géographique) ;
+  - la période temporelle ;
+  - certains attributs ou caractéristiques des referentiels (type, status, propriété etc. ).
+
+Les sélecteurs doivent être cohérents entre les différentes vues (cartes, graphiques, tableaux) afin de garantir une expérience utilisateur homogène. Une modification de filtre doit se répercuter de manière cohérente sur l’ensemble des visualisations.
+
+Une attention particulière devra être portée à la lisibilité et à l’ergonomie de ces filtres, afin d’éviter une complexité excessive pour les utilisateurs non experts, tout en permettant des usages avancés pour les profils techniques.
+
+- **Fiches territoriales (US6.7)**  
+Le système doit permettre de consulter une fiche territoire fournissant une synthèse d’un bassin versant, à l’échelle de la commune ou de l’unité de gestion (captage, bassin versant). Les fiches doivent offrir une structuration homogène des informations : description du périmètre, unités de gestion associées le cas échéant, indicateurs disponibles, éléments de comparaison descriptive et visualisations associées (cartes, graphiques temporels).  
+Les contenus doivent être directement issus des données et indicateurs produits, sans transformation interprétative : aucune fonctionnalité de classement, de scoring ou de priorisation ne doit être introduite dans ce cadre, ces rôles relevant de l’EPIC 7 (aide à la décision) et de l’option analyse multicritère (EPIC 5).
+
+- **Monitoring**
+Les fonctionnalités de monitoring dans cet EPIC visent à rendre visibles et compréhensibles les informations de suivi pour les utilisateurs.
+
+Elles comprennent :
+- la mise à disposition de tableaux de bord dédiés au monitoring (technique, qualité des données, indicateurs métier) ;
+- l’affichage d’informations de fraîcheur et de qualité directement dans les visualisations (cartes, graphiques, fiches) ;
+- des outils de suivi temporel permettant d’identifier des tendances ou des anomalies ;
+- des vues synthétiques facilitant l’identification rapide des situations nécessitant une attention particulière.
+
+Ces fonctionnalités doivent rester lisibles et adaptées aux profils d'administrateur de la plateforme.
+
+
+
+#### Points de vigilance
+
+- Risque de surcharge visuelle pouvant nuire à la compréhension  
+- Nécessité d’adapter les visualisations aux différents profils d’utilisateurs  
+- Importance de la cohérence entre les représentations (cartes, graphiques, tableaux)  
+- Risque de mauvaise interprétation lié à des choix de représentation (échelles, couleurs, classifications)  
+- Dépendance à la qualité et à la fraîcheur des données affichées

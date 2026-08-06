@@ -1,0 +1,161 @@
+---
+title: "Cartes des territoires — Parcours, contextes de sélection et comparaison"
+subtitle: "Note de propositions fonctionnelles (à discuter en réunion)"
+date: 2026-08-06
+lang: fr
+---
+
+## 1. Contexte et objectif
+
+L'onglet **Cartes des territoires** permet à l'utilisateur de naviguer entre **captages** et **bassins versants** (BV), d'ajouter un **indicateur** sur la carte, de trier la liste des captages par valeur d'indicateur (du plus au moins) et de sélectionner un sous-ensemble d'entités (par exemple les **10 plus** de l'indicateur) pour disposer de **graphiques et cartes liés**.
+
+La présente note expose comment faire **évoluer cette sélection vers un objet réutilisable** (le *contexte*), et comment permettre, à partir de là :
+
+- de **comparer des territoires entre eux** (captages / BV) sur un jeu d'indicateurs élargi, voire complet ;
+- de mener une **analyse ciblée** sur un jeu de données donné ;
+- de **changer de sélection** proprement, sans corrompre les analyses ou comparaisons déjà constituées.
+
+Cette note est **strictement fonctionnelle**. Les questions techniques (persistance, modèle de données, API, H3, etc.) font l'objet d'une note séparée : *UX-Cartes-Onglet-Contextes-architecture.qmd*.
+
+Chaque point de discussion présente plusieurs **propositions** ; **aucune décision n'est actée** ici. L'objectif est de nourrir la réunion de cadrage.
+
+---
+
+## 2. Glossaire
+
+| Notion | Définition | Exemple |
+|---|---|---|
+| **Entité** | Objet géographique élémentaire rendu par la carte | un captage, un BV élémentaire, une commune, une cellule H3 |
+| **Granularité** | Niveau d'agrégation courant de la carte et dans le temps )| Captage / BV / H3 - Par Annee / Mois / Jour / saison  ... |
+| **Sélection courante** | Éphémère, pilotée par la carte  | les 12 captages actuellement séléctionnés|
+| **Contexte** | un ensemble d'entités + un jeu d'indicateurs |  |
+| **Analyse** | Approfondissement sur un contexte | stats, graphiques, distribution |
+| **Comparaison** | Mise en regard de **plusieurs entités** sur **plusieurs indicateurs** | « BV Nord vs Sud sur 20 indicateurs » |
+
+---
+
+## 3. Modèle mental
+
+Le fil conducteur de la conception repose sur deux séparations :
+
+1. **Sélection courante ≠ Contexte.** La sélection courante est un élément éphémère ; le contexte est un objet pérenne. On ne doit jamais détruire l'un en éditant l'autre.
+
+2. **Entités ⟂ Indicateurs.** Un contexte porte un *ensemble d'entités* ; les indicateurs sont une *lecture* appliquée dessus. On doit pouvoir changer d'indicateur sans modifier le contexte, et réutiliser le même jeu d'entités sur plusieurs indicateurs.
+
+---
+
+## 4. Parcours utilisateur
+
+### Parcours A — Explorer sur la carte (live)
+1. Basculer entre captages et BV (bouton de granularité).
+2. Ajouter un indicateur → la carte le rend et les **statistiques de la sélection courante** s'affichent.
+3. Trier la liste (plus / moins), **top 10** → zoom sur les entités + cartes dédiées.
+4. Tout reste éphémère : le bandeau affiche « Sélection courante ».
+
+### Parcours B — Figer (créer un contexte)
+Au bouton **« Analyser » / « Comparer »** :
+- un **mini-récapitulatif** s'affiche (puce : « 10 captages · indicateurs : pluie, MOS · BV haute Népoui ») avec une proposition de nom ;
+- deux choix proposés : *Analyser* (sur un seul contexte) ou *Comparer* (envoyer vers un multi-contexte) ;
+- après confirmation, le contexte est **nommé et déposé dans l'onglet Contextes** (source : « issu de la carte ») ;
+- une option **« Lien vivant »** peut laisser le contexte **branché** sur la sélection courante, sinon il est figé (**photo**).
+
+### Parcours C — Analyser un contexte
+- Depuis l'onglet **Contextes**, ouvrir un contexte nommé.
+- Vue « Analyse » = tableau / stats / graphique + carte de son périmètre.
+- Changer d'indicateur reste **local** à la vue (ne modifie pas le contexte).
+
+### Parcours D — Comparer des territoires
+- La comparaison sélectionne **2…N contextes** depuis l'onglet Contextes.
+- Chaque contexte est une **colonne** (nom, provenance, badge d'état).
+- Les **indicateurs** s'ajoutent indépendamment (jeu élargi ou complet) → tableau comparatif.
+- Les indicateurs utilisent la même projection (unités / seuils) pour une lecture source-à-source.
+
+### Parcours E — Éditer sans corrompre
+- En analyse, ouvrir un contexte → réviser (ajouter / retirer des entités, jouer sur les filtres) → **« Enregistrer comme nouveau contexte »** (jamais d'écrasement silencieux).
+- La suppression d'un contexte référencé par une comparaison se traduit par un **archivage**, pas une destruction brutale.
+
+---
+
+## 5. Écrans (modèle informationnel)
+
+```
+┌─ NAV principal ─────────────────────────────────────────────┐
+│  Cartes des territoires · Contextes · Analyses · Comparateur│
+└────────────────────────────────────────────────────────────┘
+
+CARTE (sélection courante)
+  ├─ panneau carte (entités, fonds, indicateur)
+  ├─ bandeau contexte (chip « sélection courante » / nom)
+  ├─ stats live + liste triée + top 10
+  └─ [Analyser] [Comparer]
+
+ONGLET CONTEXTES (bibliothèque)
+  ├─ mini-carte du périmètre · badge {photo | règle | lien vivant}
+  ├─ provenance {carte | manuel | règle | analyse}
+  └─ actions : ouvrir · dupliquer · renommer · réévaluer · archiver
+
+ANALYSE (mono) / COMPARATEUR (multi)
+  ├─ colonnes contextes · jeu d'indicateurs
+  ├─ tableau + cartes du périmètre + KPI
+  └─ [Enregistrer en contexte] [Exporter]
+```
+
+---
+
+## 6. Points de discussion fonctionnels
+
+Chaque point liste des **propositions** ; à discuter en réunion, aucune décision n'est prise.
+
+### F1 — Création du contexte (comment on « fige »)
+- **F1-A — Depuis la carte.** Un bouton « Analyser / Comparer » fige la sélection courante, avec chip récapitulatif et nom proposé. *Immédiat, cohérent avec ce qu'on voit ; peut créer des snapshots implicites.*
+- **F1-B — Depuis l'analyse.** Le contexte est créé/figé au sein de l'onglet Contextes, déconnecté de la carte. *Plus de maîtrise, mais plus de friction pour un usage rapide.*
+- **F1-C — Les deux.** La carte sert de point d'entrée rapide ; l'onglet Contextes gère les objets. *Recommandé : converger sur un seul objet, deux accès.*
+
+### F2 — Construction d'un contexte
+- **F2-A — Liste explicite.** L'utilisateur choisit les entités une à une. *Contrôle total, stable.*
+- **F2-B — Liste + règles.** En plus de la liste, des règles : « top 10 de l'indicateur X », « tous les captages du BV Y », « entités sous un filtre ». *Puissant, réévaluable.*
+- **F2-C — Règles seules.** Le contexte est toujours une règle calculée. *Simple mais moins précis pour des jeux faits main.*
+
+### F3 — Évolution du contexte dans le temps (photo / lien vivant)
+- **F3-A — Photo.** Le contexte fige les entités et le jeu d'indicateurs (les valeurs restent à jour au rechargement). *Stable, prévisible.*
+- **F3-B — Lien vivant.** Le contexte suit la sélection courante. *Toujours actuel, mais variable.*
+- **F3-C — Choix à la création.** Un interrupteur décide à la création. *Flexible mais à expliquer.*
+
+### F4 — Analyse vs Comparateur
+- **F4-A — Deux vues séparées.** Onglets distincts « Analyses » et « Comparateur ». *Clair, mais deux contextes d'interface.*
+- **F4-B — Une vue avec bascule.** Même vue, un mode « 1 vs N contextes ». *Moins d'onglets.*
+- **F4-C — Le comparateur comme extension de l'analyse.** Comparer = analyser plusieurs contextes simultanément. *Homogène.*
+
+### F5 — Granularité captage / BV / H3
+- **F5-A — Fixe par contexte.** La granularité est figée à la création. *Simple.*
+- **F5-B — Libre à la volée.** L'utilisateur change de granularité dans la vue (géométrie de référence conservée). *Flexible mais plus complexe.*
+- **F5-C — H3 réservée à l'agrégation.** Captage/BV pour naviguer, H3 uniquement pour agréger. *Limite le risque.*
+
+### F6 — Gouvernance des contextes
+- **F6-A — Archivage.** Suppression = archivage (soft-delete), rien n'est détruit. *Sûr, jamais de casse.*
+- **F6-B — Suppression.** Suppression définitive. *Simple mais dangereux.*
+- **F6-C — Versioning.** Chaque édition crée une version ; les comparaisons pointent une version. *Le plus sûr, le plus lourd.*
+
+---
+
+## 7. Catalogue des référentiels géographiques (données)
+
+Sources référentielles de maillage / fond, sans lien direct avec un indicateur donné. Ids actuels **135–144** ; ajout documenté ici de **145 RHC** (non ajouté au classeur pour l'instant).
+
+| id | nom | origine | distributeur | type | actualisation |
+|---|---|---|---|---|---|
+| 135 | Références hydrographiques (fond imagerie / cartographie / terrain / bassin versant) | GEOREP | GEOREP | vecteur | jamais |
+| 136 | Grille tuile H3 | OEIL | OEIL | vecteur | jamais |
+| 137 | Réseau Hydrographique Modélisé (RHM) | DAVAR | DAVAR | vecteur | peu fréquente |
+| 138 | Maillage communal | DITTT | GEOREP | vecteur | peu fréquente |
+| 139 | Province (Sud, Nord, Îles) | Provinces | GEOREP | vecteur | peu fréquente |
+| 140 | Hydro-écorégion (HER) | — | OFB | vecteur | peu fréquente |
+| 141 | Aire coutumière | Institutions coutumières | GEOREP | vecteur | peu fréquente |
+| 142 | Tribu | Institutions coutumières | GEOREP | vecteur | peu fréquente |
+| 143 | Bassins versants DAVAR (bassins de référence) | DAVAR | DAVAR | vecteur | peu fréquente |
+| 144 | Unités hydrogéologiques / masses d'eau (BDLISA) | DIMENC | DIMENC | vecteur | peu fréquente |
+| **145** | **Réseau Hydrographique Cartographié (RHC)** | **DITTT (Service de la Topographie)** | **DITTT** | **vecteur (polyligne)** | **peu fréquente** |
+
+**RHC (145)** : cours d'eau cartographiés, issus de la Base de Données Topographiques au **1:10 000** produite et maintenue par le service de la topographie de la **DITTT**. Champs utiles : `type`, `origine`, `permanent`, `toponyme`, `date_acq`. Service : `carto.gouv.nc/public/rest/services/modelisation_ecoulements_surface/MapServer/4`.
+
+> Le même service héberge également les **RHM par seuil** (0,2 / 1 / 5 km²) et les **bassins versants**, en cohérence avec le référentiel RHM n°137. Le RHC complète le maillage des BV par le **réseau linéaire** des cours d'eau.

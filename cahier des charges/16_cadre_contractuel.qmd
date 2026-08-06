@@ -7,7 +7,7 @@ Le présent projet s’inscrit dans un cadre contractuel nécessitant la défini
 Les développements réalisés dans le cadre du projet HydroScope feront l’objet d’une clarification des droits de propriété intellectuelle.
 
 Sauf disposition contraire, les éléments suivants sont attendus :
-- les codes sources développés dans le cadre du projet seront accessibles à l’OEIL ;
+- la licence sur les codes sources développés dans le cadre du projet seront cédés à l’OEIL ;
 - l’OEIL disposera de droits d’usage, de modification et de réutilisation du code ;
 - les éventuels composants tiers ou bibliothèques utilisées devront être clairement identifiés (licences, restrictions).
 

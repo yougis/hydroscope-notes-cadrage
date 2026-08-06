@@ -1,0 +1,46 @@
+---
+title: "CU-DECISION-03 — Détecter une situation critique et consulter les alertes"
+profile: "Décideur métier"
+uc: "CU-DECISION-03"
+us: "US7.2, US7.3"
+epic: "EPIC 7 ; §8 — Monitoring"
+mvp: true
+amc: false
+---
+
+# Détecter une situation critique et consulter les alertes
+
+**Phrase agile :** En tant que décideur métier, je veux détecter une situation critique
+et consulter les alertes afin de réagir rapidement face aux risques sur la ressource.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-DECISION-03` (US7.2, US7.3) — `profils_utilisateurs.qmd` (Profil 4).
+- §8 — Monitoring ; EPIC 7 ; dashboard (vignettes avec badge alerte).
+
+## 2. Fonctionnalités couvertes
+
+- Consultation des alertes actives (badges, pastilles).
+- Détection de situations critiques (dépassements de seuil).
+- Accès rapide depuis les alertes vers les détails/rapports.
+- Alertes liées aux capteurs, bassins, communes ou indicateurs.
+
+## 3. Parcours IHM
+
+1. Sidebar « Exploration > Tableau de bord » (badge d'alertes actives).
+2. Vue « Alertes » (liste/filtres).
+3. Clic sur une alerte → détail + lien vers la fiche/rapport.
+4. (Option) bascule vers carte avec pastilles d'alerte.
+
+## 4. Rendu visuel obtenu
+
+- Badge d'alerte (rouge) sur les vignettes (count d'alertes actives).
+- Pastilles d'alerte sur la carte (`Marker/AlertBadge`).
+- Liste d'alertes avec sévérité et statut.
+- Captures : _(à insérer depuis le prototype — vue Tableau de bord / Alertes)_.
+
+## 5. Points de vigilance
+
+- L'alerte = déclencheur de lecture ; l'interprétation et la criticité restent
+  de la responsabilité de l'expert/décideur.
+- Les critères globaux de criticité relèvent de l'AMC (document isolé).

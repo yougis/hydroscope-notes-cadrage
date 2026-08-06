@@ -1,0 +1,53 @@
+---
+title: "CU-ADMIN-01 — Créer un compte utilisateur et attribuer un profil"
+profile: "Administrateur plateforme"
+uc: "CU-ADMIN-01"
+us: "US9.1"
+epic: "EPIC 9 — Utilisateurs"
+mvp: true
+amc: false
+---
+
+# Créer un compte utilisateur et attribuer un profil
+
+**Phrase agile :** En tant qu'administrateur plateforme, je veux créer un compte
+utilisateur et lui attribuer un profil afin que chaque acteur puisse accéder à la
+plateforme avec les droits appropriés.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-ADMIN-01` (US9.1) — `profils_utilisateurs.qmd` (Profil 1).
+- EPIC 9 — Gestion des utilisateurs ; RBAC (§ spec UX §4.4 ; §3.6 Compte utilisateur).
+- Références d'interface : `UX-header-sidebar.md` (§2.2 groupes « Administration »),
+  `specifications_interfaces_ux_architecture.md` (§3.6, §4.4).
+
+## 2. Fonctionnalités couvertes
+
+- Création d'un compte utilisateur (identifiants, nom, structure/organisme).
+- Choix d'un **profil** (expert, technicien, décideur, partenaire, grand public)
+  parmi le référentiel des rôles (EPIC 3 / EPIC 9).
+- Enregistrement sécurisé et conforme RGPD (données limitées, stockage local).
+
+## 3. Parcours IHM
+
+1. Connexion administrateur → Sidebar « Administration > Référentiels / Connexion ».
+2. Ouvrir la vue de gestion des utilisateurs.
+3. « Nouvel utilisateur » → formulaire (nom, email, organisme).
+4. Sélection du profil dans une liste déroulante → validation.
+5. Confirmation + notification ; l'utilisateur peut se connecter avec les droits
+   du profil attribué.
+
+## 4. Rendu visuel obtenu
+
+- Shell standard : header **56 px**, sidebar **224 px** (`UX-header-sidebar.md` §1-2).
+- Formulaire sur `card-content` (padding 24 px, `rounded.xl` 16 px) ; champs
+  `text-input` sur fond `canvas-soft` (`rounded.md` 8 px).
+- Sélecteur de profil en `Select` (Radix) ; bouton principal `blue-600`
+  (interactif/actif, `UX-header-sidebar.md` §3).
+- Captures : _(à insérer depuis le prototype — vue « Connexion » / gestion compte)_.
+
+## 5. Points de vigilance
+
+- Droits régulés par RBAC ; l'administrateur ne doit pas pouvoir créer un compte
+  avec un niveau supérieur au sien sans contrôle (séparation des pouvoirs).
+- RGPD : données de compte limitées au nécessaire ; consentement/transparence.

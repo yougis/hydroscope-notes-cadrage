@@ -1,117 +1,46 @@
----
-format:
-  pdf:
-    include-in-header:
-      text: |
-        \usepackage[table]{xcolor}
----
-
 ## Présentation des indicateurs {#sec-presentation-indicateurs}
 
 HydroScope calcule **38 indicateurs** organisés selon une arborescence à trois niveaux — **famille**, **thème** et **groupe** — qui structure la navigation du catalogue d'indicateurs (Famille → Thème → Groupe), conformément aux critères d'acceptation de la visualisation définis en annexe (*Criteres_acceptation_visualisation.qmd*).
 
-Le référentiel contractuel des indicateurs est le fichier `liste_indicateurs_v4.xlsx` (annexe) ; les fiches détaillées de chaque indicateur (définition, objectifs, méthode, sources, vigilances) sont documentées dans le **catalogue de fiches d'indicateurs** (`Fiches_indicateurs_HydroScope-v4.pdf`, annexe), dont le contenu textuel n'est pas repris dans ce chapitre.
+Le référentiel contractuel des indicateurs est le fichier maître `fiches indicateurs.xlsx` (source unique des indicateurs, dossier de travail `fiche indicateur/`) ; les fiches détaillées de chaque indicateur (définition, objectifs, méthode, sources, vigilances) sont documentées dans le **catalogue de fiches d'indicateurs** (`Fiches_indicateurs_HydroScope-v4.pdf`, annexe) dont le contenu textuel n'est pas repris dans ce chapitre.
 
-Le tableau suivant reproduit intégralement le référentiel (38 lignes × 9 attributs). Le code couleur appliqué reflète la hiérarchie Famille → Thème → Groupe : la colonne *Famille* porte une couleur fixe par famille, la colonne *Thème* une teinte par thème, et les colonnes *Groupe* à *Analyse multicritère* un fond uniforme par groupe, texte blanc sur cellules colorées. L'ensemble des 38 indicateurs est affiché intégralement, sans troncature, pour servir de base de recette au cahier des charges.
+Le tableau suivant reproduit intégralement le référentiel (38 lignes × 9 attributs). Le code couleur appliqué reflète la hiérarchie Famille → Thème → Groupe : la colonne *Famille* porte une couleur fixe par famille, la colonne *Thème* une teinte par thème, et les colonnes *Groupe* à *Analyse multicritère* un fond uniforme par groupe, avec texte blanc sur cellules colorées. L'ensemble des 38 indicateurs est affiché intégralement, sans troncature, pour servir de base de recette au cahier des charges.
 
 ```{python}
 #| echo: false
-import zipfile, re, xml.etree.ElementTree as ET
-import pandas as pd
+#| warning: false
+import os, sys
+sys.path.insert(0, os.getcwd())
+from _lib_indicateurs import load_all, target_format
 
-ns = {'m': 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
-with zipfile.ZipFile('annexes/liste_indicateurs_v4.xlsx') as zf:
-    styles = ET.fromstring(zf.read('xl/styles.xml'))
-    sheet = ET.fromstring(zf.read('xl/worksheets/sheet1.xml'))
-    shared = ET.fromstring(zf.read('xl/sharedStrings.xml'))
+base = os.environ.get('QUARTO_PROJECT_ROOT') or os.getcwd()
+annex = os.path.join(base, 'cahier des charges', 'annexes')
+fmt = target_format()
 
-strings = [''.join(t.itertext()) for t in shared.findall('m:si', ns)]
-fills = [f for f in styles.findall('.//m:fills/m:fill', ns)]
+df, df_colors = load_all()
 
-def fg(sidx):
-    p = fills[int(sidx)].find('m:patternFill', ns)
-    if p is None:
-        return None
-    fc = p.find('m:fgColor', ns)
-    return fc.get('rgb') if fc is not None else None
-
-xfs = styles.findall('.//m:cellXfs/m:xf', ns)
-rows = {}
-
-def gval(c):
-    t = c.get('t')
-    v = c.find('m:v', ns)
-    if t == 's' and v is not None:
-        return strings[int(v.text)]
-    return v.text if v is not None else ''
-
-for c in sheet.findall('m:sheetData/m:row/m:c', ns):
-    m = re.match(r'([A-Z]+)(\d+)', c.get('r'))
-    col, row = m.group(1), int(m.group(2))
-    if row < 2:
-        continue
-    sidx = int(c.get('s', '0'))
-    fill = fg(xfs[sidx].get('fillId')) if sidx < len(xfs) else None
-    rows.setdefault(row, {})[col] = (gval(c), fill)
-
-cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+# Noms courts utilisés par le chapitre (source unique : fiche indicateur/fiches indicateurs.xlsx)
+short = {
+    'nom_famille': 'famille',
+    'Nom_theme': 'theme',
+    'description_indicateur_utilisateur': 'description',
+    'Analyse_multicriteres': 'analyse_multicriteres',
+}
+df = df.rename(columns=short)
+df_colors = df_colors.rename(columns=short)
 hdr = ['id_indicateur', 'famille', 'theme', 'groupe', 'nom_indicateur',
        'description', 'objectif_INFO', 'objectif_AMC', 'analyse_multicriteres']
-data = []
-cdata = []
-for r in sorted(rows):
-    data.append([rows[r][colm][0] for colm in cols])
-    cdata.append([rows[r][colm][1] for colm in cols])
-
-df = pd.DataFrame(data, columns=hdr)
-df['id_indicateur'] = pd.to_numeric(df['id_indicateur'], errors='coerce').astype('Int64')
-for _c in hdr[1:]:
-    df[_c] = df[_c].astype(str)
-
-def to_hex(v):
-    if v and isinstance(v, str) and v.startswith('FF') and len(v) == 8:
-        return '#' + v[2:]
-    return None
-
-df_colors = pd.DataFrame([[to_hex(v) for v in row] for row in cdata],
-                         columns=hdr, index=df.index)
+df = df[hdr]
+df_colors = df_colors[hdr]
 ```
 
 ```{python}
-#| format: html
 #| echo: false
-#| results: asis
+#| warning: false
 import html as _html
+from IPython.display import HTML, Latex, display
 
-heads = ['ID', 'Famille', 'Thème', 'Groupe', 'Nom de l\'indicateur',
-         'Description (utilisateur)', 'Objectif INFO', 'Objectif AMC', 'Analyse multicritère']
-widths = ['2.5%', '5%', '8%', '8%', '12%', '45%', '8.5%', '8.5%', '2.5%']
-
-out = ['<table style="width:100%;border-collapse:collapse;font-size:0.78rem;font-family:Arial,Helvetica,sans-serif;table-layout:fixed;">']
-out.append('<colgroup>' + ''.join('<col style="width:%s">' % w for w in widths) + '</colgroup>')
-out.append('<thead><tr>' + ''.join(
-    '<th style="background-color:#2B5E8C;color:#ffffff;font-weight:700;padding:5px 6px;border:1px solid #9aa7b8;text-align:left;vertical-align:top;">%s</th>' % h
-    for h in heads) + '</tr></thead>')
-out.append('<tbody>')
-for i in range(len(df)):
-    row = ['<td style="padding:4px 6px;border:1px solid #c6ccd4;vertical-align:top;">%s</td>' % _html.escape(str(df.iloc[i]['id_indicateur']))]
-    for colm in hdr[1:]:
-        txt = _html.escape(str(df.iloc[i][colm]))
-        style = ''
-        color = df_colors.iloc[i][colm]
-        if color:
-            style = 'background-color:%s;color:#ffffff;font-weight:600;' % color
-        row.append('<td style="padding:4px 6px;border:1px solid #c6ccd4;vertical-align:top;%s">%s</td>' % (style, txt))
-    out.append('<tr>' + ''.join(row) + '</tr>')
-out.append('</tbody></table>')
-print('\n'.join(out))
-```
-
-```{python}
-#| format: pdf
-#| echo: false
-#| results: asis
-import html as _html
+col_order = hdr[1:]
 
 def esc(s):
     return (s.replace('\\', r'\textbackslash{}')
@@ -120,43 +49,79 @@ def esc(s):
              .replace('%', r'\%').replace('#', r'\#')
              .replace('_', r'\_')
              .replace('~', r'\textasciitilde{}')
-             .replace('^', r'\textasciicircum{}'))
+             .replace('^', r'\textasciicircum{}')
+             .replace('<', r'\textless{}').replace('>', r'\textgreater{}')
+             .replace('\r', ' ').replace('\n', ' '))
 
-col_order = hdr[1:]
-color_names = {}
-out = []
-for i in range(len(df)):
-    for colm in col_order:
-        h = df_colors.iloc[i][colm]
-        if h and h not in color_names:
-            color_names[h] = 'IND%02d' % len(color_names)
-for h, name in color_names.items():
-    out.append('\\definecolor{%s}{HTML}{%s}' % (name, h[1:]))
-out.append('\\setlength{\\tabcolsep}{2pt}')
-out.append('\\renewcommand{\\arraystretch}{1.1}')
-
-spec = 'p{0.5cm}p{1.1cm}p{1.5cm}p{1.7cm}p{1.8cm}p{2.6cm}p{1.8cm}p{1.8cm}p{0.8cm}'
-out.append('\\footnotesize')
-out.append('\\begin{longtable}{%s}' % spec)
-out.append('\\hline')
-heads_pdf = ['ID', 'Famille', 'Thème', 'Groupe', 'Nom de l\'indicateur',
-             'Description', 'Objectif INFO', 'Objectif AMC', 'An. multi.']
-out.append(' & '.join('\\textbf{%s}' % h for h in heads_pdf) + ' \\\\ \\hline')
-out.append('\\endhead')
-for i in range(len(df)):
-    row = [esc(str(df.iloc[i]['id_indicateur']))]
-    for colm in col_order:
-        txt = esc(str(df.iloc[i][colm]))
-        color = df_colors.iloc[i][colm]
-        if color:
-            row.append('\\cellcolor{%s}\\textcolor{white}{%s}' % (color_names[color], txt))
-        else:
-            row.append(txt)
-    out.append(' & '.join(row) + ' \\\\')
-out.append('\\hline')
-out.append('\\end{longtable}')
-print('\n'.join(out))
+if fmt == 'html':
+    thtml = ['<table style="width:100%;border-collapse:collapse;font-size:0.78rem;font-family:Arial,Helvetica,sans-serif;table-layout:fixed;">']
+    thtml.append('<colgroup>' + ''.join('<col style="width:%s">' % w for w in
+                 ['2.5%', '5%', '8%', '8%', '12%', '45%', '8.5%', '8.5%', '2.5%']) + '</colgroup>')
+    thtml.append('<thead><tr>' + ''.join(
+        '<th style="background-color:#2B5E8C;color:#ffffff;font-weight:700;padding:5px 6px;border:1px solid #9aa7b8;text-align:left;vertical-align:top;">%s</th>' % _html.escape(h)
+        for h in ['ID', 'Famille', 'Thème', 'Groupe', 'Nom de l\'indicateur',
+                  'Description (utilisateur)', 'Objectif INFO', 'Objectif AMC', 'Analyse']) + '</tr></thead>')
+    thtml.append('<tbody>')
+    for i in range(len(df)):
+        row = ['<td style="padding:4px 6px;border:1px solid #c6ccd4;vertical-align:top;">%s</td>' % _html.escape(str(df.iloc[i]['id_indicateur']))]
+        for colm in hdr[1:]:
+            txt = _html.escape(str(df.iloc[i][colm]))
+            style = ''
+            color = df_colors.iloc[i][colm]
+            if color:
+                style = 'background-color:%s;color:#ffffff;font-weight:600;' % color
+            row.append('<td style="padding:4px 6px;border:1px solid #c6ccd4;vertical-align:top;%s">%s</td>' % (style, txt))
+        thtml.append('<tr>' + ''.join(row) + '</tr>')
+    thtml.append('</tbody></table>')
+    display(HTML('\n'.join(thtml)))
+elif fmt == 'docx':
+    def mdcell(s):
+        return str(s).replace('|', '\\|').replace('\r', ' ').replace('\n', ' ')
+    mdl = ['| ID | Famille | Thème | Groupe | Nom de l\'indicateur | Description | Objectif INFO | Objectif AMC | Analyse |',
+           '|---|---|---|---|---|---|---|---|---|']
+    for i in range(len(df)):
+        mdl.append('| ' + ' | '.join(mdcell(df.iloc[i][c]) for c in hdr) + ' |')
+    print('\n'.join(mdl))
+else:
+    color_names = {}
+    ttex = []
+    for i in range(len(df)):
+        for cd in hdr[1:]:
+            hx = df_colors.iloc[i][cd]
+            if hx and hx not in color_names:
+                color_names[hx] = 'IND%02d' % len(color_names)
+    for hx, name in color_names.items():
+        ttex.append('\\definecolor{%s}{HTML}{%s}' % (name, hx[1:]))
+    ttex.append('\\setlength{\\tabcolsep}{2pt}')
+    ttex.append('\\renewcommand{\\arraystretch}{1.1}')
+    ttex.append('\\footnotesize')
+    ttex.append('\\begin{longtable}{p{0.5cm}p{1.1cm}p{1.5cm}p{1.7cm}p{1.8cm}p{2.4cm}p{1.9cm}p{1.9cm}p{0.8cm}}')
+    ttex.append('\\hline')
+    heads_pdf = ['ID', 'Famille', 'Thème', 'Groupe', 'Nom', 'Description', 'Obj. INFO', 'Obj. AMC', 'Multi']
+    ttex.append(' & '.join('\\textbf{%s}' % h for h in heads_pdf) + ' \\\\ \\hline')
+    ttex.append('\\endhead')
+    for i in range(len(df)):
+        row = [esc(str(df.iloc[i]['id_indicateur']))]
+        for cd in hdr[1:]:
+            txt = esc(str(df.iloc[i][cd]))
+            color = df_colors.iloc[i][cd]
+            if color:
+                row.append('\\cellcolor{%s}\\textcolor{white}{%s}' % (color_names[color], txt))
+            else:
+                row.append(txt)
+        ttex.append(' & '.join(row) + ' \\\\')
+    ttex.append('\\hline')
+    ttex.append('\\end{longtable}')
+    display(Latex('\n'.join(ttex)))
 ```
+
+### Renvois
+
+- [Catalogue de fiches d'indicateurs (PDF)](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées des 38 indicateurs (définition, objectifs, méthode, sources, vigilances).
+- Fichier maître `fiches indicateurs.xlsx` (source unique des indicateurs, `fiche indicateur/`) — tableau de référence des indicateurs (38 lignes × 9 attributs), également joint à l'offre.
+- [Arbre hiérarchique interactif des indicateurs (HTML)](./annexes/arbre_indicateurs.html) — arbre repliable Famille → Thème → Groupe, généré depuis le référentiel.
+- [Chapitre 11 — Catalogue de métadonnées](#sec-catalogue-metadonnees) : intégration des indicateurs comme données dérivées référencées.
+- EPIC 1 bis — Catalogue des données et EPIC 4 — Calcul d'indicateurs.
 
 ### Légende du code couleur
 
@@ -178,68 +143,49 @@ Les **2 familles** et les **4 thèmes** du référentiel (v4) :
 | Thème | MENACES ANTHROPIQUES | `#C55A11` |
 | Thème | MENACES NATURELLES | `#ED7D31` |
 
-Les **10 groupes** issus des familles et des thèmes utilisent des teintes dérivées de la couleur de leur famille/thème (dégradés bleus côté « Enjeu », dégradés orange côté « Menace »), conformément au fichier source.
-
-### Renvois
-
-- [Catalogue de fiches d'indicateurs (PDF)](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées des 38 indicateurs (définition, objectifs, méthode, sources, vigilances).
-- [Référentiel contractuel liste_indicateurs_v4.xlsx](./annexes/liste_indicateurs_v4.xlsx) — tableau de référence des indicateurs (38 lignes × 9 attributs).
-- [Arbre hiérarchique interactif des indicateurs (HTML)](./annexes/arbre_indicateurs.html) — arbre repliable Famille → Thème → Groupe, généré depuis le référentiel.
-- [Chapitre 11 – Catalogue de métadonnées](#sec-catalogue-metadonnees) : intégration des indicateurs comme données dérivées référencées.
-- EPIC 1 bis – Catalogue des données et EPIC 4 – Calcul d'indicateurs.
+Les **10 groupes** issus des 2 familles utilisent des teintes dérivées de la couleur de leur famille (dégradés bleus côté « Enjeu », dégradés orange côté « Menace »), conformément au fichier source — soit **16 couleurs distinctes** au total dans le référentiel.
 
 ```{python}
-#| format: html
 #| echo: false
-#| results: asis
-import html as _html
+#| warning: false
+import os
 
-dot = lambda color: '<span class="dot" style="background:%s"></span>' % color
-css = """
-body{font-family:Arial,Helvetica,sans-serif;max-width:860px;margin:2rem auto;padding:0 1rem;color:#222}
-h1{color:#2B5E8C;font-size:1.5rem;border-bottom:2px solid #2B5E8C;padding-bottom:.4rem}
-.top{color:#555}
-details{margin:2px 0 2px 16px}
-summary{cursor:pointer;font-weight:700;padding:3px 6px;border-radius:4px}
-summary:hover{background:#eef3fa}
-.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
-.n{color:#777;font-weight:400}
-ul{margin:2px 0 8px 28px;padding:0;list-style:none}
-li{margin:1px 0}
-footer{margin-top:24px;padding-top:8px;border-top:1px solid #ccc;color:#888;font-size:.8rem}
-"""
-
-order_fam = df['famille'].drop_duplicates().tolist()
-parts = []
-parts.append('<h1>Arbre hiérarchique des indicateurs — HydroScope</h1>')
-parts.append('<p class="top">%d indicateurs organisés par famille, thème et groupe (Famille → Thème → Groupe).</p>' % len(df))
-for fam in order_fam:
-    fam_rows = df[df['famille'] == fam]
-    fam_col = df_colors.loc[fam_rows.index[0], 'famille']
-    parts.append('<details open><summary>%s%s <span class="n">(%d)</span></summary>' % (dot(fam_col), _html.escape(str(fam)), len(fam_rows)))
-    for th in fam_rows['theme'].drop_duplicates().tolist():
-        th_rows = fam_rows[fam_rows['theme'] == th]
-        th_col = df_colors.loc[th_rows.index[0], 'theme']
-        parts.append('  <details><summary>%s%s <span class="n">(%d)</span></summary>' % (dot(th_col), _html.escape(str(th)), len(th_rows)))
-        for gr in th_rows['groupe'].drop_duplicates().tolist():
-            gr_rows = th_rows[th_rows['groupe'] == gr]
-            gr_col = df_colors.loc[gr_rows.index[0], 'groupe']
-            parts.append('    <details><summary>%s%s <span class="n">(%d)</span></summary>' % (dot(gr_col), _html.escape(str(gr)), len(gr_rows)))
-            parts.append('      <ul>')
-            for _, r in gr_rows.iterrows():
-                parts.append('        <li>%s<b>%d</b> — %s</li>' % (dot(gr_col), int(r['id_indicateur']), _html.escape(str(r['nom_indicateur']))))
-            parts.append('      </ul>')
-            parts.append('    </details>')
-        parts.append('  </details>')
-    parts.append('</details>')
-parts.append('<footer>Généré depuis liste_indicateurs_v4.xlsx — HydroScope.</footer>')
-
-html_doc = ('<!DOCTYPE html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n'
-            '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-            '<title>Arbre hiérarchique des indicateurs — HydroScope</title>\n'
-            '<style>%s</style>\n</head>\n<body>\n%s\n</body>\n</html>') % (css, '\n'.join(parts))
-
-with open('annexes/arbre_indicateurs.html', 'w', encoding='utf-8') as f:
-    f.write(html_doc)
-print('')
+if fmt == 'html':
+    import html as _html
+    dot = lambda color: '<span style="display:inline-block;width:10px;height:10px;border-radius:50%%;margin-right:6px;background:%s"></span>' % color
+    css = (
+        'body{font-family:Arial,Helvetica,sans-serif;max-width:860px;margin:2rem auto;padding:0 1rem;color:#222}'
+        'h1{color:#2B5E8C;font-size:1.5rem;border-bottom:2px solid #2B5E8C;padding-bottom:.4rem}'
+        '.top{color:#555}details{margin:2px 0 2px 16px}summary{cursor:pointer;font-weight:700;padding:3px 6px;border-radius:4px}'
+        'summary:hover{background:#eef3fa}.n{color:#777;font-weight:400}ul{margin:2px 0 8px 28px;padding:0;list-style:none}'
+        'li{margin:1px 0}footer{margin-top:24px;padding-top:8px;border-top:1px solid #ccc;color:#888;font-size:.8rem}')
+    parts = ['<h1>Arbre hiérarchique des indicateurs — HydroScope</h1>']
+    parts.append('<p class="top">%d indicateurs organisés par famille, thème puis groupe (Famille → Thème → Groupe).</p>' % len(df))
+    for fam in df['famille'].drop_duplicates().tolist():
+        fam_rows = df[df['famille'] == fam]
+        fam_col = df_colors.loc[fam_rows.index[0], 'famille']
+        parts.append('<details open><summary>%s%s <span class="n">(%d)</span></summary>' % (dot(fam_col), _html.escape(str(fam)), len(fam_rows)))
+        for th in fam_rows['theme'].drop_duplicates().tolist():
+            th_rows = fam_rows[fam_rows['theme'] == th]
+            th_col = df_colors.loc[th_rows.index[0], 'theme']
+            parts.append('  <details><summary>%s%s <span class="n">(%d)</span></summary>' % (dot(th_col), _html.escape(str(th)), len(th_rows)))
+            for gr in th_rows['groupe'].drop_duplicates().tolist():
+                gr_rows = th_rows[th_rows['groupe'] == gr]
+                gr_col = df_colors.loc[gr_rows.index[0], 'groupe']
+                parts.append('    <details><summary>%s%s <span class="n">(%d)</span></summary>' % (dot(gr_col), _html.escape(str(gr)), len(gr_rows)))
+                parts.append('      <ul>')
+                for _, r in gr_rows.iterrows():
+                    parts.append('        <li>%s<b>%d</b> — %s</li>' % (dot(gr_col), int(r['id_indicateur']), _html.escape(str(r['nom_indicateur']))))
+                parts.append('      </ul>')
+                parts.append('    </details>')
+            parts.append('  </details>')
+        parts.append('</details>')
+    parts.append('<footer>Généré depuis fiches indicateurs.xlsx — HydroScope, cahier des charges.</footer>')
+    doc = ('<!DOCTYPE html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n'
+           '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+           '<title>Arbre hiérarchique des indicateurs — HydroScope</title>\n'
+           '<style>%s</style>\n</head>\n<body>\n%s\n</body>\n</html>') % (css, '\n'.join(parts))
+    p = os.path.join(annex, 'arbre_indicateurs.html')
+    with open(p, 'w', encoding='utf-8') as f:
+        f.write(doc)
 ```

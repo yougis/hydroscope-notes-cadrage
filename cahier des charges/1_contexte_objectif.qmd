@@ -95,7 +95,7 @@ Le périmètre fonctionnel du projet HydroScope s’appuie sur un ensemble de do
 - **Captages / forages** : ~500 unités  
 - **Périmètres de protection** : ~250 unités  
 - **Indicateurs** : 38 indicateurs (version 4 du catalogue), dont 33 intégrés dans l’analyse multicritère et 5 à visée informative (pluviométrie, géologie, érosion, prélèvements AODPE, PUD)  
-- **Sources de données** : 42 sources référencées (GEOREP, Google Earth Engine, bases OEIL, DAVAR, DASS, DIMENC, DITTT, provinces, CEN, Endemia, Météo-France, ISEE, ANCB…)
+- **Sources de données** : 52 sources référencées (GEOREP, Google Earth Engine, bases OEIL, DAVAR, DASS, DIMENC, DITTT, provinces, CEN, Endemia, Météo-France, ISEE, ANCB…)
 
 Ces valeurs sont indicatives et pourront évoluer au cours du projet, notamment en fonction :
 
@@ -121,9 +121,9 @@ Les principales sources de données mobilisées sont les suivantes :
 #| tbl-cap: "Sources de données et modalités d'accès"
 #| output: asis
 
-import pandas as pd
+from _lib_indicateurs import load_sources
 
-df = pd.read_csv("../ressources/fiches-csv/fiches indicateurs-sources.csv", sep=";")
+df = load_sources()
 
 def modalite_acc(row):
     url = str(row.get("url", ""))

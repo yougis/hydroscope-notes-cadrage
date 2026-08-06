@@ -1,0 +1,131 @@
+---
+title: "Cartes des territoires — Architecture et modèle technique"
+subtitle: "Note technique (options à discuter en réunion)"
+date: 2026-08-06
+lang: fr
+---
+
+## 1. Objet
+
+Note **technique** complémentaire de *UX-Cartes-Onglet-Contextes.qmd* (fonctionnel). Elle décrit les options d'architecture pour implémenter le parcours « sélection courante → contexte → analyse / comparaison » dans l'onglet **Cartes des territoires**.
+
+Aucune décision n'est actée ; chaque point présente des **options** à trancher en réunion.
+
+---
+
+## 2. T1 — Persistance des contextes
+
+Le contexte est un objet réutilisable. Où le stocker ?
+
+- **T1-A — Navigateur (IndexedDB), POC.** Contextes stockés localement dans le navigateur.
+  - *Pour* : aucune infrastructure, itération rapide, adapté à la preuve de concept.
+  - *Contre* : perdu au changement d'appareil, pas de partage multi-utilisateur.
+- **T1-B — API serveur.** Contextes stockés côté serveur, ressource REST.
+  - *Pour* : multi-utilisateurs, partage, historique central.
+  - *Contre* : nécessite le service dès le début.
+- **T1-C — Hybride.** Local en POC, synchro serveur ensuite.
+  - *Pour* : démarre vite et évolue.
+  - *Contre* : gestion de la synchronisation / conflits.
+
+> Pour la **POC**, la voie T1-A est mise en avant ; T1-B / T1-C restent décrites pour la cible.
+
+---
+
+## 3. T2 — Modèle de données (ressources)
+
+Un contexte sépare **entités** et **indicateurs**, et peut être une **liste** ou une **règle**.
+
+```
+Territory
+  id, type (captage | bv | commune | h3 | …), code_référentiel,
+  geom (référentiel 135–145), geom_reference
+
+Context
+  id, nom,
+  provenance (carte | manuel | règle | analyse),
+  granularity (captage | bv | h3),
+  entities : LISTE [id…]
+           | REGLE  { operator: topN | filter | all_of_bv,
+                      arg, indicator_id },
+  mode: photo | lien_vivant,
+  archived: bool, created_by, ts
+
+Analysis
+  id, context_id, indicator_ids[], view_state, created_by, ts
+
+Comparison
+  id, context_ids[], indicator_ids[], view_state, base_indicator, ts
+```
+
+Notes :
+- En mode **photo**, `entities` est une liste d'ids (léger) ; la géométrie est résolue à la demande.
+- En mode **règle**, le contexte est **réévaluable** (ex. « top 10 » recalculé si les paramètres changent).
+- L'archivage (soft-delete) protège les comparaisons qui référencent un contexte.
+
+---
+
+## 4. T3 — API (noms provisoires)
+
+```
+GET    /contexts                     # liste (filtres : nom, provenance, archived)
+POST   /contexts                     # créer (nom, entités, granularity, mode)
+PUT    /contexts/{id}                # éditer entités / indicateurs / nom
+POST   /contexts/{id}/eval           # ré-évaluer une règle (top-N, filtre)
+POST   /contexts/{id}/snapshot       # fige une règle en liste (photo)
+DELETE /contexts/{id}                # archiver (soft-delete)
+
+POST   /analyses                     # mono-contexte (context_id, indicators)
+POST   /comparisons                  # multi-contexte (context_ids, indicators)
+GET    /comparisons/{id}             # données agrégées par contexte × indicateur
+```
+
+**Agrégation multi-contexte** : un endpoint agrégatoire paramétré par `ids` + `indicator` renvoie les stats de chaque contexte sur une même projection (voir T5).
+
+---
+
+## 5. T4 — Grille H3 (référentiel 136)
+
+- **Rendu** : la grille H3 est affichée **côté client** (affichage seul, aucune URL serveur dédiée pour l'instant).
+- **Indexation** : la base de données indexe les entités par **identifiants de cellules H3** (`spatialisation_H3`).
+- **Géométrie à la demande** : les géométries H3 / captages / BV sont fournies par le service référentiel à la demande, pour convertir une sélection d'une granularité à une autre.
+
+Options à trancher :
+- **T4-A** — H3 seulement pour l'agrégation (voir F5-C).
+- **T4-B** — H3 manipulable comme granularité de navigation complète.
+
+---
+
+## 6. T5 — Cohérence projection / unités des indicateurs
+
+Pour comparer des contextes source-à-source, chaque indicateur doit être projeté de façon **identique** quelle que soit la granularité du contexte :
+
+- unités normalisées (absolues, relatives, densité) ;
+- seuils et palettes colorimétriques communs ;
+- agrégation définie (somme / moyenne / médiane / surface) selon la sémantique de l'indicateur.
+
+Une **base indicateur** optionnelle dans la `Comparison` permet des écarts (linéaire / différence) plutôt que des valeurs absolues.
+
+---
+
+## 7. T6 — Couches de l'application
+
+1. **Carte / H3** (Leaflet / OpenLayers / MapLibre) — rendu tuile / vecteur, H3 client-side.
+2. **State store** (ex. Zustand / Redux) — sépare `liveSelection` (éphémère) de `contexts[]` (persisté).
+3. **Service référentiel** — connaît la géométrie de référence (captage ↔ BV ↔ H3) et traduit une sélection d'une granularité à l'autre.
+4. **Service indicateur** — stats par sélection, top 10, agrégation multi-contexte (T3).
+5. **Persistance** — voie T1 retenue (navigateur en POC, serveur en cible).
+
+---
+
+## 8. Synthèse des points techniques ouverts
+
+| # | Sujet | Options |
+|---|---|---|
+| T1 | Persistance | navigateur (POC) / serveur / hybride |
+| T2 | Modèle de données | liste vs règle ; photo vs lien vivant |
+| T3 | API | endpoints ci-dessus (noms provisoires) |
+| T4 | H3 | rendu client + indexation ids ; granularité complète vs agrégation |
+| T5 | Projection / unités | normalisation, agrégation, base indicateur |
+| T6 | Couches | state store, service référentiel, service indicateur |
+
+Ces points sont discutés en réunion conjointement avec les points fonctionnels F1–F6.

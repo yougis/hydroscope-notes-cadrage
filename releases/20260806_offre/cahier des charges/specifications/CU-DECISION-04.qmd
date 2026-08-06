@@ -1,0 +1,48 @@
+---
+title: "CU-DECISION-04 — Consulter un rapport automatique exportable"
+profile: "Décideur métier"
+uc: "CU-DECISION-04"
+us: "US8.3"
+epic: "EPIC 8 — Export"
+mvp: true
+amc: false
+---
+
+# Consulter et exporter un rapport automatique
+
+**Phrase agile :** En tant que décideur métier, je veux consulter et exporter un rapport
+automatique afin de disposer d'un document utilisable pour la communication et le suivi.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-DECISION-04` (US8.3) — `profils_utilisateurs.qmd` (Profil 4).
+- EPIC 8 — Génération et export de rapports.
+- Navigation : Sidebar « Rapports ».
+
+## 2. Fonctionnalités couvertes
+
+- Consultation d'un rapport automatique généré à partir des données/indicateurs.
+- **Export** du rapport dans des formats utilisables (PDF, CSV, etc.).
+- Périmètre du rapport : tableaux de bord, fiches, graphiques, métadonnées.
+- Traçabilité : date de génération, version des données/méthodes.
+
+## 3. Parcours IHM
+
+1. Sidebar « Rapports ».
+2. Choisir un rapport / générer un rapport automatique.
+3. Prévisualisation (aperçu avant export).
+4. Export (choix du format) + téléchargement.
+5. Retour avec indication de la date/version des données.
+
+## 4. Rendu visuel obtenu
+
+- Liste des rapports (table) avec date de génération.
+- Aperçu du rapport (mise en page de la fiche/tableau de bord).
+- Boutons d'export (PDF/CSV) avec état de génération.
+- Captures : _(à insérer depuis le prototype — vue Rapports / Export)_.
+
+## 5. Points de vigilance
+
+- La version des données et des méthodes doit figurer dans l'export (traçabilité).
+- Cohérence de l'export avec l'interface (mêmes données/filtres).
+- Formats réutilisables en comité/communication (EPIC 8).

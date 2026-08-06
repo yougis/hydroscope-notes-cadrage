@@ -1,0 +1,49 @@
+---
+title: "ADI — Fiche synthèse d'un bassin versant : facteurs de vulnérabilité dominants"
+profile: "Document support (ADI — Aide à l'interprétation)"
+uc: "ADI_fiche_territoire_synthese"
+us: "US7.4, US6.7"
+epic: "EPIC 7 — Aide à la décision ; EPIC 6 — Visualisation"
+mvp: true
+amc: false
+---
+
+# Fiche synthèse d'un bassin versant orientée lecture (facteurs dominants)
+
+> **⚠️ ADI — Aide à l'interprétation pour la décision.** Complète la **fiche territoire
+> descriptive** (US6.7 / `CU-DECISION-01`) par une lecture orientée action : mise en
+> évidence des **indicateurs dont le niveau est le plus élevé** (facteurs dominants).
+> Cette lecture est **descriptive et relative** : elle n'introduit **ni score, ni
+> classement, ni priorisation** — ceux-ci relèvent de l'AMC (EPIC 5, lot 2).
+
+## 1. Contexte & référence
+- Fiche synthétique US7.4 (EPIC 7) ; fiche territoire descriptive US6.7 (EPIC 6).
+- `ADI_methodologie_seuils.qmd` (niveaux) ; `help/05-fiches-territoires.md`.
+- Distinct de l'AMC (`AMC_rendu_score.qmd`) : pas de score composite ni de part de
+  contribution chiffrée.
+
+## 2. Fonctionnalités couvertes
+- Synthèse par bassin versant (ou unité de gestion) : liste des indicateurs qualifiés.
+- **Facteurs dominants** : les indicateurs de niveau le plus élevé, mis en avant avec un
+  commentaire de lecture orienté action (ex. « pression urbaine élevée »).
+- Badges de niveau, lien vers la fiche indicateur et la méthode de qualification.
+- Sans priorisation automatisée : l'acteur arbitre à partir de la mise en évidence.
+
+## 3. Parcours IHM
+1. Sidebar « Exploration > Fiches des territoires » (ou depuis une entité carte).
+2. Choix du bassin versant / unité de gestion.
+3. Lecture : blocs descriptifs (US6.7) + bloc « facteurs dominants » (US7.4).
+4. Clic sur un indicateur dominant → fiche indicateur enrichie (`ADI_fiche_indicateur`).
+
+## 4. Rendu visuel
+- Section « Facteurs de vulnérabilité dominants » : cartes de badges par niveau,
+  triées par niveau décroissant (descriptif, sans score global).
+- Commentaires de lecture (phrase type) + liens méthode.
+- Captures : _(à insérer depuis le prototype — fiche synthèse BV)_.
+
+## 5. Points de vigilance
+- **Jamais de score composite / criticité** dans cette fiche (AMC isolée, EPIC 7).
+- La mise en évidence repose sur les **niveaux relatifs** (référence globale), pas sur
+  une pondération.
+- Garder la fiche **descriptive** pour le grand public (ne pas orienter l'action) ;
+  réserver les commentaires d'arbitrage aux profils décideur/expert.

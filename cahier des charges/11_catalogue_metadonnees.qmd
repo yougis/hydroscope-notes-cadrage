@@ -34,7 +34,7 @@ Le catalogue devra être alimenté autant que possible de manière automatisée,
 
 Chaque jeu de données intégré dans HydroScope devra être associé à un ensemble de métadonnées structurées décrivant son origine, son contenu et ses conditions d’usage. Ces métadonnées devront couvrir les informations nécessaires à la compréhension et à l’exploitation des données, notamment leur source, leur description, leur emprise spatiale, leurs dates de production et de mise à jour, ainsi que les modalités de collecte ou de transformation.
 
-Elles devront être intégrées au fonctionnement du système et alimentées en lien avec les pipelines de données, notamment via des outils de transformation tels que dbt, afin de limiter les écarts entre les données réellement exploitées et les informations décrites. Elles participent ainsi à la traçabilité des traitements et à la cohérence globale du système. La mise en œuvre s’inscrit dans le cadre de l’architecture cible décrite au chapitre 10, notamment en ce qui concerne les standards de catalogage (STAC, CKAN) exposant les jeux de données et les indicateurs.
+Elles devront être intégrées au fonctionnement du système et alimentées en lien avec les pipelines de données, notamment via des outils de transformation tels que **dbt**, afin de limiter les écarts entre les données réellement exploitées et les informations décrites. Elles participent ainsi à la traçabilité des traitements et à la cohérence globale du système. La mise en œuvre s’inscrit dans le cadre de l’architecture cible, notamment en ce qui concerne les standards de catalogage (STAC, CKAN, Intake) exposant des jeux de données et les indicateurs.
 
 Les indicateurs calculés seront intégrés au catalogue comme des données dérivées, avec un lien explicite vers les données sources et les traitements associés.
 
@@ -42,13 +42,4 @@ Une partie des métadonnées devra pouvoir être exposée aux utilisateurs afin 
 
 ### Intégration au monitoring
 
-Le dispositif de catalogage devra s’intégrer aux mécanismes de monitoring du système, tels que décrits au chapitre 8. Il devra notamment permettre le suivi de la traçabilité (origine des données, transformations, mises à jour) et la gestion des erreurs dans les processus d’intégration, afin de détecter rapidement les dysfonctionnements et de garantir la fiabilité des informations exposées.
-
-### Fiches d’indicateurs
-
-Les indicateurs calculés dans HydroScope font l’objet de fiches détaillées présentant leurs définitions, leurs sources et les traitements associés. La description fonctionnelle de ces indicateurs est présentée au [chapitre 5 – Présentation des indicateurs](#sec-presentation-indicateurs).
-
-Le catalogue de fiches d’indicateurs est consultable en annexe du présent cahier des charges :
-
-- [Fiches_indicateurs_HydroScope-v4.pdf](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées des indicateurs (définitions, sources, traitements) ;
-- [liste_indicateurs_v4.xlsx](./annexes/liste_indicateurs_v4.xlsx) — référentiel complet des indicateurs.
+Le dispositif de catalogage devra s’intégrer aux mécanismes de monitoring du système. Il devra notamment permettre le suivi de la traçabilité (origine des données, transformations, mises à jour) et la gestion des erreurs dans les processus d’intégration, afin de détecter rapidement les dysfonctionnements et de garantir la fiabilité des informations exposées.

@@ -1,0 +1,51 @@
+---
+title: "ADI — Qualification à l'écran carte / H3 / légende"
+profile: "Document support (ADI — Aide à l'interprétation)"
+uc: "ADI_vigilance_carte"
+us: "US6.2, US7.1"
+epic: "EPIC 6 — Visualisation ; EPIC 7 — Aide à la décision"
+mvp: true
+amc: false
+---
+
+# Intégrer la qualification des valeurs dans la carte, les hexagones H3 et la légende
+
+> **⚠️ ADI — Aide à l'interprétation pour la décision.** Applique le bloc de
+> qualification (`ADI_methodologie_seuils.qmd`) aux surfaces cartographiques existantes :
+> couches captages/BV, maille H3, légende (`StatLegend`), infobulles. La couleur reste
+> basée sur les **classes réelles de référence**, plus sur le maillage synthétique
+> actuel.
+
+## 1. Contexte & référence
+
+- `MapCanvas` (infobulles, survol), `map/theme.ts` (`QUALITE_COLORS/LABELS`, `h3Class`,
+  `bvaepClass`), `StatLegend` (légende + échelle de grandeur), `map/layers.ts` (H3).
+- Aujourd'hui, `h3Class`/`bvaepClass` dérivent d'une **mathématique synthétique**
+  (`value % 4`, division de grille) sans seuils réels → à remplacer par des bornes
+  `ADI_*` data-driven.
+- `ADI_methodologie_seuils.qmd` ; EPIC 6 § cartographie ; EPIC 7 § seuils.
+
+## 2. Fonctionnalités couvertes
+- Colorisation des entités (captages, BV, H3) selon le **niveau de vigilance** réel.
+- Légende (`StatLegend`) affichant les **classes nommées + bornes** (pas seulement des
+  paliers).
+- Infobulle de survol enrichie : valeur, niveau, écart au seuil, tendance.
+- Bascule `h3Mode` conservée (interrupteur indépendant).
+
+## 3. Parcours IHM
+1. Carte → survol d'une entité/H3 → infobulle avec niveau + justification.
+2. Lecture de la légende (classes + bornes) ; repérage visuel des zones « Dégradé /
+   Critique ».
+3. (Option) clic sur une entité → sa fiche (nav croisée, voir `ADI_parcours`).
+
+## 4. Rendu visuel
+- Classes de couleur `QUALITE_COLORS` conservées, mais **bornes réelles** par indicateur.
+- Légende enrichie : `Bon (v ≤ P75) / Dégradé (P75 < v ≤ P90) / Critique (v > P90) / Indéterminé`.
+- Infobulle : `Niveau {n} · {label} · {valeur} ({écart} vs seuil) · {tendance}`.
+- Captures : _(à insérer depuis le prototype — carte qualifiée / H3)_.
+
+## 5. Points de vigilance
+- Ne pas casser le rendu public (mêmes classes, pas de commentaire orienté pour le
+  grand public — « qualifier » ≠ « alerter » hors EPIC 7 avancé).
+- La référence reste globale (jamais rebasculée sur la sélection, cf. méthodologie).
+- Réserve de complétude → niveau « Indéterminé » (gris) plutôt qu'une couleur trompeuse.

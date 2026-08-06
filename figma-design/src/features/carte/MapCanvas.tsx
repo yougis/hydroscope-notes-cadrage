@@ -10,7 +10,7 @@ import { buildVectorLayers } from './map/layers'
 import { QUALITE_COLORS, QUALITE_LABELS } from './map/theme'
 import { KIND_LABELS } from '@/data/ouvrages'
 import type { BasemapId, LayerDef } from './hooks/useLayers'
-import type { CaptageKind, UnitMode } from '@/types/domain'
+import type { CaptageKind, HoverEntity, UnitMode } from '@/types/domain'
 
 export interface MapCanvasProps {
   showGrid?: boolean
@@ -21,6 +21,8 @@ export interface MapCanvasProps {
   layers?: LayerDef[]
   basemap?: BasemapId
   h3Mode?: boolean
+  hoveredEntity?: HoverEntity | null
+  onHoverEntity?: (e: HoverEntity | null) => void
 }
 
 type HoverInfo =
@@ -38,12 +40,18 @@ export function MapCanvas({
   layers = [],
   basemap = 'carto',
   h3Mode = false,
+  hoveredEntity = null,
+  onHoverEntity,
 }: MapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<Map | null>(null)
   const layersRef = useRef<VectorLayer<VectorSource>[]>([])
   const basemapRef = useRef<{ layer: ReturnType<typeof createBasemapLayer> } | null>(null)
   const hoveredFeatureRef = useRef<Feature | null>(null)
+  const forcedFeatureRef = useRef<Feature | null>(null)
+  const showForcedRef = useRef(false)
+  const onHoverRef = useRef(onHoverEntity)
+  onHoverRef.current = onHoverEntity
   const [hover, setHover] = useState<HoverInfo | null>(null)
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null)
 
@@ -83,6 +91,7 @@ export function MapCanvas({
         hoveredFeatureRef.current = hit
         setPos({ x: evt.pixel[0], y: evt.pixel[1] })
         setHover(tooltipFor(hit))
+        emitHoverFor(hit, onHoverRef.current)
       } else {
         const prev = hoveredFeatureRef.current
         if (prev) {
@@ -92,6 +101,7 @@ export function MapCanvas({
         hoveredFeatureRef.current = null
         setHover(null)
         setPos(null)
+        onHoverRef.current?.(null)
       }
     })
 
@@ -129,6 +139,34 @@ export function MapCanvas({
     layersRef.current = built
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndicator, unitMode, selKeysStr, selBvStr, h3Mode, layerStr])
+
+  const hoveredStr = hoveredEntity ? `${hoveredEntity.kind}:${hoveredEntity.id}` : ''
+  useEffect(() => {
+    const prevF = forcedFeatureRef.current
+    if (prevF) {
+      prevF.set('_hover', false)
+      prevF.changed()
+    }
+    forcedFeatureRef.current = null
+    if (!hoveredEntity || !mapRef.current) {
+      if (showForcedRef.current) {
+        showForcedRef.current = false
+        setHover(null)
+        setPos(null)
+      }
+      return
+    }
+    const f = findFeatureForEntity(hoveredEntity, layersRef.current)
+    forcedFeatureRef.current = f
+    if (f) {
+      showForcedRef.current = true
+      f.set('_hover', true)
+      f.changed()
+      setPos({ x: 120, y: 120 })
+      setHover(tooltipFor(f))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hoveredStr, selKeysStr, selBvStr, activeIndicator, unitMode, layerStr])
 
   const containerW = containerRef.current?.clientWidth ?? 0
   const containerH = containerRef.current?.clientHeight ?? 0
@@ -175,6 +213,28 @@ function GridOverlay() {
   return (
     <div className="pointer-events-none absolute inset-0 z-10 opacity-40 [background-image:linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] [background-size:40px_40px]" />
   )
+}
+
+/** Émet le survol d'une feature (capet / BV) vers le parent pour synchroniser sélecteur + graphique. */
+function emitHoverFor(feature: Feature, cb?: (e: HoverEntity | null) => void) {
+  if (!cb) return
+  const kind = feature.get('kind')
+  if (kind === 'capt') cb({ kind: 'unite', id: feature.get('captId') as string })
+  else if (kind === 'bv') cb({ kind: 'bvaep', id: feature.get('bvId') as string })
+}
+
+/** Retrouve la feature correspondant à une entité de survol externe (sélecteur / graphique). */
+function findFeatureForEntity(e: HoverEntity, layers: VectorLayer<VectorSource>[]): Feature | null {
+  const wantKind = e.kind === 'unite' ? 'capt' : 'bv'
+  const idKey = wantKind === 'capt' ? 'captId' : 'bvId'
+  for (const layer of layers) {
+    const src = layer.getSource()
+    if (!src) continue
+    for (const f of src.getFeatures()) {
+      if (f.get('kind') === wantKind && f.get(idKey) === e.id) return f
+    }
+  }
+  return null
 }
 
 function tooltipFor(feature: Feature): HoverInfo {
@@ -224,7 +284,6 @@ function tooltipFor(feature: Feature): HoverInfo {
       ['Type', kindLabel ?? '—'],
       ['Commune', feature.get('commune') as string],
       ['Province', feature.get('province') as string],
-      ['Distance', `${Number(feature.get('dist'))} km`],
     ],
   }
 }

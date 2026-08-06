@@ -1,0 +1,41 @@
+Cet EPIC constitue le partie analytique d’HydroScope. Il regroupe des mécanismes permettant de transformer les données brutes en indicateurs exploitables pour le suivi, l’analyse et l’aide à la décision.
+
+Les indicateurs produits doivent permettre de caractériser les territoires et les unités de gestion de l'eau potable, d’identifier les enjeux et les pressions exercées sur la ressource en eau et de suivre leur évolution dans le temps. Leur construction repose sur des choix méthodologiques structurants, qui doivent être explicités et maîtrisés.
+
+#### Description
+
+L’EPIC couvre la définition, le calcul, la gestion et l’évolution des indicateurs. Il s’appuie sur les données structurées et cataloguées (EPIC 1 & 1 Bis), qualifiées (EPIC 2) et organisées via les référentiels (EPIC 3).
+
+Les traitements doivent permettre de produire des indicateurs à différentes échelles spatiales (captage, bassin versant, maille) et temporelles, tout en garantissant la reproductibilité des résultats.
+
+Une attention particulière est portée à la transparence des méthodes de calcul et à la capacité du système à gérer les évolutions des indicateurs dans le temps.
+
+#### Fonctionnalités
+
+- **Calculs simples (statistiques descriptives)**  
+Production d’indicateurs de base à partir des données disponibles :
+  - moyennes, médianes, sommes
+  - fréquences, occurrences
+  - indicateurs de tendance simple
+Ces calculs constituent les briques élémentaires pour des analyses plus complexes.
+
+- **Agrégations spatiales et temporelles**  
+Transformation des données afin de produire des indicateurs à différentes échelles :
+  - agrégation de données ponctuelles à l’échelle d’un bassin versant
+  - consolidation sur des périodes temporelles (mensuelle, annuelle, pluriannuelle)
+  - gestion des changements d’échelle (ex : maille H3 vers bassin versant, vers captages et vise-versa)
+Ces agrégations doivent être maîtrisées afin d’éviter les biais liés aux changements d’échelle.
+
+- **Paramétrage des méthodes de calcul**  
+Possibilité de définir et d’ajuster les règles de calcul :
+  - choix des variables utilisées
+  - règles d’agrégation
+  - filtres sur les données (qualité/type, période, source)
+Ce paramétrage doit être documenté et accessible afin de garantir la transparence.
+
+- **Versioning des indicateurs**  
+Gestion des évolutions des indicateurs dans le temps :
+  - conservation des versions successives des méthodes de calcul
+  - possibilité de reproduire un indicateur selon une version donnée
+  - traçabilité des modifications (changement de formule, de source, de paramètres)
+Ce mécanisme est essentiel pour assurer la comparabilité des résultats dans le temps.

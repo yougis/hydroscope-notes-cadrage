@@ -1,0 +1,57 @@
+---
+title: "ADI — Fiche indicateur enrichie : spectre de vigilance et justification"
+profile: "Document support (ADI — Aide à l'interprétation)"
+uc: "ADI_fiche_indicateur"
+us: "US7.1, US6.23"
+epic: "EPIC 7 — Aide à la décision ; EPIC 6 — Visualisation"
+mvp: true
+amc: false
+---
+
+# Fiche indicateur avec aide à l'interprétation
+
+> **⚠️ ADI — Aide à l'interprétation pour la décision.** La fiche indicateur existante
+> (métadonnées : méthode, source, échelle, seuils, fraîcheur, qualité — cf.
+> `help/03-indicateurs.md`, US6.23) est enrichie d'un **bloc de qualification** : le
+> spectre de vigilance et la justification de niveau. Ce bloc réutilise la méthode de
+> `ADI_methodologie_seuils.qmd`. Aucun score ni classement n'est introduit ici.
+
+## 1. Contexte & référence
+
+- Fiche métadonnées existante : icône ⓘ sur la vignette de la carte OU bouton « Fiche »
+  de la vue Indicateurs (US6.23) ; page indicateur (`IndicateurPage`) via la sidebar.
+- `ADI_methodologie_seuils.qmd` (méthode de qualification) ; `map/theme.ts` (classes).
+- EPIC 6 § Fiches ; EPIC 7 § seuils ; `help/03-indicateurs.md`.
+
+## 2. Contenu de la fiche enrichie
+
+### 2.1 Bloc métadonnées (inchangé)
+Méthode de calcul, source, unité, fraîcheur, qualité, période de référence (version des
+données). Traçabilité affichée (US6.23).
+
+### 2.2 Nouveau bloc « Interprétation »
+- **Spectre de vigilance** (jauge « vert → ambre → rouge », graduée) : position de la
+  valeur par rapport à la référence, bornes (P75/P90 ou z-scores), niveau nommé.
+- **Justification** : phrase type restituant l'écart et la tendance :
+  *« DÉGRADÉ — valeur 34, seuil P75 = 25, en hausse vs 2023. »*
+- **Méthode & référence** : lien vers `ADI_methodologie` + fenêtre/population de référence
+  et version des bornes (jamais de niveau « muet »).
+- **Réserve de complétude** : si complétude < ~80 %, afficher « Indéterminé » + réserve
+  (pas de fabrication).
+
+## 3. Parcours IHM
+1. Depuis la carte (vignette ⓘ) ou la vue Indicateurs ou la page indicateur → « Fiche ».
+2. Lecture des métadonnées (méthode/source/fraîcheur/qualité).
+3. Lecture du spectre + justification + lien méthode/référence.
+4. Retour vers la carte / page indicateur.
+
+## 4. Rendu visuel
+- Spectre vertical ou horizontal (`gradient` rouge-ambre-vert) avec marqueur de position.
+- Barre nominale de niveau + phrase de justification + lien « Méthode → ».
+- Métadonnées existantes conservées (pas de remplacement).
+- Captures : _(à insérer depuis le prototype — fiche indicateur enrichie)_.
+
+## 5. Points de vigilance
+- Ne **jamais** afficher de score composite/classement dans la fiche (AMC isolée).
+- Bornes par indicateur, **versionnées** ; toute modif tracée (EPIC 1/10).
+- Cohérence couleur avec la carte (`QUALITE_LABELS`) pour une lecture univoque.

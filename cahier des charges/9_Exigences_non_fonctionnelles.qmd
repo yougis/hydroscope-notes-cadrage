@@ -14,6 +14,7 @@ Le système doit offrir des temps de réponse compatibles avec les usages attend
 Au delà des indicateur de chargement doivent etre affichés pour informer l'utilisateur du temps de traitement restant.
 
 Pour les traitements liés aux calcul d’indicateurs :
+
 - en temps quasi immédiat pour les indicateurs simples (quelques secondes) ;
 - en différé (pipeline de traitement en arrière plan) pour les traitements lourds, avec des délais maîtrisés ; le suivi de ces traitements est détaillé au [chapitre 8 – Monitoring, supervision et pilotage](#sec-monitoring).
 
@@ -26,12 +27,12 @@ Le système devra être dimensionné pour gérer les volumes suivants :
 - plusieurs dizaines d’indicateurs calculés à différentes échelles ;
 - des données spatiales potentiellement volumineuses (maillages, séries temporelles) ;
 
-@todo[priority=high, section=processing]: indiquer la volumetrie plus précisement sur les traitements.
+@todo[priority=high, section=processing]: indiquer la volumetrie pour les traitements si cela est externalisé.
 
 
 Le système devra permettre :
 
-- la gestion de **10 à 50 utilisateurs simultanés** (ordre de grandeur) ;
+- la gestion de **10 à 30 utilisateurs simultanés** (ordre de grandeur) ;
 - des mises à jour régulières des données (de quotidienne à annuelle selon les sources) ;
 - une évolution continue du volume de données dans le temps (env. +15% ).
 Ces exigences seront précisées et validées lors des phases de conception.
@@ -60,7 +61,7 @@ Le système doit pouvoir s’intégrer dans un écosystème existant de données
 - la compatibilité avec les formats d’échange usuels (tabulaires, géographiques) ;
 - la possibilité d’interagir avec des systèmes tiers (API sécurisés ou non, webservices OGC et ESRI, serveur FTP).
 
-@todo[priority=high, section=API]: préciser les usage des API externe prévues.
+@todo[priority=high, section=API]: préciser les usages des API externe prévues.
 
 L’interopérabilité est un facteur clé pour faciliter le partage et la réutilisation des données.
 
@@ -74,6 +75,10 @@ L’interface utilisateur doit être conçue pour être accessible à des profil
 - une prise en compte des bonnes pratiques en matière d’accessibilité numérique.
 
 L’objectif est de faciliter l’appropriation de l’outil et de limiter les risques de mauvaise interprétation.
+
+Une maquette fonctionnelle de l’interface est fourni pour permettre de faciliter le chiffrage par le prestataire.
+
+@todo[priority=high, section=UX]: lien à intégrer vers la maquette fonctionnelle de l'interface.
 
 ### Maintenabilité et évolutivité
 
@@ -91,6 +96,6 @@ Ces éléments doivent permettre d’assurer la pérennité du système et sa ca
 
 Le système devra garantir un niveau de disponibilité compatible avec les usages :
 
-- disponibilité cible : **≥ 98 %** (soit 7 jours hors maintenance planifiée) ;
+- disponibilité cible : **≥ 98 %** (soit 7 jours off hors maintenance planifiée) ;
 - plages de maintenance définies et communiquées ;
 - reprise en cas d’incident dans des délais maîtrisés (cf. [SLA et engagements de service au chapitre 16 – Cadre contractuel et juridique](#sec-cadre-contractuel)).

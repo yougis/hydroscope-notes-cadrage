@@ -1,0 +1,46 @@
+---
+title: "CU-PUBLIC-04 — Parcourir le catalogue d'indicateurs"
+profile: "Intéressé public"
+uc: "CU-PUBLIC-04"
+us: "US6.22, US6.25"
+epic: "EPIC 6 — Visualisation ; EPIC 1 bis — Catalogue"
+mvp: true
+amc: false
+---
+
+# Rechercher et consulter le catalogue d'indicateurs
+
+**Phrase agile :** En tant qu'intéressé public, je veux rechercher un indicateur par
+famille, thème et groupe, et voir toute la liste, afin de le retrouver rapidement et de
+connaître ce qui est disponible.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-PUBLIC-04` (US6.22, US6.25) — Profil 1 (public).
+- EPIC 6 (catalogue d'indicateurs) ; EPIC 1 bis (catalogage).
+- Backlog : recherche par dropdown groupé Famille → Thème → Groupe ; liste complète (38 indicateurs).
+
+## 2. Fonctionnalités couvertes
+
+- **Recherche d'un indicateur** dans un dropdown groupé Famille → Thème → Groupe.
+- Visualisation de **toute la liste** des indicateurs (38), regroupée Famille → Thème → Groupe.
+- Accès à la fiche d'un indicateur (voir CU-DATA-04 / onglets dataviz).
+
+## 3. Parcours IHM
+
+1. Volet « Catalogue d'indicateurs ».
+2. Rechercher via le dropdown groupé (Famille → Thème → Groupe).
+3. (Option) afficher la liste complète des indicateurs.
+4. Sélectionner un indicateur → lecture sur la carte / fiche.
+
+## 4. Rendu visuel obtenu
+
+- Dropdown groupé avec hiérarchie Famille → Thème → Groupe.
+- Liste complète des indicateurs (regroupée, ~38).
+- Sélection → mise à jour de la carte / ouverture de l'indicateur.
+- Captures : _(à insérer depuis le prototype — Catalogue d'indicateurs)_.
+
+## 5. Points de vigilance
+
+- Mise à jour du catalogue après ajout/calcul d'indicateurs (EPIC 1 bis).
+- La liste des 38 indicateurs doit rester navigable et lisible.

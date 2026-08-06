@@ -1,6 +1,6 @@
 ## Recette et validation
 
-La recette et la validation du système HydroScope constituent une étape essentielle pour garantir la conformité de la solution aux besoins exprimés, ainsi que la fiabilité des traitements et des indicateurs produits. Elles s’inscrivent dans une démarche continue, en cohérence avec l’approche Agile du projet.
+La recette et la validation du système HydroScope garantissent la conformité de la solution aux besoins exprimés, ainsi que la fiabilité des traitements et des indicateurs produits. Elles s’inscrivent dans une démarche continue, en cohérence avec l’approche Agile du projet.
 
 L’objectif est de vérifier à la fois la qualité fonctionnelle du système, la robustesse technique et la validité méthodologique des résultats.
 
@@ -24,14 +24,14 @@ Ces tests sont réalisés de manière continue au fil des sprints.
 
 ### Recette fonctionnelle
 
-La recette fonctionnelle est pilotée par la MOA, avec l’appui de l’AMOA et la participation des utilisateurs.
+La recette fonctionnelle est pilotée par la MOA et la participation d'utilisateurs.
 
 Elle vise à :
 - valider la conformité des fonctionnalités livrées ;
 - vérifier l’adéquation de l’outil aux usages métiers ;
 - identifier les écarts ou anomalies.
 
-La recette s’appuie sur des scénarios de test représentatifs des usages réels. Elle est réalisée de manière itérative, à chaque livraison de fonctionnalités.
+La recette s’appuie sur des scénarios de test représentatifs des usages réels, exprimé dans le User Stories. Elle est réalisée de manière itérative, à chaque livraison de fonctionnalités.
 
 ### Validation scientifique et méthodologique
 
@@ -48,7 +48,7 @@ Elle implique les experts métiers et les partenaires techniques concernés.
 
 Chaque fonctionnalité doit être associée à des critères d’acceptation permettant de valider sa conformité.
 
-Ces critères portent notamment sur :
+Ces critères portent sur :
 - le respect des exigences fonctionnelles ;
 - la qualité des résultats produits ;
 - la conformité des interfaces ;

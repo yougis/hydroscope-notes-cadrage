@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Eye, EyeOff, Layers } from 'lucide-react'
 import { Icon } from '@/components/ui/Icon'
-import { BVAEPS, UNITES_GESTIONES, communes, communesIntersectingBvaep, provinces, captagesOfBvaep, catalogueById } from '@/data/hydroscope'
+import { BVAEPS, UNITES_GESTIONES, communes, communesIntersectingBvaep, provinces, catalogueById } from '@/data/hydroscope'
 import { valueForBvaep, valueForUnite } from '@/data/values'
 import { CAPTAGE_KINDS, KIND_LABELS, KIND_SHORT } from '@/data/ouvrages'
-import type { BvaepDef, CaptageKind, UniteGestionDef, UnitMode } from '@/types/domain'
+import type { BvaepDef, CaptageKind, HoverEntity, UniteGestionDef, UnitMode } from '@/types/domain'
 import { PanelSection } from './PanelSection'
 import { KindMark } from './KindMark'
 import type { LayerDef } from '../hooks/useLayers'
@@ -23,27 +23,21 @@ export interface CaptageSelectorProps {
   activeIndicator: string | null
   layers: LayerDef[]
   onToggleLayer: (key: string) => void
+  hoverEntity?: HoverEntity | null
+  onHoverEntity?: (e: HoverEntity | null) => void
 }
 
-type SortKey = 'distance' | 'nom'
-type PresetKind = 'plus-exposes' | 'moins-exposes' | 'plus-proches' | 'plus-eloignes'
+type PresetKind = 'plus-exposes' | 'moins-exposes'
 
 const PRESET_LABELS: Array<{ kind: PresetKind; label: string }> = [
   { kind: 'plus-exposes', label: 'Les 10 plus exposés' },
   { kind: 'moins-exposes', label: 'Les 10 moins exposés' },
-  { kind: 'plus-proches', label: 'Les 10 plus proches' },
-  { kind: 'plus-eloignes', label: 'Les 10 plus éloignés' },
 ]
 
 const LAYER_COLORS: Record<string, string> = {
   bv: '#94a3b8',
   capt: '#3b82f6',
   source: '#10b981',
-}
-
-function avgDistOfBvaep(bv: BvaepDef) {
-  const caps = captagesOfBvaep(bv.id)
-  return caps.length ? caps.reduce((s, c) => s + c.dist, 0) / caps.length : 0
 }
 
 export function CaptageSelector({
@@ -60,6 +54,8 @@ export function CaptageSelector({
   activeIndicator,
   layers,
   onToggleLayer,
+  hoverEntity,
+  onHoverEntity,
 }: CaptageSelectorProps) {
   const isGestion = unitMode === 'gestion'
 
@@ -67,7 +63,6 @@ export function CaptageSelector({
   const [communeFacets, setCommuneFacets] = useState<string[]>([])
   const [provinceFacets, setProvinceFacets] = useState<string[]>([])
   const [kindFacets, setKindFacets] = useState<CaptageKind[]>([])
-  const [sortKey, setSortKey] = useState<SortKey>(isGestion ? 'distance' : 'nom')
   const [focused, setFocused] = useState(false)
   const [presetChip, setPresetChip] = useState<{ label: string; restore: () => void } | null>(null)
 
@@ -97,8 +92,8 @@ export function CaptageSelector({
       (provinceFacets.length === 0 || provinceFacets.includes(b.province)),
   )
 
-  const visibleCaptages = [...filteredCaptages].sort((a, b) => (sortKey === 'nom' ? a.name.localeCompare(b.name) : a.dist - b.dist))
-  const visibleBvaeps = [...filteredBvaeps].sort((a, b) => (sortKey === 'nom' ? a.name.localeCompare(b.name) : avgDistOfBvaep(a) - avgDistOfBvaep(b)))
+  const visibleCaptages = [...filteredCaptages].sort((a, b) => a.name.localeCompare(b.name))
+  const visibleBvaeps = [...filteredBvaeps].sort((a, b) => a.name.localeCompare(b.name))
 
   const suggestionCommunes = communes().filter((x) => query && x.toLowerCase().includes(query.toLowerCase())).slice(0, 4)
   const suggestionProvinces = provinces().filter((x) => query && x.toLowerCase().includes(query.toLowerCase())).slice(0, 4)
@@ -109,8 +104,7 @@ export function CaptageSelector({
     if (isGestion) {
       const prev = [...selectedUnites]
       const scored = visibleCaptages.map((c: UniteGestionDef) => {
-        const base = kind === 'plus-proches' || kind === 'plus-eloignes' ? c.dist : valueForUnite(indId, c.id)
-        return { id: c.id, value: base }
+        return { id: c.id, value: valueForUnite(indId, c.id) }
       })
       const asc = kind === 'moins-exposes' || kind === 'plus-proches'
       scored.sort((a, b) => (asc ? a.value - b.value : b.value - a.value))
@@ -119,8 +113,7 @@ export function CaptageSelector({
     } else {
       const prev = [...selectedBvaeps]
       const scored = visibleBvaeps.map((b: BvaepDef) => {
-        const base = kind === 'plus-proches' || kind === 'plus-eloignes' ? avgDistOfBvaep(b) : valueForBvaep(indId, b.id)
-        return { id: b.id, value: base }
+        return { id: b.id, value: valueForBvaep(indId, b.id) }
       })
       const asc = kind === 'moins-exposes' || kind === 'plus-proches'
       scored.sort((a, b) => (asc ? a.value - b.value : b.value - a.value))
@@ -276,14 +269,6 @@ export function CaptageSelector({
 
         <div className="flex items-center justify-between gap-1.5">
           <select
-            value={sortKey}
-            onChange={(e) => setSortKey(e.target.value as SortKey)}
-            className="flex-1 rounded-md border border-neutral-300 bg-neutral-50 px-2 py-1 text-[11px] text-neutral-600"
-          >
-            <option value="distance">Tri : distance ▾</option>
-            <option value="nom">Tri : nom ▾</option>
-          </select>
-          <select
             defaultValue=""
             onChange={(e) => {
               const kind = e.target.value as PresetKind
@@ -317,13 +302,14 @@ export function CaptageSelector({
           <ul className="space-y-1">
             {visibleCaptages.map((c) => {
               const isSel = selectedUnites.has(c.id)
+              const isHover = hoverEntity?.kind === 'unite' && hoverEntity.id === c.id
               return (
-                <li key={c.id} className={`flex items-center gap-2 rounded-md border px-2 py-1.5 ${isSel ? 'border-blue-300 bg-blue-50' : 'border-neutral-200 bg-white'}`}>
+                <li key={c.id} onMouseEnter={() => onHoverEntity?.({ kind: 'unite', id: c.id })} onMouseLeave={() => onHoverEntity?.(null)} className={`flex items-center gap-2 rounded-md border px-2 py-1.5 ${isSel ? 'border-blue-300 bg-blue-50' : isHover ? 'border-blue-400 bg-blue-50/60' : 'border-neutral-200 bg-white'}`}>
                   <button onClick={() => onToggleUnite(c.id)} className="flex min-w-0 flex-1 items-center gap-1.5 text-left">
                     <KindMark kind={c.kind} color={isSel ? '#2563eb' : '#94a3b8'} size={9} className="shrink-0" />
                     <span className="min-w-0">
                       <span className="block truncate text-xs font-medium text-neutral-800">{c.name}</span>
-                      <span className="block truncate text-[10px] text-neutral-400">{c.commune} · {c.dist} km</span>
+                      <span className="block truncate text-[10px] text-neutral-400">{c.commune}</span>
                     </span>
                   </button>
                   <button onClick={() => onToggleUnite(c.id)} title="Retirer" aria-label={`Retirer ${c.name}`} className="text-neutral-300 hover:text-red-500">
@@ -353,8 +339,9 @@ export function CaptageSelector({
           <ul className="space-y-1">
             {visibleBvaeps.map((b) => {
               const isSel = selectedBvaeps.has(b.id)
+              const isHover = hoverEntity?.kind === 'bvaep' && hoverEntity.id === b.id
               return (
-                <li key={b.id} className={`flex items-center gap-2 rounded-md border px-2 py-1.5 ${isSel ? 'border-emerald-300 bg-emerald-50' : 'border-neutral-200 bg-white'}`}>
+                <li key={b.id} onMouseEnter={() => onHoverEntity?.({ kind: 'bvaep', id: b.id })} onMouseLeave={() => onHoverEntity?.(null)} className={`flex items-center gap-2 rounded-md border px-2 py-1.5 ${isSel ? 'border-emerald-300 bg-emerald-50' : isHover ? 'border-emerald-400 bg-emerald-50/60' : 'border-neutral-200 bg-white'}`}>
                   <button onClick={() => onToggleBvaep(b.id)} className="min-w-0 flex-1 text-left">
                     <span className="block truncate text-xs font-medium text-neutral-800">{b.name}</span>
                     <span className="block truncate text-[10px] text-neutral-400">{b.province} · {b.captageRefs.length} captages</span>
@@ -373,40 +360,19 @@ export function CaptageSelector({
         )}
       </PanelSection>
 
-      <PanelSection title="Couches & légende" icon={<Layers size={12} />}>
+      <PanelSection title="Couches" icon={<Layers size={12} />}>
         {layers.map((l) => {
           const label = l.key === 'source' && sourceInd ? `Source · ${sourceInd.sourceLabel}` : l.label
           return (
-            <div key={l.key} className={l.on ? '' : 'opacity-60'}>
-              <button
-                onClick={() => onToggleLayer(l.key)}
-                className="flex w-full items-center gap-2 rounded px-1.5 py-1 text-left hover:bg-neutral-50"
-              >
-                <span className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: l.on ? LAYER_COLORS[l.key] ?? '#94a3b8' : '#d4d4d8' }} />
-                <span className={`flex-1 text-[11px] ${l.on ? 'text-neutral-700' : 'text-neutral-400'}`}>{label}</span>
-                {l.on ? <Eye size={11} className="text-neutral-300" /> : <EyeOff size={11} className="text-neutral-400" />}
-              </button>
-              {l.on && (
-                <div className="space-y-1 py-1 pl-7 text-[11px] text-neutral-500">
-                  {l.key === 'capt' && (
-                    <>
-                      {CAPTAGE_KINDS.map((k) => (
-                        <span key={k} className="flex items-center gap-1.5"><KindMark kind={k} color="#3b82f6" size={9} /> {KIND_LABELS[k]}</span>
-                      ))}
-                      {isGestion && selectedUnites.size > 0 && (
-                        <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-amber-500" /> Unité sélectionnée</span>
-                      )}
-                      {!isGestion && selectedBvaeps.size > 0 && (
-                        <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-blue-500" /> Unité du BV sélectionné</span>
-                      )}
-                    </>
-                  )}
-                  {l.key === 'source' && sourceInd && (
-                    <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-red-500/70" /> Couche source</span>
-                  )}
-                </div>
-              )}
-            </div>
+            <button
+              key={l.key}
+              onClick={() => onToggleLayer(l.key)}
+              className="flex w-full items-center gap-2 rounded px-1.5 py-1 text-left hover:bg-neutral-50"
+            >
+              <span className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: l.on ? LAYER_COLORS[l.key] ?? '#94a3b8' : '#d4d4d8' }} />
+              <span className={`flex-1 text-[11px] ${l.on ? 'text-neutral-700' : 'text-neutral-400'}`}>{label}</span>
+              {l.on ? <Eye size={11} className="text-neutral-300" /> : <EyeOff size={11} className="text-neutral-400" />}
+            </button>
           )
         })}
       </PanelSection>

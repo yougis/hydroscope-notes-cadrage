@@ -4,8 +4,9 @@ import { MapCanvas } from './MapCanvas'
 import { useLayers, type BasemapId } from './hooks/useLayers'
 import { CaptageSelector } from './components/CaptageSelector'
 import { IndicateurExplorer } from './components/IndicateurExplorer'
+import { StatLegend } from './components/StatLegend'
 import type { ChartViewMode } from '@/features/indicateurs/ChartModeSwitcher'
-import type { UnitMode } from '@/types/domain'
+import type { HoverEntity, UnitMode } from '@/types/domain'
 
 export interface CarteViewProps {
   unitMode: UnitMode
@@ -49,6 +50,7 @@ export function CarteView({
   const { layers, toggleLayer, basemap, setBasemap } = useLayers()
   const [mode, setMode] = useState<ChartViewMode>('repartition')
   const [showCarte, setShowCarte] = useState(false)
+  const [hoverEntity, setHoverEntity] = useState<HoverEntity | null>(null)
   const isGestion = unitMode === 'gestion'
   const h3Mode = showCarte
   const selectedKeys = isGestion
@@ -71,6 +73,8 @@ export function CarteView({
         activeIndicator={activeIndicator}
         layers={layers}
         onToggleLayer={toggleLayer}
+        hoverEntity={hoverEntity}
+        onHoverEntity={setHoverEntity}
       />
 
       <div className="relative min-w-0 flex-1 overflow-hidden rounded-md border border-neutral-200 bg-white">
@@ -87,7 +91,8 @@ export function CarteView({
             </button>
           ))}
         </div>
-        <MapCanvas selectedKeys={selectedKeys} activeIndicator={activeIndicator} unitMode={unitMode} selectedBvaeps={selectedBvaeps} layers={layers} basemap={basemap} h3Mode={h3Mode} />
+        <MapCanvas selectedKeys={selectedKeys} activeIndicator={activeIndicator} unitMode={unitMode} selectedBvaeps={selectedBvaeps} layers={layers} basemap={basemap} h3Mode={h3Mode} hoveredEntity={hoverEntity} onHoverEntity={setHoverEntity} />
+        <StatLegend activeIndicator={activeIndicator} choropleth={h3Mode} />
         <div className="absolute bottom-3 right-3 flex items-center gap-2">
           <span className="rounded border border-neutral-300 bg-white px-2 py-1 text-[11px] text-neutral-500">0 — 50 km</span>
           <span className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 bg-white text-xs font-bold text-neutral-600">N</span>
@@ -110,6 +115,8 @@ export function CarteView({
         onMode={setMode}
         showCarte={showCarte}
         onToggleCarte={() => setShowCarte((c) => !c)}
+        hoverEntity={hoverEntity}
+        onHoverEntity={setHoverEntity}
       />
     </div>
   )

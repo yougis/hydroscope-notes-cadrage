@@ -1,5 +1,14 @@
 export type UnitMode = 'gestion' | 'bvaep'
 export type DataType = 'stock' | 'qualite' | 'mixte'
+
+/** Titre de légende cartographique par indicateur (colonne `description_indicateur_legende` du xlsx). */
+export type IndicatorLegendeMap = Record<string, string>
+
+/** Entité géographique visée par un survol croisé (sélecteur / carte / graphique). */
+export interface HoverEntity {
+  kind: 'unite' | 'bvaep'
+  id: string
+}
 export type PeriodRange = string
 
 export interface ViewDef {
@@ -20,7 +29,6 @@ export interface CaptageDef {
   commune: string
   province: string
   bvaep: string
-  dist: number
 }
 
 export interface UniteGestionDef {
@@ -30,7 +38,6 @@ export interface UniteGestionDef {
   province: string
   bvaep: string
   kind: CaptageKind
-  dist: number
 }
 
 export type IndicatorFamily = 'ENJEUX' | 'MENACES'

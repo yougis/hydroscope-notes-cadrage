@@ -1,0 +1,106 @@
+---
+title: "ADI — Méthodologie de la qualification statistique des indicateurs"
+profile: "Document support (ADI — Aide à l'interprétation)"
+uc: "ADI_methodologie_seuils"
+us: "US7.1, US7.3 (méthode)"
+epic: "EPIC 7 — Aide à la décision"
+mvp: false
+amc: false
+---
+
+# Qualification des valeurs par seuils statistiques de référence
+
+> **⚠️ ADI — Aide à l'interprétation pour la décision.** Ce document pose la **méthode**
+> de qualification des valeurs d'indicateurs (niveaux de vigilance) en vue d'orienter la
+> lecture vers l'action, sans jamais produire de score ni de hiérarchisation automatisée.
+> Il est **distinct de l'AMC** (EPIC 5, `AMC_methodologie.qmd`) : la qualification relative
+> ici est **descriptive et réversible** ; le score composite de criticité reste isolé et
+> hors MVP.
+
+## 1. Objectif
+
+Permettre à un décideur ou un expert de lire une valeur d'indicateur **en contexte** :
+« cette valeur est-elle plutôt bonne ou préoccupante, ici et maintenant ? », de façon
+**comparable entre deux dates** et **entre deux territoires ou sélections**, tout en
+restant transparente et traçable (exigence de réversibilité de l'EPIC 7).
+
+## 2. Principe : le « seuil de référence type »
+
+Contrairement à un seuil réglementaire figé, la qualification repose sur une
+**distribution de référence** : la valeur d'un indicateur est qualifiée **par rapport à
+une population de référence documentée et stable**, pas par rapport à la sélection
+affichée.
+
+### 2.1 Définition de la référence
+- **Population** : l'ensemble des unités de gestion (captages / bassins versants /
+  communes) du référentiel complet HydroScope, hors sélection utilisateur.
+- **Fenêtre temporelle** : une période de référence par indicateur (ex. moyenne
+  pluriannuelle ou fenêtre glissante figée), définie et versionnée.
+- La référence est calculée **une fois** (bâtiment) et **froide** : elle n'est pas
+  recalculée dans le navigateur sur le sous-ensemble affiché.
+
+### 2.2 Pourquoi ne jamais recalculer sur la sélection
+Si les seuils étaient recalculés sur la sélection visible, comparer deux territorèmes
+**relativement au choix affiché** (et non à la norme) romprait la comparabilité. La règle
+est donc :
+
+> La référence est globale et figée ; la sélection est seulement **échantillonnée** par
+> rapport à elle. **On ne rebascline jamais sur la sélection.**
+
+## 3. Construction des seuils de niveau
+
+### 3.1 Valeur standardisée
+Pour rendre comparables des indicateurs aux unités hétérogènes (%, m³, indices), chaque
+valeur est ramenée à un **score de position** calculé sur la référence :
+- **quantiles** : P50, P75, P90 (proposition par défaut) ; ou
+- **z-score** : (valeur − moyenne_réf) / écart-type_réf, selon la nature de l'indicateur.
+
+Le choix (quantiles vs z-score) est **documenté par indicateur** et versionné.
+
+### 3.2 Sens de l'indicateur
+Chaque indicateur déclare sa **direction** : « plus la valeur est élevée, plus le risque
+est élevé » (défaut) ou « plus elle est élevée, meilleure est la situation ». La
+qualification en dépend (le niveau ne s'inverse jamais automatiquement).
+
+### 3.3 Niveaux de vigilance (classes)
+On réutilise le vocabulaire visuel existant de la carte (`QUALITE_LABELS`) pour la
+cohérence :
+
+| Niveau | Visuel | Interprétation |
+|---|---|---|
+| **Indéterminé** | gris | valeur absente ou complétude < ~80 % → réserve |
+| **Bon** | vert | position dans la zone favorable de la référence |
+| **Dégradé** | ambre | au-delà du 1 er seuil de référence |
+| **Critique** | rouge | au-delà du 2e seuil de référence |
+
+Les bornes (percentiles/z) de chaque niveau sont **définies par indicateur** (US7.1) et
+restent modifiables → chaque modification est tracée (§ 5).
+
+## 4. Aides de lecture associées
+- **Justification** : à côté de chaque valeur qualifiée, une phrase type restitue
+  l'écart : les *« DÉGRADÉ — valeur 34, seuil 25 (P75), en hausse vs 2023 »* (lié à
+  US7.3, tendances).
+- **Navigabilité rétroactive** : le lien vers la méthode et la référence est toujours
+  affiché à côté du niveau (jamais de niveau « muet »).
+- **Outil rétroactif** : possibilité de revoir la référence utilisée (bonne fenêtre,
+  version des seuils).
+
+## 5. Traçabilité et garde-fous
+- Les versions de la référence et des seuils sont historisées (EPIC 1 / EPIC 10) et
+  apparaissent dans la fiche indicateur et les exports.
+- **Réserve de complétude** : si complétude < ~80 %, la valeur est affichée en
+  « Indéterminé » avec réserve — jamais fabriquée (EPIC 7).
+- **Démarcation stricte avec l'AMC** : la qualification ici est **relative et
+  descriptive** ; l'agrégation pondérée en score composite (facteurs dominants, criticité,
+  part de contribution) reste **hors de ce document** (voir `AMC_*`).
+- **Réversibilité** : on doit toujours remonter du niveau à la valeur source (liens).
+
+## 6. Gouvernance & validation
+- Persistence de la définition des références par indicateur avec les **comités
+  scientifiques / DAVAR** pour les valeurs par défaut (avec EPIC 4 + EPIC 7).
+- Validation des bornes avant mise en production (recette).
+
+## 7. Sources
+- `epics/epic-7-aide-decision.qmd` (US7.1 seuils, US7.3 tendances).
+- `figma-design/docs/help/03-indicateurs.md` (fiche métadonnées : échelle, seuils).
+- Prototype : `map/theme.ts` (classes couleur) — à rendre data-driven (bornes réelles).

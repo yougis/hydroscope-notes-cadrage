@@ -1,0 +1,47 @@
+---
+title: "CU-EXPERT-03 — Identifier des tendances et détecter des dépassements"
+profile: "Expert métier eau potable"
+uc: "CU-EXPERT-03"
+us: "US7.3, US7.2"
+epic: "EPIC 7 — Aide à la décision ; §8 — Monitoring métier"
+mvp: true
+amc: false
+---
+
+# Identifier des tendances et détecter des dépassements de seuil
+
+**Phrase agile :** En tant qu'expert métier eau potable, je veux identifier les
+tendances des indicateurs et être alerté par les dépassements de seuil que j'ai définis,
+afin d'anticiper les périodes de tension sur la ressource.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-EXPERT-03` (US7.3, US7.2) — `profils_utilisateurs.qmd` (Profil 3).
+- §8 — Monitoring métier et environnemental (tendances, ruptures, alertes).
+- EPIC 6/7 ; seuils définis par l'utilisateur.
+
+## 2. Fonctionnalités couvertes
+
+- Suivi temporel des indicateurs (tendances, ruptures).
+- Définition personnelle de **seuils** par indicateur.
+- **Alerte** en cas de dépassement (seuil franchi).
+- Affichage des alertes dans les visualisations et fiches.
+
+## 3. Parcours IHM
+
+1. Sidebar « Exploration > Tableau de bord » ou « Suivi > Supervision ».
+2. Définir/personnaliser les seuils d'un indicateur.
+3. Visualiser la tendance et les seuils sur le graphique (ligne de seuil).
+4. Réception des alertes de dépassement (badges / notifications).
+
+## 4. Rendu visuel obtenu
+
+- Graphique temporel avec **ligne de seuil** superposée.
+- Badge d'alerte (rouge) sur l'indicateur en dépassement.
+- Pastille d'alerte dans la carte/supervision.
+- Captures : _(à insérer depuis le prototype — vue Supervision / Tableau de bord)_.
+
+## 5. Points de vigilance
+
+- Ne pas confondre seuil utilisateur (configuration) et score global (AMC).
+- La détection de tendance est une aide, pas une interprétation automatique.

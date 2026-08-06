@@ -1,0 +1,53 @@
+---
+title: "CU-DATA-05 — Construire un indice composite et documenter les méthodes"
+profile: "Administrateur expert data"
+uc: "CU-DATA-05"
+us: "US5.1, US5.6"
+epic: "EPIC 5 — Analyse multicritère (partie méthode/documentation)"
+mvp: false
+amc: true
+---
+
+# Construire un indice composite et documenter les méthodes
+
+**Phrase agile :** En tant qu'administrateur expert data, je veux construire un indice
+composite et documenter les méthodes afin de fournir une base transparente pour l'aide à la décision.
+
+> **⚠️ Document AMC — isolé.** Cette fiche relève de l'analyse multicritère (EPIC 5),
+> **hors MVP**, et est conservée séparée des fiches descriptives. L'AMC est un outil
+> d'**aide à l'interprétation**, pas d'aide à la décision automatisée.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-DATA-05` (US5.1, US5.6) — `profils_utilisateurs.qmd` (Profil 2).
+- EPIC 5 — Analyse multicritère (option, chiffrée séparément) ; voir `AMC_methodologie.qmd`.
+- Réunion Read-AI « Brainstorming analyse multicritère » (méthodes en débat).
+
+## 2. Fonctionnalités couvertes
+
+- Combinaison de plusieurs indicateurs dans un indice composite.
+- **Documentation des méthodes** : choix d'agrégation, pondérations, seuils, justifications.
+- Traçabilité des résultats vers les indicateurs sources.
+- Réversibilité vers la lecture détaillée.
+
+## 3. Parcours IHM
+
+1. Accès à l'interface AMC (bouton dédié, droit + connexion requis, spec UX §3.7).
+2. Sélection des indicateurs pré-contrôlés (filtre « Analyse_multicriteres = oui »).
+3. Configuration de la construction (voir AMC_methodologie : pondération/scoring).
+4. Rédaction/documentation de la méthode.
+5. Publication de l'indice → rendu consultable (voir `AMC_rendu_score.qmd`).
+
+## 4. Rendu visuel obtenu
+
+- Éditeur de composition (liste ordonnée par famille puis thème).
+- Sliders de pondération / règles de scoring (à arbitrer, voir méthode).
+- Bloc de documentation de la méthode (texte + justifications).
+- Captures : _(à insérer depuis le prototype — interface AMC)_.
+
+## 5. Points de vigilance
+
+- **Prudence méthodologique** : éviter l'agrégation abusive et l'effet « boîte noire » (§3.2).
+- Arbitrage nécessaire (comité scientifique vs DAVAR) sur pondérations/seuils
+  (voir `AMC_methodologie.qmd`).
+- Frontière stricte : l'indice aide à l'interprétation, il ne décide pas.

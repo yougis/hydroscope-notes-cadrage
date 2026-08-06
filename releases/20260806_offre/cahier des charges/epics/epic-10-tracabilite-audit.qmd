@@ -1,0 +1,19 @@
+#### Objectifs
+
+Cet EPIC vise à garantir la transparence, la reproductibilité et la fiabilité des traitements réalisés au sein d’HydroScope.
+
+Il doit permettre de comprendre l’origine des données, les transformations appliquées et les actions réalisées dans le système, afin d’instaurer un climat de confiance dans l’outil.
+
+Dans un contexte où les indicateurs peuvent contribuer à orienter des décisions publiques, la capacité à tracer les traitements et à justifier les résultats constitue un enjeu central.
+
+#### Mise en œuvre et fonctionnalités
+
+Le système devra permettre de suivre et de reconstituer l’ensemble du cycle de vie des données, depuis leur intégration jusqu’à leur exploitation. 
+
+Il devra assurer un suivi des évolutions apportées aux données, aux référentiels et aux paramètres, afin de permettre une lecture dans le temps des modifications et, si nécessaire, une restitution d’un état antérieur.
+
+La traçabilité des calculs devra permettre de relier chaque indicateur aux données sources mobilisées, aux transformations appliquées et aux paramètres utilisés. L’objectif est de pouvoir reproduire un résultat et d’en comprendre les conditions de production.
+
+Le système devra également enregistrer les actions réalisées par les administrateurs et les utilisateurs, notamment les opérations d’import, de modification et d’export. Ces informations doivent permettre de suivre l’utilisation de la plateforme et de répondre à des besoins d’audit ou de sécurité.
+
+Enfin, les informations de traçabilité devront être structurées et accessibles de manière à permettre l’analyse des événements et la reconstitution des processus, sans se limiter à une accumulation de journaux techniques.

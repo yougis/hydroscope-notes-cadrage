@@ -16,7 +16,7 @@ Ce glossaire vise à clarifier les principaux acronymes, termes techniques et no
 
 ### Concepts projet et méthodologie Agile
 
-- **HydroScope** : Système d’information dédié au suivi, à l’analyse et à la valorisation des données relatives aux ressources en eau potable en Nouvelle-Calédonie
+
 - **Backlog produit** : Liste priorisée des fonctionnalités à développer
 - **EPIC** : Ensemble fonctionnel regroupant plusieurs User Stories
 - **User Story (US)** : Description d’un besoin fonctionnel du point de vue utilisateur
@@ -48,7 +48,6 @@ Ce glossaire vise à clarifier les principaux acronymes, termes techniques et no
 - **Analyse multicritère** : Méthode permettant de combiner plusieurs indicateurs pour produire une analyse synthétique
 - **Traçabilité** : Capacité à suivre l’origine et les transformations des données
 - **Complétude** : Niveau de remplissage d’un jeu de données
-- **Cohérence** : Absence de contradictions dans les données
 
 ### Exploitation et maintenance
 

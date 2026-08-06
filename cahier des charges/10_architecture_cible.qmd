@@ -49,23 +49,13 @@ L’architecture s’organise autour de plusieurs briques principales :
 
 *Schéma : enchaînement des couches fonctionnelles.*
 
-```mermaid
-flowchart TB
-    SRC["Sources de données"]
-    ING["Ingestion et import"]
-    STO["Stockage"]
-    TRA["Traitement"]
-    API["Exposition (API)"]
-    UI["Interfaces utilisateurs"]
-
-    SRC --> ING --> STO --> TRA --> API --> UI
-```
+![](figures/mm_1.svg){width=55%}
 
 ### Intégration au système d’information existant
 
-HydroScope doit s’intégrer dans l’écosystème existant des partenaires.
+HydroScope doit s’intégrer dans l’écosystème existant de l'Observatoire et des partenaires.
 
-Cela implique :
+Cela concerne :
 - la connexion à des sources de données existantes sans duplication inutile ;
 - la capacité à consommer des services externes (API, flux de données) ;
 - la possibilité de diffuser les données produites vers d’autres systèmes ;
@@ -75,29 +65,7 @@ Cette intégration doit être pensée de manière à limiter les redondances et 
 
 *Schéma : intégration dans l'écosystème existant.*
 
-```mermaid
-flowchart TB
-    SRC["Sources de données<br/>internes & externes"]
-    ING["Ingestion et import<br/>API · fichiers · flux automatisés"]
-    STO["Stockage<br/>base spatiale (PostgreSQL + PostGIS)<br/>historisation · référentiels · catalogue"]
-    TRA["Traitement<br/>normalisation · calcul des indicateurs<br/>agrégations spatiales (grille H3)"]
-    API["Exposition<br/>API REST · standards OGC (WMS/WFS) · ESRI"]
-    UI["Interfaces utilisateurs<br/>cartes · tableaux de bord · fiches"]
-    TIERS["Systèmes tiers<br/>outils SIG · portails · applications"]
-
-    SRC --> ING --> STO --> TRA --> API --> UI
-    API --> TIERS
-
-    subgraph INFRA["Infrastructure"]
-        ENV["3 environnements<br/>développement · test · production"]
-        SEC["Accès selon les profils"]
-        SAV["Sauvegardes et restauration"]
-        MON["Supervision et alertes"]
-    end
-
-    INFRA -.-> STO
-    INFRA -.-> API
-```
+![](figures/mm_2.svg){width=40%}
 
 ### Choix technologiques
 
@@ -105,8 +73,8 @@ Les choix technologiques ci‑dessous sont proposés pour répondre aux exigence
 
 #### Stack applicative
 
-- **Frontend** : application web monopage (SPA) développée en **Vue.js** , **React** , selon les compétences disponibles au sein de l'équipe OEIL. L'interface est conçue pour être responsive, accessible et adaptable aux différents profils d'utilisateurs (experts, partenaires institutionnels, grand public).
-- **Cartographie** : utilisation de **MapLibre GL JS** , **OpenLayers** pour la restitution cartographique interactive. Le système supporte le tuilage vectoriel et raster (architecture tuilage) afin d'assurer des performances optimales quel que soit le volume de données affiché.
+- **Frontend** : application web monopage (SPA) développée en **Vue.js** , **React** , selon les compétences disponibles au sein de l'équipe OEIL. L'interface est conçue pour être accessible et adaptable aux différents profils d'utilisateurs (experts, partenaires institutionnels, grand public).
+- **Cartographie** : utilisation de **MapLibre GL JS** ou **OpenLayers** pour la restitution cartographique interactive. Le système supporte le tuilage vectoriel et raster (architecture tuilage) afin d'assurer des performances optimales quel que soit le volume de données affiché.
 - **API backend** : exposition des données et des indicateurs via des endpoints RESTful, et conformes aux standards OGC (WMS, WFS) et compatibles avec les systèmes ESRI. L'API sert de couche d'abstraction entre le front-end et la couche de traitement.
 - **Géotraitements** : les traitements géographiques spécifiques (validation topologique, contrôle qualité géométrique, agrégation spatiale sur la grille H3) sont réalisés côté serveur via des pipelines dédiés.
 
@@ -124,17 +92,13 @@ Les choix technologiques ci‑dessous sont proposés pour répondre aux exigence
 - **ETL / Transformation** : les pipelines d'intégration et de transformation des données sont construits avec **dbt** (data build tool), assurant la traçabilité des traitements, la reproductibilité des résultats et la cohérence entre les données sources et les indicateurs produits.
 - **Modèle de données** : le modèle conceptuel de données (MCD) repose sur les entités principales du projet : **PPE** (Périmètres de Protection de l'Eau), **BV** (Bassins Versants) et **captages/forages**, avec des tables de référence et de fait clairement identifiées.
 - **Guidelines d'intégration** : un document de référence (guidelines d'intégration) est produit pour formaliser les modalités de connexion aux sources de données, les formats d'échange attendus et les règles de qualité applicables.
+- **Cluster de traitemenent paralélisé** : les traitement des données est effectué sur un cluster **Dask** pour faciliter la production des indicateurs sur des données lourdes.
 
 *Schéma : parcours des données jusqu'aux indicateurs.*
 
-```mermaid
-flowchart LR
-    SRC["Sources de données"] --> ETL["Pipelines d'intégration (dbt)"]
-    ETL --> MOD["Modèle de données<br/>captages · bassins versants · PPE"]
-    MOD --> IND["Indicateurs"]
-```
+![](figures/mm_3.svg){width=90%}
 
-#### Infrastructure et déploiement
+#### Infrastructure 
 
 - **Hébergement** : le système est déployé sur une infrastructure dédiée, conforme aux exigences de sécurité et de souveraineté des données institutionnelles. L'hébergement est à la charge de l'OEIL ou de son prestataire infrastructure.
 - **Environnements** : trois environnements distincts sont mis en place — développement, test/recette/qualification, production — afin de sécuriser les mises en production et limiter les risques de régression.
@@ -157,60 +121,5 @@ Vue d'ensemble reliant le flux de données, la boucle de traitement, l'expositio
 
 *Schéma : vue d'ensemble de l'architecture cible.*
 
-```mermaid
-flowchart TB
-    SRC["Sources de données<br/>internes & externes"]
-    ING["Ingestion et import<br/>fichiers · API · flux automatisés"]
-
-    subgraph STO["Stockage des données"]
-        DB[(PostgreSQL + PostGIS)]
-        HIST["Historisation<br/>(GeoDiff + snapshots)"]
-        REF["Référentiels"]
-        CAT["Catalogue (STAC/CKAN)"]
-    end
-
-    subgraph TRA["Cycle de traitement"]
-        DBT["Pipelines dbt<br/>normalisation · règles métier · H3"]
-        RES["Indicateurs calculés<br/>et données enrichies"]
-    end
-
-    subgraph SRV["Services / microservices"]
-        SB["Services métier et géoservices"]
-    end
-
-    API["API<br/>REST · OGC WMS/WFS · ESRI"]
-    EXP["Exports de données<br/>fichiers (CSV · Excel · GeoJSON · Shapefile)"]
-
-    subgraph UI2["Restitution"]
-        FR["Application web<br/>SPA Vue / React"]
-        MAP["Cartographie<br/>MapLibre / OpenLayers"]
-    end
-
-    TIERS["Systèmes tiers<br/>outils SIG · portails"]
-
-    SRC --> ING --> STO
-    STO --> TRA
-    TRA -->|résultats réécrits| DB
-    STO --> SRV
-    SRV --> API
-    API --> UI2
-    API --> TIERS
-    API --> EXP
-
-    ORCH["Orchestration et supervision<br/>Prefect (pipeline) · monitoring<br/>— agit entre les briques —"]
-    ORCH -.-> ING
-    ORCH -.-> STO
-    ORCH -.-> TRA
-    ORCH -.-> SRV
-
-    subgraph INFRA["Infrastructure"]
-        ENV["Infrastructure locale<br/>et cloud (production)"]
-        SEC["Accès selon les profils (RBAC)"]
-        SAV["Sauvegarde et restauration<br/>Barman · base de sauvegarde"]
-        CICD["Automatisation<br/>tests et déploiements"]
-    end
-    INFRA -.-> STO
-    INFRA -.-> SRV
-    INFRA -.-> ORCH
-```
+![](figures/mm_4.svg){width=80%}
 
