@@ -16,7 +16,7 @@ export const LAYER_DEFS: LayerDef[] = [
 
 export function useLayers() {
   const [layers, setLayers] = useState<LayerDef[]>(LAYER_DEFS)
-  const [basemap, setBasemap] = useState<BasemapId>('carto')
+  const [basemap, setBasemap] = useState<BasemapId>('terrain')
 
   const toggleLayer = (key: string) =>
     setLayers((prev) => prev.map((x) => (x.key === key ? { ...x, on: !x.on } : x)))

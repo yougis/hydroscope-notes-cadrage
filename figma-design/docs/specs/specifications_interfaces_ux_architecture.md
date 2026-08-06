@@ -24,13 +24,13 @@ flowchart TB
         LOGO[Logo + nom HydroScope]
         NAV[Navigation : Explorer / Analyse / Actualités / À propos]
         USR[Compte utilisateur<br/>bouton silhouette]
-        AMC_BTN[Bouton Analyse multicritère<br/>(droit + connexion requis)]
+        AMC_BTN[Bouton Analyse multicritère<br/>droit + connexion requis]
     end
 
-    subgraph WORK["Zone de travail (par défaut : Explorer)"]
+    subgraph WORK["Zone de travail par défaut : Explorer"]
         L["Colonne gauche<br/>Sélecteur captages/forages<br/>+ liste de sélection"]
         C["Zone centrale — carte<br/>(fond satellite/carto)<br/>+ couches H3 et captages"]
-        R["Colonne droite<br/>Onglets de dataviz<br/>(catalogue → graphiques)"]
+        R["Colonne droite<br/>Onglets de dataviz<br/>catalogue → graphiques"]
     end
 
     HEAD --> WORK

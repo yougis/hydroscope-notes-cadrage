@@ -4,7 +4,7 @@ import VectorSource from 'ol/source/Vector'
 import Polygon from 'ol/geom/Polygon'
 import Point from 'ol/geom/Point'
 import { fromLonLat } from 'ol/proj'
-import { Style, Fill, Stroke, Circle as CircleStyle } from 'ol/style'
+import { Style, Fill, Stroke, Circle as CircleStyle, RegularShape } from 'ol/style'
 import {
   BVAEPS,
   BVAEP_OUTLINES,
@@ -16,7 +16,7 @@ import { valueForBvaep, valueForUnite } from '@/data/values'
 import type { UnitMode } from '@/types/domain'
 import type { LayerDef } from '../hooks/useLayers'
 import { buildH3Features } from './h3'
-import { BV_FILLS, QUALITE_COLORS, SOURCE_FILLS, bvaepClass, symbolFor } from './theme'
+import { QUALITE_COLORS, SOURCE_FILLS, bvaepClass, symbolFor } from './theme'
 
 // Empreinte approximative (lon, lat) de la couche source.
 const SOURCE_FOOTPRINT: Array<[number, number]> = [
@@ -62,20 +62,11 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
       const hasSelectedCaptage = b.captageRefs.some((cid) => selectedCaptageIds.has(cid))
       const selBv = !isGestion && selectedBvaeps.has(b.id)
       const liaBv = isGestion && hasSelectedCaptage
-      const otherBv = !selBv && !liaBv
-      const fill = isGestion
-        ? liaBv
-          ? 'rgba(148, 163, 184, 0.22)'
-          : 'rgba(148, 163, 184, 0.05)'
-        : selBv
-          ? BV_FILLS[cls]
-          : otherBv
-            ? 'rgba(148, 163, 184, 0.1)'
-            : BV_FILLS[cls]
-      const stroke = selBv ? '#f59e0b' : liaBv ? '#94a3b8' : '#94a3b8'
-      const strokeWidth = selBv ? 2.5 : 1.5
-      const dash = selBv || liaBv ? null : '6,4'
-      const opacity = selBv ? 1 : liaBv ? 0.95 : otherBv ? 0.5 : 0.95
+      const emphasized = selBv || liaBv
+      const stroke = selBv ? QUALITE_COLORS[cls] : '#94a3b8'
+      const strokeWidth = emphasized ? 2.5 : 1.5
+      const dash = emphasized ? null : '6,4'
+      const opacity = emphasized ? 1 : 0.6
 
       const feature = new Feature({ geometry: toPolygon(BVAEP_OUTLINES[b.id]) })
       feature.set('bvId', b.id)
@@ -87,7 +78,6 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
         'value',
         ind ? `${valueForBvaep(ind.id, b.id).toLocaleString('fr-FR')} ${ind.unit}` : null
       )
-      feature.set('fill', fill)
       feature.set('stroke', stroke)
       feature.set('strokeWidth', strokeWidth)
       feature.set('dash', dash)
@@ -157,6 +147,7 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
       feature.set('fill', grayed ? '#cbd5e1' : sym.fill)
       feature.set('stroke', selCap ? '#f59e0b' : '#ffffff')
       feature.set('strokeWidth', selCap ? 2 : 1.5)
+      feature.set('kindType', cActive?.kind)
       feature.set('_hover', false)
       source.addFeature(feature)
     }
@@ -168,13 +159,13 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
 
 function bvStyle(feature: Feature): Style {
   const hover = feature.get('_hover')
-  const opacity = hover ? Math.min(1, (feature.get('opacity') as number) + 0.25) : (feature.get('opacity') as number)
-  const fill = hexA(feature.get('fill') as string, opacity)
+  const opacity = hover ? Math.min(1, (feature.get('opacity') as number) + 0.3) : (feature.get('opacity') as number)
   const dash = feature.get('dash') as string | null
+  const stroke = feature.get('stroke') as string
+  const strokeColor = hexA(stroke, stroke.startsWith('#') ? opacity : 1)
   return new Style({
-    fill: new Fill({ color: fill }),
     stroke: new Stroke({
-      color: feature.get('stroke') as string,
+      color: strokeColor,
       width: hover ? (feature.get('strokeWidth') as number) + 0.5 : (feature.get('strokeWidth') as number),
       lineDash: dash ? [6, 4] : undefined,
     }),
@@ -202,12 +193,21 @@ function h3Style(feature: Feature): Style {
 function captStyle(feature: Feature): Style {
   const hover = feature.get('_hover')
   const radius = hover ? (feature.get('radius') as number) + 2 : (feature.get('radius') as number)
+  const kind = feature.get('kindType') as 'captage_superficiel' | 'forage' | 'tranchee_drainante' | undefined
+  const fill = new Fill({ color: feature.get('fill') as string })
+  const stroke = new Stroke({ color: feature.get('stroke') as string, width: feature.get('strokeWidth') as number })
+  if (kind === 'forage') {
+    return new Style({
+      image: new RegularShape({ points: 4, radius, rotation: Math.PI / 4, fill, stroke }),
+    })
+  }
+  if (kind === 'tranchee_drainante') {
+    return new Style({
+      image: new RegularShape({ points: 3, radius, fill, stroke }),
+    })
+  }
   return new Style({
-    image: new CircleStyle({
-      radius,
-      fill: new Fill({ color: feature.get('fill') as string }),
-      stroke: new Stroke({ color: feature.get('stroke') as string, width: feature.get('strokeWidth') as number }),
-    }),
+    image: new CircleStyle({ radius, fill, stroke }),
   })
 }
 

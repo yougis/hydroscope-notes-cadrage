@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Eye, EyeOff, Layers } from 'lucide-react'
 import { Icon } from '@/components/ui/Icon'
-import { BVAEPS, CAPTAGES, communes, communesIntersectingBvaep, provinces, captagesOfBvaep, catalogueById } from '@/data/hydroscope'
+import { BVAEPS, UNITES_GESTIONES, communes, communesIntersectingBvaep, provinces, captagesOfBvaep, catalogueById } from '@/data/hydroscope'
 import { valueForBvaep, valueForUnite } from '@/data/values'
-import type { BvaepDef, CaptageDef, UnitMode } from '@/types/domain'
+import { CAPTAGE_KINDS, KIND_LABELS, KIND_SHORT } from '@/data/ouvrages'
+import type { BvaepDef, CaptageKind, UniteGestionDef, UnitMode } from '@/types/domain'
 import { PanelSection } from './PanelSection'
+import { KindMark } from './KindMark'
 import type { LayerDef } from '../hooks/useLayers'
 
 export interface CaptageSelectorProps {
@@ -36,8 +38,6 @@ const PRESET_LABELS: Array<{ kind: PresetKind; label: string }> = [
 const LAYER_COLORS: Record<string, string> = {
   bv: '#94a3b8',
   capt: '#3b82f6',
-  ppe: '#94a3b8',
-  risque: '#ef4444',
   source: '#10b981',
 }
 
@@ -66,6 +66,7 @@ export function CaptageSelector({
   const [query, setQuery] = useState('')
   const [communeFacets, setCommuneFacets] = useState<string[]>([])
   const [provinceFacets, setProvinceFacets] = useState<string[]>([])
+  const [kindFacets, setKindFacets] = useState<CaptageKind[]>([])
   const [sortKey, setSortKey] = useState<SortKey>(isGestion ? 'distance' : 'nom')
   const [focused, setFocused] = useState(false)
   const [presetChip, setPresetChip] = useState<{ label: string; restore: () => void } | null>(null)
@@ -74,15 +75,18 @@ export function CaptageSelector({
     setCommuneFacets((prev) => (prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]))
   const toggleProvince = (p: string) =>
     setProvinceFacets((prev) => (prev.includes(p) ? prev.filter((x) => x !== p) : [...prev, p]))
+  const toggleKind = (k: CaptageKind) =>
+    setKindFacets((prev) => (prev.includes(k) ? prev.filter((x) => x !== k) : [...prev, k]))
 
   const communeOptions = isGestion ? communes() : [...new Set(BVAEPS.flatMap((b) => communesIntersectingBvaep(b.id)))].sort()
   const provinceOptions = provinces()
 
   const matchText = (t: string) => t.toLowerCase().includes(query.trim().toLowerCase())
 
-  const filteredCaptages = CAPTAGES.filter(
+  const filteredCaptages = UNITES_GESTIONES.filter(
     (c) =>
       (!query || matchText(`${c.name} ${c.commune} ${c.bvaep}`)) &&
+      (kindFacets.length === 0 || kindFacets.includes(c.kind)) &&
       (communeFacets.length === 0 || communeFacets.includes(c.commune)) &&
       (provinceFacets.length === 0 || provinceFacets.includes(c.province)),
   )
@@ -104,7 +108,7 @@ export function CaptageSelector({
     const label = PRESET_LABELS.find((p) => p.kind === kind)?.label ?? ''
     if (isGestion) {
       const prev = [...selectedUnites]
-      const scored = visibleCaptages.map((c: CaptageDef) => {
+      const scored = visibleCaptages.map((c: UniteGestionDef) => {
         const base = kind === 'plus-proches' || kind === 'plus-eloignes' ? c.dist : valueForUnite(indId, c.id)
         return { id: c.id, value: base }
       })
@@ -128,6 +132,7 @@ export function CaptageSelector({
   const facets: Array<{ label: string; clear: () => void }> = []
   communeFacets.forEach((c) => facets.push({ label: `Commune : ${c}`, clear: () => toggleCommune(c) }))
   provinceFacets.forEach((p) => facets.push({ label: `Province : ${p}`, clear: () => toggleProvince(p) }))
+  kindFacets.forEach((k) => facets.push({ label: `Type : ${KIND_SHORT[k]}`, clear: () => toggleKind(k) }))
   if (presetChip) facets.push({ label: presetChip.label, clear: () => { presetChip.restore(); setPresetChip(null) } })
 
   const sourceInd = activeIndicator ? catalogueById(activeIndicator) : undefined
@@ -232,6 +237,24 @@ export function CaptageSelector({
             ))}
           </select>
         </div>
+        {isGestion && (
+          <select
+            defaultValue=""
+            onChange={(e) => {
+              const v = e.target.value as CaptageKind
+              if (v) toggleKind(v)
+              e.target.value = ''
+            }}
+            className="rounded-md border border-neutral-300 bg-neutral-50 px-2 py-1 text-[11px] text-neutral-600"
+          >
+            <option value="">Type d'ouvrage ▾ (ajout)</option>
+            {CAPTAGE_KINDS.map((k) => (
+              <option key={k} value={k}>
+                {KIND_LABELS[k]}
+              </option>
+            ))}
+          </select>
+        )}
 
         {facets.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
@@ -296,9 +319,12 @@ export function CaptageSelector({
               const isSel = selectedUnites.has(c.id)
               return (
                 <li key={c.id} className={`flex items-center gap-2 rounded-md border px-2 py-1.5 ${isSel ? 'border-blue-300 bg-blue-50' : 'border-neutral-200 bg-white'}`}>
-                  <button onClick={() => onToggleUnite(c.id)} className="min-w-0 flex-1 text-left">
-                    <span className="block truncate text-xs font-medium text-neutral-800">{c.name}</span>
-                    <span className="block truncate text-[10px] text-neutral-400">{c.commune} · {c.dist} km</span>
+                  <button onClick={() => onToggleUnite(c.id)} className="flex min-w-0 flex-1 items-center gap-1.5 text-left">
+                    <KindMark kind={c.kind} color={isSel ? '#2563eb' : '#94a3b8'} size={9} className="shrink-0" />
+                    <span className="min-w-0">
+                      <span className="block truncate text-xs font-medium text-neutral-800">{c.name}</span>
+                      <span className="block truncate text-[10px] text-neutral-400">{c.commune} · {c.dist} km</span>
+                    </span>
                   </button>
                   <button onClick={() => onToggleUnite(c.id)} title="Retirer" aria-label={`Retirer ${c.name}`} className="text-neutral-300 hover:text-red-500">
                     <Icon>
@@ -347,45 +373,42 @@ export function CaptageSelector({
         )}
       </PanelSection>
 
-      <PanelSection title="Couches" icon={<Layers size={12} />}>
+      <PanelSection title="Couches & légende" icon={<Layers size={12} />}>
         {layers.map((l) => {
           const label = l.key === 'source' && sourceInd ? `Source · ${sourceInd.sourceLabel}` : l.label
           return (
-            <button
-              key={l.key}
-              onClick={() => onToggleLayer(l.key)}
-              className="flex w-full items-center gap-2 rounded px-1.5 py-1 text-left hover:bg-neutral-50"
-            >
-              <span className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: l.on ? LAYER_COLORS[l.key] ?? '#94a3b8' : '#d4d4d8' }} />
-              <span className={`flex-1 text-[11px] ${l.on ? 'text-neutral-700' : 'text-neutral-400'}`}>{label}</span>
-              {l.on ? <Eye size={11} className="text-neutral-300" /> : <EyeOff size={11} className="text-neutral-400" />}
-            </button>
+            <div key={l.key} className={l.on ? '' : 'opacity-60'}>
+              <button
+                onClick={() => onToggleLayer(l.key)}
+                className="flex w-full items-center gap-2 rounded px-1.5 py-1 text-left hover:bg-neutral-50"
+              >
+                <span className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: l.on ? LAYER_COLORS[l.key] ?? '#94a3b8' : '#d4d4d8' }} />
+                <span className={`flex-1 text-[11px] ${l.on ? 'text-neutral-700' : 'text-neutral-400'}`}>{label}</span>
+                {l.on ? <Eye size={11} className="text-neutral-300" /> : <EyeOff size={11} className="text-neutral-400" />}
+              </button>
+              {l.on && (
+                <div className="space-y-1 py-1 pl-7 text-[11px] text-neutral-500">
+                  {l.key === 'capt' && (
+                    <>
+                      {CAPTAGE_KINDS.map((k) => (
+                        <span key={k} className="flex items-center gap-1.5"><KindMark kind={k} color="#3b82f6" size={9} /> {KIND_LABELS[k]}</span>
+                      ))}
+                      {isGestion && selectedUnites.size > 0 && (
+                        <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-amber-500" /> Unité sélectionnée</span>
+                      )}
+                      {!isGestion && selectedBvaeps.size > 0 && (
+                        <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-blue-500" /> Unité du BV sélectionné</span>
+                      )}
+                    </>
+                  )}
+                  {l.key === 'source' && sourceInd && (
+                    <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-red-500/70" /> Couche source</span>
+                  )}
+                </div>
+              )}
+            </div>
           )
         })}
-      </PanelSection>
-
-      <PanelSection title="Légende" defaultOpen={false}>
-        {isGestion ? (
-          <div className="space-y-1 text-[11px] text-neutral-500">
-            <span className="flex items-center gap-1.5"><span className="h-0 w-0 border-y-4 border-l-4 border-y-transparent border-l-neutral-400" /> Bassin versant</span>
-            <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-blue-500" /> Unité de gestion</span>
-            <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-amber-500" /> Unité sélectionnée</span>
-            {selectedUnites.size > 0 && (
-              <span className="flex items-center gap-1.5"><span className="h-0 w-0 border-y-4 border-l-4 border-y-transparent border-l-amber-500" /> BV de l'unité sélectionnée</span>
-            )}
-          </div>
-        ) : (
-          <div className="space-y-1 text-[11px] text-neutral-500">
-            <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-emerald-500/70" /> BV (classe indicateur)</span>
-            <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full border-2 border-amber-500" /> BV sélectionné</span>
-            <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-blue-300" /> Unité de gestion</span>
-            <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-blue-500" /> Unité du BV sélectionné</span>
-          </div>
-        )}
-        {sourceInd && (
-          <span className="flex items-center gap-1.5 text-[11px] text-neutral-500"><span className="h-2 w-2 rounded-full bg-red-500/70" /> Couche source</span>
-        )}
-        <span className="flex items-center gap-1.5 text-[11px] text-neutral-500"><span className="h-2 w-2 rounded-full border border-dashed border-neutral-500" /> Périmètre de protection</span>
       </PanelSection>
     </aside>
   )

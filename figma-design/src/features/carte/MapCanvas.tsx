@@ -8,8 +8,9 @@ import type { default as VectorSource } from 'ol/source/Vector'
 import { createBasemapLayer } from './map/basemaps'
 import { buildVectorLayers } from './map/layers'
 import { QUALITE_COLORS, QUALITE_LABELS } from './map/theme'
+import { KIND_LABELS } from '@/data/ouvrages'
 import type { BasemapId, LayerDef } from './hooks/useLayers'
-import type { UnitMode } from '@/types/domain'
+import type { CaptageKind, UnitMode } from '@/types/domain'
 
 export interface MapCanvasProps {
   showGrid?: boolean
@@ -213,12 +214,14 @@ function tooltipFor(feature: Feature): HoverInfo {
     }
   }
   // capt
+  const kindLabel = KIND_LABELS[feature.get('kindType') as CaptageKind]
   return {
     kind: 'entity',
     nature: 'Unité de gestion',
     name: feature.get('name') as string,
     value: (feature.get('value') as string | null) ?? null,
     rows: [
+      ['Type', kindLabel ?? '—'],
       ['Commune', feature.get('commune') as string],
       ['Province', feature.get('province') as string],
       ['Distance', `${Number(feature.get('dist'))} km`],

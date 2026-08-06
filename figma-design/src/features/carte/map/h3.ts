@@ -8,7 +8,7 @@ import { h3Class, h3Value } from './theme'
 /** Résolution H3 (~0,74 km² ≈ 1 km²/hexagone). */
 export const H3_RES = 8
 
-interface HexSpec {
+export interface HexSpec {
   cell: string
   center: [number, number] // lon, lat
   ring: Array<[number, number]> // lon, lat (fermé)
@@ -47,4 +47,9 @@ export function buildH3Features(indId: string): Feature<Polygon>[] {
 
 export function h3CellCount(): number {
   return HEX_SPECS.length
+}
+
+/** Retourne les cellules H3 (centres et anneaux WGS84) — réutilisées hors carte (ex. analyse croisée). */
+export function getHexSpecs(): HexSpec[] {
+  return HEX_SPECS
 }
