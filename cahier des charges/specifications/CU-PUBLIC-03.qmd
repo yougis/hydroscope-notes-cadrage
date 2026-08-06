@@ -1,0 +1,45 @@
+---
+title: "CU-PUBLIC-03 — Appliquer un preset et lire le compteur d'unités"
+profile: "Intéressé public"
+uc: "CU-PUBLIC-03"
+us: "US6.9, US6.13"
+epic: "EPIC 6 — Visualisation"
+mvp: true
+amc: false
+---
+
+# Appliquer un preset « Top 10 » et lire le compteur d'unités sélectionnées
+
+**Phrase agile :** En tant qu'intéressé public, je veux appliquer un preset afin d'afficher
+rapidement les territoires les plus concernés, et connaître le périmètre courant sélectionné.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-PUBLIC-03` (US6.9, US6.13) — Profil 1 (public).
+- EPIC 6 ; sélecteur de captages/BV ; presets (plus/moins exposés, plus/moins proches).
+- Backlog : US6.13 (preset « Top 10 », retirable), US6.9 (compteur d'unités).
+
+## 2. Fonctionnalités couvertes
+
+- Application d'un **preset « Top 10 »** (plus/moins exposés, plus/moins proches).
+- Possibilité de **retirer** le preset.
+- Affichage du **compteur d'unités sélectionnées** (périmètre courant).
+
+## 3. Parcours IHM
+
+1. Dans le sélecteur, choisir un preset « Top 10 ».
+2. La sélection se met à jour (liste + carte).
+3. Lire le compteur d'unités sélectionnées.
+4. Retirer le preset pour revenir à la sélection manuelle.
+
+## 4. Rendu visuel obtenu
+
+- Option/CTA « Top 10 » dans le sélecteur (plus/moins exposés, plus/moins proches).
+- Compteur d'unités sélectionnées (badge/chiffre).
+- Puces de facettes actives reflétant le preset.
+- Captures : _(à insérer depuis le prototype — Sélecteur de captages / BV)_.
+
+## 5. Points de vigilance
+
+- Le preset « plus/moins exposés » repose sur un critère d'exposition qui doit être
+  explicite ; ne pas le confondre avec un score de criticité AMC (document isolé).

@@ -1,0 +1,46 @@
+---
+title: "CU-PUBLIC-01 — Visualiser les données sur carte"
+profile: "Intéressé public"
+uc: "CU-PUBLIC-01"
+us: "US6.1, US6.2, US6.3, US6.20"
+epic: "EPIC 6 — Visualisation"
+mvp: true
+amc: false
+---
+
+# Visualiser les données sur carte
+
+**Phrase agile :** En tant qu'intéressé public, je veux visualiser les données sur carte
+et afficher les indicateurs afin de situer les territoires concernés et en lire la répartition géographique.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-PUBLIC-01` (US6.1, US6.2, US6.3, US6.20) — `profils_utilisateurs.qmd` (Profil 1, public).
+- EPIC 6 ; `src/features/portail/PublicPage.tsx`, `MapCanvas.tsx`.
+- Navigation : interface publique, accès sans connexion (spec UX §3.7).
+
+## 2. Fonctionnalités couvertes
+
+- Visualisation des données sur carte (situation des territoires).
+- Affichage des indicateurs sur la carte (répartition géographique).
+- Navigation libre : zoom, déplacement, filtres.
+- Choix du **fond de carte** (Carto / Satellite / Terrain) via sélecteur posé sur la carte.
+
+## 3. Parcours IHM
+
+1. Ouverture de l'interface publique.
+2. Lecture de la carte avec les unités de gestion et indicateurs.
+3. Navigation (zoom/pan) et filtrage.
+4. Changement du fond de carte (sélecteur sur la carte).
+
+## 4. Rendu visuel obtenu
+
+- Carte `MapCanvas` (SVG/OpenLayers) : basemaps Carto/Satellite/Terrain.
+- Couches : BV/captages/PPE/risque ; indicateurs en couleur (`QUALITE_COLORS`).
+- Infobulle au survol ; sélecteur de fond de carte posé sur la carte.
+- Captures : _(à insérer depuis le prototype — PublicPage.tsx / vue carte)_.
+
+## 5. Points de vigilance
+
+- Lisibilité sur fond de carte variable (contraste des couches).
+- Restitution grand public : même jeu de données que l'espace expert (help/04).

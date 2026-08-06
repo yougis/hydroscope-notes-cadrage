@@ -1,0 +1,49 @@
+---
+title: "CU-PUBLIC-02 — Rechercher et filtrer les unités (facettes)"
+profile: "Intéressé public"
+uc: "CU-PUBLIC-02"
+us: "US6.10, US6.11, US6.12, US6.14, US6.15, US6.17"
+epic: "EPIC 6 — Visualisation"
+mvp: true
+amc: false
+---
+
+# Rechercher et filtrer les unités (facettes cumulables)
+
+**Phrase agile :** En tant qu'intéressé public, je veux rechercher avec des suggestions et
+cumuler plusieurs facettes de recherche afin d'affiner ma sélection de captages ou de communes.
+
+## 1. Contexte & référence
+
+- Cas d'usage : `CU-PUBLIC-02` (US6.10, 6.11, 6.12, 6.14, 6.15, 6.17) — Profil 1 (public).
+- EPIC 6 ; sélecteur de captages/BV (SOLR/CKAN) ; composants `SearchInput`, `FacetChip`.
+- Navigation : carte publique + volet « Sélecteur de captages / BV ».
+
+## 2. Fonctionnalités couvertes
+
+- Recherche avec **suggestions** (commune, province, captage, presets).
+- Cumul de **plusieurs facettes** de recherche (sélection multiple).
+- Affichage des facettes actives en **puces décochables** (filtres appliqués).
+- Décocher une facette pour retirer un filtre en un clic.
+- Sélection/désélection/retrait d'une **unité individuellement**.
+- **Tri** de la liste (distance / nom).
+
+## 3. Parcours IHM
+
+1. Dans le volet de sélection, saisir dans la recherche → suggestions.
+2. Sélectionner plusieurs entrées (facettes cumulées).
+3. Lire les facettes actives en puces ; décocher pour retirer.
+4. Trier la liste (distance/nom) ; retirer une unité individuellement.
+
+## 4. Rendu visuel obtenu
+
+- Champ de recherche avec liste de suggestions (`SearchInput`).
+- Puces de facettes actives décochables (`FacetChip` avec icône de fermeture).
+- Bouton de tri (distance/nom) du sélecteur.
+- Compteur d'unités sélectionnées (voir CU-PUBLIC-03).
+- Captures : _(à insérer depuis le prototype — Sélecteur de captages / BV)_.
+
+## 5. Points de vigilance
+
+- Cohérence entre facettes actives et carte affichée.
+- Le tri « distance » suppose une position de référence (help/06).

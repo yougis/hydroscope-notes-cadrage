@@ -1,0 +1,68 @@
+---
+title: "AMC — Méthodologie du score de criticité (arbitrage)"
+profile: "Document support (AMC, isolé)"
+uc: "AMC_methodologie"
+us: "US5.x (méthode)"
+epic: "EPIC 5 — Analyse multicritère"
+mvp: false
+amc: true
+---
+
+# Méthodologie du score de criticité — arbitrages ouverts
+
+> **⚠️ Document AMC — isolé.** Ce document pose les **arbitrages méthodologiques**
+> (pondérations, seuils, agrégation) encore ouverts. Hors MVP. Il doit être validé
+> (comité scientifique / DAVAR) avant toute mise en service.
+
+## 1. Objectif
+
+Fournir une base **transparente et réversible** pour la construction du score de criticité
+d'un territoire, afin que le résultat soit explicable et justifiable (exigence §3.2 :
+transparence des calculs, pas de « boîte noire »).
+
+## 2. Principes directeurs
+
+- **Aide à l'interprétation**, pas aide à la décision automatisée.
+- **Réversibilité** : on doit pouvoir remonter du score aux données sources.
+- Indicateurs pré-contrôlés : seuls les indicateurs qualifiés (fiabilité suffisante,
+  ~80 % de complétude) sont éligibles (filtre « Analyse_multicriteres = oui »).
+- Échelle de comparaison : une **unité de gestion** (captage/BV) ou une commune.
+
+## 3. Choix ouverts (à arbitrer)
+
+### 3.1 Liste des indicateurs éligibles
+- Quels indicateurs entrent dans le score ? (famille → thème → indicateurs)
+- Le filtrage « Analyse_multicriteres = oui » doit être documenté.
+
+### 3.2 Pondération
+- Pondérations **égales** vs **pondérées** (facteurs dominants, ex. pression urbaine).
+- Qui arbitre : comité scientifique vs DAVAR.
+
+### 3.3 Règles d'agrégation
+- Agrégation arithmétique simple vs méthode plus robuste (ex. pondérée / min-max).
+- Attention à l'**agrégation abusive** (écraser les différences entre indicateurs).
+
+### 3.4 Seuils
+- Seuils de criticité (classes du score) et seuils de contribution.
+- Alignement sur les seuils réglementaires le cas échéant.
+
+### 3.5 Gestion des données manquantes
+- Comportement si un indicateur n'est pas disponible (complétude < seuil).
+
+## 4. Cadre de restitution
+
+- Score + contributions restitués ensemble (`AMC_rendu_score.qmd`).
+- La méthode est affichée **à côté** du score (jamais de score « muet »).
+- La fiche descriptive (`CU-EXPERT-04`) reste **sans** score/scoring (EPIC 7).
+
+## 5. Points de vigilance
+
+- **Prudence méthodologique** (§3.2) : éviter l'effet « boîte noire ».
+- **Réversibilité** et transparence exigées (reproductibilité).
+- Validation des pondérations/seuils avant mise en production (recette, `10_recette_validation.qmd`).
+
+## 6. Sources
+
+- Réunion Read-AI « Brainstorming analyse multicritère » (transcript sauvegardé).
+- `5_perimetre_fonctionnel.qmd` (EPIC 5).
+- `dependances_us.qmd` (chaîne AMC).

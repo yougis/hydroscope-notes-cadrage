@@ -1,0 +1,57 @@
+---
+title: "AMC — Rendu du score et contributions (restauration)"
+profile: "Document support (AMC, isolé)"
+uc: "AMC_rendu_score"
+us: "US7.6 (rendu score), contributions"
+epic: "EPIC 5 — Analyse multicritère"
+mvp: false
+amc: true
+---
+
+# Rendu du score de criticité et contributions
+
+> **⚠️ Document AMC — isolé.** Ce document rassemble la **restitution** du score de
+> criticité et de ses contributions. Il est conservé séparé des fiches descriptives
+> (EPIC 7 interdit classement/scoring dans la fiche descriptive). Hors MVP.
+
+## 1. Rappel du principe
+
+L'AMC produit un **score de criticité** par territoire, complété par la **contribution**
+de chaque indicateur au score. C'est un outil d'**aide à l'interprétation**, pas une
+aide à la décision automatisée : le score éclaire, l'acteur décide.
+
+## 2. Rendu attendu
+
+### 2.1 Score de criticité
+- Chiffre + libellé par territoire/unité de gestion.
+- Toujours restitué **avec la méthode** (transparence, `AMC_methodologie.qmd`).
+
+### 2.2 Contributions
+- Tableau triable des indicateurs par **contribution** au score.
+- Hiérarchie de lecture : famille → thème → indicateurs.
+- Met en évidence les facteurs dominants (ex. pression urbaine) à la lecture.
+
+## 3. Ordre des onglets (réunion AMC, Read-AI)
+
+- L'onglet « Score » est restitué dans un ordre défini (à stabiliser en recette).
+- Le score et les contributions sont affichés de concert (pas de score « muet »).
+
+## 4. Parcours IHM
+
+1. Accès restreint (droit + connexion requis, spec UX §3.7).
+2. Ouvrir un territoire → onglet « Score de criticité ».
+3. Lecture du score + contributions.
+4. Bascule vers la fiche descriptive (`CU-EXPERT-04`) et la méthode (`AMC_methodologie`).
+
+## 5. Rendu visuel obtenu
+
+- Score de criticité (chiffre + libellé) avec **contribution** des indicateurs.
+- Tableau triable par contribution (famille → thème).
+- Lien explicite vers la méthode documentée.
+- Captures : _(à insérer depuis le prototype — interface AMC / Score)_.
+
+## 6. Points de vigilance
+
+- Restituer systématiquement la méthode à côté du score (prudence §3.2).
+- Pas de classement définitif diffusé hors méthode validée.
+- La restitution publique est **exclue** du scoring AMC.
