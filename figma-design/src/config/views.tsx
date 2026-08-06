@@ -8,6 +8,7 @@ export const VIEWS: ViewDef[] = [
   { id: 'tableau', label: 'Tableau de bord', group: 'Exploration', expertOnly: false, desc: 'Vue d’ensemble par territoire : chiffres clés, évolution dans le temps, comparaison de périodes, tendances et alertes.', epic: 'EPIC 6', mvp: true },
   { id: 'fiches', label: 'Fiches des territoires', group: 'Exploration', expertOnly: false, desc: 'Fiches structurées par unité (commune, bassin versant, point de captage, périmètre de protection) et fiches indicateurs, avec rapports exportables.', epic: 'EPIC 7', mvp: true },
   { id: 'comparaison', label: 'Comparer les territoires', group: 'Exploration', expertOnly: true, desc: 'Comparaison de plusieurs territoires ou unités, visualisation simultanée et filtres cohérents entre les vues.', epic: 'EPIC 6', mvp: false },
+  { id: 'croisement', label: 'Analyser les indicateurs croisés', group: 'Exploration', expertOnly: true, desc: 'Agrégation de 1 à 3 indicateurs par mélange de couleurs en triangle (R, G, B) sur une grille H3 — aide à l’interprétation, sans classement.', epic: 'EPIC 6 · enrichissement', mvp: false },
   { id: 'indicateurs', label: 'Indicateurs', group: 'Données', expertOnly: false, desc: 'Liste des indicateurs (~40) : unité, échelle d’interprétation, méthode de calcul, seuils et sources.', epic: 'EPIC 1bis / 4', mvp: true },
   { id: 'catalogue', label: 'Données disponibles', group: 'Données', expertOnly: true, desc: 'Inventaire des jeux de données sources et dérivés, métadonnées, lien source → transformation → indicateur.', epic: 'EPIC 1bis', mvp: true },
   { id: 'import', label: 'Ajout de données', group: 'Données', expertOnly: true, desc: 'Intégration par fichiers (CSV, SIG) ou API, planification, normalisation, gestion des erreurs et rejeu de traitements.', epic: 'EPIC 1', mvp: true },
@@ -60,6 +61,13 @@ export const VIEW_ICONS: Record<string, ReactElement> = {
       <path d="M14 15H9v-5" />
       <path d="M16 3h5v5" />
       <path d="M21 3l-7 7" />
+    </Icon>
+  ),
+  croisement: (
+    <Icon>
+      <path d="M12 3 3 19h18L12 3z" />
+      <path d="M12 10v4" />
+      <path d="M12 17h.01" />
     </Icon>
   ),
   indicateurs: (

@@ -8,6 +8,7 @@ import { Footer } from '@/components/layout/Footer'
 import { CarteView } from '@/features/carte'
 import { IndicateurPage, IndicateursView } from '@/features/indicateurs'
 import { DashboardPage, PublicInterface } from '@/features/portail'
+import { CroisementView } from '@/features/croisement'
 import { HelpPage, helpAnchorFor } from '@/features/help'
 import { STUBS } from '@/features/stubs'
 import { downloadFile, exportContextAsCsv, exportContextAsGeoJson, exportContextAsGeoPackage } from '@/features/export'
@@ -137,6 +138,8 @@ export default function App() {
     content = <IndicateursView focusId={focusIndicator} onOpenFiche={(id) => setActive(id)} />
   } else if (active === 'tableau') {
     content = <DashboardPage onOpenPublic={() => setShowPublic(true)} />
+  } else if (active === 'croisement') {
+    content = <CroisementView />
   } else {
     const S = STUBS[active]
     content = <S />
