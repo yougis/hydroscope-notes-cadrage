@@ -465,7 +465,8 @@ Les principales sources de données mobilisées sont les suivantes :
 :::
 
 Ces données sont produites et mises à disposition par différents acteurs
-(communes, provinces, services du Gouvernement, partenaires techniques).
+(communes, provinces, services du Gouvernement, partenaires techniques,
+entreprises privées).
 
 Elles présentent des niveaux hétérogènes de qualité, de structuration et
 de fréquence de mise à jour, ce qui nécessite des traitements
@@ -2000,17 +2001,17 @@ Il permettra de :
 Il ne s'agit pas d'un document figé, mais d'un référentiel de base qui
 est évolutif.
 
-  ---------------------------------------------------------------------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------
   EPIC            ID User     Libellé User Story MVP   Front_or_Back   Module           Dépend de   Type            Profil           Phrase méthode agile
                   Story                                                                 (Parent)    fonctionnel     utilisateur      
-  --------------- ----------- ------------------ ----- --------------- ---------------- ----------- --------------- ---------------- ----------------------
+  --------------- ----------- ------------------ ----- --------------- ---------------- ----------- --------------- ---------------- -----------------------
   EPIC 1 --       US1.1       Importer des       O     Front-end       Gestion des      nan         Acquisition     Administrateur   En tant
   Gestion des                 données via                              données &                                    expert data      qu'administrateur
   données                     fichier                                  catalogue                                                     expert data, je veux
                                                                                                                                      importer des données
-                                                                                                                                     via fichier afin que
-                                                                                                                                     la plateforme dispose
-                                                                                                                                     de données fiables et
+                                                                                                                                     via fichier afin que la
+                                                                                                                                     plateforme dispose de
+                                                                                                                                     données fiables et
                                                                                                                                      homogènes.
 
   EPIC 1 --       US1.2       Connecter une API  X     Front-end       Gestion des      nan         Acquisition     Administrateur   En tant
@@ -2066,17 +2067,17 @@ est évolutif.
   EPIC 10 --      US10.1      Tracer imports     O     Backend         Suivi qualité &  nan         Gouvernance     Administrateur   En tant
   Traçabilité                                                          traçabilité                                  expert data      qu'administrateur
                                                                                                                                      expert data, je veux
-                                                                                                                                     tracer les imports
-                                                                                                                                     afin de savoir quelles
+                                                                                                                                     tracer les imports afin
+                                                                                                                                     de savoir quelles
                                                                                                                                      données ont été
                                                                                                                                      chargées.
 
   EPIC 10 --      US10.2      Tracer calculs     O     Backend         Suivi qualité &  US4.1       Gouvernance     Administrateur   En tant
   Traçabilité                                                          traçabilité                                  expert data      qu'administrateur
                                                                                                                                      expert data, je veux
-                                                                                                                                     tracer les calculs
-                                                                                                                                     afin de reconstituer
-                                                                                                                                     leur exécution.
+                                                                                                                                     tracer les calculs afin
+                                                                                                                                     de reconstituer leur
+                                                                                                                                     exécution.
 
   EPIC 10 --      US10.3      Journal actions    X     Front-end       Suivi qualité &  nan         Gouvernance     Administrateur   En tant
   Traçabilité                                                          traçabilité                                  plateforme       qu'administrateur
@@ -2133,20 +2134,18 @@ est évolutif.
   Catalogage des              données à un                             données &                                    expert data      qu'administrateur
   données                     traitement (ex :                         catalogue                                                     expert data, je veux
                               dbt)                                                                                                   relier un jeu de
-                                                                                                                                     données à un
-                                                                                                                                     traitement afin d'en
-                                                                                                                                     retracer
+                                                                                                                                     données à un traitement
+                                                                                                                                     afin d'en retracer
                                                                                                                                      l'élaboration.
 
   EPIC 1bis --    US1bis.12   Enregistrer un     O     Front-end       Gestion des      US3.5       Structuration   Administrateur   En tant
   Catalogage des              indicateur comme                         données &                                    expert data      qu'administrateur
   données                     donnée dérivée                           catalogue                                                     expert data, je veux
                                                                                                                                      enregistrer un
-                                                                                                                                     indicateur comme
-                                                                                                                                     donnée dérivée afin
-                                                                                                                                     qu'il soit identifié
-                                                                                                                                     comme tel dans le
-                                                                                                                                     catalogue.
+                                                                                                                                     indicateur comme donnée
+                                                                                                                                     dérivée afin qu'il soit
+                                                                                                                                     identifié comme tel
+                                                                                                                                     dans le catalogue.
 
   EPIC 1bis --    US1bis.13   Consulter les      X     Front-end       Gestion des      nan         Structuration   Administrateur   En tant
   Catalogage des              métadonnées d'un                         données &                                    expert data      qu'administrateur
@@ -2180,10 +2179,10 @@ est évolutif.
   Catalogage des              métadonnées à un                         données &                                    expert data      qu'administrateur
   données                     jeu de données                           catalogue                                                     expert data, je veux
                                                                                                                                      associer des
-                                                                                                                                     métadonnées à un jeu
-                                                                                                                                     de données afin d'en
-                                                                                                                                     documenter l'origine
-                                                                                                                                     et la structure.
+                                                                                                                                     métadonnées à un jeu de
+                                                                                                                                     données afin d'en
+                                                                                                                                     documenter l'origine et
+                                                                                                                                     la structure.
 
   EPIC 1bis --    US1bis.3    Modifier les       X     Front-end       Gestion des      US1bis.2    Structuration   Administrateur   En tant
   Catalogage des              métadonnées d'un                         données &                                    expert data      qu'administrateur
@@ -2199,8 +2198,8 @@ est évolutif.
                                                                                                                                      consulter les
                                                                                                                                      informations d'un jeu
                                                                                                                                      de données afin d'en
-                                                                                                                                     connaître le contenu
-                                                                                                                                     et la source.
+                                                                                                                                     connaître le contenu et
+                                                                                                                                     la source.
 
   EPIC 1bis --    US1bis.5    Rechercher un jeu  X     Front-end       Gestion des      nan         Structuration   Administrateur   En tant
   Catalogage des              de données dans le                       données &                                    expert data      qu'administrateur
@@ -2216,8 +2215,8 @@ est évolutif.
                                                                                                                                      filtrer les jeux de
                                                                                                                                      données selon des
                                                                                                                                      critères afin de
-                                                                                                                                     restreindre la liste
-                                                                                                                                     du catalogue.
+                                                                                                                                     restreindre la liste du
+                                                                                                                                     catalogue.
 
   EPIC 1bis --    US1bis.7    Visualiser les     O     Front-end       Gestion des      nan         Structuration   Administrateur   En tant
   Catalogage des              relations entre                          données &                                    expert data      qu'administrateur
@@ -2243,10 +2242,9 @@ est évolutif.
   Catalogage des              donnée comme                             données &                                    expert data      qu'administrateur
   données                     source ou dérivée                        catalogue                                                     expert data, je veux
                                                                                                                                      identifier une donnée
-                                                                                                                                     comme source ou
-                                                                                                                                     dérivée afin de
-                                                                                                                                     clarifier sa place
-                                                                                                                                     dans la chaîne.
+                                                                                                                                     comme source ou dérivée
+                                                                                                                                     afin de clarifier sa
+                                                                                                                                     place dans la chaîne.
 
   EPIC 2 --       US2.1       Détecter des       O     Backend         Suivi qualité &  nan         Qualification   Administrateur   En tant
   Qualité des                 valeurs aberrantes                       traçabilité                                  expert data      qu'administrateur
@@ -2316,23 +2314,23 @@ est évolutif.
   EPIC 3 --       US3.2       Gérer les captages O     Front-end       Administration & nan         Structuration   Administrateur   En tant
   Référentiels                                                         profils                                      expert data      qu'administrateur
                                                                                                                                      expert data, je veux
-                                                                                                                                     gérer les captages
-                                                                                                                                     afin de maintenir le
+                                                                                                                                     gérer les captages afin
+                                                                                                                                     de maintenir le
                                                                                                                                      référentiel à jour.
 
   EPIC 3 --       US3.3       Gérer périmètres   X     Front-end       Administration & nan         Structuration   Administrateur   En tant
   Référentiels                de protection                            profils                                      expert data      qu'administrateur
                                                                                                                                      expert data, je veux
-                                                                                                                                     gérer les périmètres
-                                                                                                                                     de protection afin de
-                                                                                                                                     les représenter sur la
+                                                                                                                                     gérer les périmètres de
+                                                                                                                                     protection afin de les
+                                                                                                                                     représenter sur la
                                                                                                                                      carte.
 
   EPIC 3 --       US3.4       Gérer la maille H3 O     Front-end       Administration & nan         Structuration   Administrateur   En tant
   Référentiels                                                         profils                                      expert data      qu'administrateur
                                                                                                                                      expert data, je veux
-                                                                                                                                     gérer la maille H3
-                                                                                                                                     afin de garantir la
+                                                                                                                                     gérer la maille H3 afin
+                                                                                                                                     de garantir la
                                                                                                                                      cohérence des
                                                                                                                                      agrégations.
 
@@ -2390,8 +2388,8 @@ est évolutif.
   d'indicateurs                                                        catalogue                                                     expert data, je veux
                                                                                                                                      paramétrer un calcul
                                                                                                                                      afin d'ajuster les
-                                                                                                                                     règles de production
-                                                                                                                                     de l'indicateur.
+                                                                                                                                     règles de production de
+                                                                                                                                     l'indicateur.
 
   EPIC 4 --       US4.5       Filtrer les        O     Front-end       Gestion des      nan         Exploitation    Administrateur   En tant
   Calcul                      données                                  données &                                    expert data      qu'administrateur
@@ -2443,10 +2441,9 @@ est évolutif.
   multicritère                                                                                                                       veux tester des
                                                                                                                                      scénarios de
                                                                                                                                      pondération afin
-                                                                                                                                     d'analyser l'impact
-                                                                                                                                     des différents
-                                                                                                                                     facteurs sur le
-                                                                                                                                     classement de
+                                                                                                                                     d'analyser l'impact des
+                                                                                                                                     différents facteurs sur
+                                                                                                                                     le classement de
                                                                                                                                      criticité.
 
   EPIC 5 --       US5.4       Comparer scénarios X     Front-end       Suivi & veille   US5.1 ;     Exploitation    Expert métier    En tant qu'expert
@@ -2465,16 +2462,15 @@ est évolutif.
                                                                                                                                      contribution de chaque
                                                                                                                                      indicateur au score de
                                                                                                                                      criticité afin de
-                                                                                                                                     comprendre les
-                                                                                                                                     facteurs de risque
-                                                                                                                                     dominants.
+                                                                                                                                     comprendre les facteurs
+                                                                                                                                     de risque dominants.
 
   EPIC 5 --       US5.6       Documenter         X     Backend         Suivi & veille   nan         Exploitation    Administrateur   En tant
   Analyse                     méthodes                                                                              expert data      qu'administrateur
   multicritère                                                                                                                       expert data, je veux
-                                                                                                                                     documenter les
-                                                                                                                                     méthodes de calcul
-                                                                                                                                     afin d'assurer la
+                                                                                                                                     documenter les méthodes
+                                                                                                                                     de calcul afin
+                                                                                                                                     d'assurer la
                                                                                                                                      transparence de l'aide
                                                                                                                                      à la décision.
 
@@ -2490,22 +2486,20 @@ est évolutif.
                               (commune,                                Sélecteur de                                                  rechercher avec des
                               province, captage,                       captages / BV                                                 suggestions afin de
                               presets)                                                                                               trouver rapidement un
-                                                                                                                                     captage ou une
-                                                                                                                                     commune.
+                                                                                                                                     captage ou une commune.
 
   EPIC 6 --       US6.11      Cumuler plusieurs  O     Front-end       Cartographie &   nan         Restitution --  Intéressé public En tant qu'intéressé
-  Visualisation               facettes de                              exploration \>               Diffusion                        public, je veux
-                              recherche                                Sélecteur de                                                  cumuler plusieurs
-                              (sélection                               captages / BV                                                 facettes de recherche
-                              multiple)                                                                                              afin d'affiner ma
-                                                                                                                                     sélection.
+  Visualisation               facettes de                              exploration \>               Diffusion                        public, je veux cumuler
+                              recherche                                Sélecteur de                                                  plusieurs facettes de
+                              (sélection                               captages / BV                                                 recherche afin
+                              multiple)                                                                                              d'affiner ma sélection.
 
   EPIC 6 --       US6.12      Afficher les       O     Front-end       Cartographie &   nan         Restitution --  Intéressé public En tant qu'intéressé
   Visualisation               facettes actives                         exploration \>               Diffusion                        public, je veux voir
-                              en puces                                 Outils                                                        les facettes actives
-                              décochables                              d'exploration                                                 en puces afin de
-                              (SOLR/CKAN)                                                                                            savoir quels filtres
-                                                                                                                                     sont appliqués.
+                              en puces                                 Outils                                                        les facettes actives en
+                              décochables                              d'exploration                                                 puces afin de savoir
+                              (SOLR/CKAN)                                                                                            quels filtres sont
+                                                                                                                                     appliqués.
 
   EPIC 6 --       US6.13      Appliquer un       O     Front-end       Cartographie &   nan         Restitution --  Intéressé public En tant qu'intéressé
   Visualisation               preset « Top 10 »                        exploration \>               Diffusion                        public, je veux
@@ -2523,8 +2517,8 @@ est évolutif.
 
   EPIC 6 --       US6.15      Sélectionner /     O     Front-end       Cartographie &   nan         Restitution --  Intéressé public En tant qu'intéressé
   Visualisation               désélectionner /                         exploration \>               Diffusion                        public, je veux
-                              retirer une unité                        Sélecteur de                                                  sélectionner ou
-                              individuellement                         captages / BV                                                 retirer une unité
+                              retirer une unité                        Sélecteur de                                                  sélectionner ou retirer
+                              individuellement                         captages / BV                                                 une unité
                                                                                                                                      individuellement afin
                                                                                                                                      de personnaliser ma
                                                                                                                                      sélection.
@@ -2536,15 +2530,13 @@ est évolutif.
                               Bassins versants                                                                                       indépendamment les
                                                                                                                                      sélections captages et
                                                                                                                                      bassins versants afin
-                                                                                                                                     de ne pas les
-                                                                                                                                     mélanger.
+                                                                                                                                     de ne pas les mélanger.
 
   EPIC 6 --       US6.17      Trier la liste     O     Front-end       Cartographie &   nan         Restitution --  Intéressé public En tant qu'intéressé
   Visualisation               (distance / nom)                         exploration \>               Diffusion                        public, je veux trier
                                                                        Sélecteur de                                                  la liste par distance
                                                                        captages / BV                                                 ou par nom afin
-                                                                                                                                     d'organiser ma
-                                                                                                                                     lecture.
+                                                                                                                                     d'organiser ma lecture.
 
   EPIC 6 --       US6.18      Calculer les       O     Backend         Cartographie &   US3.1 ;     Restitution --  Administrateur   En tant
   Visualisation               communes                                 exploration \>   US3.2       Diffusion       expert data      qu'administrateur
@@ -2568,16 +2560,16 @@ est évolutif.
   Visualisation               indicateurs carto                        exploration \>               Diffusion                        public, je veux
                                                                        Cartographie                                                  afficher les
                                                                                                                                      indicateurs sur la
-                                                                                                                                     carte afin d'en lire
-                                                                                                                                     la répartition
+                                                                                                                                     carte afin d'en lire la
+                                                                                                                                     répartition
                                                                                                                                      géographique.
 
   EPIC 6 --       US6.20      Choisir le fond de O     Front-end       Cartographie &   nan         Restitution --  Intéressé public En tant qu'intéressé
-  Visualisation               carte (Carto /                           exploration \>               Diffusion                        public, je veux
-                              Satellite /                              Cartographie                                                  choisir le fond de
-                              Terrain) via un                                                                                        carte afin d'adapter
-                              sélecteur posé sur                                                                                     ma lecture au
-                              la carte                                                                                               contexte.
+  Visualisation               carte (Carto /                           exploration \>               Diffusion                        public, je veux choisir
+                              Satellite /                              Cartographie                                                  le fond de carte afin
+                              Terrain) via un                                                                                        d'adapter ma lecture au
+                              sélecteur posé sur                                                                                     contexte.
+                              la carte                                                                                               
 
   EPIC 6 --       US6.21      Afficher / masquer O     Front-end       Cartographie &   nan         Restitution --  Administrateur   En tant
   Visualisation               chaque couche (BV,                       exploration \>               Diffusion       expert data      qu'administrateur
@@ -2591,10 +2583,10 @@ est évolutif.
   EPIC 6 --       US6.22      Rechercher un      O     Front-end       Cartographie &   nan         Restitution --  Intéressé public En tant qu'intéressé
   Visualisation               indicateur dans un                       exploration \>               Diffusion                        public, je veux
                               dropdown groupé                          Catalogue                                                     rechercher un
-                              Famille → Thème →                        d'indicateurs                                                 indicateur par
-                              Groupe                                                                                                 famille, thème et
-                                                                                                                                     groupe afin de le
-                                                                                                                                     retrouver rapidement.
+                              Famille → Thème →                        d'indicateurs                                                 indicateur par famille,
+                              Groupe                                                                                                 thème et groupe afin de
+                                                                                                                                     le retrouver
+                                                                                                                                     rapidement.
 
   EPIC 6 --       US6.23      Consulter la fiche O     Front-end       Cartographie &   nan         Restitution --  Administrateur   En tant
   Visualisation               métadonnées depuis                       exploration \>               Diffusion       expert data      qu'administrateur
@@ -2602,20 +2594,15 @@ est évolutif.
                               l'indicateur (pas                        d'indicateurs                                                 consulter la fiche
                               depuis les                                                                                             métadonnées d'un
                               graphiques)                                                                                            indicateur afin d'en
-                                                                                                                                     vérifier la
-                                                                                                                                     définition.
+                                                                                                                                     vérifier la définition.
 
   EPIC 6 --       US6.24      Basculer chaque    O     Front-end       Cartographie &   nan         Restitution --  Expert métier    En tant qu'expert
   Visualisation               graphique entre                          exploration \>               Diffusion       eau potable      métier eau potable, je
-                              les vues                                 Visualisation &                                               veux basculer entre
-                              Répartition /                            dataviz                                                       les vues graphiques
-                              Temporel /                                                                                             afin d'analyser la
-                              Changements /                                                                                          répartition spatiale
-                              Carte, vue                                                                                             et l'évolution
-                              temporelle                                                                                             temporelle.
-                              désactivée si                                                                                          
-                              données non                                                                                            
-                              historisées                                                                                            
+                              les vues graphique                       Visualisation &                                               veux basculer entre les
+                              / Temporel /                             dataviz                                                       vues graphiques afin
+                              Changements / H3                                                                                       d'analyser la
+                                                                                                                                     répartition spatiale et
+                                                                                                                                     l'évolution temporelle.
 
   EPIC 6 --       US6.25      Voir toute la      O     Front-end       Cartographie &   nan         Restitution --  Intéressé public En tant qu'intéressé
   Visualisation               liste des                                exploration \>               Diffusion                        public, je veux voir
@@ -2628,10 +2615,9 @@ est évolutif.
   Visualisation               les indicateurs du                       exploration \>               Diffusion       expert data      qu'administrateur
                               volet droit par                          Catalogue                                                     expert data, je veux
                               famille (tabs),                          d'indicateurs                                                 présélectionner les
-                              thèmes (pills) et                                                                                      indicateurs par
-                              groupe (dropdown)                                                                                      famille afin
-                                                                                                                                     d'orienter l'usage du
-                                                                                                                                     volet droit.
+                              thèmes (pills) et                                                                                      indicateurs par famille
+                              groupe (dropdown)                                                                                      afin d'orienter l'usage
+                                                                                                                                     du volet droit.
 
   EPIC 6 --       US6.3       Navigation (zoom   O     Front-end       Cartographie &   nan         Restitution --  Intéressé public En tant qu'intéressé
   Visualisation               filtres)                                 exploration \>               Diffusion                        public, je veux
@@ -2646,8 +2632,8 @@ est évolutif.
                                                                        dataviz                                                       l'évolution temporelle
                                                                                                                                      des indicateurs afin
                                                                                                                                      d'identifier les
-                                                                                                                                     dynamiques impactant
-                                                                                                                                     la ressource.
+                                                                                                                                     dynamiques impactant la
+                                                                                                                                     ressource.
 
   EPIC 6 --       US6.5       Comparer           X     Front-end       Cartographie &   nan         Restitution --  Décideur métier  En tant que décideur
   Visualisation               territoires                              exploration \>               Diffusion                        métier, je veux
@@ -2660,16 +2646,15 @@ est évolutif.
   Visualisation               avancé                                   exploration \>               Diffusion                        métier, je veux
                                                                        Visualisation &                                               disposer d'un tableau
                                                                        dataviz                                                       de bord avancé afin
-                                                                                                                                     d'avoir une vue
-                                                                                                                                     agrégée de
-                                                                                                                                     l'information.
+                                                                                                                                     d'avoir une vue agrégée
+                                                                                                                                     de l'information.
 
   EPIC 6 --       US6.7       Fiche territoire   O     Front-end       Cartographie &   nan         Restitution --  Décideur métier  En tant que décideur
   Visualisation                                                        exploration \>               Diffusion                        métier, je veux
                                                                        Fiches &                                                      consulter une fiche
-                                                                       synthèse                                                      territoire afin
-                                                                       territoriale                                                  d'avoir une synthèse
-                                                                                                                                     d'un bassin versant.
+                                                                       synthèse                                                      territoire afin d'avoir
+                                                                       territoriale                                                  une synthèse d'un
+                                                                                                                                     bassin versant.
 
   EPIC 6 --       US6.8       Basculer l'échelle O     Front-end       Cartographie &   US3.1 ;     Restitution --  Administrateur   En tant
   Visualisation               d'analyse Captages                       exploration \>   US3.2       Diffusion       expert data      qu'administrateur
@@ -2689,12 +2674,11 @@ est évolutif.
                                                                                                                                      périmètre courant.
 
   EPIC 7 -- Aide  US7.1       Définir des seuils O     Front-end       Suivi & veille   nan         Exploitation    Décideur métier  En tant que décideur
-  à la décision                                                                                                                      métier, je veux
-                                                                                                                                     définir des seuils
-                                                                                                                                     d'alerte afin de
-                                                                                                                                     qualifier les valeurs
-                                                                                                                                     des indicateurs et
-                                                                                                                                     être averti des
+  à la décision                                                                                                                      métier, je veux définir
+                                                                                                                                     des seuils d'alerte
+                                                                                                                                     afin de qualifier les
+                                                                                                                                     valeurs des indicateurs
+                                                                                                                                     et être averti des
                                                                                                                                      situations critiques.
 
   EPIC 7 -- Aide  US7.2       Détecter           X     Front-end       Suivi & veille   US7.1       Exploitation    Expert métier    En tant qu'expert
@@ -2702,27 +2686,25 @@ est évolutif.
                                                                                                                                      veux détecter les
                                                                                                                                      dépassements de seuil
                                                                                                                                      afin d'anticiper les
-                                                                                                                                     périodes de tension
-                                                                                                                                     sur la ressource.
+                                                                                                                                     périodes de tension sur
+                                                                                                                                     la ressource.
 
   EPIC 7 -- Aide  US7.3       Identifier         O     Front-end       Suivi & veille   nan         Exploitation    Expert métier    En tant qu'expert
   à la décision               tendances                                                                             eau potable      métier eau potable, je
                                                                                                                                      veux identifier des
                                                                                                                                      tendances sur les
                                                                                                                                      indicateurs afin de
-                                                                                                                                     détecter les
-                                                                                                                                     évolutions
+                                                                                                                                     détecter les évolutions
                                                                                                                                      préoccupantes de la
                                                                                                                                      ressource.
 
   EPIC 7 -- Aide  US7.4       Fiche synthétique  O     Front-end       Suivi & veille   nan         Exploitation    Expert métier    En tant qu'expert
   à la décision                                                                                                     eau potable      métier eau potable, je
-                                                                                                                                     veux consulter la
-                                                                                                                                     fiche synthétique d'un
-                                                                                                                                     bassin versant afin
-                                                                                                                                     d'identifier
-                                                                                                                                     rapidement les
-                                                                                                                                     facteurs de
+                                                                                                                                     veux consulter la fiche
+                                                                                                                                     synthétique d'un bassin
+                                                                                                                                     versant afin
+                                                                                                                                     d'identifier rapidement
+                                                                                                                                     les facteurs de
                                                                                                                                      vulnérabilité
                                                                                                                                      dominants.
 
@@ -2730,8 +2712,8 @@ est évolutif.
   à la décision               territoires                                               US5.2                       eau potable      métier eau potable, je
                                                                                                                                      veux prioriser les
                                                                                                                                      territoires selon leur
-                                                                                                                                     score de criticité
-                                                                                                                                     afin de concentrer les
+                                                                                                                                     score de criticité afin
+                                                                                                                                     de concentrer les
                                                                                                                                      actions sur les zones
                                                                                                                                      les plus sensibles.
 
@@ -2746,8 +2728,8 @@ est évolutif.
   EPIC 8 --       US8.1       Export CSV         O     Front-end       Export &         nan         Restitution --  Administrateur   En tant
   Export                                                               diffusion                    Diffusion       expert data      qu'administrateur
                                                                                                                                      expert data, je veux
-                                                                                                                                     exporter les données
-                                                                                                                                     en CSV afin de les
+                                                                                                                                     exporter les données en
+                                                                                                                                     CSV afin de les
                                                                                                                                      réutiliser dans
                                                                                                                                      d'autres traitements.
 
@@ -2761,11 +2743,10 @@ est évolutif.
                                                                                                                                      cartographique.
 
   EPIC 8 --       US8.3       Rapport PDF        X     Front-end       Export &         US6.7       Restitution --  Décideur métier  En tant que décideur
-  Export                                                               diffusion                    Diffusion                        métier, je veux
-                                                                                                                                     générer un rapport PDF
-                                                                                                                                     afin de présenter les
-                                                                                                                                     résultats au conseil
-                                                                                                                                     municipal et
+  Export                                                               diffusion                    Diffusion                        métier, je veux générer
+                                                                                                                                     un rapport PDF afin de
+                                                                                                                                     présenter les résultats
+                                                                                                                                     au conseil municipal et
                                                                                                                                      formaliser la prise de
                                                                                                                                      décision.
 
@@ -2780,18 +2761,17 @@ est évolutif.
   EPIC 8 --       US8.5       API                X     Backend         Export &         nan         Restitution --  Administrateur   En tant
   Export                                                               diffusion                    Diffusion       expert data      qu'administrateur
                                                                                                                                      expert data, je veux
-                                                                                                                                     accéder aux données
-                                                                                                                                     via une API afin de
-                                                                                                                                     les réutiliser dans
+                                                                                                                                     accéder aux données via
+                                                                                                                                     une API afin de les
+                                                                                                                                     réutiliser dans
                                                                                                                                      d'autres systèmes.
 
   EPIC 8 --       US8.6       Export vue simple  O     Front-end       Export &         nan         Restitution --  Administrateur   En tant
   Export                                                               diffusion                    Diffusion       expert data      qu'administrateur
                                                                                                                                      expert data, je veux
-                                                                                                                                     exporter une vue
-                                                                                                                                     simple afin de
-                                                                                                                                     partager un état des
-                                                                                                                                     données.
+                                                                                                                                     exporter une vue simple
+                                                                                                                                     afin de partager un
+                                                                                                                                     état des données.
 
   EPIC 9 --       US9.1       Créer compte       X     Front-end       Administration & US9.2       Gouvernance     Administrateur   En tant
   Utilisateurs                                                         profils                                      plateforme       qu'administrateur
@@ -2849,7 +2829,7 @@ est évolutif.
                                                                                                                                      de surveiller
                                                                                                                                      l'utilisation de la
                                                                                                                                      plateforme.
-  ---------------------------------------------------------------------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Évolution du backlog {#évolution-du-backlog number="0.7.2"}
 
@@ -3271,16 +3251,16 @@ flowchart LR
   sources de données, les performances (healthcheck, temps de réponse,
   disponibilité) et la gestion des alertes en cas d'anomalie.
 
-{ ::: {.callout-caution}
-
-Ces choix devront être validés en cohérence avec les contraintes des
-partenaires, les compétences disponibles au sein de l'équipe OEIL et les
-exigences contractuelles du projet.
-
-@todo : valider architecture cible avec l'équipe OEIL, en particulier
-sur les aspects technologiques et d'intégration.
-
-::: }
+::: {}
+> **Caution**
+>
+> Ces choix devront être validés en cohérence avec les contraintes des
+> partenaires, les compétences disponibles au sein de l'équipe OEIL et
+> les exigences contractuelles du projet.
+>
+> @todo : valider architecture cible avec l'équipe OEIL, en particulier
+> sur les aspects technologiques et d'intégration.
+:::
 
 ### Schéma de synthèse {#schéma-de-synthèse number="0.9.5"}
 
@@ -3934,80 +3914,79 @@ des parties prenantes.
 
 ### Acronymes et acteurs {#acronymes-et-acteurs number="0.16.1"}
 
-- **OEIL** : Observatoire de l'Environnement en Nouvelle-Calédonie\
+- **OEIL** : Observatoire de l'Environnement en Nouvelle-Calédonie
 - **DAVAR** : Direction des Affaires Vétérinaires, Alimentaires et
-  Rurales\
-- **OFB** : Office Français de la Biodiversité\
-- **PEP** : Politique de l'Eau Partagée\
-- **MOA** : Maîtrise d'Ouvrage (porteur du besoin)\
+  Rurales
+- **OFB** : Office Français de la Biodiversité
+- **PEP** : Politique de l'Eau Partagée
+- **MOA** : Maîtrise d'Ouvrage (porteur du besoin)
 - **AMOA** : Assistance à Maîtrise d'Ouvrage (appui à la définition et
-  au suivi du projet)\
-- **MOE** : Maîtrise d'Œuvre (réalisation technique du projet)\
-- **COPIL** : Comité de pilotage\
+  au suivi du projet)
+- **MOE** : Maîtrise d'Œuvre (réalisation technique du projet)
+- **COPIL** : Comité de pilotage
 - **COTECH** : Comité technique
 
 ### Concepts projet et méthodologie Agile {#concepts-projet-et-méthodologie-agile number="0.16.2"}
 
 - **HydroScope** : Système d'information dédié au suivi, à l'analyse et
   à la valorisation des données relatives aux ressources en eau potable
-  en Nouvelle-Calédonie\
-- **Backlog produit** : Liste priorisée des fonctionnalités à
-  développer\
-- **EPIC** : Ensemble fonctionnel regroupant plusieurs User Stories\
+  en Nouvelle-Calédonie
+- **Backlog produit** : Liste priorisée des fonctionnalités à développer
+- **EPIC** : Ensemble fonctionnel regroupant plusieurs User Stories
 - **User Story (US)** : Description d'un besoin fonctionnel du point de
-  vue utilisateur\
+  vue utilisateur
 - **MVP (Minimum Viable Product)** : Première version fonctionnelle du
-  produit, limitée aux fonctionnalités essentielles\
+  produit, limitée aux fonctionnalités essentielles
 - **Sprint** : Cycle court de développement dans une méthode Agile
 
 ### Données et objets métier {#données-et-objets-métier number="0.16.3"}
 
-- **BVAEP** : Bassin Versant d'Alimentation en Eau Potable\
-- **Captage / forage** : Point de prélèvement d'eau destiné à
-  l'alimentation en eau potable\
+- **BVAEP** : Bassin Versant d'Alimentation en Eau Potable
+- **Captage / forage** : Unité de gestion ou point de prélèvement d'eau
+  destiné à l'alimentation en eau potable
 - **Périmètre de Protection des Eaux (PPE)** : Zone réglementaire visant
-  à protéger un captage\
+  à protéger un captage
 - **Indicateur** : Variable calculée permettant de caractériser un
-  phénomène (enjeux, pression, état, évolution)\
+  phénomène (enjeux, pression, état, évolution)
 - **Référentiel** : Ensemble structuré d'objets ou de définitions
-  partagés (géographiques, indicateurs, utilisateurs)\
+  partagés (géographiques, indicateurs, utilisateurs).
 - **Métadonnées** : Données décrivant d'autres données (source, date,
-  méthode, etc.)
+  méthode, etc.}
 
 ### Concepts techniques {#concepts-techniques number="0.16.4"}
 
 - **API (Application Programming Interface)** : Interface permettant à
-  des systèmes d'échanger des données\
+  des systèmes d'échanger des données
 - **SIG (Système d'Information Géographique)** : Outils permettant de
-  manipuler et visualiser des données géographiques\
+  manipuler et visualiser des données géographiques
 - **H3** : Système de grille géographique hiérarchique permettant
   d'agréger des données spatiales dans des Hexagones dans un système
   hiérarchique.
-- **CSV (Comma-Separated Values)** : Format de fichier tabulaire simple\
-- **GeoJSON / Shapefile** : Formats de données géographiques\
-- **Base de données** : Système de stockage structuré des données\
+- **CSV (Comma-Separated Values)** : Format de fichier tabulaire simple
+- **GeoJSON / Shapefile** : Formats de données géographiques
+- **Base de données** : Système de stockage structuré des données
 - **DBT** : Outil/framework de transformation et de documentation des
   lineages de données dans un pipeline de traitement SQL.
 
 ### Qualité et analyse des données {#qualité-et-analyse-des-données number="0.16.5"}
 
 - **Agrégation** : Regroupement de données selon une échelle spatiale ou
-  temporelle\
+  temporelle
 - **Analyse multicritère** : Méthode permettant de combiner plusieurs
-  indicateurs pour produire une analyse synthétique\
+  indicateurs pour produire une analyse synthétique
 - **Traçabilité** : Capacité à suivre l'origine et les transformations
-  des données\
-- **Complétude** : Niveau de remplissage d'un jeu de données\
+  des données
+- **Complétude** : Niveau de remplissage d'un jeu de données
 - **Cohérence** : Absence de contradictions dans les données
 
 ### Exploitation et maintenance {#exploitation-et-maintenance number="0.16.6"}
 
 - **SLA (Service Level Agreement)** : Engagement sur les niveaux de
-  service (disponibilité, délais de traitement)\
+  service (disponibilité, délais de traitement)
 - **TMA (Tierce Maintenance Applicative)** : Activités de maintenance
-  corrective et évolutive d'une application\
+  corrective et évolutive d'une application
 - **Réversibilité** : Capacité à transférer le système ou les données
-  vers un autre prestataire\
+  vers un autre prestataire
 - **Monitoring** : Suivi du fonctionnement du système et des données
 
 ### Réglementation {#réglementation number="0.16.7"}
@@ -4060,16 +4039,7 @@ données, EPIC 3 -- Référentiels, EPIC 4 -- Calcul d'indicateurs) et
 constituent la base contractuelle de la **recette** et du **chiffrage**
 : une User Story n'est recettée que si tous ses critères sont
 satisfaits, et tout écart constaté à la recette est opposable au
-prestataire. Chaque critère est rédigé en style Gherkin (« Étant donné /
-Quand / Alors ») là où le comportement est testable ; les refus (« Et
-... est refusée ») sont explicites et doivent se traduire par un message
-d'erreur clair côté IHM ou par un échec tracé côté traitement. Les
-critères sont dérivés de la phrase méthode agile du backlog, des récits
-d'EPIC et de la colonne Module ; le vocabulaire HydroScope (BVAEP,
-captages, communes, PPE, maille H3, catalogue, métadonnées, traçabilité,
-historique, anomalie, fiabilité, seuil de complétude, reproductibilité,
-agrégation spatiale et temporelle) fait partie de la terminologie de
-recette.
+prestataire.
 
 ### EPIC 1 --- Gestion des données {#epic-1-gestion-des-données-1 number="1.4.1"}
 

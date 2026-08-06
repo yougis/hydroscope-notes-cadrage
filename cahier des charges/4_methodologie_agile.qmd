@@ -1,4 +1,4 @@
-## Organisation du projet en mode Agile
+## Organisation du projet en mode Agile {#sec-methodologie-agile}
 
 Le projet HydroScope est conduit selon une approche itérative et incrémentale inspirée des méthodes Agile. Cette organisation vise à adapter en continu le produit aux besoins des utilisateurs, à sécuriser les développements et à garantir une livraison progressive de fonctionnalités opérationnelles.
 
@@ -49,9 +49,7 @@ Le périmètre du MVP est volontairement restreint afin de :
 - valider les choix structurants du projet ;
 - faciliter une montée en charge progressive.
 
-Le détail du périmètre fonctionnel du MVP est détaillé dans une section suivante du présent document.
-
-@todo [priority=high, section=link] : mettre lien section
+Le détail du périmètre fonctionnel du MVP est détaillé au [chapitre 6 – Périmètre fonctionnel (EPICS)](#sec-perimetre) et dans le [chapitre 7 – Product backlog](#sec-backlog).
 
 ### Organisation des sprints
 

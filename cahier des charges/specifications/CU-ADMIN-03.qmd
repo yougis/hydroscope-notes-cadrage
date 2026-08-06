@@ -15,8 +15,8 @@ aux données sensibles selon le profil afin de protéger les informations régle
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-ADMIN-03` (US9.4) — `profils_utilisateurs.md` (Profil 1).
-- EPIC 9 ; §6 Sécurité ; §11Bis Protection des données (RGPD).
+- Cas d'usage : `CU-ADMIN-03` (US9.4) — `profils_utilisateurs.qmd` (Profil 1).
+- EPIC 9 ; §9 Sécurité ; §16 Protection des données (RGPD).
 - RBAC appliqué côté **API** et côté **front** (spec UX §4.4).
 
 ## 2. Fonctionnalités couvertes

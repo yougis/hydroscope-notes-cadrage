@@ -16,7 +16,7 @@ fonctionnalités nécessaires à son rôle.
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-ADMIN-02` (US9.3) — `profils_utilisateurs.md` (Profil 1).
+- Cas d'usage : `CU-ADMIN-02` (US9.3) — `profils_utilisateurs.qmd` (Profil 1).
 - EPIC 9 — Gestion des utilisateurs ; RBAC (§ spec UX §4.4 ; §3.6).
 - `UX-header-sidebar.md` §2.2 (groupe « Administration »).
 

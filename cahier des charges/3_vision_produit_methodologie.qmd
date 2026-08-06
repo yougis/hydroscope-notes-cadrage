@@ -10,6 +10,7 @@ L’outil repose sur un équilibre entre plusieurs exigences complémentaires :
 
 - garantir une **rigueur scientifique** dans la production et l’interprétation des indicateurs ;
 - proposer une **accessibilité adaptée à des publics variés**, allant des experts aux décideurs ;
+- fournir les **profils utilisateurs détaillés** (fiches par profil) dans le document de travail dédié [profils_utilisateurs.qmd](./profils_utilisateurs.qmd) et la **matrice des dépendances** entre user stories dans [dependances_us.qmd](./dependances_us.qmd) ;
 - offrir des capacités d’**exploration, de comparaison et d’analyse**, facilitant l’identification des enjeux prioritaires et l’orientation des actions.
 
 HydroScope ne constitue pas un outil de décision automatisée, mais un support d’analyse visant à éclairer les choix des gestionnaires.
@@ -22,7 +23,7 @@ La conception et le développement d’HydroScope reposent sur un ensemble de pr
 Chaque donnée intégrée dans le système doit être associée à sa source, à sa date de production et aux éventuelles transformations qu’elle a subies. Cette traçabilité doit être accessible aux utilisateurs afin de garantir la transparence de l’information.
 
 - **Transparence des calculs**  
-Les méthodes de calcul des indicateurs doivent être explicites, documentées et compréhensibles. Les choix méthodologiques (agrégation, pondération, seuils) doivent pouvoir être consultés et justifiés.
+Les méthodes de calcul des indicateurs doivent être explicites, documentées et compréhensibles. Les choix méthodologiques (agrégation, pondération, seuils ...) doivent pouvoir être consultés et justifiés.
 
 - **Robustesse des indicateurs**  
 Les indicateurs produits doivent reposer sur des bases méthodologiques solides. Une attention particulière est portée à la pertinence des données utilisées, à leur qualité et à la cohérence des traitements appliqués.
@@ -32,26 +33,6 @@ Le système doit s’inscrire dans un écosystème existant en respectant les st
 
 - **Lisibilité**  
 Les restitutions proposées doivent permettre une appropriation rapide de l’information, en évitant les représentations complexes ou ambiguës. Une attention particulière est portée à la pédagogie et à l’adaptation des interfaces aux différents profils d’utilisateurs.
-
-### Risques méthodologiques
-
-Compte tenu de la diversité des données mobilisées et des traitements envisagés, plusieurs risques méthodologiques doivent être identifiés et maîtrisés.
-
-- **Agrégation abusive**  
-Le croisement ou la combinaison de données hétérogènes (échelles spatiales, temporelles, unités, niveaux de précision) peut conduire à des résultats peu pertinents, voire trompeurs.
-
-- **Biais d’interprétation**  
-La simplification nécessaire à la production d’indicateurs synthétiques peut induire des erreurs de lecture ou des conclusions hâtives si le contexte d’interprétation n’est pas suffisamment explicité.
-
-- **Qualité des données**  
-La fiabilité des résultats dépend directement de la qualité des données sources, qui peuvent être incomplètes, hétérogènes ou non validées.
-
-- **Effet “boîte noire”**  
-Une complexité excessive des traitements ou un manque de transparence dans les calculs peut entraîner une perte de confiance des utilisateurs.
-
-- **Surinterprétation**  
-Les indicateurs produits doivent être utilisés dans leur domaine de validité et dans le cadre des objectifs que nous leurs avons fixés. Leur interprétation en dehors de ce cadre peut conduire à des décisions inadaptées.
-
 
 L'offre proposée par le prestataire doit intégrer ces principes méthodologiques et proposer des solutions permettant de limiter les risques identifiés, tout en garantissant la pertinence et la fiabilité des résultats produits. 
 Nous estimons que la mise en œuvre d’un **MVP (Minimum Viable Product)** constituera un moyen efficace pour valider les choix méthodologiques et techniques avant de déployer des fonctionnalités plus avancées.
@@ -64,15 +45,15 @@ Le MVP permettra de :
 
 - proposer un socle fonctionnel opérationnel (données, indicateurs, visualisation) ;
 - permettre une première utilisation par des beta testeurs;
-- recueillir des retours afin d’ajuster les développements ultérieurs.
+- recueillir des retours afin d’ajuster les développements secondaires.
 
 Le périmètre du MVP est volontairement restreint aux fonctionnalités à plus forte valeur métier, comme :
 
-- l’intégration de données structurées ;
-- le calcul d’indicateurs simples et robustes ;
-- la visualisation cartographique et temporelle ;
-- la consultation de fiches de synthèses sur certains territoires.
+- l’intégration de quelques jeux de données structurées ;
+- le calcul de certains indicateurs simples et robustes ;
+- la visualisation cartographique et graphique des indicateurs ;
+- la mise en place de l'interface et les logiques de navigation, de rechnerche et d'affichage.
 
-Les fonctionnalités plus avancées (analyse multicritère, paramétrage complexe, automatisation avancée) et un jeu d'indicateur complet sont prévues dans des phases ultérieures.
+Les fonctionnalités plus avancées (analyse multicritère, paramétrage complexe, automatisation avancée) et un jeu d'indicateur complet sont prévues dans le projet mais dans un second temps. Il s'agit du livrable principal du projet et fera l’objet d’une validation spécifique par la MOA.
 
-Le MVP constitue un jalon important du projet et fera l’objet d’une validation spécifique par la MOA.
+Les fonctionnalités prévu dans le MCP sont identifiés dans la **backlog**, qui sera priorisée au fur et à mesure par la MOA en fonction de la valeur métier et des contraintes techniques comme le préconise la méthodologie Agile (détaillée au [chapitre 7 – Product backlog](#sec-backlog)).

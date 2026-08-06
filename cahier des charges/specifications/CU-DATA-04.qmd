@@ -15,7 +15,7 @@ et versionner sa méthode afin de garantir la traçabilité et la reproductibili
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-DATA-04` (US4.1, US4.6) — `profils_utilisateurs.md` (Profil 2).
+- Cas d'usage : `CU-DATA-04` (US4.1, US4.6) — `profils_utilisateurs.qmd` (Profil 2).
 - EPIC 4 — Calcul d'indicateurs (calculs simples, agrégations, paramétrage, versioning).
 
 ## 2. Fonctionnalités couvertes

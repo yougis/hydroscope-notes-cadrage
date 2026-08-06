@@ -3,7 +3,7 @@ title: "CU-EXPERT-03 — Identifier des tendances et détecter des dépassements
 profile: "Expert métier eau potable"
 uc: "CU-EXPERT-03"
 us: "US7.3, US7.2"
-epic: "EPIC 7 — Aide à la décision ; §4 — Monitoring métier"
+epic: "EPIC 7 — Aide à la décision ; §8 — Monitoring métier"
 mvp: true
 amc: false
 ---
@@ -16,8 +16,8 @@ afin d'anticiper les périodes de tension sur la ressource.
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-EXPERT-03` (US7.3, US7.2) — `profils_utilisateurs.md` (Profil 3).
-- §4 — Monitoring métier et environnemental (tendances, ruptures, alertes).
+- Cas d'usage : `CU-EXPERT-03` (US7.3, US7.2) — `profils_utilisateurs.qmd` (Profil 3).
+- §8 — Monitoring métier et environnemental (tendances, ruptures, alertes).
 - EPIC 6/7 ; seuils définis par l'utilisateur.
 
 ## 2. Fonctionnalités couvertes

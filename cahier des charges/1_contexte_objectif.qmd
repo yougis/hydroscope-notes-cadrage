@@ -105,7 +105,7 @@ Ces valeurs sont indicatives et pourront évoluer au cours du projet, notamment 
 
 Elles permettent néanmoins de fournir un premier niveau de cadrage pour le dimensionnement technique et fonctionnel de la solution.
 
-Le catalogue détaillé des indicateurs et de leurs sources est présenté au chapitre 3bis et fourni en annexe (tableau synthétique des indicateurs).
+Le catalogue détaillé des indicateurs et de leurs sources est présenté au chapitre 5 – Présentation des indicateurs et fourni en annexe (tableau synthétique des indicateurs).
 
 
 ### Sources de données
@@ -152,6 +152,6 @@ print(df_affiche.to_markdown(index=False))
 
 ::: 
 
-Ces données sont produites et mises à disposition par différents acteurs (communes, provinces, services du Gouvernement, partenaires techniques).
+Ces données sont produites et mises à disposition par différents acteurs (communes, provinces, services du Gouvernement, partenaires techniques, entreprises privées).
 
 Elles présentent des niveaux hétérogènes de qualité, de structuration et de fréquence de mise à jour, ce qui nécessite des traitements spécifiques dans le cadre du projet HydroScope.

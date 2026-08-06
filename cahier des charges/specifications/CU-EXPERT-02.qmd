@@ -16,7 +16,7 @@ afin d'identifier les dynamiques croisées impactant la ressource.
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-EXPERT-02` (US6.4, US6.24) — `profils_utilisateurs.md` (Profil 3).
+- Cas d'usage : `CU-EXPERT-02` (US6.4, US6.24) — `profils_utilisateurs.qmd` (Profil 3).
 - EPIC 6 — Graphiques temporels, comparaisons, choroplèthe H3.
 - Spec UX §3.4 (dataviz par onglets) et §3.5 (vues temporelles, changements, H3) ;
   composant `ChartModeSwitcher` (`src/features/indicateurs/`).

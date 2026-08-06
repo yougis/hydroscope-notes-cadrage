@@ -19,7 +19,7 @@ composite et documenter les méthodes afin de fournir une base transparente pour
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-DATA-05` (US5.1, US5.6) — `profils_utilisateurs.md` (Profil 2).
+- Cas d'usage : `CU-DATA-05` (US5.1, US5.6) — `profils_utilisateurs.qmd` (Profil 2).
 - EPIC 5 — Analyse multicritère (option, chiffrée séparément) ; voir `AMC_methodologie.qmd`.
 - Réunion Read-AI « Brainstorming analyse multicritère » (méthodes en débat).
 

@@ -15,8 +15,8 @@ jeu de données et le normaliser afin que la plateforme dispose de données fiab
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-DATA-01` (US1.1, US1.4) — `profils_utilisateurs.md` (Profil 2).
-- EPIC 1 / EPIC 1 bis (catalogue de données) ; §4 Historisation (GeoDiff + Prefect).
+- Cas d'usage : `CU-DATA-01` (US1.1, US1.4) — `profils_utilisateurs.qmd` (Profil 2).
+- EPIC 1 / EPIC 1 bis (catalogue de données) ; §8 Historisation (GeoDiff + Prefect).
 - Navigation : Sidebar « Données > Ajout de données » (`UX-header-sidebar.md` §2.2).
 
 ## 2. Fonctionnalités couvertes

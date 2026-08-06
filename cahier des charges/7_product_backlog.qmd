@@ -1,5 +1,5 @@
 
-## Backlog et gestion des User Stories
+## Backlog et gestion des User Stories {#sec-backlog}
 
 Le tableau ci-dessus présente une première structuration du backlog produit d’HydroScope, organisée en EPICS et en User Stories (US). Il constitue une traduction opérationnelle des besoins fonctionnels identifiés dans le cadre du projet.
 

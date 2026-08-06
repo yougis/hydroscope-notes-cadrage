@@ -16,7 +16,7 @@ de l'eau sur mon territoire.
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-DECISION-01` (US6.6, US6.7) — `profils_utilisateurs.md` (Profil 4).
+- Cas d'usage : `CU-DECISION-01` (US6.6, US6.7) — `profils_utilisateurs.qmd` (Profil 4).
 - `help/04-tableau-de-bord.md` ; EPIC 6 ; `src/features/portail/DashboardPage.tsx`.
 - Navigation : Sidebar « Exploration > Tableau de bord ».
 

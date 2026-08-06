@@ -1,4 +1,4 @@
-## Cadre contractuel et juridique
+## Cadre contractuel et juridique {#sec-cadre-contractuel}
 
 Le présent projet s’inscrit dans un cadre contractuel nécessitant la définition de règles claires en matière de propriété, de gestion des données, de maintenance et de réversibilité. Les éléments suivants devront être pris en compte dans la mise en œuvre et l’exploitation de la solution HydroScope.
 

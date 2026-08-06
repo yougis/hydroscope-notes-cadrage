@@ -15,9 +15,7 @@ Au delà des indicateur de chargement doivent etre affichés pour informer l'uti
 
 Pour les traitements liés aux calcul d’indicateurs :
 - en temps quasi immédiat pour les indicateurs simples (quelques secondes) ;
-- en différé (pipeline de traitement en arrière plan) pour les traitements lourds, avec des délais maîtrisés et suivi.
-
-@todo[priority=high, section=lien]: faire le lien avec la section  monitoring pour le suivi des traitements en arrière plan
+- en différé (pipeline de traitement en arrière plan) pour les traitements lourds, avec des délais maîtrisés ; le suivi de ces traitements est détaillé au [chapitre 8 – Monitoring, supervision et pilotage](#sec-monitoring).
 
 ### Volumétrie et charge
 
@@ -95,6 +93,4 @@ Le système devra garantir un niveau de disponibilité compatible avec les usage
 
 - disponibilité cible : **≥ 98 %** (soit 7 jours hors maintenance planifiée) ;
 - plages de maintenance définies et communiquées ;
-- reprise en cas d’incident dans des délais maîtrisés (cf. SLA).
-
-@todo[priority=high, section=lien]: faire le lien avec SLA
+- reprise en cas d’incident dans des délais maîtrisés (cf. [SLA et engagements de service au chapitre 16 – Cadre contractuel et juridique](#sec-cadre-contractuel)).

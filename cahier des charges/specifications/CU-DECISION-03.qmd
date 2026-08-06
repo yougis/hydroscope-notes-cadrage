@@ -3,7 +3,7 @@ title: "CU-DECISION-03 — Détecter une situation critique et consulter les ale
 profile: "Décideur métier"
 uc: "CU-DECISION-03"
 us: "US7.2, US7.3"
-epic: "EPIC 7 ; §4 — Monitoring"
+epic: "EPIC 7 ; §8 — Monitoring"
 mvp: true
 amc: false
 ---
@@ -15,8 +15,8 @@ et consulter les alertes afin de réagir rapidement face aux risques sur la ress
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-DECISION-03` (US7.2, US7.3) — `profils_utilisateurs.md` (Profil 4).
-- §4 — Monitoring ; EPIC 7 ; dashboard (vignettes avec badge alerte).
+- Cas d'usage : `CU-DECISION-03` (US7.2, US7.3) — `profils_utilisateurs.qmd` (Profil 4).
+- §8 — Monitoring ; EPIC 7 ; dashboard (vignettes avec badge alerte).
 
 ## 2. Fonctionnalités couvertes
 

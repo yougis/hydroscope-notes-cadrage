@@ -16,7 +16,7 @@ plateforme avec les droits appropriés.
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-ADMIN-01` (US9.1) — `profils_utilisateurs.md` (Profil 1).
+- Cas d'usage : `CU-ADMIN-01` (US9.1) — `profils_utilisateurs.qmd` (Profil 1).
 - EPIC 9 — Gestion des utilisateurs ; RBAC (§ spec UX §4.4 ; §3.6 Compte utilisateur).
 - Références d'interface : `UX-header-sidebar.md` (§2.2 groupes « Administration »),
   `specifications_interfaces_ux_architecture.md` (§3.6, §4.4).

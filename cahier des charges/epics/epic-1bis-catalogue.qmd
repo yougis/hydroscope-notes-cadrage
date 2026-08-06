@@ -2,26 +2,15 @@
 
 L’intégration et l’exploitation de données issues de sources multiples, hétérogènes et évolutives nécessitent la mise en place d’un dispositif de catalogage structuré.
 
-Le catalogue de données a pour objectif de référencer l’ensemble des jeux de données manipulés dans HydroScope, qu’il s’agisse de données sources ou de données dérivées, dont les indicateurs. Il constitue un point d’entrée pour comprendre les données disponibles, leurs caractéristiques et leurs conditions d’usage.
-
-Il doit permettre de rendre le système de données lisible, de faciliter la réutilisation des données entre traitements et indicateurs, et de garantir la traçabilité des analyses produites. Dans un contexte multi-acteurs, il contribue également à structurer les échanges autour des données et à partager une compréhension commune.
-
-Le catalogue ne constitue pas uniquement un outil documentaire. Il est conçu comme un composant opérationnel du système, directement lié aux processus d’intégration, de transformation et d’exploitation des données.
+Le catalogue de données a pour objectif de référencer l’ensemble des jeux de données manipulés dans HydroScope, qu’il s’agisse de données sources ou de données dérivées, dont les indicateurs. Il constitue un composant opérationnel du système, directement lié aux processus d’intégration, de transformation et d’exploitation des données, et un point d’entrée pour comprendre les données disponibles et leurs conditions d’usage.
 
 #### Fonctionnalités
 
-Le catalogue devra permettre de référencer chaque jeu de données intégré dans la plateforme et de lui associer un ensemble de métadonnées décrivant son origine, son contenu et ses conditions d’usage. Ces métadonnées doivent être structurées de manière homogène afin de garantir leur exploitation dans le système.
+- **Référencement et métadonnées** : chaque jeu de données intégré est identifié de manière unique et associé à des métadonnées structurées décrivant son origine, son contenu et ses conditions d’usage.
+- **Traçabilité des liens** : le système établit des liens explicites entre données sources, transformations et données produites, notamment les indicateurs, afin d’assurer une traçabilité complète des traitements.
+- **Automatisation de l’alimentation** : le catalogue est alimenté autant que possible de manière automatisée, en lien avec les pipelines de données et les outils de transformation (dbt), afin de limiter les écarts entre données réellement exploitées et informations décrites.
+- **Consultation par profils** : le catalogue est consultable, au moins partiellement, avec un niveau de détail et d’accès adapté selon les profils utilisateurs.
+- **Standards et interopérabilité** : des standards existants pourront être mobilisés, notamment dans le domaine des données géographiques, afin de garantir l’interopérabilité et la pérennité du système.
+- **Monitoring** : le dispositif s’intègre aux mécanismes de monitoring du système, notamment pour le suivi de la traçabilité (origine des données, transformations, mises à jour) et la gestion des erreurs dans les processus d’intégration.
 
-Chaque dataset devra être identifiable de manière unique et relié aux traitements auxquels il participe. Le système devra permettre d’établir des liens explicites entre données sources, transformations et données produites, notamment les indicateurs, afin d’assurer une traçabilité complète des traitements.
-
-Le catalogue devra être alimenté autant que possible de manière automatisée, en lien avec les pipelines de données. Les outils de transformation (tels que dbt) devront être utilisés pour structurer les dépendances entre datasets et documenter les transformations, afin de limiter les écarts entre données réellement exploitées et informations décrites.
-
-Les indicateurs seront intégrés au catalogue comme des données dérivées, avec un lien explicite vers les données sources et les traitements associés.
-
-Le catalogue devra être consultable, au moins partiellement, afin de permettre aux utilisateurs d’accéder aux informations nécessaires à la compréhension et à l’interprétation des données. Le niveau de détail pourra être adapté selon les profils.
-
-La solution devra permettre l’intégration progressive de nouvelles sources de données sans remise en cause de la structure existante, ainsi que la mise à jour continue des métadonnées.
-
-Lorsque cela est pertinent, des standards existants pourront être mobilisés, notamment dans le domaine des données géographiques, afin de garantir l’interopérabilité et la pérennité du système.
-
-Enfin, le dispositif devra s’intégrer aux mécanismes de monitoring du système, notamment pour assurer le suivi de la traçabilité (origine des données, transformations, mises à jour) et la gestion des erreurs dans les processus d’intégration.
+Le détail fonctionnel et technique du catalogue de métadonnées est présenté au [chapitre 11 – Catalogue de métadonnées](#sec-catalogue-metadonnees).

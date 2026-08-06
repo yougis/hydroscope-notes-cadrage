@@ -15,8 +15,8 @@ aberrantes et qualifier la fiabilité afin de garantir la confiance à accorder 
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-DATA-02` (US2.1, US2.5) — `profils_utilisateurs.md` (Profil 2).
-- EPIC 2 — Qualité et validation ; §4 — Monitoring de la qualité des données
+- Cas d'usage : `CU-DATA-02` (US2.1, US2.5) — `profils_utilisateurs.qmd` (Profil 2).
+- EPIC 2 — Qualité et validation ; §8 — Monitoring de la qualité des données
   (fraîcheur, complétude, anomalies, fiabilité).
 
 ## 2. Fonctionnalités couvertes
@@ -42,6 +42,6 @@ aberrantes et qualifier la fiabilité afin de garantir la confiance à accorder 
 
 ## 5. Points de vigilance
 
-- La fiabilité éclaire l'interprétation sans la remplacer (§3.2, §4).
+- La fiabilité éclaire l'interprétation sans la remplacer (§3.2, §8).
 - Seuil de comparabilité (~80 % de complétude) : ne classer que les données
   suffisamment décrites (réunion AMC).

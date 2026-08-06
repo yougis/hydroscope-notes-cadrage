@@ -210,12 +210,27 @@ function renderLegend(mode) {
   legend.innerHTML = '';
 }
 
+// Coupe un libellé long sur 2 lignes équilibrées (retour à la ligne au mot le plus proche du milieu).
+function wrapLabel(text, maxLen) {
+  if (!text) return '';
+  if (text.length <= maxLen) return text;
+  const half = Math.floor(text.length / 2);
+  let split = -1;
+  for (let i = 0; i <= Math.floor(maxLen / 2); i++) {
+    if (text[half - i] === ' ') { split = half - i; break; }
+    if (text[half + i] === ' ') { split = half + i; break; }
+  }
+  if (split < 0) return text;
+  return text.slice(0, split).trim() + '\n' + text.slice(split).trim();
+}
+
 function nodeAppearance(id) {
   const [epic, label] = US[id];
+  const wrapped = wrapLabel(label, 26);
   const roleIcon = ROLE_ICONS[US_DATA[id].role];
   const stdFont = "'Segoe UI', -apple-system, Arial, sans-serif";
   if (currentColoring === 'epic') {
-    return { id: id, label: label, sublabel: id,
+    return { id: id, label: wrapped, sublabel: id,
              color: EPICS[epic], borderWidth: 1, borderWidthSelected: 2,
              title: epic + ' (' + EPIC_LABELS[epic] + ') — ' + id + ' — ' + label,
              icon: { face: 'HydroIcons', code: roleIcon.code, color: '#fff' },
@@ -223,7 +238,7 @@ function nodeAppearance(id) {
              sublabelFont: { color: '#fff', size: 10, face: 'monospace' } };
   }
   const fin = FINALITES[US_FINALITE[id]];
-  return { id: id, label: label, sublabel: id, color: fin.color, borderWidth: 2, borderWidthSelected: 3,
+  return { id: id, label: wrapped, sublabel: id, color: fin.color, borderWidth: 2, borderWidthSelected: 3,
            title: US_FINALITE[id] + ' — ' + id + ' — ' + label,
            icon: { face: 'HydroIcons', code: roleIcon.code, color: '#fff' },
            font: { color: '#fff', size: 13, face: stdFont, bold: true },

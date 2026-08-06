@@ -1,62 +1,245 @@
+---
+format:
+  pdf:
+    include-in-header:
+      text: |
+        \usepackage[table]{xcolor}
+---
 
-L’intégration et l’exploitation de données issues de sources multiples, hétérogènes et évolutives rendent nécessaire la mise en place d’un dispositif de catalogage structuré. Celui-ci constitue un élément central du système HydroScope.
+## Présentation des indicateurs {#sec-presentation-indicateurs}
 
-Le catalogue de données vise à référencer l’ensemble des jeux de données manipulés dans la plateforme, qu’il s’agisse de données sources ou de données dérivées, dont les indicateurs.
+HydroScope calcule **38 indicateurs** organisés selon une arborescence à trois niveaux — **famille**, **thème** et **groupe** — qui structure la navigation du catalogue d'indicateurs (Famille → Thème → Groupe), conformément aux critères d'acceptation de la visualisation définis en annexe (*Criteres_acceptation_visualisation.qmd*).
 
-### Description
+Le référentiel contractuel des indicateurs est le fichier `liste_indicateurs_v4.xlsx` (annexe) ; les fiches détaillées de chaque indicateur (définition, objectifs, méthode, sources, vigilances) sont documentées dans le **catalogue de fiches d'indicateurs** (`Fiches_indicateurs_HydroScope-v4.pdf`, annexe), dont le contenu textuel n'est pas repris dans ce chapitre.
 
-Le catalogage des données constitue un composant opérationnel du système. Il permet d’organiser, qualifier et rendre intelligibles les données utilisées dans HydroScope.
-
-Chaque jeu de données intégré doit être identifié, décrit et relié aux traitements auxquels il participe. Cette structuration permet d’assurer la lisibilité du système, tant pour les administrateurs que pour les utilisateurs, et de garantir la traçabilité des analyses produites.
-
-### Fonctionnalités
-
-Le système devra permettre de référencer les jeux de données au sein d’un catalogue structuré, en associant à chaque dataset un ensemble de métadonnées descriptives.
-
-Il devra également permettre de tracer les relations entre données sources, transformations et données produites, notamment les indicateurs. Cette capacité est essentielle pour comprendre l’origine des résultats et en assurer la reproductibilité.
-
-Le catalogue devra être consultable afin de permettre aux utilisateurs d’accéder aux informations nécessaires à l’interprétation des données. Le niveau de détail et d’accès pourra être adapté selon les profils.
-
-Le système devra enfin permettre l’intégration progressive de nouvelles sources de données, sans remise en cause de la structure existante.
-
-### Principes de mise en œuvre
-
-Le catalogue devra reposer sur une structuration homogène des métadonnées, afin de garantir la cohérence des descriptions et leur exploitabilité.
-
-Lorsque cela est pertinent, des standards existants pourront être mobilisés, notamment dans le domaine des données géographiques, afin de faciliter l’interopérabilité.
-
-Le catalogue devra être alimenté autant que possible de manière automatisée, en lien avec les processus d’intégration et de transformation des données. Cette automatisation est essentielle pour garantir la cohérence entre les données réellement exploitées et leur description.
-
-### Implémentation technique
-
-Chaque jeu de données intégré dans HydroScope devra être associé à un ensemble de métadonnées structurées décrivant son origine, son contenu et ses conditions d’usage.
-
-Ces métadonnées devront couvrir les informations nécessaires à la compréhension et à l’exploitation des données, notamment leur source, leur description, leur emprise spatiale, leurs dates de production et de mise à jour, ainsi que les modalités de collecte ou de transformation.
-
-Elles devront être intégrées au fonctionnement du système et alimentées en lien avec les pipelines de données, notamment via des outils de transformation tels que dbt. Elles participent ainsi à la traçabilité des traitements et à la cohérence globale du système.
-
-Les indicateurs calculés seront intégrés au catalogue comme des données dérivées, avec un lien explicite vers les données sources et les traitements associés.
-
-Une partie des métadonnées pourra être exposée aux utilisateurs afin de faciliter l’interprétation des résultats.
-
-### Catalogue des indicateurs
-
+Le tableau suivant reproduit intégralement le référentiel (38 lignes × 9 attributs). Le code couleur appliqué reflète la hiérarchie Famille → Thème → Groupe : la colonne *Famille* porte une couleur fixe par famille, la colonne *Thème* une teinte par thème, et les colonnes *Groupe* à *Analyse multicritère* un fond uniforme par groupe, texte blanc sur cellules colorées. L'ensemble des 38 indicateurs est affiché intégralement, sans troncature, pour servir de base de recette au cahier des charges.
 
 ```{python}
-#| label: tbl-indicateurs
-#| tbl-cap: "Catalogue des indicateurs"
-#| output: asis
-
+#| echo: false
+import zipfile, re, xml.etree.ElementTree as ET
 import pandas as pd
 
-df = pd.read_csv("../ressources/fiches-csv/fiches indicateurs-indicateurs.csv", sep=";")
-df = df.sort_values(by=["nom_indicateur"])
-print(df[["id_indicateur", "nom_indicateur", "unite", "actif"]].to_markdown(index=False))
+ns = {'m': 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
+with zipfile.ZipFile('annexes/liste_indicateurs_v4.xlsx') as zf:
+    styles = ET.fromstring(zf.read('xl/styles.xml'))
+    sheet = ET.fromstring(zf.read('xl/worksheets/sheet1.xml'))
+    shared = ET.fromstring(zf.read('xl/sharedStrings.xml'))
+
+strings = [''.join(t.itertext()) for t in shared.findall('m:si', ns)]
+fills = [f for f in styles.findall('.//m:fills/m:fill', ns)]
+
+def fg(sidx):
+    p = fills[int(sidx)].find('m:patternFill', ns)
+    if p is None:
+        return None
+    fc = p.find('m:fgColor', ns)
+    return fc.get('rgb') if fc is not None else None
+
+xfs = styles.findall('.//m:cellXfs/m:xf', ns)
+rows = {}
+
+def gval(c):
+    t = c.get('t')
+    v = c.find('m:v', ns)
+    if t == 's' and v is not None:
+        return strings[int(v.text)]
+    return v.text if v is not None else ''
+
+for c in sheet.findall('m:sheetData/m:row/m:c', ns):
+    m = re.match(r'([A-Z]+)(\d+)', c.get('r'))
+    col, row = m.group(1), int(m.group(2))
+    if row < 2:
+        continue
+    sidx = int(c.get('s', '0'))
+    fill = fg(xfs[sidx].get('fillId')) if sidx < len(xfs) else None
+    rows.setdefault(row, {})[col] = (gval(c), fill)
+
+cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+hdr = ['id_indicateur', 'famille', 'theme', 'groupe', 'nom_indicateur',
+       'description', 'objectif_INFO', 'objectif_AMC', 'analyse_multicriteres']
+data = []
+cdata = []
+for r in sorted(rows):
+    data.append([rows[r][colm][0] for colm in cols])
+    cdata.append([rows[r][colm][1] for colm in cols])
+
+df = pd.DataFrame(data, columns=hdr)
+df['id_indicateur'] = pd.to_numeric(df['id_indicateur'], errors='coerce').astype('Int64')
+for _c in hdr[1:]:
+    df[_c] = df[_c].astype(str)
+
+def to_hex(v):
+    if v and isinstance(v, str) and v.startswith('FF') and len(v) == 8:
+        return '#' + v[2:]
+    return None
+
+df_colors = pd.DataFrame([[to_hex(v) for v in row] for row in cdata],
+                         columns=hdr, index=df.index)
 ```
 
+```{python}
+#| format: html
+#| echo: false
+#| results: asis
+import html as _html
 
-### Points de vigilance
+heads = ['ID', 'Famille', 'Thème', 'Groupe', 'Nom de l\'indicateur',
+         'Description (utilisateur)', 'Objectif INFO', 'Objectif AMC', 'Analyse multicritère']
+widths = ['2.5%', '5%', '8%', '8%', '12%', '45%', '8.5%', '8.5%', '2.5%']
 
-- Risque de dissociation entre catalogue et données réellement exploitées  
-- Nécessité d’automatiser la production et la mise à jour des métadonnées  
-- Importance de maintenir la cohérence entre données, traitements et indicateurs  
+out = ['<table style="width:100%;border-collapse:collapse;font-size:0.78rem;font-family:Arial,Helvetica,sans-serif;table-layout:fixed;">']
+out.append('<colgroup>' + ''.join('<col style="width:%s">' % w for w in widths) + '</colgroup>')
+out.append('<thead><tr>' + ''.join(
+    '<th style="background-color:#2B5E8C;color:#ffffff;font-weight:700;padding:5px 6px;border:1px solid #9aa7b8;text-align:left;vertical-align:top;">%s</th>' % h
+    for h in heads) + '</tr></thead>')
+out.append('<tbody>')
+for i in range(len(df)):
+    row = ['<td style="padding:4px 6px;border:1px solid #c6ccd4;vertical-align:top;">%s</td>' % _html.escape(str(df.iloc[i]['id_indicateur']))]
+    for colm in hdr[1:]:
+        txt = _html.escape(str(df.iloc[i][colm]))
+        style = ''
+        color = df_colors.iloc[i][colm]
+        if color:
+            style = 'background-color:%s;color:#ffffff;font-weight:600;' % color
+        row.append('<td style="padding:4px 6px;border:1px solid #c6ccd4;vertical-align:top;%s">%s</td>' % (style, txt))
+    out.append('<tr>' + ''.join(row) + '</tr>')
+out.append('</tbody></table>')
+print('\n'.join(out))
+```
+
+```{python}
+#| format: pdf
+#| echo: false
+#| results: asis
+import html as _html
+
+def esc(s):
+    return (s.replace('\\', r'\textbackslash{}')
+             .replace('{', r'\{').replace('}', r'\}')
+             .replace('$', r'\$').replace('&', r'\&')
+             .replace('%', r'\%').replace('#', r'\#')
+             .replace('_', r'\_')
+             .replace('~', r'\textasciitilde{}')
+             .replace('^', r'\textasciicircum{}'))
+
+col_order = hdr[1:]
+color_names = {}
+out = []
+for i in range(len(df)):
+    for colm in col_order:
+        h = df_colors.iloc[i][colm]
+        if h and h not in color_names:
+            color_names[h] = 'IND%02d' % len(color_names)
+for h, name in color_names.items():
+    out.append('\\definecolor{%s}{HTML}{%s}' % (name, h[1:]))
+out.append('\\setlength{\\tabcolsep}{2pt}')
+out.append('\\renewcommand{\\arraystretch}{1.1}')
+
+spec = 'p{0.5cm}p{1.1cm}p{1.5cm}p{1.7cm}p{1.8cm}p{2.6cm}p{1.8cm}p{1.8cm}p{0.8cm}'
+out.append('\\footnotesize')
+out.append('\\begin{longtable}{%s}' % spec)
+out.append('\\hline')
+heads_pdf = ['ID', 'Famille', 'Thème', 'Groupe', 'Nom de l\'indicateur',
+             'Description', 'Objectif INFO', 'Objectif AMC', 'An. multi.']
+out.append(' & '.join('\\textbf{%s}' % h for h in heads_pdf) + ' \\\\ \\hline')
+out.append('\\endhead')
+for i in range(len(df)):
+    row = [esc(str(df.iloc[i]['id_indicateur']))]
+    for colm in col_order:
+        txt = esc(str(df.iloc[i][colm]))
+        color = df_colors.iloc[i][colm]
+        if color:
+            row.append('\\cellcolor{%s}\\textcolor{white}{%s}' % (color_names[color], txt))
+        else:
+            row.append(txt)
+    out.append(' & '.join(row) + ' \\\\')
+out.append('\\hline')
+out.append('\\end{longtable}')
+print('\n'.join(out))
+```
+
+### Légende du code couleur
+
+Le tableau ci-dessus restitue la hiérarchie du référentiel pour une lecture immédiate :
+
+- **colonne B (Famille)** : une couleur fixe identifie chaque famille (« Enjeu », « Menace ») ;
+- **colonne C (Thème)** : chaque thème dispose d'une teinte de la couleur de sa famille ;
+- **colonnes D à I (Groupe, indicateur, descriptions, objectifs, analyse)** : fond uniforme par groupe, appliqué sur toute la ligne ;
+- le texte est blanc sur l'ensemble des cellules colorées ; la colonne A (identifiant) reste sans fond.
+
+Les **2 familles** et les **4 thèmes** du référentiel (v4) :
+
+| Niveau | Libellé | Couleur |
+|---|---|---|
+| Famille | Enjeu | `#2B5E8C` |
+| Famille | Menace | `#FAA51A` |
+| Thème | Enjeux AEP | `#4472C4` |
+| Thème | Enjeux Environnementaux | `#3BC29F` |
+| Thème | MENACES ANTHROPIQUES | `#C55A11` |
+| Thème | MENACES NATURELLES | `#ED7D31` |
+
+Les **10 groupes** issus des familles et des thèmes utilisent des teintes dérivées de la couleur de leur famille/thème (dégradés bleus côté « Enjeu », dégradés orange côté « Menace »), conformément au fichier source.
+
+### Renvois
+
+- [Catalogue de fiches d'indicateurs (PDF)](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées des 38 indicateurs (définition, objectifs, méthode, sources, vigilances).
+- [Référentiel contractuel liste_indicateurs_v4.xlsx](./annexes/liste_indicateurs_v4.xlsx) — tableau de référence des indicateurs (38 lignes × 9 attributs).
+- [Arbre hiérarchique interactif des indicateurs (HTML)](./annexes/arbre_indicateurs.html) — arbre repliable Famille → Thème → Groupe, généré depuis le référentiel.
+- [Chapitre 11 – Catalogue de métadonnées](#sec-catalogue-metadonnees) : intégration des indicateurs comme données dérivées référencées.
+- EPIC 1 bis – Catalogue des données et EPIC 4 – Calcul d'indicateurs.
+
+```{python}
+#| format: html
+#| echo: false
+#| results: asis
+import html as _html
+
+dot = lambda color: '<span class="dot" style="background:%s"></span>' % color
+css = """
+body{font-family:Arial,Helvetica,sans-serif;max-width:860px;margin:2rem auto;padding:0 1rem;color:#222}
+h1{color:#2B5E8C;font-size:1.5rem;border-bottom:2px solid #2B5E8C;padding-bottom:.4rem}
+.top{color:#555}
+details{margin:2px 0 2px 16px}
+summary{cursor:pointer;font-weight:700;padding:3px 6px;border-radius:4px}
+summary:hover{background:#eef3fa}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.n{color:#777;font-weight:400}
+ul{margin:2px 0 8px 28px;padding:0;list-style:none}
+li{margin:1px 0}
+footer{margin-top:24px;padding-top:8px;border-top:1px solid #ccc;color:#888;font-size:.8rem}
+"""
+
+order_fam = df['famille'].drop_duplicates().tolist()
+parts = []
+parts.append('<h1>Arbre hiérarchique des indicateurs — HydroScope</h1>')
+parts.append('<p class="top">%d indicateurs organisés par famille, thème et groupe (Famille → Thème → Groupe).</p>' % len(df))
+for fam in order_fam:
+    fam_rows = df[df['famille'] == fam]
+    fam_col = df_colors.loc[fam_rows.index[0], 'famille']
+    parts.append('<details open><summary>%s%s <span class="n">(%d)</span></summary>' % (dot(fam_col), _html.escape(str(fam)), len(fam_rows)))
+    for th in fam_rows['theme'].drop_duplicates().tolist():
+        th_rows = fam_rows[fam_rows['theme'] == th]
+        th_col = df_colors.loc[th_rows.index[0], 'theme']
+        parts.append('  <details><summary>%s%s <span class="n">(%d)</span></summary>' % (dot(th_col), _html.escape(str(th)), len(th_rows)))
+        for gr in th_rows['groupe'].drop_duplicates().tolist():
+            gr_rows = th_rows[th_rows['groupe'] == gr]
+            gr_col = df_colors.loc[gr_rows.index[0], 'groupe']
+            parts.append('    <details><summary>%s%s <span class="n">(%d)</span></summary>' % (dot(gr_col), _html.escape(str(gr)), len(gr_rows)))
+            parts.append('      <ul>')
+            for _, r in gr_rows.iterrows():
+                parts.append('        <li>%s<b>%d</b> — %s</li>' % (dot(gr_col), int(r['id_indicateur']), _html.escape(str(r['nom_indicateur']))))
+            parts.append('      </ul>')
+            parts.append('    </details>')
+        parts.append('  </details>')
+    parts.append('</details>')
+parts.append('<footer>Généré depuis liste_indicateurs_v4.xlsx — HydroScope.</footer>')
+
+html_doc = ('<!DOCTYPE html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+            '<title>Arbre hiérarchique des indicateurs — HydroScope</title>\n'
+            '<style>%s</style>\n</head>\n<body>\n%s\n</body>\n</html>') % (css, '\n'.join(parts))
+
+with open('annexes/arbre_indicateurs.html', 'w', encoding='utf-8') as f:
+    f.write(html_doc)
+print('')
+```

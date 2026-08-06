@@ -63,90 +63,85 @@ L'OEIL assure la continuité intellectuelle du projet initial (PressionPPE en 20
 
 {{< pagebreak >}}
 
-{{< include ./8_methodologie_agile.qmd >}}
+{{< include ./4_methodologie_agile.qmd >}}
 
 ---
 
 {{< pagebreak >}}
 
-{{< include ./3bis_catalogue_indicateurs.qmd >}}
+{{< include ./5_presentation_indicateurs.qmd >}}
 
 ---
 
 {{< pagebreak >}}
 
-{{< include ./4_monitoring.qmd >}}
+{{< include ./6_perimetre_fonctionnel.qmd >}}
 
 ---
 
 {{< pagebreak >}}
 
-{{< include ./5_perimetre_fonctionnel.qmd >}}
-
----
-
-
-
-{{< pagebreak >}}
-
-{{< include ./5Ter_product_backlog.qmd >}}
+{{< include ./7_product_backlog.qmd >}}
 
 ---
 
 {{< pagebreak >}}
 
-{{< include ./6_Exigences_non_fonctionnelles.qmd >}}
+{{< include ./8_monitoring.qmd >}}
 
 ---
 
 {{< pagebreak >}}
 
-{{< include ./7_architecture_cible.qmd >}}
-
-
----
-
-
-{{< pagebreak >}}
-
-{{< include ./8Bis_bonne_pratique_dev.qmd >}}
-
+{{< include ./9_Exigences_non_fonctionnelles.qmd >}}
 
 ---
 
 {{< pagebreak >}}
 
-{{< include ./9_deploiement_CI.qmd >}}
+{{< include ./10_architecture_cible.qmd >}}
 
 ---
 
 {{< pagebreak >}}
 
-{{< include ./10_recette_validation.qmd >}}
-
----
-
-
-
-
-
-
-{{< pagebreak >}}
-
-{{< include ./11_accompagnement.qmd >}}
-
----
-
-
-{{< pagebreak >}}
-
-{{< include ./11Bis_cadre_contractuel.qmd >}}
+{{< include ./11_catalogue_metadonnees.qmd >}}
 
 ---
 
 {{< pagebreak >}}
 
-{{< include ./12_planing_jalons.qmd >}}
+{{< include ./12_bonne_pratique_dev.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./13_deploiement_CI.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./14_recette_validation.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./15_accompagnement.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./16_cadre_contractuel.qmd >}}
+
+---
+
+{{< pagebreak >}}
+
+{{< include ./17_planning_jalons.qmd >}}
 
 ---
 
@@ -170,7 +165,7 @@ Le tableau de référence des indicateurs est fourni avec le présent cahier des
 Le catalogue de fiches détaillées des indicateurs est fourni avec le présent cahier des charges :
 
 - [Fiches_indicateurs_HydroScope-v4.pdf](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées (définition, objectifs, méthode, sources, vigilances) ;
-- le répertoire des données structurées associées ([../ressources/fiches-csv](../ressources/fiches-csv/)) alimente dynamiquement les tableaux du chapitre 3bis.
+- le répertoire des données structurées associées ([../ressources/fiches-csv](../ressources/fiches-csv/)) alimente dynamiquement les tableaux du chapitre 5 – Présentation des indicateurs.
 
 ## Critères d'acceptation
 

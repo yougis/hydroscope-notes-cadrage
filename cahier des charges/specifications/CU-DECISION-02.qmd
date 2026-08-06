@@ -15,7 +15,7 @@ afin d'arbitrer les investissements en fonction des besoins identifiés.
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-DECISION-02` (US6.5, US7.5) — `profils_utilisateurs.md` (Profil 4).
+- Cas d'usage : `CU-DECISION-02` (US6.5, US7.5) — `profils_utilisateurs.qmd` (Profil 4).
 - `help/06-comparer-territoires.md` ; EPIC 6.
 - Navigation : Sidebar « Exploration > Comparer les territoires ».
 

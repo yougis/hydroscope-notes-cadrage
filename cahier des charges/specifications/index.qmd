@@ -1,6 +1,6 @@
 ---
 title: "Spécifications IHM par cas d'usage — HydroScope"
-date: "2026-08-05"
+date: "2026-08-06"
 format: html
 ---
 
@@ -25,63 +25,287 @@ aide à
 l'interprétation**, pas une aide à la décision automatisée (EPIC 5).
 :::
 
+Les index ci-dessous sont **générés automatiquement** à partir des
+frontmatters des fiches de cas d'usage (titre, profil, US) et du référentiel
+des User Stories (`backlog.csv`) : toute évolution d'une fiche ou du backlog se
+répercute à la prochaine compilation du document.
+
 ## Administration plateforme
 
-| ID | Titre | US | Fiche |
-|---|---|---|---|
-| CU-ADMIN-01 | Créer un compte et attribuer un profil | US9.1 | [CU-ADMIN-01.qmd](CU-ADMIN-01.qmd) |
-| CU-ADMIN-02 | Configurer rôles et droits d'accès | US9.3 | [CU-ADMIN-02.qmd](CU-ADMIN-02.qmd) |
-| CU-ADMIN-03 | Restreindre l'accès aux données sensibles | US9.4 | [CU-ADMIN-03.qmd](CU-ADMIN-03.qmd) |
-| CU-ADMIN-04 | Consulter le journal des actions | US10.3 | [CU-ADMIN-04.qmd](CU-ADMIN-04.qmd) |
-| CU-ADMIN-05 | Lancer un audit d'usage | US10.6 | [CU-ADMIN-05.qmd](CU-ADMIN-05.qmd) |
+```{python}
+#| label: tbl-admin
+#| tbl-cap: "Fiches de cas d'usage — Administration plateforme"
+#| output: asis
+
+import re
+from pathlib import Path
+import pandas as pd
+import yaml
+
+def parse_fiches(glob_pattern):
+    rows = []
+    for f in sorted(Path(".").glob(glob_pattern)):
+        text = f.read_text(encoding="utf-8")
+        m = re.match(r"^---\n(.*?)\n---", text, re.S)
+        meta = yaml.safe_load(m.group(1)) if m else {}
+        rows.append((f.name, meta))
+    return rows
+
+def check_us(us_str, backlog_ids):
+    for tok in re.findall(r"US\d+(?:bis)?\.\d+", us_str or ""):
+        if tok not in backlog_ids:
+            print(f"[WARNING] US inconnue dans le backlog : {tok}")
+
+backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+profile = "Administrateur plateforme"
+
+fiches = [r for r in parse_fiches("CU-ADMIN-*.qmd") if r[1].get("profile") == profile]
+fiches.sort(key=lambda r: r[1].get("uc", r[0]))
+for _, meta in fiches:
+    check_us(meta.get("us"), backlog_ids)
+
+df = pd.DataFrame([
+    {
+        "ID": meta.get("uc", f),
+        "Titre": meta.get("title", "").split("—", 1)[-1].strip(),
+        "US": meta.get("us", ""),
+        "Fiche": f"[fiche]({f})",
+    }
+    for f, meta in fiches
+])
+print(df.to_markdown(index=False))
+```
 
 ## Administration expert data
 
-| ID | Titre | Page |
-|---|---|---|
-| CU-DATA-01 | Importer et normaliser un jeu de données | [CU-DATA-01.qmd](CU-DATA-01.qmd) |
-| CU-DATA-02 | Détecter anomalies et qualifier la fiabilité | [CU-DATA-02.qmd](CU-DATA-02.qmd) |
-| CU-DATA-03 | Gérer un bassin versant et ses captages | [CU-DATA-03.qmd](CU-DATA-03.qmd) |
-| CU-DATA-04 | Calculer un indicateur et versionner la méthode | [CU-DATA-04.qmd](CU-DATA-04.qmd) |
-| CU-DATA-05 | Construire un indice composite (méthode et documentation) | [CU-DATA-05.qmd](CU-DATA-05.qmd) |
+```{python}
+#| label: tbl-data
+#| tbl-cap: "Fiches de cas d'usage — Administration expert data"
+#| output: asis
+
+import re
+from pathlib import Path
+import pandas as pd
+import yaml
+
+def parse_fiches(glob_pattern):
+    rows = []
+    for f in sorted(Path(".").glob(glob_pattern)):
+        text = f.read_text(encoding="utf-8")
+        m = re.match(r"^---\n(.*?)\n---", text, re.S)
+        meta = yaml.safe_load(m.group(1)) if m else {}
+        rows.append((f.name, meta))
+    return rows
+
+def check_us(us_str, backlog_ids):
+    for tok in re.findall(r"US\d+(?:bis)?\.\d+", us_str or ""):
+        if tok not in backlog_ids:
+            print(f"[WARNING] US inconnue dans le backlog : {tok}")
+
+backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+profile = "Administrateur expert data"
+
+fiches = [r for r in parse_fiches("CU-DATA-*.qmd") if r[1].get("profile") == profile]
+fiches.sort(key=lambda r: r[1].get("uc", r[0]))
+for _, meta in fiches:
+    check_us(meta.get("us"), backlog_ids)
+
+df = pd.DataFrame([
+    {
+        "ID": meta.get("uc", f),
+        "Titre": meta.get("title", "").split("—", 1)[-1].strip(),
+        "US": meta.get("us", ""),
+        "Fiche": f"[fiche]({f})",
+    }
+    for f, meta in fiches
+])
+print(df.to_markdown(index=False))
+```
 
 ## Expert métier eau potable
 
-| ID | Titre | Page |
-|---|---|---|
-| CU-EXPERT-02 | Consulter les graphiques temporels et alterner les vues | [CU-EXPERT-02.qmd](CU-EXPERT-02.qmd) |
-| CU-EXPERT-03 | Identifier des tendances et détecter des dépassements | [CU-EXPERT-03.qmd](CU-EXPERT-03.qmd) |
-| CU-EXPERT-04 | Consulter la fiche synthétique (descriptif) | [CU-EXPERT-04.qmd](CU-EXPERT-04.qmd) |
+```{python}
+#| label: tbl-expert
+#| tbl-cap: "Fiches de cas d'usage — Expert métier eau potable"
+#| output: asis
+
+import re
+from pathlib import Path
+import pandas as pd
+import yaml
+
+def parse_fiches(glob_pattern):
+    rows = []
+    for f in sorted(Path(".").glob(glob_pattern)):
+        text = f.read_text(encoding="utf-8")
+        m = re.match(r"^---\n(.*?)\n---", text, re.S)
+        meta = yaml.safe_load(m.group(1)) if m else {}
+        rows.append((f.name, meta))
+    return rows
+
+def check_us(us_str, backlog_ids):
+    for tok in re.findall(r"US\d+(?:bis)?\.\d+", us_str or ""):
+        if tok not in backlog_ids:
+            print(f"[WARNING] US inconnue dans le backlog : {tok}")
+
+backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+profile = "Expert métier eau potable"
+
+fiches = [r for r in parse_fiches("CU-EXPERT-*.qmd") if r[1].get("profile") == profile]
+fiches.sort(key=lambda r: r[1].get("uc", r[0]))
+for _, meta in fiches:
+    check_us(meta.get("us"), backlog_ids)
+
+df = pd.DataFrame([
+    {
+        "ID": meta.get("uc", f),
+        "Titre": meta.get("title", "").split("—", 1)[-1].strip(),
+        "US": meta.get("us", ""),
+        "Fiche": f"[fiche]({f})",
+    }
+    for f, meta in fiches
+])
+print(df.to_markdown(index=False))
+```
 
 ## Décideur métier
 
-| ID | Titre | Page |
-|---|---|---|
-| CU-DECISION-01 | Tableau de bord synthétique et fiche territoire | [CU-DECISION-01.qmd](CU-DECISION-01.qmd) |
-| CU-DECISION-02 | Comparer deux bassins versants | [CU-DECISION-02.qmd](CU-DECISION-02.qmd) |
-| CU-DECISION-03 | Suivre une tendance et détecter un dépassement | [CU-DECISION-03.qmd](CU-DECISION-03.qmd) |
-| CU-DECISION-04 | Générer un rapport PDF pour les instances | [CU-DECISION-04.qmd](CU-DECISION-04.qmd) |
-| CU-DECISION-05 | Consulter l'aide à l'interprétation | [CU-DECISION-05.qmd](CU-DECISION-05.qmd) |
+```{python}
+#| label: tbl-decision
+#| tbl-cap: "Fiches de cas d'usage — Décideur métier"
+#| output: asis
+
+import re
+from pathlib import Path
+import pandas as pd
+import yaml
+
+def parse_fiches(glob_pattern):
+    rows = []
+    for f in sorted(Path(".").glob(glob_pattern)):
+        text = f.read_text(encoding="utf-8")
+        m = re.match(r"^---\n(.*?)\n---", text, re.S)
+        meta = yaml.safe_load(m.group(1)) if m else {}
+        rows.append((f.name, meta))
+    return rows
+
+def check_us(us_str, backlog_ids):
+    for tok in re.findall(r"US\d+(?:bis)?\.\d+", us_str or ""):
+        if tok not in backlog_ids:
+            print(f"[WARNING] US inconnue dans le backlog : {tok}")
+
+backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+profile = "Décideur métier"
+
+fiches = [r for r in parse_fiches("CU-DECISION-*.qmd") if r[1].get("profile") == profile]
+fiches.sort(key=lambda r: r[1].get("uc", r[0]))
+for _, meta in fiches:
+    check_us(meta.get("us"), backlog_ids)
+
+df = pd.DataFrame([
+    {
+        "ID": meta.get("uc", f),
+        "Titre": meta.get("title", "").split("—", 1)[-1].strip(),
+        "US": meta.get("us", ""),
+        "Fiche": f"[fiche]({f})",
+    }
+    for f, meta in fiches
+])
+print(df.to_markdown(index=False))
+```
 
 ## Intéressé public
 
-| ID | Titre | Page |
-|---|---|---|
-| CU-PUBLIC-01 | Vérifier la qualité de l'eau via la carte | [CU-PUBLIC-01.qmd](CU-PUBLIC-01.qmd) |
-| CU-PUBLIC-02 | Rechercher une commune/captage et consulter les indicateurs | [CU-PUBLIC-02.qmd](CU-PUBLIC-02.qmd) |
-| CU-PUBLIC-03 | Consulter les couches thématiques et zoomer | [CU-PUBLIC-03.qmd](CU-PUBLIC-03.qmd) |
-| CU-PUBLIC-04 | Appliquer un preset « territoires exposés » | [CU-PUBLIC-04.qmd](CU-PUBLIC-04.qmd) |
-| CU-PUBLIC-05 | Trier la liste des indicateurs par distance | [CU-PUBLIC-05.qmd](CU-PUBLIC-05.qmd) |
+```{python}
+#| label: tbl-public
+#| tbl-cap: "Fiches de cas d'usage — Intéressé public"
+#| output: asis
+
+import re
+from pathlib import Path
+import pandas as pd
+import yaml
+
+def parse_fiches(glob_pattern):
+    rows = []
+    for f in sorted(Path(".").glob(glob_pattern)):
+        text = f.read_text(encoding="utf-8")
+        m = re.match(r"^---\n(.*?)\n---", text, re.S)
+        meta = yaml.safe_load(m.group(1)) if m else {}
+        rows.append((f.name, meta))
+    return rows
+
+def check_us(us_str, backlog_ids):
+    for tok in re.findall(r"US\d+(?:bis)?\.\d+", us_str or ""):
+        if tok not in backlog_ids:
+            print(f"[WARNING] US inconnue dans le backlog : {tok}")
+
+backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+profile = "Intéressé public"
+
+fiches = [r for r in parse_fiches("CU-PUBLIC-*.qmd") if r[1].get("profile") == profile]
+fiches.sort(key=lambda r: r[1].get("uc", r[0]))
+for _, meta in fiches:
+    check_us(meta.get("us"), backlog_ids)
+
+df = pd.DataFrame([
+    {
+        "ID": meta.get("uc", f),
+        "Titre": meta.get("title", "").split("—", 1)[-1].strip(),
+        "US": meta.get("us", ""),
+        "Fiche": f"[fiche]({f})",
+    }
+    for f, meta in fiches
+])
+print(df.to_markdown(index=False))
+```
 
 ---
 
-## Analyse multicritère (AMC) 
+## Analyse multicritère (AMC)
 
+```{python}
+#| label: tbl-amc
+#| tbl-cap: "Documents support — Analyse multicritère (AMC, isolée)"
+#| output: asis
 
-| ID | Titre | Page |
-|---|---|---|
-| CU-EXPERT-01 | Conduire l'analyse multicritère (pondérations, scénarios, contributions) | [CU-EXPERT-01.qmd](CU-EXPERT-01.qmd) |
-| AMC-RENDU | Rendu visuel du score : contribution et priorisation | [AMC_rendu_score.qmd](AMC_rendu_score.qmd) |
-| AMC-METHODE | Méthodes, seuils et gouvernance de l'AMC | [AMC_methodologie.qmd](AMC_methodologie.qmd) |
+import re
+from pathlib import Path
+import pandas as pd
+import yaml
 
----
+def parse_fiches(glob_pattern):
+    rows = []
+    for f in sorted(Path(".").glob(glob_pattern)):
+        text = f.read_text(encoding="utf-8")
+        m = re.match(r"^---\n(.*?)\n---", text, re.S)
+        meta = yaml.safe_load(m.group(1)) if m else {}
+        rows.append((f.name, meta))
+    return rows
+
+def check_us(us_str, backlog_ids):
+    for tok in re.findall(r"US\d+(?:bis)?\.\d+", us_str or ""):
+        if tok not in backlog_ids:
+            print(f"[WARNING] US inconnue dans le backlog : {tok}")
+
+backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+profile = "Document support (AMC, isolé)"
+
+fiches = [r for r in parse_fiches("AMC_*.qmd") if r[1].get("profile") == profile]
+fiches.sort(key=lambda r: r[1].get("uc", r[0]))
+for _, meta in fiches:
+    check_us(meta.get("us"), backlog_ids)
+
+df = pd.DataFrame([
+    {
+        "ID": meta.get("uc", f),
+        "Titre": meta.get("title", "").split("—", 1)[-1].strip(),
+        "US": meta.get("us", ""),
+        "Fiche": f"[fiche]({f})",
+    }
+    for f, meta in fiches
+])
+print(df.to_markdown(index=False))
+print()
+print("> **Note :** les références US des documents AMC ne sont pas normalisées dans le backlog (à harmoniser).")
+```

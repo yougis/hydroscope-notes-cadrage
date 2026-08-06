@@ -1,4 +1,4 @@
-## Monitoring, supervision et pilotage
+## Monitoring, supervision et pilotage {#sec-monitoring}
 
 Des besoins transverses de monitoring sont essentiels pour le bon fonctionnement du système, la fiabilité des données et la capacité à suivre les dynamiques géographiques dans le temps. Ces fonctions de monitoring reposent sur des mécanismes de suivi, d’alerte et d’analyse continue.
 

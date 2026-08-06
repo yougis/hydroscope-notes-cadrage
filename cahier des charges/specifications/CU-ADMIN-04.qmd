@@ -15,8 +15,8 @@ des actions afin de détecter des comportements anormaux et assurer la sécurit�
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-ADMIN-04` (US10.3) — `profils_utilisateurs.md` (Profil 1).
-- EPIC 10 — Traçabilité et audit ; §4 Historisation et traçabilité des données.
+- Cas d'usage : `CU-ADMIN-04` (US10.3) — `profils_utilisateurs.qmd` (Profil 1).
+- EPIC 10 — Traçabilité et audit ; §8 Historisation et traçabilité des données.
 - Navigation : Sidebar « Suivi > Historique & traçabilité » (`UX-header-sidebar.md` §2.2).
 
 ## 2. Fonctionnalités couvertes

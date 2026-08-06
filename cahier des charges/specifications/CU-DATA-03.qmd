@@ -15,7 +15,7 @@ versant et ses captages dans le référentiel afin de maintenir la cohérence sp
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-DATA-03` (US3.1, US3.2) — `profils_utilisateurs.md` (Profil 2).
+- Cas d'usage : `CU-DATA-03` (US3.1, US3.2) — `profils_utilisateurs.qmd` (Profil 2).
 - EPIC 3 — Référentiels (géographique : BVAEP, captages/forages, PPE, communes, H3).
 - `UX-header-sidebar.md` §2.2 (groupe « Administration > Référentiels »).
 

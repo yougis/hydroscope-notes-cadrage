@@ -38,15 +38,6 @@ Les validations sont réalisées de manière itérative, en lien avec les cycles
 
 ### Organisation du projet en mode Agile
 
-Le projet HydroScope est conduit selon une approche itérative et incrémentale inspirée des méthodes Agile, permettant d’adapter en continu le produit aux besoins des utilisateurs et aux contraintes identifiées.
+Le projet HydroScope est piloté selon une approche itérative et incrémentale : le développement est organisé en cycles courts (**sprints**), ponctués de revues et démonstrations régulières associant la MOA, et de rétrospectives visant à améliorer en continu les pratiques. Le **comité de pilotage** arbitre les décisions structurantes, tandis que le **backlog** est priorisé en continu par la MOA en fonction de la valeur métier, des contraintes techniques et des enjeux du projet.
 
-Le développement s’appuie sur un **backlog produit** structuré en fonctionnalités (EPICS) et décliné en éléments plus fins. Ce backlog est priorisé en continu par la MOA, en fonction de la valeur métier, des contraintes techniques et des enjeux du projet.
-
-Le fonctionnement repose sur des cycles courts de développement (**sprints**), intégrant :
-
-- des phases de planification (sprint planning),
-- des points de suivi réguliers au sein de l’équipe projet,
-- des **revues de sprint** associant les parties prenantes pour présenter les fonctionnalités développées,
-- des **rétrospectives** visant à améliorer en continu l’organisation et les pratiques.
-
-Des démonstrations régulières sont organisées afin de recueillir les retours des utilisateurs et d’ajuster les priorités. Cette organisation vise à sécuriser les développements, à améliorer la qualité du produit et à garantir son adéquation avec les besoins métiers.
+Le détail de la démarche agile (backlog, stratégie MVP, rituels, validation) est présenté au [chapitre 4 – Organisation du projet en mode Agile](#sec-methodologie-agile).

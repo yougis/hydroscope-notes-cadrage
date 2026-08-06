@@ -15,7 +15,7 @@ automatique afin de disposer d'un document utilisable pour la communication et l
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-DECISION-04` (US8.3) — `profils_utilisateurs.md` (Profil 4).
+- Cas d'usage : `CU-DECISION-04` (US8.3) — `profils_utilisateurs.qmd` (Profil 4).
 - EPIC 8 — Génération et export de rapports.
 - Navigation : Sidebar « Rapports ».
 

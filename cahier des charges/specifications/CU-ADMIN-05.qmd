@@ -3,7 +3,7 @@ title: "CU-ADMIN-05 — Lancer un audit d'usage pour adapter la plateforme"
 profile: "Administrateur plateforme"
 uc: "CU-ADMIN-05"
 us: "US10.6"
-epic: "EPIC 10 — Traçabilité ; §4 — Monitoring des usages"
+epic: "EPIC 10 — Traçabilité ; §8 — Monitoring des usages"
 mvp: false
 amc: false
 ---
@@ -16,8 +16,8 @@ plateforme aux besoins réels.
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-ADMIN-05` (US10.6) — `profils_utilisateurs.md` (Profil 1).
-- §4 — Monitoring des usages (fréquentation, actions, profils, exports, territoires/indicateurs).
+- Cas d'usage : `CU-ADMIN-05` (US10.6) — `profils_utilisateurs.qmd` (Profil 1).
+- §8 — Monitoring des usages (fréquentation, actions, profils, exports, territoires/indicateurs).
 - EPIC 10 — Traçabilité et audit.
 
 ## 2. Fonctionnalités couvertes

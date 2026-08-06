@@ -1,13 +1,13 @@
 
-## Détail Quantitatif Estimatif (DQE)
+## Détail Quantitatif Estimatif (DQE) {#sec-cadre-chiffrage}
 
 Le DQE ci-dessous constitue la **grille commune de chiffrage et de comparaison des offres**. Chaque candidat est invité à la compléter ligne à ligne :
 
-- **Périmètre de base** : l'ensemble des EPIC du chapitre 5 hors analyse multicritère (MVP + lot 2), au niveau de chaque user story du backlog (chapitre 5Ter) ;
+- **Périmètre de base** : l'ensemble des EPIC du [chapitre 6 – Périmètre fonctionnel (EPICS)](#sec-perimetre) hors analyse multicritère (MVP + lot 2), au niveau de chaque user story du [chapitre 7 – Product backlog](#sec-backlog) ;
 - **Option 1 — Analyse multicritère** (EPIC 5) : chiffrée séparément du périmètre de base ;
-- **Option 2 — TMA** : maintenance corrective et évolutive post-déploiement (référentiel SLA au chapitre 11Bis).
+- **Option 2 — TMA** : maintenance corrective et évolutive post-déploiement (référentiel SLA au [chapitre 16 – Cadre contractuel et juridique](#sec-cadre-contractuel)).
 
-Colonnes à compléter par le candidat : **Charge proposée (JH)**, **Taux journalier (€/JH)**, **Coût HT (€)**, **Commentaires** (hypothèses, points de vigilance, écarts d'interprétation du périmètre). Aucun montant indicatif n'est communiqué par la MOA : l'estimation de chaque candidat doit être fondée sur le périmètre décrit au chapitre 5, les critères d'acceptation (annexes) et les exigences non fonctionnelles (chapitre 6).
+Colonnes à compléter par le candidat : **Charge proposée (JH)**, **Taux journalier (€/JH)**, **Coût HT (€)**, **Commentaires** (hypothèses, points de vigilance, écarts d'interprétation du périmètre). Aucun montant indicatif n'est communiqué par la MOA : l'estimation de chaque candidat doit être fondée sur le périmètre décrit au [chapitre 6 – Périmètre fonctionnel (EPICS)](#sec-perimetre), les critères d'acceptation (annexes) et les exigences non fonctionnelles (chapitre 9 – Exigences non fonctionnelles).
 
 La colonne « Complexité » (faible / moyenne / élevée / très élevée) est fournie à titre indicatif pour faciliter la lecture du périmètre ; elle n'est pas contractuelle.
 
@@ -69,7 +69,7 @@ option
 
 | Poste | Référence | Charge proposée (JH/an) | Taux journalier (€/JH) | Coût HT (€/an) | Commentaires |
 |-------|-----------|-------------------------|------------------------|----------------|--------------|
-| TMA post-déploiement | Cadre contractuel (11Bis) |  |  |  | SLA : Bloquant 4 h / 24 h ; Majeur 5 j / 10 j ; Mineur 10 j / 30 j |
+| TMA post-déploiement | Cadre contractuel (chapitre 16) |  |  |  | SLA : Bloquant 4 h / 24 h ; Majeur 5 j / 10 j ; Mineur 10 j / 30 j |
 
 ### Synthèse de l'offre
 
@@ -91,6 +91,6 @@ La comparaison des offres s'appuie sur une grille de critères pondérés, appli
 | Conformité au périmètre fonctionnel | 35 % | Couverture des EPIC, compréhension des exigences, traitement des critères d'acceptation, proposition par lot (base / options) |
 | Prix | 30 % | DQE complété ligne à ligne, cohérence des taux journaliers, lisibilité des options, absence de lignes vides ou d'exclusions implicites |
 | Méthodologie et organisation | 20 % | Démarche agile, jalons et livraisons itératives, implication de la MOA, modalités de recette et de validation |
-| Qualité de la solution | 15 % | Architecture (open source, modulaire, réversible), gestion des données (traçabilité, floutage des sensibles), documentation, réversibilité (11Bis) |
+| Qualité de la solution | 15 % | Architecture (open source, modulaire, réversible), gestion des données (traçabilité, floutage des sensibles), documentation, réversibilité (chapitre 16) |
 
 La note globale de chaque offre est calculée comme la moyenne pondérée des notes attribuées sur chaque critère. Les offres ne répondant pas au périmètre de base (EPIC non traités ou critères d'acceptation non couverts) peuvent être déclarées non conformes sans notation.

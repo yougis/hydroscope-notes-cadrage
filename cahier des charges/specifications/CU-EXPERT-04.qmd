@@ -21,7 +21,7 @@ avant de recommander une action.
 
 ## 1. Contexte & référence
 
-- Cas d'usage : `CU-EXPERT-04` (US7.4, US7.5) — `profils_utilisateurs.md` (Profil 3).
+- Cas d'usage : `CU-EXPERT-04` (US7.4, US7.5) — `profils_utilisateurs.qmd` (Profil 3).
 - EPIC 7 — Fiches et rapports (descriptif, sans scoring ; EPIC 7 interdit classement/scoring).
 - Navigation : Sidebar « Exploration > Fiches des territoires ».
 
