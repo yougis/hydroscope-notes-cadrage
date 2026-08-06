@@ -1,8 +1,0 @@
-id_theme;Nom_theme;Libelle_objectif;id_famille;Famille;Définition
-1;Enjeux AEP;Importance stratégique AEP;1;Enjeu;Caractérise l’importance stratégique des ressources en eau potable en termes de disponibilité, de capacité et de résilience technique et réglementaire pour l’alimentation de la population.
-2;Enjeux Environnementaux;Valeur écologique et réglementaire;1;Enjeu;Caractérise la valeur écologique, patrimoniale et réglementaire des milieux naturels autour des captages, ainsi que leur rôle de protection (filtration, limitation de l’érosion) et leur niveau de reconnaissance et de préservation.
-3;MENACES NATURELLES;Aléas et perturbations naturelles;2;Menace;Caractérise les phénomènes naturels susceptibles d’altérer les milieux et d’impacter la qualité et la pérennité de la ressource en eau.
-4;MENACES ANTHROPIQUES;Impacts des activités humaines;2;Menace;Caractérise les menaces exercées par les activités humaines, l’occupation du sol et les infrastructures sur les ressources en eau.
-5;Vulnérabilité Intrinsèque;Sensibilité naturelle du milieu;3;Vulnérabilité;Caractérise la sensibilité naturelle des milieux aux transferts d’eau et de polluants, en fonction de leurs propriétés physiques indépendantes des pressions externes.
-6;Pressions Quantitatives;Tension sur la ressource en eau;2;Menace;Caractérise les déséquilibres entre la disponibilité de la ressource en eau et les usages humains, notamment à travers l’intensité des prélèvements.
-7;Pressions Qualitatives;Évaluation de la qualité de l’eau;2;Menace;Caractérise l’état de qualité de l’eau et les facteurs susceptibles de l’altérer (physico-chimiques, bactériologiques ou réglementaires).
