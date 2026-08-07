@@ -1,8 +1,8 @@
 ## Organisation du projet en mode Agile {#sec-methodologie-agile}
 
-Le projet HydroScope est conduit selon une approche itérative et incrémentale inspirée des méthodes Agile. Cette organisation vise à adapter en continu le produit aux besoins des utilisateurs, à sécuriser les développements et à garantir une livraison progressive de fonctionnalités opérationnelles.
+Le projet HydroScope est conduit selon une approche itérative et incrémentale inspirée des méthodes Agile/Scrum. Cette organisation vise à adapter en continu le produit aux besoins des utilisateurs, à sécuriser les développements et à garantir une livraison progressive de fonctionnalités opérationnelles.
 
-Elle permet également de concilier des exigences de rigueur méthodologique (notamment sur les indicateurs) avec une capacité d’adaptation aux retours terrain.
+Elle permet également de concilier des exigences de rigueur méthodologique (notamment sur les indicateurs) avec une capacité d’adaptation aux retours des utilisateurs.
 
 ### Principes d’organisation
 
@@ -16,18 +16,20 @@ L’organisation du projet repose sur les principes suivants :
 
 ### Backlog produit
 
-Le projet s’appuie sur un **backlog produit** structuré, qui constitue le référentiel central des besoins.
+Le projet s’appuie sur un **backlog** structuré, qui constitue le référentiel central des besoins.
 
 Ce backlog est organisé :
 
 - en **EPICS**, correspondant aux grandes fonctionnalités du système ;
 - en **User Stories (US)**, décrivant les besoins du point de vue utilisateur.
-
+- en **Critères de succès ou d'acceptation (US - SC)**, décrivant les besoins du point de vue utilisateur.
+  
 Le backlog est :
 
-- maintenu et priorisé par la **MOA**, avec l’appui de l’AMOA ;
+- maintenu et priorisé par la **MOA**;
 - enrichi et ajusté en continu en fonction des retours utilisateurs et des contraintes techniques ;
-- utilisé comme base de planification des développements.
+- utilisé comme base de planification des développements ;
+- un support de chiffrage pour le préstataire.
 
 Le backlog a vocation à être intégré et suivi dans les outils de gestion de projet utilisés par l’OEIL, notamment **Azure DevOps**, permettant :
 
@@ -37,7 +39,7 @@ Le backlog a vocation à être intégré et suivi dans les outils de gestion de 
 
 ### Organisation des sprints
 
-Le développement est organisé en cycles courts appelés **sprints**, d’une durée généralement comprise entre 2 et 4 semaines.
+Le développement est organisé en cycles courts appelés **sprints**, d’une durée fixée à l'issue des sprints de cadrage initial (recommandation : 2 semaines) afin de stabiliser la vélocité.
 
 Chaque sprint comprend :
 - la sélection d’un ensemble de User Stories issues du backlog priorisé ;
@@ -71,4 +73,34 @@ Cela se traduit par :
 - l’intégration de ces retours dans le backlog.
 
 Cette démarche permet d’ajuster progressivement le produit et de sécuriser les choix fonctionnels.
+
+### Périmètre contractuel de référence
+
+Le projet s’appuie sur un **périmètre de référence**, figé au démarrage (jalon zéro). Il regroupe les EPICS et les User Stories du socle (MVP) que le prestataire est chargé de chiffrer. Ce périmètre ne gèle pas les besoins : il fournit une **base stable** pour contractualiser le prix, mesurer l’avancement et **quantifier toute évolution** demandée ensuite. Chaque évolution est traitée selon la procédure décrite ci-dessous.
+
+### Estimation et vélocité
+
+Pour rendre l’effort chiffrable et les évolutions quantifiables :
+
+- chaque EPIC et chaque User Story est estimée en **points d'effort** (échelle relative) ;
+- la **vélocité** (points tenus par sprint) est mesurée sur les deux premiers sprints, puis recalculée régulièrement ;
+- la vélocité sert au pilotage : durée prévisionnelle, capacité à absorber les évolutions et **coût unitaire d’une évolution** ;
+- les estimations sont co-validées par la **MOA** et le prestataire, et revues en rétrospective.
+
+### Maîtrise des évolutions du périmètre
+
+Les ajustements du périmètre sont **tracés et formalisés**, jamais implicites :
+
+- toute demande (ajout, modification, suppression) est rédigée en **User Story** et versée dans une **file des évolutions**, distincte du backlog contractuel ;
+- chaque évolution est estimée et son impact financier calculé ;
+- la MOA valide chaque demande avant sa mise au sprint (immédiate ou différée) ;
+- selon son ampleur, l’évolution est absorbée dans l’enveloppe, activée en Lot 2, ou fait l’objet d’un avenant au contrat.
+
+### Cadre de chiffrage : Lot 1 (MVP) et Lot 2 (Évolutions)
+
+Le projet est structuré en deux volets :
+
+- **Lot 1 – MVP** : périmètre de référence, chiffré de façon **ferme** et comparable entre les candidats ;
+- **Lot 2 – Évolutions** : besoins secondaires, **chiffrés à l’avance** et **activables** par la MOA pendant le projet, sans renégociation ;
+- une **provision pour aléas**, laissée à l’appréciation de chaque candidat, couvre les petits écarts de périmètre.
 

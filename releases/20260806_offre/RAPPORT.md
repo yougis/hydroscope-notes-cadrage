@@ -23,9 +23,9 @@ L'analyse des `href`/`src` de `index.html` (rendu Quarto, `embed-resources: true
 
 | Format | Résultat | Taille |
 |---|---|---|
-| html | OK | 5878536 o |
-| pdf | OK | 1676877 o |
-| docx | OK | 209730 o |
+| html | OK | 5877502 o |
+| pdf | OK | 1706619 o |
+| docx | OK | 210884 o |
 
 ## Vérification des liens de l'HTML du pack
 
@@ -97,9 +97,9 @@ cahier des charges/
     index.qmd  (10939 o)
   backlog.csv  (34196 o)
   dependances_us.qmd  (10606 o)
-  index.docx  (209730 o)
-  index.html  (5878536 o)
-  index.pdf  (1676877 o)
+  index.docx  (210884 o)
+  index.html  (5877502 o)
+  index.pdf  (1706619 o)
   profils_utilisateurs.qmd  (17877 o)
 figma-design/
   docs/

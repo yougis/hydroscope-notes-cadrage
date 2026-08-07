@@ -102,6 +102,7 @@ L'ensemble de ces risques doivent être pris en compte par le prestataire et sa 
 #### Suivi des risques
 
 Les risques feront l’objet :
+
 - d’un suivi régulier en COTECH et COPIL ;
 - d’une mise à jour continue ;
 - de la définition de mesures de mitigation adaptées.
@@ -116,8 +117,8 @@ Les risques feront l’objet :
 
 ### Points de vigilance
 
-- Respect des échéances liées aux financements (OFB / PEP)  
-- Nécessité de stabiliser rapidement un MVP opérationnel  
-- Coordination entre rythme Agile et contraintes contractuelles  
-- Anticipation des phases de recette et de validation méthodologique  
-- Gestion des dépendances liées aux données et aux partenaires
+- Respect des échéances liées aux financements (OFB / PEP)
+- Nécessité de stabiliser rapidement un MVP opérationnel
+- Coordination entre rythme Agile et contraintes contractuelles
+- Anticipation des phases de recette et de validation méthodologique
+- Gestion des dépendances liées aux données et aux partenaires.

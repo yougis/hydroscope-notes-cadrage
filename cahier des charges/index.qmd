@@ -103,11 +103,6 @@ L'OEIL assure la continuité intellectuelle du projet initial (PressionPPE en 20
 
 ---
 
-{{< pagebreak >}}
-
-{{< include ./11_catalogue_metadonnees.qmd >}}
-
----
 
 {{< pagebreak >}}
 
@@ -155,26 +150,29 @@ L'OEIL assure la continuité intellectuelle du projet initial (PressionPPE en 20
 
 ## Tableau synthétique des indicateurs
 
-Le tableau de référence des indicateurs est le **fichier maître** `fiches indicateurs.xlsx` (source unique des indicateurs, dossier de travail `fiche indicateur/`), joint à l'offre :
+Le tableau de référence des indicateurs est joint à l'offre :
 
-- `fiches indicateurs.xlsx` — référentiel contractuel des indicateurs (38 indicateurs, regroupement V1 : 2 familles, 4 thèmes, 10 groupes), résolu par la variable d'environnement `HYDRO_INDICATEURS_XLSX` (défaut : dossier `fiche indicateur/`).
+- `fiches indicateurs.xlsx` — référentiel contractuel des indicateurs (38 indicateurs, regroupement V1 : 2 familles, 4 thèmes, 10 groupes)
 
-## Catalogue des indicateurs
+## Catalogue des fiches indicateurs
 
 Le catalogue de fiches détaillées des indicateurs est fourni avec le présent cahier des charges :
 
 - [Fiches_indicateurs_HydroScope-v4.pdf](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées (définition, objectifs, méthode, sources, vigilances) ;
-- le fichier maître `fiches indicateurs.xlsx` (source unique) alimente dynamiquement les tableaux des chapitres 1 et 5 – Présentation des indicateurs.
+
 
 ## Critères d'acceptation
 
-Les critères d'acceptation du périmètre MVP sont détaillés sous forme Gherkin (Étant donné / Quand / Alors) afin de constituer une base de recette contractuelle. Le périmètre lot 2 (évolutions) et l'option analyse multicritère font l'objet de critères synthétiques par EPIC, affinés en cours de projet.
+Les critères d'acceptation du périmètre MVP sont détaillés sous forme Gherkin (Étant donné / Quand / Alors) afin de constituer une base de recette contractuelle. Le périmètre lot 2 (évolutions) et l'option analyse multicritère seront à affiner en cours de projet.
 
 {{< include ./annexes/Criteres_acceptation_donnees.qmd >}}
 
 {{< include ./annexes/Criteres_acceptation_visualisation.qmd >}}
 
+
 {{< include ./annexes/Criteres_acceptation_lot2.qmd >}}
+
+---
 
 ## Cadre de chiffrage (DQE)
 
@@ -182,3 +180,8 @@ Le cadre de chiffrage (annexe ci-dessous) constitue la grille commune de chiffra
 
 
 {{< include ./annexes/Cadre_chiffrage.qmd >}}
+
+
+# Liste des document à fournir
+
+{{< include ./annexes/piece-a-fournir.qmd >}}

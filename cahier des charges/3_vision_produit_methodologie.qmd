@@ -56,4 +56,4 @@ Le périmètre du MVP est volontairement restreint aux fonctionnalités à plus 
 
 Les fonctionnalités plus avancées (analyse multicritère, paramétrage complexe, automatisation avancée) et un jeu d'indicateur complet sont prévues dans le projet mais dans un second temps. Il s'agit du livrable principal du projet et fera l’objet d’une validation spécifique par la MOA.
 
-Les fonctionnalités prévu dans le MCP sont identifiés dans la **backlog**, qui sera priorisée au fur et à mesure par la MOA en fonction de la valeur métier et des contraintes techniques comme le préconise la méthodologie Agile (détaillée au [chapitre 7 – Product backlog](#sec-backlog)).
+Les fonctionnalités prévu dans le MCP sont identifiés dans la **backlog**, qui sera priorisée au fur et à mesure par la MOA en fonction de la valeur métier et des contraintes techniques comme le préconise la méthodologie Agile (détaillée au @sec-backlog).

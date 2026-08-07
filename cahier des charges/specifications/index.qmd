@@ -10,25 +10,12 @@ Chaque cas d'usage (CU) fait l'objet d'une fiche détaillée décrivant :
 
 - les **fonctionnalités** couvertes ;
 - le **parcours IHM** (écrans et navigation) ;
-- le **rendu visuel obtenu** (description textuelle, références par libellé,
-  captures du prototype) ;
+- le **rendu visuel obtenu** (description textuelle, références par libellé, captures du prototype) ;
 - les **points de vigilance** et frontières de périmètre.
 
-::: {.callout-note}
-**Séparation de l'analyse multicritère (AMC).**
-Conformément à la consigne de cadrage, tous les éléments relatifs à l'analyse
-multicritère sont **isolés** dans des documents dédiés (section « Analyse
-multicritère (AMC) — isolée » ci-dessous). Les fiches des profils (notamment
-Expert) restent **purement descriptives** : elles ne comportent ni classement,
-ni scoring, ni hiérarchisation interprétative. L'AMC est un outil d'**
-aide à
-l'interprétation**, pas une aide à la décision automatisée (EPIC 5).
-:::
 
-Les index ci-dessous sont **générés automatiquement** à partir des
-frontmatters des fiches de cas d'usage (titre, profil, US) et du référentiel
-des User Stories (`backlog.csv`) : toute évolution d'une fiche ou du backlog se
-répercute à la prochaine compilation du document.
+Les index ci-dessous sont **générés** à partir  des fiches de cas d'usage (titre, profil, US) et du référentiel
+des User Stories (`backlog.csv`).
 
 ## Administration plateforme
 

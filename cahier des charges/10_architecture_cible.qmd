@@ -47,9 +47,6 @@ L’architecture s’organise autour de plusieurs briques principales :
   - fiches détaillées
   - outils d’exploration et d’analyse
 
-*Schéma : enchaînement des couches fonctionnelles.*
-
-![](figures/mm_1.svg){width=55%}
 
 ### Intégration au système d’information existant
 
@@ -63,9 +60,6 @@ Cela concerne :
 
 Cette intégration doit être pensée de manière à limiter les redondances et à favoriser la cohérence des données entre systèmes.
 
-*Schéma : intégration dans l'écosystème existant.*
-
-![](figures/mm_2.svg){width=40%}
 
 ### Choix technologiques
 
@@ -94,9 +88,6 @@ Les choix technologiques ci‑dessous sont proposés pour répondre aux exigence
 - **Guidelines d'intégration** : un document de référence (guidelines d'intégration) est produit pour formaliser les modalités de connexion aux sources de données, les formats d'échange attendus et les règles de qualité applicables.
 - **Cluster de traitemenent paralélisé** : les traitement des données est effectué sur un cluster **Dask** pour faciliter la production des indicateurs sur des données lourdes.
 
-*Schéma : parcours des données jusqu'aux indicateurs.*
-
-![](figures/mm_3.svg){width=90%}
 
 #### Infrastructure 
 
@@ -107,19 +98,11 @@ Les choix technologiques ci‑dessous sont proposés pour répondre aux exigence
 - **Sauvegarde et restauration** : des mécanismes de sauvegarde régulière (Barman ou équivalent) et de restauration sont configurés avec des délais de récupération évalué en cours de projet (un test de recuperation de la base complète sera effectué avant la mise en production). 
 - **Monitoring** : un dispositif de supervision couvre le bon fonctionnement des traitements, la surveillance des connexions aux sources de données, les performances (healthcheck, temps de réponse, disponibilité) et la gestion des alertes en cas d'anomalie.
 
-::: {.callout-caution}
+::: {.callout-important}
 
 Ces choix devront être validés en cohérence avec les contraintes des partenaires, les compétences disponibles au sein de l'équipe OEIL et les exigences contractuelles du projet.
 
-@todo[] : valider architecture cible avec l'équipe OEIL, en particulier sur les aspects technologiques et d'intégration.
+@todo[priority=high, section=historisation] : valider architecture cible avec l'équipe OEIL, en particulier sur les aspects technologiques et d'intégration.
 
 :::
-
-### Schéma de synthèse
-
-Vue d'ensemble reliant le flux de données, la boucle de traitement, l'exposition et les exports, l'orchestration transversale et l'infrastructure.
-
-*Schéma : vue d'ensemble de l'architecture cible.*
-
-![](figures/mm_4.svg){width=80%}
 

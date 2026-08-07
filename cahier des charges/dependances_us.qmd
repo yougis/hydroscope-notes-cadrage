@@ -62,6 +62,7 @@ JUSTIFICATIONS = {
     "US6.18": "Le calcul d'intersection (≥ 20 %) alimente la facette commune du sélecteur.",
     "US6.24": "La vue temporelle est désactivée si les données ne sont pas historisées (voir EPIC 4).",
     "US7.1": "On ne peut détecter un dépassement qu'à partir de seuils définis.",
+    "US7.3": "La détection d'un changement significatif s'appuie sur les tendances issues des séries historisées.",
     "US8.4": "Le partage doit respecter les droits d'accès (voir EPIC 9).",
     "US8.5": "L'API doit filtrer les données selon les habilitations.",
     "US9.2": "L'authentification est le préalable à la gestion des rôles, comptes et sessions.",

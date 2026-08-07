@@ -3,9 +3,9 @@
 
 L'EPIC 9 regroupe les fonctionnalités liées à la gestion des accès, des profils et des droits au sein d’HydroScope. Il vise à garantir un accès sécurisé et adapté aux données et aux fonctionnalités, en tenant compte de la diversité des utilisateurs et des usages.
 
-Dans un contexte multi-acteurs, impliquant des partenaires institutionnels, techniques et potentiellement le grand public, la gestion des utilisateurs constitue un élément clé pour assurer à la fois la sécurité des données et la pertinence des informations diffusées.
+Dans un contexte multi-acteurs, impliquant des partenaires institutionnels, techniques et potentiellement le grand public, la gestion des utilisateurs assure à la fois la sécurité des données et la pertinence des informations diffusées selon les profils.
 
-Le système doit également permettre une gestion évolutive des utilisateurs, afin d’intégrer de nouveaux acteurs et d’adapter les droits en fonction des évolutions organisationnelles.
+Le système doit également permettre une gestion évolutive des utilisateurs, afin d’intégrer de nouveaux acteurs et d’adapter les droits.
 
 #### Fonctionnalités
 
@@ -19,23 +19,22 @@ Ces mécanismes doivent garantir la sécurité des accès tout en restant simple
 
 - **Gestion des droits d’accès**  
 Définition et gestion des autorisations :
-  - accès aux données (restreint ou ouvert selon les profils)  
-  - accès aux fonctionnalités (visualisation, export, paramétrage)  
-  - gestion fine des permissions  
+  - accès aux données (restreint ou ouvert selon les profils);
+  - accès aux fonctionnalités (visualisation, export, paramétrage);
 
 Cette gestion doit permettre de protéger les données sensibles tout en facilitant leur diffusion lorsque cela est pertinent.
 
-- **Profils utilisateurs**  
+- **Profils utilisateurs**
 Définition de profils adaptés aux différents usages :
-  - profils techniques (experts, analystes)  
-  - profils opérationnels (collectivités, gestionnaires)  
-  - profils décisionnels  
-  - éventuellement accès grand public  
+  - profils techniques (experts, analystes)
+  - profils opérationnels (collectivités, gestionnaires)
+  - profils décisionnels
+  - éventuellement accès grand public
 
 Chaque profil doit bénéficier d’une interface et de fonctionnalités adaptées à ses besoins.
 
 - **Gestion des sessions et stockage local**
-Le système pourra utiliser des mécanismes de stockage côté navigateur (cookies, stockage local) afin de gérer les sessions utilisateurs et de mémoriser certains paramètres d’usage (préférences, filtres, état de navigation).
+Le système pourra utiliser des mécanismes de stockage côté navigateur (cookies, stockage local) afin de gérer les sessions utilisateurs et de mémoriser les contextes (préférences, filtres, séléctions, état de navigation).
 
 Ces mécanismes devront être limités aux usages strictement nécessaires au fonctionnement de l’application et à l’amélioration de l’expérience utilisateur.
 
@@ -58,7 +57,7 @@ Les fonctionnalités de monitoring dans cet EPIC concernent le suivi et l’anal
 Elles comprennent :
 - le suivi de la fréquentation de l’outil (connexions, sessions) ;
 - l’analyse des usages par type d’utilisateur (fonctionnalités consultées, parcours) ;
-- le suivi des actions réalisées (consultations, exports, modifications) ;
+- le suivi des actions réalisées (consultations, exports, paramterages) ;
 - la production de statistiques d’usage pour orienter les évolutions du produit.
 
 Ces éléments contribuent à l’amélioration continue de l’outil et à l’adaptation aux besoins réels.

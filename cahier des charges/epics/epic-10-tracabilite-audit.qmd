@@ -4,7 +4,7 @@ Cet EPIC vise à garantir la transparence, la reproductibilité et la fiabilité
 
 Il doit permettre de comprendre l’origine des données, les transformations appliquées et les actions réalisées dans le système, afin d’instaurer un climat de confiance dans l’outil.
 
-Dans un contexte où les indicateurs peuvent contribuer à orienter des décisions publiques, la capacité à tracer les traitements et à justifier les résultats constitue un enjeu central.
+Dans un contexte où les indicateurs peuvent contribuer à orienter des décisions publiques, la capacité à tracer les traitements et à justifier les résultats constitue un enjeu important.
 
 #### Mise en œuvre et fonctionnalités
 

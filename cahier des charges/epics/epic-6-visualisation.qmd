@@ -8,6 +8,8 @@ Les data visualisations doivent permettre à la fois une lecture synthétique de
 
 Une attention particulière est portée à l’ergonomie, à la lisibilité et à la cohérence des représentations proposées.
 
+Une maquette IHM est disponible afin de rendre la compréhension de ce qui est attendu plus fluide.
+
 #### Fonctionnalités
 
 - **Cartographie interactive**
@@ -31,7 +33,7 @@ Ces outils permettent d’analyser les dynamiques et les évolutions.
 - **Comparaisons spatiales**  
 Possibilité de comparer plusieurs territoires ou objets :
   - comparaison entre bassins versants
-  - comparaison entre captages
+  - comparaison entre unité de gestions
   - visualisation simultanée de plusieurs entités
 Les interfaces devront intégrer des mécanismes de sélection et de filtrage permettant d’explorer les données de manière dynamique.
 
@@ -45,12 +47,12 @@ Les sélecteurs doivent être cohérents entre les différentes vues (cartes, gr
 
 Une attention particulière devra être portée à la lisibilité et à l’ergonomie de ces filtres, afin d’éviter une complexité excessive pour les utilisateurs non experts, tout en permettant des usages avancés pour les profils techniques.
 
-- **Fiches territoriales (US6.7)**  
+- **Fiches territoriales**  
 Le système doit permettre de consulter une fiche territoire fournissant une synthèse d’un bassin versant, à l’échelle de la commune ou de l’unité de gestion (captage, bassin versant). Les fiches doivent offrir une structuration homogène des informations : description du périmètre, unités de gestion associées le cas échéant, indicateurs disponibles, éléments de comparaison descriptive et visualisations associées (cartes, graphiques temporels).  
 Les contenus doivent être directement issus des données et indicateurs produits, sans transformation interprétative : aucune fonctionnalité de classement, de scoring ou de priorisation ne doit être introduite dans ce cadre, ces rôles relevant de l’EPIC 7 (aide à la décision) et de l’option analyse multicritère (EPIC 5).
 
 - **Monitoring**
-Les fonctionnalités de monitoring dans cet EPIC visent à rendre visibles et compréhensibles les informations de suivi pour les utilisateurs.
+Les fonctionnalités de monitoring dans cet EPIC visent à rendre visibles et compréhensibles les informations de suivi.
 
 Elles comprennent :
 - la mise à disposition de tableaux de bord dédiés au monitoring (technique, qualité des données, indicateurs métier) ;
@@ -59,13 +61,3 @@ Elles comprennent :
 - des vues synthétiques facilitant l’identification rapide des situations nécessitant une attention particulière.
 
 Ces fonctionnalités doivent rester lisibles et adaptées aux profils d'administrateur de la plateforme.
-
-
-
-#### Points de vigilance
-
-- Risque de surcharge visuelle pouvant nuire à la compréhension  
-- Nécessité d’adapter les visualisations aux différents profils d’utilisateurs  
-- Importance de la cohérence entre les représentations (cartes, graphiques, tableaux)  
-- Risque de mauvaise interprétation lié à des choix de représentation (échelles, couleurs, classifications)  
-- Dépendance à la qualité et à la fraîcheur des données affichées

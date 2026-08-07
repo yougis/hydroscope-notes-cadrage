@@ -7,6 +7,7 @@ Le présent projet s’inscrit dans un cadre contractuel nécessitant la défini
 Les développements réalisés dans le cadre du projet HydroScope feront l’objet d’une clarification des droits de propriété intellectuelle.
 
 Sauf disposition contraire, les éléments suivants sont attendus :
+
 - la licence sur les codes sources développés dans le cadre du projet seront cédés à l’OEIL ;
 - l’OEIL disposera de droits d’usage, de modification et de réutilisation du code ;
 - les éventuels composants tiers ou bibliothèques utilisées devront être clairement identifiés (licences, restrictions).
@@ -18,6 +19,7 @@ Une attention particulière sera portée à la compatibilité avec des solutions
 Le traitement des données dans HydroScope devra respecter la réglementation en vigueur en matière de protection des données, notamment le RGPD.
 
 Cela implique :
+
 - l’identification des données sensibles ou à caractère personnel (le cas échéant) ;
 - la mise en place de mesures de sécurisation adaptées ;
 - la limitation des accès aux données en fonction des profils utilisateurs ;
@@ -30,6 +32,7 @@ Une analyse du niveau de sensibilité des données devra être réalisée en amo
 Le prestataire devra garantir la réversibilité de la solution en fin de contrat ou en cas de changement de prestataire.
 
 Cela inclut :
+
 - la restitution des données dans des formats standards et exploitables ;
 - la mise à disposition du code source (selon les modalités définies) ;
 - la documentation technique et fonctionnelle nécessaire à la reprise ;
@@ -42,6 +45,7 @@ L’objectif est d’éviter toute dépendance technique ou fonctionnelle vis-à
 Un dispositif de maintenance et de support devra être défini afin de garantir le bon fonctionnement du système dans la durée.
 
 Ce dispositif précisera notamment :
+
 - les niveaux de service attendus (SLA) ;
 - les délais de prise en charge et de résolution des incidents ;
 - les modalités de maintenance corrective et évolutive (TMA) ;

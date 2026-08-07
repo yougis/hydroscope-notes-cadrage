@@ -1,4 +1,4 @@
-## Exigences non fonctionnelles
+## Exigences non fonctionnelles {#sec-exigences-non-fonctionnelles}
 
 Les exigences non fonctionnelles définissent les qualités attendues du système HydroScope au-delà des fonctionnalités métiers. Elles visent à garantir la performance, la sécurité, la robustesse et la pérennité de la solution, tout en assurant une expérience utilisateur adaptée aux différents profils.
 
@@ -16,7 +16,7 @@ Au delà des indicateur de chargement doivent etre affichés pour informer l'uti
 Pour les traitements liés aux calcul d’indicateurs :
 
 - en temps quasi immédiat pour les indicateurs simples (quelques secondes) ;
-- en différé (pipeline de traitement en arrière plan) pour les traitements lourds, avec des délais maîtrisés ; le suivi de ces traitements est détaillé au [chapitre 8 – Monitoring, supervision et pilotage](#sec-monitoring).
+- en différé (pipeline de traitement en arrière plan) pour les traitements lourds, avec des délais maîtrisés ; le suivi de ces traitements est détaillé au @sec-monitoring.
 
 ### Volumétrie et charge
 
@@ -98,4 +98,4 @@ Le système devra garantir un niveau de disponibilité compatible avec les usage
 
 - disponibilité cible : **≥ 98 %** (soit 7 jours off hors maintenance planifiée) ;
 - plages de maintenance définies et communiquées ;
-- reprise en cas d’incident dans des délais maîtrisés (cf. [SLA et engagements de service au chapitre 16 – Cadre contractuel et juridique](#sec-cadre-contractuel)).
+- reprise en cas d’incident dans des délais maîtrisés (cf. SLA et engagements de service au @sec-cadre-contractuel).

@@ -39,6 +39,7 @@ FORMATS = ("html", "pdf", "docx")
 
 # Fichier maître des indicateurs : source unique, hors dépôt.
 MASTER_FILENAME = "fiches indicateurs.xlsx"
+LIST-INDICATEUR_FILENAME = "fiches indicateurs.xlsx"
 
 ANNEXES = (
     "arbre_indicateurs.html",
@@ -73,7 +74,7 @@ def find_root() -> Path:
 def master_indicateurs_path(root: Path) -> Path:
     """Résout le fichier maître des indicateurs (env HYDRO_INDICATEURS_XLSX ou dossier voisin)."""
     env = os.environ.get("HYDRO_INDICATEURS_XLSX")
-    p = Path(env) if env else (root / ".." / "fiche indicateur" / "fiches indicateurs.xlsx")
+    p = Path(env) if env else (root / ".." / "fiche indicateur" / MASTER_FILENAME)
     if not p.is_file():
         die(f"Fichier maître des indicateurs introuvable : {p}. Définir HYDRO_INDICATEURS_XLSX.")
     return p

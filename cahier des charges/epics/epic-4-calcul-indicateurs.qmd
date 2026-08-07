@@ -1,10 +1,16 @@
+
+
+::: {.callout-caution}
+
+
+L'implémentation des traitments se fera en étroite collaboration des experts DATA de l'Observatoire. L'architecture de traitement et les technologies exploités étant spécifiques, le travail consistera principalement à rédiger du code ETL/ELT en python et SQL.
+
+:::
+
+
 Cet EPIC constitue le partie analytique d’HydroScope. Il regroupe des mécanismes permettant de transformer les données brutes en indicateurs exploitables pour le suivi, l’analyse et l’aide à la décision.
 
 Les indicateurs produits doivent permettre de caractériser les territoires et les unités de gestion de l'eau potable, d’identifier les enjeux et les pressions exercées sur la ressource en eau et de suivre leur évolution dans le temps. Leur construction repose sur des choix méthodologiques structurants, qui doivent être explicités et maîtrisés.
-
-#### Description
-
-L’EPIC couvre la définition, le calcul, la gestion et l’évolution des indicateurs. Il s’appuie sur les données structurées et cataloguées (EPIC 1 & 1 Bis), qualifiées (EPIC 2) et organisées via les référentiels (EPIC 3).
 
 Les traitements doivent permettre de produire des indicateurs à différentes échelles spatiales (captage, bassin versant, maille) et temporelles, tout en garantissant la reproductibilité des résultats.
 
@@ -14,10 +20,11 @@ Une attention particulière est portée à la transparence des méthodes de calc
 
 - **Calculs simples (statistiques descriptives)**  
 Production d’indicateurs de base à partir des données disponibles :
-  - moyennes, médianes, sommes
-  - fréquences, occurrences
+  - moyennes, médianes, sommes, 
+  - fréquences, occurrences, ratio
   - indicateurs de tendance simple
-Ces calculs constituent les briques élémentaires pour des analyses plus complexes.
+  - intersection spatiales
+Ces calculs constituent les briques élémentaires pour des analyses plus complexes ultérieures.
 
 - **Agrégations spatiales et temporelles**  
 Transformation des données afin de produire des indicateurs à différentes échelles :
@@ -39,3 +46,5 @@ Gestion des évolutions des indicateurs dans le temps :
   - possibilité de reproduire un indicateur selon une version donnée
   - traçabilité des modifications (changement de formule, de source, de paramètres)
 Ce mécanisme est essentiel pour assurer la comparabilité des résultats dans le temps.
+
+

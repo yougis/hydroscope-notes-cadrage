@@ -1,7 +1,7 @@
 
 ## Backlog et gestion des User Stories {#sec-backlog}
 
-Le tableau ci-dessus présente une première structuration du backlog produit d’HydroScope, organisée en EPICS et en User Stories (US). Il constitue une traduction opérationnelle des besoins fonctionnels identifiés dans le cadre du projet.
+Le tableau "backlog.csv" présente une première structuration du backlog produit d’HydroScope, organisée en EPICS et en User Stories (US). Il constitue une traduction opérationnelle des besoins fonctionnels identifiés dans le cadre du projet.
 
 Chaque **EPIC** correspondant à un grand ensemble fonctionnel est lui-même décliné en **User Stories**, qui décrivent des fonctionnalités attendues du point de vue utilisateur et qui constituent une liste de travail appelée backlog.
 
@@ -16,25 +16,6 @@ Ce backlog constitue un outil de pilotage des developpement du projet. Il permet
 - faciliter les échanges entre la MOA, l’AMOA (si existante) et la MOE.
 
 Il ne s’agit pas d’un document figé, mais d’un référentiel de base qui est évolutif. 
-
-:::{landscape}
-```{python}
-#| label: tbl-backlog-latex
-#| tbl-cap: "Product Backlog (base évolutive)"
-#| output: asis
-
-import pandas as pd
-
-df = pd.read_csv("backlog.csv", sep=";")
-df = df.sort_values(by=["EPIC", "ID User Story"])
-
-df["MVP"] = df["MVP"].map({True: "O", False: "X"})
-
-# Option A: via tabulate (recommandé)
-print(df.to_markdown(index=False))
-```
-:::
-
 
 ### Évolution du backlog
 

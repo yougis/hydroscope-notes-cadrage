@@ -1,6 +1,5 @@
 Cet EPIC regroupe des éléments nécessaires au modèle de données de l'application HydroScope. Les référentiels constituent le socle sur lequel reposent les données, les traitements et les restitutions. Ils permettent d’assurer la cohérence globale du système, en garantissant une compréhension partagée des objets manipulés et des règles associées.
 
-Dans un contexte multi-acteurs et multi-sources, la mise en place de référentiels fiables et partagés est essentielle pour éviter les ambiguïtés, faciliter les croisements de données et sécuriser les analyses.
 
 #### Description
 
@@ -13,19 +12,21 @@ Ces référentiels doivent être centralisés, versionnés et documentés. Ils d
 - **Référentiel géographique**  
 Gestion des objets spatiaux utilisés dans le système :
   - bassins versants d’alimentation en eau potable (BVAEP)
-  - captages et forages
+  - unité ge gestion de l'eau portable (captages et forages AEP)
   - périmètres de protection
   - limites administratives (communes, provinces)
+  - Référentiel hydrographique cartographié
   - maillages d’analyse (ex : grille H3)
-Ce référentiel doit permettre d’assurer la cohérence spatiale des données, de gérer les relations entre objets (inclusion, intersection) et de prendre en compte les évolutions des périmètres dans le temps.
+
+Ces référentiels doivent permettre d’assurer la cohérence spatiale des données, de gérer les relations entre objets.
 
 - **Référentiel des indicateurs**  
 Définition et structuration des indicateurs utilisés dans HydroScope :
-  - nom, description et finalité  
-  - méthode de calcul  
-  - unités et échelles d’interprétation  
-  - seuils éventuels  
-  - liens avec les données sources  
+  - nom, description et finalité
+  - méthode de calcul
+  - unités et échelles d’interprétation
+  - seuils éventuels
+  - liens avec les données sources
 
 Ce référentiel constitue un élément central de la transparence méthodologique et doit être accessible aux utilisateurs via des fiches descriptives.
 

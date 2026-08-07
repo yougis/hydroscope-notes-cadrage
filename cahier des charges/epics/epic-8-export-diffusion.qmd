@@ -10,9 +10,11 @@ L’objectif est de rendre les données et résultats produits facilement exploi
 
 - **Export de données**
 Possibilité d’extraire les données et indicateurs sous des formats standards :
+
   - formats tabulaires (CSV, Excel)
   - formats géographiques (GeoJSON, Shapefile, Geopackage etc.)
   - export filtré selon des critères (territoire, période, indicateurs)
+
 Ces exports doivent permettre une réutilisation dans des outils tiers comme des SIG bureautique.
 
 - **Export de rapports**
@@ -20,13 +22,14 @@ Le système devra permettre le téléchargement des fiches territoriales produit
 D'un point de vue technique, le système ne devra pas nécessairement générer ces fiches sur demande, mais elles devront être maintenues à jour suite à l'intégration de mises à jour des données.
 
 - **Partage de résultats**
-
 Le système devra permettre le partage de vues de l’application sous forme de liens, afin de faciliter la diffusion d’analyses entre les différents acteurs.
 
 Ces liens devront permettre de restituer un **contexte de consultation**, incluant notamment :
+
 - le territoire sélectionné ;
 - les indicateurs affichés ;
 - les filtres appliqués (temporels, thématiques, géographiques) ;
+- les séléctions d'unité de gestion et de bassin versant ;
 - le type de visualisation (carte, graphique, tableau de bord).
 
 L’utilisateur destinataire devra pouvoir accéder à cette vue de manière directe, sans avoir à reconstruire manuellement le contexte d’analyse.
@@ -38,8 +41,6 @@ Le système devra permettre de gérer différents niveaux de partage, par exempl
 - diffusion élargie à des partenaires disposant d’un accès ;
 - éventuellement partage public limité à certaines données.
 
-Les mécanismes de partage devront garantir la cohérence des informations diffusées et éviter toute ambiguïté liée à des différences de configuration ou de filtres.
-
 Une attention particulière devra être portée à la pérennité des liens (gestion des versions, évolution des données) ainsi qu’à la lisibilité des informations partagées.
 
 - **API de diffusion**
@@ -47,11 +48,12 @@ Une attention particulière devra être portée à la pérennité des liens (ges
 Le système devra exposer les données via des interfaces programmatiques (API) afin de permettre leur réutilisation dans des systèmes tiers et d’assurer l’interopérabilité de la plateforme.
 
 L’API devra permettre d’accéder aux données structurées du système, notamment :
+
 - les données sources intégrées ;
 - les indicateurs calculés ;
 - les référentiels géographiques et thématiques.
 
-Les données devront être accessibles selon différents critères de requête, incluant notamment le territoire, la période temporelle, le type d’indicateur ou de donnée.
+Les données devront être accessibles selon différents critères de requête, incluant notamment le territoire, la période temporelle et l’indicateur.
 
 L’API devra permettre de restituer des données cohérentes avec celles affichées dans l’application, en tenant compte des traitements et des agrégations réalisés.
 

@@ -44,7 +44,7 @@ Cela inclut :
 
 Ces fonctionnalités participent directement au rôle d’aide à la décision du projet. D'autre part, elles permettent de sécuriser la production des indicateurs et d’alerter les utilisateurs sur des évolutions significatives.
 
-@todo [priority=high] : à préciser avec l'OEIL si c'est optionnel notamment sur les seuils d'alerte et les détéction des tendances et des ruptures.
+@todo [priority=high, section=alertes] : à préciser avec l'OEIL si c'est optionnel notamment sur les seuils d'alerte et les détéction des tendances et des ruptures.
 
 ### Monitoring des usages
 
@@ -63,7 +63,7 @@ Ces éléments alimentent la démarche d’amélioration continue de l'outil.
 
 ### Historisation et traçabilité des données
 
-@todo [priority=medium] : la solution de versionnement (GeoDiff + snapshots Prefect) est proposée — à valider avec l'OEIL.
+@todo [priority=medium, section=historisation] : la solution de versionnement (GeoDiff + snapshots Prefect) est proposée — à valider avec l'OEIL.
 
 Pour assurer la traçabilité des indicateurs, le système s'appuie sur deux mécanismes complémentaires : GeoDiff pour le versionnement des données cartographiques, et des sauvegardes complètes orchestrées par le pipeline Prefect pour les autres types de données. Chaque indicateur produit est ainsi relié à la version exacte des données ayant servi à son calcul.
 

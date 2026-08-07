@@ -67,14 +67,14 @@ Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.csv
 - **Étant donné** des facettes cumulées méthodologiquement incompatibles, **quand** je tente de les cumuler, **alors** le système présente un état « filtre incompatible » explicite, sans ambiguïté.
 - **Étant donné** l'état courant des facettes, **quand** je quitte puis reviens sur la vue, **alors** l'état est restauré ou clairement signalé comme non conservé.
 
-### US6.12 — Afficher les facettes actives en puces décochables (SOLR/CKAN)
+### US6.12 — Afficher les facettes actives en puces décochables 
 - **Étant donné** au moins un filtre actif, **quand** la vue s'affiche, **alors** une puce (chip) portant le libellé du filtre est visible.
-- **Étant donné** plusieurs filtres cumulés (SOLR/CKAN), **quand** ils sont tous appliqués, **alors** une puce par filtre est affichée, sans doublon ni filtre invisible.
+- **Étant donné** plusieurs filtres cumulés, **quand** ils sont tous appliqués, **alors** une puce par filtre est affichée, sans doublon ni filtre invisible.
 - **Étant donné** une puce active, **quand** je clique sur sa croix de désélection, **alors** le filtre est retiré et toutes les vues (carte, liste, graphiques) se mettent à jour.
 - **Étant donné** l'ensemble des puces, **quand** je les retire une à une, **alors** la sélection initiale est progressivement restituée jusqu'au retour à l'état de départ.
 
-### US6.13 — Appliquer un preset « Top 10 » (plus/moins exposés, plus/moins proches) et pouvoir le retirer
-- **Étant donné** la zone des presets, **quand** je choisis « Top 10 les plus exposés » (et les variantes : moins exposés, plus/moins proches), **alors** la sélection et la liste affichent les dix unités calculées selon la règle du preset.
+### US6.13 — Appliquer un preset « Top 10 » (plus/moins exposés) et pouvoir le retirer
+- **Étant donné** la zone des presets, **quand** je choisis « Top 10 les plus exposés » (et les variantes : moins exposés), **alors** la sélection et la liste affichent les dix unités calculées selon la règle du preset.
 - **Étant donné** un preset appliqué, **quand** la carte et les listes sont rendues, **alors** les dix unités sont identifiées dans les vues et cohérentes entre elles.
 - **Étant donné** une sélection utilisateur préalable, **quand** j'applique un preset, **alors** l'application du preset est explicite (remplacement ou superposition selon la règle définie), jamais silencieuse.
 - **Étant donné** un preset actif, **quand** je le retire, **alors** la sélection antérieure est restituée telle qu'elle était avant l'application.
@@ -175,11 +175,15 @@ Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.csv
 - **Étant donné** une tendance détectée, **quand** je survole l'élément, **alors** les valeurs montrant l'évolution de la période sont détaillées.
 - **Étant donné** une série trop courte pour une tendance significative, **quand** elle est demandée, **alors** l'état « historique insuffisant » est affiché au lieu d'un résultat indicatif.
 
-### US7.4 — Fiche synthétique
-- **Étant donné** un bassin versant, **quand** je consulte sa fiche synthétique, **alors** elle présente les facteurs de vulnérabilité dominants issus de l'analyse des indicateurs (seuils, tendances, fraîcheur des données).
-- **Étant donné** un facteur mis en avant, **quand** la fiche est consultée, **alors** son origine est traçable (indicateur → valeur → seuil/tendance) et aucune interprétation non fondée n'est introduite.
-- **Étant donné** la fiche synthétique d'un bassin, **quand** j'y accède depuis la carte ou le sélecteur, **alors** la navigation est directe et la fiche cohérente avec la sélection courante.
-- **Étant donné** des données insuffisantes pour la synthèse, **quand** la fiche est générée, **alors** un état « données insuffisantes pour une synthèse » est affiché à la place d'une hiérarchie vide.
+### US7.4 — Alerte au changement
+- Étant donné une règle de détection configurée (seuils US7.1, tendances US7.3), quand la valeur d'un indicateur sur un captage ou BVAEP franchit le critère de changement significatif, alors une alerte au changement est levée, datée et qualifiée. 
+- Étant donné une alerte levée, quand je consulte son détail, alors la règle déclencheuse (indicateur, delta, période comparée, seuil) est exposée de façon explicite et reproductible. 
+- Étant donné un captage/BVAEP avec une alerte active, quand je consulte sa fiche ou sa vue, alors les indicateurs ayant évolué sont mis en évidence (badge/teinte), sans aucune notification poussée (consultation seule). 
+- Étant donné une vue présentant plusieurs signalements, quand ils coexistent, alors l'alerte au changement est distinguée du dépassement de seuil (US7.1) et de la tendance (US7.3). 
+- Étant donné une alerte active, quand la valeur revient sous le critère ou la période de référence change, alors l'alerte est levée ou marquée « en résolution », sans message résiduel trompeur. - Étant donné le suivi d'un captage/BVAEP, quand je consulte l'historique, alors les alertes passées restent consultables (date, règle, état) sans être écrasées. 
+- Étant donné une série trop courte ou non historisée, quand une alerte serait candidate, alors l'état « historique insuffisant » est affiché et aucune alerte due n'est levée. 
+- Étant donné un profil habilité, quand une alerte est active ou configurée, alors la lecture respecte les droits (RBAC) et la configuration reste tracée (utilisateur, date).
+
 
 ---
 
@@ -234,3 +238,5 @@ Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.csv
 ---
 
 *Périmètre MVP — Ce document référence le catalogue des indicateurs (38 indicateurs) et les référentiels (BVAEP, captages, PPE) fournis en données de référence pour la recette en Nouvelle-Calédonie. La liste des US couvertes correspond aux flags `MVP=TRUE` du fichier backlog.csv : 33 US au total pour les EPIC 6 à 10, dont 24 pour l'EPIC 6.*
+
+---
