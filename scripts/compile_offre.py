@@ -130,8 +130,9 @@ def build_pack(root: Path, pack_dir: Path) -> None:
             copy_file(src, cdc_pack / f"index.{fmt}")
 
     # 5. Fichiers référencés par l'HTML dans le même dossier :
-    #    './dependances_us.qmd' et './profils_utilisateurs.qmd' ; backlog.csv ajouté pour cohérence.
-    for name in ("profils_utilisateurs.qmd", "dependances_us.qmd", "backlog.csv"):
+    #    './dependances_us.qmd' et './profils_utilisateurs.qmd' ; backlog.csv (+ backlog.xlsx,
+    #    template de réponse à compléter, colonne « Points d'effort prestataire ») ajoutés pour cohérence.
+    for name in ("profils_utilisateurs.qmd", "dependances_us.qmd", "backlog.csv", "backlog.xlsx"):
         copy_file(CDC_SRC / name, cdc_pack / name)
 
     # 2. annexes/ (7 fichiers listés) + fichier maître des indicateurs (source unique).
