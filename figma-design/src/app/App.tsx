@@ -7,6 +7,7 @@ import { Sidebar } from '@/components/layout/Sidebar'
 import { Footer } from '@/components/layout/Footer'
 import { CarteView } from '@/features/carte'
 import { IndicateurPage, IndicateursView } from '@/features/indicateurs'
+import { ComparaisonView } from '@/features/comparaison'
 import { DashboardPage, PublicInterface } from '@/features/portail'
 import { CroisementView } from '@/features/croisement'
 import { HelpPage, helpAnchorFor } from '@/features/help'
@@ -140,6 +141,17 @@ export default function App() {
     content = <DashboardPage onOpenPublic={() => setShowPublic(true)} />
   } else if (active === 'croisement') {
     content = <CroisementView />
+  } else if (active === 'comparaison') {
+    content = (
+      <ComparaisonView
+        avance={avance}
+        unitMode={unitMode}
+        selectedUnites={selectedUnites}
+        selectedBvaeps={selectedBvaeps}
+        activeIndicator={activeIndicator}
+        period={period}
+      />
+    )
   } else {
     const S = STUBS[active]
     content = <S />

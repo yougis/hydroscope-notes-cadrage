@@ -1,7 +1,6 @@
 import type { ReactElement } from 'react'
 import { TableauStub } from './TableauStub'
 import { FichesStub } from './FichesStub'
-import { ComparaisonStub } from './ComparaisonStub'
 import { CatalogueStub } from './CatalogueStub'
 import { ImportStub } from './ImportStub'
 import { MonitoringStub } from './MonitoringStub'
@@ -12,7 +11,6 @@ import { ConnexionStub } from './ConnexionStub'
 export const STUBS: Record<string, () => ReactElement> = {
   tableau: TableauStub,
   fiches: FichesStub,
-  comparaison: ComparaisonStub,
   catalogue: CatalogueStub,
   import: ImportStub,
   monitoring: MonitoringStub,
