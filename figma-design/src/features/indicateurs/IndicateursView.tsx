@@ -4,6 +4,8 @@ import { PanelSection } from '@/features/carte/components/PanelSection'
 import { Icon } from '@/components/ui/Icon'
 import { IndicatorSymbol } from '@/components/ui/IndicatorSymbol'
 import type { IndicatorDef } from '@/types/domain'
+import { qualify, seuilsRef } from '@/data/qualification'
+import { VigilanceGauge } from '@/components/charts'
 
 export interface IndicateursViewProps {
   focusId?: string | null
@@ -141,6 +143,31 @@ export function IndicateursView({ focusId, onOpenFiche }: IndicateursViewProps) 
           <p className="mt-2 text-[11px] leading-relaxed text-neutral-500">
             <span className="font-semibold text-neutral-700">Objectif :</span> {fiche.objectif}
           </p>
+
+          {/* Bloc Interprétation ADI sur la valeur de référence */}
+          <div className="mt-3 rounded-md border border-neutral-200 bg-white p-3">
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-neutral-400">Interprétation</span>
+              <span className="shrink-0 rounded-full bg-neutral-100 px-2 py-0.5 text-[10px] text-neutral-500">Valeur de référence</span>
+            </div>
+            {(() => {
+              const val = fiche.datatype === 'qualite' ? 2 : 400
+              const q = qualify(fiche.id, val)
+              return (
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <VigilanceGauge value={val} niveau={q.niveau} label="Niveau (réf.)" threshold={seuilsRef(fiche.id).seuilP90} thresholdLabel="P90" />
+                  <div className="flex-1 min-w-0 space-y-2 text-xs text-neutral-600">
+                    <p className="text-neutral-700 font-medium">{q.label}</p>
+                    <p>{q.justification}</p>
+                    <p className="mt-1 text-[10px] text-neutral-400">
+                      <a href="#" className="underline hover:text-blue-600">📖 Voir la méthode de qualification</a>
+                    </p>
+                  </div>
+                </div>
+              )
+            })()}
+          </div>
+
           <dl className="mt-3 space-y-2 text-xs">
             {[
               ['Famille', fiche.family],
@@ -169,7 +196,7 @@ export function IndicateursView({ focusId, onOpenFiche }: IndicateursViewProps) 
             <path d="M12 16v-4" />
             <path d="M12 8h.01" />
           </Icon>
-          Cliquez sur « Fiche » pour consulter les métadonnées d’un indicateur.
+          Cliquez sur « Fiche » pour consulter les métadonnées d'un indicateur.
         </div>
       )}
     </div>
