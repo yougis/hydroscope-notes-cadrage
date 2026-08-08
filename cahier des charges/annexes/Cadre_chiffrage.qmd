@@ -15,7 +15,7 @@ La colonne « Complexité » (faible / moyenne / élevée / très élevée) est 
 import pandas as pd
 from IPython.display import display, Markdown
 
-df = pd.read_csv("backlog.csv", sep=";")
+df = pd.read_excel("backlog.xlsx", sheet_name="Backlog")
 df.columns = df.columns.str.strip()
 
 df = df.rename(columns={

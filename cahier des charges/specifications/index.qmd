@@ -15,7 +15,7 @@ Chaque cas d'usage (CU) fait l'objet d'une fiche détaillée décrivant :
 
 
 Les index ci-dessous sont **générés** à partir  des fiches de cas d'usage (titre, profil, US) et du référentiel
-des User Stories (`backlog.csv`).
+des User Stories (`backlog.xlsx`).
 
 ## Administration plateforme
 
@@ -43,7 +43,7 @@ def check_us(us_str, backlog_ids):
         if tok not in backlog_ids:
             print(f"[WARNING] US inconnue dans le backlog : {tok}")
 
-backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+backlog_ids = set(pd.read_excel("../backlog.xlsx", sheet_name="Backlog")["ID User Story"].astype(str).str.strip())
 profile = "Administrateur plateforme"
 
 fiches = [r for r in parse_fiches("CU-ADMIN-*.qmd") if r[1].get("profile") == profile]
@@ -89,7 +89,7 @@ def check_us(us_str, backlog_ids):
         if tok not in backlog_ids:
             print(f"[WARNING] US inconnue dans le backlog : {tok}")
 
-backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+backlog_ids = set(pd.read_excel("../backlog.xlsx", sheet_name="Backlog")["ID User Story"].astype(str).str.strip())
 profile = "Administrateur expert data"
 
 fiches = [r for r in parse_fiches("CU-DATA-*.qmd") if r[1].get("profile") == profile]
@@ -135,7 +135,7 @@ def check_us(us_str, backlog_ids):
         if tok not in backlog_ids:
             print(f"[WARNING] US inconnue dans le backlog : {tok}")
 
-backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+backlog_ids = set(pd.read_excel("../backlog.xlsx", sheet_name="Backlog")["ID User Story"].astype(str).str.strip())
 profile = "Expert métier eau potable"
 
 fiches = [r for r in parse_fiches("CU-EXPERT-*.qmd") if r[1].get("profile") == profile]
@@ -181,7 +181,7 @@ def check_us(us_str, backlog_ids):
         if tok not in backlog_ids:
             print(f"[WARNING] US inconnue dans le backlog : {tok}")
 
-backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+backlog_ids = set(pd.read_excel("../backlog.xlsx", sheet_name="Backlog")["ID User Story"].astype(str).str.strip())
 profile = "Décideur métier"
 
 fiches = [r for r in parse_fiches("CU-DECISION-*.qmd") if r[1].get("profile") == profile]
@@ -227,7 +227,7 @@ def check_us(us_str, backlog_ids):
         if tok not in backlog_ids:
             print(f"[WARNING] US inconnue dans le backlog : {tok}")
 
-backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+backlog_ids = set(pd.read_excel("../backlog.xlsx", sheet_name="Backlog")["ID User Story"].astype(str).str.strip())
 profile = "Intéressé public"
 
 fiches = [r for r in parse_fiches("CU-PUBLIC-*.qmd") if r[1].get("profile") == profile]
@@ -275,7 +275,7 @@ def check_us(us_str, backlog_ids):
         if tok not in backlog_ids:
             print(f"[WARNING] US inconnue dans le backlog : {tok}")
 
-backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+backlog_ids = set(pd.read_excel("../backlog.xlsx", sheet_name="Backlog")["ID User Story"].astype(str).str.strip())
 profile = "Document support (AMC, isolé)"
 
 fiches = [r for r in parse_fiches("AMC_*.qmd") if r[1].get("profile") == profile]
@@ -323,7 +323,7 @@ def check_us(us_str, backlog_ids):
         if tok not in backlog_ids:
             print(f"[WARNING] US inconnue dans le backlog : {tok}")
 
-backlog_ids = set(pd.read_csv("../backlog.csv", sep=";")["ID User Story"].astype(str).str.strip())
+backlog_ids = set(pd.read_excel("../backlog.xlsx", sheet_name="Backlog")["ID User Story"].astype(str).str.strip())
 profile = "Document support (ADI — Aide à l'interprétation)"
 
 fiches = [r for r in parse_fiches("ADI_*.qmd") if r[1].get("profile") == profile]

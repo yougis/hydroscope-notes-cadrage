@@ -1,0 +1,16 @@
+{
+  "name": "dynamic-world-nc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Démo Google Earth Engine — Dynamic World sur la côte ouest de la Nouvelle-Calédonie (bassins PPE). Slider temporel, swipe et deux cartes comparatives.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@google/earthengine": "^1.7.38",
+    "express": "^5.2.1"
+  }
+}

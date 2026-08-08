@@ -4,7 +4,7 @@ format: html
 date: "2026-08-06"
 ---
 
-Ce document recense les relations de dépendance **(parent → enfant)** entre les User Stories du backlog. Tous les tableaux de ce document sont générés depuis `backlog.csv` : les relations parent/enfant sont dérivées de la colonne `Dépend de (Parent)`, et **seules les dépendances déclarées dans cette colonne** figurent dans les tableaux.
+Ce document recense les relations de dépendance **(parent → enfant)** entre les User Stories du backlog. Tous les tableaux de ce document sont générés depuis `backlog.xlsx` : les relations parent/enfant sont dérivées de la colonne `Dépend de (Parent)`, et **seules les dépendances déclarées dans cette colonne** figurent dans les tableaux.
 
 > Une US peut être **à la fois enfant et parent** (ex : `US4.1` est enfant de `US3.5`, `US4.7` et `US1bis.12`, et parent de `US4.2`, `US4.3`, `US4.7`, `US5.1` et `US10.2`). Ces influences croisées sont représentées dans le graphe navigable (`annexes/graphe_dependances.html`).
 
@@ -12,7 +12,7 @@ Ce document recense les relations de dépendance **(parent → enfant)** entre l
 
 ## Typologie des dépendances
 
-Chaque US est classée selon une **finalité fonctionnelle** (`Type fonctionnel` dans `backlog.csv`), rattachée aux **4 piliers** du projet (vision AMOA). Les EPIC restent le conteneur thématique stable ; la finalité est une vue transversale.
+Chaque US est classée selon une **finalité fonctionnelle** (`Type fonctionnel` dans `backlog.xlsx`), rattachée aux **4 piliers** du projet (vision AMOA). Les EPIC restent le conteneur thématique stable ; la finalité est une vue transversale.
 
 ```{python}
 #| label: tbl-typologie
@@ -21,7 +21,7 @@ Chaque US est classée selon une **finalité fonctionnelle** (`Type fonctionnel`
 
 import pandas as pd
 
-df = pd.read_csv("backlog.csv", sep=";")
+df = pd.read_excel("backlog.xlsx", sheet_name="Backlog")
 df["Dépend de (Parent)"] = df["Dépend de (Parent)"].fillna("").astype(str)
 
 # Explications extraites de la version précédente du document (tableau « Typologie »)

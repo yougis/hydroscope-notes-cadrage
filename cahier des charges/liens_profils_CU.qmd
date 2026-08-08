@@ -1,0 +1,105 @@
+## Profils utilisateurs et cas d'usage {#sec-profil-utilisateur}
+
+Les tableaux de cas d'usage par profil et la matrice de couverture présentés dans ce document sont **générés depuis `backlog.xlsx`** (source de vérité du projet, 99 User Stories). Les colonnes éditoriales « Cas d'usage », « Question concrète » et la description/objectifs de chaque profil sont conservées via `specifications/cas_usage.yaml` ; les colonnes « Périmètre (MVP/lot 2) » et « Phrase méthode agile » sont calculées depuis le backlog.
+
+**Attribution des fiches aux profils.** Le rattachement de chaque cas d'usage à un profil se fait **à partir du backlog** (colonne « Profil utilisateur » de l'US principale de la fiche), et non à partir de l'attribut `profile` de la fiche — décision MOA 2026-08-07 : « le backlog fait foi ». En cas de divergence (fiche rattachée à un profil différent de celui de son US dans le backlog), c'est le profil du backlog qui s'applique.
+
+```{python}
+#| label: setup-gene
+import glob
+import yaml
+import pandas as pd
+
+backlog = pd.read_excel("backlog.xlsx", sheet_name="Backlog")
+backlog["MVP"] = backlog["MVP"].astype(str).str.strip().str.upper().eq("TRUE")
+us_mvp = dict(zip(backlog["ID User Story"].astype(str).str.strip(), backlog["MVP"]))
+us_phrase = dict(zip(backlog["ID User Story"].astype(str).str.strip(), backlog["Phrase méthode agile"]))
+us_profil = dict(zip(backlog["ID User Story"].astype(str).str.strip(), backlog["Profil utilisateur"].astype(str).str.strip()))
+
+mapping = yaml.safe_load(open("specifications/cas_usage.yaml", encoding="utf-8"))
+def cast_issue(uc):
+    """Cas d'usage question concrète d'une fiche depuis le YAML."""
+    m = mapping.get(uc, {})
+    return m.get("usage", "—"), m.get("question", "—")
+
+def fiche_to_us(path):
+    meta = yaml.safe_load(open(path, encoding="utf-8").read().split("---", 2)[1])
+    return meta, [u.strip() for u in meta["us"].split(",")]
+
+def mvp_label(us_list):
+    """MVP+lot2: 'MVP' si toutes MVP, 'Lot 2' si aucune, 'MVP + lot 2' sinon."""
+    if not us_list:
+        return "—"
+    flags = [us_mvp.get(u, False) for u in us_list]
+    if all(flags):
+        return "MVP"
+    if not any(flags):
+        return "Lot 2"
+    return "MVP + lot 2"
+
+def rows_for_profile(profile):
+    rows = []
+    for path in sorted(glob.glob("specifications/CU-*.qmd")):
+        meta = yaml.safe_load(open(path, encoding="utf-8").read().split("---", 2)[1])
+        us_list = [u.strip() for u in meta["us"].split(",")]
+        # rattache-fille au profil du backlog (US principale), décision MOA 2026-08-07
+        main_us = us_list[0]
+        if us_profil.get(main_us) != profile:
+            continue
+        usage, question = cast_issue(meta["uc"])
+        mvp_txt = mvp_label(us_list)
+        if main_us not in us_mvp:
+            print(f"[warning] US principale {main_us} introuvable dans backlog.xlsx (fiche {meta['uc']})")
+            rows.append({"#": meta["uc"], "Cas d'usage": usage, "US": meta["us"], "Périmètre": "—", "Question concrète": question, "Phrase méthode agile": "—"})
+        else:
+            rows.append({"#": meta["uc"], "Cas d'usage": usage, "US": meta["us"], "Périmètre": mvp_txt, "Question concrète": question, "Phrase méthode agile": us_phrase.get(main_us, "—")})
+    return rows
+
+def print_rows(profile):
+    import pandas as pd
+    print(pd.DataFrame(rows_for_profile(profile)).to_markdown(index=False))
+```
+
+
+## Matrice de couverture profil × périmètre
+
+Nombre d'User Stories (US) du backlog par profil et par EPIC. « lecture seule » (Intéressé public) = aucun US dédié au profil sur ce périmètre (cases à 0), accès en consultation uniquement. Matrice générée depuis backlog.xlsx (99 US).
+
+```{python}
+#| label: tbl-matrice
+#| output: asis
+import pandas as pd
+
+backlog = pd.read_excel("backlog.xlsx", sheet_name="Backlog")
+
+epic_short = {
+    "EPIC 1 – Gestion des données": "EP1",
+    "EPIC 1bis – Catalogage des données": "EP1bis",
+    "EPIC 2 – Qualité des données": "EP2",
+    "EPIC 3 – Référentiels": "EP3",
+    "EPIC 4 – Calcul d'indicateurs": "EP4",
+    "EPIC 5 – Analyse multicritère": "EP5",
+    "EPIC 6 – Visualisation": "EP6",
+    "EPIC 7 – Aide à la décision": "EP7",
+    "EPIC 8 – Export": "EP8",
+    "EPIC 9 – Utilisateurs": "EP9",
+    "EPIC 10 – Traçabilité": "EP10",
+}
+
+profil_order = [
+    "Administrateur plateforme",
+    "Administrateur expert data",
+    "Expert métier eau potable",
+    "Décideur métier",
+    "Public avisé",
+]
+
+mat = (
+    pd.crosstab(backlog["Profil utilisateur"], backlog["EPIC"])
+    .reindex(index=profil_order, columns=list(epic_short.keys()))
+    .rename(columns=epic_short)
+)
+mat.index.name = "Profil \\ EPIC"
+
+print(mat.to_markdown())
+```

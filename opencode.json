@@ -12,6 +12,10 @@
     "catalogue-fiches-indicateur-pdf": {
       "path": "/home/yogis/SynologyDrive/Projects/hydroscope/documents projet/fiche indicateur/release/Fiches indicateurs HydroScope-v4.pdf",
       "description": "catalogue fiches indicateur"
+    },
+    "offre-yapuka-AMOA": {
+      "path": "/home/yogis/SynologyDrive/Projects/hydroscope/client/proposition/YAPUKA - Proposition V3 - AMOA Projet HydroScope - OEIL Nouvelle-Calédonie.pdf",
+      "description": "catalogue fiches indicateur"
     }
   },
   "$schema": "https://opencode.ai/config.json",

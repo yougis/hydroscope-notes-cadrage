@@ -1,0 +1,260 @@
+---
+title: "HydroScope — L'observatoire de l'eau calédonien"
+subtitle: "Réunion de présentation — Retour sur l'accompagnement AMOA et le cahier des charges"
+author:
+  - name: "Yapuka — AMOA HydroScope"
+date: today
+date-format: long
+lang: fr
+format:
+  revealjs:
+    slide-number: true
+    progress: true
+    chalkboard: false
+    center: false
+    width: 1280
+    height: 720
+    margin: 0.055
+    theme: simple
+    css:
+      - hydroscope-reveal.css
+    footer: |-
+      Yapuka · AMOA HydroScope
+execute:
+  echo: false
+---
+
+## Objectifs de la réunion
+
+::: {.eyebrow}
+25 minutes, trois messages
+:::
+
+<div class="card"><span class="pill emerald">1</span><span class="k">Avancement</span><br>
+<span class="v">Où en est le projet HydroScope ?</span>
+</div>
+
+<div class="card"><span class="pill emerald">2</span><span class="k">Cahier des charges</span><br>
+<span class="v">Qu'est-ce qu'on propose de construire ensemble ?</span>
+</div>
+
+<div class="card"><span class="pill emerald">3</span><span class="k">Votre regard</span><br>
+<span class="v">Les points à trancher et ce qu'on attend des partenaires.</span>
+</div>
+
+::: {.credit}
+Débat en fin de présentation : vos questions guident la suite.
+:::
+
+---
+
+## Le constat de départ
+
+::: {.eyebrow}
+La ressource en eau, une responsabilité partagée en Nouvelle-Calédonie
+:::
+
+- Les données sur l'eau **existent** aujourd'hui mais sont **dispersées** entre services et producteurs.
+- Les indicateurs ne sont pas **partagés** ni **lisibles** pour les décideurs et le grand public.
+- Réseaux d'eau potable, qualité, pressions sur les milieux : on peut mieux préparer et mieux décider.
+
+::: {.left .card}
+<span class="k">Ambition</span><br>
+<span class="v">Un outil commun de connaissance, de diagnostic et de suivi de l'eau.</span>
+:::
+
+::: {.right .card}
+<span class="k">Positionnement</span><br>
+<span class="v">Observatoire de l'eau (OEIL), porté par la PEP et l'OFB.</span>
+:::
+
+---
+
+## Le contexte institutionnel
+
+::: {.eyebrow}
+Un projet porté collectivement
+:::
+
+- **OEIL** — Observatoire de l'environnement en Nouvelle-Calédonie : pilote.
+- **DAVAR** — gestion de l'eau et de l'environnement.
+- **DASS** — santé publique, eau destinée à la consommation humaine.
+- Les **producteurs de données** : mairies, régies, réseaux, bureaux d'études.
+
+Un portail n'est qu'une vitrine : la valeur vient du **partenariat durable** autour des données.
+
+---
+
+## Ce que le projet doit réussir
+
+::: {.eyebrow}
+Le fil directeur du projet
+:::
+
+- **Rassembler** les données de l'eau, aujourd'hui dispersées, dans un référentiel fiable.
+- **Transformer** ces données en indicateurs compréhensibles pour chacun.
+- **Orienter** la lecture vers l'action, sans travestir l'incertitude.
+- **Diffuser** une information transparente et traçable jusqu'à sa source.
+
+::: {.rule}
+:::
+
+Un mot d'ordre : **chaque valeur affichée doit rester attachée à sa source et à sa méthode**.
+
+---
+
+## Ce qui a été produit
+
+::: {.eyebrow}
+Livrables de l'accompagnement AMOA
+:::
+
+- Un **cahier des charges** du projet HydroScope.
+- Un **backlog fonctionnel** : besoins priorisés, par usage et par profil.
+- Des **interviews** des services partenaires (OEIL, DAVAR, DASS, provinces).
+- Une **maquette** interactive du portail, présentée aujourd'hui.
+
+::: {.credit}
+La documentation est structurée pour être relue, amendée et maintenue en continu.
+:::
+
+---
+
+## Quelques chiffres pour se repérer
+
+::: {.split}
+<div>
+
+**10 chantiers** (EPICS) fonctionnels
+- Connaissance, gestion des données, indicateurs…
+- Diagnostic, aide à la décision, diffusion.
+
+</div>
+<div>
+
+**42 indicateurs** identifiés
+- Qualité, pression, eau potable, milieux.
+- 5 familles et 12 thèmes de lecture.
+
+</div>
+:::
+
+::: {.rule}
+:::
+
+**Un socle priorisé** : environ la moitié des actions en phase 1 (« MVP ») — à confirmer avec vous.
+
+---
+
+## Le parcours utilisateur
+
+::: {.eyebrow}
+De la carte à la décision
+:::
+
+1. **Carte** : entrer par le territoire qui m'intéresse (commune, bassin versant, unité de gestion).
+2. **Fiche territoire** : l'essentiel en un coup d'œil.
+3. **Indicateurs** : les valeurs, leur source, leur méthode.
+4. **Synthèse** : lecture orientée vers l'action (dont le débat AMC/ADI).
+
+Le parcours doit être **simple pour le grand public** et **riche pour l'expert**.
+
+---
+
+## Découverte de la maquette
+
+::: {.eyebrow}
+Une première version interactive
+:::
+
+::: {.r-stack}
+<iframe data-src="../../figma-design/dist/index.html" width="100%" height="640"></iframe>
+:::
+
+::: {.demo-bar}
+Maquette HydroScope — chargement local : `file://…/figma-design/dist/index.html`, ou serveur de test `npm run dev`.
+:::
+
+---
+
+## De la maquette au produit
+
+- La maquette matérialise les **choix d'interface** (filtres, cartes, provenance des données).
+- Elle ne remplace pas le **calcul réel** des indicateurs, mais fixe **le langage visuel**.
+- Vos avis sur la maquette **éclairent les priorités** du backlog.
+
+L'idée : **tester avant de construire**, plutôt que construire pour découvrir.
+
+---
+
+## Le point à trancher : AMC vs ADI
+
+Lorsqu'on lit une valeur, on veut savoir : « cette situation est-elle plutôt bonne, à surveiller, ou problématique ? »
+
+Deux approches figurent aujourd'hui dans la documentation :
+
+- **AMC** — analyse **multi-critère** : combine plusieurs indicateurs pour produire un **score synthétique** par territoire.
+- **ADI** — **aide à l'interprétation** : qualifie la valeur par des **seuils de référence**, sans créer de score.
+
+Ce choix n'est pas technique d'abord : il est **méthodologique et de confiance**.
+
+---
+
+## AMC — L'analyse multi-critère
+
+### Quand elle est utile
+- Comparer des territoires entre eux.
+- Identifier des priorités d'action (investissement, vigilance).
+
+### Prudence
+- Les pondérations sont à **justifier publiquement**.
+- Risque de « boîte noire » si le calcul n'est pas auditable.
+- Risque de simplification excessive si mal encadré.
+
+---
+
+## ADI — L'aide à l'interprétation
+
+### Utilité
+- Qualifie une valeur **en contexte** : « plutôt bonne, plutôt mauvaise… ».
+- Reste **descriptif** et **réversible** : on peut remonter aux données sources.
+- Affiche **les seuils de référence** pour que chacun comprenne la lecture.
+
+### Prudence
+- Sans score, la comparaison directe entre territoires est **moins immédiate**.
+
+---
+
+## Notre proposition
+
+> Aujourd'hui, les **deux langages** sont documentés (AMC et ADI) mais pas encore priorisés.
+
+- Mettre en socle l'**ADI** : lecture transparente et descriptive, robuste.
+- **Réserver l'AMC** à une étape suivante, comme capacité d'exploration.
+
+C'est une option de **prudence méthodique**, à valider avec les partenaires.
+
+---
+
+## Ce qu'on attend de vous
+
+1. **Confirmer** le périmètre le plus utile (3-4 priorités).
+2. **Trancher** les choix de lecture : synthèse vs transparence.
+3. **Identifier** qui participera aux ateliers de co-construction.
+4. **Fournir** un premier jeu de données de démonstration.
+
+::: {.credit}
+Pas d'engagement d'effort aujourd'hui : nous voulons d'abord **prioriser ensemble**.
+:::
+
+---
+
+## Prochaines étapes
+
+1. **Intégration** de vos retours à la documentation et au backlog.
+2. **Ateliers de co-construction** (2 à 3 séances, profils décideurs et experts).
+3. **Socle priorisé** livré avec test de bout en bout.
+
+::: {.final}
+**Merci de votre attention — vos questions, vos clarifications, vos retours.**
+:::

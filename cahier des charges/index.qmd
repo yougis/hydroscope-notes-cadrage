@@ -1,16 +1,23 @@
 ---
 title: "Projet HydroScope"
-subtitle: "Note de cadrage stratégique"
+subtitle: "Cahier des charges"
 
 execute:
   echo: false
 
 version: "version 1"
- 
+
+fichier_backlog : "backlog.xlsx"
+catalogue_inidcateur : ""
+fiche_indicateur : ""
+
+
+
 
 copyright: !expr paste("Copyright Yapuka SARL - 2026. Tous droits réservés.", version)
 
 resume: "Succédant au tableau de bord PressionPPE (2021), dont il capitalise les acquis techniques et le retour d'expérience, le projet Hydroscope vise la mise en place de services numériques destinées au suivi de la ressource en eau potable sur l'ensemble du territoire de la Nouvelle-Calédonie. Le projet Hydroscope se fixe pour objectif de caractériser les Bassin Versant d'Approvisionnement en Eau Potable (BVAEP), incluant les Perimetre de Protection de l'Eau (PPE) et les points de captages via leurs facteurs biogéographiques (relief, géologie, végétation, pluviométrie), les pressions subies (urbanisation, incendies, érosion...) et les réponses qui ont pu être apportées sur ces milieux. Le projet doit aussi permettre le partage de ces connaissances à différentes échelles (pays, province, commune) via des interfaces numériques adaptés à différents publics."
+
 ---
 
 
@@ -40,111 +47,124 @@ Le projet **Hydroscope** a pour ambition de doter le territoire d'une architectu
 
 L'OEIL assure la continuité intellectuelle du projet initial (PressionPPE en 2021) et s’assurera à ce que les futurs outils — qu'il s'agisse de tableaux de bord experts, d'interfaces simplifiées pour les partenaires ou de fiches pédagogiques — deviennent des leviers d'aide à la décision pour la protection durable des bassins versants producteurs d'eau potable (BVAEP). 
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./1_contexte_objectif.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./2_partie_prenantes_gouvernance.qmd >}}
 
----
+***
+
 
 {{< pagebreak >}}
 
 {{< include ./3_vision_produit_methodologie.qmd >}}
 
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./4_methodologie_agile.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./5_presentation_indicateurs.qmd >}}
 
----
+***
+
+{{< pagebreak >}}
+
+{{< include ./5bis_profils_utilisateurs.qmd >}}
+
+
+***
 
 {{< pagebreak >}}
 
 {{< include ./6_perimetre_fonctionnel.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./7_product_backlog.qmd >}}
 
----
+***
+{{< pagebreak >}}
+
+{{< include ./7bis_dependances_us.qmd >}}
+
+***
 
 {{< pagebreak >}}
 
 {{< include ./8_monitoring.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./9_Exigences_non_fonctionnelles.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./10_architecture_cible.qmd >}}
 
----
+***
 
 
 {{< pagebreak >}}
 
 {{< include ./12_bonne_pratique_dev.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./13_deploiement_CI.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./14_recette_validation.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./15_accompagnement.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./16_cadre_contractuel.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./17_planning_jalons.qmd >}}
 
----
+***
 
 {{< pagebreak >}}
 
 {{< include ./0_glossaire.qmd >}}
 
----
+***
 
 # Annexes {#sec-Annexes}
 
@@ -154,7 +174,7 @@ Le tableau de référence des indicateurs est joint à l'offre :
 
 - `fiches indicateurs.xlsx` — référentiel contractuel des indicateurs (38 indicateurs, regroupement V1 : 2 familles, 4 thèmes, 10 groupes)
 
-## Catalogue des fiches indicateurs
+## Catalogue des fiches indicateurs {#sec-Catalogue-des-fiches-ind}
 
 Le catalogue de fiches détaillées des indicateurs est fourni avec le présent cahier des charges :
 
@@ -172,7 +192,7 @@ Les critères d'acceptation du périmètre MVP sont détaillés sous forme Gherk
 
 {{< include ./annexes/Criteres_acceptation_lot2.qmd >}}
 
----
+***
 
 ## Cadre de chiffrage (DQE)
 
@@ -185,3 +205,4 @@ Le cadre de chiffrage (annexe ci-dessous) constitue la grille commune de chiffra
 # Liste des document à fournir
 
 {{< include ./annexes/piece-a-fournir.qmd >}}
+

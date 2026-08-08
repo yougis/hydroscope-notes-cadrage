@@ -28,7 +28,7 @@ HydroScope vise ainsi à faire évoluer cet outil en proposant une plateforme pe
 
 Le projet est actuellement engagé dans une phase de réalisation destinée à développer des services numériques en réponse aux  besoins métiers identifiés lors de la phase d'analyse. Cette phase se concentre sur la définition des indicateurs, la structuration des données et la conception des interfaces utilisateurs adaptées aux différents profils d'acteurs. 
 
-### Éléments de cadrage issus du dossier de candidature
+### Dossier de candidature PEP
 
 Le projet HydroScope a fait l'objet d'un dossier de candidature au fonds de soutien à la Politique de l'Eau Partagée (PEP 2023), co-financé par l'Office Français de la Biodiversité (OFB) et le fonds PEP. Les éléments suivants, issus de ce dossier, constituent le socle de cadrage du présent cahier des charges :
 
@@ -46,44 +46,25 @@ L'objectif d'HydroScope est de mettre à disposition un système d'information p
 
 Plus précisément, le projet poursuit 4 objectifs :
 
-- **Connaissance:** 
-Mieux caractériser le territoire (relief, géologie, pluviométrie) et les enjeux (population desservie) en 
-centralisant et structurant les données utiles à la caractérisation des bassins versants et des points de captages
+- **Connaissance:**
+  Mieux caractériser le territoire (relief, géologie, pluviométrie) et les enjeux (population desservie) en  centralisant et structurant les données utiles à la caractérisation des bassins versants et des points de captages
 
 - **Diagnostic:**
-Appréhender le niveau d'intégrité de la ressource via l'analyse d'une multitude d'indicateurs : 
+  Appréhender le niveau d'intégrité de la ressource via l'analyse d'une multitude d'indicateurs : 
   - en produisant des indicateurs homogènes décrivant les enjeux, les pressions environnementales et les caractéristiques des territoires. 
   - en assurant l'historisation des données afin de suivre leur évolution dans le temps.
 
 - **Veille:** 
-Détecter automatiquement les changements environnementaux significatifs et faciliter l'identification de ces évolutions significatives grâce à des mécanismes de veille et de mise à jour automatisée.
+  Détecter automatiquement les changements environnementaux significatifs et faciliter l'identification de ces évolutions significatives grâce à des mécanismes de veille et de mise à jour automatisée.
 
 - **Partage:**
-Diffuser un diagnostic commun entre les parties prenantes pour orienter les investissements publics en mettant à disposition des indicateurs dans un tableau de bord adaptés aux différents profils d'utilisateurs et en facilitant le partage d'une information cohérente entre les différents partenaires.
+  Diffuser un diagnostic commun entre les parties prenantes pour orienter les investissements publics en mettant à disposition des indicateurs dans un tableau de bord adaptés aux différents profils d'utilisateurs et en facilitant le partage d'une information cohérente entre les différents partenaires.
 
 HydroScope n'a pas vocation à remplacer les outils métiers existants ni à se substituer aux décisions des gestionnaires. Il constitue un outil d'observation, d'analyse et de restitution destiné à fournir une vision consolidée des informations disponibles afin d'appuyer les travaux de suivi et de protection de la ressource en eau potable.
 
-### Objectifs fonctionnels
+La réalisation de ces objectifs se traduit par un ensemble de **fonctionnalités** structuré autour d'un catalogue de 38 indicateurs : production et historique des indicateurs, tableau de bord de restitution, veille automatique sur les pressions environnementales et partage de l'information entre partenaires. L'architecture fonctionnelle détaillée et la présentation des indicateurs sont traitées au @sec-presentation-indicateurs.
 
-L'application doit permettre aux gestionnaires de répondre à des questions concrètes pour prioriser leurs interventions :
-
-- Quels sont les bassins versants actuellement sous pression forte et selon quels critères ?
-- Quelle est la tendance d'évolution d'une pression (ex: incendies, glissement de terrain) sur les 5 ou 10 dernières années ?
-- Quelles zones doivent être protégées ou restaurées en priorité ?
-- Quel est le niveau de gravité d'un défrichage détecté par satellite ?
-
-L'application devra notamment permettre de :
-
-- consulter les caractéristiques des bassins versants d'alimentation en eau potable ;
-- visualiser les indicateurs produits à différentes échelles territoriales et sur les objets géographiques suivants (captage/forage; bassin versant AEP, maille géographique vectorielle H3 ^[Système de grille hierarchique vectorielle standardisée utilisé pour agréger des données hétérogènes (incendies, érosion, occupation du sol).] );
-- suivre l'évolution temporelle des pressions environnementales ;
-- comparer plusieurs territoires, captages/forages ou bassins versants ;
-- Assurer la traçabilité et la transparence des traitements effectués
-- accéder aux fiches descriptives des indicateurs, des bassins versants AEP, des captages/forages et périmètres de protection ;
-- produire des rapports exportables ;
-- diffuser des niveaux d'information adaptés aux différents profils d'utilisateurs (experts, partenaires institutionnels et grand public).
-
-L'ensemble de ces fonctionnalités devra contribuer à améliorer l'accès aux données existantes et d'appuyer la prise de décision publique et opérationnelle auprès des acteurs de la gestion de l'eau potable en Nouvelle-Calédonie.
+Ces services s'adressent à des **profils utilisateurs variés**, des experts techniques (OEIL, DAVAR, DASS) aux décideurs et au grand public, chacun disposant d'interfaces et de niveaux de restitution adaptés. La description des profils et de leurs objectifs est détaillée au @sec-profil-utilisateur.
 
 ### Quantification du périmètre
 
@@ -91,11 +72,11 @@ Le périmètre fonctionnel du projet HydroScope s’appuie sur un ensemble de do
 
 À ce stade, les ordres de grandeur sont les suivants :
 
-- **Bassins versants d’alimentation en eau potable (BVAEP)** : ~50 unités  
-- **Captages / forages** : ~500 unités  
-- **Périmètres de protection** : ~250 unités  
-- **Indicateurs** : 38 indicateurs (version 4 du catalogue), dont 33 intégrés dans l’analyse multicritère et 5 à visée informative (pluviométrie, géologie, érosion, prélèvements AODPE, PUD)  
-- **Sources de données** : 52 sources référencées (GEOREP, Google Earth Engine, bases OEIL, DAVAR, DASS, DIMENC, DITTT, provinces, CEN, Endemia, Météo-France, ISEE, ANCB…)
+- **Bassins versants d’alimentation en eau potable (BVAEP)** : ~50 unités
+- **Captages / forages** : ~500 unités
+- **Périmètres de protection** : ~250 unités
+- **Indicateurs** : 38 indicateurs (version 4 du catalogue), dont 33 intégrés dans l’analyse multicritère et 5 à visée informative (pluviométrie, géologie, érosion, prélèvements AODPE, PUD)
+- **Sources de données** : 52 sources référencées (GEOREP, Google Earth Engine, bases OEIL, DAVAR, DASS, DIMENC, DITTT, provinces, CEN, Endemia, Météo-France, ISEE, ANCB…}
 
 Ces valeurs sont indicatives et pourront évoluer au cours du projet, notamment en fonction :
 
@@ -105,10 +86,10 @@ Ces valeurs sont indicatives et pourront évoluer au cours du projet, notamment 
 
 Elles permettent néanmoins de fournir un premier niveau de cadrage pour le dimensionnement technique et fonctionnel de la solution.
 
-Le catalogue détaillé des indicateurs et de leurs sources est présenté au chapitre 5 – Présentation des indicateurs et fourni en annexe (tableau synthétique des indicateurs).
+La liste détaillée des indicateurs et de leurs sources est présentée au @sec-presentation-indicateurs et est aussi fournie en pièce-jointe.
 
 
-### Sources de données
+### Sources de données des indicateurs
 
 Le projet HydroScope repose sur l'intégration et la valorisation de données issues de sources multiples, produites par différents acteurs du territoire.
 

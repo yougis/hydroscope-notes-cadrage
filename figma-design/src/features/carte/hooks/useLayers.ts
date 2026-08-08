@@ -1,6 +1,9 @@
 import { useState } from 'react'
 
-export type BasemapId = 'carto' | 'satellite' | 'terrain'
+export type BasemapId = 'carto' | 'terrain' | 'esri' | 'google' | 'bing' | 'mapbox' | 'georep'
+export type SatelliteId = Extract<BasemapId, 'esri' | 'google' | 'bing' | 'mapbox' | 'georep'>
+
+export const SATELLITE_IDS: SatelliteId[] = ['esri', 'google', 'bing', 'mapbox', 'georep']
 
 export interface LayerDef {
   key: string

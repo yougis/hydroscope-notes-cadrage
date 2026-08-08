@@ -14,3 +14,6 @@ _extensions/*
 */dist/
 **/pnpm-lock.yaml
 opencode.json
+.env
+/cahier des charges/archive_backlog/
+/cahier des charges/annexes/serveur-graphe/node_modules/

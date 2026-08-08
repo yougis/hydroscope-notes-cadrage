@@ -2,7 +2,7 @@
 
 Ce document fixe, pour chaque User Story MVP du périmètre EPIC 6 à 10, des **critères d'acceptation** contractuels rédigés en Gherkin (Étant donné / Quand / Alors). Ils constituent la base de recette fonctionnelle : un critère est satisfait lorsque le comportement décrit se reproduit de façon déterministe lors des essais, sur les jeux de données de référence et les comptes de test fournis au chiffrage.
 
-Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.csv) — EPIC 6 (24 US), EPIC 7 (3 US), EPIC 8 (2 US), EPIC 9 (2 US), EPIC 10 (2 US), soit 33 US. Les conventions suivantes s'appliquent à l'ensemble :
+Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.xlsx) — EPIC 6 (24 US), EPIC 7 (3 US), EPIC 8 (2 US), EPIC 9 (2 US), EPIC 10 (2 US), soit 33 US. Les conventions suivantes s'appliquent à l'ensemble :
 
 - **BVAEP** : bassin versant d'alimentation en eau potable ; **PPE** : périmètre de protection des eaux ; **unités** : captages ou BVAEP selon l'échelle active.
 - **Cohérence des vues** : carte, listes, graphiques, compteur et fiches présentent la même sélection et les mêmes filtres à tout instant.
@@ -237,6 +237,6 @@ Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.csv
 
 ---
 
-*Périmètre MVP — Ce document référence le catalogue des indicateurs (38 indicateurs) et les référentiels (BVAEP, captages, PPE) fournis en données de référence pour la recette en Nouvelle-Calédonie. La liste des US couvertes correspond aux flags `MVP=TRUE` du fichier backlog.csv : 33 US au total pour les EPIC 6 à 10, dont 24 pour l'EPIC 6.*
+*Périmètre MVP — Ce document référence le catalogue des indicateurs (38 indicateurs) et les référentiels (BVAEP, captages, PPE) fournis en données de référence pour la recette en Nouvelle-Calédonie. La liste des US couvertes correspond aux flags `MVP=TRUE` du fichier backlog.xlsx : 33 US au total pour les EPIC 6 à 10, dont 24 pour l'EPIC 6.*
 
 ---

@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.reveal {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 30px;
+  color: #26262b;
+  background: #fbfbfa;
+}
+
+.reveal .slides section {
+  text-align: left;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  font-weight: 700;
+  color: #0b5a4a;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.reveal h1 { font-size: 1.65em; margin-bottom: 0.4em; }
+.reveal h2 { font-size: 1.35em; margin-bottom: 0.35em; }
+.reveal h3 { font-size: 1.02em; color: #0b5a4a; margin-bottom: 0.3em; }
+
+.reveal p,
+.reveal li {
+  color: #3f3f46;
+  line-height: 1.45;
+}
+.reveal strong { color: #0b5a4a; font-weight: 700; }
+
+.reveal a { color: #0e7490; }
+
+.reveal blockquote {
+  background: #ecfdf5;
+  border-left: 6px solid #10b981;
+  padding: 0.6em 1em;
+  color: #064e3b;
+  font-style: normal;
+}
+
+/* Eyebrow tag */
+.eyebrow {
+  text-transform: uppercase;
+  font-size: 0.55em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #059669;
+  margin-bottom: 0.6em;
+}
+
+/* Signature : jauge hydro (petite éprouvette) */
+.gauge {
+  display: inline-block;
+  width: 4px;
+  height: 3.1em;
+  vertical-align: middle;
+  margin-right: 0.35em;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #bfe8dc 0%, #10b981 78%, #0b5a4a 100%);
+}
+
+/* Cartes */
+.card {
+  border: 1px solid #e4e4e7;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 0.8em 1em;
+  margin: 0.5em 0;
+  box-shadow: 0 1px 2px rgba(3, 2, 19, 0.05);
+}
+.card .k {
+  font-size: 0.62em;
+  font-weight: 600;
+  color: #059669;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.card .v {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: #0b5a4a;
+}
+
+/* Trois colonnes */
+.left { width: 48%; display: inline-block; vertical-align: top; margin-right: 2%; }
+.right { width: 48%; display: inline-block; vertical-align: top; }
+
+/* Splitter */
+.split { display: flex; gap: 1.2em; }
+.split > div { flex: 1; }
+
+/* Pastille colorée */
+.pill {
+  display: inline-block;
+  padding: 0.12em 0.7em;
+  border-radius: 999px;
+  font-size: 0.55em;
+  font-weight: 600;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+.pill.emerald { background: #d1fae5; color: #065f46; }
+.pill.slate   { background: #e2e8f0; color: #334155; }
+.pill.orange  { background: #ffedd5; color: #9a3412; }
+.pill.blue    { background: #dbeafe; color: #1e40af; }
+
+/* Petit trait séparateur fonctionnel */
+.rule { border-top: 1px solid #e4e4e7; margin: 0.9em 0 0.7em 0; }
+
+.reveal ul { margin: 0 0 0 1.2em; }
+.reveal li { margin-bottom: 0.3em; }
+.reveal ul ul { margin-top: 0.2em; }
+
+/* Tableaux */
+.reveal table { font-size: 0.72em; border-collapse: separate; border-spacing: 0; }
+.reveal table th { background: #f0fdf9; color: #065f46; font-weight: 700; }
+.reveal table th, .reveal table td { border: 1px solid #e4e4e7 !important; padding: 0.45em 0.7em; }
+.reveal table tr:nth-child(even) td { background: #fafafa; }
+
+/* Slide titre */
+#title-slide {
+  background: linear-gradient(160deg, #042f26 0%, #065f46 55%, #0b8a67 100%);
+}
+#title-slide h1 {
+  color: #ffffff;
+  font-size: 1.9em;
+}
+#title-slide .subtitle {
+  color: #d1fae5 !important;
+  font-size: 0.6em;
+  font-weight: 500;
+  margin-top: 0.6em;
+}
+#title-slide .quarto-title-authors,
+#title-slide .date {
+  color: #cbe9dd !important;
+  font-size: 0.55em;
+}
+#title-slide .gauge { background: linear-gradient(180deg, #a7f3d0 0%, #34d399 60%, #059669 100%); }
+
+/* Diapositive finale */
+.final {
+  background: linear-gradient(160deg, #04231a 0%, #064e3b 60%, #065f46 100%);
+}
+.final h2 { color: #ffffff; }
+.final p, .final li { color: #d1fae5; }
+
+/* Footer numeroté */
+.reveal .slide-number {
+  font-size: 0.45em;
+  color: #9ca3af;
+}
+
+/* Bandes démo */
+.demo-bar {
+  background: #0b5a4a;
+  color: #ecfdf5;
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  font-size: 0.7em;
+}
+.demo-bar code {
+  color: #a7f3d0;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0 0.4em;
+  border-radius: 4px;
+}
+
+/* CPS tiers neutres */
+.credit {
+  font-size: 0.45em;
+  color: #9ca3af;
+  margin-top: 1.2em;
+}

@@ -1,6 +1,6 @@
 ## Critères d'acceptation — Lot 2 (évolutions) et options
 
-Le périmètre du **Lot 2** regroupe les User Stories du product backlog non retenues dans le MVP (`MVP=FALSE` dans backlog.csv). Pour le chiffrage contractuel, ces User Stories sont couvertes par des **critères d'acceptation synthétiques au niveau de l'EPIC**, présentés ci-après ; ils seront détaillés et affinés au fil du projet, avant le développement de chaque fonctionnalité. Un critère est accepté lorsque la fonctionnalité se comporte conformément aux règles décrites, sur des jeux de données de référence représentatifs de la Nouvelle-Calédonie.
+Le périmètre du **Lot 2** regroupe les User Stories du product backlog non retenues dans le MVP (`MVP=FALSE` dans backlog.xlsx). Pour le chiffrage contractuel, ces User Stories sont couvertes par des **critères d'acceptation synthétiques au niveau de l'EPIC**, présentés ci-après ; ils seront détaillés et affinés au fil du projet, avant le développement de chaque fonctionnalité. Un critère est accepté lorsque la fonctionnalité se comporte conformément aux règles décrites, sur des jeux de données de référence représentatifs de la Nouvelle-Calédonie.
 
 ### EPIC 1 — Gestion des données (US1.2, US1.7)
 

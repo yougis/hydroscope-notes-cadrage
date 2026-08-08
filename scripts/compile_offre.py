@@ -39,7 +39,6 @@ FORMATS = ("html", "pdf", "docx")
 
 # Fichier maître des indicateurs : source unique, hors dépôt.
 MASTER_FILENAME = "fiches indicateurs.xlsx"
-LIST-INDICATEUR_FILENAME = "fiches indicateurs.xlsx"
 
 ANNEXES = (
     "arbre_indicateurs.html",
@@ -130,9 +129,9 @@ def build_pack(root: Path, pack_dir: Path) -> None:
             copy_file(src, cdc_pack / f"index.{fmt}")
 
     # 5. Fichiers référencés par l'HTML dans le même dossier :
-    #    './dependances_us.qmd' et './profils_utilisateurs.qmd' ; backlog.csv (+ backlog.xlsx,
-    #    template de réponse à compléter, colonne « Points d'effort prestataire ») ajoutés pour cohérence.
-    for name in ("profils_utilisateurs.qmd", "dependances_us.qmd", "backlog.csv", "backlog.xlsx"):
+    #    './2bis_profils_utilisateurs.qmd' et './7bis_dependances_us.qmd' ; backlog.xlsx
+    #    (template de réponse à compléter, colonne « Point d'effort prestataire ») ajouté pour cohérence.
+    for name in ("2bis_profils_utilisateurs.qmd", "7bis_dependances_us.qmd", "backlog.xlsx"):
         copy_file(CDC_SRC / name, cdc_pack / name)
 
     # 2. annexes/ (7 fichiers listés) + fichier maître des indicateurs (source unique).
@@ -253,7 +252,7 @@ def write_report(root: Path, pack_dir: Path, date_str: str, command_used: str,
         "## Contenu du pack",
         "",
         "1. `cahier des charges/` — les trois rendus frais du CDC (`index.html`, `index.pdf`, `index.docx`), "
-        "ainsi que `profils_utilisateurs.qmd`, `dependances_us.qmd`, `backlog.csv` et les sous-dossiers "
+        "ainsi que `2bis_profils_utilisateurs.qmd`, `7bis_dependances_us.qmd`, `backlog.xlsx` et les sous-dossiers "
         "`annexes/` (fiches PDF, arbre HTML, critères + fichier maître `fiches indicateurs.xlsx`), "
         "`specifications/` (tous les `.qmd`) et `epics/` (tous les `.qmd`).",
         "2. `analyse_architecture_donnees_geographique_decisionnelle.md` (source `reponse_prestataire/`).",
@@ -268,13 +267,13 @@ def write_report(root: Path, pack_dir: Path, date_str: str, command_used: str,
         "document référence des ressources par **chemins relatifs** depuis son propre répertoire :",
         "",
         "- `index.pdf`, `index.docx` — téléchargement des versions pdf/docx, même dossier ;",
-        "- `./dependances_us.qmd`, `./profils_utilisateurs.qmd` — même dossier ;",
+        "- `./7bis_dependances_us.qmd`, `./2bis_profils_utilisateurs.qmd` — même dossier ;",
         "- `./annexes/{Fiches_indicateurs_HydroScope-v4.pdf,arbre_indicateurs.html}` — fiches et arbre ;",
         "",
         "**Décision :** placer les trois rendus dans un sous-dossier `cahier des charges/` **sans les "
         "renommer** (garder `index.{html,pdf,docx}`). Le renommage proposé `Cahier_des_charges.*` aurait "
-        "cassé les liens internes `index.pdf` / `index.docx`. Les fichiers `dependances_us.qmd` et "
-        "`profils_utilisateurs.qmd` sont placés à côté de l'HTML (référencés en relatif), et `backlog.csv` "
+        "cassé les liens internes `index.pdf` / `index.docx`. Les fichiers `7bis_dependances_us.qmd` et "
+        "`2bis_profils_utilisateurs.qmd` sont placés à côté de l'HTML (référencés en relatif), et `backlog.xlsx` "
         "les accompagne pour cohérence. Le fichier maître `fiches indicateurs.xlsx` (source unique des "
         "indicateurs, résolu via `HYDRO_INDICATEURS_XLSX` ou le dossier voisin `fiche indicateur/`) est "
         "copié dans `annexes/`. Comme l'HTML embarque CSS/JS/images (`embed-resources`), uniquement les "

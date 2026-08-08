@@ -1,0 +1,167 @@
+CU-ADMIN-01:
+  uc: CU-ADMIN-01
+  profile: Administrateur plateforme
+  us: US9.1
+  usage: Créer un compte utilisateur et lui attribuer un profil
+  question: Combien de comptes « Décideur métier » ont été créés depuis l'ouverture
+    et dans quelle province se connectent-ils le plus ?
+CU-ADMIN-02:
+  uc: CU-ADMIN-02
+  profile: Administrateur plateforme
+  us: US9.3
+  usage: Configurer les rôles et les droits d'accès par profil
+  question: Quel profil doit voir la couche PPE sans pouvoir exporter les données
+    brutes associées ?
+CU-ADMIN-03:
+  uc: CU-ADMIN-03
+  profile: Administrateur plateforme
+  us: US9.4
+  usage: Restreindre l'accès à certaines données sensibles selon le profil
+  question: Faut-il masquer la localisation exacte des captages sensibles (Koné, Pouembout)
+    aux comptes publics ?
+CU-ADMIN-04:
+  uc: CU-ADMIN-04
+  profile: Administrateur plateforme
+  us: US10.3
+  usage: Consulter le journal des actions et détecter des anomalies
+  question: Quelle connexion tardive ou quel export CSV massif doit déclencher un
+    signalement ?
+CU-ADMIN-05:
+  uc: CU-ADMIN-05
+  profile: Administrateur plateforme
+  us: US10.6
+  usage: Lancer un audit d'usage pour adapter la plateforme aux besoins
+  question: Quel indicateur (BBR, ICPE, incendies cumulés) est le plus consulté sur
+    le Grand Nouméa ?
+CU-DATA-01:
+  uc: CU-DATA-01
+  profile: Administrateur expert data
+  us: US1.1, US1.4
+  usage: Importer un nouveau jeu de données et le normaliser
+  question: L'inventaire des captages de la province Nord contient-il des lignes rejetées
+    et comment les corriger ?
+CU-DATA-02:
+  uc: CU-DATA-02
+  profile: Administrateur expert data
+  us: US2.1, US2.5
+  usage: Détecter des valeurs aberrantes et qualifier la fiabilité
+  question: La complétude du BBR sur le BVAEP de la Dumbéa est-elle suffisante pour
+    publier l'indicateur ?
+CU-DATA-03:
+  uc: CU-DATA-03
+  profile: Administrateur expert data
+  us: US3.1, US3.2
+  usage: Gérer un bassin versant et ses captages dans le référentiel
+  question: Le captage de la Coulée est-il rattaché au bon bassin versant ?
+CU-DATA-04:
+  uc: CU-DATA-04
+  profile: Administrateur expert data
+  us: US4.1, US4.6
+  usage: Calculer un indicateur et versionner sa méthode
+  question: La version 2 de l'indicateur BBR modifie-t-elle les valeurs publiées l'an
+    passé ?
+CU-DATA-05:
+  uc: CU-DATA-05
+  profile: Administrateur expert data
+  us: US5.1, US5.6
+  usage: Construire un indice composite et documenter les méthodes
+  question: Quel jeu de données source alimente l'indicateur « occupation du sol »
+    au sein de l'indice composite ?
+CU-DECISION-01:
+  uc: CU-DECISION-01
+  profile: Décideur métier
+  us: US6.6, US6.7
+  usage: Consulter un tableau de bord synthétique et une fiche territoire
+  question: Quel BVAEP du Grand Nouméa affiche le plus mauvais BBR ce trimestre ?
+CU-DECISION-02:
+  uc: CU-DECISION-02
+  profile: Décideur métier
+  us: US6.5, US7.5
+  usage: Comparer deux bassins versants pour prioriser des investissements
+  question: Entre le BVAEP de la Dumbéa et celui de la Coulée, lequel concentre le
+    plus d'ICPE et d'incendies cumulés ?
+CU-DECISION-03:
+  uc: CU-DECISION-03
+  profile: Décideur métier
+  us: US7.2, US7.3
+  usage: Identifier une tendance critique et détecter un dépassement de seuil
+  question: Le BBR du captage de Pouembout est-il passé sous le seuil d'alerte en
+    période d'étiage ?
+CU-DECISION-04:
+  uc: CU-DECISION-04
+  profile: Décideur métier
+  us: US8.3
+  usage: Générer un rapport PDF pour un conseil municipal
+  question: Quel rapport PDF présenter au conseil municipal de Farino pour justifier
+    un investissement de sécurisation ?
+CU-DECISION-05:
+  uc: CU-DECISION-05
+  profile: Décideur métier
+  us: US7.6
+  usage: Consulter l'aide à l'interprétation avancée pour éclairer une décision
+  question: 'Pourquoi le BVAEP de La Foa est-il classé prioritaire : PPE absente,
+    densité d''ICPE ou occupation du sol ?'
+CU-EXPERT-01:
+  uc: CU-EXPERT-01
+  profile: Expert métier eau potable
+  us: US5.2, US5.3, US5.4, US5.5
+  usage: Conduire l'analyse multicritère (pondérations, scénarios, comparaisons, contributions)
+  question: Sachant que le BVAEP de la Dumbéa a un statut PPE absent, une surface
+    agricole de 15 %, 3 ICPE en amont et une géologie ruisselante, quel poids attribuer
+    à chaque indicateur pour que le classement de criticité reflète le risque réel
+    de dégradation ?
+CU-EXPERT-02:
+  uc: CU-EXPERT-02
+  profile: Expert métier eau potable
+  us: US6.4, US6.24
+  usage: Consulter les graphiques temporels et alterner les vues
+  question: Entre 2021 et 2025, comment a évolué la surface cumulée d'incendies sur
+    le BVAEP de la Dumbéa, et cette hausse est-elle corrélée aux surfaces d'érosion
+    identifiées la même année ?
+CU-EXPERT-03:
+  uc: CU-EXPERT-03
+  profile: Expert métier eau potable
+  us: US7.3, US7.2
+  usage: Identifier des tendances et détecter des dépassements
+  question: Le BBR du captage de la Dumbéa est-il passé sous le seuil de déficit en
+    période d'étiage sur les deux dernières années, indiquant une tension quantitative
+    sur la ressource ?
+CU-EXPERT-04:
+  uc: CU-EXPERT-04
+  profile: Expert métier eau potable
+  us: US7.4, US7.5
+  usage: Consulter la fiche synthétique du BVAEP prioritaire
+  question: 'Quels indicateurs contribuent le plus au score de criticité final du
+    BVAEP de la Dumbéa : est-ce le statut PPE, la densité d''ICPE, la surface d''incendies
+    cumulés, ou la géologie ?'
+CU-PUBLIC-01:
+  uc: CU-PUBLIC-01
+  profile: Intéressé public
+  us: US6.1, US6.2, US6.3, US6.20
+  usage: Vérifier la qualité de l'eau près de chez soi via la carte
+  question: Le captage qui alimente mon quartier à Nouméa a-t-il un BBR correct ?
+CU-PUBLIC-02:
+  uc: CU-PUBLIC-02
+  profile: Intéressé public
+  us: US6.10, US6.11, US6.12, US6.14, US6.15, US6.17
+  usage: Rechercher ma commune ou mon captage et consulter les indicateurs
+  question: Quels indicateurs sont disponibles pour ma commune de Koné ?
+CU-PUBLIC-03:
+  uc: CU-PUBLIC-03
+  profile: Intéressé public
+  us: US6.9, US6.13
+  usage: Consulter les couches thématiques et zoomer sur un territoire
+  question: La couche « périmètres de protection » est-elle visible autour de mon
+    captage ?
+CU-PUBLIC-04:
+  uc: CU-PUBLIC-04
+  profile: Intéressé public
+  us: US6.22, US6.25
+  usage: Appliquer un preset pour voir les territoires les plus exposés
+  question: Quels sont les 10 captages les plus exposés en province Sud ?
+CU-PUBLIC-05:
+  uc: CU-PUBLIC-05
+  profile: Intéressé public
+  us: US6.6, US6.7
+  usage: Trier la liste des indicateurs par distance pour trouver les plus proches
+  question: Quels captages sont les plus proches de mon domicile à Païta ?

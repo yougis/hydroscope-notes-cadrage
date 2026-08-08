@@ -9,8 +9,7 @@ HydroScope a vocation à devenir un outil de référence partagé entre les acte
 L’outil repose sur un équilibre entre plusieurs exigences complémentaires :
 
 - garantir une **rigueur scientifique** dans la production et l’interprétation des indicateurs ;
-- proposer une **accessibilité adaptée à des publics variés**, allant des experts aux décideurs ;
-- fournir les **profils utilisateurs détaillés** (fiches par profil) dans le document de travail dédié [profils_utilisateurs.qmd](./profils_utilisateurs.qmd) et la **matrice des dépendances** entre user stories dans [dependances_us.qmd](./dependances_us.qmd) ;
+- proposer une **accessibilité adaptée à des publics variés**, allant des experts aux décideurs voir le @sec-profil-utilisateur.
 - offrir des capacités d’**exploration, de comparaison et d’analyse**, facilitant l’identification des enjeux prioritaires et l’orientation des actions.
 
 HydroScope ne constitue pas un outil de décision automatisée, mais un support d’analyse visant à éclairer les choix des gestionnaires.

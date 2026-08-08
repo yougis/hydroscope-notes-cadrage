@@ -1,0 +1,16 @@
+{
+  "name": "serveur-graphe-backlog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Serveur local d'édition du backlog.xlsx + graphe des dépendances des User Stories HydroScope.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "express": "^4.21.0"
+  }
+}

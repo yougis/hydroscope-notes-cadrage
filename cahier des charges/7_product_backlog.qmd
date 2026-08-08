@@ -1,7 +1,7 @@
 
 ## Backlog et gestion des User Stories {#sec-backlog}
 
-Le tableau "backlog.csv" présente une première structuration du backlog produit d’HydroScope, organisée en EPICS et en User Stories (US). Il constitue une traduction opérationnelle des besoins fonctionnels identifiés dans le cadre du projet.
+Le tableau "backlog.xlsx" présente une première structuration du backlog produit d’HydroScope, organisée en EPICS et en User Stories (US). Il constitue une traduction opérationnelle des besoins fonctionnels identifiés dans le cadre du projet.
 
 Chaque **EPIC** correspondant à un grand ensemble fonctionnel est lui-même décliné en **User Stories**, qui décrivent des fonctionnalités attendues du point de vue utilisateur et qui constituent une liste de travail appelée backlog.
 

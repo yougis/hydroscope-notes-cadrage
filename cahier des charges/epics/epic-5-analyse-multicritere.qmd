@@ -1,6 +1,7 @@
 
 #### Description
-L’analyse multicritère constitue un axe d’évolution du projet HydroScope visant à proposer des lectures synthétiques des dynamiques territoriales, en combinant plusieurs indicateurs relatifs aux pressions, aux enjeux et aux caractéristiques des bassins versants.
+
+L’analyse multicritère constitue un axe d’évolution du projet HydroScope visant à proposer des lectures synthétiques des indicateurs sur la ressources en eau, en combinant plusieurs indicateurs relatifs aux pressions, aux enjeux et aux caractéristiques des bassins versants.
 
 Elle a pour objectif de faciliter l’identification de situations prioritaires et d’apporter un appui à la décision, tout en conservant un lien explicite avec les données et indicateurs sous-jacents.
 

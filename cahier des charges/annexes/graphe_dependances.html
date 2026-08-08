@@ -40,7 +40,9 @@
   .facet-pill:hover { border-color: #7fc0ff; }
   .facet-pill.on { background: #2f6f9f; color: #fff; border-color: #7fc0ff; }
   .facet-clear { margin-left: 6px; color: #ff6b6b; cursor: pointer; font-weight: bold; }
-  #detail { position: fixed; top: 0; right: 0; bottom: 0; width: 340px; min-width: 260px; max-width: 70vw;
+  #status { font-size: 12px; padding: 4px 18px; background: #101215; color: #9aa1a8; border-bottom: 1px solid #2a2e35; }
+  #status b { color: #7fc0ff; }
+  #detail { position: fixed; top: 0; right: 0; bottom: 0; width: 400px; min-width: 300px; max-width: 80vw;
     background: #1c1f24; box-shadow: -3px 0 12px rgba(0,0,0,.5); z-index: 1000; overflow-y: auto;
     display: flex; flex-direction: column; border-left: 1px solid #2a2e35; color: #e6e8eb; }
   #detail.closed { display: none; }
@@ -53,6 +55,29 @@
   #detail .prop .k { font-weight: bold; color: #7fc0ff; margin-bottom: 2px; }
   #detail .prop .v { color: #e6e8eb; }
   #detail .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; color: #fff; }
+  /* ── Formulaire d'édition ── */
+  #detail .form-field { margin-bottom: 12px; }
+  #detail .form-field label { display: block; font-weight: bold; color: #7fc0ff; margin-bottom: 3px; font-size: 12px; }
+  #detail .form-field label .req { color: #ff6b6b; }
+  #detail input[type=text], #detail select, #detail textarea {
+    width: 100%; box-sizing: border-box; background: #17191d; border: 1px solid #2a2e35; color: #e6e8eb;
+    border-radius: 4px; padding: 5px 8px; font-size: 13px; font-family: inherit; }
+  #detail textarea { min-height: 60px; resize: vertical; }
+  #detail .dep-wrap { border: 1px solid #2a2e35; background: #17191d; border-radius: 4px; padding: 5px 6px; }
+  #detail .dep-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 5px; }
+  #detail .chip { display: inline-block; background: #14324d; border: 1px solid #2f6f9f; color: #fff;
+    border-radius: 10px; padding: 2px 8px; font-size: 12px; cursor: pointer; }
+  #detail .chip .x { margin-left: 4px; color: #ff6b6b; }
+  #detail .dep-input-row { display: flex; gap: 6px; }
+  #detail .dep-input-row input { flex: 1; }
+  #d-actions { display: flex; gap: 8px; padding: 12px 14px; border-top: 1px solid #2a2e35; background: #101215; }
+  #d-actions button { margin-left: 0; flex: 1; }
+  #d-actions .danger { background: #4a1515; border-color: #8c2a2a; }
+  #d-actions .danger:hover { background: #6e1f1f; }
+  #toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+    background: #14324d; border: 1px solid #2f6f9f; color: #fff; padding: 8px 16px; border-radius: 6px;
+    font-size: 13px; z-index: 2000; display: none; max-width: 90vw; }
+  #toast.error { background: #4a1515; border-color: #8c2a2a; }
 </style>
 </head>
 <body>
@@ -61,9 +86,12 @@
   <p>Arcs orientés = relation <b>parent → enfant</b>. Zoom, pan et glisser-déposer des nœuds pour naviguer. Cliquez sur un nœud pour le détail.</p>
 </header>
 
+<div id="status"></div>
+
 <div id="controls">
   <button onclick="resetView()">Réinitialiser la vue</button>
   <button id="btnFilter" onclick="toggleLinked()">Afficher US liées uniquement</button>
+  <button id="btnNew" onclick="newUs()" style="display:none">+ Nouvelle US</button>
   <span id="colorby"><b>Colorier par :</b>
     <label><input type="radio" name="coloring" value="epic" checked onchange="setColoring(this.value)"> EPIC</label>
     <label><input type="radio" name="coloring" value="finalite" onchange="setColoring(this.value)"> Type fonctionnel</label>
@@ -89,12 +117,14 @@
     <span id="d-close" onclick="closeDetail()" title="Fermer">✕</span>
   </div>
   <div id="d-body"></div>
+  <div id="d-actions" style="display:none"></div>
 </div>
+
+<div id="toast"></div>
 
 <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
 <script>
 // ---------- Données des US ----------
-// nœud: {id, label, epic, title}
 const EPICS = {
   "EPIC 1": "#d32f2f", "EPIC 1bis": "#f57c00", "EPIC 2": "#fbc02d",
   "EPIC 3": "#43a047", "EPIC 4": "#2e7d32", "EPIC 5": "#00897b",
@@ -116,15 +146,36 @@ const EPIC_LABELS = {
   "EPIC 10": "Traçabilité & audit"
 };
 
-// ---------- Données issues de cahier des charges/backlog.csv ----------
-// Structures consolidées du graphe. La source de vérité est backlog.csv,
-// servie via GitHub raw (HTTPS + CORS *) puis dérivée en US_DATA / US / US_FINALITE / DEP.
-const BACKLOG_URL = 'https://raw.githubusercontent.com/yougis/hydroscope-notes-cadrage/refs/heads/main/cahier%20des%20charges/backlog.csv';
+// Nom complet d'un EPIC (ex. "EPIC 1 – Gestion des données")
+const EPIC_FULL = code => code + ' – ' + EPIC_LABELS[code];
 
-let US_DATA = {};        // id -> { epic, nom, libelle, mvp, ihm, module, depend[], typ, role, phrase }
+// ---------- Source de données ----------
+// Mode lecture (page statique) : backlog.csv servi via GitHub raw (HTTPS + CORS *).
+// Mode édition (page servie par le serveur local) : API /api/backlog sur backlog.xlsx.
+const BACKLOG_URL = 'https://raw.githubusercontent.com/yougis/hydroscope-notes-cadrage/refs/heads/main/cahier%20des%20charges/backlog.csv';
+const API_BASE = '/api';
+
+let EDIT_MODE = false;
+let FILE_INFO = null;
+
+let US_DATA = {};        // id -> { epic, nom, libelle, mvp, frontback, module, depend[], typ, pilier, role, phrase, besoins, row }
 let US = {};             // id -> [epic, libelle]
 let US_FINALITE = {};    // id -> type fonctionnel
 let DEP = [];            // [parent, child]
+
+// ---------- Helpers ----------
+function toast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = type === 'error' ? 'error' : '';
+  t.style.display = 'block';
+  clearTimeout(t._h);
+  t._h = setTimeout(() => { t.style.display = 'none'; }, 4000);
+}
+
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+}[c]));
 
 // Parsing CSV RFC4180 (séparateur ';', champs quotés, retours à la ligne CRLF/LF)
 function parseCSV(text) {
@@ -150,14 +201,42 @@ function parseCSV(text) {
 
 // Cellule EPIC "EPIC 1 – Gestion des données" -> { code:'EPIC 1', label:'Gestion des données' }
 function parseEpic(cell) {
-  const t = cell.trim();
+  const t = String(cell || '').trim();
   const m = /^(EPIC\s+[^–-]+?)\s*[–-]\s*(.*)$/.exec(t);
   if (m) return { code: m[1].trim(), label: m[2].trim() };
   return { code: t, label: t };
 }
 
-// Charge et consolide les données depuis backlog.csv
-async function loadUsData() {
+// Charge le backlog via l'API locale (mode édition)
+function ingestUs(list) {
+  US_DATA = {}; US = {}; US_FINALITE = {}; DEP = [];
+  for (const d of list) {
+    const id = String(d.id || '').trim();
+    if (!id) continue;
+    const epic = parseEpic(d.epic).code;
+    const frontback = String(d.frontback || '');
+    US_DATA[id] = {
+      epic, nom: id, libelle: String(d.libelle || ''),
+      mvp: String(d.mvp || ''),
+      frontback,
+      ihm: frontback.toLowerCase().startsWith('front') ? 'OUI' : 'NON',
+      module: String(d.module || ''),
+      depend: Array.isArray(d.depend) ? d.depend : [],
+      typ: String(d.typ || ''),
+      pilier: String(d.pilier || ''),
+      role: String(d.role || ''),
+      phrase: String(d.phrase || ''),
+      besoins: String(d.besoins || ''),
+      row: d.row
+    };
+    US[id] = [epic, String(d.libelle || '')];
+    US_FINALITE[id] = String(d.typ || '');
+    (Array.isArray(d.depend) ? d.depend : []).forEach(p => { if (p) DEP.push([p, id]); });
+  }
+}
+
+// Charge les données depuis backlog.csv (mode lecture / page statique)
+async function loadCsvData() {
   const res = await fetch(BACKLOG_URL);
   if (!res.ok) throw new Error('Impossible de charger le backlog (HTTP ' + res.status + ')');
   const rows = parseCSV(await res.text());
@@ -168,25 +247,41 @@ async function loadUsData() {
         iDep = col('Dépend de (Parent)'), iTyp = col('Type fonctionnel'),
         iRole = col('Profil utilisateur'), iPhrase = col('Phrase méthode agile');
 
-  US_DATA = {}; US = {}; US_FINALITE = {}; DEP = [];
+  const list = [];
   for (let r = 1; r < rows.length; r++) {
     const get = k => (rows[r][k] || '').trim();
     const id = get(iId);
     if (!id) continue;
-    const epic = parseEpic(get(iEpic)).code;
-    const libelle = get(iLib);
-    const depend = get(iDep) ? get(iDep).split(';').map(s => s.trim()).filter(Boolean) : [];
-    US_DATA[id] = {
-      epic: epic, nom: id, libelle: libelle,
+    list.push({
+      id,
+      epic: get(iEpic),
+      libelle: get(iLib),
       mvp: get(iMvp),
-      ihm: get(iFeB).toLowerCase().startsWith('front') ? 'OUI' : 'NON',
-      module: get(iMod), depend: depend,
-      typ: get(iTyp), role: get(iRole), phrase: get(iPhrase)
-    };
-    US[id] = [epic, libelle];
-    US_FINALITE[id] = get(iTyp);
-    depend.forEach(p => { if (p) DEP.push([p, id]); });
+      frontback: get(iFeB),
+      module: get(iMod),
+      depend: get(iDep) ? get(iDep).split(';').map(s => s.trim()).filter(Boolean) : [],
+      typ: get(iTyp),
+      pilier: '',
+      role: get(iRole),
+      phrase: get(iPhrase),
+      besoins: ''
+    });
   }
+  ingestUs(list);
+}
+
+// Charge les données via l'API locale (mode édition)
+async function loadApiData() {
+  const res = await fetch(API_BASE + '/backlog');
+  if (!res.ok) throw new Error('Impossible de charger le backlog API (HTTP ' + res.status + ')');
+  const data = await res.json();
+  FILE_INFO = { file: data.file, archiveDir: data.archiveDir };
+  ingestUs(data.us || []);
+}
+
+async function loadUsData() {
+  if (EDIT_MODE) return loadApiData();
+  return loadCsvData();
 }
 
 const FINALITES = {
@@ -198,19 +293,36 @@ const FINALITES = {
   "Gouvernance": { color: "#9c2d1e", bord: "#5e150c", groupe: "Transverse – Socle" }
 };
 
-// US_FINALITE (id -> type fonctionnel) : dérivée de US_DATA depuis backlog.csv
+const TYPES = Object.keys(FINALITES);
 
+const PILIERS = [
+  'Pilier 1 – Connaissance & Caractérisation',
+  'Pilier 1 – Connaissance & Caractérisation (fondement)',
+  'Pilier 2 – Diagnostic & Analyse multicritère (+ Pilier 3)',
+  'Pilier 4 – Partage & Diffusion',
+  'Transverse (socle)'
+];
+
+const ROLES = ['Administrateur expert data', 'Administrateur plateforme', 'Décideur métier', 'Expert métier eau potable', 'Intéressé public'];
+
+const ROLE_ICONS = {
+  'Administrateur expert data': { cls: 'fa-wrench',     code: '\uf0ad' },
+  'Administrateur plateforme':  { cls: 'fa-gear',       code: '\uf013' },
+  'Décideur métier':            { cls: 'fa-chart-line', code: '\uf201' },
+  'Expert métier eau potable':  { cls: 'fa-droplet',    code: '\uf043' },
+  'Intéressé public':           { cls: 'fa-users',      code: '\uf0c0' }
+};
+const FALLBACK_ICON = { cls: 'fa-user', code: '\uf007' };
+const roleIcon = r => ROLE_ICONS[r] || FALLBACK_ICON;
 
 // ---------- Construction ----------
 let currentColoring = 'epic';
 
 function renderLegend(mode) {
   // Légende retirée (les groupes sont visibles via la barre de navigation).
-  const legend = document.getElementById('legend');
-  legend.innerHTML = '';
+  document.getElementById('legend').innerHTML = '';
 }
 
-// Coupe un libellé long sur 2 lignes équilibrées (retour à la ligne au mot le plus proche du milieu).
 function wrapLabel(text, maxLen) {
   if (!text) return '';
   if (text.length <= maxLen) return text;
@@ -227,20 +339,20 @@ function wrapLabel(text, maxLen) {
 function nodeAppearance(id) {
   const [epic, label] = US[id];
   const wrapped = wrapLabel(label, 26);
-  const roleIcon = ROLE_ICONS[US_DATA[id].role];
+  const roleIconDef = roleIcon(US_DATA[id].role);
   const stdFont = "'Segoe UI', -apple-system, Arial, sans-serif";
   if (currentColoring === 'epic') {
     return { id: id, label: wrapped, sublabel: id,
              color: EPICS[epic], borderWidth: 1, borderWidthSelected: 2,
              title: epic + ' (' + EPIC_LABELS[epic] + ') — ' + id + ' — ' + label,
-             icon: { face: 'HydroIcons', code: roleIcon.code, color: '#fff' },
+             icon: { face: 'HydroIcons', code: roleIconDef.code, color: '#fff' },
              font: { color: '#fff', size: 13, face: stdFont, bold: true },
              sublabelFont: { color: '#fff', size: 10, face: 'monospace' } };
   }
   const fin = FINALITES[US_FINALITE[id]];
   return { id: id, label: wrapped, sublabel: id, color: fin.color, borderWidth: 2, borderWidthSelected: 3,
            title: US_FINALITE[id] + ' — ' + id + ' — ' + label,
-           icon: { face: 'HydroIcons', code: roleIcon.code, color: '#fff' },
+           icon: { face: 'HydroIcons', code: roleIconDef.code, color: '#fff' },
            font: { color: '#fff', size: 13, face: stdFont, bold: true },
            sublabelFont: { color: '#fff', size: 10, face: 'monospace' } };
 }
@@ -250,43 +362,41 @@ function setColoring(mode) {
   renderLegend(mode);
   renderGroupNav();
   allNodes = buildNodes();
-  if (activeGroup) {
-    // ré-appliquer le filtre au nouveau découpage
-    applyFilter();
-  } else {
-    window.network.body.data.nodes.update(allNodes);
-  }
+  if (activeGroup) applyFilter();
+  else window.network.body.data.nodes.update(allNodes);
 }
 
 // ---------- Navigation & filtrage par groupe ----------
-// Sélection courante : {mode:'epic'|'finalite', valeur} | null = tout
 let activeGroup = null;
 let linkedOnly = false;
 
-// ---------- Facettes (ROLE, IHM, MVP) ----------
+// ---------- Facettes (ROLE, IHM, MVP) dynamiques ----------
 let facets = { role: new Set(), ihm: new Set(), mvp: new Set() };
 
-const FACET_DEFS = {
-  role: { container: 'facet-role', values: ['Administrateur expert data','Administrateur plateforme','Décideur métier','Expert métier eau potable','Intéressé public'] },
-  ihm: { container: 'facet-ihm', values: ['OUI','NON'] },
-  mvp: { container: 'facet-mvp', values: ['TRUE','FALSE'] }
-};
+function facetValues(key) {
+  const set = new Set();
+  Object.values(US_DATA).forEach(d => {
+    if (key === 'role') set.add(d.role);
+    else if (key === 'ihm') set.add(d.ihm);
+    else if (key === 'mvp') set.add(d.mvp);
+  });
+  return [...set].sort((a, b) => String(a).localeCompare(String(b), 'fr'));
+}
 
-const ROLE_ICONS = {
-  'Administrateur expert data': { cls: 'fa-wrench',     code: '\uf0ad' },
-  'Administrateur plateforme':  { cls: 'fa-gear',       code: '\uf013' },
-  'Décideur métier':            { cls: 'fa-chart-line', code: '\uf201' },
-  'Expert métier eau potable':  { cls: 'fa-droplet',    code: '\uf043' },
-  'Intéressé public':           { cls: 'fa-users',      code: '\uf0c0' }
+const FACET_DEFS = {
+  role: { container: 'facet-role' },
+  ihm: { container: 'facet-ihm' },
+  mvp: { container: 'facet-mvp' }
 };
 
 function renderFacets() {
   for (const [key, def] of Object.entries(FACET_DEFS)) {
     const el = document.getElementById(def.container);
-    let html = def.values.map(v => {
+    const values = facetValues(key);
+    let html = values.map(v => {
       const on = facets[key].has(v) ? ' on' : '';
-      const icon = key === 'role' ? `<i class="fa-solid ${ROLE_ICONS[v].cls}"></i> ` : '';
-      return `<span class="facet-pill${on}" onclick="toggleFacet('${key}','${v}')">${icon}${v}</span>`;
+      const icon = key === 'role' ? `<i class="fa-solid ${roleIcon(v).cls}"></i> ` : '';
+      return `<span class="facet-pill${on}" onclick="toggleFacet('${key}','${esc(v)}')">${icon}${esc(v)}</span>`;
     }).join('');
     if (facets[key].size) html += `<span class="facet-clear" onclick="clearFacet('${key}')">✕ effacer</span>`;
     el.innerHTML = html;
@@ -316,35 +426,183 @@ function facetMatches(id) {
 
 // ---------- Volet Détail (clic sur une US) ----------
 let detailOpen = false;
+let editingId = null;    // id de l'US en cours d'édition (null = nouvelle)
+let dependList = [];     // chips « Dépend de » du formulaire
+
+function depText(d) {
+  if (!d.depend || !d.depend.length) return '<em>aucun</em>';
+  const pills = d.depend.map(p => `<span class="facet-pill" onclick="openDetail('${p}')">${p}</span>`).join(' ');
+  return pills;
+}
+
+// Affichage lecture seule (page statique, sans serveur)
+function renderReadOnly(d) {
+  return `
+    <div class="prop"><div class="k">EPIC</div><div class="v">${esc(d.epic)} · ${esc(EPIC_LABELS[d.epic])}</div></div>
+    <div class="prop"><div class="k">Type fonctionnel</div><div class="v">${esc(d.typ)}</div></div>
+    <div class="prop"><div class="k">Pilier(s)</div><div class="v">${esc(d.pilier || '—')}</div></div>
+    <div class="prop"><div class="k">Module</div><div class="v">${esc(d.module)}</div></div>
+    <div class="prop"><div class="k">ROLE (profil utilisateur)</div><div class="v"><i class="fa-solid ${roleIcon(d.role).cls}"></i> ${esc(d.role)}</div></div>
+    <div class="prop"><div class="k">IHM</div><div class="v">${esc(d.ihm)}</div></div>
+    <div class="prop"><div class="k">MVP</div><div class="v">${esc(d.mvp)}</div></div>
+    <div class="prop"><div class="k">Dépend de (parents)</div><div class="v">${depText(d)}</div></div>
+    <div class="prop"><div class="k">Phrase méthode agile</div><div class="v">${esc(d.phrase || '—')}</div></div>`;
+}
+
+// Formulaire d'édition (mode édition)
+function usListHtml() {
+  return Object.keys(US).map(id => `<option value="${esc(id)}">`).join('');
+}
+
+function epicOptions() {
+  return Object.keys(EPICS).map(code => `<option value="${esc(EPIC_FULL(code))}">${esc(EPIC_FULL(code))}</option>`).join('');
+}
+
+function renderEditForm(d) {
+  const epicVal = d ? EPIC_FULL(parseEpic(d.epic).code) : EPIC_FULL('EPIC 1');
+  const mvpVal = d ? d.mvp : 'True';
+  const frontVal = d ? d.frontback : 'Front-end';
+  const typVal = d ? d.typ : '';
+  const pilierVal = d ? d.pilier : '';
+  const roleVal = d ? d.role : '';
+  const depChips = (d ? d.depend : []).slice();
+
+  dependList = depChips;
+
+  document.getElementById('d-actions').style.display = 'flex';
+  document.getElementById('d-actions').innerHTML = `
+    <button id="btn-save" onclick="saveForm()">${d ? 'Enregistrer' : 'Créer l' + "'" + 'US'}</button>
+    <button onclick="closeDetail()">Annuler</button>
+    ${d ? '<button class="danger" onclick="deleteForm()">Supprimer</button>' : ''}
+  `;
+
+  const html = `
+    <div class="form-field">
+      <label>EPIC <span class="req">*</span></label>
+      <input type="text" id="f-epic" list="dl-epic" value="${esc(epicVal)}" placeholder="EPIC 1 – Gestion des données">
+      <datalist id="dl-epic">${epicOptions()}</datalist>
+    </div>
+    <div class="form-field">
+      <label>ID User Story <span class="req">*</span></label>
+      <input type="text" id="f-id" value="${esc(d ? d.nom : '')}" placeholder="US10.1">
+    </div>
+    <div class="form-field">
+      <label>Libellé User Story <span class="req">*</span></label>
+      <input type="text" id="f-libelle" value="${esc(d ? d.libelle : '')}">
+    </div>
+    <div class="form-field">
+      <label>MVP</label>
+      <select id="f-mvp">
+        <option value="True" ${mvpVal === 'True' ? 'selected' : ''}>True</option>
+        <option value="False" ${mvpVal === 'False' ? 'selected' : ''}>False</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label>Front_or_Back</label>
+      <select id="f-frontback">
+        <option value="Front-end" ${frontVal === 'Front-end' ? 'selected' : ''}>Front-end</option>
+        <option value="Backend" ${frontVal === 'Backend' ? 'selected' : ''}>Backend</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label>Module</label>
+      <input type="text" id="f-module" value="${esc(d ? d.module : '')}" placeholder="Gestion des données & catalogue">
+    </div>
+    <div class="form-field">
+      <label>Dépend de (Parent)</label>
+      <div class="dep-wrap">
+        <div class="dep-chips" id="dep-chips"></div>
+        <div class="dep-input-row">
+          <input type="text" id="f-dep-input" list="dl-us" placeholder="Ajouter un parent…">
+          <datalist id="dl-us">${usListHtml()}</datalist>
+          <button type="button" onclick="addDep()" style="margin-left:0;flex:0 0 auto">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Type fonctionnel</label>
+      <select id="f-typ">
+        <option value=""></option>
+        ${TYPES.map(t => `<option value="${esc(t)}" ${typVal === t ? 'selected' : ''}>${esc(t)}</option>`).join('')}
+      </select>
+    </div>
+    <div class="form-field">
+      <label>Pilier(s)</label>
+      <input type="text" id="f-pilier" list="dl-pilier" value="${esc(pilierVal)}">
+      <datalist id="dl-pilier">${PILIERS.map(p => `<option value="${esc(p)}">`).join('')}</datalist>
+    </div>
+    <div class="form-field">
+      <label>Profil utilisateur</label>
+      <input type="text" id="f-role" list="dl-role" value="${esc(roleVal)}">
+      <datalist id="dl-role">${ROLES.map(r => `<option value="${esc(r)}">`).join('')}</datalist>
+    </div>
+    <div class="form-field">
+      <label>Phrase méthode agile</label>
+      <textarea id="f-phrase">${esc(d ? d.phrase : '')}</textarea>
+    </div>
+    <div class="form-field">
+      <label>Besoins testables</label>
+      <textarea id="f-besoins">${esc(d ? d.besoins : '')}</textarea>
+    </div>`;
+
+  return html;
+}
+
+// État du formulaire d'édition après insertion dans le DOM.
+function wireEditForm() {
+  renderDepChips();
+  const input = document.getElementById('f-dep-input');
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addDep(); }
+  });
+}
+
+function renderDepChips() {
+  const box = document.getElementById('dep-chips');
+  box.innerHTML = dependList.map(id =>
+    `<span class="chip" title="Retirer" onclick="removeDep('${esc(id)}')">${esc(id)}<span class="x">✕</span></span>`
+  ).join('') || '<em style="color:#9aa1a8;font-size:12px">Aucune dépendance</em>';
+}
+
+function addDep() {
+  const input = document.getElementById('f-dep-input');
+  const val = (input.value || '').trim().replace(/^US\s*/, 'US');
+  if (val) {
+    if (!dependList.includes(val)) {
+      if (!US[val]) { toast('US inconnue : ' + val + ' — utilisez une US existante ou créez-la d\'abord.', 'error'); input.value = ''; return; }
+      dependList.push(val);
+      renderDepChips();
+    }
+    input.value = '';
+  }
+}
+
+function removeDep(id) {
+  dependList = dependList.filter(x => x !== id);
+  renderDepChips();
+}
 
 function openDetail(id) {
   const d = US_DATA[id];
+  if (!d) return;
   const panel = document.getElementById('detail');
   panel.classList.remove('closed');
   detailOpen = true;
+  editingId = id;
   document.getElementById('d-title').textContent = d.nom + ' — ' + d.libelle;
-  const depLabels = (d.depend && d.depend.length)
-    ? d.depend.map(p => `<span class="facet-pill" onclick="openDetail('${p}')">${p}</span>`).join(' ')
-    : '<em>aucun</em>';
-  document.getElementById('d-body').innerHTML = `
-    <div class="prop"><div class="k">EPIC</div><div class="v">${d.epic} · ${EPIC_LABELS[d.epic]}</div></div>
-    <div class="prop"><div class="k">Type fonctionnel</div><div class="v">${d.typ}</div></div>
-    <div class="prop"><div class="k">Module</div><div class="v">${d.module}</div></div>
-    <div class="prop"><div class="k">ROLE (profil utilisateur)</div><div class="v"><i class="fa-solid ${ROLE_ICONS[d.role].cls}"></i> ${d.role}</div></div>
-    <div class="prop"><div class="k">IHM</div><div class="v">${d.ihm}</div></div>
-    <div class="prop"><div class="k">MVP</div><div class="v">${d.mvp}</div></div>
-    <div class="prop"><div class="k">Dépend de (parents)</div><div class="v">${depLabels}</div></div>
-    <div class="prop"><div class="k">Phrase méthode agile</div><div class="v">${d.phrase || '<em>—</em>'}</div></div>`;
+  document.getElementById('d-body').innerHTML = EDIT_MODE ? renderEditForm(d) : renderReadOnly(d);
+  document.getElementById('d-actions').style.display = EDIT_MODE ? 'flex' : 'none';
+  if (EDIT_MODE) wireEditForm();
 }
 
 function closeDetail() {
   document.getElementById('detail').classList.add('closed');
   detailOpen = false;
+  editingId = null;
   if (window.network) window.network.unselectAll();
 }
 
 function initDetail() {
-  // resizer : agrandir / rétrécir la largeur
   const panel = document.getElementById('detail');
   const resizer = document.getElementById('d-resizer');
   resizer.addEventListener('mousedown', e => {
@@ -353,7 +611,7 @@ function initDetail() {
     const startW = panel.offsetWidth;
     const move = ev => {
       const w = startW - (ev.clientX - startX);
-      panel.style.width = Math.min(Math.max(w, 260), Math.round(window.innerWidth * 0.7)) + 'px';
+      panel.style.width = Math.min(Math.max(w, 300), Math.round(window.innerWidth * 0.8)) + 'px';
     };
     const up = () => {
       document.removeEventListener('mousemove', move);
@@ -364,6 +622,84 @@ function initDetail() {
   });
 }
 
+// Nouvelle US : ouvre le formulaire vide
+function newUs() {
+  if (!EDIT_MODE) return;
+  const panel = document.getElementById('detail');
+  panel.classList.remove('closed');
+  detailOpen = true;
+  editingId = null;
+  document.getElementById('d-title').textContent = 'Nouvelle User Story';
+  document.getElementById('d-body').innerHTML = renderEditForm(null);
+  wireEditForm();
+}
+
+// Récupère les valeurs du formulaire
+function gatherForm() {
+  const val = id => (document.getElementById(id)?.value || '').trim();
+  return {
+    epic: val('f-epic'),
+    id: val('f-id'),
+    libelle: val('f-libelle'),
+    mvp: val('f-mvp'),
+    frontback: val('f-frontback'),
+    module: val('f-module'),
+    depend: dependList.slice(),
+    typ: val('f-typ'),
+    pilier: val('f-pilier'),
+    role: val('f-role'),
+    phrase: val('f-phrase'),
+    besoins: val('f-besoins')
+  };
+}
+
+async function saveForm() {
+  const us = gatherForm();
+  if (!us.id || !us.libelle) { toast('Champs requis : ID User Story et Libellé.', 'error'); return; }
+  const newId = us.id;
+  if (newId !== editingId && US[newId]) { toast('L\'ID « ' + newId + ' » existe déjà.', 'error'); return; }
+
+  const method = editingId ? 'PUT' : 'POST';
+  const url = editingId ? `${API_BASE}/backlog/${encodeURIComponent(editingId)}` : `${API_BASE}/backlog`;
+  const res = await fetch(url, {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ us })
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || json.ok === false) {
+    toast('Erreur : ' + (json.error || 'HTTP ' + res.status), 'error');
+    return;
+  }
+  toast('Enregistré ✓' + (json.backup ? ' — backup : ' + json.backup.name : ''));
+  await reloadAndRender();
+  if (EDIT_MODE) openDetail(json.id || newId);
+}
+
+async function deleteForm() {
+  if (!editingId) return;
+  if (!confirm('Supprimer définitivement l\'US ' + editingId + ' ?')) return;
+  const res = await fetch(`${API_BASE}/backlog/${encodeURIComponent(editingId)}`, { method: 'DELETE' });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || json.ok === false) {
+    toast('Erreur suppression : ' + (json.error || 'HTTP ' + res.status), 'error');
+    return;
+  }
+  toast('US supprimée ✓' + (json.backup ? ' — backup : ' + json.backup.name : ''));
+  closeDetail();
+  await reloadAndRender();
+}
+
+// Recharge les données et rafraîchit le graphe + facettes + navigation
+async function reloadAndRender() {
+  await loadUsData();
+  allNodes = buildNodes();
+  allEdges = DEP.map(([from, to]) => ({ from, to, arrows: 'to', color: { color: '#e6e8eb' }, smooth: { type: 'dynamic' } }));
+  renderFacets();
+  renderGroupNav();
+  applyFilter();
+  document.getElementById('count').textContent = `${allNodes.length} US · ${allEdges.length} dépendances`;
+}
 
 function linkedIds() {
   const s = new Set();
@@ -387,7 +723,7 @@ function renderGroupNav() {
 
   nav.querySelectorAll('.gn-btn').forEach(bt => {
     const val = bt.dataset.val;
-    if (!val) { return; }
+    if (!val) return;
     const col = chip(val);
     bt.style.background = col;
     bt.style.borderColor = col;
@@ -399,7 +735,6 @@ function renderGroupNav() {
   });
 }
 
-// Jeu complet de nœuds et de liens (source de référence)
 let allNodes = [];
 let allEdges = [];
 
@@ -420,7 +755,6 @@ function computeShownIds() {
     const linked = linkedIds();
     shown = new Set([...shown].filter(id => linked.has(id)));
   }
-  // Facettes : combinaison ET entre facettes actives
   if (facets.role.size || facets.ihm.size || facets.mvp.size) {
     shown = new Set([...shown].filter(id => facetMatches(id)));
   }
@@ -429,22 +763,17 @@ function computeShownIds() {
 
 function applyFilter() {
   const shown = computeShownIds();
-  // Ne garder que les nœuds filtrés
   const nodes = allNodes.filter(n => shown.has(n.id));
-  // Ne garder que les liens dont les deux extrémités sont visibles
   const edges = allEdges.filter(e => shown.has(e.from) && shown.has(e.to));
-  // Remplacement de la source de données du graphe
   window.network.setData({ nodes: nodes, edges: edges });
   document.querySelector('#btnFilter').textContent = linkedOnly ? 'Tout afficher' : 'Afficher US liées uniquement';
-  // Vue initialisée sur le jeu filtré
   window.network.fit({ animation: true });
 }
 
 function setGroup(mode, valeur) {
-  if (!mode) { activeGroup = null; }
-  else { activeGroup = { mode: mode, valeur: valeur }; }
+  if (!mode) activeGroup = null;
+  else activeGroup = { mode, valeur };
   renderGroupNav();
-  // régénère les nœuds selon le coloriage courant puis filtre
   allNodes = buildNodes();
   applyFilter();
 }
@@ -454,7 +783,17 @@ function toggleLinked() {
   applyFilter();
 }
 
+function renderStatus() {
+  const el = document.getElementById('status');
+  if (EDIT_MODE) {
+    el.innerHTML = `<i class="fa-solid fa-pen"></i> <b>Mode édition</b> — fichier : ${esc(FILE_INFO ? FILE_INFO.file : '')} · archive : ${esc(FILE_INFO ? FILE_INFO.archiveDir : '')} · <span style="color:#8bc34a">enregistrement direct après chaque modification</span>`;
+  } else {
+    el.innerHTML = `<i class="fa-solid fa-eye"></i> <b>Mode lecture seule</b> — données : backlog.csv (GitHub). Lancer le serveur local (annexes/serveur-graphe) pour éditer backlog.xlsx.`;
+  }
+}
+
 function main() {
+  renderStatus();
   renderLegend('epic');
   renderGroupNav();
   renderFacets();
@@ -462,7 +801,7 @@ function main() {
 
   allNodes = buildNodes();
   allEdges = DEP.map(([from, to]) => ({
-    from: from, to: to, arrows: 'to', color: { color: '#e6e8eb' }, smooth: { type: 'dynamic' }
+    from, to, arrows: 'to', color: { color: '#e6e8eb' }, smooth: { type: 'dynamic' }
   }));
 
   const container = document.getElementById('graph');
@@ -486,7 +825,7 @@ function main() {
   network.on('selectNode', params => {
     if (params.nodes && params.nodes.length) openDetail(params.nodes[0]);
   });
-  network.on('deselectNode', () => {}); // conservé : fermeture via ✕
+  network.on('deselectNode', () => {});
 
   document.getElementById('count').textContent = `${allNodes.length} US · ${allEdges.length} dépendances`;
 
@@ -495,13 +834,42 @@ function main() {
   window.applyHierarchy = () => network.setOptions(hierarchicalOptions);
   window.openDetail = openDetail;
   window.closeDetail = closeDetail;
+  window.newUs = newUs;
+  window.saveForm = saveForm;
+  window.deleteForm = deleteForm;
+  window.addDep = addDep;
+  window.removeDep = removeDep;
+  window.toggleFacet = toggleFacet;
+  window.clearFacet = clearFacet;
+  window.setGroup = setGroup;
+  window.setColoring = setColoring;
+  window.toggleLinked = toggleLinked;
+}
+
+// Détection du mode édition (serveur local) avec timeout court
+async function detectMode() {
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 1500);
+    const res = await fetch(API_BASE + '/health', { signal: ctrl.signal });
+    clearTimeout(t);
+    if (res.ok) {
+      const j = await res.json();
+      EDIT_MODE = !!j.ok && j.mode === 'edit';
+    }
+  } catch (e) {
+    EDIT_MODE = false;
+  }
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+  await detectMode();
+  if (EDIT_MODE) document.getElementById('btnNew').style.display = 'inline-block';
   try {
     await loadUsData();
   } catch (e) {
-    document.getElementById('count').textContent = 'Erreur chargement CSV : ' + e.message;
+    document.getElementById('count').textContent = 'Erreur chargement : ' + e.message;
+    renderStatus();
     return;
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(main);

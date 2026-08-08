@@ -1,5 +1,45 @@
 ## Présentation des indicateurs {#sec-presentation-indicateurs}
 
-HydroScope calcule **38 indicateurs** (évolutif) organisés selon une arborescence à trois niveaux — **famille**, **thème** et **groupe**. cette liste est disponible au format Excel "liste_indicateurs_v4.xlsx"
+HydroScope calcule **38 indicateurs** (évolutif) organisés selon une arborescence à trois niveaux — **famille**, **thème** et **groupe** — et structurés pour décrire les **enjeux** (disponibilité et intégrité de la ressource) et les **menaces** (anthropiques et naturelles) pesant sur les bassins versants d'alimentation en eau potable (BVAEP). Cette liste est disponible au format Excel « liste_indicateurs_v4.xlsx » et un corpus de fiches détaillées des indicateurs (format PDF) est fourni en annexe (@sec-Annexes).
 
-Un corpus de fiches détaillées des indicateurs (formatPDF) est aussi disponible (./annexes/Fiches_indicateurs_HydroScope-v4.pdf).
+La liste ci-dessous présente les indicateurs organisés par famille, thème et groupe, avec pour chacun l'objectif d'usage en lecture d'information et en analyse décisionnelle. L'acronyme « AMC » renvoie à l'analyse multicritère mobilisée dans l'aide à la décision.
+
+
+```{python}
+#| label: txt-list-indicateurs
+#| output: asis
+
+import sys
+sys.path.insert(0, ".")
+from _lib_indicateurs import load_all
+
+df, _ = load_all()
+
+rows = []
+famille_prec = None
+theme_prec = None
+for (famille, theme, groupe), sub in df.groupby(["nom_famille", "Nom_theme", "groupe"], sort=True):
+    if famille != famille_prec:
+        rows.append(f"### Indicateurs de la famille : {famille}")
+        famille_prec = famille
+        theme_prec = None
+    if theme != theme_prec:
+        rows.append(f"#### Thème : {theme}")
+        theme_prec = theme
+    rows.append(f"**Groupe d'indicateur : {groupe.strip()}**")
+    rows.append("")
+    for _, r in sub.iterrows():
+        nom = str(r["nom_indicateur"])
+        info = str(r["objectif_INFO"]).rstrip(".").lstrip("- ")
+        amc = str(r["objectif_AMC"]).rstrip(".").lstrip("- ")
+        rows.append(f"- **{nom}**")
+        rows.append(f"  - *Lecture d'information* : {info}.")
+        if amc not in ("nan", ""):
+            rows.append(f"  - *Analyse décisionnelle (AMC)* : {amc}.")
+    rows.append("")
+
+print("\n".join(rows))
+```
+
+
+Un corpus de fiches détaillées des indicateurs (format PDF) est aussi disponible en annexe @Catalogue-des-fiches-ind. Chaque fiche précise la définition, les objectifs, la méthode de calcul, les sources de données et les vigilances associées.
