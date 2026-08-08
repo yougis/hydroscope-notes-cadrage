@@ -1,5 +1,6 @@
 import { catalogueById } from '@/data/hydroscope'
-import { valueForBvaep } from '@/data/values'
+import { valueForBvaep, valueForUnite } from '@/data/values'
+import { qualify, niveauForValue } from '@/data/qualification'
 import type { DataType } from '@/types/domain'
 
 /** Couleurs par niveau de qualité (0..3). */
@@ -46,24 +47,22 @@ export function symbolFor(value: number, datatype: DataType) {
   return { r: 5, fill: QUALITE_COLORS[cls] }
 }
 
-/** Classe de qualité (0..3) d'un bassin versant pour l'indicateur donné. */
+/** Classe de qualité (0..3) d'un bassin versant pour l'indicateur donné — data-driven via qualify(). */
 export function bvaepClass(indId: string | null, bvId: string): number {
   if (!indId) return 0
   const ind = catalogueById(indId)
+  if (!ind) return 0
   const val = valueForBvaep(indId, bvId)
-  if (ind && ind.datatype === 'qualite') return val % 4
-  return Math.min(3, Math.floor(val / 300))
+  return niveauForValue(indId, val)
 }
 
-/** Classe de qualité (0..3) d'une cellule H3 à partir de son centre (lon, lat). */
+/** Classe de qualité (0..3) d'une cellule H3 à partir de son centre (lon, lat) — data-driven via qualify(). */
 export function h3Class(indId: string | null, lon: number, lat: number): number {
+  if (!indId) return 0
   const ind = catalogueById(indId)
-  const q = Math.round((lon - 164) * 4)
-  const r = Math.round((lat + 20.5) * 4)
-  const noise = ((q * 13 + r * 7 + q * r * 7) % 41) - 20
-  if (ind && ind.datatype === 'qualite') return Math.abs((q * 3 + r * 5) % 4)
-  const raw = 80 + q * 12 + r * 18 + noise
-  return Math.max(0, Math.min(3, Math.floor(raw / 180)))
+  if (!ind) return 0
+  const val = h3Value(indId, lon, lat)
+  return niveauForValue(indId, val)
 }
 
 /** Valeur affichée d'une cellule H3. */
@@ -72,4 +71,10 @@ export function h3Value(indId: string, lon: number, lat: number): number {
   const r = Math.round((lat + 20.5) * 4)
   const noise = ((q * 31 + r * 47 + q * r * 13) % 61) - 30
   return Math.max(0, 120 + q * 14 + r * 22 + noise)
+}
+
+/** Qualification complète d'une cellule H3 (valeur, niveau, label, justification). */
+export function h3Qualify(indId: string, lon: number, lat: number) {
+  const val = h3Value(indId, lon, lat)
+  return qualify(indId, val)
 }
