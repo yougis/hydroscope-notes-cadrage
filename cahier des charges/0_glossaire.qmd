@@ -34,6 +34,7 @@ Ce glossaire vise à clarifier les principaux acronymes, termes techniques et no
 
 ### Concepts techniques
 
+- **IHM (Interface Homme Machine)** : Interface utilisateur (interface graphique)
 - **API (Application Programming Interface)** : Interface permettant à des systèmes d’échanger des données
 - **SIG (Système d’Information Géographique)** : Outils permettant de manipuler et visualiser des données géographiques
 - **H3** : Système de grille géographique hiérarchique permettant d’agréger des données spatiales dans des Hexagones dans un système hiérarchique.

@@ -26,8 +26,8 @@ Le système doit fournir une aide à l’interprétation en explicitant les fact
 
 #### Points de vigilance
 
-- **Méthode de scoring** : le scoring conservateur « déclassant » (la classe la plus pénalisante détermine le niveau) est privilégié ; il reste à valider avec la MOA et le conseil scientifique avant son intégration (point ouvert MOA).
-- **Complétude des données** : la comparabilité des territoires suppose un seuil de complétude commun des données d’environ 80 % ; en deçà, les résultats doivent être affichés avec la réserve appropriée.
+- **Méthode de scoring** : le scoring conservateur « déclassant » (la classe la plus pénalisante détermine le niveau) est une possibilité ; il reste à valider avec la MOA et le conseil scientifique avant son intégration (point ouvert MOA).
+- **Complétude des données** : la comparabilité des territoires suppose un seuil de complétude commun des données d’environ {80 % ?); en deçà, les résultats doivent être affichés avec la réserve appropriée.
 - **Pondérations encadrées** : les pondérations éventuelles sont encadrées et validées (atelier OS1, conseil scientifique) ; des garde-fous d’interface doivent prévenir les usages non maîtrisés.
 - **Transparence** : les scores intermédiaires doivent rester exportables et documentés afin de préserver la traçabilité de l’aide à la décision.
 

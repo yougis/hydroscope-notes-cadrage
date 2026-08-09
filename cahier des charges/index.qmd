@@ -51,6 +51,12 @@ L'OEIL assure la continuité intellectuelle du projet initial (PressionPPE en 20
 
 {{< pagebreak >}}
 
+{{< include ./0_glossaire.qmd >}}
+
+***
+
+{{< pagebreak >}}
+
 {{< include ./1_contexte_objectif.qmd >}}
 
 ***
@@ -160,11 +166,7 @@ L'OEIL assure la continuité intellectuelle du projet initial (PressionPPE en 20
 
 ***
 
-{{< pagebreak >}}
 
-{{< include ./0_glossaire.qmd >}}
-
-***
 
 # Annexes {#sec-Annexes}
 
@@ -174,14 +176,14 @@ Le tableau de référence des indicateurs est joint à l'offre :
 
 - `fiches indicateurs.xlsx` — référentiel contractuel des indicateurs (38 indicateurs, regroupement V1 : 2 familles, 4 thèmes, 10 groupes)
 
-## Catalogue des fiches indicateurs {#sec-Catalogue-des-fiches-ind}
+## Catalogue des fiches indicateurs {#sec-CataloguefichesInd}
 
 Le catalogue de fiches détaillées des indicateurs est fourni avec le présent cahier des charges :
 
 - [Fiches_indicateurs_HydroScope-v4.pdf](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées (définition, objectifs, méthode, sources, vigilances) ;
 
 
-## Critères d'acceptation
+## Critères d'acceptation {#sec-critere_acceptation}
 
 Les critères d'acceptation du périmètre MVP sont détaillés sous forme Gherkin (Étant donné / Quand / Alors) afin de constituer une base de recette contractuelle. Le périmètre lot 2 (évolutions) et l'option analyse multicritère seront à affiner en cours de projet.
 

@@ -42,4 +42,4 @@ print("\n".join(rows))
 ```
 
 
-Un corpus de fiches détaillées des indicateurs (format PDF) est aussi disponible en annexe @Catalogue-des-fiches-ind. Chaque fiche précise la définition, les objectifs, la méthode de calcul, les sources de données et les vigilances associées.
+Un corpus de fiches détaillées des indicateurs (format PDF) est aussi disponible en annexe @sec-CataloguefichesInd. Chaque fiche précise la définition, les objectifs, la méthode de calcul, les sources de données et les vigilances associées.

@@ -2,9 +2,9 @@
 
 Ce document fixe, pour chaque User Story MVP du périmètre EPIC 6 à 10, des **critères d'acceptation** contractuels rédigés en Gherkin (Étant donné / Quand / Alors). Ils constituent la base de recette fonctionnelle : un critère est satisfait lorsque le comportement décrit se reproduit de façon déterministe lors des essais, sur les jeux de données de référence et les comptes de test fournis au chiffrage.
 
-Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.xlsx) — EPIC 6 (24 US), EPIC 7 (3 US), EPIC 8 (2 US), EPIC 9 (2 US), EPIC 10 (2 US), soit 33 US. Les conventions suivantes s'appliquent à l'ensemble :
+Périmètre couvert : les **User Stories** du ({{< meta fichier_backlog >}}) — EPIC 6 (24 US), EPIC 7 (3 US), EPIC 8 (2 US), EPIC 9 (2 US), EPIC 10 (2 US), soit 33 US. Les conventions suivantes s'appliquent à l'ensemble :
 
-- **BVAEP** : bassin versant d'alimentation en eau potable ; **PPE** : périmètre de protection des eaux ; **unités** : captages ou BVAEP selon l'échelle active.
+- **BVAEP** : bassin versant d'alimentation en eau potable ; **PPE** : périmètre de protection des eaux ; **unités de gestion** : captages ou BVAEP selon l'échelle active.
 - **Cohérence des vues** : carte, listes, graphiques, compteur et fiches présentent la même sélection et les mêmes filtres à tout instant.
 - **Catalogue d'indicateurs** : navigation par Famille → Thème → Groupe ; un indicateur n'est affichable que s'il est calculé et publié.
 - Un état « sans donnée », « non historisé » ou « filtre inactif » est toujours explicité, jamais silencieux.
@@ -102,7 +102,7 @@ Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.xls
 - **Étant donné** un tri en cours, **quand** je change de mode, **alors** l'autre mode s'applique immédiatement.
 - **Étant donné** un tri appliqué, **quand** j'ajoute ou je retire des unités, **alors** l'ordre est recalculé en conservant le mode choisi.
 
-### US6.18 — Calculer les communes intersectant un BV (≥ 20 %) pour la facette Commune (IHM NON)
+### US6.18 — Calculer les communes intersectant un BV (≥ 20 %) pour la facette Commune (hors IHM)
 - **Étant donné** un bassin versant et le référentiel communal, **quand** le calcul d'intersection est exécuté, **alors** sont identifiées les communes dont la surface intersectée avec le bassin versant atteint au moins 20 % de la surface du bassin.
 - **Étant donné** une commune dont le taux d'intersection est inférieur au seuil de 20 %, **quand** le calcul est exécuté, **alors** elle n'est pas retenue pour la facette « Commune ».
 - **Étant donné** un bassin versant mis à jour (US3.1), **quand** le calcul est relancé, **alors** la liste des communes de la facette reflète les relations à jour du référentiel.
@@ -121,9 +121,9 @@ Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.xls
 - **Étant donné** un fond sans couverture (ex. satellite hors zone), **quand** il est sélectionné, **alors** un fond de substitution est affiché sans erreur visible.
 - **Étant donné** le choix du fond, **quand** ma préférence est mémorisée, **alors** elle est ré-appliquée lors des prochaines sessions.
 
-### US6.21 — Afficher / masquer chaque couche (BV, captages, périmètres, zones à risque) depuis la section « Couches »
+### US6.21 — Afficher / masquer chaque couche (BV, captages, périmètres, zones à risque) depuis la section "Couches"
 - **Étant donné** le volet gauche avec la section « Couches », **quand** la vue est ouverte, **alors** chaque couche est listée (BVAEP, captages, PPE – périmètres de protection, zones à risque) avec son état de visibilité.
-- **Étant donné** un basculement de couche, **quand** je l'affiche, **alors** elle apparaît immédiatement ; quand je la masque, elle disparaît sans impact sur les autres couches.
+- **Étant donné** un basculement de couche, **quand** je l'affiche, **alors** elle apparaît immédiatement ; **quand**  je la masque, elle disparaît sans impact sur les autres couches.
 - **Étant donné** un indicateur porté par la couche BVAEP, **quand** la couche est masquée, **alors** le rendu de l'indicateur est mis en évidence (message proposant sa réactivation) au lieu d'un affichage silencieusement vide.
 - **Étant donné** plusieurs couches actives, **quand** elles se superposent, **alors** l'ordre de rendu est stable et la lisibilité est conservée.
 
@@ -176,13 +176,14 @@ Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.xls
 - **Étant donné** une série trop courte pour une tendance significative, **quand** elle est demandée, **alors** l'état « historique insuffisant » est affiché au lieu d'un résultat indicatif.
 
 ### US7.4 — Alerte au changement
-- Étant donné une règle de détection configurée (seuils US7.1, tendances US7.3), quand la valeur d'un indicateur sur un captage ou BVAEP franchit le critère de changement significatif, alors une alerte au changement est levée, datée et qualifiée. 
-- Étant donné une alerte levée, quand je consulte son détail, alors la règle déclencheuse (indicateur, delta, période comparée, seuil) est exposée de façon explicite et reproductible. 
-- Étant donné un captage/BVAEP avec une alerte active, quand je consulte sa fiche ou sa vue, alors les indicateurs ayant évolué sont mis en évidence (badge/teinte), sans aucune notification poussée (consultation seule). 
-- Étant donné une vue présentant plusieurs signalements, quand ils coexistent, alors l'alerte au changement est distinguée du dépassement de seuil (US7.1) et de la tendance (US7.3). 
-- Étant donné une alerte active, quand la valeur revient sous le critère ou la période de référence change, alors l'alerte est levée ou marquée « en résolution », sans message résiduel trompeur. - Étant donné le suivi d'un captage/BVAEP, quand je consulte l'historique, alors les alertes passées restent consultables (date, règle, état) sans être écrasées. 
-- Étant donné une série trop courte ou non historisée, quand une alerte serait candidate, alors l'état « historique insuffisant » est affiché et aucune alerte due n'est levée. 
-- Étant donné un profil habilité, quand une alerte est active ou configurée, alors la lecture respecte les droits (RBAC) et la configuration reste tracée (utilisateur, date).
+-**Étant donné** une règle de détection configurée (seuils US7.1, tendances US7.3), **quand**  la valeur d'un indicateur sur un captage ou BVAEP franchit le critère de changement significatif, **alors**  une alerte au changement est levée, datée et qualifiée. 
+-**Étant donné** une alerte levée, **quand**  je consulte son détail, **alors**  la règle déclencheuse (indicateur, delta, période comparée, seuil) est exposée de façon explicite et reproductible. 
+-**Étant donné** un captage/BVAEP avec une alerte active, **quand**  je consulte sa fiche ou sa vue, **alors**  les indicateurs ayant évolué sont mis en évidence (badge/teinte), sans aucune notification poussée (consultation seule). 
+-**Étant donné** une vue présentant plusieurs signalements, **quand**  ils coexistent, **alors**  l'alerte au changement est distinguée du dépassement de seuil (US7.1) et de la tendance (US7.3). 
+-**Étant donné** une alerte active, **quand**  la valeur revient sous le critère ou la période de référence change, **alors**  l'alerte est levée ou marquée « en résolution », sans message résiduel trompeur. 
+-**Étant donné** le suivi d'un captage/BVAEP, **quand**  je consulte l'historique, **alors**  les alertes passées restent consultables (date, règle, état) sans être écrasées. 
+-**Étant donné** une série trop courte ou non historisée, **quand**  une alerte serait candidate, **alors**  l'état « historique insuffisant » est affiché et aucune alerte due n'est levée. 
+-**Étant donné** un profil habilité, **quand**  une alerte est active ou configurée, **alors**  la lecture respecte les droits (RBAC) et la configuration reste tracée (utilisateur, date).
 
 
 ---
@@ -237,6 +238,6 @@ Périmètre couvert : les **User Stories à `MVP=TRUE`** du backlog (backlog.xls
 
 ---
 
-*Périmètre MVP — Ce document référence le catalogue des indicateurs (38 indicateurs) et les référentiels (BVAEP, captages, PPE) fournis en données de référence pour la recette en Nouvelle-Calédonie. La liste des US couvertes correspond aux flags `MVP=TRUE` du fichier backlog.xlsx : 33 US au total pour les EPIC 6 à 10, dont 24 pour l'EPIC 6.*
+*Périmètre MVP — Ce document référence le catalogue des indicateurs (38 indicateurs) et les référentiels (BVAEP, captages, PPE) fournis en données de référence pour la recette en Nouvelle-Calédonie. La liste des US couvertes correspond à l'attribut `MVP=TRUE` du fichier {{< meta fichier_backlog >}} : 33 US au total pour les EPIC 6 à 10, dont 24 pour l'EPIC 6.*
 
 ---

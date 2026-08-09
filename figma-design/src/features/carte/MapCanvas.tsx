@@ -11,6 +11,8 @@ import { QUALITE_COLORS, QUALITE_LABELS } from './map/theme'
 import { KIND_LABELS } from '@/data/ouvrages'
 import type { BasemapId, LayerDef } from './hooks/useLayers'
 import type { CaptageKind, HoverEntity, UnitMode } from '@/types/domain'
+import { tendanceDe, ecartA, debutTension, seuilsRef } from '@/data/qualification'
+import type { LiveCaptage, LiveRegion } from '@/data/referentiels'
 
 export interface MapCanvasProps {
   showGrid?: boolean
@@ -23,11 +25,13 @@ export interface MapCanvasProps {
   h3Mode?: boolean
   hoveredEntity?: HoverEntity | null
   onHoverEntity?: (e: HoverEntity | null) => void
+  captages?: LiveCaptage[]
+  regions?: LiveRegion[]
 }
 
 type HoverInfo =
   | { kind: 'entity'; nature: string; name: string; value: string | null; rows: Array<[string, string]> }
-  | { kind: 'h3'; value: number; unit: string; cls: number; clsColor: string }
+  | { kind: 'h3'; value: number; unit: string; cls: number; clsColor: string; niveau: number; niveauLabel: string; ecart: number; tendance: string; debutTension: number | null }
 
 const NC_CENTER = fromLonLat([165.5, -21.3])
 
@@ -42,6 +46,8 @@ export function MapCanvas({
   h3Mode = false,
   hoveredEntity = null,
   onHoverEntity,
+  captages = [],
+  regions = [],
 }: MapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<Map | null>(null)
@@ -59,7 +65,6 @@ export function MapCanvas({
   const selBvStr = useMemo(() => [...selectedBvaeps].sort().join(','), [selectedBvaeps])
   const layerStr = useMemo(() => layers.map((l) => `${l.key}:${l.on}`).join(','), [layers])
 
-  // Création de la carte (une seule fois).
   useEffect(() => {
     if (!containerRef.current) return
     const map = new Map({
@@ -112,7 +117,6 @@ export function MapCanvas({
     }
   }, [])
 
-  // Changement de fond de carte.
   useEffect(() => {
     const map = mapRef.current
     if (!map) return
@@ -121,7 +125,6 @@ export function MapCanvas({
     basemapRef.current = { layer: next }
   }, [basemap])
 
-  // Reconstruction des calques vectoriels.
   useEffect(() => {
     const map = mapRef.current
     if (!map) return
@@ -134,11 +137,12 @@ export function MapCanvas({
       selectedKeys,
       h3Mode,
       layers,
+      captages,
+      regions,
     })
     for (const l of built) map.addLayer(l)
     layersRef.current = built
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeIndicator, unitMode, selKeysStr, selBvStr, h3Mode, layerStr])
+  }, [activeIndicator, unitMode, selKeysStr, selBvStr, h3Mode, layerStr, captages, regions])
 
   const hoveredStr = hoveredEntity ? `${hoveredEntity.kind}:${hoveredEntity.id}` : ''
   useEffect(() => {
@@ -165,7 +169,6 @@ export function MapCanvas({
       setPos({ x: 120, y: 120 })
       setHover(tooltipFor(f))
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hoveredStr, selKeysStr, selBvStr, activeIndicator, unitMode, layerStr])
 
   const containerW = containerRef.current?.clientWidth ?? 0
@@ -215,7 +218,6 @@ function GridOverlay() {
   )
 }
 
-/** Émet le survol d'une feature (capet / BV) vers le parent pour synchroniser sélecteur + graphique. */
 function emitHoverFor(feature: Feature, cb?: (e: HoverEntity | null) => void) {
   if (!cb) return
   const kind = feature.get('kind')
@@ -223,7 +225,6 @@ function emitHoverFor(feature: Feature, cb?: (e: HoverEntity | null) => void) {
   else if (kind === 'bv') cb({ kind: 'bvaep', id: feature.get('bvId') as string })
 }
 
-/** Retrouve la feature correspondant à une entité de survol externe (sélecteur / graphique). */
 function findFeatureForEntity(e: HoverEntity, layers: VectorLayer<VectorSource>[]): Feature | null {
   const wantKind = e.kind === 'unite' ? 'capt' : 'bv'
   const idKey = wantKind === 'capt' ? 'captId' : 'bvId'
@@ -240,12 +241,27 @@ function findFeatureForEntity(e: HoverEntity, layers: VectorLayer<VectorSource>[
 function tooltipFor(feature: Feature): HoverInfo {
   const kind = feature.get('kind')
   if (kind === 'h3') {
+    const cls = feature.get('cls') as number
+    const val = feature.get('value') as number
+    const unit = feature.get('unit') as string
+    const indId = feature.get('indicatorId') as string | undefined
+    const niveau = cls
+    const niveauLabel = QUALITE_LABELS[niveau]
+    const ecart = indId ? ecartA(indId, val) : 0
+    const timeSeries = indId ? feature.get('timeSeries') as number[] | undefined : undefined
+    const tendance = timeSeries ? tendanceDe(timeSeries) : 'indeterminee'
+    const debutT = indId && timeSeries ? debutTension(timeSeries, seuilsRef(indId).seuilP75) : null
     return {
       kind: 'h3',
-      value: feature.get('value') as number,
-      unit: feature.get('unit') as string,
-      cls: feature.get('cls') as number,
-      clsColor: QUALITE_COLORS[feature.get('cls') as number],
+      value: val,
+      unit,
+      cls,
+      clsColor: QUALITE_COLORS[cls],
+      niveau,
+      niveauLabel,
+      ecart,
+      tendance: tendance === 'hausse' ? '↑ Hausse' : tendance === 'baisse' ? '↓ Baisse' : tendance === 'stable' ? '→ Stable' : '? Indéterminée',
+      debutTension: debutT,
     }
   }
   if (kind === 'bv') {
@@ -273,7 +289,6 @@ function tooltipFor(feature: Feature): HoverInfo {
       ],
     }
   }
-  // capt
   const kindLabel = KIND_LABELS[feature.get('kindType') as CaptageKind]
   return {
     kind: 'entity',
@@ -300,19 +315,35 @@ function HoverTooltip({
   containerH: number
 }) {
   if (hover.kind === 'h3') {
-    const left = Math.min(pos.x + 14, Math.max(containerW - 150, 0))
-    const top = pos.y > 60 ? pos.y - 84 : pos.y + 16
+    const left = Math.min(pos.x + 14, Math.max(containerW - 190, 0))
+    const top = pos.y > 100 ? pos.y - 120 : pos.y + 16
     return (
-    <div
-      className="pointer-events-none absolute z-20 w-36 rounded border border-neutral-300 bg-white p-2 shadow-lg"
-      style={{ left, top }}
-    >
+      <div
+        className="pointer-events-none absolute z-20 w-44 rounded border border-neutral-300 bg-white p-2 shadow-lg"
+        style={{ left, top }}
+      >
         <div className="font-mono text-[10px] font-semibold text-blue-700">H3 cell</div>
         <div className="font-mono text-lg font-semibold leading-none text-neutral-800">
           {hover.value.toLocaleString('fr-FR')} {hover.unit}
         </div>
         <div className="text-[11px] font-medium" style={{ color: hover.clsColor }}>
-          Niveau {hover.cls + 1} · {QUALITE_LABELS[hover.cls]}
+          {hover.niveauLabel}
+        </div>
+        <div className="mt-1 space-y-0.5 border-t border-neutral-100 pt-1 text-[10px] text-neutral-600">
+          <div className="flex justify-between">
+            <span>Écart P90</span>
+            <span className="font-medium text-neutral-700">{hover.ecart > 0 ? '+' : ''}{hover.ecart}%</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Tendance</span>
+            <span className="font-medium text-neutral-700">{hover.tendance}</span>
+          </div>
+          {hover.debutTension !== null && (
+            <div className="flex justify-between">
+              <span>Début tension</span>
+              <span className="font-medium text-neutral-700">{hover.debutTension}</span>
+            </div>
+          )}
         </div>
       </div>
     )

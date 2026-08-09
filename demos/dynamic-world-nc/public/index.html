@@ -21,6 +21,10 @@
       <span class="dot" id="modeDot"></span>
       <span id="modeLabel">Connexion…</span>
     </div>
+    <div class="opacity-control">
+      <label for="opacitySlider" class="opacity-label">Opacité couche</label>
+      <input type="range" id="opacitySlider" min="0" max="100" value="85" step="1" aria-label="Opacité de la couche Dynamic World">
+    </div>
   </header>
 
   <nav class="tabs" aria-label="Modes de visualisation">
@@ -61,21 +65,21 @@
 
     <section id="panel-swipe" class="panel">
       <div class="map-head swipe-head">
-        <span class="map-pill pill-b">B</span>
-        <label class="date-field">
-          <span>Date gauche</span>
-          <input type="date" id="swipeDateB" value="2024-09-01">
-        </label>
         <span class="map-pill pill-a">A</span>
         <label class="date-field">
-          <span>Date droite</span>
+          <span>Date gauche</span>
           <input type="date" id="swipeDateA" value="2017-09-01">
+        </label>
+        <span class="map-pill pill-b">B</span>
+        <label class="date-field">
+          <span>Date droite</span>
+          <input type="date" id="swipeDateB" value="2024-09-01">
         </label>
       </div>
       <div class="map-container" id="map-swipe">
         <div class="swipe-divider" id="swipeDivider" aria-hidden="true"></div>
       </div>
-      <p class="hint">Faites glisser la poignée centrale pour comparer la date A (à droite) et la date B (à gauche) de la cohérence en un seul coup d'œil.</p>
+      <p class="hint">Faites glisser la poignée centrale pour comparer la date A (à gauche) et la date B (à droite) de la cohérence en un seul coup d'œil.</p>
     </section>
 
     <section id="panel-anim" class="panel">

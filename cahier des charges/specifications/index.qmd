@@ -14,8 +14,7 @@ Chaque cas d'usage (CU) fait l'objet d'une fiche détaillée décrivant :
 - les **points de vigilance** et frontières de périmètre.
 
 
-Les index ci-dessous sont **générés** à partir  des fiches de cas d'usage (titre, profil, US) et du référentiel
-des User Stories (`backlog.xlsx`).
+Les index ci-dessous sont **générés** à partir  des fiches de cas d'usage (titre, profil, US) et du référentiel des User Stories du ({{< meta fichier_backlog >}}).
 
 ## Administration plateforme
 

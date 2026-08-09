@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -97,11 +98,18 @@ function hexToRgb(hex) {
 }
 const CLASS_RGB = CLASSES.map((c) => hexToRgb(c.color));
 
-function renderMockTile(z, x, y) {
-  const block = z <= 5 ? 8 : z <= 8 ? 4 : 2;
-  const zoneX = Math.floor(x / block) * block;
-  const zoneY = Math.floor(y / block) * block;
-  const classIdx = MOCK_LANDCLASSES[hash32(zoneX, zoneY, z) % MOCK_LANDCLASSES.length];
+function tileToLonLat(z, x, y) {
+  const n = 2 ** z;
+  const lon = x / n * 360 - 180;
+  const latRad = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / n)));
+  const lat = latRad * 180 / Math.PI;
+  return { lon, lat };
+}
+
+function renderMockTile(z, x, y, dateSeed = 0) {
+  const center = tileToLonLat(z, x + 0.5, y + 0.5);
+  // Incorporate dateSeed into hash so different dates produce different patterns
+  const classIdx = MOCK_LANDCLASSES[hash32(Math.round(center.lon * 1e5), Math.round(center.lat * 1e5), dateSeed) % MOCK_LANDCLASSES.length];
   const base = CLASS_RGB[classIdx];
   const stride = TILE_SIZE * 3;
   const rgb = Buffer.alloc(TILE_SIZE * stride);
@@ -110,7 +118,8 @@ function renderMockTile(z, x, y) {
     for (let px = 0; px < TILE_SIZE; px += 1) {
       const gx = x * TILE_SIZE + px;
       const line = (gx % 64) < 2 || (gy % 64) < 2 ? 0.85 : 1;
-      const tex = 0.9 + 0.2 * ((hash32(gx, gy, z) % 65536) / 65536);
+      // Use dateSeed to vary texture per date
+      const tex = 0.9 + 0.2 * ((hash32(gx, gy, z, dateSeed) % 65536) / 65536);
       const f = line * tex;
       const o = py * stride + px * 3;
       rgb[o] = Math.min(255, Math.round(base[0] * f));
@@ -208,22 +217,16 @@ async function initGee() {
   }
 }
 
-async function buildCoverage(startDate, endDate) {
-  const geometry = ee.Geometry.Rectangle([aoi.minLon, aoi.minLat, aoi.maxLon, aoi.maxLat]);
-  const col = ee.ImageCollection('GOOGLE/DYNAMICWORLD_V1')
-    .filterBounds(geometry)
-    .filterDate(shiftIso(startDate, -45), shiftIso(endDate, 45))
-    .select('label');
-  const count = await col.count().getInfo();
-  if (!count) {
-    throw new Error(`Aucune donnée Dynamic World sur la période ${startDate.iso} → ${endDate.iso}.`);
+const PYTHON_EE_URL = process.env.PYTHON_EE_URL || 'http://python-ee:8082';
+
+async function fetchCoverageFromPython(startIso, endIso) {
+  const url = `${PYTHON_EE_URL}/mapid?start=${startIso}&end=${endIso}`;
+  const resp = await fetch(url);
+  if (!resp.ok) {
+    const txt = await resp.text();
+    throw new Error(`Python EE service error ${resp.status}: ${txt}`);
   }
-  const image = col
-    .reduce(ee.Reducer.mode())
-    .reproject('EPSG:3857', null, 100)
-    .visualize({ bands: ['label'], min: 0, max: 8, palette: PALETTE });
-  const id = await ee.data.getMapId({ image });
-  return { mapid: id.mapid, token: id.token, urlFormat: id.urlFormat };
+  return resp.json();
 }
 
 const app = express();
@@ -257,27 +260,45 @@ app.get('/api/coverage', async (req, res) => {
     const key = `${startDate.iso}|${endDate.iso}`;
     if (TILE_CACHE.has(key)) return res.json(TILE_CACHE.get(key));
     try {
-      const coverage = await buildCoverage(startDate, endDate);
+      const coverage = await fetchCoverageFromPython(startDate.iso, endDate.iso);
       TILE_CACHE.set(key, coverage);
       return res.json(coverage);
     } catch (err) {
-      return res.status(502).json({ error: 'Impossible de générer les tuiles Dynamic World depuis Earth Engine.', detail: err.message });
+      console.warn('[gee] Python EE proxy failed, fallback mock:', err.message);
+      // fallback to mock
+      const mock = { mapid: 'mock', token: '', urlFormat: `/mock/${startDate.iso}/{z}/{x}/{y}.png` };
+      TILE_CACHE.set(key, mock);
+      return res.json(mock);
     }
   }
-  return res.json({ mapid: 'mock', token: '', urlFormat: '/mock/{z}/{x}/{y}.png' });
+  return res.json({ mapid: 'mock', token: '', urlFormat: `/mock/${startDate.iso}/{z}/{x}/{y}.png` });
 });
 
-app.get('/mock/:z/:x/:y.png', (req, res) => {
-  if (mode !== 'mock') {
-    return res.status(404).json({ error: 'Le mode tuiles synthétiques n\'est pas actif.' });
+app.get('/mock/:date/:z/:x/:y.png', (req, res) => {
+  const dateStr = req.params.date;
+  const z = Number(req.params.z);
+  const x = Number(req.params.x);
+  const y = Number(req.params.y);
+  if (!DATE_RE.test(dateStr) || !Number.isInteger(z) || !Number.isInteger(x) || !Number.isInteger(y) || z < 0 || z > 19 || x < 0 || y < 0) {
+    return res.status(400).json({ error: 'Coordonnées de tuile ou date invalides.' });
   }
+  // Derive a deterministic seed from the date string
+  const dateSeed = hash32(...dateStr.split('').map(c => c.charCodeAt(0)));
+  const png = renderMockTile(z, x, y, dateSeed);
+  res.set('Content-Type', 'image/png');
+  res.set('Cache-Control', 'public, max-age=3600');
+  res.send(png);
+});
+
+// Keep legacy route for backwards compat (dateSeed = 0)
+app.get('/mock/:z/:x/:y.png', (req, res) => {
   const z = Number(req.params.z);
   const x = Number(req.params.x);
   const y = Number(req.params.y);
   if (!Number.isInteger(z) || !Number.isInteger(x) || !Number.isInteger(y) || z < 0 || z > 19 || x < 0 || y < 0) {
     return res.status(400).json({ error: 'Coordonnées de tuile invalides.' });
   }
-  const png = renderMockTile(z, x, y);
+  const png = renderMockTile(z, x, y, 0);
   res.set('Content-Type', 'image/png');
   res.set('Cache-Control', 'public, max-age=3600');
   res.send(png);
@@ -287,7 +308,9 @@ app.use('/api', (_req, res) => {
   res.status(404).json({ error: 'Route API inconnue.' });
 });
 
-await initGee();
+if (mode !== 'gee') {
+  await initGee();
+}
 
 const server = app.listen(PORT, () => {
   console.log(`[hydroscope] Démo Dynamic World — côte ouest NC`);

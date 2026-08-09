@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Eye, EyeOff, Layers } from 'lucide-react'
 import { Icon } from '@/components/ui/Icon'
-import { BVAEPS, UNITES_GESTIONES, communes, communesIntersectingBvaep, provinces, catalogueById } from '@/data/hydroscope'
+import { catalogueById } from '@/data/hydroscope'
 import { valueForBvaep, valueForUnite } from '@/data/values'
 import { CAPTAGE_KINDS, KIND_LABELS, KIND_SHORT } from '@/data/ouvrages'
-import type { BvaepDef, CaptageKind, HoverEntity, UniteGestionDef, UnitMode } from '@/types/domain'
+import type { CaptageKind, HoverEntity, UnitMode } from '@/types/domain'
 import { PanelSection } from './PanelSection'
 import { KindMark } from './KindMark'
 import type { LayerDef } from '../hooks/useLayers'
+import type { LiveCaptage, LiveRegion } from '@/data/referentiels'
 
 export interface CaptageSelectorProps {
   unitMode: UnitMode
@@ -25,6 +26,26 @@ export interface CaptageSelectorProps {
   onToggleLayer: (key: string) => void
   hoverEntity?: HoverEntity | null
   onHoverEntity?: (e: HoverEntity | null) => void
+}
+
+export interface CaptageSelectorProps {
+  unitMode: UnitMode
+  onSetMode: (m: UnitMode) => void
+  selectedUnites: Set<string>
+  onToggleUnite: (id: string) => void
+  selectedBvaeps: Set<string>
+  onToggleBvaep: (id: string) => void
+  onApplyUnites: (ids: string[]) => void
+  onApplyBvaeps: (ids: string[]) => void
+  onClearUnites: () => void
+  onClearBvaeps: () => void
+  activeIndicator: string | null
+  layers: LayerDef[]
+  onToggleLayer: (key: string) => void
+  hoverEntity?: HoverEntity | null
+  onHoverEntity?: (e: HoverEntity | null) => void
+  captages: LiveCaptage[]
+  regions: LiveRegion[]
 }
 
 type PresetKind = 'plus-exposes' | 'moins-exposes'
@@ -56,6 +77,8 @@ export function CaptageSelector({
   onToggleLayer,
   hoverEntity,
   onHoverEntity,
+  captages,
+  regions,
 }: CaptageSelectorProps) {
   const isGestion = unitMode === 'gestion'
 
@@ -73,37 +96,40 @@ export function CaptageSelector({
   const toggleKind = (k: CaptageKind) =>
     setKindFacets((prev) => (prev.includes(k) ? prev.filter((x) => x !== k) : [...prev, k]))
 
-  const communeOptions = isGestion ? communes() : [...new Set(BVAEPS.flatMap((b) => communesIntersectingBvaep(b.id)))].sort()
-  const provinceOptions = provinces()
+  const allCommunes = useMemo(() => [...new Set(captages.map(c => c.commune).filter(Boolean))].sort(), [captages])
+  const allProvinces = useMemo(() => [...new Set(regions.map(r => r.province).filter(Boolean))].sort(), [regions])
+  const communeOptions = isGestion ? allCommunes : allCommunes
+  const provinceOptions = allProvinces
 
   const matchText = (t: string) => t.toLowerCase().includes(query.trim().toLowerCase())
 
-  const filteredCaptages = UNITES_GESTIONES.filter(
+  const filteredCaptages = useMemo(() => captages.filter(
     (c) =>
-      (!query || matchText(`${c.name} ${c.commune} ${c.bvaep}`)) &&
+      (!query || matchText(`${c.name} ${c.commune} ${c.province}`)) &&
       (kindFacets.length === 0 || kindFacets.includes(c.kind)) &&
       (communeFacets.length === 0 || communeFacets.includes(c.commune)) &&
       (provinceFacets.length === 0 || provinceFacets.includes(c.province)),
-  )
-  const filteredBvaeps = BVAEPS.filter(
-    (b) =>
-      (!query || matchText(`${b.name} ${b.province}`)) &&
-      (communeFacets.length === 0 || communesIntersectingBvaep(b.id).some((c) => communeFacets.includes(c))) &&
-      (provinceFacets.length === 0 || provinceFacets.includes(b.province)),
-  )
+  ), [captages, query, kindFacets, communeFacets, provinceFacets])
 
-  const visibleCaptages = [...filteredCaptages].sort((a, b) => a.name.localeCompare(b.name))
-  const visibleBvaeps = [...filteredBvaeps].sort((a, b) => a.name.localeCompare(b.name))
+  const filteredRegions = useMemo(() => regions.filter(
+    (r) =>
+      (!query || matchText(`${r.name} ${r.province}`)) &&
+      (communeFacets.length === 0 || r.communes.some((c) => communeFacets.includes(c))) &&
+      (provinceFacets.length === 0 || provinceFacets.includes(r.province)),
+  ), [regions, query, communeFacets, provinceFacets])
 
-  const suggestionCommunes = communes().filter((x) => query && x.toLowerCase().includes(query.toLowerCase())).slice(0, 4)
-  const suggestionProvinces = provinces().filter((x) => query && x.toLowerCase().includes(query.toLowerCase())).slice(0, 4)
+  const visibleCaptages = useMemo(() => [...filteredCaptages].sort((a, b) => a.name.localeCompare(b.name)), [filteredCaptages])
+  const visibleRegions = useMemo(() => [...filteredRegions].sort((a, b) => a.name.localeCompare(b.name)), [filteredRegions])
+
+  const suggestionCommunes = useMemo(() => allCommunes.filter((x) => query && x.toLowerCase().includes(query.toLowerCase())).slice(0, 4), [allCommunes, query])
+  const suggestionProvinces = useMemo(() => allProvinces.filter((x) => query && x.toLowerCase().includes(query.toLowerCase())).slice(0, 4), [allProvinces, query])
 
   const applyPreset = (kind: PresetKind) => {
     const indId = activeIndicator ?? 'ind:200'
     const label = PRESET_LABELS.find((p) => p.kind === kind)?.label ?? ''
     if (isGestion) {
       const prev = [...selectedUnites]
-      const scored = visibleCaptages.map((c: UniteGestionDef) => {
+      const scored = visibleCaptages.map((c) => {
         return { id: c.id, value: valueForUnite(indId, c.id) }
       })
       const asc = kind === 'moins-exposes' || kind === 'plus-proches'
@@ -112,8 +138,8 @@ export function CaptageSelector({
       setPresetChip({ label: `Preset : ${label}`, restore: () => onApplyUnites(prev) })
     } else {
       const prev = [...selectedBvaeps]
-      const scored = visibleBvaeps.map((b: BvaepDef) => {
-        return { id: b.id, value: valueForBvaep(indId, b.id) }
+      const scored = visibleRegions.map((r) => {
+        return { id: r.id, value: valueForBvaep(indId, r.id) }
       })
       const asc = kind === 'moins-exposes' || kind === 'plus-proches'
       scored.sort((a, b) => (asc ? a.value - b.value : b.value - a.value))
@@ -337,16 +363,16 @@ export function CaptageSelector({
             )}
           </div>
           <ul className="space-y-1">
-            {visibleBvaeps.map((b) => {
-              const isSel = selectedBvaeps.has(b.id)
-              const isHover = hoverEntity?.kind === 'bvaep' && hoverEntity.id === b.id
+            {visibleRegions.map((r) => {
+              const isSel = selectedBvaeps.has(r.id)
+              const isHover = hoverEntity?.kind === 'bvaep' && hoverEntity.id === r.id
               return (
-                <li key={b.id} onMouseEnter={() => onHoverEntity?.({ kind: 'bvaep', id: b.id })} onMouseLeave={() => onHoverEntity?.(null)} className={`flex items-center gap-2 rounded-md border px-2 py-1.5 ${isSel ? 'border-emerald-300 bg-emerald-50' : isHover ? 'border-emerald-400 bg-emerald-50/60' : 'border-neutral-200 bg-white'}`}>
-                  <button onClick={() => onToggleBvaep(b.id)} className="min-w-0 flex-1 text-left">
-                    <span className="block truncate text-xs font-medium text-neutral-800">{b.name}</span>
-                    <span className="block truncate text-[10px] text-neutral-400">{b.province} · {b.captageRefs.length} captages</span>
+                <li key={r.id} onMouseEnter={() => onHoverEntity?.({ kind: 'bvaep', id: r.id })} onMouseLeave={() => onHoverEntity?.(null)} className={`flex items-center gap-2 rounded-md border px-2 py-1.5 ${isSel ? 'border-emerald-300 bg-emerald-50' : isHover ? 'border-emerald-400 bg-emerald-50/60' : 'border-neutral-200 bg-white'}`}>
+                  <button onClick={() => onToggleBvaep(r.id)} className="min-w-0 flex-1 text-left">
+                    <span className="block truncate text-xs font-medium text-neutral-800">{r.name}</span>
+                    <span className="block truncate text-[10px] text-neutral-400">{r.province} · {r.captageRefs.length} captages</span>
                   </button>
-                  <button onClick={() => onToggleBvaep(b.id)} title="Retirer" aria-label={`Retirer ${b.name}`} className="text-neutral-300 hover:text-red-500">
+                  <button onClick={() => onToggleBvaep(r.id)} title="Retirer" aria-label={`Retirer ${r.name}`} className="text-neutral-300 hover:text-red-500">
                     <Icon>
                       <path d="M18 6 6 18" />
                       <path d="m6 6 12 12" />

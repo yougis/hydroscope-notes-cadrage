@@ -53,6 +53,7 @@ L’architecture s’organise autour de plusieurs briques principales :
 HydroScope doit s’intégrer dans l’écosystème existant de l'Observatoire et des partenaires.
 
 Cela concerne :
+
 - la connexion à des sources de données existantes sans duplication inutile ;
 - la capacité à consommer des services externes (API, flux de données) ;
 - la possibilité de diffuser les données produites vers d’autres systèmes ;

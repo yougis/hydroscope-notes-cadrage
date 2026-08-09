@@ -3,36 +3,34 @@ import VectorLayer from 'ol/layer/Vector'
 import VectorSource from 'ol/source/Vector'
 import Polygon from 'ol/geom/Polygon'
 import Point from 'ol/geom/Point'
-import { fromLonLat } from 'ol/proj'
 import { Style, Fill, Stroke, Circle as CircleStyle, RegularShape } from 'ol/style'
-import {
-  BVAEPS,
-  BVAEP_OUTLINES,
-  CAPTAGE_COORDS,
-  UNITES_GESTIONES,
-  catalogueById,
-} from '@/data/hydroscope'
+import { catalogueById } from '@/data/hydroscope'
 import { valueForBvaep, valueForUnite } from '@/data/values'
 import type { UnitMode } from '@/types/domain'
 import type { LayerDef } from '../hooks/useLayers'
 import { buildH3Features } from './h3'
 import { QUALITE_COLORS, SOURCE_FILLS, bvaepClass, symbolFor } from './theme'
+import type { LiveCaptage, LiveRegion } from '@/data/referentiels'
+import type { Polygon as GeoJSONPolygon, Point as GeoJSONPoint } from 'geojson'
 
-// Empreinte approximative (lon, lat) de la couche source.
-const SOURCE_FOOTPRINT: Array<[number, number]> = [
-  [164.1, -20.6],
-  [165.4, -20.5],
-  [166.3, -20.8],
-  [166.6, -21.4],
-  [166.0, -21.9],
-  [165.2, -22.0],
-  [164.3, -21.5],
-  [164.1, -20.6],
+// Empreinte approximative de la zone d'intérêt (en Web Mercator / EPSG:3857)
+const SOURCE_FOOTPRINT_3857: Array<[number, number]> = [
+  [18350000, -2600000],
+  [18550000, -2600000],
+  [18650000, -2400000],
+  [18700000, -2300000],
+  [18650000, -2200000],
+  [18450000, -2150000],
+  [18350000, -2400000],
+  [18350000, -2600000],
 ]
 
-function toPolygon(lonLatRing: Array<[number, number]>): Polygon {
-  const ring = [...lonLatRing]
-  return new Polygon([ring.map(([lon, lat]) => fromLonLat([lon, lat]))])
+function toPolygon3857(ring: number[][]): Polygon {
+  return new Polygon([ring])
+}
+
+function toPoint3857(coords: [number, number]): Point {
+  return new Point(coords)
 }
 
 export interface BuildLayersOptions {
@@ -42,11 +40,13 @@ export interface BuildLayersOptions {
   selectedKeys: string[]
   h3Mode: boolean
   layers: LayerDef[]
+  captages: Array<{ id: string; coordinates: [number, number]; kind: string; name: string; commune: string; province: string }>
+  regions: Array<{ id: string; coordinates: number[][][]; captageRefs: string[]; name: string; province: string; sector: string; communes: string[] }>
 }
 
 /** Retourne les calques vectoriels ordonnés (bas → haut). */
 export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorSource>[] {
-  const { activeIndicator, unitMode, selectedBvaeps, selectedKeys, h3Mode, layers } = opts
+  const { activeIndicator, unitMode, selectedBvaeps, selectedKeys, h3Mode, layers, captages, regions } = opts
   const ind = activeIndicator ? catalogueById(activeIndicator) : undefined
   const isGestion = unitMode === 'gestion'
   const on = (key: string) => layers.find((l) => l.key === key)?.on ?? true
@@ -54,10 +54,10 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
 
   const result: VectorLayer<VectorSource>[] = []
 
-  // ── Bassins versants ────────────────────────────────────────────────────────
+  // ── Bassins versants (régions hydrographiques réelles) ────────────────────────
   if (on('bv')) {
     const source = new VectorSource()
-    for (const b of BVAEPS) {
+    for (const b of regions) {
       const cls = bvaepClass(activeIndicator, b.id)
       const hasSelectedCaptage = b.captageRefs.some((cid) => selectedCaptageIds.has(cid))
       const selBv = !isGestion && selectedBvaeps.has(b.id)
@@ -68,7 +68,8 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
       const dash = emphasized ? null : '6,4'
       const opacity = emphasized ? 1 : 0.6
 
-      const feature = new Feature({ geometry: toPolygon(BVAEP_OUTLINES[b.id]) })
+      const coords = b.coordinates?.[0]?.[0] ? b.coordinates[0][0] : []
+      const feature = new Feature({ geometry: coords.length ? toPolygon3857(coords) : undefined })
       feature.set('bvId', b.id)
       feature.set('name', b.name)
       feature.set('province', b.province)
@@ -92,7 +93,7 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
   // ── Couche source ───────────────────────────────────────────────────────────
   if (ind && on('source')) {
     const source = new VectorSource()
-    const feature = new Feature({ geometry: toPolygon(SOURCE_FOOTPRINT) })
+    const feature = new Feature({ geometry: toPolygon3857(SOURCE_FOOTPRINT_3857) })
     feature.set('name', ind.sourceLabel)
     feature.set('datatype', ind.datatype)
     feature.set('theme', ind.theme)
@@ -116,37 +117,35 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
     result.push(new VectorLayer({ source, style: h3Style }))
   }
 
-  // ── Unités de gestion (captages) ────────────────────────────────────────────
+  // ── Unités de gestion (captages réels) ──────────────────────────────────────
   if (on('capt')) {
     const source = new VectorSource()
-    for (const id of Object.keys(CAPTAGE_COORDS)) {
-      const p = CAPTAGE_COORDS[id]
-      const inSelectedBv = BVAEPS.some(
-        (b) => selectedBvaeps.has(b.id) && b.captageRefs.includes(id)
+    for (const c of captages) {
+      const inSelectedBv = regions.some(
+        (b) => selectedBvaeps.has(b.id) && b.captageRefs.includes(c.id)
       )
-      const selCap = isGestion ? selectedKeys.includes(id) : false
+      const selCap = isGestion ? selectedKeys.includes(c.id) : false
       const liaCap = isGestion ? false : inSelectedBv
       const grayed = !selCap && !liaCap
-      const cActive = UNITES_GESTIONES.find((c) => c.id === id)
       const sym = ind
-        ? symbolFor(valueForUnite(ind.id, id), ind.datatype)
+        ? symbolFor(valueForUnite(ind.id, c.id), ind.datatype)
         : { r: 4.5, fill: '#3b82f6' }
       const radius = selCap ? Math.max(sym.r, 6) : sym.r
-      const feature = new Feature({ geometry: new Point(fromLonLat(p)) })
+      const feature = new Feature({ geometry: toPoint3857(c.coordinates) })
       feature.set('kind', 'capt')
-      feature.set('captId', id)
-      feature.set('name', cActive?.name ?? id)
-      feature.set('commune', cActive?.commune ?? '—')
-      feature.set('province', cActive?.province ?? '—')
+      feature.set('captId', c.id)
+      feature.set('name', c.name)
+      feature.set('commune', c.commune ?? '—')
+      feature.set('province', c.province ?? '—')
       feature.set(
         'value',
-        ind ? `${valueForUnite(ind.id, id).toLocaleString('fr-FR')} ${ind.unit}` : null
+        ind ? `${valueForUnite(ind.id, c.id).toLocaleString('fr-FR')} ${ind.unit}` : null
       )
       feature.set('radius', radius)
       feature.set('fill', grayed ? '#cbd5e1' : sym.fill)
       feature.set('stroke', selCap ? '#f59e0b' : '#ffffff')
       feature.set('strokeWidth', selCap ? 2 : 1.5)
-      feature.set('kindType', cActive?.kind)
+      feature.set('kindType', c.kind)
       feature.set('_hover', false)
       source.addFeature(feature)
     }

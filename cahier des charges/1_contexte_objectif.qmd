@@ -50,7 +50,7 @@ Plus précisément, le projet poursuit 4 objectifs :
   Mieux caractériser le territoire (relief, géologie, pluviométrie) et les enjeux (population desservie) en  centralisant et structurant les données utiles à la caractérisation des bassins versants et des points de captages
 
 - **Diagnostic:**
-  Appréhender le niveau d'intégrité de la ressource via l'analyse d'une multitude d'indicateurs : 
+  Appréhender le niveau d'intégrité de la ressource via l'analyse d'une multitude d'indicateurs :
   - en produisant des indicateurs homogènes décrivant les enjeux, les pressions environnementales et les caractéristiques des territoires. 
   - en assurant l'historisation des données afin de suivre leur évolution dans le temps.
 
@@ -107,22 +107,45 @@ from _lib_indicateurs import load_sources
 df = load_sources()
 
 def modalite_acc(row):
-    url = str(row.get("url", ""))
-    if "georep" in url or "geoportail" in url:
+    # Convertit en minuscule une seule fois pour simplifier les tests
+    url = str(row.get("url", "")).lower()
+
+    if any(
+        domain in url
+        for domain in [
+            "georep",
+            "geoportail",
+            "services1.arcgis.com",
+            "carto.gouv.nc",
+            "dtsi-sgt.maps.arcgis.com",
+        ]
+    ):
         return "GEOREP (plateforme web)"
-    if "earth-engine" in url.lower() or "developers.google" in url:
-        return "GEE API"
+    if "virtualearth.net" in url:
+        return "Bing Microsoft (API)"
+    if "mapbox.com" in url:
+        return "Mapbox (API)"
+    if "openstreetmap" in url:
+        return "Openstreetmap (API)"
+    if any(
+        domain in url
+        for domain in ["earth-engine", "developers.google", "google.com"]
+    ):
+        return "Google earth engine (GEE API)"
+    if "server.arcgisonline.com" in url:
+        return "ESRI (API)"
     if "province-sud.nc" in url:
         return "PSUD Open Data"
     if "cadastre.gouv.nc" in url:
         return "cadastre.gouv.nc"
-    if "pas d'accès api" in url.lower():
+    if "pas d'accès api" in url:
         return "Contact direct"
-    if "convention" in url.lower():
+    if "convention" in url:
         return "Convention requise"
-    if "à identifier" in url.lower() or url == "":
+    if "à identifier" in url or url == "":
         return "À confirmer"
-    return url
+
+    return str(row.get("url", ""))
 
 df["Accès"] = df.apply(modalite_acc, axis=1)
 df_affiche = df[["nom_ressource", "origine", "distributeur", "Accès", "statut_disponibilite"]].sort_values(by=["origine", "nom_ressource"])

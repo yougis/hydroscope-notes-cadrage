@@ -4,6 +4,7 @@ import { valueForUnite } from '@/data/values'
 import { QUALITE_COLORS, h3Class, h3Value, symbolFor } from '../map/theme'
 import { getHexSpecs } from '../map/h3'
 import { legendeFor } from '@/data/indicatorLegende'
+import { seuilsRef, niveauLabel } from '@/data/qualification'
 
 export interface StatLegendProps {
   activeIndicator: string | null
@@ -12,29 +13,21 @@ export interface StatLegendProps {
 
 interface Band {
   cls: number
+  label: string
   min: number
   max: number
 }
 
-/** Bornes [min, max] de valeurs brutes par classe, sur les cellules H3 de l'indicateur. */
 function classBands(indId: string): Band[] {
-  const byCls = new Map<number, number[]>()
-  for (const s of getHexSpecs()) {
-    const [lon, lat] = s.center
-    const cls = h3Class(indId, lon, lat)
-    const v = h3Value(indId, lon, lat)
-    const arr = byCls.get(cls) ?? []
-    arr.push(v)
-    byCls.set(cls, arr)
-  }
-  return [0, 1, 2, 3].map((cls) => {
-    const arr = byCls.get(cls) ?? []
-    if (!arr.length) return { cls, min: NaN, max: NaN }
-    return { cls, min: Math.min(...arr), max: Math.max(...arr) }
-  })
+  const { seuilP75, seuilP90 } = seuilsRef(indId)
+  return [
+    { cls: 0, label: 'Indéterminé', min: 0, max: 0 },
+    { cls: 1, label: 'Bon', min: 0, max: seuilP75 },
+    { cls: 2, label: 'Dégradé', min: seuilP75, max: seuilP90 },
+    { cls: 3, label: 'Critique', min: seuilP90, max: Infinity },
+  ].map((b) => ({ ...b, min: Math.round(b.min), max: b.max === Infinity ? Infinity : Math.round(b.max) }))
 }
 
-/** Échantillons de valeur brute (bas / médian / haut) pour l'échelle proportionnelle. */
 function proportionSamples(indId: string, datatype: string): number[] {
   const vals = UNITES_GESTIONES.map((u) => valueForUnite(indId, u.id)).sort((a, b) => a - b)
   if (!vals.length) return []
@@ -44,7 +37,6 @@ function proportionSamples(indId: string, datatype: string): number[] {
 
 const fmt = (v: number, unit: string) => `${Math.round(v)} ${unit}`.trim()
 
-/** Légende statistique cartographique : échelle de grandeur (choroplèthe) et proportion. */
 export function StatLegend({ activeIndicator, choropleth }: StatLegendProps) {
   const ind = activeIndicator ? catalogueById(activeIndicator) : undefined
 
@@ -72,7 +64,11 @@ export function StatLegend({ activeIndicator, choropleth }: StatLegendProps) {
             <div key={b.cls} className="flex items-center gap-1.5">
               <span className="h-3 w-3 shrink-0 rounded-sm" style={{ background: QUALITE_COLORS[b.cls] }} />
               <span className="truncate">
-                {Number.isNaN(b.min) ? '—' : `${Math.round(b.min)} – ${Math.round(b.max)} ${ind.unit}`}
+                {b.cls === 0
+                  ? '—'
+                  : b.max === Infinity
+                    ? `≥ ${b.min} ${ind.unit} (${b.label})`
+                    : `${b.min} – ${b.max} ${ind.unit} (${b.label})`}
               </span>
             </div>
           ))}

@@ -31,11 +31,13 @@ Les messages de commit devront respecter une nomenclature commune afin de garant
 `[EPIC/US] Type : description courte`
 
 Exemples :
+
 - `[US4.1] feat : ajout du calcul d’indicateur de base`
 - `[US6.2] fix : correction affichage carte`
 - `[US1.1] chore : amélioration script import`
 
 Les types de commits peuvent inclure :
+
 - `feat` (nouvelle fonctionnalité)
 - `fix` (correction)
 - `chore` (maintenance)
@@ -44,6 +46,7 @@ Les types de commits peuvent inclure :
 #### Revue de code
 
 Des mécanismes de revue de code (pull requests) devront être mis en place afin de :
+
 - garantir la qualité du code produit ;
 - partager les connaissances au sein de l’équipe ;
 - limiter les risques d’erreur.

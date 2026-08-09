@@ -1,18 +1,13 @@
----
-title: "Dépendances entre User Stories"
-format: html
-date: "2026-08-06"
----
+## Dépendances entre User Stories
 
-Ce document recense les relations de dépendance **(parent → enfant)** entre les User Stories du backlog. Tous les tableaux de ce document sont générés depuis `backlog.xlsx` : les relations parent/enfant sont dérivées de la colonne `Dépend de (Parent)`, et **seules les dépendances déclarées dans cette colonne** figurent dans les tableaux.
+Ce document recense les relations de dépendance **(parent → enfant)** entre les User Stories du backlog. Tous les tableaux de ce document sont générés depuis {{< meta fichier_backlog >}} : les relations parent/enfant sont dérivées de la colonne `Dépend de (Parent)`, et **seules les dépendances déclarées dans cette colonne** figurent dans les tableaux.
 
-> Une US peut être **à la fois enfant et parent** (ex : `US4.1` est enfant de `US3.5`, `US4.7` et `US1bis.12`, et parent de `US4.2`, `US4.3`, `US4.7`, `US5.1` et `US10.2`). Ces influences croisées sont représentées dans le graphe navigable (`annexes/graphe_dependances.html`).
+Une US peut être **à la fois enfant et parent** (ex : `US4.1` est enfant de `US3.5`, `US4.7` et `US1bis.12`, et parent de `US4.2`, `US4.3`, `US4.7`, `US5.1` et `US10.2`). Ces influences croisées sont aussi représentées dans un graphe navigable (`annexes/graphe_dependances.html`).
 
----
 
-## Typologie des dépendances
+### Typologie des dépendances
 
-Chaque US est classée selon une **finalité fonctionnelle** (`Type fonctionnel` dans `backlog.xlsx`), rattachée aux **4 piliers** du projet (vision AMOA). Les EPIC restent le conteneur thématique stable ; la finalité est une vue transversale.
+Chaque US est classée selon une **finalité fonctionnelle** (`Type fonctionnel` dans `backlog.xlsx`), rattachée aux **4 piliers** du projet (vision AMOA). Les EPIC restent le conteneur thématique stable ; la finalité est dávoir une vue transversale.
 
 ```{python}
 #| label: tbl-typologie
@@ -116,7 +111,7 @@ typologie = pd.DataFrame({
 print(typologie.to_markdown(index=False))
 ```
 
-> **Note sur le Pilier 3 (Veille & Détection) :** il n'est pas une finalité séparée ici. Les US de veille/détection (ex : `US7.1` seuils, `US7.2` dépassement) sont rattachées à **Exploitation**, en cohérence avec la classification B retenue.
+**Note sur le Pilier 3 (Veille & Détection) :** il n'est pas une finalité séparée ici. Les US de veille/détection (ex : `US7.1` seuils, `US7.2` dépassement) sont rattachées à **Exploitation**, en cohérence avec la classification B retenue.
 
 ### Répartition par EPIC
 

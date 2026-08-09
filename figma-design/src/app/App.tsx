@@ -7,11 +7,13 @@ import { Sidebar } from '@/components/layout/Sidebar'
 import { Footer } from '@/components/layout/Footer'
 import { CarteView } from '@/features/carte'
 import { IndicateurPage, IndicateursView } from '@/features/indicateurs'
+import { ComparaisonView } from '@/features/comparaison'
 import { DashboardPage, PublicInterface } from '@/features/portail'
 import { CroisementView } from '@/features/croisement'
 import { HelpPage, helpAnchorFor } from '@/features/help'
 import { STUBS } from '@/features/stubs'
 import { downloadFile, exportContextAsCsv, exportContextAsGeoJson, exportContextAsGeoPackage } from '@/features/export'
+import { ReferentielsProvider } from '@/data/ReferentielsContext'
 import type { ExportContext, ExportFormat } from '@/features/export'
 import type { IndicatorDef } from '@/types/domain'
 
@@ -117,22 +119,24 @@ export default function App() {
     )
   } else if (active === 'carte') {
     content = (
-      <CarteView
-        unitMode={unitMode}
-        onSetMode={setMode}
-        selectedUnites={selectedUnites}
-        onToggleUnite={toggleUnite}
-        selectedBvaeps={selectedBvaeps}
-        onToggleBvaep={toggleBvaep}
-        onApplyUnites={applyUnites}
-        onApplyBvaeps={applyBvaeps}
-        onClearUnites={clearUnites}
-        onClearBvaeps={clearBvaeps}
-        activeIndicator={activeIndicator}
-        onSelectIndicator={selectIndicator}
-        onOpenCatalogue={handleOpenCatalogue}
-        onOpenFiche={handleOpenFiche}
-      />
+      <ReferentielsProvider>
+        <CarteView
+          unitMode={unitMode}
+          onSetMode={setMode}
+          selectedUnites={selectedUnites}
+          onToggleUnite={toggleUnite}
+          selectedBvaeps={selectedBvaeps}
+          onToggleBvaep={toggleBvaep}
+          onApplyUnites={applyUnites}
+          onApplyBvaeps={applyBvaeps}
+          onClearUnites={clearUnites}
+          onClearBvaeps={clearBvaeps}
+          activeIndicator={activeIndicator}
+          onSelectIndicator={selectIndicator}
+          onOpenCatalogue={handleOpenCatalogue}
+          onOpenFiche={handleOpenFiche}
+        />
+      </ReferentielsProvider>
     )
   } else if (active === 'indicateurs') {
     content = <IndicateursView focusId={focusIndicator} onOpenFiche={(id) => setActive(id)} />
@@ -140,6 +144,17 @@ export default function App() {
     content = <DashboardPage onOpenPublic={() => setShowPublic(true)} />
   } else if (active === 'croisement') {
     content = <CroisementView />
+  } else if (active === 'comparaison') {
+    content = (
+      <ComparaisonView
+        avance={avance}
+        unitMode={unitMode}
+        selectedUnites={selectedUnites}
+        selectedBvaeps={selectedBvaeps}
+        activeIndicator={activeIndicator}
+        period={period}
+      />
+    )
   } else {
     const S = STUBS[active]
     content = <S />

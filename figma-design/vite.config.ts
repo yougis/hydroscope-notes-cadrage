@@ -50,6 +50,11 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (p) => p.replace('/gmaps-js', '/maps/api/js'),
         },
+        // Proxy vers le serveur-cache local (port 8081) pour les référentiels
+        '/api': {
+          target: 'http://localhost:8081',
+          changeOrigin: true,
+        },
       },
     },
   }
