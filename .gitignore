@@ -17,3 +17,4 @@ opencode.json
 .env
 /cahier des charges/archive_backlog/
 /cahier des charges/annexes/serveur-graphe/node_modules/
+*.pyc
