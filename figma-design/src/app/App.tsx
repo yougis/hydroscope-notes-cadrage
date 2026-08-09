@@ -13,6 +13,7 @@ import { CroisementView } from '@/features/croisement'
 import { HelpPage, helpAnchorFor } from '@/features/help'
 import { STUBS } from '@/features/stubs'
 import { downloadFile, exportContextAsCsv, exportContextAsGeoJson, exportContextAsGeoPackage } from '@/features/export'
+import { ReferentielsProvider } from '@/data/ReferentielsContext'
 import type { ExportContext, ExportFormat } from '@/features/export'
 import type { IndicatorDef } from '@/types/domain'
 
@@ -118,22 +119,24 @@ export default function App() {
     )
   } else if (active === 'carte') {
     content = (
-      <CarteView
-        unitMode={unitMode}
-        onSetMode={setMode}
-        selectedUnites={selectedUnites}
-        onToggleUnite={toggleUnite}
-        selectedBvaeps={selectedBvaeps}
-        onToggleBvaep={toggleBvaep}
-        onApplyUnites={applyUnites}
-        onApplyBvaeps={applyBvaeps}
-        onClearUnites={clearUnites}
-        onClearBvaeps={clearBvaeps}
-        activeIndicator={activeIndicator}
-        onSelectIndicator={selectIndicator}
-        onOpenCatalogue={handleOpenCatalogue}
-        onOpenFiche={handleOpenFiche}
-      />
+      <ReferentielsProvider>
+        <CarteView
+          unitMode={unitMode}
+          onSetMode={setMode}
+          selectedUnites={selectedUnites}
+          onToggleUnite={toggleUnite}
+          selectedBvaeps={selectedBvaeps}
+          onToggleBvaep={toggleBvaep}
+          onApplyUnites={applyUnites}
+          onApplyBvaeps={applyBvaeps}
+          onClearUnites={clearUnites}
+          onClearBvaeps={clearBvaeps}
+          activeIndicator={activeIndicator}
+          onSelectIndicator={selectIndicator}
+          onOpenCatalogue={handleOpenCatalogue}
+          onOpenFiche={handleOpenFiche}
+        />
+      </ReferentielsProvider>
     )
   } else if (active === 'indicateurs') {
     content = <IndicateursView focusId={focusIndicator} onOpenFiche={(id) => setActive(id)} />

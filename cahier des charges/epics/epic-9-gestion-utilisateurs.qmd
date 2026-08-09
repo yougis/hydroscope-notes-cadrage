@@ -55,6 +55,7 @@ Les mécanismes mis en œuvre devront être proportionnés aux usages de la plat
 Les fonctionnalités de monitoring dans cet EPIC concernent le suivi et l’analyse des usages de la plateforme.
 
 Elles comprennent :
+
 - le suivi de la fréquentation de l’outil (connexions, sessions) ;
 - l’analyse des usages par type d’utilisateur (fonctionnalités consultées, parcours) ;
 - le suivi des actions réalisées (consultations, exports, paramterages) ;

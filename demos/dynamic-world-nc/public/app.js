@@ -11,7 +11,28 @@ const initSeq = {};
 const maps = { A: null, B: null, swipe: null, anim: null };
 const started = { compare: false, swipe: false, anim: false };
 
-const overlayOpts = { opacity: 0.85, maxZoom: 19 };
+const overlayOpts = { opacity: 0.85, maxZoom: 19, tileSize: 256, noWrap: true };
+
+// shared view across modules
+const sharedView = { has: false, center: null, zoom: null };
+function captureShared(map) { sharedView.has = true; sharedView.center = map.getCenter(); sharedView.zoom = map.getZoom(); }
+function applyShared(map) { if (sharedView.has) { map.setView(sharedView.center, sharedView.zoom, { animate: false }); } else { fitAoi(map); captureShared(map); } }
+
+// global opacity control
+let overlayOpacity = 0.85;
+function setGlobalOpacity(v) {
+  overlayOpacity = v;
+  overlayOpts.opacity = v;
+  Object.values(overlays).forEach(layer => { if (layer) layer.setOpacity(v); });
+}
+
+// animation state
+let animReady = false;
+let animPreloading = false;
+let animCoverageCache = {};
+let animLayerCurrent = null;
+let animLayerNext = null;
+let animPreloadOverlay = null;
 
 let toastTimer = null;
 
@@ -54,8 +75,9 @@ async function fetchJson(url) {
 
 function tileUrlFor(coverage) {
   if (!coverage.urlFormat) throw new Error('Réponse de couverture incomplète');
+  // Conserver les placeholders {z}/{x}/{y} sans les encoder
   return coverage.urlFormat.startsWith('/')
-    ? new URL(coverage.urlFormat, location.origin).href
+    ? location.origin + coverage.urlFormat
     : coverage.urlFormat;
 }
 
@@ -80,8 +102,13 @@ async function loadOverlay(key, map, date, options) {
   }
 }
 
+let syncGuard = false;
+
 function syncTo(src, dst) {
+  if (syncGuard) return;
+  syncGuard = true;
   dst.setView(src.getCenter(), src.getZoom(), { animate: false });
+  syncGuard = false;
 }
 
 function bindDate(input, labelEl, onChange) {
@@ -97,10 +124,10 @@ function initCompare() {
   const mapB = L.map('mapB');
   esriLayer().addTo(mapA);
   esriLayer().addTo(mapB);
-  fitAoi(mapA);
-  fitAoi(mapB);
-  mapA.on('moveend zoomend', () => syncTo(mapA, mapB));
-  mapB.on('moveend zoomend', () => syncTo(mapB, mapA));
+  applyShared(mapA);
+  applyShared(mapB);
+  mapA.on('moveend zoomend', () => { syncTo(mapA, mapB); captureShared(mapA); });
+  mapB.on('moveend zoomend', () => { syncTo(mapB, mapA); captureShared(mapB); });
 
   maps.A = mapA;
   maps.B = mapB;
@@ -121,10 +148,11 @@ function initSwipe() {
   const divider = $('swipeDivider');
   const map = L.map('map-swipe');
   const pane = map.createPane('glide');
-  pane.style.zIndex = '380';
+  pane.style.zIndex = '450';
 
   positronLayer().addTo(map);
-  fitAoi(map);
+  applyShared(map);
+  map.on('moveend zoomend', () => captureShared(map));
 
   swipeState = { pane };
 
@@ -155,12 +183,12 @@ function initSwipe() {
 
   const swipeA = $('swipeDateA');
   const swipeB = $('swipeDateB');
-  const right = { opacity: 0.9 };
-  const left = { pane: 'glide', opacity: 0.9 };
-  bindDate(swipeA, null, () => loadOverlay('swipeA', map, swipeA.value, right));
-  bindDate(swipeB, null, () => loadOverlay('swipeB', map, swipeB.value, left));
-  loadOverlay('swipeA', map, swipeA.value, right);
-  loadOverlay('swipeB', map, swipeB.value, left);
+  const right = { };
+  const left = { pane: 'glide' };
+  bindDate(swipeA, null, () => loadOverlay('swipeA', map, swipeA.value, left));
+  bindDate(swipeB, null, () => loadOverlay('swipeB', map, swipeB.value, right));
+  loadOverlay('swipeA', map, swipeA.value, left);
+  loadOverlay('swipeB', map, swipeB.value, right);
 }
 
 /* ── Animation : slider temporel ─────────────────────────── */
@@ -170,7 +198,9 @@ let timer = null;
 function initAnim() {
   const map = L.map('mapAnim');
   positronLayer().addTo(map);
-  fitAoi(map);
+  applyShared(map);
+  map.on('moveend zoomend', () => captureShared(map));
+
   maps.anim = map;
 
   const slider = $('frameSlider');
@@ -179,15 +209,43 @@ function initAnim() {
   slider.value = String(Math.max(0, frames.length - 1));
   const current = frames[Number(slider.value)] || frames[0];
   $('frameDate').textContent = current;
-  loadOverlay('anim', map, current);
+
+  // create preload overlay once
+  if (!animPreloadOverlay) {
+    const mapContainer = $('mapAnim');
+    animPreloadOverlay = document.createElement('div');
+    animPreloadOverlay.id = 'animPreloadOverlay';
+    animPreloadOverlay.className = 'preload-overlay';
+    animPreloadOverlay.innerHTML = `
+      <div class="preload-card">
+        <div class="spinner"></div>
+        <p class="preload-text" id="preloadText">Préparation…</p>
+        <div class="preload-bar"><div class="preload-fill" id="preloadFill"></div></div>
+      </div>`;
+    mapContainer.appendChild(animPreloadOverlay);
+  }
+
+  // initial frame (no preload yet)
+  loadAnimOverlay(map, current);
 
   slider.addEventListener('input', () => {
     const date = frames[Number(slider.value)];
     $('frameDate').textContent = date;
-    loadOverlay('anim', map, date);
+    loadAnimOverlay(map, date);
   });
 
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', async () => {
+    if (!animReady) {
+      // start preload then play
+      btn.disabled = true;
+      slider.disabled = true;
+      animPreloadOverlay.hidden = false;
+      await preloadAnimation(map);
+      animPreloadOverlay.hidden = true;
+      btn.disabled = false;
+      slider.disabled = false;
+      animReady = true;
+    }
     playing = !playing;
     btn.textContent = playing ? '⏸' : '▶';
     btn.setAttribute('aria-label', playing ? 'Pause' : 'Lecture');
@@ -198,10 +256,90 @@ function initAnim() {
         slider.value = String(next);
         const date = frames[next];
         $('frameDate').textContent = date;
-        loadOverlay('anim', map, date);
+        loadAnimOverlay(map, date);
       }, PLAY_INTERVAL);
     }
   });
+}
+
+// load animation frame with crossfade using cached coverage
+async function loadAnimOverlay(map, date) {
+  let coverage = animCoverageCache[date];
+  if (!coverage) {
+    coverage = await fetchJson(`/api/coverage?start=${date}&end=${date}`);
+    animCoverageCache[date] = coverage;
+  }
+  const url = tileUrlFor(coverage);
+  const layer = L.tileLayer(url, Object.assign({}, overlayOpts));
+  layer.addTo(map);
+  if (animLayerCurrent) {
+    // crossfade: new layer from 0 to global opacity
+    layer.setOpacity(0);
+    // force reflow
+    void layer.getContainer().offsetWidth;
+    layer.setOpacity(overlayOpacity);
+    // fade out old - capture reference to avoid race condition
+    const oldLayer = animLayerCurrent;
+    oldLayer.setOpacity(0);
+    setTimeout(() => { map.removeLayer(oldLayer); }, 250);
+  }
+  animLayerCurrent = layer;
+}
+
+// preload all frames for current view
+async function preloadAnimation(map) {
+  if (animPreloading) return;
+  animPreloading = true;
+  const z = map.getZoom();
+  const bounds = map.getBounds();
+  const tiles = getTileCoords(bounds, z);
+  const totalFrames = frames.length;
+  let doneFrames = 0;
+  const update = () => {
+    doneFrames++;
+    const pct = Math.round((doneFrames / totalFrames) * 100);
+    $('preloadText').textContent = `Préparation ${doneFrames}/${totalFrames}`;
+    $('preloadFill').style.width = `${pct}%`;
+  };
+  // fetch coverages with limited concurrency
+  const concurrency = 6;
+  for (let i = 0; i < totalFrames; i += concurrency) {
+    const batch = frames.slice(i, i + concurrency);
+    await Promise.all(batch.map(async (date) => {
+      const cov = await fetchJson(`/api/coverage?start=${date}&end=${date}`);
+      animCoverageCache[date] = cov;
+      // prefetch tiles
+      await Promise.all(tiles.map(async (t) => {
+        const img = new Image();
+        img.src = tileUrlFor(cov).replace('{z}', z).replace('{x}', t.x).replace('{y}', t.y);
+        await new Promise(r => { img.onload = img.onerror = r; });
+      }));
+      update();
+    }));
+  }
+  animPreloading = false;
+}
+
+// compute tile x/y covering bounds at zoom z
+function getTileCoords(bounds, z) {
+  const n = 2 ** z;
+  const min = latLngToTile(bounds.getSouthWest(), z);
+  const max = latLngToTile(bounds.getNorthEast(), z);
+  const xs = [];
+  for (let x = min.x; x <= max.x; x++) xs.push(x);
+  const ys = [];
+  for (let y = max.y; y <= min.y; y++) ys.push(y); // y increases southward
+  const res = [];
+  for (const x of xs) for (const y of ys) res.push({x, y});
+  return res;
+}
+
+function latLngToTile(latLng, z) {
+  const n = 2 ** z;
+  const x = Math.floor((latLng.lng + 180) / 360 * n);
+  const latRad = latLng.lat * Math.PI / 180;
+  const y = Math.floor((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2 * n);
+  return { x, y };
 }
 
 /* ── Onglets ─────────────────────────────────────────────── */
@@ -218,6 +356,13 @@ function switchTab(name) {
     if (name === 'swipe') initSwipe();
     if (name === 'anim') initAnim();
   }
+  // apply shared view to active module maps
+  const targets = {
+    compare: [maps.A, maps.B],
+    swipe: maps.swipe ? [maps.swipe] : [],
+    anim: maps.anim ? [maps.anim] : []
+  }[name];
+  (targets || []).forEach(m => m && applyShared(m));
   invalidatePanelMaps(name);
 }
 
@@ -267,7 +412,9 @@ async function boot() {
     Object.assign(meta, await fetchJson('/api/meta'));
     const framesPayload = await fetchJson('/api/frames');
     frames.length = 0;
-    frames.push(...framesPayload.frames);
+    // Filter out future dates (server rejects them)
+    const today = new Date().toISOString().slice(0, 10);
+    frames.push(...framesPayload.frames.filter(d => d <= today));
   } catch (err) {
     toast(`Impossible de joindre le serveur : ${err.message}`, true);
     return;
@@ -275,6 +422,13 @@ async function boot() {
   renderLegend();
   renderMode();
   startTabs();
+  // opacity slider
+  const opacitySlider = $('opacitySlider');
+  if (opacitySlider) {
+    opacitySlider.addEventListener('input', (e) => {
+      setGlobalOpacity(Number(e.target.value) / 100);
+    });
+  }
   initCompare();
   started.compare = true;
   switchTab('compare');

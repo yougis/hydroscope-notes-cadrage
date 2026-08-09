@@ -1,6 +1,6 @@
 ## Profils utilisateurs et cas d'usage {#sec-profil-utilisateur}
 
-Les tableaux de cas d'usage par profil et la matrice de couverture présentés dans ce document sont **générés depuis `backlog.xlsx`** (source de vérité du projet, 99 User Stories). Les colonnes éditoriales « Cas d'usage », « Question concrète » et la description/objectifs de chaque profil sont conservées via `specifications/cas_usage.yaml` ; les colonnes « Périmètre (MVP/lot 2) » et « Phrase méthode agile » sont calculées depuis le backlog.
+Les tableaux de cas d'usage par profil et la matrice de couverture présentés dans ce document sont **générés depuis {{< meta fichier_backlog >}}** (source de référence du projet contenant une centaine de User Stories). Les colonnes éditoriales « Cas d'usage », « Question concrète » et la description/objectifs de chaque profil sont conservées via `specifications/cas_usage.yaml` ; les colonnes « Périmètre (MVP/lot 2) » et « Phrase méthode agile » sont calculées depuis le backlog.
 
 **Attribution des fiches aux profils.** Le rattachement de chaque cas d'usage à un profil se fait **à partir du backlog** (colonne « Profil utilisateur » de l'US principale de la fiche), et non à partir de l'attribut `profile` de la fiche — décision MOA 2026-08-07 : « le backlog fait foi ». En cas de divergence (fiche rattachée à un profil différent de celui de son US dans le backlog), c'est le profil du backlog qui s'applique.
 

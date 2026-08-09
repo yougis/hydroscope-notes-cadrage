@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: hydroscope-node
+    ports:
+      - "8080:8080"
+    environment:
+      - EE_MODE=${EE_MODE:-gee}
+      - EE_PROJECT=${EE_PROJECT:-hydroscope-504019}
+      - AOI=${AOI:-163.4,-21.9,165.6,-20.4}
+      - PYTHON_EE_URL=http://python-ee:8082
+    depends_on:
+      - python-ee
+    volumes:
+      - ./public:/app/public:ro
+    restart: unless-stopped
+
+  python-ee:
+    build:
+      context: ./python-ee
+      dockerfile: Dockerfile
+    container_name: hydroscope-python-ee
+    expose:
+      - "8082"
+    environment:
+      - EE_PROJECT=${EE_PROJECT:-hydroscope-504019}
+      - AOI_MIN_LON=163.4
+      - AOI_MIN_LAT=-21.9
+      - AOI_MAX_LON=165.6
+      - AOI_MAX_LAT=-20.4
+      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
+    volumes:
+      # mount host ADC credentials (read-only) to root's config
+      - ${HOME}/.config/gcloud:/root/.config/gcloud:ro
+    restart: unless-stopped
+
+networks:
+  default:
+    name: hydroscope-net

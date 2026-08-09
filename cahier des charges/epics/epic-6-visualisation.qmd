@@ -18,16 +18,16 @@ Une maquette IHM est disponible afin de rendre la compréhension de ce qui est a
   - navigation (zoom, déplacement) et interaction (sélection, survol)
   - superposition de plusieurs couches d’information
 
-- **Tableaux de bord**  
+- **Tableaux de bord**
   - visualisation agrégée par territoire ou thématique
   - affichage de statistiques via des graphiques et des cartes
   - accès rapide à l’information essentielle des indicateurs disponibles.
 Ces tableaux de bord doivent être adaptés aux différents profils utilisateurs.
 
-- **Graphiques temporels**  
-  - séries temporelles  
-  - comparaison de périodes  
-  - identification de tendances et de ruptures  
+- **Graphiques temporels**
+  - séries temporelles
+  - comparaison de périodes
+  - identification de tendances et de ruptures
 Ces outils permettent d’analyser les dynamiques et les évolutions.
 
 - **Comparaisons spatiales**  
@@ -42,8 +42,7 @@ Ces dispositifs doivent permettre de filtrer les données selon différentes dim
   - le territoire (bassin versant, captage, zone géographique) ;
   - la période temporelle ;
   - certains attributs ou caractéristiques des referentiels (type, status, propriété etc. ).
-
-Les sélecteurs doivent être cohérents entre les différentes vues (cartes, graphiques, tableaux) afin de garantir une expérience utilisateur homogène. Une modification de filtre doit se répercuter de manière cohérente sur l’ensemble des visualisations.
+  Les sélecteurs doivent être cohérents entre les différentes vues (cartes, graphiques, tableaux) afin de garantir une expérience utilisateur homogène. Une modification de filtre doit se répercuter de manière cohérente sur l’ensemble des visualisations.
 
 Une attention particulière devra être portée à la lisibilité et à l’ergonomie de ces filtres, afin d’éviter une complexité excessive pour les utilisateurs non experts, tout en permettant des usages avancés pour les profils techniques.
 
@@ -52,9 +51,8 @@ Le système doit permettre de consulter une fiche territoire fournissant une syn
 Les contenus doivent être directement issus des données et indicateurs produits, sans transformation interprétative : aucune fonctionnalité de classement, de scoring ou de priorisation ne doit être introduite dans ce cadre, ces rôles relevant de l’EPIC 7 (aide à la décision) et de l’option analyse multicritère (EPIC 5).
 
 - **Monitoring**
-Les fonctionnalités de monitoring dans cet EPIC visent à rendre visibles et compréhensibles les informations de suivi.
-
-Elles comprennent :
+Les fonctionnalités de monitoring dans cet EPIC visent à rendre visibles et compréhensibles les informations de suivi. 
+Elles comprennent : 
 - la mise à disposition de tableaux de bord dédiés au monitoring (technique, qualité des données, indicateurs métier) ;
 - l’affichage d’informations de fraîcheur et de qualité directement dans les visualisations (cartes, graphiques, fiches) ;
 - des outils de suivi temporel permettant d’identifier des tendances ou des anomalies ;

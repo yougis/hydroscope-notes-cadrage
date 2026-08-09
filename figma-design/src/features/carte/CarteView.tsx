@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { BVAEPS } from '@/data/hydroscope'
 import { MapCanvas } from './MapCanvas'
 import { useLayers, type BasemapId, SATELLITE_IDS } from './hooks/useLayers'
 import { BASEMAP_META, probeUrl, probeTile, webMercatorTile } from './map/basemaps'
@@ -8,6 +7,8 @@ import { IndicateurExplorer } from './components/IndicateurExplorer'
 import { StatLegend } from './components/StatLegend'
 import type { ChartViewMode } from '@/features/indicateurs/ChartModeSwitcher'
 import type { HoverEntity, UnitMode } from '@/types/domain'
+import { useReferentiels } from '@/data/ReferentielsContext'
+import type { LiveCaptage, LiveRegion } from '@/data/referentiels'
 
 export interface CarteViewProps {
   unitMode: UnitMode
@@ -118,6 +119,7 @@ export function CarteView({
   onOpenFiche,
 }: CarteViewProps) {
   const { layers, toggleLayer, basemap, setBasemap } = useLayers()
+  const { regions, captages, loading: referentielsLoading } = useReferentiels()
   const [mode, setMode] = useState<ChartViewMode>('repartition')
   const [showCarte, setShowCarte] = useState(false)
   const [hoverEntity, setHoverEntity] = useState<HoverEntity | null>(null)
@@ -126,7 +128,7 @@ export function CarteView({
   const h3Mode = showCarte
   const selectedKeys = isGestion
     ? [...selectedUnites]
-    : BVAEPS.filter((b) => selectedBvaeps.has(b.id)).flatMap((b) => b.captageRefs)
+    : regions.filter((b) => selectedBvaeps.has(b.id)).flatMap((b) => b.captageRefs)
   const activeMeta = BASEMAP_META.find((m) => m.id === basemap)
 
   useEffect(() => {
@@ -143,6 +145,14 @@ export function CarteView({
       alive = false
     }
   }, [])
+
+  if (referentielsLoading) {
+    return (
+      <div className="flex h-full items-center justify-center text-neutral-500">
+        Chargement des référentiels…
+      </div>
+    )
+  }
 
   return (
     <div className="flex h-full gap-3">
@@ -162,6 +172,8 @@ export function CarteView({
         onToggleLayer={toggleLayer}
         hoverEntity={hoverEntity}
         onHoverEntity={setHoverEntity}
+        captages={captages}
+        regions={regions}
       />
 
       <div className="relative min-w-0 flex-1 overflow-hidden rounded-md border border-neutral-200 bg-white">
@@ -184,7 +196,20 @@ export function CarteView({
           <div className="mx-1 h-4 w-px bg-neutral-200" />
           <SatelliteDropdown basemap={basemap} onSelect={setBasemap} health={health} />
         </div>
-        <MapCanvas selectedKeys={selectedKeys} activeIndicator={activeIndicator} unitMode={unitMode} selectedBvaeps={selectedBvaeps} layers={layers} basemap={basemap} h3Mode={h3Mode} hoveredEntity={hoverEntity} onHoverEntity={setHoverEntity} showGrid={false} />
+<MapCanvas
+        selectedKeys={selectedKeys}
+        activeIndicator={activeIndicator}
+        unitMode={unitMode}
+        selectedBvaeps={selectedBvaeps}
+        layers={layers}
+        basemap={basemap}
+        h3Mode={h3Mode}
+        hoveredEntity={hoverEntity}
+        onHoverEntity={setHoverEntity}
+        showGrid={false}
+        captages={captages}
+        regions={regions}
+      />
         <StatLegend activeIndicator={activeIndicator} choropleth={h3Mode} />
         <div className="absolute bottom-3 right-3 flex items-center gap-2">
 {activeMeta?.credits && (
@@ -201,7 +226,7 @@ export function CarteView({
         </div>
       </div>
 
-      <IndicateurExplorer
+<IndicateurExplorer
         unitMode={unitMode}
         selectedUnites={selectedUnites}
         selectedBvaeps={selectedBvaeps}
@@ -215,6 +240,8 @@ export function CarteView({
         onToggleCarte={() => setShowCarte((c) => !c)}
         hoverEntity={hoverEntity}
         onHoverEntity={setHoverEntity}
+        captages={captages}
+        regions={regions}
       />
     </div>
   )

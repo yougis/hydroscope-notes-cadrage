@@ -1,10 +1,10 @@
-## Critères d'acceptation — EPIC 1 à 4 (périmètre MVP)
+## Critères d'acceptation — EPIC 1 à 4 (périmètre MVP) 
 
 Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope. Ils complètent le product backlog (EPIC 1 – Gestion des données, EPIC 1bis – Catalogage des données, EPIC 2 – Qualité des données, EPIC 3 – Référentiels, EPIC 4 – Calcul d'indicateurs) et constituent la base contractuelle de la **recette** et du **chiffrage** : une User Story n'est recettée que si tous ses critères sont satisfaits, et tout écart constaté à la recette est opposable au prestataire. 
 
 ### EPIC 1 — Gestion des données
 
-#### US1.1 — Importer des données via fichier (IHM OUI)
+#### US1.1 — Importer des données via fichier (IHM)
 
 - Étant donné un administrateur expert data connecté, Quand il importe un fichier CSV conforme au modèle attendu (en-têtes, types, unités), Alors les données sont enregistrées dans la plateforme, Et un message de succès indique le nombre de lignes chargées, Et le jeu de données apparaît dans le catalogue comme donnée source.
 - Étant donné un fichier au format SIG (Shapefile, GeoJSON), Quand il est importé, Alors les géométries sont validées et converties dans le système de coordonnées de référence de la plateforme, Et les enregistrements invalides sont rejetés avec leur motif.
@@ -12,7 +12,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Étant donné un import volumineux ou long, Quand l'import est lancé, Alors il s'exécute de manière asynchrone avec un statut visible (en cours / terminé / échec), sans bloquer les autres actions de l'administrateur.
 - Étant donné un fichier non conforme (extension non supportée, colonnes obligatoires manquantes), Quand l'administrateur tente l'import, Alors l'import est refusée et un message d'erreur explicite liste les anomalies détectées.
 
-#### US1.3 — Planifier des imports simples (IHM NON)
+#### US1.3 — Planifier des imports simples 
 
 - Étant donné une source de données fichier, Quand l'administrateur définit une planification (fréquence journalière, hebdomadaire, mensuelle, heure d'exécution), Alors l'import est exécuté automatiquement à l'échéance prévue, Et chaque exécution est tracée (date, heure, source, résultat, volumétrie).
 - Quand un import planifié échoue, Alors son statut passe à « échec », l'événement est journalisé avec le motif, Et les exécutions suivantes restent programmées.
@@ -20,7 +20,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Quand deux imports planifiés se chevauchent, Alors le système les sérialise ou refuse le chevauchement sans perte de données.
 - Étant donné un import planifié sans fichier source disponible à l'échéance, Alors l'exécution est signalée en échec avec un motif explicite, Et aucune donnée partielle ou vide n'est enregistrée.
 
-#### US1.4 — Normaliser les données (IHM NON)
+#### US1.4 — Normaliser les données 
 
 - Étant donné des données brutes hétérogènes (unités, formats de date, nomenclatures), Quand elles sont intégrées, Alors elles sont converties selon les règles de normalisation de la plateforme (unités de référence, dates ISO 8601, identifiants des référentiels), Et chaque transformation est documentée et tracée.
 - Étant donné une valeur référant à un captage ou un BVAEP, Quand la normalisation s'exécute, Alors la valeur est rattachée à l'objet correspondant du référentiel, Et toute valeur non rattachable est signalée en anomalie sans bloquer le reste du jeu.
@@ -28,7 +28,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Quand aucune règle de normalisation n'existe pour une colonne obligatoire, Alors l'import est refusée avec un message renvoyant vers la configuration de la source.
 - Quand un jeu de données normalisé est réimporté, Alors les mêmes règles produisent les mêmes valeurs (reproductibilité de la normalisation).
 
-#### US1.5 — Gérer les erreurs d'import (IHM OUI)
+#### US1.5 — Gérer les erreurs d'import (IHM)
 
 - Étant donné un fichier CSV contenant 3 lignes invalides sur 100, Quand l'import est exécuté, Alors un rapport d'erreurs est généré listant les 3 lignes avec leur motif de rejet, Et les 97 lignes valides sont enregistrées.
 - Quand l'administrateur ouvre le rapport d'erreurs, Alors il voit pour chaque erreur le numéro de ligne, la valeur en cause et le motif (type, plage, rattachement référentiel, doublon).
@@ -36,7 +36,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Quand un import se termine avec des rejets, Alors un message d'alerte informe l'administrateur du nombre d'enregistrements rejetés, avec un lien vers le rapport d'erreurs.
 - Étant donné un fichier corrigé après un rejet, Quand l'administrateur relance l'import, Alors seules les nouvelles anomalies sont signalées, les lignes précédemment corrigées n'apparaissant plus dans le rapport.
 
-#### US1.6 — Historiser les données (IHM NON)
+#### US1.6 — Historiser les données
 
 - Étant donné un jeu de données déjà importé, Quand un nouvel import met à jour ce jeu, Alors une nouvelle version est créée, Et les versions antérieures sont intégralement conservées et consultables.
 - Quand une donnée est modifiée ou supprimée, Alors l'historisation conserve l'intégralité des versions antérieures : aucune valeur écrasée n'est perdue.
@@ -46,7 +46,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 
 ### EPIC 1bis — Catalogage des données
 
-#### US1bis.1 — Enregistrer un jeu de données dans le catalogue (IHM OUI)
+#### US1bis.1 — Enregistrer un jeu de données dans le catalogue (IHM)
 
 - Étant donné un jeu de données intégré dans la plateforme, Quand l'administrateur l'enregistre dans le catalogue, Alors il reçoit un identifiant unique de catalogue, Et il devient visible et trouvable dans la liste du catalogue.
 - Quand un jeu de données est enregistré, Alors les champs obligatoires suivants sont renseignés et validés : nom, fournisseur, date de mise à jour, licence ; l'enregistrement est refusé tant qu'ils sont manquants.
@@ -54,7 +54,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Quand un jeu de données enregistré est mis à jour (nouvel import), Alors la fiche du catalogue reste liée à la version courante du jeu.
 - Étant donné un jeu de données non encore intégré, Quand l'administrateur tente de l'enregistrer, Alors l'enregistrement est refusée : le catalogue ne référence que des données réellement disponibles dans la plateforme.
 
-#### US1bis.2 — Associer des métadonnées à un jeu de données (IHM OUI)
+#### US1bis.2 — Associer des métadonnées à un jeu de données (IHM)
 
 - Étant donné un jeu de données du catalogue, Quand l'administrateur renseigne ses métadonnées, Alors les métadonnées obligatoires sont enregistrées : nom, fournisseur, date de mise à jour, licence ; Et le système refuse l'enregistrement tant qu'elles sont manquantes.
 - Quand des métadonnées descriptives sont saisies (origine, couverture spatiale et temporelle, unités, fréquence de mise à jour, contact), Alors elles sont structurées selon un schéma commun et affichées sur la fiche du jeu de données.
@@ -62,7 +62,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Quand des métadonnées sont enregistrées, Alors la date et l'auteur de la saisie sont tracés.
 - Étant donné une licence non autorisée ou une date de mise à jour future, Quand l'enregistrement est tenté, Alors il est refusé avec un message d'erreur explicite.
 
-#### US1bis.4 — Consulter les informations d'un jeu de données (IHM OUI)
+#### US1bis.4 — Consulter les informations d'un jeu de données (IHM)
 
 - Étant donné un jeu de données du catalogue, Quand l'utilisateur ouvre sa fiche, Alors il voit son nom, son fournisseur, sa date de mise à jour, sa licence, sa couverture spatiale et temporelle, et son type (donnée source ou donnée dérivée).
 - Quand l'utilisateur consulte la fiche, Alors il voit la structure du jeu (champs, types, unités) et, si disponible, un aperçu du contenu.
@@ -70,7 +70,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Étant donné un jeu de données sans licence renseignée, Quand sa fiche est consultée, Alors la mention « licence non renseignée » est affichée (aucune valeur par défaut trompeuse).
 - Quand la fiche est consultée depuis le catalogue, Alors l'utilisateur voit les métadonnées de qualité associées (EPIC 2) si elles existent.
 
-#### US1bis.7 — Visualiser les relations entre indicateur et données sources (IHM OUI)
+#### US1bis.7 — Visualiser les relations entre indicateur et données sources (IHM)
 
 - Étant donné un indicateur dérivé, Quand l'utilisateur ouvre sa page de relations, Alors il voit un graphe reliant l'indicateur à ses données sources et aux traitements intermédiaires.
 - Quand l'utilisateur clique sur un nœud du graphe (jeu de données source, traitement), Alors les métadonnées correspondantes sont affichées.
@@ -78,15 +78,15 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Étant donné un indicateur sans dépendance déclarée, Quand la page est ouverte, Alors un message indique l'absence de relations tracées plutôt qu'un graphe vide.
 - Quand l'indicateur est recalculé sur de nouvelles données, Alors le graphe reflète les relations de la version de calcul la plus récente.
 
-#### US1bis.10 — Alimenter automatiquement le catalogue lors des imports (IHM NON)
+#### US1bis.10 — Alimenter automatiquement le catalogue lors des imports
 
 - Étant donné un import de fichier réussi, Quand le traitement se termine, Alors une entrée de catalogue est créée ou mise à jour automatiquement, sans saisie manuelle.
 - Étant donné un jeu de données déjà catalogué, Quand un import le met à jour, Alors sa fiche de catalogue est actualisée (date de mise à jour, version courante) sans création de doublon.
 - Étant donné un import en échec, Quand le traitement se termine, Alors aucune entrée de catalogue n'est créée, Et l'événement est tracé.
-- Quand une entrée est créée automatiquement, Alors les métadonnées minimales (nom, fournisseur, date de mise à jour) sont déduites de l'import et marquées « générées automatiquement ».
+- Quand une entrée est créée automatiquement, Alors les métadonnées minimales (nom, fournisseur, date de mise à jour) sont déduites de l'import et marquées "générées automatiquement".
 - Étant donné un import sans identifiant de jeu identifiable, Quand l'alimentation du catalogue est tentée, Alors l'import est signalé en échec partiel avec le motif.
 
-#### US1bis.12 — Enregistrer un indicateur comme donnée dérivée (IHM OUI)
+#### US1bis.12 — Enregistrer un indicateur comme donnée dérivée (IHM)
 
 - Étant donné un indicateur défini dans le référentiel (US3.5), Quand il est enregistré dans le catalogue, Alors il apparaît avec le type « donnée dérivée », distinct des données sources.
 - Quand la fiche de l'indicateur est consultée, Alors elle indique qu'il s'agit d'une donnée dérivée et renvoie vers sa définition et sa méthode de calcul.
@@ -96,7 +96,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 
 ### EPIC 2 — Qualité des données
 
-#### US2.1 — Détecter des valeurs aberrantes (IHM NON)
+#### US2.1 — Détecter des valeurs aberrantes 
 
 - Étant donné un jeu de données avec des règles de contrôle définies (bornes min/max, plages attendues), Quand une valeur sort de la plage attendue, Alors l'anomalie est détectée et enregistrée avec le jeu de données, la ligne, la valeur et la règle violée.
 - Quand la détection est exécutée, Alors un rapport liste les valeurs aberrantes avec leur motif, sans modifier les données d'origine.
@@ -104,7 +104,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Étant donné une valeur signalée à tort (faux positif), Quand l'administrateur la blanchit, Alors le motif du blanchiment est documenté et tracé.
 - Étant donné un jeu sans règles de détection configurées, Quand le contrôle est exécuté, Alors aucune valeur aberrante n'est signalée et le jeu est qualifié « non contrôlé ».
 
-#### US2.4 — Calculer un taux de complétude (IHM NON)
+#### US2.4 — Calculer un taux de complétude
 
 - Étant donné un jeu de données avec des champs obligatoires définis, Quand le taux de complétude est calculé, Alors il correspond au pourcentage de valeurs renseignées sur les valeurs attendues, par champ et par jeu, Et le résultat est stocké comme métadonnée de qualité.
 - Quand un taux est calculé, Alors la période et la version du jeu de données utilisées pour le calcul sont précisées.
@@ -112,7 +112,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Quand un jeu est mis à jour (nouvel import, corrections), Alors le taux est recalculé sur la dernière version, sans perte des taux historiques.
 - Quand le taux de complétude d'un jeu sert au calcul d'un indicateur (EPIC 4), Alors il est exploitable de façon automatisée (filtrage ou marquage du résultat).
 
-#### US2.5 — Qualifier la fiabilité (IHM NON)
+#### US2.5 — Qualifier la fiabilité
 
 - Étant donné les critères de fiabilité définis (source, méthode de production, complétude, fréquence de mise à jour), Quand la fiabilité d'un jeu de données est évaluée, Alors une classe de fiabilité (élevée, moyenne, faible) lui est attribuée selon des règles documentées.
 - Quand une classe de fiabilité est attribuée, Alors la règle et les critères utilisés sont tracés.
@@ -120,7 +120,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Étant donné un jeu sans métadonnées de qualité renseignées, Quand l'évaluation est demandée, Alors aucune classe n'est attribuée : le jeu est qualifié « fiabilité non évaluée » (pas de note par défaut trompeuse).
 - Quand une classe de fiabilité est disponible, Alors elle est exploitable par les traitements ultérieurs (filtrage, affichage différencié).
 
-#### US2.6 — Associer des métadonnées de qualité (IHM OUI)
+#### US2.6 — Associer des métadonnées de qualité (IHM)
 
 - Étant donné un jeu de données contrôlé, Quand l'administrateur associe des métadonnées de qualité, Alors il renseigne : date du dernier contrôle, règles appliquées, résultats (anomalies, taux de complétude, fiabilité) et statut de validation.
 - Quand des métadonnées de qualité sont enregistrées, Alors elles sont visibles sur la fiche qualité du jeu de données.
@@ -130,7 +130,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 
 ### EPIC 3 — Référentiels
 
-#### US3.1 — Gérer les bassins versants (BVAEP) (IHM OUI)
+#### US3.1 — Gérer les bassins versants (BVAEP) (IHM)
 
 - Étant donné le référentiel des BVAEP, Quand l'administrateur crée un bassin versant d'alimentation en eau potable, Alors il renseigne au minimum : identifiant, nom, géométrie, communes et captages rattachés, Et le BVAEP devient utilisable dans les agrégations et sur la carte.
 - Quand l'administrateur modifie la géométrie ou le périmètre d'un BVAEP, Alors la modification est enregistrée avec sa date, Et les données historiques restent rattachées à l'ancien périmètre (cohérence temporelle).
@@ -138,7 +138,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Quand l'administrateur consulte la liste des BVAEP, Alors il voit l'identifiant, le nom, les communes et le nombre de captages rattachés.
 - Étant donné un BVAEP auquel des données ou des captages sont rattachés, Quand l'administrateur tente de le supprimer, Alors la suppression est refusée tant qu'aucun réaffectement explicite n'a été effectué.
 
-#### US3.2 — Gérer les captages (IHM OUI)
+#### US3.2 — Gérer les captages (IHM)
 
 - Étant donné le référentiel des captages, Quand l'administrateur crée un captage, Alors il renseigne au minimum : identifiant, nom, commune, coordonnées et BVAEP de rattachement, Et le captage apparaît dans le référentiel et sur la carte.
 - Quand un captage est rattaché à un BVAEP, Alors la cohérence du rattachement est vérifiée (position dans le bassin ou rattachement explicite justifié), Et toute incohérence est signalée.
@@ -146,7 +146,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Quand la fiche du captage est consultée, Alors elle affiche ses données de qualité (EPIC 2) et les périmètres de protection (PPE) associés s'ils sont renseignés.
 - Étant donné un identifiant de captage déjà utilisé, Quand la création est tentée, Alors elle est refusée avec un message explicite.
 
-#### US3.4 — Gérer la maille H3 (IHM OUI)
+#### US3.4 — Gérer la maille H3 (IHM)
 
 - Étant donné le référentiel de la maille H3, Quand l'administrateur définit les résolutions utilisées par la plateforme, Alors la configuration est enregistrée et documentée, Et elle sert de référence aux agrégations.
 - Quand l'administrateur consulte la maille, Alors il voit la grille H3 superposée à la carte avec ses cellules identifiées.
@@ -154,7 +154,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Étant donné une modification de la résolution configurée, Quand elle est enregistrée, Alors les agrégations existantes restent reproductibles et les données historiques ne sont pas altérées.
 - Étant donné une résolution non supportée, Quand l'administrateur tente de la configurer, Alors l'opération est refusée avec la liste des résolutions disponibles.
 
-#### US3.5 — Définir un indicateur (IHM OUI)
+#### US3.5 — Définir un indicateur (IHM)
 
 - Étant donné le référentiel des indicateurs, Quand l'administrateur définit un indicateur, Alors il renseigne au minimum : nom, description, finalité, unité, échelle spatiale (captage, BVAEP, maille H3) et temporelle, méthode de calcul et liens vers les données sources ; l'enregistrement est refusé tant que ces éléments sont manquants.
 - Quand l'indicateur est enregistré, Alors il devient calculable par le moteur (EPIC 4), affichable dans le catalogue et exploitable par la carte.
@@ -164,7 +164,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 
 ### EPIC 4 — Calcul d'indicateurs
 
-#### US4.1 — Calculer des indicateurs simples (IHM NON)
+#### US4.1 — Calculer des indicateurs simples
 
 - Étant donné un indicateur défini (US3.5) et ses données sources cataloguées et qualifiées, Quand le calcul est exécuté, Alors les valeurs produites respectent la méthode définie (moyenne, médiane, somme, fréquence, occurrence), Et le résultat est stocké avec la date de calcul, la version de la définition et les versions des données utilisées.
 - Étant donné un calcul reposant sur des données manquantes ou sous le seuil de complétude, Quand le résultat est produit, Alors il est marqué « non fiable » ou non calculé selon les règles de l'indicateur.
@@ -172,7 +172,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Quand le calcul est relancé après correction des données, Alors le résultat est recalculé et la nouvelle exécution est tracée (reproductibilité).
 - Étant donné un indicateur sans méthode complète ou sans données sources, Quand le calcul est demandé, Alors il est refusé avec un message explicite.
 
-#### US4.2 — Agréger à l'échelle BV (IHM NON)
+#### US4.2 — Agréger à l'échelle BV
 
 - Étant donné des valeurs à l'échelle captage ou maille H3, Quand l'agrégation à l'échelle du BVAEP est exécutée, Alors une valeur synthétique est produite pour chaque bassin versant selon la règle d'agrégation définie (somme, moyenne, moyenne pondérée), Et la règle utilisée est tracée.
 - Quand le résultat d'agrégation est produit, Alors il est accompagné de la liste des captages pris en compte et du taux de complétude associé.
@@ -180,7 +180,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Étant donné une évolution du périmètre d'un BVAEP, Quand l'agrégation est exécutée sur une période passée, Alors elle utilise la version du périmètre applicable à cette période (cohérence historique).
 - Étant donné un indicateur sans règle d'agrégation spatiale définie, Quand l'agrégation à l'échelle BV est demandée, Alors elle est refusée avec un message explicite.
 
-#### US4.3 — Agrégation temporelle (IHM NON)
+#### US4.3 — Agrégation temporelle
 
 - Étant donné des données historisées (US1.6), Quand l'agrégation temporelle (mensuelle, annuelle, pluriannuelle) est exécutée, Alors les séries consolidées sont produites sur les périodes demandées, Et les données sous-jacentes restent disponibles.
 - Étant donné une période contenant des données manquantes, Quand le résultat est produit, Alors le taux de couverture de la période est indiqué, Et le résultat est marqué si le seuil de complétude n'est pas atteint.
@@ -188,7 +188,7 @@ Les critères ci-dessous sont **normatifs** pour le périmètre MVP d'HydroScope
 - Étant donné une période demandée dépassant l'historique disponible, Quand l'agrégation est exécutée, Alors elle est limitée à l'historique existant et l'écart est signalé, ou refusée si aucune donnée ne couvre la période.
 - Quand un indicateur est produit à plusieurs granularités temporelles, Alors le périmètre de calcul (données incluses, période couverte) est documenté pour garantir la comparabilité des séries.
 
-#### US4.5 — Filtrer les données (IHM OUI)
+#### US4.5 — Filtrer les données (IHM)
 
 - Étant donné l'interface de calcul d'un indicateur, Quand l'administrateur applique des filtres (période, source, qualité, territoire : captage, BVAEP, commune), Alors seules les valeurs répondant aux filtres sont utilisées dans le calcul, Et les filtres appliqués sont affichés à l'écran.
 - Quand l'administrateur exclut les données de qualité insuffisante (fiabilité faible, anomalies, sous le seuil de complétude), Alors elles sont exclues du calcul, Et l'option d'exclusion est visible dans l'interface.

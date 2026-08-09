@@ -37,6 +37,7 @@ L’utilisateur destinataire devra pouvoir accéder à cette vue de manière dir
 L’accès à ces contenus devra toutefois respecter les règles de gestion des droits. Un utilisateur ne devra pouvoir consulter que les données auxquelles il est autorisé, même lorsqu’il accède via un lien partagé.
 
 Le système devra permettre de gérer différents niveaux de partage, par exemple :
+  
 - partage interne entre utilisateurs authentifiés ;
 - diffusion élargie à des partenaires disposant d’un accès ;
 - éventuellement partage public limité à certaines données.

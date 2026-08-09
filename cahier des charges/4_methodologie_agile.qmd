@@ -35,7 +35,10 @@ Le backlog a vocation à être intégré et suivi dans les outils de gestion de 
 
 - le suivi de l’avancement ;
 - la traçabilité des développements ;
-- le lien entre besoins fonctionnels et réalisation technique.
+- le lien entre besoins fonctionnels et réalisation technique. 
+
+Le @sec_backlog détail les UserStories identifié jusau'à maintenant.
+
 
 ### Organisation des sprints
 
@@ -47,6 +50,7 @@ Chaque sprint comprend :
 - la production d’un incrément fonctionnel utilisable.
 
 Cette organisation permet :
+
 - des livraisons régulières ;
 - une réduction des risques ;
 - une meilleure visibilité sur l’avancement.
@@ -104,3 +108,4 @@ Le projet est structuré en deux volets :
 - **Lot 2 – Évolutions** : besoins secondaires, **chiffrés à l’avance** et **activables** par la MOA pendant le projet, sans renégociation ;
 - une **provision pour aléas**, laissée à l’appréciation de chaque candidat, couvre les petits écarts de périmètre.
 
+Le fichier joint {{< meta fichier_backlog >}} est mis à disposition du répondant pour permettre une estimation des points d'effort. Les US principales sont détaillées en scénario de test. C'est pour ces derniers qu'il est demandé d'évaluer les points d'efforts.

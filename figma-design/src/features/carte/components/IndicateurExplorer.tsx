@@ -2,11 +2,12 @@ import { useMemo, useState } from 'react'
 import { Icon } from '@/components/ui/Icon'
 import { IndicatorSymbol } from '@/components/ui/IndicatorSymbol'
 import { UnitBarChart, UnitValueTable } from '@/components/charts'
-import { UNITES_GESTIONES, CATALOGUE, BVAEPS, catalogueById, groupsOfFamily, groupsOfThemes, themesOfFamily } from '@/data/hydroscope'
+import { CATALOGUE, catalogueById, groupsOfFamily, groupsOfThemes, themesOfFamily } from '@/data/hydroscope'
 import { valueForUnite, valueForBvaep } from '@/data/values'
 import { ChartModeSwitcher, type ChartViewMode } from '@/features/indicateurs/ChartModeSwitcher'
 import { PanelSection } from './PanelSection'
 import type { IndicatorDef, IndicatorFamily, UnitMode, HoverEntity } from '@/types/domain'
+import type { LiveCaptage, LiveRegion } from '@/data/referentiels'
 
 export interface IndicateurExplorerProps {
   unitMode: UnitMode
@@ -22,6 +23,8 @@ export interface IndicateurExplorerProps {
   onToggleCarte: () => void
   hoverEntity?: HoverEntity | null
   onHoverEntity?: (e: HoverEntity | null) => void
+  captages?: LiveCaptage[]
+  regions?: LiveRegion[]
 }
 
 function matchIndicator(i: IndicatorDef, q: string) {
@@ -43,6 +46,8 @@ export function IndicateurExplorer({
   onToggleCarte,
   hoverEntity = null,
   onHoverEntity,
+  captages,
+  regions,
 }: IndicateurExplorerProps) {
   const [query, setQuery] = useState('')
   const [famille, setFamille] = useState<IndicatorFamily>('ENJEUX')
@@ -81,15 +86,15 @@ export function IndicateurExplorer({
       return s
     })
 
-  const chartData = (() => {
+  const chartData = useMemo(() => {
     if (!ind) return []
     if (unitMode === 'bvaep') {
-      const units = BVAEPS.filter((b) => selectedBvaeps.has(b.id))
+      const units = (regions ?? []).filter((b) => selectedBvaeps.has(b.id))
       return units.map((b) => ({ id: b.id, label: `BV-${b.id.slice(-2)}`, value: valueForBvaep(ind.id, b.id) }))
     }
-    const units = UNITES_GESTIONES.filter((c) => selectedUnites.has(c.id))
+    const units = (captages ?? []).filter((c) => selectedUnites.has(c.id))
     return units.map((c) => ({ id: c.id, label: c.name.slice(0, 8), value: valueForUnite(ind.id, c.id) }))
-  })()
+  }, [ind, unitMode, selectedBvaeps, selectedUnites, captages, regions])
 
   const hoveredKind = unitMode === 'bvaep' ? 'bvaep' : 'unite'
   const hoveredId = hoverEntity && hoverEntity.kind === hoveredKind ? hoverEntity.id : null

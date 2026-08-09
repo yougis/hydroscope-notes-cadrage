@@ -101,11 +101,8 @@ L'ensemble de ces risques doivent être pris en compte par le prestataire et sa 
 
 #### Suivi des risques
 
-Les risques feront l’objet :
 
-- d’un suivi régulier en COTECH et COPIL ;
-- d’une mise à jour continue ;
-- de la définition de mesures de mitigation adaptées.
+Les risques feront l’objet d’un suivi régulier en COTECH et COPIL ; d’une mise à jour continue et de la définition de mesures de mitigation adaptées.
 
 #### Mesures de mitigation (exemples)
 

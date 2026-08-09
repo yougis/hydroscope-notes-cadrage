@@ -27,6 +27,7 @@ Ces tests sont réalisés de manière continue au fil des sprints.
 La recette fonctionnelle est pilotée par la MOA et la participation d'utilisateurs.
 
 Elle vise à :
+
 - valider la conformité des fonctionnalités livrées ;
 - vérifier l’adéquation de l’outil aux usages métiers ;
 - identifier les écarts ou anomalies.
@@ -37,7 +38,8 @@ La recette s’appuie sur des scénarios de test représentatifs des usages rée
 
 Compte tenu de la nature du projet, une attention particulière est portée à la validation des indicateurs et des méthodes de calcul.
 
-Cette validation vise à :
+Cette validation doit :
+
 - vérifier la pertinence des indicateurs produits ;
 - contrôler la cohérence des méthodes d’agrégation et de calcul ;
 - s’assurer de la conformité aux principes méthodologiques définis.
@@ -49,6 +51,7 @@ Elle implique les experts métiers et les partenaires techniques concernés.
 Chaque fonctionnalité doit être associée à des critères d’acceptation permettant de valider sa conformité.
 
 Ces critères portent sur :
+
 - le respect des exigences fonctionnelles ;
 - la qualité des résultats produits ;
 - la conformité des interfaces ;
@@ -56,9 +59,12 @@ Ces critères portent sur :
 
 La validation est prononcée par la MOA sur la base de ces critères.
 
+La liste des critère d'acceptation se situe en annexe @sec-critere_acceptation
+
 ### Gestion des anomalies
 
 Les anomalies identifiées lors des phases de test et de recette sont :
+
 - recensées et qualifiées ;
 - priorisées en fonction de leur impact ;
 - corrigées dans les cycles de développement suivants.
@@ -69,7 +75,8 @@ Un suivi des anomalies est mis en place afin de garantir leur résolution.
 
 Chaque version du système fait l’objet d’une validation avant mise en production.
 
-Cette validation repose sur :
+Cette validation permet :
+
 - la réussite des tests techniques et fonctionnels ;
 - la validation des éléments méthodologiques ;
 - la correction des anomalies critiques.
@@ -78,8 +85,8 @@ La décision de mise en production est prise par la MOA.
 
 ### Points de vigilance
 
-- Nécessité d’impliquer les utilisateurs dans les phases de recette  
-- Importance de la validation méthodologique des indicateurs  
-- Risque de sous-estimation des efforts de test dans un contexte Agile  
-- Coordination entre corrections d’anomalies et développement de nouvelles fonctionnalités  
+- Nécessité d’impliquer les utilisateurs dans les phases de recette
+- Importance de la validation méthodologique des indicateurs
+- Risque de sous-estimation des efforts de test dans un contexte Agile
+- Coordination entre corrections d’anomalies et développement de nouvelles fonctionnalités
 - Maintien d’un référentiel de tests à jour tout au long du projet

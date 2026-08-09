@@ -78,6 +78,10 @@
     background: #14324d; border: 1px solid #2f6f9f; color: #fff; padding: 8px 16px; border-radius: 6px;
     font-size: 13px; z-index: 2000; display: none; max-width: 90vw; }
   #toast.error { background: #4a1515; border-color: #8c2a2a; }
+  /* Scénario chips */
+  .scenario-chip { display: inline-flex; align-items: center; gap: 4px; background: #1a3a5c; border: 1px solid #2f6f9f; color: #fff; border-radius: 10px; padding: 2px 8px; font-size: 12px; cursor: pointer; margin: 2px; }
+  .scenario-chip:hover { background: #244a7a; }
+  .scenario-chip .x { color: #ff6b6b; cursor: pointer; margin-left: 4px; }
 </style>
 </head>
 <body>
@@ -150,18 +154,20 @@ const EPIC_LABELS = {
 const EPIC_FULL = code => code + ' – ' + EPIC_LABELS[code];
 
 // ---------- Source de données ----------
-// Mode lecture (page statique) : backlog.csv servi via GitHub raw (HTTPS + CORS *).
-// Mode édition (page servie par le serveur local) : API /api/backlog sur backlog.xlsx.
 const BACKLOG_URL = 'https://raw.githubusercontent.com/yougis/hydroscope-notes-cadrage/refs/heads/main/cahier%20des%20charges/backlog.csv';
 const API_BASE = '/api';
 
 let EDIT_MODE = false;
 let FILE_INFO = null;
 
-let US_DATA = {};        // id -> { epic, nom, libelle, mvp, frontback, module, depend[], typ, pilier, role, phrase, besoins, row }
+let US_DATA = {};        // id -> { epic, nom, libelle, mvp, frontback, module, depend[], typ, pilier, role, phrase, row }
 let US = {};             // id -> [epic, libelle]
 let US_FINALITE = {};    // id -> type fonctionnel
 let DEP = [];            // [parent, child]
+
+// Scénarios (Besoins testables)
+let SCENARIOS_BY_US = {}; // usId -> [{ident, libelle, scenario, ...}]
+let SCENARIOS_MAP = {};   // ident -> full scenario object
 
 // ---------- Helpers ----------
 function toast(msg, type) {
@@ -174,7 +180,11 @@ function toast(msg, type) {
 }
 
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
-  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  '&': '&',
+  '<': '<',
+  '>': '>',
+  '"': '"',
+  "'": "'"
 }[c]));
 
 // Parsing CSV RFC4180 (séparateur ';', champs quotés, retours à la ligne CRLF/LF)
@@ -226,7 +236,6 @@ function ingestUs(list) {
       pilier: String(d.pilier || ''),
       role: String(d.role || ''),
       phrase: String(d.phrase || ''),
-      besoins: String(d.besoins || ''),
       row: d.row
     };
     US[id] = [epic, String(d.libelle || '')];
@@ -264,10 +273,10 @@ async function loadCsvData() {
       pilier: '',
       role: get(iRole),
       phrase: get(iPhrase),
-      besoins: ''
     });
   }
   ingestUs(list);
+  // pas de scénarios en mode lecture seule (CSV ne les contient pas)
 }
 
 // Charge les données via l'API locale (mode édition)
@@ -277,6 +286,16 @@ async function loadApiData() {
   const data = await res.json();
   FILE_INFO = { file: data.file, archiveDir: data.archiveDir };
   ingestUs(data.us || []);
+  // Scénarios
+  SCENARIOS_BY_US = {};
+  SCENARIOS_MAP = {};
+  if (Array.isArray(data.scenarios)) {
+    for (const sc of data.scenarios) {
+      SCENARIOS_MAP[sc.ident] = sc;
+      if (!SCENARIOS_BY_US[sc.usId]) SCENARIOS_BY_US[sc.usId] = [];
+      SCENARIOS_BY_US[sc.usId].push(sc);
+    }
+  }
 }
 
 async function loadUsData() {
@@ -319,7 +338,6 @@ const roleIcon = r => ROLE_ICONS[r] || FALLBACK_ICON;
 let currentColoring = 'epic';
 
 function renderLegend(mode) {
-  // Légende retirée (les groupes sont visibles via la barre de navigation).
   document.getElementById('legend').innerHTML = '';
 }
 
@@ -428,11 +446,21 @@ function facetMatches(id) {
 let detailOpen = false;
 let editingId = null;    // id de l'US en cours d'édition (null = nouvelle)
 let dependList = [];     // chips « Dépend de » du formulaire
+let scenarioEditing = false; // true quand on affiche une fiche scénario
+let currentScenarioIdent = null;
 
 function depText(d) {
   if (!d.depend || !d.depend.length) return '<em>aucun</em>';
   const pills = d.depend.map(p => `<span class="facet-pill" onclick="openDetail('${p}')">${p}</span>`).join(' ');
   return pills;
+}
+
+// --- Rendu scénarios (lecture seule) ---
+function renderScenariosReadOnly(usId) {
+  const list = SCENARIOS_BY_US[usId] || [];
+  if (!list.length) return '<div class="prop"><div class="k">Besoins testables</div><div class="v"><em>aucun</em></div></div>';
+  const chips = list.map(sc => `<span class="scenario-chip" onclick="openScenario('${esc(sc.ident)}')">${esc(sc.ident)} – ${esc(sc.libelle)}</span>`).join(' ');
+  return `<div class="prop"><div class="k">Besoins testables</div><div class="v">${chips}</div></div>`;
 }
 
 // Affichage lecture seule (page statique, sans serveur)
@@ -446,7 +474,8 @@ function renderReadOnly(d) {
     <div class="prop"><div class="k">IHM</div><div class="v">${esc(d.ihm)}</div></div>
     <div class="prop"><div class="k">MVP</div><div class="v">${esc(d.mvp)}</div></div>
     <div class="prop"><div class="k">Dépend de (parents)</div><div class="v">${depText(d)}</div></div>
-    <div class="prop"><div class="k">Phrase méthode agile</div><div class="v">${esc(d.phrase || '—')}</div></div>`;
+    <div class="prop"><div class="k">Phrase méthode agile</div><div class="v">${esc(d.phrase || '—')}</div></div>
+    ${renderScenariosReadOnly(d.nom)}`;
 }
 
 // Formulaire d'édition (mode édition)
@@ -456,6 +485,18 @@ function usListHtml() {
 
 function epicOptions() {
   return Object.keys(EPICS).map(code => `<option value="${esc(EPIC_FULL(code))}">${esc(EPIC_FULL(code))}</option>`).join('');
+}
+
+// Rendu liste scénarios dans le formulaire d'édition
+function renderScenariosEdit(usId) {
+  const list = SCENARIOS_BY_US[usId] || [];
+  const chips = list.map(sc => `
+    <span class="scenario-chip" onclick="openScenario('${esc(sc.ident)}')">
+      ${esc(sc.ident)} – ${esc(sc.libelle)}
+      <span class="x" onclick="event.stopPropagation(); deleteScenario('${esc(sc.ident)}')">✕</span>
+    </span>`).join(' ');
+  const addBtn = EDIT_MODE ? `<button type="button" class="scenario-chip" style="background:#2a4a6b;border-color:#4a8fc7;" onclick="addScenario()"><i class="fa-solid fa-plus"></i> Ajouter</button>` : '';
+  return `<div class="form-field"><label>Besoins testables (scénarios)</label><div>${chips}${addBtn}</div></div>`;
 }
 
 function renderEditForm(d) {
@@ -475,6 +516,8 @@ function renderEditForm(d) {
     <button onclick="closeDetail()">Annuler</button>
     ${d ? '<button class="danger" onclick="deleteForm()">Supprimer</button>' : ''}
   `;
+
+  const scenariosHtml = d ? renderScenariosEdit(d.nom) : '';
 
   const html = `
     <div class="form-field">
@@ -540,10 +583,8 @@ function renderEditForm(d) {
       <label>Phrase méthode agile</label>
       <textarea id="f-phrase">${esc(d ? d.phrase : '')}</textarea>
     </div>
-    <div class="form-field">
-      <label>Besoins testables</label>
-      <textarea id="f-besoins">${esc(d ? d.besoins : '')}</textarea>
-    </div>`;
+    ${scenariosHtml}
+  `;
 
   return html;
 }
@@ -552,13 +593,16 @@ function renderEditForm(d) {
 function wireEditForm() {
   renderDepChips();
   const input = document.getElementById('f-dep-input');
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addDep(); }
-  });
+  if (input) {
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addDep(); }
+    });
+  }
 }
 
 function renderDepChips() {
   const box = document.getElementById('dep-chips');
+  if (!box) return;
   box.innerHTML = dependList.map(id =>
     `<span class="chip" title="Retirer" onclick="removeDep('${esc(id)}')">${esc(id)}<span class="x">✕</span></span>`
   ).join('') || '<em style="color:#9aa1a8;font-size:12px">Aucune dépendance</em>';
@@ -582,6 +626,78 @@ function removeDep(id) {
   renderDepChips();
 }
 
+// --- Scénario CRUD ---
+async function addScenario() {
+  if (!editingId) return;
+  const res = await fetch(`${API_BASE}/scenarios`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ usId: editingId })
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || json.ok === false) { toast('Erreur ajout scénario : ' + (json.error || 'HTTP ' + res.status), 'error'); return; }
+  toast('Scénario créé ✓');
+  await reloadAndRender();
+  openDetail(editingId);
+}
+
+async function deleteScenario(ident) {
+  if (!confirm('Supprimer le scénario ' + ident + ' ?')) return;
+  const res = await fetch(`${API_BASE}/scenarios/${encodeURIComponent(ident)}`, { method: 'DELETE' });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || json.ok === false) { toast('Erreur suppression : ' + (json.error || 'HTTP ' + res.status), 'error'); return; }
+  toast('Scénario supprimé ✓');
+  await reloadAndRender();
+  if (editingId) openDetail(editingId);
+}
+
+function openScenario(ident) {
+  const sc = SCENARIOS_MAP[ident];
+  if (!sc) return;
+  currentScenarioIdent = ident;
+  scenarioEditing = true;
+  const panel = document.getElementById('detail');
+  panel.classList.remove('closed');
+  detailOpen = true;
+  document.getElementById('d-title').textContent = sc.ident + ' — ' + sc.libelle;
+  const body = document.getElementById('d-body');
+  body.innerHTML = `
+    <div class="form-field"><label>Identifiant</label><input type="text" id="sc-ident" value="${esc(sc.ident)}" readonly></div>
+    <div class="form-field"><label>Libellé scénario</label><input type="text" id="sc-libelle" value="${esc(sc.libelle)}"></div>
+    <div class="form-field"><label>Scénario testable (complet)</label><textarea id="sc-scenario" style="min-height:120px;">${esc(sc.scenario)}</textarea></div>
+  `;
+  document.getElementById('d-actions').style.display = 'flex';
+  document.getElementById('d-actions').innerHTML = `
+    <button onclick="saveScenario()">Enregistrer</button>
+    <button onclick="backToUs()">Retour à l'US</button>
+    <button class="danger" onclick="deleteScenario('${esc(ident)}')">Supprimer</button>
+  `;
+}
+
+async function saveScenario() {
+  if (!currentScenarioIdent) return;
+  const libelle = document.getElementById('sc-libelle').value.trim();
+  const scenario = document.getElementById('sc-scenario').value.trim();
+  const res = await fetch(`${API_BASE}/scenarios/${encodeURIComponent(currentScenarioIdent)}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ libelle, scenario })
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || json.ok === false) { toast('Erreur enregistrement : ' + (json.error || 'HTTP ' + res.status), 'error'); return; }
+  toast('Scénario enregistré ✓');
+  scenarioEditing = false;
+  currentScenarioIdent = null;
+  await reloadAndRender();
+  if (editingId) openDetail(editingId);
+}
+
+function backToUs() {
+  scenarioEditing = false;
+  currentScenarioIdent = null;
+  if (editingId) openDetail(editingId);
+}
+
 function openDetail(id) {
   const d = US_DATA[id];
   if (!d) return;
@@ -599,6 +715,8 @@ function closeDetail() {
   document.getElementById('detail').classList.add('closed');
   detailOpen = false;
   editingId = null;
+  scenarioEditing = false;
+  currentScenarioIdent = null;
   if (window.network) window.network.unselectAll();
 }
 
@@ -648,8 +766,7 @@ function gatherForm() {
     typ: val('f-typ'),
     pilier: val('f-pilier'),
     role: val('f-role'),
-    phrase: val('f-phrase'),
-    besoins: val('f-besoins')
+    phrase: val('f-phrase')
   };
 }
 
@@ -844,6 +961,11 @@ function main() {
   window.setGroup = setGroup;
   window.setColoring = setColoring;
   window.toggleLinked = toggleLinked;
+  window.addScenario = addScenario;
+  window.deleteScenario = deleteScenario;
+  window.openScenario = openScenario;
+  window.saveScenario = saveScenario;
+  window.backToUs = backToUs;
 }
 
 // Détection du mode édition (serveur local) avec timeout court

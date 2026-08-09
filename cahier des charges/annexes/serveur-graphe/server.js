@@ -17,7 +17,7 @@ const ARCHIVE_DIR = path.join(__dirname, '..', '..', 'archive_backlog');
 const PORT = Number(process.env.PORT || 8081);
 const XLSX = process.env.BACKLOG_XLSX ? path.resolve(process.env.BACKLOG_XLSX) : DEFAULT_XLSX;
 
-// Colonnes de la feuille « Backlog » (ordre 1-based = A..M).
+// Colonnes de la feuille « Backlog » (ordre 1-based = A..M) — aligné sur le xlsx réel.
 const HEADERS = [
   'EPIC',
   'ID User Story',
@@ -30,14 +30,27 @@ const HEADERS = [
   'Pilier(s)',
   'Profil utilisateur',
   'Phrase méthode agile',
-  'Besoins testables',
-  "Point d'effort prestataire (1er niveau)",
+  "Point d'effort prestataire",
+  "Point d'effort estimé MOA",
 ];
 
 // Colonnes reflet dans la feuille « Besoins testables ».
 const BT_COLS = {
-  epic: 3, id: 4, libelle: 5, mvp: 6, frontback: 7, module: 8,
-  depend: 9, typ: 10, pilier: 11, role: 12, phrase: 13,
+  ident: 1,        // Identifiant test
+  libelle: 2,      // Libellé scénario
+  epic: 3,
+  id: 4,           // ID User Story
+  libelleUs: 5,
+  mvp: 6,
+  frontback: 7,
+  module: 8,
+  depend: 9,
+  typ: 10,
+  pilier: 11,
+  role: 12,
+  phrase: 13,
+  scenario: 14,    // Scénario testable (complet)
+  effort: 15,      // Point d'effort prestataire (1er niveau)
 };
 
 const SHEET_BACKLOG = 'Backlog';
@@ -122,12 +135,46 @@ function parseBacklogRow(row) {
     pilier: s(readCell(row, 9)),
     role: s(readCell(row, 10)),
     phrase: s(readCell(row, 11)),
-    besoins: s(readCell(row, 12)),
+    // plus de colonne « Besoins testables » dans le Backlog réel
+    besoins: '',
   };
 }
 
 const sheetBacklog = (wb) => wb.getWorksheet(SHEET_BACKLOG) || wb.worksheets[0];
 const sheetTestable = (wb) => wb.getWorksheet(SHEET_TESTABLE) || wb.worksheets[1] || null;
+
+// Lit tous les scénarios de la feuille « Besoins testables ».
+function parseScenarioRow(row) {
+  return {
+    ident: s(readCell(row, BT_COLS.ident)),
+    libelle: s(readCell(row, BT_COLS.libelle)),
+    usId: s(readCell(row, BT_COLS.id)),
+    epic: s(readCell(row, BT_COLS.epic)),
+    libelleUs: s(readCell(row, BT_COLS.libelleUs)),
+    mvp: s(readCell(row, BT_COLS.mvp)),
+    frontback: s(readCell(row, BT_COLS.frontback)),
+    module: s(readCell(row, BT_COLS.module)),
+    depend: s(readCell(row, BT_COLS.depend)) ? s(readCell(row, BT_COLS.depend)).split(/[;]/).map(x => x.trim()).filter(Boolean) : [],
+    typ: s(readCell(row, BT_COLS.typ)),
+    pilier: s(readCell(row, BT_COLS.pilier)),
+    role: s(readCell(row, BT_COLS.role)),
+    phrase: s(readCell(row, BT_COLS.phrase)),
+    scenario: s(readCell(row, BT_COLS.scenario)),
+    effort: s(readCell(row, BT_COLS.effort)),
+  };
+}
+
+async function readScenarios(wb) {
+  const bt = sheetTestable(wb);
+  if (!bt) return [];
+  const list = [];
+  for (let r = 2; r <= bt.rowCount; r += 1) {
+    const row = bt.getRow(r);
+    if (row.getCell(1).value == null && row.getCell(2).value == null) continue;
+    list.push({ ...parseScenarioRow(row), row: r });
+  }
+  return list;
+}
 
 // Lit toutes les US de la feuille Backlog.
 async function readBacklog() {
@@ -139,11 +186,13 @@ async function readBacklog() {
     if (row.getCell(1).value == null && row.getCell(2).value == null) continue;
     us.push({ ...parseBacklogRow(row), row: r });
   }
+  const scenarios = await readScenarios(wb);
   return {
     file: path.relative(process.cwd(), XLSX),
     archiveDir: path.relative(process.cwd(), ARCHIVE_DIR),
     columns: HEADERS,
     us,
+    scenarios,
   };
 }
 
@@ -158,6 +207,18 @@ function nextId(existingIds, epicName) {
     if (mm) maxN = Math.max(maxN, Number(mm[1]));
   }
   return `${base}.${maxN + 1}`;
+}
+
+// Prochain identifiant de scénario pour une US : USx.yy-SC{n+1}
+function nextScenarioId(existingScenarios, usId) {
+  const prefix = usId + '-SC';
+  const re = new RegExp('^' + prefix + '(\\d+)$');
+  let maxN = 0;
+  for (const sc of existingScenarios) {
+    const mm = re.exec(sc.ident);
+    if (mm) maxN = Math.max(maxN, Number(mm[1]));
+  }
+  return `${prefix}${String(maxN + 1).padStart(2, '0')}`;
 }
 
 // Remplace oldId → newId dans « Dépend de (Parent) » de toutes les US.
@@ -181,6 +242,13 @@ function findRow(ws, id) {
   return null;
 }
 
+function findScenarioRow(bt, ident) {
+  for (let r = 2; r <= bt.rowCount; r += 1) {
+    if (s(bt.getRow(r).getCell(BT_COLS.ident).value) === ident) return r;
+  }
+  return null;
+}
+
 // Écrit une US dans la feuille Backlog + propagation « Besoins testables ».
 function applyUs(ws, bt, data) {
   const { row, id, epic, libelle, mvp, frontback, module, depend, typ, pilier, role, phrase } = data;
@@ -196,7 +264,8 @@ function applyUs(ws, bt, data) {
   r.getCell(9).value = pilier ?? '';
   r.getCell(10).value = role ?? '';
   r.getCell(11).value = phrase ?? '';
-  r.getCell(12).value = data.besoins ?? '';
+  // Colonne 12 = Point d'effort prestataire (formule) — on n'écrit pas de « besoins »
+  // La formule d'effort sera (ré)écrite par l'appelant au besoin.
 
   if (!bt) return;
   const depText = Array.isArray(depend) ? depend.join(' ; ') : (depend || '');
@@ -204,7 +273,7 @@ function applyUs(ws, bt, data) {
     const br = bt.getRow(b);
     if (s(br.getCell(BT_COLS.id).value) !== s(id)) continue;
     br.getCell(BT_COLS.epic).value = epic ?? '';
-    br.getCell(BT_COLS.libelle).value = libelle ?? '';
+    br.getCell(BT_COLS.libelleUs).value = libelle ?? '';
     br.getCell(BT_COLS.mvp).value = mvp ?? '';
     br.getCell(BT_COLS.frontback).value = frontback ?? '';
     br.getCell(BT_COLS.module).value = module ?? '';
@@ -245,7 +314,8 @@ app.post('/api/backlog', async (req, res) => {
 
     const result = await withWrite(wb, () => {
       applyUs(ws, bt, { ...us, row: newRow, id });
-      const fcell = ws.getRow(newRow).getCell(13);
+      // Formule d'effort en colonne 12 (Point d'effort prestataire)
+      const fcell = ws.getRow(newRow).getCell(12);
       fcell.value = { formula: effortFormula(newRow) };
     });
     res.status(201).json({ ok: true, id, row: newRow, ...result });
@@ -269,6 +339,11 @@ app.put('/api/backlog/:id', async (req, res) => {
 
     const result = await withWrite(wb, () => {
       applyUs(ws, bt, { ...us, row: r, id: newId });
+      // S'assurer que la formule d'effort est présente en col 12
+      const fcell = ws.getRow(r).getCell(12);
+      if (!fcell.value || (fcell.value && typeof fcell.value === 'object' && fcell.value.formula === undefined)) {
+        fcell.value = { formula: effortFormula(r) };
+      }
     });
     res.json({ ok: true, id: newId, ...result });
   } catch (e) {
@@ -296,6 +371,113 @@ app.delete('/api/backlog/:id', async (req, res) => {
       }
     });
     res.json({ ok: true, deleted: id, ...result });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: String(e.message || e) });
+  }
+});
+
+// ── Scénarios (Besoins testables) ──────────────────────────────────────────
+app.get('/api/scenarios', async (req, res) => {
+  try {
+    const wb = await readWorkbook();
+    const scenarios = await readScenarios(wb);
+    res.json({ ok: true, scenarios });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: String(e.message || e) });
+  }
+});
+
+app.post('/api/scenarios', async (req, res) => {
+  try {
+    const { usId } = req.body;
+    if (!usId) return res.status(400).json({ ok: false, error: 'usId requis' });
+    const wb = await readWorkbook();
+    const ws = sheetBacklog(wb);
+    const bt = sheetTestable(wb);
+    if (!bt) return res.status(500).json({ ok: false, error: 'Onglet Besoins testables introuvable' });
+
+    // Trouver l'US source pour copier ses méta
+    const r = findRow(ws, usId);
+    if (r == null) return res.status(404).json({ ok: false, error: `US ${usId} introuvable` });
+    const usRow = ws.getRow(r);
+    const usData = {
+      epic: s(usRow.getCell(1).value),
+      libelle: s(usRow.getCell(3).value),
+      mvp: s(usRow.getCell(4).value),
+      frontback: s(usRow.getCell(5).value),
+      module: s(usRow.getCell(6).value),
+      depend: s(usRow.getCell(7).value) ? s(usRow.getCell(7).value).split(/[;]/).map(x => x.trim()).filter(Boolean) : [],
+      typ: s(usRow.getCell(8).value),
+      pilier: s(usRow.getCell(9).value),
+      role: s(usRow.getCell(10).value),
+      phrase: s(usRow.getCell(11).value),
+    };
+
+    const existingScenarios = await readScenarios(wb);
+    const ident = nextScenarioId(existingScenarios, usId);
+
+    const result = await withWrite(wb, () => {
+      const newRow = bt.rowCount + 1;
+      const br = bt.getRow(newRow);
+      br.getCell(BT_COLS.ident).value = ident;
+      br.getCell(BT_COLS.libelle).value = '';
+      br.getCell(BT_COLS.epic).value = usData.epic;
+      br.getCell(BT_COLS.id).value = usId;
+      br.getCell(BT_COLS.libelleUs).value = usData.libelle;
+      br.getCell(BT_COLS.mvp).value = usData.mvp;
+      br.getCell(BT_COLS.frontback).value = usData.frontback;
+      br.getCell(BT_COLS.module).value = usData.module;
+      br.getCell(BT_COLS.depend).value = usData.depend.join(' ; ');
+      br.getCell(BT_COLS.typ).value = usData.typ;
+      br.getCell(BT_COLS.pilier).value = usData.pilier;
+      br.getCell(BT_COLS.role).value = usData.role;
+      br.getCell(BT_COLS.phrase).value = usData.phrase;
+      br.getCell(BT_COLS.scenario).value = 'Étant donné …, quand …, alors …';
+      br.getCell(BT_COLS.effort).value = null;
+      return { ident, row: newRow };
+    });
+    res.status(201).json({ ok: true, ...result });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: String(e.message || e) });
+  }
+});
+
+app.put('/api/scenarios/:ident', async (req, res) => {
+  try {
+    const ident = req.params.ident;
+    const { libelle, scenario } = req.body;
+    const wb = await readWorkbook();
+    const bt = sheetTestable(wb);
+    if (!bt) return res.status(500).json({ ok: false, error: 'Onglet Besoins testables introuvable' });
+    const row = findScenarioRow(bt, ident);
+    if (!row) return res.status(404).json({ ok: false, error: `Scénario ${ident} introuvable` });
+
+    const result = await withWrite(wb, () => {
+      const br = bt.getRow(row);
+      if (libelle !== undefined) br.getCell(BT_COLS.libelle).value = libelle;
+      if (scenario !== undefined) br.getCell(BT_COLS.scenario).value = scenario;
+      return { ident, row };
+    });
+    res.json({ ok: true, ...result });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: String(e.message || e) });
+  }
+});
+
+app.delete('/api/scenarios/:ident', async (req, res) => {
+  try {
+    const ident = req.params.ident;
+    const wb = await readWorkbook();
+    const bt = sheetTestable(wb);
+    if (!bt) return res.status(500).json({ ok: false, error: 'Onglet Besoins testables introuvable' });
+    const row = findScenarioRow(bt, ident);
+    if (!row) return res.status(404).json({ ok: false, error: `Scénario ${ident} introuvable` });
+
+    const result = await withWrite(wb, () => {
+      bt.spliceRows(row, 1);
+      return { ident };
+    });
+    res.json({ ok: true, ...result });
   } catch (e) {
     res.status(500).json({ ok: false, error: String(e.message || e) });
   }

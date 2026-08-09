@@ -27,7 +27,7 @@ Le système devra être dimensionné pour gérer les volumes suivants :
 - plusieurs dizaines d’indicateurs calculés à différentes échelles ;
 - des données spatiales potentiellement volumineuses (maillages, séries temporelles) ;
 
-@todo[priority=high, section=processing]: indiquer la volumetrie pour les traitements si cela est externalisé.
+@todo[priority=high, section=processing]: indiquer la volumetrie pour les traitements d'indicateur sur des sources lourdes si cela est externalisé.
 
 
 Le système devra permettre :
@@ -59,9 +59,7 @@ Le système doit pouvoir s’intégrer dans un écosystème existant de données
 - le respect des standards en vigueur, notamment pour les données géographiques ;
 - la capacité à consommer et à exposer des données via des API ;
 - la compatibilité avec les formats d’échange usuels (tabulaires, géographiques) ;
-- la possibilité d’interagir avec des systèmes tiers (API sécurisés ou non, webservices OGC et ESRI, serveur FTP).
-
-@todo[priority=high, section=API]: préciser les usages des API externe prévues.
+- la possibilité d’interagir avec des systèmes tiers (API sécurisés ou non, webservices OGC, ESRI,  Google Earth API, Bing, OpensStreetMap, Digital Earth Pacific, serveur FTP ... ).
 
 L’interopérabilité est un facteur clé pour faciliter le partage et la réutilisation des données.
 

@@ -5,7 +5,7 @@ import { CatalogueStub } from './CatalogueStub'
 import { ImportStub } from './ImportStub'
 import { MonitoringStub } from './MonitoringStub'
 import { TracabiliteStub } from './TracabiliteStub'
-import { ReferentielsStub } from './ReferentielsStub'
+import { ReferentielsView } from '@/features/referentiels/ReferentielsView'
 import { ConnexionStub } from './ConnexionStub'
 
 export const STUBS: Record<string, () => ReactElement> = {
@@ -15,6 +15,6 @@ export const STUBS: Record<string, () => ReactElement> = {
   import: ImportStub,
   monitoring: MonitoringStub,
   tracabilite: TracabiliteStub,
-  referentiels: ReferentielsStub,
+  referentiels: ReferentielsView,
   connexion: ConnexionStub,
 }

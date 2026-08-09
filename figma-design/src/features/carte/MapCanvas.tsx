@@ -12,6 +12,7 @@ import { KIND_LABELS } from '@/data/ouvrages'
 import type { BasemapId, LayerDef } from './hooks/useLayers'
 import type { CaptageKind, HoverEntity, UnitMode } from '@/types/domain'
 import { tendanceDe, ecartA, debutTension, seuilsRef } from '@/data/qualification'
+import type { LiveCaptage, LiveRegion } from '@/data/referentiels'
 
 export interface MapCanvasProps {
   showGrid?: boolean
@@ -24,6 +25,8 @@ export interface MapCanvasProps {
   h3Mode?: boolean
   hoveredEntity?: HoverEntity | null
   onHoverEntity?: (e: HoverEntity | null) => void
+  captages?: LiveCaptage[]
+  regions?: LiveRegion[]
 }
 
 type HoverInfo =
@@ -43,6 +46,8 @@ export function MapCanvas({
   h3Mode = false,
   hoveredEntity = null,
   onHoverEntity,
+  captages = [],
+  regions = [],
 }: MapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<Map | null>(null)
@@ -132,10 +137,12 @@ export function MapCanvas({
       selectedKeys,
       h3Mode,
       layers,
+      captages,
+      regions,
     })
     for (const l of built) map.addLayer(l)
     layersRef.current = built
-  }, [activeIndicator, unitMode, selKeysStr, selBvStr, h3Mode, layerStr])
+  }, [activeIndicator, unitMode, selKeysStr, selBvStr, h3Mode, layerStr, captages, regions])
 
   const hoveredStr = hoveredEntity ? `${hoveredEntity.kind}:${hoveredEntity.id}` : ''
   useEffect(() => {

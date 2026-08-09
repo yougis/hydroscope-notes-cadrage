@@ -19,9 +19,11 @@ import os
 
 import pandas as pd
 
+
 # ── Palette 16 couleurs (V1) — extraite du référentiel contractuel v4 ────────
 # Famille (2), Thème (4) puis Groupe (10). Identique à l'existant pour ne pas
 # changer le rendu visuel des chapitres.
+
 FAMILLE_COLORS = {
     "Enjeu": "2B5E8C",
     "Menace": "FAA51A",

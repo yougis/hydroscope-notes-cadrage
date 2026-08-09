@@ -12,8 +12,25 @@ Colonnes à compléter par le candidat : **Charge proposée (JH)**, **Taux journ
 La colonne « Complexité » (faible / moyenne / élevée / très élevée) est fournie à titre indicatif pour faciliter la lecture du périmètre ; elle n'est pas contractuelle.
 
 ```{python}
+#| output: asis
+
+import json
+import os
+
 import pandas as pd
-from IPython.display import display, Markdown
+
+# Forme du tableau : compacte (colonnes essentielles) pour le PDF afin d'éviter
+# le débordement des colonnes larges ; intégrale pour les autres formats.
+def is_pdf():
+    info_env = os.environ.get("QUARTO_EXECUTE_INFO")
+    if not info_env:
+        return False
+    try:
+        with open(info_env, encoding="utf-8") as f:
+            info = json.load(f)
+        return str(info["format"]["identifier"]["target-format"]).lower() == "pdf"
+    except (OSError, ValueError, KeyError, TypeError):
+        return False
 
 df = pd.read_excel("backlog.xlsx", sheet_name="Backlog")
 df.columns = df.columns.str.strip()
@@ -55,15 +72,21 @@ df["Taux journalier (€/JH)"] = ""
 df["Coût HT (€)"] = ""
 df["Commentaires"] = ""
 
+fill_cols = ["Charge proposée (JH)", "Taux journalier (€/JH)", "Coût HT (€)", "Commentaires"]
+cols_pdf = ["ID_US", "User_Story", "MVP", "Front_or_Back", "Module", "Complexité"] + fill_cols
+
 base = df[df["EPIC"] != "EPIC 5 – Analyse multicritère"].sort_values(["EPIC", "ID_US"])
 option = df[df["EPIC"] == "EPIC 5 – Analyse multicritère"].sort_values(["EPIC", "ID_US"])
 
-display(Markdown("### Périmètre de base (MVP + lot 2)"))
-print(" ")
+if is_pdf():
+    base = base[cols_pdf]
+    option = option[cols_pdf]
 
+print("### Périmètre de base (MVP + lot 2)")
+print(" ")
 print(base.to_markdown(index=False))
 
-display(Markdown("### Option 1 — Analyse multicritère (EPIC 5)"))
+print("### Option 1 — Analyse multicritère (EPIC 5)")
 print(" ")
 print(option.to_markdown(index=False))
 ```
