@@ -171,6 +171,294 @@ def load_all():
     return df, colors
 
 
+# ── Backlog — grille de chiffrage (bordereau de prix) ─────────────────────────
+
+BACKLOG_XLSX = "backlog.xlsx"
+BACKLOG_SHEET = "Backlog"
+
+EPIC_ORDER = [
+    "EPIC 1 – Gestion des données",
+    "EPIC 1bis – Catalogage des données",
+    "EPIC 2 – Qualité des données",
+    "EPIC 3 – Référentiels",
+    "EPIC 4 – Calcul d'indicateurs",
+    "EPIC 5 – Analyse multicritère",
+    "EPIC 6 – Visualisation",
+    "EPIC 7 – Aide à la décision",
+    "EPIC 8 – Export",
+    "EPIC 9 – Utilisateurs",
+    "EPIC 10 – Traçabilité",
+]
+
+COMPLEXITY_MAP = {
+    "EPIC 1 – Gestion des données": "Élevée",
+    "EPIC 1bis – Catalogage des données": "Moyenne",
+    "EPIC 2 – Qualité des données": "Moyenne",
+    "EPIC 3 – Référentiels": "Moyenne",
+    "EPIC 4 – Calcul d'indicateurs": "Élevée",
+    "EPIC 5 – Analyse multicritère": "Très élevée",
+    "EPIC 6 – Visualisation": "Élevée",
+    "EPIC 7 – Aide à la décision": "Moyenne",
+    "EPIC 8 – Export": "Faible",
+    "EPIC 9 – Utilisateurs": "Faible",
+    "EPIC 10 – Traçabilité": "Moyenne",
+}
+
+# Colonnes du bordereau final (7 colonnes : fusions EPIC / Module / Front-Back)
+PRICING_COLUMNS = [
+    "ID_US",
+    "User_Story",
+    "Complexité",
+    "Charge proposée (JH)",
+    "Taux journalier (€/JH)",
+    "Coût HT (€)",
+    "Commentaires",
+]
+
+PRICING_HEADERS = {
+    "ID_US": "ID",
+    "User_Story": "User Story",
+    "Complexité": "Complexité",
+    "Charge proposée (JH)": "Charge (JH)",
+    "Taux journalier (€/JH)": "Taux (€/JH)",
+    "Coût HT (€)": "Coût HT (€)",
+    "Commentaires": "Commentaires",
+}
+
+# Largeurs (cm) : somme ≤ 15.0 cm portrait A4 marges 1 in (≈15.9 cm utiles)
+PRICING_WIDTHS_CM = {
+    "ID_US": 1.1,
+    "User_Story": 4.7,
+    "Complexité": 1.8,
+    "Charge proposée (JH)": 1.4,
+    "Taux journalier (€/JH)": 1.5,
+    "Coût HT (€)": 1.5,
+    "Commentaires": 2.6,
+}
+
+
+def load_backlog(path: str = None) -> pd.DataFrame:
+    """Charge le backlog et construit la table de chiffrage (7 colonnes).
+
+    Enrichit le flux : Complexité (map EPIC → niveau) et colonnes vides à
+    compléter par le candidat (Charge, Taux, Coût, Commentaires).
+    """
+    p = path or BACKLOG_XLSX
+    df = pd.read_excel(p, sheet_name=BACKLOG_SHEET)
+    df.columns = [str(c).strip() if c is not None else c for c in df.columns]
+
+    df = df.rename(columns={"ID User Story": "ID_US", "Libellé User Story": "User_Story"})
+    if "ID_US" not in df.columns:
+        df["ID_US"] = df.iloc[:, 1]
+    if "User_Story" not in df.columns:
+        df["User_Story"] = df.iloc[:, 2]
+
+    df["MVP"] = df["MVP"].astype(str).str.upper().map({"TRUE": "Oui", "FALSE": "Non"})
+    df["Complexité"] = df["EPIC"].map(COMPLEXITY_MAP)
+    for c in ("Charge proposée (JH)", "Taux journalier (€/JH)", "Coût HT (€)", "Commentaires"):
+        df[c] = ""
+    keep = ["EPIC", "Module", "Front_or_Back"] + PRICING_COLUMNS
+    return df[[c for c in keep if c in df.columns]].copy()
+
+
+def _subset(df: pd.DataFrame, epic5_excl: bool) -> pd.DataFrame:
+    if epic5_excl:
+        return df[df["EPIC"] != "EPIC 5 – Analyse multicritère"]
+    return df[df["EPIC"] == "EPIC 5 – Analyse multicritère"]
+
+
+def render_pricing_table(df: pd.DataFrame, fmt: str) -> str:
+    r"""Génère la grille de chiffrage unique (base + option 1 + option 2).
+
+    fmt: 'pdf' → LaTeX longtable (booktabs, \multicolumn pour les fusions) ;
+         'html' → <table class="pricing"> avec colspan + CSS ;
+         'docx' → pipe-table markdown (fusions réduites à des lignes titre).
+    """
+    sections = [
+        ("Périmètre de base (MVP + lot 2)", _subset(df, epic5_excl=True)),
+        ("Option 1 — Analyse multicritère (EPIC 5)", _subset(df, epic5_excl=False)),
+    ]
+    if fmt == "pdf":
+        return _render_pdf(sections)
+    if fmt == "html":
+        return _render_html_gt(sections)
+    return _render_docx(sections)
+
+
+# ── Rendu LaTeX (longtable + booktabs) ──────────────────────────────────────
+
+def _esc_latex(s):
+    out = str(s).replace("\\", r"\textbackslash{}")
+    for ch, rep in [("&", r"\&"), ("%", r"\%"), ("$", r"\$"), ("#", r"\#"),
+                    ("_", r"\_"), ("{", r"\{" ), ("}", r"\}" )]:
+        out = out.replace(ch, rep)
+    return out.replace("~", r"\textasciitilde{}").replace("^", r"\textasciicircum{}")
+
+
+def _render_pdf(sections) -> str:
+    widths = " ".join(f"p{{{PRICING_WIDTHS_CM[c]}cm}}" for c in PRICING_COLUMNS)
+    headers = " & ".join(r"\textbf{" + _esc_latex(PRICING_HEADERS[c]) + "}" for c in PRICING_COLUMNS)
+    ncol = len(PRICING_COLUMNS)
+
+    out = [r"{\small", r"\begin{longtable}{" + widths + "}", r"\toprule"]
+    out.append(headers + r" \\")
+    out.append(r"\midrule")
+
+    for i, (sec_title, sdf) in enumerate(sections):
+        if i > 0:
+            out.append(r"\midrule")
+        out.append(r"\multicolumn{" + str(ncol) + r"}{l}{\textbf{" + _esc_latex(sec_title) + r"}} \\")
+
+        if sdf.empty:
+            out.append(r"\multicolumn{" + str(ncol) + r"}{l}{\textit{Aucune ligne}} \\")
+            continue
+
+        epic_prev = None
+        module_prev = None
+        fb_prev = None
+        for epic in EPIC_ORDER:
+            de = sdf[sdf["EPIC"] == epic]
+            if de.empty:
+                continue
+            if epic != epic_prev:
+                out.append(r"\midrule")
+                out.append(r"\multicolumn{" + str(ncol) + r"}{l}{\textbf{" + _esc_latex(epic) + r"}} \\")
+                epic_prev = epic
+                module_prev = None
+                fb_prev = None
+            eps = de.sort_values(["Module", "ID_US"])
+            for module, dm in eps.groupby("Module", sort=True):
+                if module != module_prev:
+                    out.append(r"\multicolumn{" + str(ncol) + r"}{l}{\textit{" + _esc_latex(str(module)) + r"}} \\")
+                    module_prev = module
+                    fb_prev = None
+                dm = dm.sort_values("ID_US")
+                fb_groups = sorted(dm.groupby("Front_or_Back"), key=lambda kv: (kv[0] != "Front-end", kv[0]))
+                for fb, dfb in fb_groups:
+                    if fb != fb_prev:
+                        out.append(r"\multicolumn{" + str(ncol) + r"}{l}{" + _esc_latex(str(fb)) + r"} \\")
+                        fb_prev = fb
+                    for _, r in dfb.sort_values("ID_US").iterrows():
+                        cells = [str(r[c]).replace("\n", " ").strip() for c in PRICING_COLUMNS]
+                        out.append(" & ".join(_esc_latex(x) for x in cells) + r" \\")
+        out.append(r"\midrule")
+
+    # Option 2 — TMA (lignes fixes)
+    out.append(r"\multicolumn{" + str(ncol) + r"}{l}{\textbf{Option 2 — TMA (maintenance et support)}} \\")
+    out.append(r"\midrule")
+    out.append(r"\textbf{TMA post-déploiement} & Cadre contractuel (chapitre 16) &"
+               r" & & & & SLA : Bloquant 4 h / 24 h ; Majeur 5 j / 10 j ; Mineur 10 j / 30 j \\")
+
+    # Synthèse
+    out.append(r"\midrule")
+    out.append(r"\multicolumn{" + str(ncol) + r"}{l}{\textbf{Synthèse de l'offre}} \\")
+    out.append(r"\toprule")
+    out.append(r"\textbf{Total périmètre de base} & & & & & & \\")
+    out.append(r"\textbf{Total option 1} & & & & & & \\")
+    out.append(r"\textbf{Total option 2} & & & & & & \\")
+    out.append(r"\textbf{Total général (base + options)} & & & & & & \\")
+    out.append(r"\bottomrule")
+    out.append(r"\end{longtable}")
+    out.append(r"}")
+    return "\n".join(out)
+
+
+# ── Rendu HTML (tableau class="pricing" + colspan) ──────────────────────────
+
+def _esc_html(s):
+    return (str(s).replace("&", "&amp;").replace("<", "&lt;")
+            .replace(">", "&gt;").replace('"', "&quot;"))
+
+
+def _render_html_gt(sections) -> str:
+    ncol = len(PRICING_COLUMNS)
+    col_td = {
+        "ID_US": "id",
+        "User_Story": "story",
+        "Charge proposée (JH)": "charge",
+        "Taux journalier (€/JH)": "taux",
+        "Coût HT (€)": "cout",
+        "Commentaires": "comm",
+    }
+    hdrs = "".join(f'<th>{_esc_html(PRICING_HEADERS[c])}</th>' for c in PRICING_COLUMNS)
+
+    out = ['<table class="pricing">', "<thead>", f'<tr class="cols">{hdrs}</tr>', "</thead>", "<tbody>"]
+    for i, (sec_title, sdf) in enumerate(sections):
+        if i > 0:
+            out.append(f'<tr class="section-sep"><td colspan="{ncol}"><strong>{_esc_html(sec_title)}</strong></td></tr>')
+        elif sec_title:
+            out.append(f'<tr class="section"><td colspan="{ncol}"><strong>{_esc_html(sec_title)}</strong></td></tr>')
+        for epic in EPIC_ORDER:
+            de = sdf[sdf["EPIC"] == epic]
+            if de.empty:
+                continue
+            out.append(f'<tr class="epic"><td colspan="{ncol}"><strong>{_esc_html(epic)}</strong></td></tr>')
+            eps = de.sort_values(["Module", "ID_US"])
+            for module, dm in eps.groupby("Module", sort=True):
+                out.append(f'<tr class="module"><td colspan="{ncol}"><em>{_esc_html(str(module))}</em></td></tr>')
+                fb_groups = sorted(dm.groupby("Front_or_Back"), key=lambda kv: (kv[0] != "Front-end", kv[0]))
+                for fb, dfb in fb_groups:
+                    out.append(f'<tr class="front"><td colspan="{ncol}">{_esc_html(str(fb))}</td></tr>')
+                    for _, r in dfb.sort_values("ID_US").iterrows():
+                        cells = "".join(
+                            f'<td class="{col_td.get(c, "")}">{_esc_html(str(r[c]).replace(chr(10), " ").strip())}</td>'
+                            for c in PRICING_COLUMNS
+                        )
+                        out.append(f"<tr>{cells}</tr>")
+
+    # Option 2 TMA + synthèse
+    out.append(f'<tr class="section"><td colspan="{ncol}"><strong>Option 2 — TMA (maintenance et support)</strong></td></tr>')
+    out.append('<tr class="cols"><th>TMA post-déploiement</th><th>Cadre contractuel (chapitre 16)</th>'
+               '<th></th><th></th><th></th><th></th>'
+               '<th>SLA : Bloquant 4 h / 24 h ; Majeur 5 j / 10 j ; Mineur 10 j / 30 j</th></tr>')
+    out.append(f'<tr class="section"><td colspan="{ncol}"><strong>Synthèse de l’offre</strong></td></tr>')
+    for t in ("Total périmètre de base", "Total option 1", "Total option 2", "Total général (base + options)"):
+        out.append(f'<tr class="total"><th>{t}</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>')
+    out.append("</tbody></table>")
+    return "\n".join(out)
+
+
+# ── Rendu DOCX (pipe table — pas de colspan, fusions en lignes titre) ───────
+
+def _esc_pipe(s):
+    return str(s).replace("|", r"\|").replace("\n", " ").strip()
+
+
+def _render_docx(sections) -> str:
+    ncol = len(PRICING_COLUMNS)
+    header = "| " + " | ".join(_esc_pipe(PRICING_HEADERS[c]) for c in PRICING_COLUMNS) + " |"
+    sep = "|" + "---|" * ncol
+
+    lines = [header, sep]
+    for i, (sec_title, sdf) in enumerate(sections):
+        if i > 0 and sec_title:
+            lines.append(f"| **{_esc_pipe(sec_title)}** | " + " | ".join([""] * (ncol - 1)) + " |")
+        elif i == 0 and sec_title:
+            lines.append(f"| **{_esc_pipe(sec_title)}** | " + " | ".join([""] * (ncol - 1)) + " |")
+        for epic in EPIC_ORDER:
+            de = sdf[sdf["EPIC"] == epic]
+            if de.empty:
+                continue
+            lines.append(f"| **{_esc_pipe(epic)}** | " + " | ".join([""] * (ncol - 1)) + " |")
+            eps = de.sort_values(["Module", "ID_US"])
+            for module, dm in eps.groupby("Module", sort=True):
+                lines.append(f"| *{_esc_pipe(str(module))}* | " + " | ".join([""] * (ncol - 1)) + " |")
+                fb_groups = sorted(dm.groupby("Front_or_Back"), key=lambda kv: (kv[0] != "Front-end", kv[0]))
+                for fb, dfb in fb_groups:
+                    lines.append(f"| {_esc_pipe(str(fb))} | " + " | ".join([""] * (ncol - 1)) + " |")
+                    for _, r in dfb.sort_values("ID_US").iterrows():
+                        cells = [_esc_pipe(r[c]) for c in PRICING_COLUMNS]
+                        lines.append("| " + " | ".join(cells) + " |")
+    # Option 2 TMA + synthèse
+    lines.append("| **Option 2 — TMA (maintenance et support)** | " + " | ".join([""] * (ncol - 1)) + " |")
+    lines.append("| **TMA post-déploiement** | Cadre contractuel (chapitre 16) | | | | | "
+                 "SLA : Bloquant 4 h / 24 h ; Majeur 5 j / 10 j ; Mineur 10 j / 30 j |")
+    lines.append("| **Synthèse de l'offre** | | | | | | |")
+    for t in ("Total périmètre de base", "Total option 1", "Total option 2", "Total général (base + options)"):
+        lines.append("| **" + t + "** | | | | | | |")
+    return "\n".join(lines)
+
+
 if __name__ == "__main__":
     _df, _dfc = load_all()
     print(f"Indicateurs actifs : {len(_df)}")

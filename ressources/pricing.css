@@ -1,0 +1,60 @@
+/* Grille de chiffrage — bordereau de prix (annexe Cadre_chiffrage) */
+
+table.pricing {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  line-height: 1.25;
+  table-layout: fixed;
+}
+
+table.pricing th,
+table.pricing td {
+  border: 0.4pt solid #999;
+  padding: 3pt 5pt;
+  vertical-align: top;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+table.pricing thead th {
+  background: #2b5e8c;
+  color: #fff;
+  font-weight: 600;
+}
+
+table.pricing td.id { width: 8%; }
+table.pricing td.story { width: 28%; }
+table.pricing td.complex { width: 9%; }
+table.pricing td.charge { width: 9%; }
+table.pricing td.taux { width: 9%; }
+table.pricing td.cout { width: 10%; }
+table.pricing td.comm { width: 27%; }
+
+table.pricing tr.section td,
+table.pricing tr.section th {
+  background: #dce4f0;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+table.pricing tr.epic td {
+  background: #eef3fa;
+  font-weight: 600;
+}
+
+table.pricing tr.module td {
+  font-style: italic;
+  padding-left: 10pt;
+}
+
+table.pricing tr.front td {
+  font-weight: 600;
+  padding-left: 16pt;
+}
+
+table.pricing tr.total th,
+table.pricing tr.total td {
+  font-weight: 700;
+}

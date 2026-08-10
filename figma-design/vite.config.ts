@@ -45,14 +45,15 @@ export default defineConfig(({ mode }) => {
       proxy: {
         // Récupération de la version du cache khms Google (le JS Google n'envoie
         // pas de header CORS — le proxy contourne pour le navigateur).
+        // NOTE: Nginx (port 8090) gère maintenant /gmaps-js et /api.
+        // Ces proxies restent pour l'accès direct via le port 5173.
         '/gmaps-js': {
           target: 'https://maps.googleapis.com',
           changeOrigin: true,
           rewrite: (p) => p.replace('/gmaps-js', '/maps/api/js'),
         },
-        // Proxy vers le serveur-cache local (port 8081) pour les référentiels
         '/api': {
-          target: 'http://localhost:8081',
+          target: 'http://serveur-cache:8081',
           changeOrigin: true,
         },
       },

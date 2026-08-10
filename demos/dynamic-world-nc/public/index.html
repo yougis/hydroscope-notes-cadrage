@@ -40,27 +40,29 @@
         <div class="map-col">
           <div class="map-head">
             <span class="map-pill pill-a">A</span>
-            <span class="map-title" id="titleA">Situation · 2017-09-01</span>
-            <label class="date-field">
-              <span>Date</span>
-              <input type="date" id="dateA" value="2017-09-01">
-            </label>
+            <span class="map-title" id="titleA">Moyenne · 2017-09-01 → 2024-09-01</span>
           </div>
           <div class="map-container" id="mapA"></div>
         </div>
         <div class="map-col">
           <div class="map-head">
             <span class="map-pill pill-b">B</span>
-            <span class="map-title" id="titleB">Situation · 2024-09-01</span>
-            <label class="date-field">
-              <span>Date</span>
-              <input type="date" id="dateB" value="2024-09-01">
-            </label>
+            <span class="map-title" id="titleB">Modale · 2017-09-01 → 2024-09-01</span>
           </div>
           <div class="map-container" id="mapB"></div>
         </div>
       </div>
-      <p class="hint">Les deux cartes sont synchronisées : déplacez ou zoomez sur l'une, l'autre suit. Les tuiles de couverture du sol sont superposées au fond satellite.</p>
+      <div class="interval-control">
+        <label class="date-field">
+          <span>Début</span>
+          <input type="date" id="compareStart" value="2017-09-01">
+        </label>
+        <label class="date-field">
+          <span>Fin</span>
+          <input type="date" id="compareEnd" value="2024-09-01">
+        </label>
+      </div>
+      <p class="hint">Les deux cartes sont synchronisées : déplacez ou zoomez sur l'une, l'autre suit. Carte A = Moyenne (classe dominante + taux de présence), Carte B = Modale (classe la plus fréquente).</p>
     </section>
 
     <section id="panel-swipe" class="panel">
@@ -76,9 +78,9 @@
           <input type="date" id="swipeDateB" value="2024-09-01">
         </label>
       </div>
-      <div class="map-container" id="map-swipe">
-        <div class="swipe-divider" id="swipeDivider" aria-hidden="true"></div>
-      </div>
+      <div class="map-container" id="map-swipe"></div>
+      <div class="map-container swipe-top-map" id="map-swipe-top"></div>
+      <div class="swipe-divider" id="swipeDivider" aria-hidden="true"></div>
       <p class="hint">Faites glisser la poignée centrale pour comparer la date A (à gauche) et la date B (à droite) de la cohérence en un seul coup d'œil.</p>
     </section>
 

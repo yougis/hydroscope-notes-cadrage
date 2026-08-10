@@ -14,7 +14,7 @@ export const VIEWS: ViewDef[] = [
   { id: 'import', label: 'Ajout de données', group: 'Données', expertOnly: true, desc: 'Intégration par fichiers (CSV, SIG) ou API, planification, normalisation, gestion des erreurs et rejeu de traitements.', epic: 'EPIC 1', mvp: true },
   { id: 'monitoring', label: 'Supervision', group: 'Suivi', expertOnly: true, desc: 'Suivi technique (imports, connexions, performances), qualité des données (fraîcheur, complétude, anomalies) et veille environnementale.', epic: 'Monitoring', mvp: true },
   { id: 'tracabilite', label: 'Historique & traçabilité', group: 'Suivi', expertOnly: true, desc: 'Cycle de vie des données : versioning, journal des actions, reconstitution d’un état ou d’un calcul à une date donnée.', epic: 'EPIC 10', mvp: true },
-  { id: 'referentiels', label: 'Référentiels', group: 'Administration', expertOnly: true, desc: 'Gestion des objets géographiques (bassins versants, captages, périmètres, grille d’analyse), des indicateurs et des profils.', epic: 'EPIC 3', mvp: true },
+  { id: 'referentiels', label: 'Référentiels', group: 'Données', expertOnly: true, desc: 'Gestion des objets géographiques (bassins versants, captages, périmètres, grille d’analyse), des indicateurs et des profils.', epic: 'EPIC 3', mvp: true },
   { id: 'connexion', label: 'Connexion', group: 'Administration', expertOnly: true, desc: 'Authentification, gestion des droits d’accès et des sessions, conformité RGPD.', epic: 'EPIC 9', mvp: true },
 ]
 

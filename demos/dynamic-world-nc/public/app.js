@@ -86,10 +86,10 @@ function fitAoi(map) {
   map.fitBounds(L.latLngBounds([[a.minLat, a.minLon], [a.maxLat, a.maxLon]]), { padding: [16, 16] });
 }
 
-async function loadOverlay(key, map, date, options) {
+async function loadOverlay(key, map, start, end, stat, options) {
   const token = (initSeq[key] = (initSeq[key] || 0) + 1);
   try {
-    const coverage = await fetchJson(`/api/coverage?start=${date}&end=${date}`);
+    const coverage = await fetchJson(`/api/coverage?start=${start}&end=${end}&stat=${stat}`);
     if (initSeq[key] !== token) return;
     const layer = L.tileLayer(tileUrlFor(coverage), Object.assign({}, overlayOpts, options));
     if (overlays[key]) map.removeLayer(overlays[key]);
@@ -98,7 +98,7 @@ async function loadOverlay(key, map, date, options) {
   } catch (err) {
     if (initSeq[key] !== token) return;
     overlays[key] = null;
-    toast(`Impossible de charger les tuiles pour ${date} : ${err.message}`, true);
+    toast(`Impossible de charger les tuiles pour ${start} → ${end} (${stat}) : ${err.message}`, true);
   }
 }
 
@@ -118,7 +118,7 @@ function bindDate(input, labelEl, onChange) {
   if (labelEl) labelEl.textContent = `Situation · ${input.value}`;
 }
 
-/* ── Comparer (2 cartes synchronisées) ───────────────────── */
+/* ── Comparer (2 cartes synchronisées : Moyenne / Modale) ─── */
 function initCompare() {
   const mapA = L.map('mapA');
   const mapB = L.map('mapB');
@@ -132,34 +132,57 @@ function initCompare() {
   maps.A = mapA;
   maps.B = mapB;
 
-  const dateA = $('dateA');
-  const dateB = $('dateB');
-  bindDate(dateA, $('titleA'), () => loadOverlay('A', mapA, dateA.value));
-  bindDate(dateB, $('titleB'), () => loadOverlay('B', mapB, dateB.value));
-  loadOverlay('A', mapA, dateA.value);
-  loadOverlay('B', mapB, dateB.value);
+  const startInput = $('compareStart');
+  const endInput = $('compareEnd');
+  const titleA = $('titleA');
+  const titleB = $('titleB');
+
+  function updateCompare() {
+    const start = startInput.value;
+    const end = endInput.value;
+    if (!start || !end) return;
+    if (start > end) return;
+    titleA.textContent = `Moyenne · ${start} → ${end}`;
+    titleB.textContent = `Modale · ${start} → ${end}`;
+    loadOverlay('compareA', mapA, start, end, 'mean');
+    loadOverlay('compareB', mapB, start, end, 'mode');
+  }
+
+  startInput.addEventListener('change', updateCompare);
+  endInput.addEventListener('change', updateCompare);
+
+  updateCompare();
 }
 
-/* ── Swipe : une carte, diviseur vertical ────────────────── */
+/* ── Swipe : deux cartes empilées synchronisées ────────────── */
 let swipeState = null;
 
 function initSwipe() {
   const container = $('map-swipe');
   const divider = $('swipeDivider');
-  const map = L.map('map-swipe');
-  const pane = map.createPane('glide');
-  pane.style.zIndex = '450';
 
-  positronLayer().addTo(map);
-  applyShared(map);
-  map.on('moveend zoomend', () => captureShared(map));
+  // Bottom map (date A - left side)
+  const mapA = L.map('map-swipe');
+  positronLayer().addTo(mapA);
+  applyShared(mapA);
+  mapA.on('moveend zoomend', () => { captureShared(mapA); syncSwipeMaps(mapA); });
 
-  swipeState = { pane };
+  // Top map (date B - right side, clipped)
+  const mapB = L.map('map-swipe-top');
+  positronLayer().addTo(mapB);
+  applyShared(mapB);
+  mapB.on('moveend zoomend', () => { captureShared(mapB); syncSwipeMaps(mapB); });
+
+  swipeState = { mapA, mapB, divider };
 
   function setSwipe(pos) {
     const clamped = Math.max(0, Math.min(100, pos));
     divider.style.left = `${clamped}%`;
-    pane.style.clipPath = `inset(0 ${100 - clamped}% 0 0)`;
+    // Clip the top map (B) to show only right portion
+    const topMapEl = $('#map-swipe-top');
+    if (topMapEl) {
+      topMapEl.style.clipPath = `inset(0 0 0 ${clamped}%)`;
+    }
   }
 
   let dragging = false;
@@ -179,16 +202,21 @@ function initSwipe() {
 
   setSwipe(50);
 
-  maps.swipe = map;
+  maps.swipe = mapA;
+  maps.swipeTop = mapB;
 
   const swipeA = $('swipeDateA');
   const swipeB = $('swipeDateB');
-  const right = { };
-  const left = { pane: 'glide' };
-  bindDate(swipeA, null, () => loadOverlay('swipeA', map, swipeA.value, left));
-  bindDate(swipeB, null, () => loadOverlay('swipeB', map, swipeB.value, right));
-  loadOverlay('swipeA', map, swipeA.value, left);
-  loadOverlay('swipeB', map, swipeB.value, right);
+  bindDate(swipeA, null, () => loadOverlay('swipeA', mapA, swipeA.value, swipeA.value, 'mode'));
+  bindDate(swipeB, null, () => loadOverlay('swipeB', mapB, swipeB.value, swipeB.value, 'mode'));
+  loadOverlay('swipeA', mapA, swipeA.value, swipeA.value, 'mode');
+  loadOverlay('swipeB', mapB, swipeB.value, swipeB.value, 'mode');
+}
+
+function syncSwipeMaps(source) {
+  const target = source === swipeState.mapA ? swipeState.mapB : swipeState.mapA;
+  if (!target) return;
+  target.setView(source.getCenter(), source.getZoom(), { animate: false });
 }
 
 /* ── Animation : slider temporel ─────────────────────────── */
@@ -199,7 +227,13 @@ function initAnim() {
   const map = L.map('mapAnim');
   positronLayer().addTo(map);
   applyShared(map);
-  map.on('moveend zoomend', () => captureShared(map));
+  map.on('moveend zoomend', () => {
+    captureShared(map);
+    // If playing, pause and reset ready state so re-play triggers re-preload for new extent
+    if (playing) {
+      pauseAnimation();
+    }
+  });
 
   maps.anim = map;
 
@@ -210,12 +244,13 @@ function initAnim() {
   const current = frames[Number(slider.value)] || frames[0];
   $('frameDate').textContent = current;
 
-  // create preload overlay once
+  // create preload overlay once (hidden by default)
   if (!animPreloadOverlay) {
     const mapContainer = $('mapAnim');
     animPreloadOverlay = document.createElement('div');
     animPreloadOverlay.id = 'animPreloadOverlay';
     animPreloadOverlay.className = 'preload-overlay';
+    animPreloadOverlay.hidden = true;
     animPreloadOverlay.innerHTML = `
       <div class="preload-card">
         <div class="spinner"></div>
@@ -260,6 +295,18 @@ function initAnim() {
       }, PLAY_INTERVAL);
     }
   });
+}
+
+function pauseAnimation() {
+  playing = false;
+  clearInterval(timer);
+  const btn = $('playBtn');
+  if (btn) {
+    btn.textContent = '▶';
+    btn.setAttribute('aria-label', 'Lecture');
+  }
+  // reset ready state so next play re-preloads for new extent
+  animReady = false;
 }
 
 // load animation frame with crossfade using cached coverage

@@ -34,6 +34,7 @@ format:
     code-fold: true
     embed-resources: true
     theme: lumen
+    css: ressources/pricing.css
   pdf:
     pdf-engine: xelatex
     df-print: kable # Formate les dataframes pandas proprement en LaTeX

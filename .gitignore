@@ -18,4 +18,4 @@ opencode.json
 /cahier des charges/archive_backlog/
 /cahier des charges/annexes/serveur-graphe/node_modules/
 *.pyc
-cahier des charges/__pycache__/_lib_indicateurs.cpython-314.pyc
+cahier des charges/__pycache__/

@@ -219,8 +219,8 @@ async function initGee() {
 
 const PYTHON_EE_URL = process.env.PYTHON_EE_URL || 'http://python-ee:8082';
 
-async function fetchCoverageFromPython(startIso, endIso) {
-  const url = `${PYTHON_EE_URL}/mapid?start=${startIso}&end=${endIso}`;
+async function fetchCoverageFromPython(startIso, endIso, stat = 'mode') {
+  const url = `${PYTHON_EE_URL}/mapid?start=${startIso}&end=${endIso}&stat=${stat}`;
   const resp = await fetch(url);
   if (!resp.ok) {
     const txt = await resp.text();
@@ -244,6 +244,7 @@ app.get('/api/frames', (_req, res) => {
 app.get('/api/coverage', async (req, res) => {
   const startDate = parseDate(req.query.start);
   const endDate = parseDate(req.query.end);
+  const stat = req.query.stat || 'mode';
   if (!startDate || !endDate) {
     return res.status(400).json({ error: 'Les paramètres start et end doivent être des dates au format YYYY-MM-DD.' });
   }
@@ -257,10 +258,10 @@ app.get('/api/coverage', async (req, res) => {
     if (startDate.ms > Date.now() || endDate.ms > Date.now()) {
       return res.status(400).json({ error: 'La date demandée est dans le futur.' });
     }
-    const key = `${startDate.iso}|${endDate.iso}`;
+    const key = `${startDate.iso}|${endDate.iso}|${stat}`;
     if (TILE_CACHE.has(key)) return res.json(TILE_CACHE.get(key));
     try {
-      const coverage = await fetchCoverageFromPython(startDate.iso, endDate.iso);
+      const coverage = await fetchCoverageFromPython(startDate.iso, endDate.iso, stat);
       TILE_CACHE.set(key, coverage);
       return res.json(coverage);
     } catch (err) {

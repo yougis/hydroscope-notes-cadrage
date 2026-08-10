@@ -12,6 +12,7 @@ Chaque US est classée selon une **finalité fonctionnelle** (`Type fonctionnel`
 ```{python}
 #| label: tbl-typologie
 #| tbl-cap: "Typologie des dépendances (finalité fonctionnelle × pilier)"
+#| tbl-colwidths: [18, 22, 44, 12]
 #| output: asis
 
 import pandas as pd
@@ -118,6 +119,7 @@ print(typologie.to_markdown(index=False))
 ```{python}
 #| label: tbl-repartition
 #| tbl-cap: "Répartition des US par EPIC et finalité dominante"
+#| tbl-colwidths: [18, 22, 60]
 #| output: asis
 
 def finalite_dominante(series):
@@ -146,11 +148,12 @@ Le graphe navigable (`annexes/graphe_dependances.html`) permet de basculer le co
 
 ## EPIC 1 & 1bis — Gestion & catalogage des données
 
-Le tableau ci-dessous recense les arêtes dont le parent appartient à l'EPIC 1 (Gestion des données) ou à l'EPIC 1bis (Catalogage des données).
+Le tableau ci-dessous recense les User Stories dont le parent appartient à l'EPIC 1 (Gestion des données) ou à l'EPIC 1bis (Catalogage des données).
 
 ```{python}
 #| label: tbl-epic-1-1bis
 #| tbl-cap: "EPIC 1 & 1bis — arêtes parent/enfant"
+#| tbl-colwidths: [28, 44, 28]
 #| output: asis
 
 print(tableau_dependances({"EPIC 1 – Gestion des données", "EPIC 1bis – Catalogage des données"}).to_markdown(index=False))
@@ -163,6 +166,7 @@ print(tableau_dependances({"EPIC 1 – Gestion des données", "EPIC 1bis – Cat
 ```{python}
 #| label: tbl-epic-3
 #| tbl-cap: "EPIC 3 — arêtes parent/enfant"
+#| tbl-colwidths: [28, 44, 28]
 #| output: asis
 
 print(tableau_dependances({"EPIC 3 – Référentiels"}).to_markdown(index=False))
@@ -177,6 +181,7 @@ Noter la **boucle de recalcul** `US4.1` ↔ `US4.7` : `US4.7` (Recalculer un ind
 ```{python}
 #| label: tbl-epic-4
 #| tbl-cap: "EPIC 4 — arêtes parent/enfant"
+#| tbl-colwidths: [28, 44, 28]
 #| output: asis
 
 print(tableau_dependances({"EPIC 4 – Calcul d'indicateurs"}).to_markdown(index=False))
@@ -189,6 +194,7 @@ print(tableau_dependances({"EPIC 4 – Calcul d'indicateurs"}).to_markdown(index
 ```{python}
 #| label: tbl-epic-5
 #| tbl-cap: "EPIC 5 — arêtes parent/enfant"
+#| tbl-colwidths: [28, 44, 28]
 #| output: asis
 
 print(tableau_dependances({"EPIC 5 – Analyse multicritère"}).to_markdown(index=False))
@@ -203,6 +209,7 @@ L'EPIC 6 est le plus dense du backlog (26 US). Ses dépendances externes sont po
 ```{python}
 #| label: tbl-epic-6
 #| tbl-cap: "EPIC 6 — arêtes parent/enfant"
+#| tbl-colwidths: [28, 44, 28]
 #| output: asis
 
 print(tableau_dependances({"EPIC 6 – Visualisation"}).to_markdown(index=False))
@@ -215,6 +222,7 @@ print(tableau_dependances({"EPIC 6 – Visualisation"}).to_markdown(index=False)
 ```{python}
 #| label: tbl-epic-7
 #| tbl-cap: "EPIC 7 — arêtes parent/enfant"
+#| tbl-colwidths: [28, 44, 28]
 #| output: asis
 
 print(tableau_dependances({"EPIC 7 – Aide à la décision"}).to_markdown(index=False))
@@ -227,6 +235,7 @@ print(tableau_dependances({"EPIC 7 – Aide à la décision"}).to_markdown(index
 ```{python}
 #| label: tbl-epic-8
 #| tbl-cap: "EPIC 8 — arêtes parent/enfant"
+#| tbl-colwidths: [28, 44, 28]
 #| output: asis
 
 print(tableau_dependances({"EPIC 8 – Export"}).to_markdown(index=False))
@@ -239,6 +248,7 @@ print(tableau_dependances({"EPIC 8 – Export"}).to_markdown(index=False))
 ```{python}
 #| label: tbl-epic-9
 #| tbl-cap: "EPIC 9 — arêtes parent/enfant"
+#| tbl-colwidths: [28, 44, 28]
 #| output: asis
 
 print(tableau_dependances({"EPIC 9 – Utilisateurs"}).to_markdown(index=False))
@@ -251,6 +261,7 @@ print(tableau_dependances({"EPIC 9 – Utilisateurs"}).to_markdown(index=False))
 ```{python}
 #| label: tbl-epic-10
 #| tbl-cap: "EPIC 10 — arêtes parent/enfant"
+#| tbl-colwidths: [28, 44, 28]
 #| output: asis
 
 print(tableau_dependances({"EPIC 10 – Traçabilité"}).to_markdown(index=False))

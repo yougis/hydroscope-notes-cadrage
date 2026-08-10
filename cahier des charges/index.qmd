@@ -5,7 +5,7 @@ subtitle: "Cahier des charges"
 execute:
   echo: false
 
-version: "version 1"
+version: "version 1.1"
 
 fichier_backlog : "backlog.xlsx"
 catalogue_inidcateur : ""
@@ -31,7 +31,7 @@ Historique des versions du document :
 | Version | Date | Auteur(s) | Description des modifications |
 | --|--------|--------- |--------------------------------|
 | 1 || Hugo Roussaffa |Rédaction initiale du cahier des charges|
-| 2 | 05/08/2026 | Hugo Roussaffa | Finalisation du backlog et des profils utilisateurs, ajout du cadre de chiffrage, compléments des exigences — version soumise à la relecture de la MOA |
+| 1.1 | 10/08/2026 | Hugo Roussaffa | Finalisation du backlog et des profils utilisateurs, ajout du cadre de chiffrage, compléments des exigences — version soumise à la relecture de la MOA |
 
 
 ::: {#todo-list}
@@ -203,6 +203,7 @@ Le cadre de chiffrage (annexe ci-dessous) constitue la grille commune de chiffra
 
 {{< include ./annexes/Cadre_chiffrage.qmd >}}
 
+---
 
 # Liste des document à fournir
 

@@ -125,6 +125,8 @@ def modalite_acc(row):
         return "Bing Microsoft (API)"
     if "mapbox.com" in url:
         return "Mapbox (API)"
+    if "opentopomap" in url:
+        return "Opentopomap (API)"
     if "openstreetmap" in url:
         return "Openstreetmap (API)"
     if any(

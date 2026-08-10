@@ -52,6 +52,7 @@ def expand_window(start_dt: datetime, end_dt: datetime) -> tuple[datetime, datet
 def get_mapid(
     start: str = Query(..., description="Start date YYYY-MM-DD"),
     end: str = Query(..., description="End date YYYY-MM-DD"),
+    stat: str = Query("mode", description="Statistic: 'mode' (dominant class) or 'mean' (dominant class + presence rate)"),
 ):
     """Return a GEE mapid/token/urlFormat for Dynamic World mosaic over AOI and date range."""
     try:
@@ -74,21 +75,68 @@ def get_mapid(
         if count == 0:
             raise HTTPException(status_code=404, detail="No Dynamic World data for this period")
 
-        image = (
-            col.reduce(ee.Reducer.mode())
-            .reproject("EPSG:3857", None, 10)  # 10 m native resolution
-            .visualize(bands=["label_mode"], min=0, max=8, palette=[
-                "#419BDF","#397D49","#88B053","#7B87C6","#E49635",
-                "#DFC35A","#C4281B","#A59B8F","#B39FE1"
-            ])
-        )
-        mapid_dict = ee.data.getMapId({"image": image})
-        # Use modern tile fetcher URL format: /v1/projects/.../tiles/{z}/{x}/{y}
-        tile_fetcher = mapid_dict.get("tile_fetcher")
-        url_format = tile_fetcher.url_format if tile_fetcher else ""
-        full_mapid = mapid_dict.get("mapid", "")
-        token = mapid_dict.get("token", "")
-        return MapIdResponse(mapid=full_mapid, token=token, urlFormat=url_format)
+        if stat == "mean":
+            # Dominant class + presence rate (% of observations)
+            # Compute frequency of each class per pixel
+            def class_frequency(img):
+                return img.remap([0,1,2,3,4,5,6,7,8], 
+                                 [ee.Image(1), ee.Image(0), ee.Image(0), ee.Image(0), ee.Image(0), 
+                                  ee.Image(0), ee.Image(0), ee.Image(0), ee.Image(0)]).rename('freq_0')
+            # More efficient: use reducer on remapped class masks
+            # Create one image per class with 1 where label==class else 0, then mean across collection
+            class_images = []
+            for c in range(9):
+                class_images.append(
+                    col.map(lambda img: img.select('label').eq(c).rename(f'freq_{c}'))
+                       .reduce(ee.Reducer.mean())
+                )
+            freq_stack = ee.Image.cat(class_images)  # 9 bands: freq_0 .. freq_8
+            
+            # Find dominant class (argmax of frequency)
+            dominant = freq_stack.argmax().rename('dominant_class')
+            
+            # Get presence rate of dominant class
+            presence_rate = freq_stack.select(
+                dominant
+            ).rename('presence_rate')
+            
+            # Visualize: dominant class with palette, presence rate as alpha/gain
+            # We'll output dominant_class band and presence_rate band
+            image = dominant.addBands(presence_rate)
+            
+            # Visualize dominant with palette, presence_rate as 0-1
+            vis_params = {
+                'bands': ['dominant_class'],
+                'min': 0,
+                'max': 8,
+                'palette': [
+                    "#419BDF","#397D49","#88B053","#7B87C6","#E49635",
+                    "#DFC35A","#C4281B","#A59B8F","#B39FE1"
+                ]
+            }
+            # We'll return both bands via urlFormat; client handles visualization
+            mapid_dict = ee.data.getMapId({"image": image})
+            tile_fetcher = mapid_dict.get("tile_fetcher")
+            url_format = tile_fetcher.url_format if tile_fetcher else ""
+            full_mapid = mapid_dict.get("mapid", "")
+            token = mapid_dict.get("token", "")
+            return MapIdResponse(mapid=full_mapid, token=token, urlFormat=url_format)
+        else:
+            # Default: mode (most frequent class)
+            image = (
+                col.reduce(ee.Reducer.mode())
+                .reproject("EPSG:3857", None, 10)
+                .visualize(bands=["label_mode"], min=0, max=8, palette=[
+                    "#419BDF","#397D49","#88B053","#7B87C6","#E49635",
+                    "#DFC35A","#C4281B","#A59B8F","#B39FE1"
+                ])
+            )
+            mapid_dict = ee.data.getMapId({"image": image})
+            tile_fetcher = mapid_dict.get("tile_fetcher")
+            url_format = tile_fetcher.url_format if tile_fetcher else ""
+            full_mapid = mapid_dict.get("mapid", "")
+            token = mapid_dict.get("token", "")
+            return MapIdResponse(mapid=full_mapid, token=token, urlFormat=url_format)
     except HTTPException:
         raise
     except Exception as e:

@@ -11,100 +11,31 @@ Colonnes à compléter par le candidat : **Charge proposée (JH)**, **Taux journ
 
 La colonne « Complexité » (faible / moyenne / élevée / très élevée) est fournie à titre indicatif pour faciliter la lecture du périmètre ; elle n'est pas contractuelle.
 
+
+
 ```{python}
 #| output: asis
 
 import json
 import os
 
-import pandas as pd
+import sys
+sys.path.insert(0, "..")
+from _lib_indicateurs import load_backlog, render_pricing_table
 
-# Forme du tableau : compacte (colonnes essentielles) pour le PDF afin d'éviter
-# le débordement des colonnes larges ; intégrale pour les autres formats.
-def is_pdf():
-    info_env = os.environ.get("QUARTO_EXECUTE_INFO")
-    if not info_env:
-        return False
+info_env = os.environ.get("QUARTO_EXECUTE_INFO")
+fmt = "html"
+if info_env:
     try:
         with open(info_env, encoding="utf-8") as f:
-            info = json.load(f)
-        return str(info["format"]["identifier"]["target-format"]).lower() == "pdf"
+            fmt = str(json.load(f)["format"]["identifier"]["target-format"]).lower()
     except (OSError, ValueError, KeyError, TypeError):
-        return False
+        fmt = "html"
 
-df = pd.read_excel("backlog.xlsx", sheet_name="Backlog")
-df.columns = df.columns.str.strip()
-
-df = df.rename(columns={
-    "ID User Story": "ID_US",
-    "Libellé User Story": "User_Story"
-})
-
-if "ID_US" not in df.columns:
-    df["ID_US"] = df.iloc[:, 1]
-
-if "User_Story" not in df.columns:
-    df["User_Story"] = df.iloc[:, 2]
-
-df["MVP"] = df["MVP"].astype(str).str.upper().map({
-    "TRUE": "Oui",
-    "FALSE": "Non"
-})
-
-complexity_map = {
-    "EPIC 1 – Gestion des données": "Élevée",
-    "EPIC 1bis – Catalogage des données": "Moyenne",
-    "EPIC 2 – Qualité des données": "Moyenne",
-    "EPIC 3 – Référentiels": "Moyenne",
-    "EPIC 4 – Calcul d’indicateurs": "Élevée",
-    "EPIC 5 – Analyse multicritère": "Très élevée",
-    "EPIC 6 – Visualisation": "Élevée",
-    "EPIC 7 – Aide à la décision": "Moyenne",
-    "EPIC 8 – Export": "Faible",
-    "EPIC 9 – Utilisateurs": "Faible",
-    "EPIC 10 – Traçabilité": "Moyenne"
-}
-
-df["Complexité"] = df["EPIC"].map(complexity_map)
-
-df["Charge proposée (JH)"] = ""
-df["Taux journalier (€/JH)"] = ""
-df["Coût HT (€)"] = ""
-df["Commentaires"] = ""
-
-fill_cols = ["Charge proposée (JH)", "Taux journalier (€/JH)", "Coût HT (€)", "Commentaires"]
-cols_pdf = ["ID_US", "User_Story", "MVP", "Front_or_Back", "Module", "Complexité"] + fill_cols
-
-base = df[df["EPIC"] != "EPIC 5 – Analyse multicritère"].sort_values(["EPIC", "ID_US"])
-option = df[df["EPIC"] == "EPIC 5 – Analyse multicritère"].sort_values(["EPIC", "ID_US"])
-
-if is_pdf():
-    base = base[cols_pdf]
-    option = option[cols_pdf]
-
-print("### Périmètre de base (MVP + lot 2)")
-print(" ")
-print(base.to_markdown(index=False))
-
-print("### Option 1 — Analyse multicritère (EPIC 5)")
-print(" ")
-print(option.to_markdown(index=False))
+df = load_backlog("backlog.xlsx")
+print(render_pricing_table(df, fmt))
 ```
 
-#### Option 2 — TMA (maintenance et support)
-
-| Poste | Référence | Charge proposée (JH/an) | Taux journalier (€/JH) | Coût HT (€/an) | Commentaires |
-|----------|--------------|--------|----------------|-------------|--------------|
-| TMA post-déploiement | Cadre contractuel (chapitre 16) |  |  |  | SLA : Bloquant 4 h / 24 h ; Majeur 5 j / 10 j ; Mineur 10 j / 30 j |
-
-#### Synthèse de l'offre
-
-| Ligne | Coût HT (€) | Commentaires |
-|-------|-------------|--------------|
-| Total périmètre de base |  |  |
-| Total option 1 — Analyse multicritère |  |  |
-| Total option 2 — TMA |  |  |
-| **Total général (base + options)** |  |  |
 
 ---
 
@@ -121,5 +52,3 @@ La comparaison des offres s'appuie sur une grille de critères pondérés, appli
 | Qualité de la solution | 15 % | Architecture (open source, modulaire, réversible), gestion des données, documentation, réversibilité  |
 
 La note globale de chaque offre est calculée comme la moyenne pondérée des notes attribuées sur chaque critère. Les offres ne répondant pas au périmètre de base (EPIC non traités ou critères d'acceptation non couverts) peuvent être déclarées non conformes sans notation.
-
-

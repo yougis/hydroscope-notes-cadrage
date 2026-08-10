@@ -14,7 +14,7 @@ const HTML_FILE = path.join(__dirname, '..', 'graphe_dependances.html');
 const DEFAULT_XLSX = path.join(__dirname, '..', '..', 'backlog.xlsx');
 const ARCHIVE_DIR = path.join(__dirname, '..', '..', 'archive_backlog');
 
-const PORT = Number(process.env.PORT || 8081);
+const PORT = Number(process.env.PORT || 8082);
 const XLSX = process.env.BACKLOG_XLSX ? path.resolve(process.env.BACKLOG_XLSX) : DEFAULT_XLSX;
 
 // Colonnes de la feuille « Backlog » (ordre 1-based = A..M) — aligné sur le xlsx réel.

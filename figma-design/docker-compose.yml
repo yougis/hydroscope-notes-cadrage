@@ -1,6 +1,19 @@
 name: hydroscope
 
 services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: hydroscope-nginx
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
+    networks:
+      - hydroscope-shared
+    depends_on:
+      - pnpm-dev
+
   pnpm-dev:
     image: node:22
     container_name: pnpm-dev
@@ -14,3 +27,9 @@ services:
     volumes:
       - "/home/yogis/SynologyDrive/Projects/hydroscope/documents projet/Notes de cadrage/figma-design:/app"
     restart: unless-stopped
+    networks:
+      - hydroscope-shared
+
+networks:
+  hydroscope-shared:
+    external: true
