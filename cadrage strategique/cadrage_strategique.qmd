@@ -142,4 +142,4 @@ Les pressions sur la ressource — incendies, défrichements, nouvelles installa
 Le projet s'inscrit dans la continuité de travaux engagés depuis 2021. L'enjeu est de consolider ces acquis dans un système durable, maintenable sans dépendance à des logiciels propriétaires coûteux, et capable de produire des analyses temporelles sur le temps long.
 
 - **Enjeu** : Garantir la durabilité du système à coût maîtrisé, en évitant la dette technique et en assurant la traçabilité des données dans le temps.
-- **Réponse** : Adoption d’un socle open source et mise en place d’une historisation réfléchie des données et indicateurs prioritaires, avec un cataloguage et une documentation systématiques des procédures.
+- **Réponse** : Adoption d’un socle open source et mise en place d’une historisation réfléchie des données et indicateurs prioritaires, avec un catalogage et une documentation systématiques des procédures.

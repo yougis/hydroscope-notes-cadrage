@@ -1,17 +1,17 @@
 :root {
-  --bg: #fbfbfa;
-  --surface: #ffffff;
-  --surface-soft: #f1f5f2;
-  --ink: #17352e;
-  --muted: #5b6f68;
-  --primary: #0b5a4a;
-  --accent: #059669;
-  --accent-light: #10b981;
-  --accent-soft: #e4f3ec;
-  --border: #e3eae6;
+  --bg: #F5F2EE;
+  --surface: #FFFFFF;
+  --surface-soft: #F0EFEB;
+  --ink: #1D1E1D;
+  --muted: #6B6B66;
+  --primary: #1D1E1D;
+  --accent: #F0CB0A;
+  --accent-light: #40ADD6;
+  --accent-soft: #FDF2C8;
+  --border: #E4E1DA;
   --danger: #b42318;
   --radius: 14px;
-  --shadow: 0 1px 3px rgba(11, 90, 74, 0.08), 0 6px 18px rgba(11, 90, 74, 0.06);
+  --shadow: 0 1px 3px rgba(29, 30, 29, 0.08), 0 6px 18px rgba(29, 30, 29, 0.06);
 }
 
 * {
@@ -118,6 +118,35 @@ body {
 .opacity-control input[type="range"] {
   width: 140px;
   accent-color: var(--accent);
+}
+
+/* topbar right: basemap selector + YAPUKA logo */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.basemap-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.basemap-field select {
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  cursor: pointer;
+}
+#brand-logo {
+  height: 40px;
+  width: auto;
+  opacity: 0.9;
 }
 
 /* ── Onglets ─────────────────────────────────────────────── */
@@ -265,6 +294,55 @@ main {
 }
 .interval-control .date-field {
   flex: 1 1 180px;
+}
+
+/* layer toggles */
+.layer-toggle {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  font-size: 12px;
+}
+.layer-toggle label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--ink);
+}
+.layer-toggle input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--primary);
+}
+
+/* gradient legend for occurrence rate */
+.legend-gradient {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  box-shadow: var(--shadow);
+  font-size: 11px;
+  line-height: 1;
+  z-index: 900;
+}
+.legend-gradient[hidden] { display: none; }
+.legend-gradient-bar {
+  width: 120px;
+  height: 10px;
+  border-radius: 3px;
+  background: linear-gradient(to right, #ffffff, #fff7bc, #fec44f, #fe9929, #d95f0e, #993404);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.legend-gradient-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  color: var(--muted);
 }
 
 /* ── Cartes ──────────────────────────────────────────────── */
@@ -460,6 +538,29 @@ main {
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   flex: 0 0 auto;
+}
+
+/* ── Site footer (YAPUKA) ─────────────────────────────────── */
+.site-footer {
+  max-width: 1280px;
+  margin: 24px auto 16px;
+  padding: 16px 28px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.footer-brand {
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.footer-contact {
+  color: var(--accent-light);
+  margin-bottom: 4px;
+}
+.footer-copyright {
+  color: var(--muted);
 }
 
 /* ── Toast ───────────────────────────────────────────────── */

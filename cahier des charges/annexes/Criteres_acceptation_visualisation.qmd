@@ -2,7 +2,7 @@
 
 Ce document fixe, pour chaque User Story MVP du périmètre EPIC 6 à 10, des **critères d'acceptation** contractuels rédigés en Gherkin (Étant donné / Quand / Alors). Ils constituent la base de recette fonctionnelle : un critère est satisfait lorsque le comportement décrit se reproduit de façon déterministe lors des essais, sur les jeux de données de référence et les comptes de test fournis au chiffrage.
 
-Périmètre couvert : les **User Stories** du ({{< meta fichier_backlog >}}) — EPIC 6 (24 US), EPIC 7 (3 US), EPIC 8 (2 US), EPIC 9 (2 US), EPIC 10 (2 US), soit 33 US. Les conventions suivantes s'appliquent à l'ensemble :
+Périmètre couvert : les **User Stories** du ({{< meta fichier_backlog >}}) — EPIC 6 ({{< meta n_us_epic6_mvp >}} US), EPIC 7 ({{< meta n_us_epic7_mvp >}} US), EPIC 8 ({{< meta n_us_epic8_mvp >}} US), EPIC 9 ({{< meta n_us_epic9_mvp >}} US), EPIC 10 ({{< meta n_us_epic10_mvp >}} US), soit {{< meta n_us_mvp_6_10 >}} US. Les conventions suivantes s'appliquent à l'ensemble :
 
 - **BVAEP** : bassin versant d'alimentation en eau potable ; **PPE** : périmètre de protection des eaux ; **unités de gestion** : captages ou BVAEP selon l'échelle active.
 - **Cohérence des vues** : carte, listes, graphiques, compteur et fiches présentent la même sélection et les mêmes filtres à tout instant.
@@ -146,8 +146,8 @@ Périmètre couvert : les **User Stories** du ({{< meta fichier_backlog >}}) —
 - **Étant donné** la vue « Changements » demandée, **quand** les données sont insuffisantes, **alors** un état « données insuffisantes » est affiché au lieu d'un faux résultat.
 - **Étant donné** un indicateur, **quand** la vue « Carte » (maille H3) est affichée, **alors** elle est cohérente avec la carte principale (classes et palettes identiques).
 
-### US6.25 — Voir toute la liste des indicateurs (38) regroupée Famille → Thème → Groupe
-- **Étant donné** le catalogue d'indicateurs complet, **quand** je l'ouvre, **alors** la liste complète (38 indicateurs) s'affiche, regroupée par Famille → Thème → Groupe avec compteurs.
+### US6.25 — Voir toute la liste des indicateurs ({{< meta n_ind >}}) regroupée Famille → Thème → Groupe
+- **Étant donné** le catalogue d'indicateurs complet, **quand** je l'ouvre, **alors** la liste complète ({{< meta n_ind >}} indicateurs) s'affiche, regroupée par Famille → Thème → Groupe avec compteurs.
 - **Étant donné** un regroupement, **quand** une famille/thème est sans indicateur visible, **alors** elle est affichée vide ou masquée selon une règle cohérente, jamais tronquée arbitrairement.
 - **Étant donné** le catalogue des indicateurs, **quand** je recherche par libellé, **alors** le résultat reste hiérarchisé et identifiable.
 - **Étant donné** les droits du profil, **quand** un indicateur n'est pas autorisé, **alors** il est absent de la liste pour ce profil, sans message d'erreur.
@@ -238,6 +238,6 @@ Périmètre couvert : les **User Stories** du ({{< meta fichier_backlog >}}) —
 
 ---
 
-*Périmètre MVP — Ce document référence le catalogue des indicateurs (38 indicateurs) et les référentiels (BVAEP, captages, PPE) fournis en données de référence pour la recette en Nouvelle-Calédonie. La liste des US couvertes correspond à l'attribut `MVP=TRUE` du fichier {{< meta fichier_backlog >}} : 33 US au total pour les EPIC 6 à 10, dont 24 pour l'EPIC 6.*
+*Périmètre MVP — Ce document référence le catalogue des indicateurs ({{< meta n_ind >}} indicateurs) et les référentiels (BVAEP, captages, PPE) fournis en données de référence pour la recette en Nouvelle-Calédonie. La liste des US couvertes correspond à l'attribut `MVP=TRUE` du fichier {{< meta fichier_backlog >}} : {{< meta n_us_mvp_6_10 >}} US au total pour les EPIC 6 à 10, dont {{< meta n_us_epic6_mvp >}} pour l'EPIC 6.*
 
 ---

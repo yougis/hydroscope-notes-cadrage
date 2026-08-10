@@ -1,17 +1,22 @@
-import type { ReactElement } from 'react'
+import type { ReactElement, FC } from 'react'
 import { TableauStub } from './TableauStub'
 import { FichesStub } from './FichesStub'
-import { CatalogueStub } from './CatalogueStub'
 import { ImportStub } from './ImportStub'
 import { MonitoringStub } from './MonitoringStub'
 import { TracabiliteStub } from './TracabiliteStub'
 import { ReferentielsView } from '@/features/referentiels/ReferentielsView'
 import { ConnexionStub } from './ConnexionStub'
+import { CatalogueView } from '@/features/catalogue'
 
-export const STUBS: Record<string, () => ReactElement> = {
+interface StubProps {
+  onNavigate: (view: string) => void
+  location: { pathname: string; search: string }
+}
+
+export const STUBS: Record<string, FC<StubProps>> = {
   tableau: TableauStub,
   fiches: FichesStub,
-  catalogue: CatalogueStub,
+  catalogue: CatalogueView,
   import: ImportStub,
   monitoring: MonitoringStub,
   tracabilite: TracabiliteStub,

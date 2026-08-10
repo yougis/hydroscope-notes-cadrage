@@ -27,6 +27,7 @@ export interface MapCanvasProps {
   onHoverEntity?: (e: HoverEntity | null) => void
   captages?: LiveCaptage[]
   regions?: LiveRegion[]
+  bbrRegions?: LiveRegion[]
 }
 
 type HoverInfo =
@@ -48,6 +49,7 @@ export function MapCanvas({
   onHoverEntity,
   captages = [],
   regions = [],
+  bbrRegions = [],
 }: MapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<Map | null>(null)
@@ -139,10 +141,11 @@ export function MapCanvas({
       layers,
       captages,
       regions,
+      bbrRegions,
     })
     for (const l of built) map.addLayer(l)
     layersRef.current = built
-  }, [activeIndicator, unitMode, selKeysStr, selBvStr, h3Mode, layerStr, captages, regions])
+  }, [activeIndicator, unitMode, selKeysStr, selBvStr, h3Mode, layerStr, captages, regions, bbrRegions])
 
   const hoveredStr = hoveredEntity ? `${hoveredEntity.kind}:${hoveredEntity.id}` : ''
   useEffect(() => {

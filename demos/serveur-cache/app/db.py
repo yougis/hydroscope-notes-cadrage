@@ -40,11 +40,25 @@ def init_db() -> None:
                 status TEXT,
                 last_sync TEXT,
                 last_count INTEGER,
-                layer_counts TEXT
+                layer_counts TEXT,
+                layer_meta TEXT,
+                catalog_version INTEGER DEFAULT 0
             )
         """)
+        # Migration: add layer_meta and catalog_version if missing (for existing DBs)
+        _ensure_meta_columns(conn)
         # Feature tables will be created dynamically per source/layer
         # naming: features_{source_key}_layer{layer_id}
+
+
+def _ensure_meta_columns(conn: sqlite3.Connection) -> None:
+    """Ensure sources_meta has layer_meta and catalog_version columns (migration-safe)."""
+    cursor = conn.execute("PRAGMA table_info(sources_meta)")
+    existing_cols = {row[1] for row in cursor.fetchall()}
+    if "layer_meta" not in existing_cols:
+        conn.execute('ALTER TABLE sources_meta ADD COLUMN layer_meta TEXT')
+    if "catalog_version" not in existing_cols:
+        conn.execute('ALTER TABLE sources_meta ADD COLUMN catalog_version INTEGER DEFAULT 0')
 
 
 def ensure_feature_table(source_key: str, layer_id: int, fields: List[Dict]) -> None:
@@ -171,17 +185,31 @@ def update_source_meta(
     base_url: str,
     status: str,
     layer_counts: Dict[int, int],
+    layer_meta: Optional[Dict[int, Dict]] = None,
 ) -> None:
     import datetime
     last_sync = datetime.datetime.utcnow().isoformat() + "Z"
     total = sum(layer_counts.values())
     with db_conn() as conn:
+        # Increment catalog_version for cache invalidation
+        cur_ver = conn.execute("SELECT catalog_version FROM sources_meta WHERE key=?", (key,)).fetchone()
+        next_ver = (cur_ver[0] if cur_ver and cur_ver[0] is not None else 0) + 1
         conn.execute(
             """
-            INSERT OR REPLACE INTO sources_meta (key, name, base_url, status, last_sync, last_count, layer_counts)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT OR REPLACE INTO sources_meta (key, name, base_url, status, last_sync, last_count, layer_counts, layer_meta, catalog_version)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
-            (key, name, base_url, status, last_sync, total, json.dumps(layer_counts)),
+            (
+                key,
+                name,
+                base_url,
+                status,
+                last_sync,
+                total,
+                json.dumps(layer_counts),
+                json.dumps(layer_meta) if layer_meta else None,
+                next_ver,
+            ),
         )
 
 
@@ -193,7 +221,9 @@ def get_source_meta(key: str) -> Optional[Dict]:
         if not row:
             return None
         d = dict(row)
-        d["layer_counts"] = json.loads(d["layer_counts"])
+        d["layer_counts"] = json.loads(d["layer_counts"]) if d["layer_counts"] else {}
+        d["layer_meta"] = json.loads(d["layer_meta"]) if d["layer_meta"] else {}
+        d["catalog_version"] = d["catalog_version"] or 0
         return d
 
 
@@ -203,6 +233,27 @@ def get_all_sources_meta() -> List[Dict]:
         results = []
         for row in rows:
             d = dict(row)
-            d["layer_counts"] = json.loads(d["layer_counts"])
+            d["layer_counts"] = json.loads(d["layer_counts"]) if d["layer_counts"] else {}
+            d["layer_meta"] = json.loads(d["layer_meta"]) if d["layer_meta"] else {}
+            d["catalog_version"] = d["catalog_version"] or 0
             results.append(d)
         return results
+
+
+def ensure_enrichment_columns(source_key: str, layer_id: int) -> None:
+    """Ajoute les colonnes d'enrichissement (commune, bassin) si elles n'existent pas."""
+    table = f"features_{source_key}_layer{layer_id}"
+    enrichment_cols = {
+        "id_bassin": "INTEGER",
+        "code_bassin": "TEXT",
+        "nom_bassin": "TEXT",
+        "id_commune": "INTEGER",
+        "code_commune": "TEXT",
+        "commune": "TEXT",
+    }
+    with db_conn() as conn:
+        cursor = conn.execute(f"PRAGMA table_info({table})")
+        existing_cols = {row[1] for row in cursor.fetchall()}
+        for col_name, col_type in enrichment_cols.items():
+            if col_name not in existing_cols:
+                conn.execute(f'ALTER TABLE {table} ADD COLUMN "{col_name}" {col_type}')

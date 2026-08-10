@@ -204,7 +204,7 @@ print(tableau_dependances({"EPIC 5 – Analyse multicritère"}).to_markdown(inde
 
 ## EPIC 6 — Visualisation
 
-L'EPIC 6 est le plus dense du backlog (26 US). Ses dépendances externes sont portées par les EPIC 3 et 4 (référentiels → affichage cartographique, historisation → vue temporelle) ; le tableau ci-dessous recense les arêtes dont le parent appartient à l'EPIC 6.
+L'EPIC 6 est le plus dense du backlog ({{< meta n_us_epic6 >}} US). Ses dépendances externes sont portées par les EPIC 3 et 4 (référentiels → affichage cartographique, historisation → vue temporelle) ; le tableau ci-dessous recense les arêtes dont le parent appartient à l'EPIC 6.
 
 ```{python}
 #| label: tbl-epic-6

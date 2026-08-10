@@ -1,0 +1,29 @@
+## Tableau synthétique des indicateurs
+
+Le tableau de référence des indicateurs est joint à l'offre :
+
+- `fiches indicateurs.xlsx` — référentiel contractuel des indicateurs ({{< meta n_ind >}} indicateurs, regroupement V1 : {{< meta n_fam >}} familles, {{< meta n_th >}} thèmes, {{< meta n_grp >}} groupes)
+
+## Catalogue des fiches indicateurs {#sec-CataloguefichesInd}
+
+Le catalogue de fiches détaillées des indicateurs est fourni avec le présent cahier des charges :
+
+- [Fiches_indicateurs_HydroScope-v4.pdf](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées (définition, objectifs, méthode, sources, vigilances) ;
+
+
+
+
+***
+
+## Cadre de chiffrage (DQE)
+
+Le cadre de chiffrage (annexe ci-dessous) constitue la grille commune de chiffrage et de comparaison des offres. Les candidats sont invités à le compléter ligne à ligne, pour le périmètre de base, puis pour les options (analyse multicritère, TMA).
+
+
+{{< include ./annexes/Cadre_chiffrage.qmd >}}
+
+---
+
+# Liste des document à fournir
+
+{{< include ./annexes/piece-a-fournir.qmd >}}

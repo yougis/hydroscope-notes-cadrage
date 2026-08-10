@@ -18,12 +18,12 @@ connaître ce qui est disponible.
 
 - Cas d'usage : `CU-PUBLIC-04` (US6.22, US6.25) — Profil 1 (public).
 - EPIC 6 (catalogue d'indicateurs) ; EPIC 1 bis (catalogage).
-- Backlog : recherche par dropdown groupé Famille → Thème → Groupe ; liste complète (38 indicateurs).
+- Backlog : recherche par dropdown groupé Famille → Thème → Groupe ; liste complète ({{< meta n_ind >}} indicateurs).
 
 ## 2. Fonctionnalités couvertes
 
 - **Recherche d'un indicateur** dans un dropdown groupé Famille → Thème → Groupe.
-- Visualisation de **toute la liste** des indicateurs (38), regroupée Famille → Thème → Groupe.
+- Visualisation de **toute la liste** des indicateurs ({{< meta n_ind >}}), regroupée Famille → Thème → Groupe.
 - Accès à la fiche d'un indicateur (voir CU-DATA-04 / onglets dataviz).
 
 ## 3. Parcours IHM
@@ -36,11 +36,11 @@ connaître ce qui est disponible.
 ## 4. Rendu visuel obtenu
 
 - Dropdown groupé avec hiérarchie Famille → Thème → Groupe.
-- Liste complète des indicateurs (regroupée, ~38).
+- Liste complète des indicateurs (regroupée, ~{{< meta n_ind >}}).
 - Sélection → mise à jour de la carte / ouverture de l'indicateur.
 - Captures : _(à insérer depuis le prototype — Catalogue d'indicateurs)_.
 
 ## 5. Points de vigilance
 
 - Mise à jour du catalogue après ajout/calcul d'indicateurs (EPIC 1 bis).
-- La liste des 38 indicateurs doit rester navigable et lisible.
+- La liste des {{< meta n_ind >}} indicateurs doit rester navigable et lisible.

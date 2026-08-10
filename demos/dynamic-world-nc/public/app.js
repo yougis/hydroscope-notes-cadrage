@@ -8,15 +8,110 @@ const meta = { mode: 'mock', aoi: null, palette: [], classes: [] };
 const frames = [];
 const overlays = {};
 const initSeq = {};
-const maps = { A: null, B: null, swipe: null, anim: null };
-const started = { compare: false, swipe: false, anim: false };
+const maps = { A: null, B: null, median: null, swipe: null, swipeTop: null, anim: null };
+const started = { compare: false, median: false, swipe: false, anim: false };
 
 const overlayOpts = { opacity: 0.85, maxZoom: 19, tileSize: 256, noWrap: true };
+
+// current global basemap key
+let currentBasemap = 'esri';
+
+// ── Basemap factories ──────────────────────────────────────────
+function quadKey(x, y, z) {
+  let key = '';
+  for (let i = z; i > 0; i--) {
+    let digit = 0;
+    const mask = 1 << (i - 1);
+    if (x & mask) digit += 1;
+    if (y & mask) digit += 2;
+    key += digit;
+  }
+  return key;
+}
+
+const GeorepLayer = L.TileLayer.extend({
+  getTileUrl: function (coords) {
+    const url = 'https://carto.gouv.nc/public/rest/services/fond_imagerie/MapServer/WMTS/tile/1.0.0/fond_imagerie/default/GoogleMapsCompatible/{z}/{y}/{x}';
+    return L.Util.template(url, { z: coords.z, x: coords.x, y: coords.y });
+  },
+  options: {
+    maxZoom: 19,
+    attribution: 'Orthophotos © DITTT / GEOREP Nouvelle-Calédonie',
+    pane: 'basemapPane'
+  }
+});
+
+const BingLayer = L.TileLayer.extend({
+  getTileUrl: function (coords) {
+    const q = quadKey(coords.x, coords.y, coords.z);
+    const sub = (coords.x + coords.y) % 4;
+    return `https://ecn.t${sub}.tiles.virtualearth.net/tiles/a${q}.jpeg?g=0`;
+  },
+  options: {
+    maxZoom: 19,
+    attribution: 'Imagerie aérienne © Microsoft / Bing',
+    pane: 'basemapPane'
+  }
+});
+
+function buildBasemap(key) {
+  switch (key) {
+    case 'georep':
+      return new GeorepLayer();
+
+    case 'esri':
+      return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 18,
+        attribution: 'Imagerie © Esri, Maxar, Earthstar Geographics',
+        pane: 'basemapPane'
+      });
+
+    case 'bing':
+      return new BingLayer();
+
+    case 'google':
+      return L.tileLayer('https://mt{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+        subdomains: '0123',
+        maxZoom: 19,
+        attribution: 'Imagerie satellite © Google',
+        pane: 'basemapPane'
+      });
+
+    default:
+      return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 18,
+        attribution: 'Imagerie © Esri',
+        pane: 'basemapPane'
+      });
+  }
+}
+
+// Helper: ensure basemapPane exists (z-index 150 < tilePane 200) and add basemap layer
+function basemapFor(map, key) {
+  if (!map.getPane('basemapPane')) {
+    map.createPane('basemapPane');
+    map.getPane('basemapPane').style.zIndex = '150';
+  }
+  map.basemapLayer = buildBasemap(key);
+  map.basemapLayer.addTo(map);
+}
 
 // shared view across modules
 const sharedView = { has: false, center: null, zoom: null };
 function captureShared(map) { sharedView.has = true; sharedView.center = map.getCenter(); sharedView.zoom = map.getZoom(); }
 function applyShared(map) { if (sharedView.has) { map.setView(sharedView.center, sharedView.zoom, { animate: false }); } else { fitAoi(map); captureShared(map); } }
+
+// set basemap on all initialized maps
+function setBasemap(key) {
+  currentBasemap = key;
+  Object.values(maps).forEach(m => {
+    if (m && m.basemapLayer) {
+      m.removeLayer(m.basemapLayer);
+      m.basemapLayer = buildBasemap(key);
+      m.basemapLayer.addTo(m);
+    }
+  });
+}
 
 // global opacity control
 let overlayOpacity = 0.85;
@@ -47,21 +142,6 @@ function toast(message, isError) {
   el.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove('show'), 4200);
-}
-
-function esriLayer() {
-  return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 18,
-    attribution: 'Imagerie © Esri, Maxar, Earthstar Geographics'
-  });
-}
-
-function positronLayer() {
-  return L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    subdomains: 'abcd',
-    maxZoom: 19,
-    attribution: 'Fond © OpenStreetMap contributors & CARTO'
-  });
 }
 
 async function fetchJson(url) {
@@ -118,12 +198,12 @@ function bindDate(input, labelEl, onChange) {
   if (labelEl) labelEl.textContent = `Situation · ${input.value}`;
 }
 
-/* ── Comparer (2 cartes synchronisées : Moyenne / Modale) ─── */
+/* ── Comparer (2 cartes synchronisées) ───────────────────── */
 function initCompare() {
   const mapA = L.map('mapA');
   const mapB = L.map('mapB');
-  esriLayer().addTo(mapA);
-  esriLayer().addTo(mapB);
+  basemapFor(mapA, currentBasemap);
+  basemapFor(mapB, currentBasemap);
   applyShared(mapA);
   applyShared(mapB);
   mapA.on('moveend zoomend', () => { syncTo(mapA, mapB); captureShared(mapA); });
@@ -132,26 +212,61 @@ function initCompare() {
   maps.A = mapA;
   maps.B = mapB;
 
-  const startInput = $('compareStart');
-  const endInput = $('compareEnd');
-  const titleA = $('titleA');
-  const titleB = $('titleB');
+  const dateA = $('dateA');
+  const dateB = $('dateB');
+  bindDate(dateA, $('titleA'), () => loadOverlay('A', mapA, dateA.value, dateA.value, 'mode'));
+  bindDate(dateB, $('titleB'), () => loadOverlay('B', mapB, dateB.value, dateB.value, 'mode'));
+  loadOverlay('A', mapA, dateA.value, dateA.value, 'mode');
+  loadOverlay('B', mapB, dateB.value, dateB.value, 'mode');
+}
 
-  function updateCompare() {
+/* ── Médiane (deux couches togglables) ───────────────────── */
+function initMedian() {
+  const map = L.map('mapMedian');
+  basemapFor(map, currentBasemap);
+  applyShared(map);
+  map.on('moveend zoomend', () => { captureShared(map); });
+
+  maps.median = map;
+
+  const startInput = $('medianStart');
+  const endInput = $('medianEnd');
+  const titleEl = $('medianTitle');
+  const toggleMode = $('medianToggleMode');
+  const togglePresence = $('medianTogglePresence');
+  const legendEl = $('medianLegend');
+
+  function setLayer(key, stat, enabled) {
+    if (enabled) {
+      loadOverlay(key, map, startInput.value, endInput.value, stat);
+    } else {
+      if (overlays[key]) {
+        map.removeLayer(overlays[key]);
+        overlays[key] = null;
+      }
+    }
+  }
+
+  function updateMedian() {
     const start = startInput.value;
     const end = endInput.value;
     if (!start || !end) return;
     if (start > end) return;
-    titleA.textContent = `Moyenne · ${start} → ${end}`;
-    titleB.textContent = `Modale · ${start} → ${end}`;
-    loadOverlay('compareA', mapA, start, end, 'mean');
-    loadOverlay('compareB', mapB, start, end, 'mode');
+    titleEl.textContent = `Médiane · ${start} → ${end}`;
+    const modeOn = toggleMode.checked;
+    const presOn = togglePresence.checked;
+    setLayer('medianMode', 'dominant', modeOn);
+    setLayer('medianPresence', 'presence', presOn);
+    // show/hide gradient legend
+    if (presOn) legendEl.hidden = false; else legendEl.hidden = true;
   }
 
-  startInput.addEventListener('change', updateCompare);
-  endInput.addEventListener('change', updateCompare);
+  startInput.addEventListener('change', updateMedian);
+  endInput.addEventListener('change', updateMedian);
+  toggleMode.addEventListener('change', updateMedian);
+  togglePresence.addEventListener('change', updateMedian);
 
-  updateCompare();
+  updateMedian();
 }
 
 /* ── Swipe : deux cartes empilées synchronisées ────────────── */
@@ -163,13 +278,13 @@ function initSwipe() {
 
   // Bottom map (date A - left side)
   const mapA = L.map('map-swipe');
-  positronLayer().addTo(mapA);
+  basemapFor(mapA, currentBasemap);
   applyShared(mapA);
   mapA.on('moveend zoomend', () => { captureShared(mapA); syncSwipeMaps(mapA); });
 
   // Top map (date B - right side, clipped)
   const mapB = L.map('map-swipe-top');
-  positronLayer().addTo(mapB);
+  basemapFor(mapB, currentBasemap);
   applyShared(mapB);
   mapB.on('moveend zoomend', () => { captureShared(mapB); syncSwipeMaps(mapB); });
 
@@ -225,7 +340,7 @@ let timer = null;
 
 function initAnim() {
   const map = L.map('mapAnim');
-  positronLayer().addTo(map);
+  basemapFor(map, currentBasemap);
   applyShared(map);
   map.on('moveend zoomend', () => {
     captureShared(map);
@@ -400,13 +515,15 @@ function switchTab(name) {
   if (!started[name]) {
     started[name] = true;
     if (name === 'compare') initCompare();
+    if (name === 'median') initMedian();
     if (name === 'swipe') initSwipe();
     if (name === 'anim') initAnim();
   }
-  // apply shared view to active module maps
+  // apply shared view to active module maps (including swipeTop)
   const targets = {
     compare: [maps.A, maps.B],
-    swipe: maps.swipe ? [maps.swipe] : [],
+    median: maps.median ? [maps.median] : [],
+    swipe: maps.swipe ? [maps.swipe, maps.swipeTop] : [],
     anim: maps.anim ? [maps.anim] : []
   }[name];
   (targets || []).forEach(m => m && applyShared(m));
@@ -416,6 +533,7 @@ function switchTab(name) {
 function invalidatePanelMaps(name) {
   const targets = {
     compare: [maps.A, maps.B],
+    median: maps.median ? [maps.median] : [],
     swipe: maps.swipe ? [maps.swipe] : [],
     anim: maps.anim ? [maps.anim] : []
   }[name];
@@ -475,6 +593,11 @@ async function boot() {
     opacitySlider.addEventListener('input', (e) => {
       setGlobalOpacity(Number(e.target.value) / 100);
     });
+  }
+  // basemap selector
+  const basemapSelect = $('basemapSelect');
+  if (basemapSelect) {
+    basemapSelect.addEventListener('change', (e) => setBasemap(e.target.value));
   }
   initCompare();
   started.compare = true;

@@ -99,7 +99,7 @@ Les évolutions non-MVP de la traçabilité couvrent le **journal des actions**,
 
 ### EPIC 5 — Analyse multicritère (OPTION — US5.1 à US5.6, non-MVP, chiffrée séparément)
 
-L'analyse multicritère est traitée en **OPTION** : l'intégralité de ses 6 User Stories (construction d'indice composite, pondérations, scénarios, comparaison, visualisation des contributions, documentation des méthodes) est exclue du MVP et fera l'objet d'un chiffrage distinct, après validation des principes méthodologiques. Critères d'acceptation synthétiques :
+L'analyse multicritère est traitée en **OPTION** : l'intégralité de ses {{< meta n_us_epic5 >}} User Stories (construction d'indice composite, pondérations, scénarios, comparaison, visualisation des contributions, documentation des méthodes) est exclue du MVP et fera l'objet d'un chiffrage distinct, après validation des principes méthodologiques. Critères d'acceptation synthétiques :
 
 - **Scoring conservateur « déclassant »** : pour un territoire, la classe de priorité retenue est celle de l'indicateur le plus pénalisant (règle du « pire cas »), les critères dégradés ne pouvant pas être compensés par des critères favorables.
 - **Pondérations encadrées** : les poids des indicateurs sont définis par l'expert métier dans une plage contrainte (bornes validées), le total étant normalisé ; toute pondération hors cadre est refusée avec un message explicite.

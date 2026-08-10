@@ -63,7 +63,7 @@ def print_rows(profile):
 
 ## Matrice de couverture profil × périmètre
 
-Nombre d'User Stories (US) du backlog par profil et par EPIC. « lecture seule » (Intéressé public) = aucun US dédié au profil sur ce périmètre (cases à 0), accès en consultation uniquement. Matrice générée depuis backlog.xlsx (99 US).
+Nombre d'User Stories (US) du backlog par profil et par EPIC. « lecture seule » (Intéressé public) = aucun US dédié au profil sur ce périmètre (cases à 0), accès en consultation uniquement. Matrice générée depuis backlog.xlsx ({{< meta n_us_tot >}} US).
 
 ```{python}
 #| label: tbl-matrice

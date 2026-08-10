@@ -12,6 +12,7 @@ from app.db import (
     update_source_meta,
     get_source_meta,
 )
+from app.enrich import enrich_captages
 
 
 class ArcGISFetcher:
@@ -56,11 +57,12 @@ async def sync_source(source_key: str) -> Dict[int, int]:
         return {}
 
     layer_counts = {}
+    layer_meta = {}
     async with httpx.AsyncClient(timeout=60) as client:
         fetcher = ArcGISFetcher(client)
         for layer in source.layers:
             try:
-                # Fetch layer metadata (fields)
+                # Fetch layer metadata (fields, geometryType, extent, etc.)
                 info = await fetcher.fetch_layer_info(source.base_url, layer.id)
                 fields = info.get("fields", [])
                 max_rc = info.get("maxRecordCount") or settings.max_record_count
@@ -87,19 +89,56 @@ async def sync_source(source_key: str) -> Dict[int, int]:
                     await asyncio.sleep(0.05)
 
                 layer_counts[layer.id] = fetched
-                print(f"  {source_key} layer {layer.id}: {fetched}/{total}")
+
+                # Build rich layer metadata for catalogue (Intake-lite style)
+                extent = info.get("extent")
+                bbox = None
+                if extent:
+                    bbox = [extent.get("xmin"), extent.get("ymin"), extent.get("xmax"), extent.get("ymax")]
+
+                layer_meta[layer.id] = {
+                    "name": info.get("name", layer.name),
+                    "description": info.get("description", ""),
+                    "geometryType": info.get("geometryType"),
+                    "extent": bbox,
+                    "spatialReference": info.get("spatialReference", {}),
+                    "fields": [
+                        {
+                            "name": f.get("name"),
+                            "alias": f.get("alias"),
+                            "type": f.get("type"),
+                            "nullable": f.get("nullable", True),
+                            "length": f.get("length"),
+                        }
+                        for f in fields
+                    ],
+                    "copyrightText": info.get("copyrightText", ""),
+                    "service_url": f"{source.base_url}/{layer.id}",
+                    "driver": "arcgis_featureserver",
+                    "tags": ["referentiel", source.key],
+                    "provenance": "sync_python",
+                }
+
+                print(f"  {source_key} layer {layer.id}: {fetched}/{total} — {info.get('name', layer.name)}")
 
             except Exception as e:
                 print(f"  ERROR syncing {source_key} layer {layer.id}: {e}")
                 layer_counts[layer.id] = 0
+                layer_meta[layer.id] = {
+                    "name": layer.name,
+                    "driver": "arcgis_featureserver",
+                    "provenance": "sync_python",
+                    "error": str(e),
+                }
 
-    # Update meta
+    # Update meta with layer metadata
     update_source_meta(
         key=source_key,
         name=source.name,
         base_url=source.base_url,
         status="ok",
         layer_counts=layer_counts,
+        layer_meta=layer_meta,
     )
     return layer_counts
 
@@ -137,6 +176,15 @@ async def sync_all(force: bool = False) -> Dict[str, Dict[int, int]]:
         else:
             print(f"Skipping {source.key} (cache fresh)")
             results[source.key] = {}
+    
+    # Post-sync enrichment: attribuer commune et bassin aux captages
+    print("Enrichissant les captages (commune + bassin)...")
+    try:
+        enriched = enrich_captages()
+        print(f"  {enriched} captages enrichis")
+    except Exception as e:
+        print(f"  ERREUR enrichissement: {e}")
+    
     return results
 
 
@@ -154,6 +202,8 @@ def get_sync_status() -> List[Dict]:
             "last_sync": meta.get("last_sync") if meta else None,
             "last_count": meta.get("last_count") if meta else 0,
             "layer_counts": meta.get("layer_counts") if meta else {},
+            "layer_meta": meta.get("layer_meta") if meta else {},
+            "catalog_version": meta.get("catalog_version") if meta else 0,
             "stale": stale,
         })
     return status_list

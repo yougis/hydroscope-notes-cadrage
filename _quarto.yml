@@ -23,6 +23,7 @@ image_font_2:  "ressources/eau-monitoring.png"  #image 2 supérieure
 logo_partenaire: "ressources/logo_yapuka.png" #logo partenaire
 filters:
   - filters/todo.lua
+  - filters/dyn-counts.lua
 
 lang: fr
 format:

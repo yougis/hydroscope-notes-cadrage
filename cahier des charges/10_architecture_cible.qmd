@@ -79,7 +79,7 @@ Les choix technologiques ci‑dessous sont proposés pour répondre aux exigence
 - **Base de données** : **PostgreSQL** avec l'extension **PostGIS** pour le stockage des données relationnelles et spatiales. Ce choix garantit la compatibilité avec les standards géographiques et la capacité à gérer des volumes de données importants.
 - **Historisation** : mécanisme de versionnement des données via **GeoDiff** (ou équivalent), permettant de conserver un état complet des données à chaque mise à jour et de reconstituer la source exacte d'un indicateur produit à une date donnée.
 - **Référentiels** : gestion centralisée des référentiels (objets géographiques, indicateurs, sources de données) avec possibilité d'évolution progressive.
-- **Catalogage** : les jeux de données et les indicateurs sont référencés dans un catalogue structuré, exposé via des standards **STAC** (SpatioTemporal Asset Catalog) et **CKAN**, assurant la traçabilité, la découverte des données  interapplicative et la consultation humaine.
+- **Catalogage** : les jeux de données et les indicateurs sont référencés dans un catalogue structuré, exposé via des standards **STAC** (SpatioTemporal Asset Catalog) **Intake** et **CKAN**, assurant la traçabilité, la découverte des données interapplicative et la consultation par des utilisateurs.
 
 
 #### Intégration et pipelines de données

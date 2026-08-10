@@ -30,10 +30,16 @@ export interface LiveCommune {
   coordinates: number[][][]
 }
 
-async function fetchJson<T>(url: string): Promise<T> {
-  const res = await fetch(url)
-  if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  return res.json()
+async function fetchJson<T>(url: string, timeoutMs = 15000): Promise<T> {
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
+  try {
+    const res = await fetch(url, { signal: controller.signal })
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    return res.json()
+  } finally {
+    clearTimeout(timeoutId)
+  }
 }
 
 function deriveKind(props: Record<string, unknown>): CaptageKind {
@@ -42,6 +48,20 @@ function deriveKind(props: Record<string, unknown>): CaptageKind {
   if (nature.includes('forage') || typeEau.includes('forage')) return 'forage'
   if (nature.includes('tranch') || nature.includes('drain')) return 'tranchee_drainante'
   return 'captage_superficiel'
+}
+
+function bboxContains(coords: number[][][], pt: [number, number]): boolean {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity
+  for (const ring of coords) {
+    for (const [x, y] of ring) {
+      if (x < minX) minX = x
+      if (y < minY) minY = y
+      if (x > maxX) maxX = x
+      if (y > maxY) maxY = y
+    }
+  }
+  const [px, py] = pt
+  return px >= minX && px <= maxX && py >= minY && py <= maxY
 }
 
 function pointInPolygon(pt: [number, number], poly: number[][]): boolean {
@@ -57,6 +77,8 @@ function pointInPolygon(pt: [number, number], poly: number[][]): boolean {
 }
 
 function pointInMultiPolygon(pt: [number, number], coords: number[][][]): boolean {
+  // Pré-filtre bbox rapide
+  if (!bboxContains(coords, pt)) return false
   for (const ring of coords) {
     if (pointInPolygon(pt, ring)) return true
   }
@@ -69,55 +91,67 @@ export async function loadLiveReferentiels(): Promise<{
   communes: LiveCommune[]
 } | null> {
   try {
+    // Bassins avec simplification (100m) pour réduire le payload
+    // Communes sans géométrie (seulement id/nom) car attribution faite côté serveur
     const [captagesRes, regionsRes, communesRes] = await Promise.all([
       fetchJson<any>(`${API_BASE}/captages?layer=0&limit=10000`),
-      fetchJson<any>(`${API_BASE}/bassins?layer=0&limit=500`),
-      fetchJson<any>(`${API_BASE}/communes?layer=0&limit=100`),
+      fetchJson<any>(`${API_BASE}/bassins?layer=0&limit=500&simplify=100`),
+      fetchJson<any>(`${API_BASE}/communes?layer=0&limit=100&simplify=100`),
     ])
 
+    // Communes : charger seulement id/nom (géométrie non nécessaire côté client)
     const liveCommunes: LiveCommune[] = (communesRes.features ?? []).map((f: any) => ({
       id: String(f.properties.objectid),
-      name: String(f.properties.nom ?? f.properties.nom_minus ?? ''),
+      name: String(f.properties.nom_minus ?? f.properties.nom ?? ''),
       province: '',
-      coordinates: f.geometry?.coordinates ?? [],
+      coordinates: [], // géométrie non utilisée côté client (attribution serveur)
     }))
 
     const communeById = new Map(liveCommunes.map(c => [c.id, c]))
-    const communeNames = liveCommunes.map(c => c.name).filter(Boolean)
 
+    // Captages : utiliser les attributs serveur (commune, nom_bassin) au lieu du point-in-polygon client
     const liveCaptages: LiveCaptage[] = (captagesRes.features ?? []).map((f: any) => {
       const props = f.properties
       const coords = f.geometry?.coordinates as [number, number] | undefined
-      let commune = ''
-      let province = ''
-      if (coords) {
-        for (const c of liveCommunes) {
-          if (c.coordinates && pointInMultiPolygon(coords, c.coordinates)) {
-            commune = c.name
-            break
-          }
-        }
-      }
+      
+      // Commune depuis l'attribut serveur (rempli au sync)
+      const commune = String(props.commune ?? '')
+      
+      // Bassin depuis l'attribut serveur (rempli au sync via regi_hydro_prel)
+      // Fallback: regi_hydro_prel si l'attribut enrichi manque
+      const nomBassin = String(props.nom_bassin ?? props.regi_hydro_prel ?? '')
+      
       return {
         id: String(props.objectid ?? props.num_ore ?? ''),
         name: String(props.nom_ouvrage ?? props.num_ore ?? ''),
         commune,
-        province,
+        province: '',
         kind: deriveKind(props),
         coordinates: coords ?? [0, 0],
-        properties: props,
+        properties: {
+          ...props,
+          // Normaliser les noms pour les jointures
+          _commune_server: commune,
+          _bassin_server: nomBassin,
+        },
       }
     }).filter(c => c.id)
 
+    // Régions (bassins) : captageRefs par jointure string (regi_hydro_prel / nom_bassin === region.nom)
+    // Plus de point-in-polygon client — attribution faite au sync
     const liveRegions: LiveRegion[] = (regionsRes.features ?? []).map((f: any) => {
       const props = f.properties
       const coords = f.geometry?.coordinates as number[][][] | undefined
+      const regionName = String(props.nom ?? '').trim()
+      
+      // Jointure par nom : captages dont _bassin_server === region.nom
       const captageRefs = liveCaptages
-        .filter(c => coords && pointInMultiPolygon(c.coordinates, coords))
+        .filter(c => c.properties._bassin_server === regionName)
         .map(c => c.id)
+      
       return {
         id: String(props.objectid ?? props.code_rh ?? ''),
-        name: String(props.nom ?? ''),
+        name: regionName,
         province: '',
         communes: String(props.communes ?? '').split(',').map(s => s.trim()).filter(Boolean),
         coordinates: coords ?? [],

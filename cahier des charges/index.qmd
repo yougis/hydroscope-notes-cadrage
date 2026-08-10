@@ -11,6 +11,9 @@ fichier_backlog : "backlog.xlsx"
 catalogue_inidcateur : ""
 fiche_indicateur : ""
 
+appendix:
+  - annexes_index.qmd
+  - critere-acceptation-index.qmd
 
 
 
@@ -19,6 +22,36 @@ copyright: !expr paste("Copyright Yapuka SARL - 2026. Tous droits réservés.", 
 resume: "Succédant au tableau de bord PressionPPE (2021), dont il capitalise les acquis techniques et le retour d'expérience, le projet Hydroscope vise la mise en place de services numériques destinées au suivi de la ressource en eau potable sur l'ensemble du territoire de la Nouvelle-Calédonie. Le projet Hydroscope se fixe pour objectif de caractériser les Bassin Versant d'Approvisionnement en Eau Potable (BVAEP), incluant les Perimetre de Protection de l'Eau (PPE) et les points de captages via leurs facteurs biogéographiques (relief, géologie, végétation, pluviométrie), les pressions subies (urbanisation, incendies, érosion...) et les réponses qui ont pu être apportées sur ces milieux. Le projet doit aussi permettre le partage de ces connaissances à différentes échelles (pays, province, commune) via des interfaces numériques adaptés à différents publics."
 
 ---
+
+
+```{python}
+#| label: dyn-counts
+#| include: false
+#| echo: false
+#| warning: false
+#| message: false
+
+import os
+import sys
+
+sys.path.insert(0, ".")
+from _lib_indicateurs import counts_all
+
+folder = "."
+docpath = os.environ.get("QUARTO_DOCUMENT_PATH")
+if docpath:
+    folder = os.path.dirname(docpath) or "."
+else:
+    folder = os.getcwd()
+
+try:
+    path = os.path.join(folder, "dyn_counts.txt")
+    with open(path, "w", encoding="utf-8") as f:
+        for k, v in sorted(counts_all().items()):
+            f.write(f"{k}={v}\n")
+except Exception as e:
+    print("DYNAD_ERROR", e)
+```
 
 
 {{< pagebreak >}}
@@ -167,45 +200,4 @@ L'OEIL assure la continuité intellectuelle du projet initial (PressionPPE en 20
 ***
 
 
-
-# Annexes {#sec-Annexes}
-
-## Tableau synthétique des indicateurs
-
-Le tableau de référence des indicateurs est joint à l'offre :
-
-- `fiches indicateurs.xlsx` — référentiel contractuel des indicateurs (38 indicateurs, regroupement V1 : 2 familles, 4 thèmes, 10 groupes)
-
-## Catalogue des fiches indicateurs {#sec-CataloguefichesInd}
-
-Le catalogue de fiches détaillées des indicateurs est fourni avec le présent cahier des charges :
-
-- [Fiches_indicateurs_HydroScope-v4.pdf](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées (définition, objectifs, méthode, sources, vigilances) ;
-
-
-## Critères d'acceptation {#sec-critere_acceptation}
-
-Les critères d'acceptation du périmètre MVP sont détaillés sous forme Gherkin (Étant donné / Quand / Alors) afin de constituer une base de recette contractuelle. Le périmètre lot 2 (évolutions) et l'option analyse multicritère seront à affiner en cours de projet.
-
-{{< include ./annexes/Criteres_acceptation_donnees.qmd >}}
-
-{{< include ./annexes/Criteres_acceptation_visualisation.qmd >}}
-
-
-{{< include ./annexes/Criteres_acceptation_lot2.qmd >}}
-
-***
-
-## Cadre de chiffrage (DQE)
-
-Le cadre de chiffrage (annexe ci-dessous) constitue la grille commune de chiffrage et de comparaison des offres. Les candidats sont invités à le compléter ligne à ligne, pour le périmètre de base, puis pour les options (analyse multicritère, TMA).
-
-
-{{< include ./annexes/Cadre_chiffrage.qmd >}}
-
----
-
-# Liste des document à fournir
-
-{{< include ./annexes/piece-a-fournir.qmd >}}
 

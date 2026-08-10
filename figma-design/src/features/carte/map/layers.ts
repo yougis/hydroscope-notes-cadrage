@@ -42,6 +42,7 @@ export interface BuildLayersOptions {
   layers: LayerDef[]
   captages: Array<{ id: string; coordinates: [number, number]; kind: string; name: string; commune: string; province: string }>
   regions: Array<{ id: string; coordinates: number[][][]; captageRefs: string[]; name: string; province: string; sector: string; communes: string[] }>
+  bbrRegions?: Array<{ id: string; coordinates: number[][][]; name: string; province: string; sector: string; communes: string[] }>
 }
 
 /** Retourne les calques vectoriels ordonnés (bas → haut). */
@@ -68,7 +69,7 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
       const dash = emphasized ? null : '6,4'
       const opacity = emphasized ? 1 : 0.6
 
-      const coords = b.coordinates?.[0]?.[0] ? b.coordinates[0][0] : []
+      const coords = b.coordinates?.[0] ? b.coordinates[0] : []
       const feature = new Feature({ geometry: coords.length ? toPolygon3857(coords) : undefined })
       feature.set('bvId', b.id)
       feature.set('name', b.name)
@@ -88,6 +89,35 @@ export function buildVectorLayers(opts: BuildLayersOptions): VectorLayer<VectorS
       source.addFeature(feature)
     }
     result.push(new VectorLayer({ source, style: bvStyle }))
+  }
+
+  // ── Bassins versants BBR ────────────────────────────────────────────────────────
+  if (on('bbr') && bbrRegions) {
+    const source = new VectorSource()
+    for (const b of bbrRegions) {
+      const cls = bvaepClass(activeIndicator, b.id)
+      const stroke = '#ef4444'
+      const strokeWidth = 1.5
+      const dash = '8,4'
+      const opacity = 0.7
+
+      const coords = b.coordinates?.[0] ? b.coordinates[0] : []
+      const feature = new Feature({ geometry: coords.length ? toPolygon3857(coords) : undefined })
+      feature.set('bvId', b.id)
+      feature.set('name', b.name)
+      feature.set('province', b.province)
+      feature.set('sector', b.sector)
+      feature.set('captageCount', b.communes?.length || 0)
+      feature.set('value', ind ? `${valueForBvaep(ind.id, b.id).toLocaleString('fr-FR')} ${ind.unit}` : null)
+      feature.set('stroke', stroke)
+      feature.set('strokeWidth', strokeWidth)
+      feature.set('dash', dash)
+      feature.set('opacity', opacity)
+      feature.set('kind', 'bbr')
+      feature.set('_hover', false)
+      source.addFeature(feature)
+    }
+    result.push(new VectorLayer({ source, style: bbrStyle }))
   }
 
   // ── Couche source ───────────────────────────────────────────────────────────
@@ -166,6 +196,21 @@ function bvStyle(feature: Feature): Style {
       color: strokeColor,
       width: hover ? (feature.get('strokeWidth') as number) + 0.5 : (feature.get('strokeWidth') as number),
       lineDash: dash ? [6, 4] : undefined,
+    }),
+  })
+}
+
+function bbrStyle(feature: Feature): Style {
+  const hover = feature.get('_hover')
+  const opacity = hover ? Math.min(1, (feature.get('opacity') as number) + 0.3) : (feature.get('opacity') as number)
+  const dash = feature.get('dash') as string | null
+  const stroke = feature.get('stroke') as string
+  const strokeColor = hexA(stroke, stroke.startsWith('#') ? opacity : 1)
+  return new Style({
+    stroke: new Stroke({
+      color: strokeColor,
+      width: hover ? (feature.get('strokeWidth') as number) + 0.5 : (feature.get('strokeWidth') as number),
+      lineDash: dash ? [8, 4] : undefined,
     }),
   })
 }

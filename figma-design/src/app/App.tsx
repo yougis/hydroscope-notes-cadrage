@@ -1,4 +1,4 @@
-import { useState, type ReactElement } from 'react'
+import { useEffect, useMemo, useState, type ReactElement } from 'react'
 import { useSession } from './hooks/useSession'
 import { VIEWS, GROUPS, buildIndicatorGroup } from '@/config/views'
 import { catalogueById } from '@/data/hydroscope'
@@ -26,6 +26,8 @@ export default function App() {
   const [helpAnchor, setHelpAnchor] = useState<string | undefined>(undefined)
   const [helpFrom, setHelpFrom] = useState<string | undefined>(undefined)
   const [focusIndicator, setFocusIndicator] = useState<string | null>(null)
+  // Key to force location refresh on pushState/popstate
+  const [locationKey, setLocationKey] = useState(0)
   const {
     unitMode,
     setMode,
@@ -44,6 +46,28 @@ export default function App() {
     period,
     setPeriod,
   } = useSession()
+
+  // Listen for URL changes (pushState/popstate) to refresh location
+  useEffect(() => {
+    const onPopState = () => setLocationKey((k) => k + 1)
+    const onCustomNavigate = () => setLocationKey((k) => k + 1)
+    window.addEventListener('popstate', onPopState)
+    window.addEventListener('hydroscope:navigate', onCustomNavigate)
+    return () => {
+      window.removeEventListener('popstate', onPopState)
+      window.removeEventListener('hydroscope:navigate', onCustomNavigate)
+    }
+  }, [])
+
+  // Location pour les stubs (CatalogueView, ReferentielsView) - évite React Router hooks
+  const location = useMemo(() => ({
+    pathname: `/${active}`,
+    search: window.location.search,
+  }), [active, locationKey])
+
+  const onNavigate = (view: string) => {
+    setActive(view)
+  }
 
   if (showHelp) {
     return <HelpPage initialAnchor={helpAnchor} fromLabel={helpFrom} onBack={() => setShowHelp(false)} />
@@ -119,24 +143,22 @@ export default function App() {
     )
   } else if (active === 'carte') {
     content = (
-      <ReferentielsProvider>
-        <CarteView
-          unitMode={unitMode}
-          onSetMode={setMode}
-          selectedUnites={selectedUnites}
-          onToggleUnite={toggleUnite}
-          selectedBvaeps={selectedBvaeps}
-          onToggleBvaep={toggleBvaep}
-          onApplyUnites={applyUnites}
-          onApplyBvaeps={applyBvaeps}
-          onClearUnites={clearUnites}
-          onClearBvaeps={clearBvaeps}
-          activeIndicator={activeIndicator}
-          onSelectIndicator={selectIndicator}
-          onOpenCatalogue={handleOpenCatalogue}
-          onOpenFiche={handleOpenFiche}
-        />
-      </ReferentielsProvider>
+      <CarteView
+        unitMode={unitMode}
+        onSetMode={setMode}
+        selectedUnites={selectedUnites}
+        onToggleUnite={toggleUnite}
+        selectedBvaeps={selectedBvaeps}
+        onToggleBvaep={toggleBvaep}
+        onApplyUnites={applyUnites}
+        onApplyBvaeps={applyBvaeps}
+        onClearUnites={clearUnites}
+        onClearBvaeps={clearBvaeps}
+        activeIndicator={activeIndicator}
+        onSelectIndicator={selectIndicator}
+        onOpenCatalogue={handleOpenCatalogue}
+        onOpenFiche={handleOpenFiche}
+      />
     )
   } else if (active === 'indicateurs') {
     content = <IndicateursView focusId={focusIndicator} onOpenFiche={(id) => setActive(id)} />
@@ -157,33 +179,35 @@ export default function App() {
     )
   } else {
     const S = STUBS[active]
-    content = <S />
+    content = <S onNavigate={onNavigate} location={location} />
   }
 
   return (
-    <div className="flex h-screen flex-col bg-neutral-100 text-neutral-800">
-      <Header avance={avance} onToggleAvance={() => setAvance((a) => !a)} period={period} onSetPeriod={setPeriod} onOpenHelp={openHelp} onExport={handleExport} />
+    <ReferentielsProvider>
+      <div className="flex h-screen flex-col bg-neutral-100 text-neutral-800">
+        <Header avance={avance} onToggleAvance={() => setAvance((a) => !a)} period={period} onSetPeriod={setPeriod} onOpenHelp={openHelp} onExport={handleExport} />
 
-      <div className="flex min-h-0 flex-1">
-        <Sidebar groups={visibleGroups} active={active} onSelect={setActive} collapsed={collapsed} onToggleCollapsed={() => setCollapsed((c) => !c)} />
+        <div className="flex min-h-0 flex-1">
+          <Sidebar groups={visibleGroups} active={active} onSelect={setActive} collapsed={collapsed} onToggleCollapsed={() => setCollapsed((c) => !c)} />
 
-        <main className="flex min-h-0 flex-1 flex-col">
-          <div className="flex items-center gap-2 border-b border-neutral-200 bg-white px-5 py-2.5">
-            <span className="text-xs text-neutral-400">{current.group}</span>
-            <span className="text-xs text-neutral-300">/</span>
-            <span className="text-sm font-semibold">{current.label}</span>
-            <span className="ml-auto rounded border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-[10px] text-neutral-400">
-              {current.epic} {current.mvp ? '· MVP' : ''}
-            </span>
-          </div>
+          <main className="flex min-h-0 flex-1 flex-col">
+            <div className="flex items-center gap-2 border-b border-neutral-200 bg-white px-5 py-2.5">
+              <span className="text-xs text-neutral-400">{current.group}</span>
+              <span className="text-xs text-neutral-300">/</span>
+              <span className="text-sm font-semibold">{current.label}</span>
+              <span className="ml-auto rounded border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-[10px] text-neutral-400">
+                {current.epic} {current.mvp ? '· MVP' : ''}
+              </span>
+            </div>
 
-          <div className="min-h-0 flex-1 overflow-y-auto p-5">
-            <div className="h-full">{content}</div>
-          </div>
-        </main>
+            <div className="min-h-0 flex-1 overflow-y-auto p-5">
+              <div className="h-full">{content}</div>
+            </div>
+          </main>
+        </div>
+
+        <Footer />
       </div>
-
-      <Footer />
-    </div>
+    </ReferentielsProvider>
   )
 }

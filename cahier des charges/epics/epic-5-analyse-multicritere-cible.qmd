@@ -1,0 +1,712 @@
+# Module d'Analyse Multicritère (AMC) — Spécifications Cibles pour Démonstration
+
+> **Note** : Ce document décrit l'architecture cible du module AMC telle qu'elle doit être réalisée pour la démonstration. L'implémentation technique est simplifiée (frontend-only avec données mockées) mais l'interface doit être visuellement et fonctionnellement représentative du module final.
+
+---
+
+## 1. Objectifs de la Démonstration
+
+Le module AMC doit permettre à un **expert métier eau potable** de :
+
+1. **Explorer** les 42 indicateurs organisés par Famille / Thème / Groupe
+2. **Pondérer** chaque indicateur via sliders (0–100 par famille)
+3. **Visualiser** en temps réel le score de criticité et les contributions
+4. **Sauvegarder/Charger** des presets (session locale + partage par lien)
+5. **Comparer** des scénarios de pondération
+6. **Comprendre** la méthodologie (transparence, traçabilité, vigilances)
+
+**Périmètre démo** : Frontend React + TypeScript, données mockées, localStorage uniquement, pas de backend.
+
+---
+
+## 2. Modèle de Données (Simplifié pour Démo)
+
+### 2.1 Hiérarchie des Indicateurs (42 indicateurs AMC)
+
+```
+FAMILLE (3 + 1 contexte)
+├── ENJEU (pondération positive) — "Qu'est-ce qu'on protège ?"
+│   ├── Thème: Enjeux AEP
+│   │   ├── Groupe: Robustesse et résilience technique
+│   │   │   ├── Capacité de production (ID:1)
+│   │   │   ├── Capacité réservoir (ID:3)
+│   │   │   └── Interconnexion (ID:5)
+│   │   ├── Groupe: Poids stratégique de la desserte
+│   │   │   ├── Longueur réseau (ID:2)
+│   │   │   ├── Population desservie (ID:6)
+│   │   │   └── Établissements publics sensibles (ID:12)
+│   │   └── Groupe: Sécurisation sanitaire et réglementaire
+│   │       ├── Traitement (ID:4)
+│   │       ├── Statut AODPE (ID:7)
+│   │       ├── Statut PPE (ID:8)
+│   │       └── Statut foncier (ID:11)
+│   └── Thème: Enjeux Environnementaux
+│       ├── Groupe: Valeur patrimoniale et réglementaire
+│       │   ├── Zones UNESCO (ID:100)
+│       │   ├── Zones protégées provinciales (ID:101)
+│       │   └── KBA / ZICO (ID:102)
+│       ├── Groupe: Richesse biologique et rareté
+│       │   └── Espèces rares et menacées dont forêt sèche (ID:104)
+│       └── Groupe: État écologique et rôle protecteur
+│           ├── Occupation sol - couvert végétal (ID:105)
+│           ├── Occupation sol - couvert forestier (ID:106)
+│           └── Occupation sol - surfaces agricoles (ID:107)
+│
+├── MENACE (pondération négative) — "Qu'est-ce qui menace ?"
+│   ├── Thème: MENACES NATURELLES
+│   │   ├── Groupe: Perturbations majeures du milieu (Aléa)
+│   │   │   └── Incendies cumulés (ID:200)
+│   │   └── Groupe: Fragilité des sols et transferts (chronique)
+│   │       ├── Surface érosion (ID:201)
+│   │       ├── Terrain nu (ID:202)
+│   │       └── Glissement terrain (ID:203)
+│   ├── Thème: MENACES ANTHROPIQUES
+│   │   ├── Groupe: Activités à risque
+│   │   │   ├── ICPE (ID:300)
+│   │   │   ├── Zone d'exploitation minière (ID:301)
+│   │   │   └── Autres IOTA (ID:308)
+│   │   ├── Groupe: Niveau d'artificialisation et densité
+│   │   │   ├── Urbanisation (ID:302)
+│   │   │   └── Habitations (ID:304)
+│   │   └── Groupe: Infrastructures et risques de dégradation
+│   │       ├── Franchissements (ID:305)
+│   │       ├── Linéaire routes (ID:306)
+│   │       └── Plan d'Urbanisme Directeur (ID:307)
+│   ├── Thème: Pressions Quantitatives
+│   │   ├── Groupe: Tension des usages
+│   │   │   ├── BBR (ID:500)
+│   │   │   ├── Nombre de prélèvement AODPE (ID:503)
+│   │   │   └── Volume des prélèvements AODPE (ID:504)
+│   │   └── Groupe: Apports naturels
+│   │       └── Pluviométrie (ID:501)
+│   └── Thème: Pressions Qualitatives
+│       ├── Groupe: Sensibilité naturelle
+│       │   ├── Géologie (ID:401)
+│       │   └── Vulnérabilité intrinsèque des eaux souterraines (ID:402)
+│       └── Groupe: État sanitaire et suivi de la qualité
+│           *(indicateurs qualité eau — non listés dans AMC actuel)*
+│
+├── VULNÉRABILITÉ (facteur amplificateur) — "Quelle est la sensibilité ?"
+│   └── Thème: Vulnérabilité Intrinsèque
+│       ├── Groupe: Vulnérabilité technique
+│       │   ├── Type ouvrage (ID:9)
+│       │   └── Statut captage (ID:10)
+│       └── Groupe: Sensibilité naturelle
+│           ├── Géologie (ID:401) — *redondance R2*
+│           └── Vulnérabilité intrinsèque (ID:402)
+│
+└── CONTEXTE / ÉTAT (hors calcul) — "Quel est le contexte ?"
+```
+
+### 2.2 Propriétés par Indicateur (pour démo)
+
+Chaque indicateur dispose de :
+- `id` : identifiant numérique
+- `nom` : libellé court
+- `famille` : 'enjeu' | 'menace' | 'vulnerabilite' | 'contexte'
+- `theme` : libellé thème
+- `groupe` : libellé groupe
+- `normalisation` : 'classes_3' | 'categoriel_1_3' | 'binaire_1_3' | 'deja_normalise_1_5'
+- `sens` : 'positif' | 'negatif' | 'arbitraire'
+- `objectif_amc` : texte explicatif
+- `vigilances` : array de codes (ex: ['R1', 'R8'])
+- `valeur_brute_mock` : nombre (donnée simulée par entité)
+- `donnee_manquante` : boolean (pour démo: certains indicateurs flagués)
+
+### 2.3 Vigilances (10 règles — affichage non-bloquant)
+
+| Code | Indicateurs | Type | Message affiché |
+|------|-------------|------|-----------------|
+| R1 | 501, 1 | Redondance | Pluviométrie redondante avec Capacité de production |
+| R2 | 401, 400 | Redondance | Géologie redondante avec Vulnérabilité intrinsèque |
+| R3 | 301, 202 | Redondance | Activité minière redondante avec Terrain nu |
+| R4 | 304, 302 | Redondance | Habitations + Urbanisation = même pression |
+| R5 | 203 | Incohérence | Glissement terrain → reclasser en Vulnérabilité |
+| R6 | 5 | Incohérence | Interconnexion : sens non tranché (secours vs pollution) |
+| R7 | 105, 106, 202 | Redondance | Sources MOS/TMF/Dynamic World concurrentes |
+| R8 | 2, 3, 6 | Incohérence | Multiples captages par UD → sur-comptage |
+| R9 | 201, 202 | Redondance | Surface érosion OEIL vs Terrain nu MOS |
+| R10 | 1, 500, 503 | Redondance | BBR intègre déjà prélèvements et étiage |
+
+---
+
+## 3. Logique de Calcul (Cible — Implémentée en Frontend)
+
+### 3.1 Normalisation (échelle 0–1)
+
+| Méthode | Règle (sens positif = plus = mieux) |
+|---------|-------------------------------------|
+| `classes_3` | Seuils [seuil_faible, seuil_moyen] → Classe 1=0.0, 2=0.5, 3=1.0 (inversé si sens négatif) |
+| `categoriel_1_3` | Mapping explicite {valeur: classe} → (classe-1)/2 |
+| `binaire_1_3` | 2 classes mappées sur 1 et 3 → 0.0 ou 1.0 |
+| `deja_normalise_1_5` | (valeur-1)/4 |
+
+### 3.2 Agrégation Additive par Famille
+
+```
+Score_Famille = Σ(valeur_normale_i × poids_i) / Σ|poids_i|
+```
+
+- Poids slider : 0–100 par famille (sens géré en interne : menace = poids négatif)
+- Si `donnee_manquante = true` → **exclu du calcul**, flag affiché, poids non redistribué
+
+### 3.3 Score Global
+
+```
+Score_Global = (w_enjeu × E + w_menace × M + w_vuln × V) / (w_enjeu + w_menace + w_vuln)
+```
+
+- Poids familles par défaut : Enjeu=1, Menace=1, Vulnérabilité=1 (modifiables)
+- Contexte = hors calcul (affichage seul)
+
+### 3.4 Contributions (pour waterfall chart)
+
+```
+Contribution_i = (valeur_normale_i × poids_i) / Σ|poids_j|  (par famille)
+%_contribution = Contribution_i / Score_Famille × 100
+```
+
+---
+
+## 4. Interface Utilisateur — Spécifications Visuelles
+
+### 4.1 Layout Global (3 zones)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  HEADER : Titre "Analyse Multicritère" | Sélecteur niveau géo | Presets      │
+├──────────────┬────────────────────────────────────────────────┬──────────────┤
+│              │                                                │              │
+│  SIDEBAR     │           PANEL CENTRAL                        │  PANEL       │
+│  GAUCHE      │                                                │  DROIT       │
+│  (320px)     │  ┌────────────────────────────────────────┐    │  (350px)     │
+│              │  │  SCORE GLOBAL + GAUGE                  │    │              │
+│  Indicator   │  ├────────────────────────────────────────┤    │  Contribution│
+│  Tree        │  │  VIGILANCES BANNER (si actives)        │    │  Chart       │
+│              │  ├────────────────────────────────────────┤    │  (Waterfall) │
+│  - Arbores-  │  │  SLIDERS POIDS (par indicateur actif)  │    │              │
+│  cence       │  │  (groupés par Famille/Thème/Groupe)    │    │  [Tri/filtre]│
+│  - Checkbox  │  └────────────────────────────────────────┘    │              │
+│  - Slider    │                                                │  Scenario    │
+│  - Badges    │  ┌────────────────────────────────────────┐    │  Comparison  │
+│  - Recherche │  │  CARTE / VUE LISTE ENTITÉS             │    │  (Tableau)   │
+│              │  │  (choroplèthe scores par entité)       │    │              │
+│              │  └────────────────────────────────────────┘    │              │
+│              │                                                │  Methodology │
+│              │                                                │  Panel       │
+└──────────────┴────────────────────────────────────────────────┴──────────────┘
+```
+
+### 4.2 Sidebar Gauche — IndicatorTree
+
+**Composant** : `IndicatorTree.tsx` (récursif)
+
+**Fonctionnalités** :
+- Arborescence 4 niveaux : Famille → Thème → Groupe → Indicateur
+- **Checkbox** à chaque niveau (cascade parent→enfants, tri-state)
+- **Slider mini** (0–100) visible au niveau indicateur seulement
+- **Badges** :
+  - ⚠️ Vigilance (tooltip liste codes)
+  - 🟡 Donnée manquante (si `donnee_manquante=true`)
+  - ℹ️ Info (objectif AMC, normalisation)
+- **Recherche full-text** (filtre arborescence, highlight match)
+- **Filtres rapides** : Boutons Famille (Enjeu/Menace/Vulnérabilité/Contexte)
+
+**États visuels** :
+```
+☑ Enjeu ▼
+  ☑ Enjeux AEP ▼
+    ☑ Robustesse et résilience technique ▼
+      ☑ Capacité de production     [████████░░] 80  ⚠️ ℹ️
+      ☐ Capacité réservoir         [██████░░░░] 60     ℹ️
+      ☑ Interconnexion             [██████████] 100 🟡 ⚠️ ℹ️
+    ☑ Poids stratégique ▼
+      ☑ Longueur réseau            [████████░░] 80  ⚠️
+      ☑ Population desservie       [██████████] 100
+      ☐ Établissements publics     [████░░░░░░] 40
+```
+
+### 4.3 Panel Central — Sliders + Score + Carte
+
+#### 4.3.1 Score Global + Gauge (Top)
+
+```
+┌────────────────────────────────────────────────────────────────────┐
+│  SCORE GLOBAL : 0.67 / 1.00    ████████████████████░░░░░░░░░░░░  67% │
+│  ┌─────────┬─────────┬─────────┐                                    │
+│  │ ENJEU   │ MENACE  │ VULNÉR. │                                    │
+│  │ 0.78    │ 0.42    │ 0.35    │                                    │
+│  │ ████████│ ██████░░│ ████░░░░│  Poids: [100] [100] [100] ▼        │
+│  └─────────┴─────────┴─────────┘                                    │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+#### 4.3.2 Banner Vigilances (si indicateurs actifs concernés)
+
+```
+⚠️ 3 vigilances détectées sur les indicateurs actifs
+   [R1] Pluviométrie redondante avec Capacité production
+   [R4] Habitations + Urbanisation = même pression
+   [R8] Sur-comptage possible (multiples captages/UD)
+   [Voir détails →] ouvre panneau latéral droit
+```
+
+#### 4.3.3 Sliders Poids (Zone principale, scrollable)
+
+**Groupement visuel par Famille > Thème > Groupe** (accordéons)
+
+```
+┌─ ENJEU (Poids famille: 100) ──────────────────────────────────────┐
+│  ▼ Enjeux AEP                                                       │
+│    ▼ Robustesse et résilience technique                            │
+│       Capacité de production        [████████████░░░░░░░░] 60  ℹ️  │
+│       Capacité réservoir            [██████████░░░░░░░░░░] 50  ℹ️  │
+│       Interconnexion                [████████████████░░░░] 80  ⚠️  │
+│    ▼ Poids stratégique de la desserte                              │
+│       Longueur réseau               [██████████████████░░] 90  ⚠️  │
+│       Population desservie          [████████████████████] 100     │
+│  ▼ Enjeux Environnementaux                                         │
+│    ...                                                              │
+└────────────────────────────────────────────────────────────────────┘
+
+┌─ MENACE (Poids famille: 100) ─────────────────────────────────────┐
+│  ▼ Menaces Naturelles                                              │
+│    ▼ Perturbations majeures                                        │
+│       Incendies cumulés             [████████████████████] 100     │
+│    ▼ Fragilité des sols                                          │
+│       Terrain nu                    [████████████████░░░░] 80  ⚠️  │
+│       Glissement terrain            [██████████░░░░░░░░░░] 50  ⚠️  │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+**Chaque slider** :
+- Track 0–100, thumb avec valeur
+- Tooltip au hover : nom complet, objectif AMC, normalisation, vigilances
+- Bouton **Reset** (valeur défaut = 50 ou pondération fiche indicateur)
+- Indicateur sens : petite icône ↗️ (positif) / ↘️ (négatif) / ❓ (arbitraire)
+- Fond coloré famille : Vert (Enjeu), Rouge (Menace), Orange (Vulnérabilité), Gris (Contexte)
+
+#### 4.3.4 Carte / Liste Entités (Bottom)
+
+- **Sélecteur niveau** : Tabs [Captage] [Bassin Versant] [H3-7] [H3-8] [UD]
+- **Carte choroplèthe** : Couleurs score global (vert→jaune→rouge)
+- **Liste triable** : Entité | Score | Enjeu | Menace | Vuln. | Données manquantes
+- **Click entité** → met à jour waterfall chart (panel droit) pour cette entité
+
+### 4.4 Panel Droit — Analyses
+
+#### 4.4.1 ContributionChart (Waterfall Horizontal)
+
+```
+CONTRIBUTIONS — Captage Prony (Score: 0.67)
+═══════════════════════════════════════════════════════════════════
+
+ENJEU (+0.42)
+  ████████████████████████████░░░░░░░░░░░░░░░░░  Capacité production     +0.23 (34%)
+  ██████████████████████████░░░░░░░░░░░░░░░░░░░  Longueur réseau         +0.18 (27%)
+  ██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  Traitement              +0.05 (7%)
+  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  Interconnexion          +0.00 (0%) 🟡
+
+MENACE (-0.31)
+  ████████████████████████░░░░░░░░░░░░░░░░░░░░░  Urbanisation            -0.15 (22%)
+  ████████████████████░░░░░░░░░░░░░░░░░░░░░░░░  ICPE                    -0.12 (18%)
+  ████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░  Terrain nu              -0.10 (15%) ⚠️
+
+VULNÉRABILITÉ (×0.18)
+  ██████████████████████████████░░░░░░░░░░░░░  Vulnérabilité intrinsèque ×0.18 (27%)
+
+──────────────────────────────────────────────────────────────────────
+TOTAL: 0.67 / 1.00
+```
+
+**Interactions** :
+- Hover barre → tooltip détaillé (valeur brute, normale, poids, vigilance)
+- Click barre → focus indicateur dans sidebar (scroll + highlight)
+- Tri : Contribution ↕ | Famille | Thème | Alphabétique
+- Filtre : Famille [Tous ▼] | Top 10 seulement [☐]
+
+#### 4.4.2 ScenarioComparison (Tableau + Radar)
+
+```
+COMPARAISON SCÉNARIOS
+════════════════════════════════════════════════════════════════════════
+
+| Entité          | Défaut (Équilibré) | Forte Menace | Forte Résilience | Δ Déf→Men | Δ Déf→Rés |
+|-----------------|-------------------|--------------|------------------|-----------|-----------|
+| Captage Prony   | 0.72 🟢           | 0.45 🔴      | 0.81 🟢          | -0.27     | +0.09     |
+| Captage Tontouta| 0.58 🟡           | 0.32 🔴      | 0.71 🟢          | -0.26     | +0.13     |
+| BV Dumbéa       | 0.64 🟡           | 0.38 🔴      | 0.75 🟢          | -0.26     | +0.11     |
+
+[Graphique Radar superposé — 3 scénarios, 5 entités max]
+[Heatmap indicateurs différenciants — quelles pondérations changent le classement]
+```
+
+**Actions** :
+- [+] Nouveau scénario (copie config actuelle)
+- Charger scénario → remplace sliders actuels
+- Exporter comparaison CSV
+
+#### 4.4.3 MethodologyPanel (Documentation Auto-générée)
+
+```
+MÉTHODOLOGIE — Scénario "Défaut"
+════════════════════════════════════════════════════════════════════════
+
+FORMULE GLOBALE
+  Score = (1.0×Enjeu + 1.0×Menace + 1.0×Vulnérabilité) / 3.0
+
+NORMALISATION PAR INDICATEUR (actifs)
+  • Capacité production : Classes 3 niveaux, seuils [50, 150] m³/j, sens +
+  • Longueur réseau : Classes 3 niveaux, seuils [20, 80] km, sens +
+  • Traitement : Catégoriel 1-3 {Aucun:1, Partiel:2, Complet:3}, sens +
+  • ...
+
+VIGILANCES APPLIQUÉES
+  ⚠️ R1 : Pluviométrie (501) redondante avec Capacité production (1)
+  ⚠️ R4 : Habitations (304) + Urbanisation (302) = même pression
+  ℹ️ R8 : Sur-comptage possible (captages 2,3,6 partagent même UD)
+
+DONNÉES MANQUANTES (exclues du calcul)
+  🟡 Interconnexion (5) : pas de donnée pour ce captage
+  🟡 Glissement terrain (203) : indicateur non calculé
+
+[Exporter PDF] [Exporter Markdown]
+```
+
+---
+
+## 5. Gestion des Presets (localStorage + Partage)
+
+### 5.1 Structure Preset (JSON)
+
+```json
+{
+  "id": "uuid-v4",
+  "nom": "Scénario Équilibré",
+  "description": "Pondérations par défaut validées experts",
+  "version": 1,
+  "parentId": null,
+  "isPublic": false,
+  "shareSlug": null,
+  "createdAt": "2026-08-10T14:30:00Z",
+  "updatedAt": "2026-08-10T14:30:00Z",
+  "config": {
+    "niveauGeo": "captage",
+    "poidsFamilles": { "enjeu": 100, "menace": 100, "vulnerabilite": 100 },
+    "indicateursActifs": [1,2,3,4,5,6,7,8,9,10,11,12,100,101,102,104,105,106,107,200,201,202,203,300,301,302,304,305,306,307,308,401,402,500,501,503,504],
+    "poids": { "1": 80, "2": 60, "3": 50, "4": 70, "5": 100, ... },
+    "vigilancesActives": ["R1","R4","R8"]
+  }
+}
+```
+
+### 5.2 Fonctionnalités PresetManager
+
+| Action | Description |
+|--------|-------------|
+| **Sauvegarder** | Modal nom/description → ajoute à localStorage, génère UUID |
+| **Charger** | Liste presets utilisateur + presets publics → remplace config courante |
+| **Défaut** | ⭐ Marquer comme défaut → chargé au démarrage |
+| **Exporter** | Télécharge `preset-nom.json` |
+| **Importer** | Drag-drop JSON → validation → ajoute aux presets |
+| **Publier** | Génère `shareSlug` (8 chars), `isPublic=true`, copy lien `demo/amc?preset=abc123` |
+| **Forker** | Sur preset public → crée copie `isPublic=false`, `parentId=original`, nouveau slug |
+| **Supprimer** | Confirmation → retire de localStorage |
+
+### 5.3 Mode Lecture Seule (Lien Partagé)
+
+URL : `/demo/amc?preset=abc123def`
+
+**Comportement** :
+- Charge preset public (lecture seule)
+- **Désactive** : tous sliders, checkboxes, boutons save/publish/fork
+- **Affiche** : badge "🔒 Vue partagée — lecture seule"
+- **Autorise** : navigation arbre, tooltips, waterfall, changement entité, export PDF méthodologie
+- **Cache** : boutons "Nouveau scénario", "Publier", "Forker"
+
+---
+
+## 6. Données Mockées pour Démo
+
+### 6.1 Entités (10 captages + 5 BV + 20 H3)
+
+```typescript
+const mockEntites = [
+  { id: 'CAP_001', nom: 'Captage Prony', type: 'captage', bv: 'BV_01', h3_7: '87283082b', h3_8: '87283082bfff', valeurs: {1: 180, 2: 45, 3: 1200, ...} },
+  { id: 'CAP_002', nom: 'Captage Tontouta', type: 'captage', bv: 'BV_02', ... },
+  { id: 'BV_01', nom: 'Bassin Versant Prony', type: 'bassin_versant', enfants: ['CAP_001', 'CAP_003'], ... },
+  { id: 'H3_87283082b', nom: 'Zone H3-7 Prony', type: 'h3_resolution_7', ... },
+];
+```
+
+### 6.2 Valeurs par indicateur (simulées)
+
+- Générateur aléatoire seedé par `entite_id + indicateur_id` pour reproductibilité
+- ~15% indicateurs flagués `donnee_manquante=true` par entité
+- Respecte échelles : classes_3 (1-3), categoriel (1-3), binaire (1/3), 1-5
+
+---
+
+## 7. Spécifications Techniques Frontend (Démo)
+
+### 7.1 Stack
+
+| Technologie | Version | Usage |
+|-------------|---------|-------|
+| React | 18+ | UI |
+| TypeScript | 5+ | Typage |
+| Vite | 5+ | Build/dev |
+| Tailwind CSS | 3+ | Styling |
+| Zustand | 4+ | State + persist localStorage |
+| Recharts | 2+ | Graphiques (waterfall, radar) |
+| Leaflet / MapLibre | - | Carte choroplèthe |
+| Lucide React | - | Icônes |
+| date-fns | - | Dates |
+
+### 7.2 Architecture Composants (Simplifiée)
+
+```
+src/
+├── components/
+│   ├── amc/
+│   │   ├── AMCWorkspace.tsx           # Root, layout 3 zones
+│   │   ├── sidebar/
+│   │   │   ├── IndicatorTree.tsx      # Arborescence récursive
+│   │   │   ├── IndicatorTreeNode.tsx  # Nœud unique
+│   │   │   └── FilterBar.tsx          # Recherche + filtres famille
+│   │   ├── center/
+│   │   │   ├── ScoreHeader.tsx        # Gauge + familles + vigilances
+│   │   │   ├── WeightSliders.tsx      # Accordéons famille/thème/groupe
+│   │   │   ├── IndicatorSlider.tsx    # Slider unique + tooltip
+│   │   │   ├── EntityMap.tsx          # Carte choroplèthe
+│   │   │   └── EntityList.tsx         # Tableau entités triable
+│   │   ├── right/
+│   │   │   ├── ContributionChart.tsx  # Waterfall horizontal
+│   │   │   ├── ScenarioComparison.tsx # Tableau + radar + heatmap
+│   │   │   ├── MethodologyPanel.tsx   # Doc auto-générée
+│   │   │   └── PresetManager.tsx      # Save/Load/Share/Fork
+│   │   └── shared/
+│   │       ├── VigilanceBanner.tsx    # Banner alertes
+│   │       ├── TooltipInfo.tsx        # Tooltip standardisé
+│   │       └── BadgeMissing.tsx       # Badge donnée manquante
+│   ├── ui/                            # Composants de base (Button, Accordion, Tab, etc.)
+│   └── map/                           # Wrapper carte
+├── store/
+│   └── useAMCStore.ts                 # Zustand store (config, presets, entité sélectionnée)
+├── data/
+│   ├── indicators.ts                  # 42 indicateurs config complète
+│   ├── vigilances.ts                  # 10 règles
+│   ├── mockEntites.ts                 # Entités + valeurs mock
+│   └── presets.ts                     # Presets par défaut
+├── utils/
+│   ├── normalization.ts               # 4 méthodes normalisation
+│   ├── aggregation.ts                 # Calcul scores + contributions
+│   ├── presetStorage.ts               # localStorage CRUD + share slug
+│   └── export.ts                      # PDF/Markdown/CSV/JSON
+├── hooks/
+│   ├── useAMCCalculation.ts           # Calcul memoized (react-use-memo)
+│   └── usePresets.ts                  # Actions presets
+└── types/
+    └── amc.ts                         # Types TypeScript complets
+```
+
+### 7.3 Store Zustand (useAMCStore)
+
+```typescript
+interface AMCState {
+  // Config courante
+  niveauGeo: 'captage' | 'bassin_versant' | 'h3_7' | 'h3_8' | 'unite_distribution';
+  poidsFamilles: { enjeu: number; menace: number; vulnerabilite: number };
+  indicateursActifs: Set<number>;
+  poids: Record<number, number>;           // indicateur_id → 0-100
+  vigilancesActives: string[];
+  
+  // Entité sélectionnée (pour panel droit)
+  entiteSelectionneeId: string | null;
+  
+  // Presets
+  presets: Preset[];
+  presetActifId: string | null;
+  modeLectureSeule: boolean;               // true si ?preset=slug
+  
+  // Actions
+  setNiveauGeo: (n: NiveauGeo) => void;
+  setPoidsFamille: (famille: keyof PoidsFamilles, v: number) => void;
+  toggleIndicateur: (id: number, actif: boolean) => void;
+  setPoidsIndicateur: (id: number, v: number) => void;
+  toggleVigilance: (code: string) => void;
+  selectionnerEntite: (id: string) => void;
+  
+  // Presets
+  sauvegarderPreset: (nom: string, desc?: string) => Preset;
+  chargerPreset: (id: string) => void;
+  publierPreset: (id: string) => string;   // retourne shareSlug
+  forkerPreset: (id: string) => Preset;
+  supprimerPreset: (id: string) => void;
+  exporterPreset: (id: string) => void;
+  importerPreset: (file: File) => Preset;
+  
+  // Auto-save localStorage (debounced)
+  _hydrate: () => void;
+}
+```
+
+### 7.4 Calcul Mémoïsé (useAMCCalculation)
+
+```typescript
+// Recalcul uniquement si config ou entité change
+const { scoreGlobal, scoresFamilles, contributions, vigilancesDetectees, donneesManquantes } = 
+  useAMCCalculation({
+    entiteId: entiteSelectionneeId,
+    indicateursActifs,
+    poids,
+    poidsFamilles,
+    vigilancesActives,
+    niveauGeo,
+  });
+```
+
+---
+
+## 8. Parcours Utilisateur (User Journeys)
+
+### 8.1 Parcours Expert Métier — Première utilisation
+
+1. **Arrivée** → Page `/demo/amc` → Config par défaut chargée (preset "Défaut")
+2. **Exploration** → Sidebar : déplie Enjeu > Enjeux AEP > Robustesse > voit 3 indicateurs
+3. **Ajustement** → Slider "Capacité production" 80 → Score global MAJ temps réel (gauge + waterfall)
+4. **Vigilance** → Banner "⚠️ 3 vigilances" → clique "Voir détails" → panel droit méthodologie
+5. **Donnée manquante** → Badge 🟡 sur Interconnexion → tooltip "Donnée non disponible pour ce captage"
+6. **Sauvegarde** → Clic "💾 Sauvegarder preset" → nom "Mon analyse Prony" → confirm
+7. **Partage** → Clic "🔗 Publier" → copie lien → envoie à collègue
+8. **Collègue** → Ouvre lien → Mode lecture seule → voit même config, peut exporter PDF méthode
+
+### 8.2 Parcours Décideur — Lecture Seule
+
+1. Reçoit lien `demo/amc?preset=abc123def`
+2. Voit score global, gauge, waterfall pour captage par défaut
+3. Change entité via liste → waterfall MAJ
+4. Clic "📄 Exporter méthode" → PDF pour instance décisionnelle
+5. Ne peut pas modifier sliders (désactivés visuellement)
+
+### 8.3 Parcours Expert — Comparaison Scénarios
+
+1. Charge preset "Défaut" → Clic "➕ Nouveau scénario" → nom "Forte Menace"
+2. Monte sliders Menace (Urbanisation 100, ICPE 100, Terrain nu 100)
+3. Baisse sliders Enjeu (Capacité production 30)
+4. Sauvegarde scénario
+5. Onglet "Comparaison" → Ajoute "Défaut" + "Forte Menace" + "Forte Résilience"
+6. Voit tableau + radar → identifie captages basculants
+7. Exporte CSV comparaison
+
+---
+
+## 9. Accessibilité & Qualité (Cibles Démo)
+
+| Critère | Cible |
+|---------|-------|
+| **Contraste** | WCAG AA (4.5:1 texte, 3:1 UI) |
+| **Focus visible** | Outline 2px sur tous éléments interactifs |
+| **Navigation clavier** | Tab ordonné, Escape ferme modales, Flèches dans tree |
+| **ARIA** | `aria-label` sliders, `aria-expanded` accordéons, `role="tree"` sidebar |
+| **Screen reader** | Annonces score MAJ (`aria-live="polite"`), badges lus |
+| **Responsive** | Sidebar collapsible < 1024px, panels empilés mobile |
+| **Performance** | Calcul < 50ms, render < 100ms, bundle < 200KB gzipped |
+
+---
+
+## 10. Livrables Démo (Checklist)
+
+### 10.1 Interface (Obligatoire)
+
+- [ ] Layout 3 zones responsive
+- [ ] IndicatorTree complet (42 indicateurs, 4 familles, 7 thèmes, 16 groupes)
+- [ ] Sliders groupés par famille/thème/groupe avec accordéons
+- [ ] Score header (gauge + 3 familles + poids familles modifiables)
+- [ ] Vigilance banner + détails
+- [ ] Badges donnée manquante (exclusion calcul)
+- [ ] ContributionChart (waterfall triable, filtrable, drill-down)
+- [ ] EntityMap (choroplèthe 5 niveaux géo) + EntityList
+- [ ] ScenarioComparison (tableau + radar + heatmap)
+- [ ] MethodologyPanel (auto-généré, export PDF/MD)
+- [ ] PresetManager (save/load/export/import/publish/fork/delete)
+- [ ] Mode lecture seule via `?preset=slug`
+
+### 10.2 Données & Calcul
+
+- [ ] 42 indicateurs config complète (normalisation, sens, vigilances, objectif AMC)
+- [ ] 10 vigilances règles
+- [ ] 10 captages + 5 BV + 20 H3 mockés avec valeurs cohérentes
+- [ ] Normalisation 4 méthodes fonctionnelles
+- [ ] Agrégation additive par famille + globale
+- [ ] Exclusion données manquantes + flag visuel
+- [ ] Calcul contributions waterfall
+
+### 10.3 Persistance & Partage
+
+- [ ] localStorage : config courante + presets utilisateur
+- [ ] Auto-save debounced 500ms
+- [ ] Génération slug partage (8 chars)
+- [ ] Fork preset (copie + parent_id)
+- [ ] Import/Export JSON
+
+### 10.4 Polish
+
+- [ ] Tooltips riches (objectif AMC, normalisation, vigilances)
+- [ ] Animations fluides (accordion, slider, transitions)
+- [ ] États de charge (skeleton tree, carte)
+- [ ] Gestion erreurs (import JSON invalide, preset introuvable)
+- [ ] README démo (lancement, structure, données mock)
+
+---
+
+## 11. Estimation Effort Démo (Frontend Only)
+
+| Composant | Complexité | Jours |
+|-----------|------------|-------|
+| Setup projet + store + types | Faible | 1 |
+| IndicatorTree (récursif + recherche) | Moyenne | 2 |
+| WeightSliders (accordéons + sliders groupés) | Moyenne | 2 |
+| ScoreHeader + VigilanceBanner | Faible | 1 |
+| Normalisation + Agrégation (utils) | Moyenne | 1 |
+| ContributionChart (waterfall Recharts) | Moyenne | 2 |
+| EntityMap (Leaflet choroplèthe) | Moyenne | 2 |
+| EntityList + sélecteur niveau | Faible | 1 |
+| ScenarioComparison (tableau + radar) | Élevée | 2 |
+| MethodologyPanel (génération doc) | Moyenne | 1 |
+| PresetManager (CRUD + share + fork) | Moyenne | 2 |
+| Mode lecture seule (URL param) | Faible | 0.5 |
+| Données mock (42 indicateurs + entités) | Faible | 1 |
+| Polish + accessibilité + tests | Moyenne | 2 |
+| **TOTAL** | | **~20.5 jours** |
+
+---
+
+## 12. Risques & Mitigations (Démo)
+
+| Risque | Probabilité | Impact | Mitigation |
+|--------|-------------|--------|------------|
+| Waterfall chart Recharts limitations | Moyenne | Élevé | Prévoir fallback D3 simple si Recharts insuffisant |
+| Performance arbre 42 nœuds + sliders | Faible | Moyen | Virtualisation liste + memo React.memo |
+| localStorage quota (presets volumineux) | Faible | Faible | Compresser JSON, limiter 50 presets |
+| Partage lien - collision slug | Très faible | Faible | UUID v4 tronqué 8 chars (16^8 combinaisons) |
+| Données mock incohérentes | Moyenne | Moyen | Script génération seedé + validation seuils |
+
+---
+
+## 13. Évolutions Post-Démo (Vers Architecture Cible)
+
+| Domaine | Démo (Actuel) | Cible (Production) |
+|---------|---------------|-------------------|
+| **Backend** | Aucun (mock localStorage) | API REST + Celery calcul async |
+| **Auth** | Aucune | JWT + rôles (expert_metier, admin_data) |
+| **Données** | Mock seedé | Vraies valeurs indicateurs (PostGIS + H3) |
+| **Presets** | localStorage + lien public | BDD + partage équipe + versioning |
+| **Scénarios** | Local uniquement | Calcul batch + comparaison serveur |
+| **Carte** | Leaflet statique | MapLibre GL + tuiles vectorielles + filtres |
+| **Export** | PDF/MD client-side | Rapports serveur (templates Jinja2) |
+| **Audit** | Aucun | Traçabilité complète (user, config, timestamp) |
+
+---
+
+*Document généré pour la démonstration du module AMC HydroScope — Version cible simplifiée frontend-only*

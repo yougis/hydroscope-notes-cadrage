@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react'
 import { WireframeBlock } from '@/components/ui/WireframeBlock'
+import { Icon } from '@/components/ui/Icon'
+
+interface StubProps {
+  onNavigate: (view: string) => void
+  location: { pathname: string; search: string }
+}
 
 interface SourceMeta {
   key: string
@@ -46,7 +52,7 @@ async function triggerRefresh(): Promise<void> {
   await res.json()
 }
 
-export function ReferentielsView() {
+export function ReferentielsView({ onNavigate, location }: StubProps) {
   const [sources, setSources] = useState<SourceMeta[]>([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
@@ -198,12 +204,25 @@ export function ReferentielsView() {
                           Dernier sync: {src.last_sync ? new Date(src.last_sync).toLocaleString() : 'Jamais'}
                         </span>
                         {isAvailable && (
-                          <button
-                            onClick={() => handlePreview(src.key, Number(layerId))}
-                            className="rounded border border-neutral-300 bg-white px-2.5 py-1 text-xs hover:bg-neutral-50"
-                          >
-                            Aperçu (10)
-                          </button>
+                          <>
+                            <button
+                              onClick={() => handlePreview(src.key, Number(layerId))}
+                              className="rounded border border-neutral-300 bg-white px-2.5 py-1 text-xs hover:bg-neutral-50"
+                            >
+                              Aperçu (10)
+                            </button>
+                            <button
+                              onClick={() => onNavigate('catalogue')}
+                              className="rounded border border-neutral-300 bg-white px-2.5 py-1 text-xs hover:bg-neutral-50"
+                              title="Voir la fiche complète dans le catalogue"
+                              aria-label={`Fiche catalogue pour ${src.key} layer ${layerId}`}
+                            >
+                              <Icon className="h-3.5 w-3.5">
+                                <circle cx="8" cy="8" r="6" />
+                                <path d="M8 6v4M8 14v.01" />
+                              </Icon>
+                            </button>
+                          </>
                         )}
                       </div>
                     </div>

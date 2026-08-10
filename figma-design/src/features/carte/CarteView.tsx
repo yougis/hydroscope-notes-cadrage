@@ -10,6 +10,32 @@ import type { HoverEntity, UnitMode } from '@/types/domain'
 import { useReferentiels } from '@/data/ReferentielsContext'
 import type { LiveCaptage, LiveRegion } from '@/data/referentiels'
 
+const API_BASE = '/api'
+
+async function fetchBBRRegions(): Promise<LiveRegion[]> {
+  try {
+    const res = await fetch(`${API_BASE}/bbr?layer=0&limit=10000`)
+    if (!res.ok) throw new Error('Failed to fetch BBR')
+    const data = await res.json()
+    return (data.features ?? []).map((f: any) => {
+      const props = f.properties
+      return {
+        id: String(props.objectid ?? ''),
+        name: String(props.dce_restant_pour_affichage ?? `BV ${props.objectid}`),
+        province: '',
+        sector: String(props.dce_restant_pour_affichage ?? ''),
+        communes: [],
+        coordinates: f.geometry?.coordinates as number[][][] | undefined ?? [],
+        captageRefs: [],
+        properties: props,
+      }
+    }).filter(r => r.id)
+  } catch (e) {
+    console.warn('[CarteView] Failed to load BBR regions:', e)
+    return []
+  }
+}
+
 export interface CarteViewProps {
   unitMode: UnitMode
   onSetMode: (m: UnitMode) => void
@@ -120,6 +146,7 @@ export function CarteView({
 }: CarteViewProps) {
   const { layers, toggleLayer, basemap, setBasemap } = useLayers()
   const { regions, captages, loading: referentielsLoading } = useReferentiels()
+  const [bbrRegions, setBbrRegions] = useState<LiveRegion[]>([])
   const [mode, setMode] = useState<ChartViewMode>('repartition')
   const [showCarte, setShowCarte] = useState(false)
   const [hoverEntity, setHoverEntity] = useState<HoverEntity | null>(null)
@@ -144,6 +171,15 @@ export function CarteView({
     return () => {
       alive = false
     }
+  }, [])
+
+  // Fetch BBR regions
+  useEffect(() => {
+    let alive = true
+    fetchBBRRegions().then(data => {
+      if (alive) setBbrRegions(data)
+    })
+    return () => { alive = false }
   }, [])
 
   if (referentielsLoading) {
@@ -209,6 +245,7 @@ export function CarteView({
         showGrid={false}
         captages={captages}
         regions={regions}
+        bbrRegions={bbrRegions}
       />
         <StatLegend activeIndicator={activeIndicator} choropleth={h3Mode} />
         <div className="absolute bottom-3 right-3 flex items-center gap-2">

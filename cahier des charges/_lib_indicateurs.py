@@ -459,6 +459,110 @@ def _render_docx(sections) -> str:
     return "\n".join(lines)
 
 
+# ── Compteurs dynamiques pour les chapitres ──────────────────────────────────
+
+def count_sources(disponible_only: bool = False) -> int:
+    """Compte les sources de données de la feuille `sources` (12 colonnes).
+
+    disponible_only=True ne retient que les lignes dont la colonne
+    `statut_disponibilite` (casse et espaces normalisés) vaut « disponible ».
+    """
+    df = load_sources()
+    if disponible_only:
+        df = df[df["statut_disponibilite"].astype(str).str.strip().str.lower() == "disponible"]
+    return len(df)
+
+
+def count_indicateurs_actifs() -> int:
+    """Nombre d'indicateurs actifs du référentiel flat V1 (38 contractuels)."""
+    return len(load_flat(active_only=True))
+
+
+def count_familles_actives() -> int:
+    """Nombre de familles actives distinctes (2 dans le regroupement V1)."""
+    return int(load_flat(active_only=True)["nom_famille"].nunique())
+
+
+def count_themes_actives() -> int:
+    """Nombre de thèmes actifs distincts (4 dans le regroupement V1)."""
+    return int(load_flat(active_only=True)["Nom_theme"].nunique())
+
+
+def count_groupes_actifs() -> int:
+    """Nombre de groupes actifs distincts (10 dans le regroupement V1)."""
+    return int(load_flat(active_only=True)["groupe"].nunique())
+
+
+def _backlog_df() -> pd.DataFrame:
+    """Charge le backlog brut (EPIC, ID_US, MVP) sans passer par `load_backlog`.
+
+    `load_backlog()` écrase la colonne MVP ; ici on garde les colonnes
+    d'origine et on ajoute `ID_US` en alias de « ID User Story » si présent.
+    Le MVP est normalisé comme dans `load_backlog` (TRUE → Oui / FALSE → Non).
+    """
+    df = pd.read_excel(BACKLOG_XLSX, sheet_name=BACKLOG_SHEET)
+    df.columns = [str(c).strip() if c is not None else c for c in df.columns]
+    if "ID_US" not in df.columns and "ID User Story" in df.columns:
+        df["ID_US"] = df["ID User Story"]
+    df["MVP"] = df["MVP"].astype(str).str.upper().map({"TRUE": "Oui", "FALSE": "Non"})
+    return df
+
+
+def count_backlog() -> dict:
+    """Compte les User Stories du backlog (total, MVP, décliné par EPIC 5..10).
+
+    Les EPIC sont filtrés par préfixe (`str.startswith`) car leurs libellés
+    varient (ex. « EPIC 8 – Export » et « EPIC 8 – Export & diffusion »).
+    """
+    df = _backlog_df()
+    mvp = df["MVP"] == "Oui"
+
+    prefixes = {
+        "EPIC6": "EPIC 6 –",
+        "EPIC7": "EPIC 7 –",
+        "EPIC8": "EPIC 8 –",
+        "EPIC9": "EPIC 9 –",
+        "EPIC10": "EPIC 10 –",
+        "EPIC5": "EPIC 5 –",
+    }
+    epics = {k: df["EPIC"].astype(str).str.startswith(prefix) for k, prefix in prefixes.items()}
+
+    n_us_mvp_6_10 = sum(
+        int((epics[k] & mvp).sum()) for k in ("EPIC6", "EPIC7", "EPIC8", "EPIC9", "EPIC10")
+    )
+
+    return {
+        "n_us_tot": len(df),
+        "n_us_mvp": int(mvp.sum()),
+        "n_us_mvp_6_10": n_us_mvp_6_10,
+        "n_us_epic6": int(epics["EPIC6"].sum()),
+        "n_us_epic6_mvp": int((epics["EPIC6"] & mvp).sum()),
+        "n_us_epic7_mvp": int((epics["EPIC7"] & mvp).sum()),
+        "n_us_epic8_mvp": int((epics["EPIC8"] & mvp).sum()),
+        "n_us_epic9_mvp": int((epics["EPIC9"] & mvp).sum()),
+        "n_us_epic10_mvp": int((epics["EPIC10"] & mvp).sum()),
+        "n_us_epic5": int(epics["EPIC5"].sum()),
+    }
+
+
+def counts_all() -> dict:
+    """Agrège l'ensemble des compteurs dynamiques utilisés dans les chapitres.
+
+    Clés flat : n_ind, n_fam, n_th, n_grp, n_src_tot, n_src_dispo puis toutes
+    les clés de `count_backlog()`.
+    """
+    d = {
+        "n_ind": count_indicateurs_actifs(),
+        "n_fam": count_familles_actives(),
+        "n_th": count_themes_actives(),
+        "n_grp": count_groupes_actifs(),
+        "n_src_tot": count_sources(),
+        "n_src_dispo": count_sources(disponible_only=True),
+    }
+    d.update(count_backlog())
+    return d
+
+
 if __name__ == "__main__":
     _df, _dfc = load_all()
     print(f"Indicateurs actifs : {len(_df)}")
