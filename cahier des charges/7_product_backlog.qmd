@@ -47,7 +47,7 @@ Le backlog présenté dans ce document a vocation à être intégré dans les ou
 Dans ce cadre :
 
 - les EPICS et User Stories seront créés et structurés dans un projet dédié ;
-- ils seront enrichis avec des critères d’acceptation (voir l'annexe « Critères d'acceptation »), des estimations de charge et des dépendances ;
+- ils seront enrichis avec des critères d’acceptation (voir @sec-critere_acceptation), des estimations de charge et des dépendances ;
 - ils seront planifiés et suivis au sein des sprints de développement ;
 - leur avancement sera tracé de manière continue ;
 - le code source sera hebergé dans l'infrastructure de l'OEIL et les commits seront liés aux US dans la mesure du possible.
