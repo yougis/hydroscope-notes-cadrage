@@ -34,4 +34,4 @@
 
 - [x] 6.1 Rendre l'ensemble du CDC (`quarto render` du projet ou documents touchés), mettre à jour l'historique de version et `{#todo-list}`, et vérifier zéro référence cassée et rendus html/pdf/docx OK
 - [x] 6.2 Relire `suivi-retours-MD.md` comme preuve d'exhaustivité (chaque retour source a une ligne avec décision + SHA valide) et vérifier par confrontation finale aux 20 commentaires, ~70 lignes backlog et 9 diffs
-- [ ] 6.3 Lancer `openspec validate "integration-retours-md-cdc-v1-1" --strict` et `git log` de contrôle sur la branche (chaque commit cite « Proposé par Marjolaine David » + décision), pousser la branche et ouvrir le merge/PR vers `main`, et vérifier validation verte, aucun fichier `releases/` modifié et `main` intacte jusqu'au merge
+- [x] 6.3 Lancer `openspec validate "integration-retours-md-cdc-v1-1" --strict` et `git log` de contrôle sur la branche (chaque commit cite « Proposé par Marjolaine David » + décision), pousser la branche et ouvrir le merge/PR vers `main`, et vérifier validation verte, aucun fichier `releases/` modifié et `main` intacte jusqu'au merge
