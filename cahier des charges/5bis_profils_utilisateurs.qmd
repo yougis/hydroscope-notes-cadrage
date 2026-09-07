@@ -2,6 +2,8 @@
 
 Nous avons pour le moment identifié 5 profils types ayant pour certains des objectifs basiques de lecture d'information et pour d'autres de manipulation et de pilotage d'analyse complexe des données.
 
+Les profils 4 (Administrateur expert data) et 5 (Administrateur plateforme) sont aujourd'hui cumulés par l'OEIL mais restent distingués afin de séparer les responsabilités : données, qualité, catalogue et aide à la décision d'un côté ; exploitation, sécurité et droits d'accès de l'autre.
+
 ### Profil 1 : Public averti
 
 **Description** — Citoyen, habitant ou journaliste souhaitant consulter la qualité de l'eau sur son territoire. Accès anonyme, interface simplifiée et filtrable, lecture seule stricte (aucun export, aucun partage).
