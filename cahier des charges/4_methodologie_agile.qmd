@@ -100,6 +100,13 @@ Les ajustements du périmètre sont **tracés et formalisés**, jamais implicite
 - la MOA valide chaque demande avant sa mise au sprint (immédiate ou différée) ;
 - selon son ampleur, l’évolution est absorbée dans l’enveloppe, activée en Lot 2, ou fait l’objet d’un avenant au contrat.
 
+L'enveloppe MVP/Lot 1 est figée mais son contenu reste évolutif : le MVP sert de base au chiffrage et à la comparaison des offres, le Lot 2 est chiffré par fonctionnalité. Les cas de figure suivants s'appliquent :
+
+- **Maintien dans l'enveloppe MVP** : l'évolution reste compatible avec les engagements contractuels (charge absorbable, ou interchange avec une fonctionnalité de complexité équivalente à points d'effort constants) — elle est intégrée au périmètre existant après analyse d'impact et validation MOA ;
+- **Pioche dans le Lot 2** : le besoin correspond à une fonctionnalité du Lot 2 déjà chiffrée à l'unité — substitution documentée, sans renégociation, dans la limite de l'enveloppe ;
+- **Provision pour aléas** : les petits écarts de périmètre sont couverts par la provision proposée par chaque candidat — au-delà de la provision, avenant ;
+- **Avenant au contrat** : évolution hors périmètre et hors provision — chiffrée sur la base du coût unitaire (vélocité) puis contractualisée avant toute mise au sprint.
+
 ### Cadre de chiffrage : Lot 1 (MVP) et Lot 2 (Évolutions)
 
 Le projet est structuré en deux volets :
