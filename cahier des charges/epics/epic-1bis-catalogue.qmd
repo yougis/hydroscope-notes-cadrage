@@ -37,3 +37,5 @@ Une partie des métadonnées devra pouvoir être exposée aux utilisateurs afin 
 #### Intégration au monitoring
 
 Le dispositif de catalogage devra s’intégrer aux mécanismes de monitoring du système. Il devra notamment permettre le suivi de la traçabilité (origine des données, transformations, mises à jour) et la gestion des erreurs dans les processus d’intégration, afin de détecter rapidement les dysfonctionnements et de garantir la fiabilité des informations exposées.
+
+@todo [priority=medium, section=catalogue] : Clarifier avec la MOA la traçabilité attendue entre jeux d'indicateurs et exécutions (paramètres de croisement ? ETL d'intégration ?) et ce que recouvre « sans modifier la structure » (de la base ?) — retours MD C7/C9.

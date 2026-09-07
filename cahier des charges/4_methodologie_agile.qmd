@@ -109,3 +109,5 @@ Le projet est structuré en deux volets :
 - une **provision pour aléas**, laissée à l’appréciation de chaque candidat, couvre les petits écarts de périmètre.
 
 Le fichier joint {{< meta fichier_backlog >}} est mis à disposition du répondant pour permettre une estimation des points d'effort. Les US principales sont détaillées en scénario de test. C'est pour ces derniers qu'il est demandé d'évaluer les points d'efforts.
+
+@todo [priority=high, section=mvp] : Préciser avec la MOA si les « US principales » détaillées en scénario de test correspondent aux US du MVP, et définir le contenu attendu d'un scénario de test (exemples de tests de cohérence) — retours MD A8/A9/C10.

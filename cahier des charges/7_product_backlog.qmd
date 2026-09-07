@@ -53,3 +53,5 @@ Dans ce cadre :
 - le code source sera hebergé dans l'infrastructure de l'OEIL et les commits seront liés aux US dans la mesure du possible.
 
 Le tableau présent dans le présent cahier des charges constitue ainsi une base de travail initiale, destinée à être opérationnalisée et détaillée dans l’outil de gestion de projet au cours de la phase de réalisation.
+
+@todo [priority=high, section=mvp] : Vérifier avec la MOA les User Stories à MVP=FALSE dont le statut interroge (retour MD C41) et statuer avant chiffrage.
