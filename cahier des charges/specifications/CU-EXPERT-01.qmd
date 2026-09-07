@@ -1,5 +1,5 @@
 ---
-title: "CU-EXPERT-01 — Construire le score de criticité d'un territoire (AMC)"
+title: "CU-EXPERT-01 — Construire le classement multicritère d'un territoire (AMC)"
 profile: "Expert métier eau potable"
 uc: "CU-EXPERT-01"
 us: "US5.2, US5.3, US5.4, US5.5"
@@ -8,42 +8,44 @@ mvp: false
 amc: true
 ---
 
-# Construire le score de criticité d'un territoire (AMC)
+# Construire le classement multicritère d'un territoire (AMC)
 
-**Phrase agile :** En tant qu'expert métier eau potable, je veux construire le score de
-criticité d'un territoire à partir d'une méthode documentée, afin de disposer d'un outil
-d'aide à l'interprétation (et non de décision automatisée).
+**Phrase agile :** En tant qu'expert métier eau potable, je veux construire le
+classement multicritère d'un territoire à partir d'une méthode documentée, afin
+de disposer d'un outil d'aide à l'interprétation (et non de décision automatisée).
 
 > **⚠️ Document AMC — isolé.** Relève de l'analyse multicritère (EPIC 5), **hors MVP**,
 > conservé séparé des fiches descriptives. Voir `AMC_methodologie.qmd` (méthode) et
 > `AMC_rendu_score.qmd` (restitution). L'AMC aide à l'interprétation, pas à la décision.
+> La méthode est codée en dur : choix d'un jeu de pondérations de référence
+> (avec sa fiche méthodo), pas de définition libre via le front.
 
 ## 1. Contexte & référence
 
 - Cas d'usage : `CU-EXPERT-01` (US5.2 à US5.5) — `profils_utilisateurs.qmd` (Profil 3).
-- EPIC 5 — Analyse multicritère (construction du score de criticité).
+- EPIC 5 — Analyse multicritère (construction du classement multicritère).
 - Réunion Read-AI « Brainstorming analyse multicritère » (transcript sauvegardé).
 
 ## 2. Fonctionnalités couvertes
 
-- Construction du **score de criticité** d'un territoire à partir d'indicateurs sélectionnés.
-- **Documentation de la méthode** : règles d'agrégation, pondérations, seuils.
+- Construction du **classement multicritère** d'un territoire à partir d'indicateurs sélectionnés.
+- **Documentation de la méthode** : règles d'agrégation, jeux de pondérations de référence (+ fiches méthodo), seuils.
 - Composition famille → thème → indicateurs (base = résultats d'analyse de la ressource).
 - Traçabilité vers les données et méthodes sources (réversibilité).
 
 ## 3. Parcours IHM
 
 1. Accès restreint (droit + connexion requis, spec UX §3.7).
-2. Ouvrir un territoire → onglet « Score de criticité ».
+2. Ouvrir un territoire → onglet « Classement multicritère ».
 3. Sélection des indicateurs pré-contrôlés (filtre « Analyse_multicriteres = oui »).
 4. Application de la méthode (voir AMC_methodologie) et validation.
-5. Publication → restitution du score + contributions (CU-DECISION-05).
+5. Publication → restitution du classement + contributions (CU-DECISION-05).
 
 ## 4. Rendu visuel obtenu
 
 - Interface de construction : arborescence famille → thème → indicateurs.
-- Paramètres de méthode (pondération/seuils) — à arbitrer.
-- Aperçu du score avant publication.
+- Choix du jeu de pondérations de référence (avec fiche méthodo) — méthode codée en dur.
+- Aperçu du classement avant publication.
 - Captures : _(à insérer depuis le prototype — interface AMC / Construction)_.
 
 ## 5. Points de vigilance

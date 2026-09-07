@@ -5,7 +5,7 @@ Cet EPIC regroupe des éléments nécessaires au modèle de données de l'applic
 
 L’EPIC couvre la définition, la gestion et la mise à jour des référentiels utilisés par HydroScope. Il s’agit notamment des référentiels géographiques, des référentiels d’indicateurs et des référentiels liés aux utilisateurs.
 
-Ces référentiels doivent être centralisés, versionnés et documentés. Ils doivent également permettre de gérer les évolutions dans le temps (modification de périmètres, ajout de nouveaux objets, évolution des indicateurs) sans remettre en cause la cohérence des données historiques.
+Ces référentiels doivent être centralisés, versionnés et documentés. Ils doivent également permettre de gérer les évolutions dans le temps (modification de périmètres, ajout de nouveaux objets, évolution des indicateurs) sans remettre en cause la cohérence des données historiques. Leur gestion suit le même cycle que les autres données (intégration, versioning) ; seule leur gouvernance (validation, versionnage) est spécifique et devra aussi être documentée.
 
 #### Fonctionnalités
 
@@ -27,6 +27,8 @@ Définition et structuration des indicateurs utilisés dans HydroScope :
   - unités et échelles d’interprétation
   - seuils éventuels
   - liens avec les données sources
+
+Définir un indicateur, c'est décrire sa méthode au référentiel pour le rendre calculable (car les indicateurs sont précalculés) ; Il n'y a aucune création d'indicateur coté front, pour autant une interface d'administration peut permettre à terme le démarage des ETL d'ingestion et de calcul.
 
 Ce référentiel constitue un élément central de la transparence méthodologique et doit être accessible aux utilisateurs via des fiches descriptives.
 
