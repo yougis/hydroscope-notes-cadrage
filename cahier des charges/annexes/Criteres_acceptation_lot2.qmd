@@ -63,7 +63,7 @@ Les évolutions non-MVP de la visualisation couvrent la **comparaison de territo
 Les évolutions non-MVP de l'aide à la décision couvrent la **détection de dépassement**, la **priorisation des territoires** et l'**aide à l'interprétation avancée** :
 
 - La détection de dépassement (US7.2) signale les valeurs franchissant les seuils définis (US7.1) et les périodes de tension sur la ressource, avec restitution des circonstances (période, unité, indicateur).
-- La priorisation des territoires (US7.5) classe les bassins versants selon leur score de criticité issu de l'analyse multicritère (EPIC 5) ; le classement est traçable jusqu'aux scores intermédiaires et aux pondérations.
+- La priorisation des territoires (US7.5) classe les bassins versants selon leur classement multicritère issu de l'analyse multicritère (EPIC 5) ; le classement est traçable jusqu'aux contributions et aux pondérations.
 - L'aide à l'interprétation avancée (US7.6) établit une hiérarchie d'actions justifiée, explicite les facteurs déterminants de chaque situation et documente les limites méthodologiques de l'analyse.
 - Les résultats sont présentés comme aide à l'interprétation, sans décision automatique, et toute hiérarchie reste justifiable et rejouable.
 
@@ -101,12 +101,12 @@ Les évolutions non-MVP de la traçabilité couvrent le **journal des actions**,
 
 L'analyse multicritère est traitée en **OPTION** : l'intégralité de ses {{< meta n_us_epic5 >}} User Stories (construction d'indice composite, pondérations, scénarios, comparaison, visualisation des contributions, documentation des méthodes) est exclue du MVP et fera l'objet d'un chiffrage distinct, après validation des principes méthodologiques. Critères d'acceptation synthétiques :
 
-- **Scoring conservateur « déclassant »** : pour un territoire, la classe de priorité retenue est celle de l'indicateur le plus pénalisant (règle du « pire cas »), les critères dégradés ne pouvant pas être compensés par des critères favorables.
-- **Pondérations encadrées** : les poids des indicateurs sont définis par l'expert métier dans une plage contrainte (bornes validées), le total étant normalisé ; toute pondération hors cadre est refusée avec un message explicite.
+- **Classement sans note absolue** : les territoires sont classés / priorisés, sans notation absolue ; aucune compensation masquée ni résultat partiel non signalé.
+- **Jeux de pondérations de référence** : les pondérations sont issues de jeux de référence élaborés par des groupes de travail ou instances de gouvernance (ex. atelier dédié) ; chaque jeu est accompagné de sa fiche méthodo (méthode, participants, validation) ; pas de définition libre via le front (méthode codée en dur).
 - **Seuil de complétude** : un territoire n'est inclus dans le classement que si ses données couvrent au moins ~80 % des indicateurs requis ; en deçà, le territoire est exclu ou marqué « non classable », sans résultat partial.
-- **Scores intermédiaires exportables** : les scores par indicateur, les pondérations et le score composite sont exportables (CSV) pour contrôle et réutilisation externe.
+- **Résultats intermédiaires exportables** : les contributions par indicateur, les pondérations et le classement sont exportables (CSV) pour contrôle et réutilisation externe ; les pondérations figurent dans l'export d'un rapport.
 - **Comparaison de scénarios** : plusieurs jeux de pondérations sont testables et comparables (classements côte à côte, écarts), permettant d'identifier la configuration la plus représentative du terrain.
-- **Visualisation des contributions** : la part de chaque indicateur dans le score de criticité est visualisable, pour comprendre les facteurs de risque dominants.
-- **Documentation des méthodes** : les méthodes de calcul (formules, normalisation, déclassement, seuils) sont documentées et consultables, garantissant la transparence de l'aide à la décision.
+- **Visualisation des contributions** : la part de chaque indicateur dans le classement est visualisable, pour comprendre les facteurs de risque dominants.
+- **Documentation des méthodes** : les méthodes de calcul (formules, normalisation, seuils) et les fiches méthodo des jeux de pondérations sont documentées et consultables, garantissant la transparence de l'aide à la décision.
 
 ----

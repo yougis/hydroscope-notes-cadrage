@@ -1,5 +1,5 @@
 ---
-title: "CU-DECISION-05 — Consulter le rendu d'un score de criticité (AMC)"
+title: "CU-DECISION-05 — Consulter le classement multicritère d'un territoire (AMC)"
 profile: "Décideur métier"
 uc: "CU-DECISION-05"
 us: "US7.6"
@@ -8,45 +8,47 @@ mvp: false
 amc: true
 ---
 
-# Consulter le rendu d'un score de criticité d'un territoire
+# Consulter le classement multicritère d'un territoire (AMC)
 
-**Phrase agile :** En tant que décideur métier, je veux consulter le score de criticité
-d'un territoire et la contribution de ses indicateurs afin de décider où concentrer les
-actions, en connaissance de la méthode.
+**Phrase agile :** En tant que décideur métier, je veux consulter le classement
+multicritère d'un territoire et la contribution de ses indicateurs afin de décider
+où concentrer les actions, en connaissance de la méthode.
 
 > **⚠️ Document AMC — isolé.** Relève de l'analyse multicritère (EPIC 5), **hors MVP**,
 > conservé séparé des fiches descriptives. L'AMC est une **aide à l'interprétation**,
-> pas une aide à la décision automatisée. Voir aussi `AMC_rendu_score.qmd`.
+> pas une aide à la décision automatisée. Pas de note absolue : classement uniquement.
+> Voir aussi `AMC_rendu_score.qmd`.
 
 ## 1. Contexte & référence
 
 - Cas d'usage : `CU-DECISION-05` (US7.6) — `profils_utilisateurs.qmd` (Profil 4).
 - EPIC 5 ; restitue l'indice composite construit en CU-DATA-05.
-- Réunion AMC (Read-AI) : ordre des onglets, score + contribution.
+- Réunion AMC (Read-AI) : ordre des onglets, classement + contribution.
 
 ## 2. Fonctionnalités couvertes
 
-- Affichage du **score de criticité** d'un territoire.
-- **Contribution** des indicateurs au score (facteurs dominants).
-- Lecture liée à la méthode documentée (transparence).
+- Affichage du **classement multicritère** d'un territoire.
+- **Contribution** des indicateurs au classement (facteurs dominants).
+- Lecture liée à la méthode documentée (transparence) : méthode, jeu de
+  pondérations de référence et fiche méthodo associée.
 - Hiérarchisation indicative des territoires pour la priorisation.
 
 ## 3. Parcours IHM
 
 1. Accès restreint (droit + connexion requis, spec UX §3.7).
-2. Ouvrir un territoire → onglet « Score de criticité ».
-3. Lecture du score + contributions par indicateur.
+2. Ouvrir un territoire → onglet « Classement multicritère ».
+3. Lecture du classement + contributions par indicateur.
 4. Retour vers la fiche descriptive et la méthode AMC.
 
 ## 4. Rendu visuel obtenu
 
-- Score de criticité (chiffre + libellé) avec **contribution** des indicateurs.
+- Classement (rang + libellé) avec **contribution** des indicateurs.
 - Tableau triable par contribution (famille → thème).
 - Lien vers `AMC_methodologie.qmd` (méthode justifiée).
-- Captures : _(à insérer depuis le prototype — interface AMC / Score)_.
+- Captures : _(à insérer depuis le prototype — interface AMC / Classement)_.
 
 ## 5. Points de vigilance
 
-- Toujours restituer la méthode à côté du score (prudence méthodologique, §3.2).
-- Pas de décision automatique : le score éclaire, l'acteur décide.
+- Toujours restituer la méthode à côté du classement (prudence méthodologique, §3.2).
+- Pas de décision automatique : le classement éclaire, l'acteur décide.
 - Arbitrage en cours sur pondérations/seuils (voir AMC_methodologie).

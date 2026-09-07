@@ -1,5 +1,5 @@
 ---
-title: "AMC — Méthodologie du score de criticité (arbitrage)"
+title: "AMC — Méthodologie du classement multicritère (arbitrage)"
 profile: "Document support (AMC, isolé)"
 uc: "AMC_methodologie"
 us: "US5.x (méthode)"
@@ -8,34 +8,49 @@ mvp: false
 amc: true
 ---
 
-# Méthodologie du score de criticité — arbitrages ouverts
+# Méthodologie du classement multicritère — arbitrages ouverts
 
 > **⚠️ Document AMC — isolé.** Ce document pose les **arbitrages méthodologiques**
 > (pondérations, seuils, agrégation) encore ouverts. Hors MVP. Il doit être validé
 > (comité scientifique / DAVAR) avant toute mise en service.
+>
+> L'outil est un **explorateur de priorisation** : il produit un **classement**
+> des territoires, pas une note absolue (cf. cadrage OEIL du 14/08/2026).
 
 ## 1. Objectif
 
-Fournir une base **transparente et réversible** pour la construction du score de criticité
-d'un territoire, afin que le résultat soit explicable et justifiable (exigence §3.2 :
-transparence des calculs, pas de « boîte noire »).
+Fournir une base **transparente et réversible** pour la construction du classement
+multicritère d'un territoire, afin que le résultat soit explicable et justifiable
+(exigence §3.2 : transparence des calculs, pas de « boîte noire »).
 
 ## 2. Principes directeurs
 
 - **Aide à l'interprétation**, pas aide à la décision automatisée.
-- **Réversibilité** : on doit pouvoir remonter du score aux données sources.
+- **Classement, pas notation** : les résultats sont présentés sous forme de
+  classement / priorisation, jamais sous forme de note absolue.
+- **Réversibilité** : on doit pouvoir remonter du classement aux données sources.
 - Indicateurs pré-contrôlés : seuls les indicateurs qualifiés (fiabilité suffisante,
   ~80 % de complétude) sont éligibles (filtre « Analyse_multicriteres = oui »).
 - Échelle de comparaison : une **unité de gestion** (captage/BV) ou une commune.
+- Méthode **codée en dur** : la définition de l'indice composite et la méthode
+  d'AMC ne sont pas paramétrables via le front (pas de création d'indicateurs
+  ni de croisements ad hoc dans l'interface).
 
 ## 3. Choix ouverts (à arbitrer)
 
 ### 3.1 Liste des indicateurs éligibles
-- Quels indicateurs entrent dans le score ? (famille → thème → indicateurs)
+- Quels indicateurs entrent dans le classement ? (famille → thème → indicateurs)
 - Le filtrage « Analyse_multicriteres = oui » doit être documenté.
 
-### 3.2 Pondération
-- Pondérations **égales** vs **pondérées** (facteurs dominants, ex. pression urbaine).
+### 3.2 Jeux de pondérations de référence
+- Des jeux de pondérations de référence peuvent être mis à disposition, élaborés
+  par des groupes de travail ou des instances de gouvernance (ex. pondérations
+  validées dans le cadre d'un atelier dédié).
+- Chaque jeu mis à disposition est **obligatoirement accompagné d'une fiche
+  méthodo** présentant la méthode utilisée (AHP, Swing weighting…), les
+  participants impliqués et les modalités de validation retenues.
+- Les résultats indiquent la méthode utilisée et les pondérations affectées ;
+  les pondérations sont affichées dans l'export d'un rapport.
 - Qui arbitre : comité scientifique vs DAVAR.
 
 ### 3.3 Règles d'agrégation
@@ -43,7 +58,7 @@ transparence des calculs, pas de « boîte noire »).
 - Attention à l'**agrégation abusive** (écraser les différences entre indicateurs).
 
 ### 3.4 Seuils
-- Seuils de criticité (classes du score) et seuils de contribution.
+- Seuils de vigilance (classes du classement) et seuils de contribution.
 - Alignement sur les seuils réglementaires le cas échéant.
 
 ### 3.5 Gestion des données manquantes
@@ -51,18 +66,21 @@ transparence des calculs, pas de « boîte noire »).
 
 ## 4. Cadre de restitution
 
-- Score + contributions restitués ensemble (`AMC_rendu_score.qmd`).
-- La méthode est affichée **à côté** du score (jamais de score « muet »).
-- La fiche descriptive (`CU-EXPERT-04`) reste **sans** score/scoring (EPIC 7).
+- Classement + contributions restitués ensemble (`AMC_rendu_score.qmd`).
+- La méthode est affichée **à côté** du classement (jamais de classement « muet »).
+- La fiche descriptive (`CU-EXPERT-04`) reste **sans** classement/scoring (EPIC 7).
 
 ## 5. Points de vigilance
 
-- **Prudence méthodologique** (§3.2) : éviter l'effet « boîte noire ».
+- **Prudence méthodologique** (§3.2) : éviter l'effet « boîte noire » ; une analyse
+  de sensibilité et une étude des dépendances entre indicateurs restent nécessaires
+  avant de figer des résultats aboutis.
 - **Réversibilité** et transparence exigées (reproductibilité).
 - Validation des pondérations/seuils avant mise en production (recette, `10_recette_validation.qmd`).
 
 ## 6. Sources
 
 - Réunion Read-AI « Brainstorming analyse multicritère » (transcript sauvegardé).
+- Cadrage OEIL du 14/08/2026 (classement multicritère, jeux de pondérations, fiche méthodo).
 - `5_perimetre_fonctionnel.qmd` (EPIC 5).
 - `dependances_us.qmd` (chaîne AMC).

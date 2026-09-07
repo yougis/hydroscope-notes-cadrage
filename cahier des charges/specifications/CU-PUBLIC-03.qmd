@@ -42,4 +42,4 @@ rapidement les territoires les plus concernés, et connaître le périmètre cou
 ## 5. Points de vigilance
 
 - Le preset « plus/moins exposés » repose sur un critère d'exposition qui doit être
-  explicite ; ne pas le confondre avec un score de criticité AMC (document isolé).
+  explicite ; ne pas le confondre avec un classement multicritère AMC (document isolé).
