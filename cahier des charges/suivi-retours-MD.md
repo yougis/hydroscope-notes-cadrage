@@ -113,15 +113,15 @@ Toutes auteure Marjolaine DAVID. Toutes de niveau orthographe/grammaire/mise en 
 
 | # | US | Champ | Base → MD | Décision | Commit |
 |---|----|-------|-----------|----------|--------|
-| D1 | US1bis.13 | Dépend de | `US1bis.1` → vide | intégré | |
-| D2 | US1bis.4 | Dépend de | `US1bis.6` → vide | intégré | |
-| D3 | US2.5 | Dépend de | liste → vide | intégré | |
-| D4 | US2.6 | Dépend de | `US2.5` → vide | intégré | |
-| D5 | US4.1 | Dépend de | `US3.5 ; US1bis.12` → `US3.5 ; US4.7 ; US1bis.12` | intégré | |
-| D6 | US8.1 | EPIC / Profil | `Export & diffusion` → `Export` ; Expert métier → Administrateur expert data | intégré (profil : voir arbitrage C37/tâche 3.2 pour les exports restants) | |
-| D7 | US8.2 | EPIC / Profil / 3W | idem + 3W réécrite côté admin | intégré | |
-| D8 | US8.4 | EPIC / Profil | idem D6 | intégré | |
-| D9 | US8.6 | EPIC / Profil / 3W | idem + 3W réécrite côté admin | intégré | |
+| D1 | US1bis.13 | Dépend de | `US1bis.1` → vide | intégré | d24c69c |
+| D2 | US1bis.4 | Dépend de | `US1bis.6` → vide | intégré | d24c69c |
+| D3 | US2.5 | Dépend de | liste → vide | intégré | d24c69c |
+| D4 | US2.6 | Dépend de | `US2.5` → vide | intégré | d24c69c |
+| D5 | US4.1 | Dépend de | `US3.5 ; US1bis.12` → `US3.5 ; US4.7 ; US1bis.12` | intégré | d24c69c |
+| D6 | US8.1 | EPIC / Profil | `Export & diffusion` → `Export` ; Expert métier → Administrateur expert data | intégré (profil : voir arbitrage C37/tâche 3.2 pour les exports restants) | d24c69c |
+| D7 | US8.2 | EPIC / Profil / 3W | idem + 3W réécrite côté admin | intégré | d24c69c |
+| D8 | US8.4 | EPIC / Profil | idem D6 | intégré | d24c69c |
+| D9 | US8.6 | EPIC / Profil / 3W | idem + 3W réécrite côté admin | intégré | d24c69c |
 
 ## Points d'arbitrage MOA en suspens
 
