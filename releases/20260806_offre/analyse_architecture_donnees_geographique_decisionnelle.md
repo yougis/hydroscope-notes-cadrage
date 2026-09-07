@@ -476,7 +476,7 @@ Restitution **multi-profils** : tableaux de bord experts, interfaces partenaires
 
 ### 9.4 Gouvernance (§2.3) & déploiement (§7 ; §9)
 
-- **COPIL / COTECH / ateliers utilisateurs** ; validations itératives ;
+- **COPIL / COPRO / ateliers utilisateurs** ; validations itératives ;
 - **3 environnements** : dev / recette-qualification / production (conteneurs + CI/CD — §9) ;
 - infrastructure **souveraine**, à la charge de l'OEIL (orientation open source — §7).
 

@@ -66,7 +66,7 @@ Le suivi du planning repose sur :
 - l’avancement des sprints ;
 - le suivi du backlog produit et de ses priorités ;
 - les démonstrations régulières (sprint review) ;
-- les comités de pilotage (COPIL) et comités techniques (COTECH) ;
+- les comités de pilotage (COPIL) et comités de projet (COOPRO) ;
 - le suivi des anomalies et des corrections.
 
 Des ajustements pourront être réalisés en fonction de l’avancement réel, dans le respect des jalons contractuels.
@@ -102,7 +102,7 @@ L'ensemble de ces risques doivent être pris en compte par le prestataire et sa 
 #### Suivi des risques
 
 
-Les risques feront l’objet d’un suivi régulier en COTECH et COPIL ; d’une mise à jour continue et de la définition de mesures de mitigation adaptées.
+Les risques feront l’objet d’un suivi régulier en COPRO et COPIL ; d’une mise à jour continue et de la définition de mesures de mitigation adaptées.
 
 #### Mesures de mitigation (exemples)
 

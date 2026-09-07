@@ -407,12 +407,8 @@ La gouvernance du projet s'appuie sur plusieurs instances :
 - Le **comité de pilotage (COPIL)**, chargé de définir les orientations
   stratégiques, de valider les grandes étapes du projet et d'arbitrer
   les décisions structurantes ;
-- Le **comité technique (COTECH)**, qui assure le suivi opérationnel, la
-  validation des choix fonctionnels et méthodologiques ainsi que la
-  coordination entre les acteurs ;
-- Des **ateliers thématiques et utilisateurs**, permettant de recueillir
-  les besoins, de confronter les propositions fonctionnelles aux usages
-  et d'intégrer les retours terrain.
+- Le **comité de projet (COPRO)**, qui assure le suivi opérationnel, la validation des choix fonctionnels et méthodologiques ainsi que la coordination entre les acteurs ;
+- Des **ateliers thématiques et utilisateurs**, permettant de recueillir les besoins, de confronter les propositions fonctionnelles aux usages et d'intégrer les retours terrain.
 
 Les validations sont réalisées de manière itérative, en lien avec les
 cycles de développement, afin de sécuriser progressivement les choix
@@ -3706,7 +3702,7 @@ Le suivi du planning repose sur :
 - l'avancement des sprints ;
 - le suivi du backlog produit et de ses priorités ;
 - les démonstrations régulières (sprint review) ;
-- les comités de pilotage (COPIL) et comités techniques (COTECH) ;
+- les comités de pilotage (COPIL) et comités de projet (COPRO) ;
 - le suivi des anomalies et des corrections.
 
 Des ajustements pourront être réalisés en fonction de l'avancement réel,
@@ -3746,7 +3742,8 @@ sécuriser le projet.
 
 #### Suivi des risques {#suivi-des-risques number="0.15.5.2"}
 
-Les risques feront l'objet : - d'un suivi régulier en COTECH et COPIL
+Les risques feront l'objet : - d'un suivi régulier en COPRO et COPIL si un arbitrage est nécessaire. 
+
 ; - d'une mise à jour continue ; - de la définition de mesures de
 mitigation adaptées.
 
@@ -3789,7 +3786,7 @@ des parties prenantes.
   au suivi du projet)
 - **MOE** : Maîtrise d'Œuvre (réalisation technique du projet)
 - **COPIL** : Comité de pilotage
-- **COTECH** : Comité technique
+- **COPRO** : Comité de projet
 
 ### Concepts projet et méthodologie Agile {#concepts-projet-et-méthodologie-agile number="0.16.2"}
 

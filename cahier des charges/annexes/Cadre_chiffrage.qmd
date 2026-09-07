@@ -3,11 +3,11 @@
 
 Le DQE ci-dessous constitue la **grille commune de chiffrage et de comparaison des offres**. Chaque candidat est invité à la compléter ligne à ligne :
 
-- **Périmètre de base** : l'ensemble des EPIC du @sec-perimetre hors analyse multicritère (MVP + lot 2), au niveau de chaque user story du @sec-backlog ;
+- **Périmètre de base** : l'ensemble des EPIC du @sec-perimetre_fonctionnel hors analyse multicritère (MVP + lot 2), au niveau de chaque user story du {{< meta fichier_backlog >}} ;
 - **Option 1 — Analyse multicritère** (EPIC 5) : chiffrée séparément du périmètre de base ;
 - **Option 2 — TMA** : maintenance corrective et évolutive post-déploiement (référentiel SLA au @sec-cadre-contractuel).
 
-Colonnes à compléter par le candidat : **Charge proposée (JH)**, **Taux journalier (€/JH)**, **Coût HT (€)**, **Commentaires** (hypothèses, points de vigilance, écarts d'interprétation du périmètre). Aucun montant indicatif n'est communiqué par la MOA : l'estimation de chaque candidat doit être fondée sur le périmètre décrit au @sec-perimetre, les critères d'acceptation (annexes) et les exigences non fonctionnelles au @sec-exigences-non-fonctionnelles.
+Colonnes à compléter par le candidat : **Charge proposée (JH)**, **Taux journalier (€/JH)**, **Coût HT (€)**, **Commentaires** (hypothèses, points de vigilance, écarts d'interprétation du périmètre). Aucun montant indicatif n'est communiqué par la MOA : l'estimation de chaque candidat doit être fondée sur le périmètre décrit au @sec-perimetre_fonctionnel, les critères d'acceptation (annexes) et les exigences non fonctionnelles au @sec-exigences-non-fonctionnelles.
 
 La colonne « Complexité » (faible / moyenne / élevée / très élevée) est fournie à titre indicatif pour faciliter la lecture du périmètre ; elle n'est pas contractuelle.
 

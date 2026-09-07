@@ -12,7 +12,7 @@ Ce glossaire vise à clarifier les principaux acronymes, termes techniques et no
 - **AMOA** : Assistance à Maîtrise d’Ouvrage (appui à la définition et au suivi du projet)
 - **MOE** : Maîtrise d’Œuvre (réalisation technique du projet)
 - **COPIL** : Comité de pilotage
-- **COTECH** : Comité technique
+- **COPRO** : Comité de projet
 
 ### Concepts projet et méthodologie Agile
 

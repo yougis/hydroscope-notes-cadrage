@@ -31,7 +31,7 @@ Les **utilisateurs** sont associés tout au long du projet afin de garantir l’
 La gouvernance du projet s’appuie sur plusieurs instances :
 
 - Le **comité de pilotage (COPIL)**, chargé de définir les orientations stratégiques, de valider les grandes étapes du projet et d’arbitrer les décisions structurantes ;
-- Le **comité technique (COTECH)**, qui assure le suivi opérationnel, la validation des choix fonctionnels et méthodologiques ainsi que la coordination entre les acteurs ;
+- Le **comité de projet (COPRO)**, qui assure le suivi opérationnel, la validation des choix fonctionnels et méthodologiques ainsi que la coordination entre les acteurs ;
 - Des **ateliers thématiques et utilisateurs**, permettant de recueillir les besoins, de confronter les propositions fonctionnelles aux usages et d’intégrer les retours terrain.
 
 Les validations sont réalisées de manière itérative, en lien avec les cycles de développement, afin de sécuriser progressivement les choix effectués.

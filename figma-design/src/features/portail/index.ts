@@ -1,6 +1,0 @@
-export { PublicHome } from './PublicHome'
-export type { PublicHomeProps } from './PublicHome'
-export { PublicInterface } from './PublicInterface'
-export type { PublicInterfaceProps } from './PublicInterface'
-export { DashboardPage } from './DashboardPage'
-export type { DashboardPageProps } from './DashboardPage'

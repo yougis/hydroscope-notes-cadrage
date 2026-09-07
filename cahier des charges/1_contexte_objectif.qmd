@@ -30,10 +30,9 @@ Le projet est actuellement engagé dans une phase de réalisation destinée à d
 
 ### Dossier de candidature PEP
 
-Le projet HydroScope a fait l'objet d'un dossier de candidature au fonds de soutien à la Politique de l'Eau Partagée (PEP 2023), co-financé par l'Office Français de la Biodiversité (OFB) et le fonds PEP. Les éléments suivants, issus de ce dossier, constituent le socle de cadrage du présent cahier des charges :
+Le projet HydroScope a fait l’objet d’un dossier de candidature au fonds de soutien à la Politique de l’Eau Partagée (PEP 2023), qui co-finance ce projet avec l’Office Français de la Biodiversité (OFB). Les éléments suivants, issus de ce dossier, constituent le socle de cadrage du présent cahier des charges : 
 
 - **64 % des captages** destinés à la production d'eau potable sont implantés sur des cours d'eau et soumis à des pressions multiples (incendies, activité minière, espèces envahissantes herbivores, artificialisation des sols) ;
-- **plus de 220 périmètres de protection des eaux** sont réglementés, et d'autres sont en cours de réglementation, ce qui accroît la charge de suivi des gestionnaires ;
 - en 2019, **17 % des feux de brousse ont touché des périmètres de protection des eaux**, soit près de **7 000 hectares** ;
 - une étude estimait en 2016 que la **couverture végétale de 90 % des périmètres de protection** des eaux de Nouvelle-Calédonie était dégradée (Andreoli R. et al., 2016) ;
 - le changement climatique pourrait induire une **baisse moyenne de 20 % des précipitations d'ici 2100**, avec de fortes disparités territoriales (Menkes C. et al., 2019).

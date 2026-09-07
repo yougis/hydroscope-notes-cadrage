@@ -8,7 +8,7 @@ Le tableau de référence des indicateurs est joint à l'offre :
 
 Le catalogue de fiches détaillées des indicateurs est fourni avec le présent cahier des charges :
 
-- [Fiches_indicateurs_HydroScope-v4.pdf](./annexes/Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées (définition, objectifs, méthode, sources, vigilances) ;
+- [Fiches_indicateurs_HydroScope-v4.pdf](./Fiches_indicateurs_HydroScope-v4.pdf) — fiches détaillées (définition, objectifs, méthode, sources, vigilances) ;
 
 
 
@@ -20,10 +20,10 @@ Le catalogue de fiches détaillées des indicateurs est fourni avec le présent 
 Le cadre de chiffrage (annexe ci-dessous) constitue la grille commune de chiffrage et de comparaison des offres. Les candidats sont invités à le compléter ligne à ligne, pour le périmètre de base, puis pour les options (analyse multicritère, TMA).
 
 
-{{< include ./annexes/Cadre_chiffrage.qmd >}}
+{{< include ./Cadre_chiffrage.qmd >}}
 
 ---
 
 # Liste des document à fournir
 
-{{< include ./annexes/piece-a-fournir.qmd >}}
+{{< include ./piece-a-fournir.qmd >}}

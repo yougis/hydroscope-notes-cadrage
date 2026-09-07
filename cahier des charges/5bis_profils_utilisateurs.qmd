@@ -70,4 +70,4 @@ Nous avons pour le moment identifié 5 profils types ayant pour certain des obje
 
 ---
 
-Les fonctionnalités à développer dans le cadre du projet HydroScope servent aux intérêts d'une multitude d'acteur Calédonien. L'ensemble des fonctionalités sont présentés dans le @sec-6_perimetre_fonctionnel.qmd. et nous nous sommes efforcés de toujours ratacher une fonctionnalité à un cas d'utilisation concret.
+Les fonctionnalités à développer dans le cadre du projet HydroScope servent aux intérêts d'une multitude d'acteur Calédonien. L'ensemble des fonctionalités sont présentés dans le @sec-perimetre_fonctionnel et nous nous sommes efforcés de toujours ratacher une fonctionnalité à un cas d'utilisation concret.
