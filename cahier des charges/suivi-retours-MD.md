@@ -13,26 +13,26 @@ Décisions (5 états) : **intégré** / **adapté** / **@todo** (question renvoy
 
 | # | Id MD | Commentaire | Ancre DOCX | Cible qmd | Décision + motif | Commit |
 |---|-------|-------------|------------|-----------|------------------|--------|
-| A1 | 979569393 | « c'est pas plutôt API météo France ? » | Tableau sources, modalité GEOREP | `1_contexte_objectif.qmd` (tbl-sources générée depuis le fichier maître externe) | @todo — données hors repo : vérifier la modalité d'accès des sources météo dans le maître + mapping `_lib_indicateurs.py` (touche fabrique interdite ici) | |
-| A2 | 47463100 | « ya aussi openmeteo » | idem | idem | @todo — évaluer l'ajout d'Open-Meteo comme source candidate dans le maître | |
-| A3 | 1294083187 | ICPE : base LOGIC PSUD vs Open Data | Tableau sources (ICPE) | idem | @todo — préciser distributeur (PSUD Open Data, base LOGIC sur convention ?) dans le maître ; la liste statique cite déjà DIMENC | |
-| A4 | 1985713834 | « Tu mentionnes pas le COPRO ? » | § gouvernance, COPIL | `2_partie_prenantes_gouvernance.qmd:34` (COPRO déjà présent, ainsi qu'au glossaire) | intégré — COPRO déjà présent dans les sources (DOCX antérieur) ; corrigé le sigle COOPRO→COPRO en `17_planning_jalons.qmd:69` | |
-| A5 | 239861025 | « répétition de la même définition » | Définition US-SC | `4_methodologie_agile.qmd:23-25` (US et US-SC partageaient le même libellé) | intégré — différencié le libellé US-SC (conditions de validation : tests, seuils, jeux de données) | |
-| A6 | 1694054913 | « pb référence » (`@sec_backlog`) | § backlog | `4_methodologie_agile.qmd:40` | intégré — corriger en `@sec-backlog` (id réel `{#sec-backlog}`) + coquilles de la phrase | |
-| A7 | 1027808996 | Enveloppe MVP figée / pioche Lot 2 / aléa / avenant : détailler les cas | § 5.8 Maîtrise des évolutions | `4_methodologie_agile.qmd:94` + `16_cadre_contractuel.qmd` | intégré — rédiger les cas de figure (relecture OEIL requise, cf. tâche 3.1) | |
-| A8 | 1023013908 | « C'est celles qui seront dans le MVP ? » (US principales) | § backlog.xlsx | `4_methodologie_agile.qmd:111` | intégré — clarifier ce que recouvre « US principales » | |
-| A9 | 1355744299 | « c'est quoi le scénario de test ? » | idem | idem + backlog | @todo — définir le contenu attendu (exemples de tests de cohérence) avec la MOA | |
-| A10 | 1460746416 | « menaces » vs « pressions » (terme incorrect selon le PENV OEIL) | § 38 indicateurs | `5_presentation_indicateurs.qmd:3`, `5bis_profils_utilisateurs.qmd:12,38` (prose CDC uniquement — la famille taxonomique « Menace » du catalogue et les maquettes EPIC 5/ADI sont hors périmètre) | intégré — « pressions » dans la prose CDC | |
-| A11 | 1870055478 | « pb référence » (même §, `(@sec-Annexes)`) | idem | `5_presentation_indicateurs.qmd:3` | intégré — aucun `{#sec-Annexes}` n'existe (annexes packées séparément, non incluses au rendu) : remplacé par un lien fichier direct vers le PDF du catalogue | |
-| A12 | 587743481 | « pb ref » (fiches PDF en annexe) | § fiches indicateurs | `5_presentation_indicateurs.qmd:45` | intégré — même cause que A11 : lien fichier direct vers le PDF (inclusion des annexes testée puis abandonnée : chemins d'inclusion incohérents + contenu du pack modifié) | |
-| A13 | 1003324664 | « Sous partie 7.1 ? » (numérotation « 8 Profil 1 ») | Profils utilisateurs | `5bis_profils_utilisateurs.qmd` | intégré — passer les Profils 1–5 en `###` (sous-parties) | |
-| A14 | 591057693 | 2 profils admin alors que l'OEIL cumulera les deux ? | Profil 4/5 | `5bis_profils_utilisateurs.qmd:46-70` | à arbitrer MOA (tâche 3.2) — trancher 1 vs 2 profils avant d'appliquer | |
-| A15 | 121183428 | « Pas structuré en sous parties comme les autres epics, normal ? » | EPIC 1 | `epics/epic-1-gestion-donnees.qmd` | intégré — harmoniser la structure avec les autres EPIC | |
-| A16 | 2059218774 | « pb ref » (`(#sec-catalogage_donnees)`) | EPIC 1 bis | `6_perimetre_fonctionnel.qmd:9` | intégré — corriger en `{#sec-catalogage_donnees}` | |
-| A17 | 2015163039 | « ce sera codé en dur, pas administré » | Objectif « construire et faire évoluer les outils d'aide à la décision » | `5bis_profils_utilisateurs.qmd:56` | intégré — reformuler (AMC/seuils/pondérations codés en dur) | |
-| A18 | 176102727 | Import de fichiers → Lot 2 (structure inconnue, utile qu'en automatisation) | EPIC 1 import | `6_perimetre_fonctionnel.qmd` + backlog | intégré — bascule Lot 2 + reformulation « automatisation » | |
-| A19 | 289829657 | « Pourquoi distinguer cet EPIC du précédent (API) ? » | EPIC 1 import vs API | `6_perimetre_fonctionnel.qmd` | à arbitrer (tâche 5.1) — fusionner ou justifier la distinction | |
-| A20 | 566759447 | Simplifier journalisation / suivi ingestion (statut, perf, volumétrie) | EPIC 1 suivi imports | `6_perimetre_fonctionnel.qmd` | adapté — fusionner les points redondants | |
+| A1 | 979569393 | « c'est pas plutôt API météo France ? » | Tableau sources, modalité GEOREP | `1_contexte_objectif.qmd` (tbl-sources générée depuis le fichier maître externe) | @todo — données hors repo : vérifier la modalité d'accès des sources météo dans le maître + mapping `_lib_indicateurs.py` (touche fabrique interdite ici) | ad6e44f |
+| A2 | 47463100 | « ya aussi openmeteo » | idem | idem | @todo — évaluer l'ajout d'Open-Meteo comme source candidate dans le maître | ad6e44f |
+| A3 | 1294083187 | ICPE : base LOGIC PSUD vs Open Data | Tableau sources (ICPE) | idem | @todo — préciser distributeur (PSUD Open Data, base LOGIC sur convention ?) dans le maître ; la liste statique cite déjà DIMENC | ad6e44f |
+| A4 | 1985713834 | « Tu mentionnes pas le COPRO ? » | § gouvernance, COPIL | `2_partie_prenantes_gouvernance.qmd:34` (COPRO déjà présent, ainsi qu'au glossaire) | intégré — COPRO déjà présent dans les sources (DOCX antérieur) ; corrigé le sigle COOPRO→COPRO en `17_planning_jalons.qmd:69` | fc06a8e |
+| A5 | 239861025 | « répétition de la même définition » | Définition US-SC | `4_methodologie_agile.qmd:23-25` (US et US-SC partageaient le même libellé) | intégré — différencié le libellé US-SC (conditions de validation : tests, seuils, jeux de données) | fc06a8e |
+| A6 | 1694054913 | « pb référence » (`@sec_backlog`) | § backlog | `4_methodologie_agile.qmd:40` | intégré — corriger en `@sec-backlog` (id réel `{#sec-backlog}`) + coquilles de la phrase | fc06a8e |
+| A7 | 1027808996 | Enveloppe MVP figée / pioche Lot 2 / aléa / avenant : détailler les cas | § 5.8 Maîtrise des évolutions | `4_methodologie_agile.qmd:94` + `16_cadre_contractuel.qmd` | intégré — rédiger les cas de figure (relecture OEIL requise, cf. tâche 3.1) | e40be40 |
+| A8 | 1023013908 | « C'est celles qui seront dans le MVP ? » (US principales) | § backlog.xlsx | `4_methodologie_agile.qmd:111` | intégré — clarifier ce que recouvre « US principales » | ad6e44f |
+| A9 | 1355744299 | « c'est quoi le scénario de test ? » | idem | idem + backlog | @todo — définir le contenu attendu (exemples de tests de cohérence) avec la MOA | ad6e44f |
+| A10 | 1460746416 | « menaces » vs « pressions » (terme incorrect selon le PENV OEIL) | § 38 indicateurs | `5_presentation_indicateurs.qmd:3`, `5bis_profils_utilisateurs.qmd:12,38` (prose CDC uniquement — la famille taxonomique « Menace » du catalogue et les maquettes EPIC 5/ADI sont hors périmètre) | intégré — « pressions » dans la prose CDC | fc06a8e |
+| A11 | 1870055478 | « pb référence » (même §, `(@sec-Annexes)`) | idem | `5_presentation_indicateurs.qmd:3` | intégré — aucun `{#sec-Annexes}` n'existe (annexes packées séparément, non incluses au rendu) : remplacé par un lien fichier direct vers le PDF du catalogue | fc06a8e |
+| A12 | 587743481 | « pb ref » (fiches PDF en annexe) | § fiches indicateurs | `5_presentation_indicateurs.qmd:45` | intégré — même cause que A11 : lien fichier direct vers le PDF (inclusion des annexes testée puis abandonnée : chemins d'inclusion incohérents + contenu du pack modifié) | fc06a8e |
+| A13 | 1003324664 | « Sous partie 7.1 ? » (numérotation « 8 Profil 1 ») | Profils utilisateurs | `5bis_profils_utilisateurs.qmd` | intégré — passer les Profils 1–5 en `###` (sous-parties) | fc06a8e |
+| A14 | 591057693 | 2 profils admin alors que l'OEIL cumulera les deux ? | Profil 4/5 | `5bis_profils_utilisateurs.qmd:46-70` | à arbitrer MOA (tâche 3.2) — trancher 1 vs 2 profils avant d'appliquer | ed10bdf |
+| A15 | 121183428 | « Pas structuré en sous parties comme les autres epics, normal ? » | EPIC 1 | `epics/epic-1-gestion-donnees.qmd` | intégré — harmoniser la structure avec les autres EPIC | fc06a8e |
+| A16 | 2059218774 | « pb ref » (`(#sec-catalogage_donnees)`) | EPIC 1 bis | `6_perimetre_fonctionnel.qmd:9` | intégré — corriger en `{#sec-catalogage_donnees}` | fc06a8e |
+| A17 | 2015163039 | « ce sera codé en dur, pas administré » | Objectif « construire et faire évoluer les outils d'aide à la décision » | `5bis_profils_utilisateurs.qmd:56` | intégré — reformuler (AMC/seuils/pondérations codés en dur) | fc06a8e |
+| A18 | 176102727 | Import de fichiers → Lot 2 (structure inconnue, utile qu'en automatisation) | EPIC 1 import | `6_perimetre_fonctionnel.qmd` + backlog | intégré — bascule Lot 2 + reformulation « automatisation » | d24c69c |
+| A19 | 289829657 | « Pourquoi distinguer cet EPIC du précédent (API) ? » | EPIC 1 import vs API | `6_perimetre_fonctionnel.qmd` | à arbitrer (tâche 5.1) — fusionner ou justifier la distinction | eab266a |
+| A20 | 566759447 | Simplifier journalisation / suivi ingestion (statut, perf, volumétrie) | EPIC 1 suivi imports | `6_perimetre_fonctionnel.qmd` | adapté — fusionner les points redondants | fc06a8e |
 
 ## B. Suivi de modifications DOCX (40 insertions / 26 suppressions, 27 paragraphes)
 
@@ -57,55 +57,55 @@ Toutes auteure Marjolaine DAVID. Toutes de niveau orthographe/grammaire/mise en 
 
 | # | EPIC / US | Commentaire (résumé) | Décision + motif | Commit |
 |---|-----------|----------------------|------------------|--------|
-| C1 | EPIC 1 / import fichiers | Structure inconnue, utile qu'en automatisation → Lot 2 | intégré — bascule Lot 2 (cf. A18) | |
-| C2 | EPIC 1 / API | « c'est notre back qui appelle ; à virer ou backend si redondant » | adapté — qualifier backend, vérifier redondance | |
-| C3 | EPIC 1 / libellé | « Intégration plutôt que import » | intégré — harmoniser le vocabulaire | |
-| C4 | EPIC 1bis / US1bis.4-6 | Catalogue en 2 options : (1) Lot 1 vue fiche simple, (2) Lot 2 catalogue filtrable | intégré — rédiger les 2 options | |
-| C5 | EPIC 1bis / données brutes | Mentionner aussi les données « brutes » sources | déjà conforme — `epic-1bis-catalogue.qmd:3` couvre sources + dérivées | |
-| C6 | EPIC 1bis / libellé | « lors des intégrations de données » | intégré — reformuler | |
-| C7 | EPIC 1bis / traçabilité exécutions | « relier indicateurs à une exécution ? » | @todo — clarifier le besoin avec la MOA | |
-| C8 | EPIC 1bis / métadonnées | Regrouper avec « consulter les métadonnées » | adapté — fusionner | |
-| C9 | EPIC 1bis / structure | « Sans modifier la structure de quoi ? De la bdd ? » | @todo — préciser avec la MOA | |
-| C10 | EPIC 2 / US2.1-2.3 | « T'as des exemples de tests de cohérence ? c'est vague » | @todo — fournir des exemples | |
-| C11 | EPIC 2 / complétude | « Taux de complétude sur le territoire de la NC ? » | adapté — préciser le périmètre | |
-| C12 | EPIC 2 / US2.5-2.6 | Qualité en MVP alors que certaines données (ex. Dynamic World) ne seront pas qualifiées en V1 | adapté — nuancer : signaler les données non qualifiées en V1 | |
-| C13 | EPIC 2 / Lot 2 | « Ok à garder en lot 2 mais pas une priorité » | reporté — Lot 2, priorité basse | |
-| C14 | EPIC 3 / US3.1-3.4 | « Qu'entends-tu par gérer ? » + H3 en Lot 2 | intégré (H3 → Lot 2) + adapté (fusion gestion référentiels) | |
-| C15 | EPIC 3 / calculable | « Tous précalculés non ? Création d'indicateurs via front ? » | rejeté (création front) — indicateurs codés en dur ; reformuler « définir » | |
-| C16 | EPIC 3 / périmètre | « Pourquoi dans l'EPIC référentiels ? » | déjà conforme — section « Référentiel des utilisateurs et des rôles » : les profils sont gérés comme un référentiel | |
-| C17 | EPIC 4 / échelles | « et des PPE et captages » | intégré — compléter les échelles | |
-| C18 | EPIC 4 / params | Regrouper avec US4.1 « calcul paramétrable » | adapté — fusionner | |
-| C19 | EPIC 4 / filtres front | « Pré-calcul, pas de filtre via le front. À retirer ? » | intégré — retirer le paramétrage front | |
-| C20 | EPIC 4 / calculer-recalculer | « Vraiment 2 fonctionnalités à distinguer ? » | adapté — fusionner si redondant | |
-| C21 | EPIC 5 / composite | « Codé en dur, pas dans le front. À virer ? » | intégré — retirer la définition front | |
-| C22 | EPIC 5 / échelles | « à l'échelle d'un indicateur et d'une famille » | intégré — préciser | |
-| C23 | EPIC 5 / tester-définir | « je vois pas la nuance » | intégré — US5.2 recentrée « choisir un jeu de pondérations » vs US5.3 « tester des scénarios » | |
-| C24 | EPIC 5 / scénarios | « on a aussi parlé d'enregistrer et partager des scénarios » | intégré — US5.4 « Comparer et partager des scénarios » | |
-| C25 | EPIC 5 / classement | Pas de score de criticité mais un classement (mail 14/08/2026) | intégré — aligner sur classement/priorisation | |
-| C26 | EPIC 5 / pondérations | Détailler : pondérations dans l'export, fiche méthodo obligatoire par jeu partageable (mail 14/08) | intégré — détailler | |
-| C27 | EPIC 6 / redondance | « Beaucoup de redondance, regrouper avec les 2 suivantes » | adapté — fusionner (validation MOA) | |
-| C28 | EPIC 6 / agrégés | « selon des indicateurs agrégés » | intégré — préciser | |
-| C29 | EPIC 6 / profil | « en tant qu'expert métier non ? » | adapté — corriger le profil | |
-| C30 | EPIC 6 / détail | « à regrouper avec une US au dessus, c'est du détail » | adapté — fusionner | |
-| C31 | EPIC 6 / profil+PPE | « expert métier plutôt ? + sélection PPE » | adapté — corriger + compléter | |
-| C32 | EPIC 6 / facettes | Scinder : facette auto (utilisateur/décideur) vs intersections référentiels (admin data) ; virer la suivante | intégré — scinder en 2 US (proposition MD reprise) | |
-| C33 | EPIC 6 / profil | « expert métier » | adapté — corriger le profil | |
-| C34 | EPIC 6 / profil (US6.23) | « expert métier (+décideur ?) » | adapté — profil Expert appliqué ; « +décideur ? » restant à confirmer avec la MOA | |
-| C35 | EPIC 6 / ergo | « Choix ergo UX pas une fonctionnalité, redondant » | conservée — bascule de vues = fonction de navigation (pas seulement ergo) ; libellé US6.24 inchangé | |
-| C36 | EPIC 6 / volet droit | Reformuler en sélection d'indicateurs par famille (3W proposé) | intégré — reformuler (proposition MD reprise) | |
-| C37 | EPIC 8 / exports (US8.1/US8.2) | « Expert métier ; CSV et SIG à regrouper » | tranché — regroupement CSV/SIG en proposition P7 ; profils conservés admin (arbitrage 3.2 option A) | |
-| C38 | EPIC 8 / profil | « expert métier » | conservé admin — arbitrage 3.2 option A (exports côté Administrateur expert data) | |
-| C39 | EPIC 8 / profil | « expert métier » | conservé admin — arbitrage 3.2 option A | |
-| C40 | EPIC 8 / format | « préciser le format ? redondant avec le rapport PDF ? » | déjà conforme — formats précisés `epic-8-export-diffusion.qmd:11-22`, rapport PDF = US8.3 distincte | |
-| C41 | EPIC 9 / MVP | « c'est normal que MVP soit à False ? » | @todo — vérifier avec la MOA | |
-| C42 | EPIC 9 / redondance | « redondance avec US 3.6 » | adapté — fusionner | |
-| C43 | EPIC 9 / droits | Scinder vue/fonctionnalités vs données (2 US proposées : restreindre fonctions front MVP=true ; filtrer jeux sensibles back MVP=false) | intégré — scinder (proposition MD reprise) | |
-| C44 | EPIC 10 / remaniement | Remanier US1bis.8/9.6/10.1-10.4/10.6 en 2-3 US (3 propositions : suivi pipelines, audit sécurité, versioning métier) | intégré — remanier (propositions MD reprises) | |
-| C45 | EPIC 10 / recalculer-tracer | « quel genre de calcul ? redondant avec d'autres US » | adapté — fusionner + préciser (indicateur vs AMC) | |
-| C46 | EPIC 7 / alertes | Fusionner 7.4+7.2 (seuils/changements) + alertes nouveautés | proposition P11 (nouveaux IDs requis, validation MOA) — voir ci-dessous | |
-| P11 | US7.2 + US7.4 + nouveautés (cf. C46) | Fusion alertes seuils/changements + alertes nouveautés (intégrations, fonctionnalités) | proposition — fusionner en une US « être alerté » à 3 volets, sans renumérotation avant validation MOA | |
-| C47 | EPIC 7 / vocabulaire | « selon un classement multicritère » | intégré — aligner sur classement | |
-| C48 | EPIC 7 / contribution | « c'est quoi ? » (contribution au score de criticité) | intégré — reformuler en contribution au classement | |
+| C1 | EPIC 1 / import fichiers | Structure inconnue, utile qu'en automatisation → Lot 2 | intégré — bascule Lot 2 (cf. A18) | d24c69c |
+| C2 | EPIC 1 / API | « c'est notre back qui appelle ; à virer ou backend si redondant » | adapté — qualifier backend, vérifier redondance | 9412e8c |
+| C3 | EPIC 1 / libellé | « Intégration plutôt que import » | intégré — harmoniser le vocabulaire | 9412e8c |
+| C4 | EPIC 1bis / US1bis.4-6 | Catalogue en 2 options : (1) Lot 1 vue fiche simple, (2) Lot 2 catalogue filtrable | intégré — rédiger les 2 options | d24c69c |
+| C5 | EPIC 1bis / données brutes | Mentionner aussi les données « brutes » sources | déjà conforme — `epic-1bis-catalogue.qmd:3` couvre sources + dérivées | — |
+| C6 | EPIC 1bis / libellé | « lors des intégrations de données » | intégré — reformuler | 9412e8c |
+| C7 | EPIC 1bis / traçabilité exécutions | « relier indicateurs à une exécution ? » | @todo — clarifier le besoin avec la MOA | ad6e44f |
+| C8 | EPIC 1bis / métadonnées | Regrouper avec « consulter les métadonnées » | adapté — fusionner | eab266a |
+| C9 | EPIC 1bis / structure | « Sans modifier la structure de quoi ? De la bdd ? » | @todo — préciser avec la MOA | ad6e44f |
+| C10 | EPIC 2 / US2.1-2.3 | « T'as des exemples de tests de cohérence ? c'est vague » | @todo — fournir des exemples | ad6e44f |
+| C11 | EPIC 2 / complétude | « Taux de complétude sur le territoire de la NC ? » | adapté — préciser le périmètre | 9412e8c |
+| C12 | EPIC 2 / US2.5-2.6 | Qualité en MVP alors que certaines données (ex. Dynamic World) ne seront pas qualifiées en V1 | adapté — nuancer : signaler les données non qualifiées en V1 | 9412e8c |
+| C13 | EPIC 2 / Lot 2 | « Ok à garder en lot 2 mais pas une priorité » | reporté — Lot 2, priorité basse | — |
+| C14 | EPIC 3 / US3.1-3.4 | « Qu'entends-tu par gérer ? » + H3 en Lot 2 | intégré (H3 → Lot 2) + adapté (fusion gestion référentiels) | d24c69c |
+| C15 | EPIC 3 / calculable | « Tous précalculés non ? Création d'indicateurs via front ? » | rejeté (création front) — indicateurs codés en dur ; reformuler « définir » | — |
+| C16 | EPIC 3 / périmètre | « Pourquoi dans l'EPIC référentiels ? » | déjà conforme — section « Référentiel des utilisateurs et des rôles » : les profils sont gérés comme un référentiel | — |
+| C17 | EPIC 4 / échelles | « et des PPE et captages » | intégré — compléter les échelles | 9412e8c |
+| C18 | EPIC 4 / params | Regrouper avec US4.1 « calcul paramétrable » | adapté — fusionner | eab266a |
+| C19 | EPIC 4 / filtres front | « Pré-calcul, pas de filtre via le front. À retirer ? » | intégré — retirer le paramétrage front | 9412e8c |
+| C20 | EPIC 4 / calculer-recalculer | « Vraiment 2 fonctionnalités à distinguer ? » | adapté — fusionner si redondant | eab266a |
+| C21 | EPIC 5 / composite | « Codé en dur, pas dans le front. À virer ? » | intégré — retirer la définition front | eff890f |
+| C22 | EPIC 5 / échelles | « à l'échelle d'un indicateur et d'une famille » | intégré — préciser | 9412e8c |
+| C23 | EPIC 5 / tester-définir | « je vois pas la nuance » | intégré — US5.2 recentrée « choisir un jeu de pondérations » vs US5.3 « tester des scénarios » | 9412e8c |
+| C24 | EPIC 5 / scénarios | « on a aussi parlé d'enregistrer et partager des scénarios » | intégré — US5.4 « Comparer et partager des scénarios » | 9412e8c |
+| C25 | EPIC 5 / classement | Pas de score de criticité mais un classement (mail 14/08/2026) | intégré — aligner sur classement/priorisation | eff890f |
+| C26 | EPIC 5 / pondérations | Détailler : pondérations dans l'export, fiche méthodo obligatoire par jeu partageable (mail 14/08) | intégré — détailler | eff890f |
+| C27 | EPIC 6 / redondance | « Beaucoup de redondance, regrouper avec les 2 suivantes » | adapté — fusionner (validation MOA) | eab266a |
+| C28 | EPIC 6 / agrégés | « selon des indicateurs agrégés » | intégré — préciser | 9412e8c |
+| C29 | EPIC 6 / profil | « en tant qu'expert métier non ? » | adapté — corriger le profil | 9412e8c |
+| C30 | EPIC 6 / détail | « à regrouper avec une US au dessus, c'est du détail » | adapté — fusionner | eab266a |
+| C31 | EPIC 6 / profil+PPE | « expert métier plutôt ? + sélection PPE » | adapté — corriger + compléter | 9412e8c |
+| C32 | EPIC 6 / facettes | Scinder : facette auto (utilisateur/décideur) vs intersections référentiels (admin data) ; virer la suivante | intégré — scinder en 2 US (proposition MD reprise) | eab266a |
+| C33 | EPIC 6 / profil | « expert métier » | adapté — corriger le profil | 9412e8c |
+| C34 | EPIC 6 / profil (US6.23) | « expert métier (+décideur ?) » | adapté — profil Expert appliqué ; « +décideur ? » restant à confirmer avec la MOA | 9412e8c |
+| C35 | EPIC 6 / ergo | « Choix ergo UX pas une fonctionnalité, redondant » | conservée — bascule de vues = fonction de navigation (pas seulement ergo) ; libellé US6.24 inchangé | — |
+| C36 | EPIC 6 / volet droit | Reformuler en sélection d'indicateurs par famille (3W proposé) | intégré — reformuler (proposition MD reprise) | 9412e8c |
+| C37 | EPIC 8 / exports (US8.1/US8.2) | « Expert métier ; CSV et SIG à regrouper » | tranché — regroupement CSV/SIG en proposition P7 ; profils conservés admin (arbitrage 3.2 option A) | eab266a |
+| C38 | EPIC 8 / profil | « expert métier » | conservé admin — arbitrage 3.2 option A (exports côté Administrateur expert data) | ed10bdf |
+| C39 | EPIC 8 / profil | « expert métier » | conservé admin — arbitrage 3.2 option A | ed10bdf |
+| C40 | EPIC 8 / format | « préciser le format ? redondant avec le rapport PDF ? » | déjà conforme — formats précisés `epic-8-export-diffusion.qmd:11-22`, rapport PDF = US8.3 distincte | — |
+| C41 | EPIC 9 / MVP | « c'est normal que MVP soit à False ? » | @todo — vérifier avec la MOA | ad6e44f |
+| C42 | EPIC 9 / redondance | « redondance avec US 3.6 » | adapté — fusionner | eab266a |
+| C43 | EPIC 9 / droits | Scinder vue/fonctionnalités vs données (2 US proposées : restreindre fonctions front MVP=true ; filtrer jeux sensibles back MVP=false) | intégré — scinder (proposition MD reprise) | eab266a |
+| C44 | EPIC 10 / remaniement | Remanier US1bis.8/9.6/10.1-10.4/10.6 en 2-3 US (3 propositions : suivi pipelines, audit sécurité, versioning métier) | intégré — remanier (propositions MD reprises) | eab266a |
+| C45 | EPIC 10 / recalculer-tracer | « quel genre de calcul ? redondant avec d'autres US » | adapté — fusionner + préciser (indicateur vs AMC) | eab266a |
+| C46 | EPIC 7 / alertes | Fusionner 7.4+7.2 (seuils/changements) + alertes nouveautés | proposition P11 (nouveaux IDs requis, validation MOA) — voir ci-dessous | 9412e8c |
+| P11 | US7.2 + US7.4 + nouveautés (cf. C46) | Fusion alertes seuils/changements + alertes nouveautés (intégrations, fonctionnalités) | proposition — fusionner en une US « être alerté » à 3 volets, sans renumérotation avant validation MOA | 9412e8c |
+| C47 | EPIC 7 / vocabulaire | « selon un classement multicritère » | intégré — aligner sur classement | eff890f |
+| C48 | EPIC 7 / contribution | « c'est quoi ? » (contribution au score de criticité) | intégré — reformuler en contribution au classement | eff890f |
 
 ## D. Écarts backlog MD vs base (9)
 
@@ -113,15 +113,15 @@ Toutes auteure Marjolaine DAVID. Toutes de niveau orthographe/grammaire/mise en 
 
 | # | US | Champ | Base → MD | Décision | Commit |
 |---|----|-------|-----------|----------|--------|
-| D1 | US1bis.13 | Dépend de | `US1bis.1` → vide | intégré | |
-| D2 | US1bis.4 | Dépend de | `US1bis.6` → vide | intégré | |
-| D3 | US2.5 | Dépend de | liste → vide | intégré | |
-| D4 | US2.6 | Dépend de | `US2.5` → vide | intégré | |
-| D5 | US4.1 | Dépend de | `US3.5 ; US1bis.12` → `US3.5 ; US4.7 ; US1bis.12` | intégré | |
-| D6 | US8.1 | EPIC / Profil | `Export & diffusion` → `Export` ; Expert métier → Administrateur expert data | intégré (profil : voir arbitrage C37/tâche 3.2 pour les exports restants) | |
-| D7 | US8.2 | EPIC / Profil / 3W | idem + 3W réécrite côté admin | intégré | |
-| D8 | US8.4 | EPIC / Profil | idem D6 | intégré | |
-| D9 | US8.6 | EPIC / Profil / 3W | idem + 3W réécrite côté admin | intégré | |
+| D1 | US1bis.13 | Dépend de | `US1bis.1` → vide | intégré | d24c69c |
+| D2 | US1bis.4 | Dépend de | `US1bis.6` → vide | intégré | d24c69c |
+| D3 | US2.5 | Dépend de | liste → vide | intégré | d24c69c |
+| D4 | US2.6 | Dépend de | `US2.5` → vide | intégré | d24c69c |
+| D5 | US4.1 | Dépend de | `US3.5 ; US1bis.12` → `US3.5 ; US4.7 ; US1bis.12` | intégré | d24c69c |
+| D6 | US8.1 | EPIC / Profil | `Export & diffusion` → `Export` ; Expert métier → Administrateur expert data | intégré (profil : voir arbitrage C37/tâche 3.2 pour les exports restants) | d24c69c |
+| D7 | US8.2 | EPIC / Profil / 3W | idem + 3W réécrite côté admin | intégré | d24c69c |
+| D8 | US8.4 | EPIC / Profil | idem D6 | intégré | d24c69c |
+| D9 | US8.6 | EPIC / Profil / 3W | idem + 3W réécrite côté admin | intégré | d24c69c |
 
 ## Points d'arbitrage MOA en suspens
 
