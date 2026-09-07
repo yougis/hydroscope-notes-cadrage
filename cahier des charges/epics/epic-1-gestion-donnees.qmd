@@ -13,7 +13,7 @@ L’EPIC couvre plusieurs dimensions complémentaires.
 Le système doit permettre l’intégration de données via différents canaux : dépôts FTP de fichiers (CSV, formats SIG, etc.) et connexions à des services externes (API). Ces imports doivent être paramétrables afin de s’adapter aux spécificités de chaque source (structure, fréquence, format). Une attention particulière sera portée à la **reproductibilité** des imports, notamment dans une logique d’automatisation.
 
 - **Connexion aux sources web existantes**  
-HydroScope doit pouvoir se connecter à des sources de données existantes (bases de données, services web institutionnels ex.Georep et privée) et de garantir la mise à jour régulière des informations. Ces connexions doivent être documentées.
+HydroScope doit pouvoir se connecter à des sources de données existantes (bases de données, services web institutionnels ex.Georep et privée) et de garantir la mise à jour régulière des informations. Ces connexions, appelées côté back (ETL/scripts d'intégration), doivent être documentées.
 
 - **Structuration et normalisation des données**  
 Les données intégrées doivent être transformées afin de s’inscrire dans un modèle de données commun. Cela implique des opérations de standardisation (formats, unités, nomenclatures), de mise en cohérence spatiale et temporelle, ainsi que de rattachement aux référentiels du système (objets géographiques, indicateurs, etc.).  

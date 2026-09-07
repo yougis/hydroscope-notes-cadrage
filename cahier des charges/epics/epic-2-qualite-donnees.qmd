@@ -17,3 +17,9 @@ Mise en place de règles automatiques permettant de détecter des anomalies dans
   - incohérences temporelles (dates manquantes, inversées, discontinuités)
 
 Ces contrôles peuvent être bloquants ou informatifs selon les cas.
+
+- **Taux de complétude territorial**  
+Le taux de complétude est calculé à l'échelle de la Nouvelle-Calédonie afin de mesurer la couverture des données.
+
+- **Données non qualifiées en V1**  
+Certaines données (ex. Dynamic World) peuvent ne pas être qualifiées en V1 : elles sont alors signalées comme non qualifiées et exclues des usages sensibles (ex. AMC).

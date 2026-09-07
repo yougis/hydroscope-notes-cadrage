@@ -12,7 +12,7 @@ Cet EPIC constitue le partie analytique d’HydroScope. Il regroupe des mécanis
 
 Les indicateurs produits doivent permettre de caractériser les territoires et les unités de gestion de l'eau potable, d’identifier les enjeux et les pressions exercées sur la ressource en eau et de suivre leur évolution dans le temps. Leur construction repose sur des choix méthodologiques structurants, qui doivent être explicités et maîtrisés.
 
-Les traitements doivent permettre de produire des indicateurs à différentes échelles spatiales (captage, bassin versant, maille) et temporelles, tout en garantissant la reproductibilité des résultats.
+Les traitements doivent permettre de produire des indicateurs à différentes échelles spatiales (captage, PPE, bassin versant, maille) et temporelles, tout en garantissant la reproductibilité des résultats.
 
 Une attention particulière est portée à la transparence des méthodes de calcul et à la capacité du système à gérer les évolutions des indicateurs dans le temps.
 
