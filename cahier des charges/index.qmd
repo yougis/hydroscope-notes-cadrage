@@ -5,7 +5,7 @@ subtitle: "Cahier des charges"
 execute:
   echo: false
 
-version: "version 1.1"
+version: "version 1.2"
 
 fichier_backlog : "backlog.xlsx"
 catalogue_inidcateur : ""
@@ -65,6 +65,7 @@ Historique des versions du document :
 | --|--------|--------- |--------------------------------|
 | 1 || Hugo Roussaffa |Rédaction initiale du cahier des charges|
 | 1.1 | 10/08/2026 | Hugo Roussaffa | Finalisation du backlog et des profils utilisateurs, ajout du cadre de chiffrage, compléments des exigences — version soumise à la relecture de la MOA |
+| 1.2 | 08/09/2026 | Hugo Roussaffa | Intégration des retours de Marjolaine David sur la v1.1 (orthographe, pressions, références, COPRO, profils, MVP/Lot 2, backlog, AMC classement) — suivi exhaustif : `suivi-retours-MD.md` |
 
 
 ::: {#todo-list}
