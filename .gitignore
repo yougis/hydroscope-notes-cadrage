@@ -22,3 +22,4 @@ cahier des charges/__pycache__/
 /cahier des charges/dyn_counts.txt
 .opencode/*
 .continue/*
+**/cache.db
