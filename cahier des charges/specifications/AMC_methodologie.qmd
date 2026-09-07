@@ -36,6 +36,7 @@ multicritère d'un territoire, afin que le résultat soit explicable et justifia
   d'AMC ne sont pas paramétrables via le front (pas de création d'indicateurs
   ni de croisements ad hoc dans l'interface).
 
+<<<<<<< HEAD
 ## 3. Choix ouverts (à arbitrer)
 
 ### 3.1 Liste des indicateurs éligibles
@@ -52,6 +53,9 @@ multicritère d'un territoire, afin que le résultat soit explicable et justifia
 - Les résultats indiquent la méthode utilisée et les pondérations affectées ;
   les pondérations sont affichées dans l'export d'un rapport.
 - Qui arbitre : comité scientifique vs DAVAR.
+=======
+- les grandes familles d'indicateur "enjeux/pressions" peuvent être modulées via des pondérations globales.
+>>>>>>> 7cc50bb (CDC/MD: ajout de fichiers pour encadrer le tri et l'intégration des retours de Marjolaine David sur le CDC v1.1 — Proposé par Marjolaine David (intégration-retours-md-cdc-v1-1))
 
 ### 3.3 Règles d'agrégation
 - Agrégation arithmétique simple vs méthode plus robuste (ex. pondérée / min-max).
@@ -80,7 +84,11 @@ multicritère d'un territoire, afin que le résultat soit explicable et justifia
 
 ## 6. Sources
 
+<<<<<<< HEAD
 - Réunion Read-AI « Brainstorming analyse multicritère » (transcript sauvegardé).
+=======
+- Réunion « Brainstorming analyse multicritère » 
+>>>>>>> 7cc50bb (CDC/MD: ajout de fichiers pour encadrer le tri et l'intégration des retours de Marjolaine David sur le CDC v1.1 — Proposé par Marjolaine David (intégration-retours-md-cdc-v1-1))
 - Cadrage OEIL du 14/08/2026 (classement multicritère, jeux de pondérations, fiche méthodo).
 - `5_perimetre_fonctionnel.qmd` (EPIC 5).
 - `dependances_us.qmd` (chaîne AMC).

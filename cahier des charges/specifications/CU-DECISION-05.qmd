@@ -23,7 +23,11 @@ où concentrer les actions, en connaissance de la méthode.
 
 - Cas d'usage : `CU-DECISION-05` (US7.6) — `profils_utilisateurs.qmd` (Profil 4).
 - EPIC 5 ; restitue l'indice composite construit en CU-DATA-05.
+<<<<<<< HEAD
 - Réunion AMC (Read-AI) : ordre des onglets, classement + contribution.
+=======
+- Réunion brainstorm AMC
+>>>>>>> 7cc50bb (CDC/MD: ajout de fichiers pour encadrer le tri et l'intégration des retours de Marjolaine David sur le CDC v1.1 — Proposé par Marjolaine David (intégration-retours-md-cdc-v1-1))
 
 ## 2. Fonctionnalités couvertes
 
@@ -45,7 +49,11 @@ où concentrer les actions, en connaissance de la méthode.
 - Classement (rang + libellé) avec **contribution** des indicateurs.
 - Tableau triable par contribution (famille → thème).
 - Lien vers `AMC_methodologie.qmd` (méthode justifiée).
+<<<<<<< HEAD
 - Captures : _(à insérer depuis le prototype — interface AMC / Classement)_.
+=======
+- Captures :  @todo à insérer depuis le prototype — interface AMC / Classement.
+>>>>>>> 7cc50bb (CDC/MD: ajout de fichiers pour encadrer le tri et l'intégration des retours de Marjolaine David sur le CDC v1.1 — Proposé par Marjolaine David (intégration-retours-md-cdc-v1-1))
 
 ## 5. Points de vigilance
 

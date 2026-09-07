@@ -26,7 +26,11 @@ Le système doit fournir une aide à l’interprétation en explicitant les fact
 
 #### Points de vigilance
 
+<<<<<<< HEAD
 - **Méthode de classement** : le classement multicritère (pas de note absolue) reste à valider avec la MOA et le conseil scientifique avant son intégration, avec analyse de sensibilité et étude des dépendances entre indicateurs (point ouvert MOA).
+=======
+- **Méthode de classement** : le classement multicritère (pas de note absolue) reste à valider avec la MOA (et/ou le conseil scientifique / ateliers d'intelligences collectives) avant son intégration, avec analyse de sensibilité et étude des dépendances entre indicateurs (point ouvert MOA).
+>>>>>>> 7cc50bb (CDC/MD: ajout de fichiers pour encadrer le tri et l'intégration des retours de Marjolaine David sur le CDC v1.1 — Proposé par Marjolaine David (intégration-retours-md-cdc-v1-1))
 - **Complétude des données** : la comparabilité des territoires suppose un seuil de complétude commun des données d’environ {80 % ?); en deçà, les résultats doivent être affichés avec la réserve appropriée.
 - **Pondérations encadrées** : les pondérations éventuelles sont encadrées et validées (atelier OS1, conseil scientifique) ; des garde-fous d’interface doivent prévenir les usages non maîtrisés.
 - **Transparence** : les résultats intermédiaires (contributions) doivent rester exportables et documentés afin de préserver la traçabilité de l’aide à la décision.

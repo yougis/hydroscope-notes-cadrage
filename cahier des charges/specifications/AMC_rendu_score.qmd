@@ -37,12 +37,16 @@ pas une aide à la décision automatisée : le classement éclaire, l'acteur dé
 - Hiérarchie de lecture : famille → thème → indicateurs.
 - Met en évidence les facteurs dominants (ex. pression urbaine) à la lecture.
 
+<<<<<<< HEAD
 ## 3. Ordre des onglets (réunion AMC, Read-AI)
 
 - L'onglet « Classement » est restitué dans un ordre défini (à stabiliser en recette).
 - Le classement et les contributions sont affichés de concert (pas de classement « muet »).
 
 ## 4. Parcours IHM
+=======
+## 3. Parcours IHM
+>>>>>>> 7cc50bb (CDC/MD: ajout de fichiers pour encadrer le tri et l'intégration des retours de Marjolaine David sur le CDC v1.1 — Proposé par Marjolaine David (intégration-retours-md-cdc-v1-1))
 
 1. Accès restreint (droit + connexion requis, spec UX §3.7).
 2. Ouvrir un territoire → onglet « Classement multicritère ».
@@ -54,6 +58,7 @@ pas une aide à la décision automatisée : le classement éclaire, l'acteur dé
 - Classement (rang + libellé) avec **contribution** des indicateurs.
 - Tableau triable par contribution (famille → thème).
 - Lien explicite vers la méthode documentée.
+<<<<<<< HEAD
 - Captures : _(à insérer depuis le prototype — interface AMC / Classement)_.
 
 ## 6. Points de vigilance
@@ -61,3 +66,12 @@ pas une aide à la décision automatisée : le classement éclaire, l'acteur dé
 - Restituer systématiquement la méthode à côté du classement (prudence §3.2).
 - Pas de classement définitif diffusé hors méthode validée.
 - La restitution publique est **exclue** du scoring AMC.
+=======
+- Captures : @todo à insérer depuis le prototype — interface AMC / Classement.
+
+## 6. Points de vigilance
+
+- Restituer systématiquement la méthode à côté du classement.
+- Pas de classement définitif diffusé hors méthode validée ?
+- La restitution publique est **exclue** du scoring AMC ?
+>>>>>>> 7cc50bb (CDC/MD: ajout de fichiers pour encadrer le tri et l'intégration des retours de Marjolaine David sur le CDC v1.1 — Proposé par Marjolaine David (intégration-retours-md-cdc-v1-1))
