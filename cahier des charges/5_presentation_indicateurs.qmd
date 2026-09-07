@@ -1,6 +1,6 @@
 ## Présentation des indicateurs {#sec-presentation-indicateurs}
 
-HydroScope calcule **{{< meta n_ind >}} indicateurs** (évolutif) organisés selon une arborescence à trois niveaux — **famille**, **thème** et **groupe** — et structurés pour décrire les **enjeux** (disponibilité et intégrité de la ressource) et les **menaces** (anthropiques et naturelles) pesant sur les bassins versants d'alimentation en eau potable (BVAEP). Cette liste est disponible au format Excel « liste_indicateurs_v4.xlsx » et un corpus de fiches détaillées des indicateurs (format PDF) est fourni en annexe (@sec-Annexes).
+HydroScope calcule **{{< meta n_ind >}} indicateurs** (évolutif) organisés selon une arborescence à trois niveaux — **famille**, **thème** et **groupe** — et structurés pour décrire les **enjeux** (disponibilité et intégrité de la ressource) et les **pressions** (anthropiques et naturelles) pesant sur les bassins versants d'alimentation en eau potable (BVAEP). Cette liste est disponible au format Excel « liste_indicateurs_v4.xlsx » et un corpus de fiches détaillées des indicateurs (format PDF) est fourni en annexe (voir le [catalogue des fiches](./annexes/Fiches_indicateurs_HydroScope-v4.pdf)).
 
 La liste ci-dessous présente les indicateurs organisés par famille, thème et groupe, avec pour chacun l'objectif d'usage en lecture d'information et en analyse décisionnelle. L'acronyme « AMC » renvoie à l'analyse multicritère mobilisée dans l'aide à la décision.
 
@@ -42,4 +42,4 @@ print("\n".join(rows))
 ```
 
 
-Un corpus de fiches détaillées des indicateurs (format PDF) est aussi disponible en annexe @sec-CataloguefichesInd. Chaque fiche précise la définition, les objectifs, la méthode de calcul, les sources de données et les vigilances associées.
+Un corpus de fiches détaillées des indicateurs (format PDF) est aussi disponible en annexe ([catalogue des fiches](./annexes/Fiches_indicateurs_HydroScope-v4.pdf)). Chaque fiche précise la définition, les objectifs, la méthode de calcul, les sources de données et les vigilances associées.

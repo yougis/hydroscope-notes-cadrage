@@ -1,20 +1,20 @@
 ## Profils utilisateurs et objectifs identifiés {#sec-profil-utilisateur}
 
-Nous avons pour le moment identifié 5 profils types ayant pour certain des objectifs basics de lecture d'information et pour d'autre de manipulation et de pilotage d'analyse complexe des données.
+Nous avons pour le moment identifié 5 profils types ayant pour certains des objectifs basiques de lecture d'information et pour d'autres de manipulation et de pilotage d'analyse complexe des données.
 
-## Profil 1 : Public averti
+### Profil 1 : Public averti
 
 **Description** — Citoyen, habitant ou journaliste souhaitant consulter la qualité de l'eau sur son territoire. Accès anonyme, interface simplifiée et filtrable, lecture seule stricte (aucun export, aucun partage).
 
 **Objectifs** :
 
 1. Explorer la carte des captages et des bassins versants de sa commune
-2. Comprendre les indicateurs d'enjeux et de menaces grâce à des données chiffrées
-3. Accéder aux information de périmètres de protection et des zones où les risques sont présents
-4. Consulter ll'état de la ressource en eau  potable sur son lieu de résidence
+2. Comprendre les indicateurs d'enjeux et de pressions grâce à des données chiffrées
+3. Accéder aux informations de périmètres de protection et des zones où les risques sont présents
+4. Consulter l'état de la ressource en eau potable sur son lieu de résidence
 
 
-## Profil 2 : Décideur métier
+### Profil 2 : Décideur métier
 
 **Description** — Élu, directeur de service ou président d'association disposant d'un pouvoir de décision. Utilise HydroScope pour piloter les orientations stratégiques et opérationnelles en matière de gestion de l'eau potable.
 
@@ -27,15 +27,15 @@ Nous avons pour le moment identifié 5 profils types ayant pour certain des obje
 5. Consulter les outils d'aide à la décision pour éclairer ses choix
 
 
-## Profil 3 : Expert métier eau potable
+### Profil 3 : Expert métier eau potable
 
 **Description** — Ingénieur/e spécialisé(e) en eau potable qui consulte les indicateurs et approfondit ses analyses (AMC, scénarios, comparaisons). Effectue parfois de la gestion de données et il exploite principalement des résultats pour son expertise métier.
 
 **Objectifs** :
 
-1. Conduire les  analyse décisionnele comme par exemple des analyses multicritères pour évaluer des scénarios complexes
+1. Conduire les analyses décisionnelles comme par exemple des analyses multicritères pour évaluer des scénarios complexes
 2. Produire des synthèses pour alimenter la prise de décision
-3. Consulter les indicateurs de menace sur l'eau potable d'un territoire
+3. Consulter les indicateurs de pression sur l'eau potable d'un territoire
 4. Visualiser les cartographies pour une analyse multi-échelle
 5. Suivre les tendances et détecter les situations critiques
 6. Evaluer la qualité des données sources des indicateurs les unes par rapport aux autres afin d'envisager des campagnes d'acquisition de nouvelles données.
@@ -43,7 +43,7 @@ Nous avons pour le moment identifié 5 profils types ayant pour certain des obje
 
 
 
-## Profil 4 : Administrateur expert data
+### Profil 4 : Administrateur expert data
 
 **Description** — Administrateur des données responsable de l'alimentation, de la qualité, du catalogue, des calculs d'indicateurs et de la construction de l'aide à la décision. Gère les référentiels géographiques et méthodologiques.
 
@@ -53,10 +53,10 @@ Nous avons pour le moment identifié 5 profils types ayant pour certain des obje
 2. Qualifier la qualité des données et détecter les anomalies
 3. Construire et maintenir les référentiels géographiques et méthodologiques
 4. Produire les indicateurs et les rendre accessibles aux autres profils
-5. Construire et faire évoluer les outils d'aide à la décision (AMC, seuils, pondérations)
-6. Annimer la communauté d'utilisateur de la plateforme
+5. Exploiter les outils d'aide à la décision (AMC, seuils, pondérations), définis et codés en dur
+6. Animer la communauté d'utilisateur de la plateforme
 
-## Profil 5 : Administrateur plateforme
+### Profil 5 : Administrateur plateforme
 
 **Description** — Agent technique (OEIL) responsable de l'exploitation, de la sécurité et de la maintenance de la plateforme HydroScope. Gère les comptes utilisateurs, les droits d'accès, les paramètres système et l'audit des usages.
 
