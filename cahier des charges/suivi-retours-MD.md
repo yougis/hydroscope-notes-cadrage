@@ -127,3 +127,18 @@ Toutes auteure Marjolaine DAVID. Toutes de niveau orthographe/grammaire/mise en 
 - Enveloppe MVP/aléa/avenant (A7, tâche 3.1) — relecture OEIL requise.
 - 1 vs 2 profils admin (A14, C37–C39 vs D6–D9, tâches 3.2/4.1) — trancher avant d'uniformiser les exports.
 - Fusion EPIC import/API (A19) et fusions d'US redondantes (C27, C30, C42, C45, tâche 5.1) — valider avant renumérotation.
+
+## Propositions de fusion/scission (tâche 5.1) — validation MOA requise, sans renumérotation
+
+| # | Périmètre (IDs sources) | Motif | Proposition |
+|---|------------------------|-------|-------------|
+| P1 | US1bis.13 + US1bis.12 (« Enregistrer un indicateur comme donnée dérivée » / métadonnées jeu de données, cf. C8) | Même fonctionnalité de consultation des métadonnées une fois tout catalogué | Fusionner en une US « consulter les métadonnées (jeu ou indicateur) » |
+| P2 | US4.4 (« Paramétrer un calcul ») + US4.1 (« Calculer des indicateurs simples », cf. C18) | Pas de paramètres propres par source de données | Fusionner dans US4.1, paramètres éventuels en critères d'acceptation |
+| P3 | US4.1 (« Calculer ») + US4.7 (« Recalculer un indicateur », cf. C20) | Recalculer = ré-exécuter le même calcul (correction de données, nouvelle version) | Fusionner : « calculer / recalculer » en une US avec critère de rejouabilité |
+| P4 | US6.1 + US6.2 + US6.3 (carte / indicateurs carto / navigation, cf. C27) | Trois facettes d'une même vue cartographique de base | Fusionner en une US « visualiser et naviguer sur carte » |
+| P5 | US6.14 + US6.13 (facettes/preset, cf. C30) | Détail de manipulation des facettes | Absorber US6.14 en critère d'acceptation de la gestion des facettes |
+| P6 | US9.3 (« Rôles simples », MVP) vs US3.6 (« Gérer les profils utilisateurs », Lot 2, cf. C42) | Recouvrement gestion des rôles/profils | Fusionner ou expliciter la frontière (rôles applicatifs vs profils référentiels) |
+| P7 | US8.1 (CSV) + US8.2 (SIG, cf. C37) | Même geste d'export, seul le format change | Fusionner en « exporter (CSV, SIG) » avec formats en critères d'acceptation |
+| P8 | US10.1/10.2/10.3/10.4/10.6 + US1bis.8 + US9.6 (cf. C44) | Journalisation pipeline / audit sécurité / versioning métier mélangés | Remanier en 3 US selon la proposition MD (Suivi des Pipelines / Audit de Sécurité / Versioning Métier) |
+| P9 | US10.5 (« Reconstituer calcul ») + US4.7 + US10.2 (cf. C45) | Tracer vs reconstituer vs recalculer : trois faces d'une même traçabilité des calculs | Fusionner en précisant le type de calcul (indicateur vs AMC) |
+| P10 | EPIC 1 « Import fichiers & API » vs « Connexion sources web » (cf. A19) | Distinction de canaux pour une même fonction d'intégration | Fusionner en « Intégration des données (fichiers & API) » ou justifier la distinction (temps réel vs batch) |
