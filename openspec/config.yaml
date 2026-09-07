@@ -1,32 +1,33 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Projet HydroScope — Observatoire de l'eau potable en Nouvelle-Caledonie (porteur OEIL, partenaires DAVAR Service de l'Eau, DASS, Provinces, Communes ; co-financement OFB 65 % / fonds PEP 35 % ; suite de PressionPPE 2021).
+  Nature : outil de diagnostic, comparaison territoriale et aide a la decision a l'echelle BVAEP / PPE / captages (~50 BVAEP, ~500 captages/forages, ~250 PPE, catalogue indicateurs v4 : 33 multicriteres + 5 informatifs). Approche par indicateurs de pressions/enjeux (incendies, erosion, urbanisation, minier, especes envahissantes, artificialisation). N'est PAS un simulateur hydraulique temps reel, ni modelisation reseau, ni facturation.
+  4 piliers : 1 Connaissance & caracterisation, 2 Diagnostic & analyse multicritere (+ historisation/diachronie), 3 Veille & detection automatique, 4 Partage & diffusion. 3 interfaces : Gestionnaires/Experts (granularite pleine, multicritere, requetes spatiales), Partenaires (tableaux simplifies, comparatif bassins, PDF auto, notifications), Grand public (vulgarisation).
+  Ce repo (Notes de cadrage) est une fabrique documentaire, pas une app : production des notes de cadrage strategique (v0.6 validee OEIL), fonctionnelle Gestionnaire (v0.3 travail) / Partenaires / UX-Cartes, et du Cahier des charges v1.1 + backlog.xlsx (EPICS/US) + specifications (CU-*, ADI-*, AMC-*) + releases/ figees (docx/pdf).
+  Stack : Quarto qmd (lang fr, _quarto.yml, pdf-engine xelatex, template eisvogel, custom-reference.docx, before-body.tex/in-header.tex/header.tex), Python _lib_indicateurs.py (comptes dynamiques dyn-counts), filtres Lua filters/todo.lua (@todo[priority,section] + ::: {#todo-list}) et dyn-counts.lua, ressources/ (OEIL_logo.png, logo_yapuka.png). Rendu : quarto render vers html/pdf/docx dans _output/.
+  Conventions : redaction en francais, versionnage 0.x (notes de travail) / 1.x (CDC), front-matter title/subtitle/version/copyright Yapuka SARL/resume, tableau d'historique des versions, validation COPRO/COPIL/OEIL. Backlog.xlsx + catalogue indicateurs = sources de verite fonctionnelles. Skill actif : hydroScope-amoa (format US 3W En tant que/Je veux/Afin de, regles INVEST, separation IHM vs backend, priorisation MVP vs Lot 2, traçabilite Azure DevOps). DESIGN.md existant (style Uber) est hors sujet : ne pas l'appliquer aux documents.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+rules:
+  proposal:
+    - Rediger en francais, perimetre explicite rattache a un des 4 piliers.
+    - Invalider tout besoin hors perimetre (temps reel, modelisation reseau, facturation) avec justification.
+    - Distinguer MVP (mise en service) vs Lot 2 (evolutions) et impact sur backlog.xlsx.
+  specs:
+    - Formater chaque US en 3W + criteres d'acceptation testables (regles INVEST).
+    - Preciser IHM concernee (Experts / Partenaires / Public) ou traitement backend, et tracabilite (EPIC, CU-*, backlog.xlsx, catalogue indicateurs).
+    - Rappeler les ordres de grandeur BVAEP/captages/PPE si dimensionnant.
+  design:
+    - Privilegier l'evolution des qmd existants (cadrage strategique/, cadrage fonctionnel/, cahier des charges/) et des filtres Lua ; justifier tout nouvel outillage.
+    - Respecter le systeme Quarto (front-matter, includes, callouts, @todo, reference docx) et ne jamais editer directement releases/.
+  tasks:
+    - Decoupage en lots verificables par `quarto render` du document concerne, avec mise a jour de l'historique de version et de {#todo-list}.
 
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+operations:
+  apply:
+    guidance:
+      - Ne modifier que les qmd sources et assets ; ne jamais reecrire les PDF/DOCX figes de releases/.
+      - Verifier par `quarto render` ciblé et controler les @todo restants avant de cloturer.
+  archive:
+    guidance:
+      - Resumer quel document de cadrage (note/CDC/backlog) a evolue, sa version et sa validation (COPRO/OEIL).
