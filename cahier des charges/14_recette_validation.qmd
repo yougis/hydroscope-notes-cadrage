@@ -59,7 +59,7 @@ Ces critères portent sur :
 
 La validation est prononcée par la MOA sur la base de ces critères.
 
-La liste des critère d'acceptation se situe en annexe @sec-critere_acceptation
+La liste des critère d'acceptation se situe en annexe « Critères d'acceptation »
 
 ### Gestion des anomalies
 

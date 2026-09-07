@@ -13,18 +13,18 @@ Décisions (5 états) : **intégré** / **adapté** / **@todo** (question renvoy
 
 | # | Id MD | Commentaire | Ancre DOCX | Cible qmd | Décision + motif | Commit |
 |---|-------|-------------|------------|-----------|------------------|--------|
-| A1 | 979569393 | « c'est pas plutôt API météo France ? » | Tableau sources, modalité GEOREP | `1_contexte_objectif.qmd` (tbl-sources, données : fichier maître externe `fiche indicateur/fiches indicateurs.xlsx`) | adapté — vérifier la modalité d'accès des sources météo dans le maître, corriger en API si flux ; sinon @todo | |
-| A2 | 47463100 | « ya aussi openmeteo » | idem | idem | adapté — ajouter Open-Meteo comme source candidate dans le maître si pertinent | |
-| A3 | 1294083187 | ICPE : base LOGIC PSUD vs Open Data | Tableau sources (ICPE) | idem | adapté — préciser distributeur (PSUD Open Data, base LOGIC sur convention ?) dans le maître + note qmd | |
-| A4 | 1985713834 | « Tu mentionnes pas le COPRO ? » | § gouvernance, COPIL | `2_partie_prenantes_gouvernance.qmd` | intégré — ajouter le COPRO (comité de projet) ; harmoniser le sigle (COOPRO dans `17_planning_jalons.qmd`) | |
-| A5 | 239861025 | « répétition de la même définition » | Définition US-SC | `4_methodologie_agile.qmd:25` + `7_product_backlog.qmd` | adapté — fusionner avec la définition du §7/backlog, une seule définition de référence | |
+| A1 | 979569393 | « c'est pas plutôt API météo France ? » | Tableau sources, modalité GEOREP | `1_contexte_objectif.qmd` (tbl-sources générée depuis le fichier maître externe) | @todo — données hors repo : vérifier la modalité d'accès des sources météo dans le maître + mapping `_lib_indicateurs.py` (touche fabrique interdite ici) | |
+| A2 | 47463100 | « ya aussi openmeteo » | idem | idem | @todo — évaluer l'ajout d'Open-Meteo comme source candidate dans le maître | |
+| A3 | 1294083187 | ICPE : base LOGIC PSUD vs Open Data | Tableau sources (ICPE) | idem | @todo — préciser distributeur (PSUD Open Data, base LOGIC sur convention ?) dans le maître ; la liste statique cite déjà DIMENC | |
+| A4 | 1985713834 | « Tu mentionnes pas le COPRO ? » | § gouvernance, COPIL | `2_partie_prenantes_gouvernance.qmd:34` (COPRO déjà présent, ainsi qu'au glossaire) | intégré — COPRO déjà présent dans les sources (DOCX antérieur) ; corrigé le sigle COOPRO→COPRO en `17_planning_jalons.qmd:69` | |
+| A5 | 239861025 | « répétition de la même définition » | Définition US-SC | `4_methodologie_agile.qmd:23-25` (US et US-SC partageaient le même libellé) | intégré — différencié le libellé US-SC (conditions de validation : tests, seuils, jeux de données) | |
 | A6 | 1694054913 | « pb référence » (`@sec_backlog`) | § backlog | `4_methodologie_agile.qmd:40` | intégré — corriger en `@sec-backlog` (id réel `{#sec-backlog}`) + coquilles de la phrase | |
 | A7 | 1027808996 | Enveloppe MVP figée / pioche Lot 2 / aléa / avenant : détailler les cas | § 5.8 Maîtrise des évolutions | `4_methodologie_agile.qmd:94` + `16_cadre_contractuel.qmd` | intégré — rédiger les cas de figure (relecture OEIL requise, cf. tâche 3.1) | |
 | A8 | 1023013908 | « C'est celles qui seront dans le MVP ? » (US principales) | § backlog.xlsx | `4_methodologie_agile.qmd:111` | intégré — clarifier ce que recouvre « US principales » | |
 | A9 | 1355744299 | « c'est quoi le scénario de test ? » | idem | idem + backlog | @todo — définir le contenu attendu (exemples de tests de cohérence) avec la MOA | |
-| A10 | 1460746416 | « menaces » vs « pressions » (terme incorrect selon le PENV OEIL) | § 38 indicateurs | `5_presentation_indicateurs.qmd:3` (+ occurrences) | intégré — remplacer par « pressions » partout | |
-| A11 | 1870055478 | « pb référence » (même §) | idem | `5_presentation_indicateurs.qmd:3` | intégré — réparer la référence (fichier liste indicateurs) | |
-| A12 | 587743481 | « pb ref » (fiches PDF en annexe) | § fiches indicateurs | `5_presentation_indicateurs.qmd:45` | intégré — `@sec-CataloguefichesInd` sans syntaxe de lien → réparer | |
+| A10 | 1460746416 | « menaces » vs « pressions » (terme incorrect selon le PENV OEIL) | § 38 indicateurs | `5_presentation_indicateurs.qmd:3`, `5bis_profils_utilisateurs.qmd:12,38` (prose CDC uniquement — la famille taxonomique « Menace » du catalogue et les maquettes EPIC 5/ADI sont hors périmètre) | intégré — « pressions » dans la prose CDC | |
+| A11 | 1870055478 | « pb référence » (même §, `(@sec-Annexes)`) | idem | `5_presentation_indicateurs.qmd:3` | intégré — aucun `{#sec-Annexes}` n'existe (annexes packées séparément, non incluses au rendu) : remplacé par un lien fichier direct vers le PDF du catalogue | |
+| A12 | 587743481 | « pb ref » (fiches PDF en annexe) | § fiches indicateurs | `5_presentation_indicateurs.qmd:45` | intégré — même cause que A11 : lien fichier direct vers le PDF (inclusion des annexes testée puis abandonnée : chemins d'inclusion incohérents + contenu du pack modifié) | |
 | A13 | 1003324664 | « Sous partie 7.1 ? » (numérotation « 8 Profil 1 ») | Profils utilisateurs | `5bis_profils_utilisateurs.qmd` | intégré — passer les Profils 1–5 en `###` (sous-parties) | |
 | A14 | 591057693 | 2 profils admin alors que l'OEIL cumulera les deux ? | Profil 4/5 | `5bis_profils_utilisateurs.qmd:46-70` | à arbitrer MOA (tâche 3.2) — trancher 1 vs 2 profils avant d'appliquer | |
 | A15 | 121183428 | « Pas structuré en sous parties comme les autres epics, normal ? » | EPIC 1 | `epics/epic-1-gestion-donnees.qmd` | intégré — harmoniser la structure avec les autres EPIC | |
@@ -40,11 +40,11 @@ Toutes auteure Marjolaine DAVID. Toutes de niveau orthographe/grammaire/mise en 
 
 | Groupe | Paragraphes concernés | Nature | Décision |
 |--------|----------------------|--------|----------|
-| B1 | Dossier PEP (« qui », « e ce projet avec ») | Grammaire | intégré |
+| B1 | Dossier PEP (« qui », « e ce projet avec ») | Grammaire | déjà conforme — `1_contexte_objectif.qmd:33` contient déjà « ce projet » (DOCX antérieur aux sources) |
 | B2 | Objectifs Connaissance/Diagnostic/Veille/Partage (espaces) | Typographie | intégré |
-| B3 | « DIMENC » ajouté à GEOREP ; « Cadastre minier » (« C ») | Complément + coquille | intégré |
+| B3 | « DIMENC » ajouté à GEOREP ; « Cadastre minier » (« C ») | Complément + coquille | partiellement — liste statique déjà conforme (`1_contexte_objectif.qmd:78` cite DIMENC) ; la cellule du tableau est générée depuis le maître externe → @todo maître |
 | B4 | « recherche », « prévus » | Accords | intégré |
-| B5 | Paragraphe MVP/Lot 2 (« L'ensemble des fonctionnalités (MVP et fonctionnalités avancées)… adapté au fil du projet ») | Reformulation de fond mineure | intégré |
+| B5 | Paragraphe MVP/Lot 2 (« L'ensemble des fonctionnalités (MVP et fonctionnalités avancées)… adapté au fil du projet ») | Reformulation de fond mineure | rejeté — paragraphe absent des sources actuelles (DOCX divergent) ; fond déjà couvert par « Périmètre contractuel de référence » et « Maîtrise des évolutions » (`4_methodologie_agile.qmd:81-101`) |
 | B6 | « prestataire » (support de chiffrage) | Précision | intégré |
 | B7 | « Le @sec_backlog détaille les UserStories… jusqu'à » (+ § A6) | Grammaire + ref | intégré |
 | B8 | Sprints (puces conception/test/incrément) | Mise en forme | intégré |

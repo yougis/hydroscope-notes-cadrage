@@ -66,7 +66,7 @@ Le suivi du planning repose sur :
 - l’avancement des sprints ;
 - le suivi du backlog produit et de ses priorités ;
 - les démonstrations régulières (sprint review) ;
-- les comités de pilotage (COPIL) et comités de projet (COOPRO) ;
+- les comités de pilotage (COPIL) et comités de projet (COPRO) ;
 - le suivi des anomalies et des corrections.
 
 Des ajustements pourront être réalisés en fonction de l’avancement réel, dans le respect des jalons contractuels.

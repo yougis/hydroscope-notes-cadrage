@@ -12,8 +12,8 @@ catalogue_inidcateur : ""
 fiche_indicateur : ""
 
 appendix:
-  - annexes_index.qmd
-  - critere-acceptation-index.qmd
+  - annexes/annexes_index.qmd
+  - annexes/critere-acceptation-index.qmd
 
 
 
@@ -198,6 +198,5 @@ L'OEIL assure la continuité intellectuelle du projet initial (PressionPPE en 20
 {{< include ./17_planning_jalons.qmd >}}
 
 ***
-
 
 
